@@ -1,7 +1,7 @@
 [project]
 name = "scraper"
 version = "0.1.0"
-description = "Add your description here"
+description = "Public startup discovery and page fetching for StartupGo"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -12,3 +12,12 @@ dependencies = [
     "undetected-chromedriver>=3.5.5",
     "xvfbwrapper>=0.2.35",
 ]
+
+# Installable so other modules (e.g. Modules/Agent) can depend on it by path.
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["scraper"]
+

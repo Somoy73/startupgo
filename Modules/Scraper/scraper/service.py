@@ -12,6 +12,7 @@ from .adapters import (
 )
 from .errors import ScraperError
 from .models import StartupLead
+from .wellfound import WellfoundAdapter
 
 
 class StartupScraper:
@@ -23,7 +24,7 @@ class StartupScraper:
             "generic": GenericDirectoryAdapter(),
             "linkedin": NetworkDirectoryAdapter("linkedin"),
             "glassdoor": NetworkDirectoryAdapter("glassdoor"),
-            "wellfound": NetworkDirectoryAdapter("wellfound"),
+            "wellfound": WellfoundAdapter(),
             "osm": OpenStreetMapAdapter(),
         }
 

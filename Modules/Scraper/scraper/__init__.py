@@ -1,18 +1,24 @@
-"""StartupGo public startup lead scraper."""
+"""StartupGo scraper: public page fetching and startup lead discovery.
 
-from .criteria import StartupCriteria, matches_criteria
-from .models import StartupLead, StartupProfile
-from .ranking import RankedStartup, StartupRanker
-from .research import StartupResearchTools
+Turning leads into evidence-backed, scored entries is the job of the separate
+agent module (Modules/Agent); this package contains no AI.
+"""
+
+from .browser import BrowserSettings
+from .config import AppSettings, ScraperSettings
+from .errors import ScraperError
+from .factory import create_fetcher
+from .fetchers import PublicPageFetcher
+from .models import StartupLead
 from .service import StartupScraper
 
 __all__ = [
-    "RankedStartup",
-    "StartupCriteria",
+    "AppSettings",
+    "BrowserSettings",
+    "PublicPageFetcher",
+    "ScraperError",
+    "ScraperSettings",
     "StartupLead",
-    "StartupProfile",
-    "StartupRanker",
-    "StartupResearchTools",
     "StartupScraper",
-    "matches_criteria",
+    "create_fetcher",
 ]

@@ -1,0 +1,44 @@
+# StartupGo agent configuration. Secrets go in .env (see .env.example).
+
+[llm]
+provider = "gemini"            # "gemini" or "openai-compatible"
+model = "gemini-3.8-flash"
+api_key_env = "GEMINI_API_KEY"
+endpoint = ""                  # base URL for openai-compatible providers
+temperature = 0.0
+
+[crawl]
+max_pages = 12                 # pages per startup website, homepage included
+page_chars = 15000             # text kept per page
+section_chars = 30000          # document text sent with each section's LLM call
+timeout = 30.0
+delay = 1.5                    # seconds between requests
+browser = false                # render pages with Chrome; options in [browser]
+respect_robots = true
+
+# Chrome options when [crawl] browser = true (passed to the scraper module).
+[browser]
+driver = "undetected"
+stealth = true
+headless = true
+chrome_version = 0
+settle_seconds = 2.0
+
+[paths]
+cache_dir = "cache"            # raw pages and LLM outputs, for free and reproducible reruns
+output_dir = "output"          # startups/<id>.json entries and index.json
+system_prompt = "prompts/system.md"
+section_prompt = "prompts/section.md"
+
+# Investment-potential weights per criterion (a mentor question; defaults are equal).
+[weights]
+Market = 1.0
+Product = 1.0
+Team = 1.0
+"Business model" = 1.0
+Competition = 1.0
+"Marketing and distribution" = 1.0
+Financials = 1.0
+Tech = 1.0
+"Deal dynamics" = 1.0
+Impact = 1.0
