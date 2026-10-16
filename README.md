@@ -35,12 +35,12 @@ Frontend layout: `src/lib/` holds pure, unit-tested logic (`search.ts`, `matchin
 
 ## Run locally
 
-Backend (Python 3.11+). It creates `DB/startupgo.db` from the SQL files on first start:
+Backend (Python 3.11, managed with [uv](https://docs.astral.sh/uv/)). It creates `DB/startupgo.db` from the SQL files on first start:
 
 ```bash
 cd Backend
-python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
-.venv/bin/uvicorn app.main:app --reload --port 8000
+uv sync            # creates .venv with runtime + dev dependencies
+uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 Frontend (Node 18+). The dev server proxies `/api` to `:8000`:
@@ -56,7 +56,7 @@ To reset the database after editing `DB/*.sql`, delete `DB/startupgo.db` and res
 ## Tests
 
 ```bash
-cd Backend && .venv/bin/python -m pytest      # scoring + API
+cd Backend && uv run pytest                   # scoring + API
 cd Frontend && npm run check                  # typecheck + lint + unit tests
 cd Frontend && npm run format                 # prettier
 ```
