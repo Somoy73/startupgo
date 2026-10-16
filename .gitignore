@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+*.local
+
+# Local SQLite database (rebuilt from DB/schema.sql + DB/seed.sql)
+DB/*.db
+
+.DS_Store
