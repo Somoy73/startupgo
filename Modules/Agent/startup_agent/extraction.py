@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -98,9 +99,17 @@ class SectionExtractor:
         self.prompts = prompts
 
     def extract(
-        self, section: SectionSpec, *, startup_name: str, website: str, documents: list[SourceDocument]
+        self,
+        sections: SectionSpec | Sequence[SectionSpec],
+        *,
+        startup_name: str,
+        website: str,
+        documents: list[SourceDocument],
+        feedback: str = "",
     ) -> SectionResult:
-        fields = section_fields(section.id, origin="llm")
+        """One LLM call for one section, or for a group of sections sharing the call (fewer requests)."""
+        group = [sections] if isinstance(sections, SectionSpec) else list(sections)
+        fields = [f for s in group for f in section_fields(s.id, origin="llm")]
         result = SectionResult()
         if not fields or not documents:
             return result
@@ -108,12 +117,14 @@ class SectionExtractor:
         user = self.prompts.section.format(
             startup_name=startup_name,
             website=website,
-            section_id=section.id,
-            section_title=section.title,
-            section_note=section.note,
+            section_id=", ".join(s.id for s in group),
+            section_title="; ".join(s.title for s in group),
+            section_note=" ".join(s.note for s in group if s.note),
             field_guide=field_guide(fields),
             documents=render_documents(documents),
         )
+        if feedback:
+            user += f"\n\nReviewer feedback on your previous attempt (address it; all rules still apply):\n{feedback}"
         data = self.llm.complete_json(system=self.prompts.system, user=user, schema=response_schema(fields))
 
         for spec in fields:

@@ -16,6 +16,13 @@ from .vocab import FACT_STATUSES, SOURCE_TYPES
 SCHEMA_VERSION = "1.0"
 
 
+def rank_key(entry: dict[str, Any]) -> tuple[bool, float, float]:
+    """Sort key for evaluated entries: scored first, then by investment score and confidence."""
+    scores = entry["scores"]
+    score = scores["investment_score"]
+    return (score is None, -(score or 0.0), -scores["overall_confidence"])
+
+
 def slugify(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-") or "startup"
 
@@ -31,6 +38,7 @@ class StartupRecord:
     rejected: list[dict[str, Any]] = field(default_factory=list)
     errors: list[dict[str, Any]] = field(default_factory=list)
     lead: dict[str, Any] | None = None
+    review: dict[str, Any] | None = None  # the judge's verdict and history
 
     def to_dict(self, *, weights: dict[str, float] | None = None) -> dict[str, Any]:
         """Serialize, recomputing scores and next steps from the current facts."""
@@ -58,6 +66,7 @@ class StartupRecord:
             "sources": self.sources,
             "rejected_extractions": self.rejected,
             "errors": self.errors,
+            "review": self.review,
         }
 
     def _last_changed_fact(self, changed: dict[str, str]) -> Fact | None:
@@ -86,6 +95,7 @@ class StartupRecord:
             rejected=data.get("rejected_extractions", []),
             errors=data.get("errors", []),
             lead=data.get("lead"),
+            review=data.get("review"),
         )
 
 

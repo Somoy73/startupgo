@@ -15,7 +15,7 @@ dependencies = [
 startup-agent = "startup_agent.cli:main"
 
 [tool.uv.sources]
-scraper = { path = "../Scraper", editable = true }
+scraper = { workspace = true }
 
 [dependency-groups]
 dev = ["pytest>=8.3"]

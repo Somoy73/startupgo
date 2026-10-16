@@ -6,9 +6,14 @@ agent module in [`../Agent`](../Agent/README.md), which uses this package for fe
 
 ## Setup
 
+This package is a member of the uv workspace in `Modules/` (shared lockfile and `Modules/.venv`):
+
 ```bash
-uv sync
+cd Modules && uv sync --all-packages && cd Scraper
 ```
+
+Run commands from `Modules/Scraper` with `uv run`. Don't run a plain `uv sync` here: it would remove
+the Agent's packages from the shared environment.
 
 ## Configuration
 
@@ -29,13 +34,13 @@ different file. There are no secrets here. LLM credentials live in `../Agent/.en
 
 ```bash
 # Startups from a Wellfound collection page
-.venv/bin/python main.py --source wellfound --url https://wellfound.com/startups/industry/aquaculture --limit 10
+uv run python main.py --source wellfound --url https://wellfound.com/startups/industry/aquaculture --limit 10
 
 # Places matching a query via OpenStreetMap Nominatim
-.venv/bin/python main.py --source osm --query "ocean technology" --location Lisbon --format csv --output leads.csv
+uv run python main.py --source osm --query "ocean technology" --location Lisbon --format csv --output leads.csv
 
 # Generic directory page (JSON-LD and company/startup cards)
-.venv/bin/python main.py --source generic --url https://example.org/startups
+uv run python main.py --source generic --url https://example.org/startups
 ```
 
 From Python:
@@ -65,7 +70,7 @@ returns leads with name, website, one-line pitch, description, stage badge, mark
   `country`.
 
 ```bash
-.venv/bin/python main.py --source wellfound --url https://wellfound.com/startups/industry/aquaculture --limit 10
+uv run python main.py --source wellfound --url https://wellfound.com/startups/industry/aquaculture --limit 10
 ```
 
 To turn leads into schema entries (facts, evidence, TRL/BRL/OIR, next steps), use the agent:
@@ -90,7 +95,7 @@ Enable it with `browser = true` under `[scraper]` in `config.toml`, or pass `--b
 CLI overrides: `--driver`, `--stealth/--no-stealth`, `--headed`, `--chrome-version`.
 
 ```bash
-.venv/bin/python main.py --source generic --url "https://example.org/startups" --browser --format json
+uv run python main.py --source generic --url "https://example.org/startups" --browser --format json
 ```
 
 Notes:
@@ -104,5 +109,5 @@ Notes:
 ## Tests
 
 ```bash
-.venv/bin/python -m unittest discover -s tests -t .
+uv run python -m unittest discover -s tests -t .
 ```

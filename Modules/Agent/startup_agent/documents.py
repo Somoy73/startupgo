@@ -102,14 +102,19 @@ def rank_links(links: Iterable[str], site_host: str, *, exclude: set[str]) -> li
 
 
 def documents_for_section(section_id: str, documents: list[SourceDocument], max_chars: int) -> list[SourceDocument]:
-    """Pick the documents relevant to one section, within a character budget.
+    return documents_for_sections([section_id], documents, max_chars)
 
-    Order: pages routed to the section, then the homepage, then independent sources
+
+def documents_for_sections(section_ids: Iterable[str], documents: list[SourceDocument], max_chars: int) -> list[SourceDocument]:
+    """Pick the documents relevant to the given sections, within a character budget.
+
+    Order: pages routed to any of the sections, then the homepage, then independent sources
     (news, registries), then any remaining pages.
     """
+    wanted = set(section_ids)
 
     def priority(doc: SourceDocument) -> int:
-        if section_id in section_tags(doc.url, doc.title):
+        if wanted & section_tags(doc.url, doc.title):
             return 0
         if doc.is_homepage:
             return 1

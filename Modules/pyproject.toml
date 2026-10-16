@@ -1,0 +1,9 @@
+# uv workspace for the StartupGo Python modules: one lockfile (uv.lock) and one environment
+# (.venv) here, shared by every member. Each member keeps its own pyproject.toml and dependencies.
+#
+#   uv sync --all-packages                      # install every member + dev tools
+#   uv run --package scraper ...                # run within one member
+#   cd Agent && uv run startup-agent graph ...  # or from a member's directory
+
+[tool.uv.workspace]
+members = ["Agent", "Scraper"]

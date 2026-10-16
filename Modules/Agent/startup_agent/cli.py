@@ -1,4 +1,4 @@
-"""Command line: profile a startup, discover and profile leads, rescore an entry, export the schema."""
+"""Command line: run the research/evaluation workflow, profile or discover startups, rescore, export the schema."""
 
 from __future__ import annotations
 
@@ -11,15 +11,15 @@ from typing import Any
 
 from .config import AgentSettings
 from .errors import AgentError
-from .factory import build_agent
+from .factory import build_agent, build_judge
 from .graph import build_agent_graph
-from .record import record_json_schema
+from .record import StartupRecord, record_json_schema
 from .store import RecordStore
 
 
 def parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(prog="startup-agent", description=__doc__)
-    parser.add_argument("--config", type=Path, default=Path("config.toml"))
+    parser.add_argument("--config", type=Path, help="Settings file (default: Agent/config.toml)")
     commands = parser.add_subparsers(dest="command", required=True)
 
     profile = commands.add_parser("profile", help="Build a schema entry from a startup's name and website")
@@ -44,17 +44,22 @@ def parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
     schema = commands.add_parser("schema", help="Print the JSON Schema of a startup entry")
     schema.add_argument("--output", type=Path)
 
-    graph = commands.add_parser("graph", help="Run the LangGraph research, evaluation, or combined workflow")
+    graph = commands.add_parser("graph", help="Multi-agent workflow: research and evaluation agents, reviewed by a judge")
     graph.add_argument("--mode", choices=("research", "evaluation", "both"), default="both")
-    graph.add_argument("--name")
-    graph.add_argument("--website")
-    graph.add_argument("--business-id")
-    graph.add_argument("--url", action="append", default=[], help="Extra source page; repeatable")
-    graph.add_argument("--source", default="wellfound", choices=("wellfound", "generic", "osm"))
-    graph.add_argument("--query", help="Search query for the osm source")
-    graph.add_argument("--location", default="")
-    graph.add_argument("--limit", type=int, default=10)
-    graph.add_argument("--entry", action="append", type=Path, default=[], help="Existing JSON entry; repeatable")
+    target = graph.add_argument_group("research one startup")
+    target.add_argument("--name")
+    target.add_argument("--website")
+    target.add_argument("--business-id")
+    target.add_argument("--url", action="append", default=[], help="Extra source page; repeatable")
+    discovery = graph.add_argument_group("or discover startups to research")
+    discovery.add_argument("--source", default="wellfound", choices=("wellfound", "generic", "osm"))
+    discovery.add_argument("--discover-url", help="Collection URL, e.g. https://wellfound.com/startups/industry/aquaculture")
+    discovery.add_argument("--query", help="Search query (osm source)")
+    discovery.add_argument("--location", default="")
+    discovery.add_argument("--limit", type=int, default=10)
+    graph.add_argument("--entry", action="append", type=Path, default=[],
+                       help="Entry to evaluate (mode evaluation); repeatable; default: all saved entries")
+    graph.add_argument("--json", action="store_true", help="Print the final workflow state as JSON")
     graph.add_argument("--refresh", action="store_true")
     return parser.parse_args(argv)
 
@@ -72,29 +77,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
 
         if args.command == "graph":
-            agent, fetcher = build_agent(settings, refresh=args.refresh)
-            try:
-                try:
-                    records = [json.loads(path.read_text(encoding="utf-8")) for path in args.entry]
-                except (OSError, json.JSONDecodeError) as exc:
-                    raise AgentError(f"could not read graph entry: {exc}") from exc
-                initial = {
-                    "mode": args.mode,
-                    "name": args.name or "",
-                    "website": args.website or "",
-                    "business_id": args.business_id,
-                    "extra_urls": args.url,
-                    "source": args.source,
-                    "url": args.url[0] if args.url else None,
-                    "query": args.query,
-                    "location": args.location,
-                    "limit": args.limit,
-                    "records": records,
-                }
-                result = build_agent_graph(agent, weights=settings.weights).invoke(initial)
-                return _write_json(result, None)
-            finally:
-                fetcher.close()
+            return _run_graph(args, settings, store)
 
         agent, fetcher = build_agent(settings, refresh=args.refresh)
         try:
@@ -116,9 +99,85 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1 if failures and failures == len(leads) else 0
         finally:
             fetcher.close()
+            print(f"usage: {agent.usage.summary()}", file=sys.stderr)
     except AgentError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
+
+
+def _run_graph(args: argparse.Namespace, settings: AgentSettings, store: RecordStore) -> int:
+    if args.mode == "evaluation":
+        paths = args.entry or store.entry_paths()
+        try:
+            records = [json.loads(path.read_text(encoding="utf-8")) for path in paths]
+        except (OSError, json.JSONDecodeError) as exc:
+            raise AgentError(f"could not read entry: {exc}") from exc
+        if not records:
+            raise AgentError(f"no entries to evaluate in {store.entries}; run research first or pass --entry")
+    else:
+        records = []
+        if not (args.name and args.website) and not (args.discover_url or args.query):
+            raise AgentError("research needs --name and --website, or --discover-url / --query to discover startups")
+
+    initial = {
+        "mode": args.mode,
+        "name": args.name or "",
+        "website": args.website or "",
+        "business_id": args.business_id,
+        "extra_urls": args.url,
+        "source": args.source,
+        "discover_url": args.discover_url,
+        "query": args.query,
+        "location": args.location,
+        "limit": args.limit,
+        "records": records,
+    }
+    agent, fetcher = build_agent(settings, refresh=args.refresh)
+    try:
+        workflow = build_agent_graph(agent, judge=build_judge(settings, agent), weights=settings.weights)
+        result = workflow.invoke(initial)
+    finally:
+        fetcher.close()
+        print(f"usage: {agent.usage.summary()}", file=sys.stderr)
+
+    for review in result.get("reviews", []):
+        print(_review_line(review))
+
+    entries = result.get("evaluated") if args.mode != "research" else result.get("records")
+    for entry in entries or []:
+        _report(*store.save(StartupRecord.from_dict(entry), weights=settings.weights))
+    for assessment in result.get("assessments", []):
+        print(_assessment_line(assessment))
+    for skipped in result.get("skipped", []):
+        print(f"skipped {skipped['name']}: {skipped['reason']}", file=sys.stderr)
+    for error in result.get("errors", []):
+        print(f"error: {error}", file=sys.stderr)
+    if args.json:
+        _write_json(result, None)
+    return 0 if entries else 1
+
+
+def _review_line(review: dict[str, Any]) -> str:
+    issues = review["issues"]
+    shown = "; ".join(issues[:3]) + (f"; +{len(issues) - 3} more" if len(issues) > 3 else "")
+    return f"judge · {review['stage']} round {review['round']} · {review['entry']}: {review['verdict']}" + (f" — {shown}" if shown else "")
+
+
+def _assessment_line(a: dict[str, Any]) -> str:
+    score = f"{a['investment_score']}/5" if a["investment_score"] is not None else "unscored"
+    parts = [
+        f"#{a['rank']} {a['name']}: investment {score} (confidence {a['confidence']})",
+        f"TRL {a['trl'] or '?'} · BRL {a['brl'] or '?'} · OIR {a['ocean_impact_readiness'] or '?'}",
+    ]
+    if a["strengths"]:
+        parts.append(f"strong: {', '.join(a['strengths'])}")
+    if a["weaknesses"]:
+        parts.append(f"weak: {', '.join(a['weaknesses'])}")
+    if a["next_steps"]:
+        parts.append(f"next: {a['next_steps'][0]}")
+    if a["review_status"]:
+        parts.append(f"judge: {a['review_status']}" + (f" ({a['open_issues']} open issues)" if a["open_issues"] else ""))
+    return " | ".join(parts)
 
 
 def _level(score: dict[str, Any]) -> str:
