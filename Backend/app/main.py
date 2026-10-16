@@ -3,12 +3,24 @@
 import sqlite3
 from contextlib import asynccontextmanager
 
-from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from . import repository
 from .db import get_conn, init_db
-from .schemas import FilterOptions, Note, NoteCreate, PipelineUpdate, StartupDetail, StartupSummary
+from .schemas import (
+    AssessmentCreate,
+    FilterOptions,
+    Note,
+    NoteCreate,
+    PipelineUpdate,
+    ScorePreviewRequest,
+    Scores,
+    StartupCreate,
+    StartupDetail,
+    StartupSummary,
+)
 
 
 @asynccontextmanager
@@ -27,6 +39,11 @@ app.add_middleware(
 )
 
 Conn = Depends(get_conn)
+
+
+@app.exception_handler(repository.InvalidInput)
+def invalid_input(_: Request, exc: repository.InvalidInput) -> JSONResponse:
+    return JSONResponse(status_code=422, content={"detail": str(exc)})
 
 
 @app.get("/api/health")
@@ -63,6 +80,11 @@ def list_startups(
     )
 
 
+@app.post("/api/startups", response_model=StartupDetail, status_code=201)
+def create_startup(body: StartupCreate, conn: sqlite3.Connection = Conn):
+    return repository.create_startup(conn, body)
+
+
 @app.get("/api/startups/{slug}", response_model=StartupDetail)
 def get_startup(slug: str, conn: sqlite3.Connection = Conn):
     startup = repository.get_startup(conn, slug)
@@ -76,6 +98,19 @@ def update_pipeline(slug: str, body: PipelineUpdate, conn: sqlite3.Connection = 
     if not repository.set_pipeline_stage(conn, slug, body.pipeline_stage):
         raise HTTPException(404, f"Startup '{slug}' not found")
     return repository.get_startup(conn, slug)
+
+
+@app.post("/api/startups/{slug}/assessments", response_model=StartupDetail, status_code=201)
+def add_assessment(slug: str, body: AssessmentCreate, conn: sqlite3.Connection = Conn):
+    startup = repository.add_assessment(conn, slug, body)
+    if startup is None:
+        raise HTTPException(404, f"Startup '{slug}' not found")
+    return startup
+
+
+@app.post("/api/scoring/preview", response_model=Scores)
+def preview_scores(body: ScorePreviewRequest):
+    return repository.preview_scores(body)
 
 
 @app.post("/api/startups/{slug}/notes", response_model=Note, status_code=201)

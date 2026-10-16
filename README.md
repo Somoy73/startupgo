@@ -11,10 +11,27 @@ Background research, the DeepTree feature notes and paper references are in [RES
 ## Structure
 
 ```
-Frontend/   React + TypeScript (Vite): deal flow, startup profile, compare, pipeline board, methodology
+Frontend/   React + TypeScript (Vite): search, assess, matching, pipeline, compare, methodology
 Backend/    Python (FastAPI): REST API + scoring model (app/scoring.py)
 DB/         SQL: schema.sql + seed.sql (SQLite in dev, written to port to PostgreSQL)
+Modules/
+  Scraper/  Python: public page fetching (HTTP or stealth Chrome) and startup discovery (Wellfound, OSM, generic)
+  Agent/    Python: builds evidence-backed startup entries per the Ocean Opportunity Radar extraction
+            schema (facts → TRL/BRL/OIR, investment criteria, next steps). See Modules/Agent/README.md
 ```
+
+## Features
+
+| Page | What it does |
+|------|--------------|
+| **Deal flow** (`/`) | Smart search: type `seed kelp in europe trl>=5` and it becomes removable filter chips (stage, sector, country, region, impact area, pipeline, minimum levels, free text). The query lives in the URL, so searches can be shared |
+| **Quick search** (⌘K / Ctrl+K) | Jump to any startup, run a deal-flow search, or start an assessment |
+| **Assess** (`/assess`, `/assess/:slug`) | Score a new or existing startup: KTH IRL 1–9 per dimension with level definitions, Ocean Impact Navigator KPI evidence 0–4 with claims and sources, and a live score preview from the backend model. Each save is a dated snapshot |
+| **Matching** (`/matching`) | Define an investor thesis (stages, sectors, regions, impact areas, minimum TRL/BRL/ocean impact) and rank startups by fit + investment potential, with a per-criterion explanation. Presets included; custom theses are saved in the browser |
+| **Startup profile** | Scores, readiness profile, ocean impact, funding, notes, sources |
+| **Pipeline / Compare / Methodology** | Kanban deal stages, side-by-side comparison, scoring documentation |
+
+Frontend layout: `src/lib/` holds pure, unit-tested logic (`search.ts`, `matching.ts`, `assessment.ts`); `src/state/AppData.tsx` loads the startup list and frameworks once for all pages; `src/components/` and `src/pages/` are presentation.
 
 ## Run locally
 
@@ -40,7 +57,8 @@ To reset the database after editing `DB/*.sql`, delete `DB/startupgo.db` and res
 
 ```bash
 cd Backend && .venv/bin/python -m pytest      # scoring + API
-cd Frontend && npm run build                  # typecheck + production build
+cd Frontend && npm run check                  # typecheck + lint + unit tests
+cd Frontend && npm run format                 # prettier
 ```
 
 ## API
@@ -48,7 +66,10 @@ cd Frontend && npm run build                  # typecheck + production build
 | Method | Path | Purpose |
 |--------|------|---------|
 | GET | `/api/startups` | List with scores. Filters: `q`, `sector`, `country`, `stage`, `pipeline_stage`, `impact_area` (A–F), `min_trl`, `min_brl`, `min_potential`. Sort: `potential`, `readiness`, `ocean`, `momentum`, `trl`, `brl`, `name` |
+| POST | `/api/startups` | Create a startup with its first assessment (and optional funding round) |
 | GET | `/api/startups/{slug}` | Profile: level text, ocean KPIs, funding rounds, sources, notes |
+| POST | `/api/startups/{slug}/assessments` | Add a dated readiness + ocean-impact assessment |
+| POST | `/api/scoring/preview` | Score unsaved levels/KPIs (powers the live preview) |
 | PATCH | `/api/startups/{slug}/pipeline` | Move a deal between pipeline stages |
 | POST | `/api/startups/{slug}/notes` | Add an analyst note |
 | GET | `/api/compare?slugs=a,b,c` | Up to 3 profiles |
@@ -66,7 +87,7 @@ impact-evidence levels are seed estimates (confidence `low`)** and must be valid
 
 1. Ingestion: import startups and rounds from CSV and public sources; store provenance per field
 2. Assessment workflow: founders or analysts submit dated readiness assessments with evidence
-3. Natural-language search: parse "seed-stage kelp startups in Europe with TRL ≥ 6" into filters
-4. Investor ↔ startup thesis matching (DeepTree-style buyer discovery)
+3. Persist investor theses server-side (currently browser localStorage)
+4. Move search/matching server-side once the dataset outgrows client-side filtering
 5. IC memo generation from a profile
 6. Postgres + auth + multi-user notes

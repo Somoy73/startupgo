@@ -1,20 +1,29 @@
 """Data access: SQL queries that assemble startups with their scores."""
 
+import re
 import sqlite3
 from dataclasses import asdict
+from datetime import date
 
 from . import scoring
 from .schemas import (
+    AssessmentCreate,
     FundingRound,
     LevelDetail,
     Note,
     OceanKpiEvidence,
     Readiness,
     Scores,
+    ScorePreviewRequest,
     Source,
+    StartupCreate,
     StartupDetail,
     StartupSummary,
 )
+
+
+class InvalidInput(ValueError):
+    """Raised for requests that pass schema validation but conflict with stored data."""
 
 LATEST_ASSESSMENT_SQL = """
 SELECT * FROM readiness_assessments
@@ -71,6 +80,7 @@ def _summary(conn: sqlite3.Connection, row: sqlite3.Row) -> StartupSummary:
         slug=row["slug"],
         name=row["name"],
         tagline=row["tagline"],
+        description=row["description"],
         sector=row["sector"],
         country=row["country"],
         city=row["city"],
@@ -193,7 +203,6 @@ def get_startup(conn: sqlite3.Connection, slug: str) -> StartupDetail | None:
 
     return StartupDetail(
         **summary.model_dump(),
-        description=row["description"],
         founded_year=row["founded_year"],
         website=row["website"],
         levels=levels,
@@ -258,3 +267,95 @@ def frameworks(conn: sqlite3.Connection) -> dict:
         "max_healthy_spread": scoring.MAX_HEALTHY_SPREAD,
         "penalty_per_extra_level": scoring.PENALTY_PER_EXTRA_LEVEL,
     }
+
+
+# ---------------------------------------------------------------------------
+# Writes: assessments and new startups
+# ---------------------------------------------------------------------------
+
+
+def _slugify(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "startup"
+
+
+def _unique_slug(conn: sqlite3.Connection, name: str) -> str:
+    base = slug = _slugify(name)
+    n = 2
+    while conn.execute("SELECT 1 FROM startups WHERE slug = ?", (slug,)).fetchone():
+        slug = f"{base}-{n}"
+        n += 1
+    return slug
+
+
+def _insert_assessment(conn: sqlite3.Connection, startup_id: int, a: AssessmentCreate) -> None:
+    """Store a dated readiness snapshot and replace the startup's ocean KPI evidence."""
+    codes = [k.kpi_code for k in a.ocean_kpis]
+    if len(codes) != len(set(codes)):
+        raise InvalidInput("Each ocean KPI may appear only once")
+    known = {r[0] for r in conn.execute("SELECT code FROM ocean_kpis")}
+    if unknown := sorted(set(codes) - known):
+        raise InvalidInput(f"Unknown ocean KPI codes: {', '.join(unknown)}")
+
+    conn.execute(
+        """
+        INSERT INTO readiness_assessments
+            (startup_id, assessed_on, assessor, confidence, crl, trl, brl, iprl, tmrl, frl, rationale)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (startup_id, date.today().isoformat(), a.assessor, a.confidence,
+         a.crl, a.trl, a.brl, a.iprl, a.tmrl, a.frl, a.rationale),
+    )
+    conn.execute("DELETE FROM startup_ocean_kpis WHERE startup_id = ?", (startup_id,))
+    conn.executemany(
+        "INSERT INTO startup_ocean_kpis (startup_id, kpi_code, evidence_level, claim, source_url) VALUES (?, ?, ?, ?, ?)",
+        [
+            (startup_id, k.kpi_code, k.evidence_level, k.claim.strip(), k.source_url or None)
+            for k in a.ocean_kpis
+            if k.evidence_level > 0
+        ],
+    )
+    conn.execute("UPDATE startups SET updated_at = datetime('now') WHERE id = ?", (startup_id,))
+
+
+def add_assessment(conn: sqlite3.Connection, slug: str, assessment: AssessmentCreate) -> StartupDetail | None:
+    row = conn.execute("SELECT id FROM startups WHERE slug = ?", (slug,)).fetchone()
+    if row is None:
+        return None
+    with conn:
+        _insert_assessment(conn, row["id"], assessment)
+    return get_startup(conn, slug)
+
+
+def create_startup(conn: sqlite3.Connection, data: StartupCreate) -> StartupDetail:
+    slug = _unique_slug(conn, data.name)
+    with conn:
+        cur = conn.execute(
+            """
+            INSERT INTO startups (slug, name, tagline, description, sector, country, city, founded_year, website, stage)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (slug, data.name.strip(), data.tagline.strip(), data.description.strip(), data.sector.strip(),
+             data.country.strip(), data.city, data.founded_year, data.website, data.stage),
+        )
+        startup_id = cur.lastrowid
+        if r := data.funding_round:
+            conn.execute(
+                """
+                INSERT INTO funding_rounds (startup_id, round_type, amount, currency, announced_on, lead_investors)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (startup_id, r.round_type, r.amount, r.currency, r.announced_on, r.lead_investors),
+            )
+        _insert_assessment(conn, startup_id, data.assessment)
+    return get_startup(conn, slug)
+
+
+def preview_scores(req: ScorePreviewRequest) -> Scores:
+    levels = {d: getattr(req, d) for d in scoring.DIMENSIONS}
+    breakdown = scoring.score_startup(
+        levels,
+        [(k.kpi_code, k.evidence_level) for k in req.ocean_kpis],
+        req.stage,
+        scoring.parse_partial_date(req.last_round_on),
+    )
+    return Scores(**asdict(breakdown))
