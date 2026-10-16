@@ -1,14 +1,8 @@
 ﻿slug,section_code,item_no,name,priority,coverage,status,sources
-notpla,A,4,Country of incorporation,P0,partial,empty,"gleif_lei jurisdiction; uk_companies_house*, opencorporates*"
-notpla,A,9,Sub-industry,P0,partial,empty,yc_oss tags/subindustry
 notpla,A,10,Business model,P0,missing,not-collectable,
 notpla,A,11,Customer segment,P0,missing,not-collectable,
 notpla,A,12,Target geography,P0,missing,not-collectable,
-notpla,A,13,Operating status,P0,partial,empty,"gleif_lei status, yc_oss status"
-notpla,A,14,Employee count,P0,partial,empty,"yc_oss team_size, serpapi_google knowledge panel; people_data_labs*"
 notpla,A,15,Employee growth,P0,missing,not-collectable,
-notpla,A,17,Legal structure,P0,partial,empty,gleif_lei legal form
-notpla,B,2,Founder roles,P0,partial,empty,serpapi_google knowledge panel (names only)
 notpla,B,3,Relevant industry experience,P0,missing,not-collectable,
 notpla,B,4,Relevant technical experience,P0,missing,not-collectable,
 notpla,B,5,Previous startup experience,P0,missing,not-collectable,
@@ -28,7 +22,6 @@ notpla,B,18,Key-person dependency,P0,missing,not-collectable,
 notpla,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 notpla,B,20,Employee turnover,P0,missing,not-collectable,
 notpla,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-notpla,B,22,Board composition and governance experience,P0,missing,not-collectable,
 notpla,B,23,References,P0,missing,not-collectable,
 notpla,C,1,Problem description,P0,missing,not-collectable,
 notpla,C,2,Target user,P0,missing,not-collectable,
@@ -215,7 +208,6 @@ notpla,K,8,Valuation growth between comparable rounds,P0,missing,not-collectable
 notpla,K,11,Investor concentration,P1,missing,not-collectable,
 notpla,K,12,Founder ownership,P1,missing,not-collectable,
 notpla,K,13,Employee option pool,P1,missing,not-collectable,
-notpla,K,14,Fully diluted share count,P1,missing,not-collectable,
 notpla,K,15,Convertible notes,P1,missing,not-collectable,
 notpla,K,16,SAFEs,P1,missing,not-collectable,
 notpla,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -264,8 +256,6 @@ notpla,M,17,Geographic operating complexity,P2,missing,not-collectable,
 notpla,M,18,Business continuity,P2,missing,not-collectable,
 notpla,M,19,Process automation,P2,missing,not-collectable,
 notpla,M,20,Management reporting quality,P2,missing,not-collectable,
-notpla,N,1,Incorporation status,P1,partial,empty,gleif_lei; uk_companies_house*
-notpla,N,2,Ownership verification and beneficial ownership,P1,partial,empty,gleif_lei parent relationships; uk_companies_house PSC*
 notpla,N,3,Litigation,P1,missing,not-collectable,
 notpla,N,4,Regulatory approvals and required licenses,P1,missing,not-collectable,
 notpla,N,5,Industry-specific compliance,P1,missing,not-collectable,
@@ -283,10 +273,9 @@ notpla,N,16,Tax compliance,P1,missing,not-collectable,
 notpla,N,17,Founder or shareholder disputes,P1,missing,not-collectable,
 notpla,N,18,Related-party transactions,P1,missing,not-collectable,
 notpla,N,19,Change-of-control restrictions,P1,missing,not-collectable,
-notpla,N,20,Outstanding guarantees and contingent liabilities,P1,missing,not-collectable,
 notpla,O,1,Market risk,P1,missing,not-collectable,
 notpla,O,2,Product risk,P1,missing,not-collectable,
-notpla,O,3,Financial risk,P1,missing,not-collectable,
+notpla,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 notpla,O,4,Execution risk,P1,missing,not-collectable,
 notpla,O,5,Customer concentration risk,P1,missing,not-collectable,
 notpla,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -384,7 +373,6 @@ notpla,T,8,CAC payback = time needed to recover customer acquisition cost,P2,mis
 notpla,T,9,NRR = (starting recurring revenue + expansion - contraction - churn) /,P2,missing,not-collectable,
 notpla,T,10,Revenue concentration = revenue from largest customers / total revenue,P2,missing,not-collectable,
 notpla,T,11,Capital efficiency = growth or revenue achieved relative to capital consumed,P2,missing,not-collectable,
-notpla,T,12,Hiring growth = percentage change in headcount,P2,partial,empty,headcount snapshots across runs
 notpla,T,13,Market penetration = relevant customers acquired / estimated addressable,P2,missing,not-collectable,
 notpla,T,14,Pipeline coverage = qualified pipeline / target bookings or sales,P2,missing,not-collectable,
 notpla,T,15,"Valuation-to-revenue = valuation / revenue, where revenue is meaningful",P2,missing,not-collectable,
@@ -398,16 +386,14 @@ notpla,U,10,Consent status,P2,missing,not-collectable,
 notpla,U,11,Update frequency,P2,missing,not-collectable,
 notpla,U,13,Human review status,P2,missing,not-collectable,
 notpla,U,16,Metric definition and calculation method,P2,missing,not-collectable,
-sofar-ocean,A,4,Country of incorporation,P0,partial,empty,"gleif_lei jurisdiction; uk_companies_house*, opencorporates*"
-sofar-ocean,A,9,Sub-industry,P0,partial,empty,yc_oss tags/subindustry
+sofar-ocean,A,4,Country of incorporation,P0,auto,empty,"uk_companies_house, gleif_lei; opencorporates*"
 sofar-ocean,A,10,Business model,P0,missing,not-collectable,
 sofar-ocean,A,11,Customer segment,P0,missing,not-collectable,
 sofar-ocean,A,12,Target geography,P0,missing,not-collectable,
-sofar-ocean,A,13,Operating status,P0,partial,empty,"gleif_lei status, yc_oss status"
-sofar-ocean,A,14,Employee count,P0,partial,empty,"yc_oss team_size, serpapi_google knowledge panel; people_data_labs*"
+sofar-ocean,A,13,Operating status,P0,auto,empty,"uk_companies_house status, gleif_lei, yc_oss"
 sofar-ocean,A,15,Employee growth,P0,missing,not-collectable,
-sofar-ocean,A,17,Legal structure,P0,partial,empty,gleif_lei legal form
-sofar-ocean,B,2,Founder roles,P0,partial,empty,serpapi_google knowledge panel (names only)
+sofar-ocean,A,17,Legal structure,P0,auto,empty,"uk_companies_house type, gleif_lei legal form"
+sofar-ocean,B,2,Founder roles,P0,partial,empty,uk_companies_house officer roles; serpapi_google knowledge panel
 sofar-ocean,B,3,Relevant industry experience,P0,missing,not-collectable,
 sofar-ocean,B,4,Relevant technical experience,P0,missing,not-collectable,
 sofar-ocean,B,5,Previous startup experience,P0,missing,not-collectable,
@@ -426,7 +412,7 @@ sofar-ocean,B,17,Team complementarity,P0,missing,not-collectable,
 sofar-ocean,B,18,Key-person dependency,P0,missing,not-collectable,
 sofar-ocean,B,20,Employee turnover,P0,missing,not-collectable,
 sofar-ocean,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-sofar-ocean,B,22,Board composition and governance experience,P0,missing,not-collectable,
+sofar-ocean,B,22,Board composition and governance experience,P0,partial,empty,uk_companies_house directors (board composition)
 sofar-ocean,B,23,References,P0,missing,not-collectable,
 sofar-ocean,C,1,Problem description,P0,missing,not-collectable,
 sofar-ocean,C,2,Target user,P0,missing,not-collectable,
@@ -613,7 +599,6 @@ sofar-ocean,K,8,Valuation growth between comparable rounds,P0,missing,not-collec
 sofar-ocean,K,11,Investor concentration,P1,missing,not-collectable,
 sofar-ocean,K,12,Founder ownership,P1,missing,not-collectable,
 sofar-ocean,K,13,Employee option pool,P1,missing,not-collectable,
-sofar-ocean,K,14,Fully diluted share count,P1,missing,not-collectable,
 sofar-ocean,K,15,Convertible notes,P1,missing,not-collectable,
 sofar-ocean,K,16,SAFEs,P1,missing,not-collectable,
 sofar-ocean,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -662,8 +647,8 @@ sofar-ocean,M,17,Geographic operating complexity,P2,missing,not-collectable,
 sofar-ocean,M,18,Business continuity,P2,missing,not-collectable,
 sofar-ocean,M,19,Process automation,P2,missing,not-collectable,
 sofar-ocean,M,20,Management reporting quality,P2,missing,not-collectable,
-sofar-ocean,N,1,Incorporation status,P1,partial,empty,gleif_lei; uk_companies_house*
-sofar-ocean,N,2,Ownership verification and beneficial ownership,P1,partial,empty,gleif_lei parent relationships; uk_companies_house PSC*
+sofar-ocean,N,1,Incorporation status,P1,auto,empty,"uk_companies_house, gleif_lei"
+sofar-ocean,N,2,Ownership verification and beneficial ownership,P1,partial,empty,"uk_companies_house PSC register, gleif_lei parents"
 sofar-ocean,N,3,Litigation,P1,missing,not-collectable,
 sofar-ocean,N,4,Regulatory approvals and required licenses,P1,missing,not-collectable,
 sofar-ocean,N,5,Industry-specific compliance,P1,missing,not-collectable,
@@ -681,10 +666,10 @@ sofar-ocean,N,16,Tax compliance,P1,missing,not-collectable,
 sofar-ocean,N,17,Founder or shareholder disputes,P1,missing,not-collectable,
 sofar-ocean,N,18,Related-party transactions,P1,missing,not-collectable,
 sofar-ocean,N,19,Change-of-control restrictions,P1,missing,not-collectable,
-sofar-ocean,N,20,Outstanding guarantees and contingent liabilities,P1,missing,not-collectable,
+sofar-ocean,N,20,Outstanding guarantees and contingent liabilities,P1,partial,empty,uk_companies_house insolvency + charges flags
 sofar-ocean,O,1,Market risk,P1,missing,not-collectable,
 sofar-ocean,O,2,Product risk,P1,missing,not-collectable,
-sofar-ocean,O,3,Financial risk,P1,missing,not-collectable,
+sofar-ocean,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 sofar-ocean,O,4,Execution risk,P1,missing,not-collectable,
 sofar-ocean,O,5,Customer concentration risk,P1,missing,not-collectable,
 sofar-ocean,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -780,7 +765,6 @@ sofar-ocean,T,8,CAC payback = time needed to recover customer acquisition cost,P
 sofar-ocean,T,9,NRR = (starting recurring revenue + expansion - contraction - churn) /,P2,missing,not-collectable,
 sofar-ocean,T,10,Revenue concentration = revenue from largest customers / total revenue,P2,missing,not-collectable,
 sofar-ocean,T,11,Capital efficiency = growth or revenue achieved relative to capital consumed,P2,missing,not-collectable,
-sofar-ocean,T,12,Hiring growth = percentage change in headcount,P2,partial,empty,headcount snapshots across runs
 sofar-ocean,T,13,Market penetration = relevant customers acquired / estimated addressable,P2,missing,not-collectable,
 sofar-ocean,T,14,Pipeline coverage = qualified pipeline / target bookings or sales,P2,missing,not-collectable,
 sofar-ocean,T,15,"Valuation-to-revenue = valuation / revenue, where revenue is meaningful",P2,missing,not-collectable,
@@ -794,13 +778,11 @@ sofar-ocean,U,10,Consent status,P2,missing,not-collectable,
 sofar-ocean,U,11,Update frequency,P2,missing,not-collectable,
 sofar-ocean,U,13,Human review status,P2,missing,not-collectable,
 sofar-ocean,U,16,Metric definition and calculation method,P2,missing,not-collectable,
-ocean-rainforest,A,9,Sub-industry,P0,partial,empty,yc_oss tags/subindustry
 ocean-rainforest,A,10,Business model,P0,missing,not-collectable,
 ocean-rainforest,A,11,Customer segment,P0,missing,not-collectable,
 ocean-rainforest,A,12,Target geography,P0,missing,not-collectable,
-ocean-rainforest,A,14,Employee count,P0,partial,empty,"yc_oss team_size, serpapi_google knowledge panel; people_data_labs*"
 ocean-rainforest,A,15,Employee growth,P0,missing,not-collectable,
-ocean-rainforest,B,2,Founder roles,P0,partial,empty,serpapi_google knowledge panel (names only)
+ocean-rainforest,B,2,Founder roles,P0,partial,empty,uk_companies_house officer roles; serpapi_google knowledge panel
 ocean-rainforest,B,3,Relevant industry experience,P0,missing,not-collectable,
 ocean-rainforest,B,4,Relevant technical experience,P0,missing,not-collectable,
 ocean-rainforest,B,5,Previous startup experience,P0,missing,not-collectable,
@@ -820,7 +802,7 @@ ocean-rainforest,B,18,Key-person dependency,P0,missing,not-collectable,
 ocean-rainforest,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 ocean-rainforest,B,20,Employee turnover,P0,missing,not-collectable,
 ocean-rainforest,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-ocean-rainforest,B,22,Board composition and governance experience,P0,missing,not-collectable,
+ocean-rainforest,B,22,Board composition and governance experience,P0,partial,empty,uk_companies_house directors (board composition)
 ocean-rainforest,B,23,References,P0,missing,not-collectable,
 ocean-rainforest,C,1,Problem description,P0,missing,not-collectable,
 ocean-rainforest,C,2,Target user,P0,missing,not-collectable,
@@ -1008,7 +990,7 @@ ocean-rainforest,K,8,Valuation growth between comparable rounds,P0,missing,not-c
 ocean-rainforest,K,11,Investor concentration,P1,missing,not-collectable,
 ocean-rainforest,K,12,Founder ownership,P1,missing,not-collectable,
 ocean-rainforest,K,13,Employee option pool,P1,missing,not-collectable,
-ocean-rainforest,K,14,Fully diluted share count,P1,missing,not-collectable,
+ocean-rainforest,K,14,Fully diluted share count,P1,partial,empty,uk_companies_house statements of capital (SH01)
 ocean-rainforest,K,15,Convertible notes,P1,missing,not-collectable,
 ocean-rainforest,K,16,SAFEs,P1,missing,not-collectable,
 ocean-rainforest,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -1074,10 +1056,10 @@ ocean-rainforest,N,16,Tax compliance,P1,missing,not-collectable,
 ocean-rainforest,N,17,Founder or shareholder disputes,P1,missing,not-collectable,
 ocean-rainforest,N,18,Related-party transactions,P1,missing,not-collectable,
 ocean-rainforest,N,19,Change-of-control restrictions,P1,missing,not-collectable,
-ocean-rainforest,N,20,Outstanding guarantees and contingent liabilities,P1,missing,not-collectable,
+ocean-rainforest,N,20,Outstanding guarantees and contingent liabilities,P1,partial,empty,uk_companies_house insolvency + charges flags
 ocean-rainforest,O,1,Market risk,P1,missing,not-collectable,
 ocean-rainforest,O,2,Product risk,P1,missing,not-collectable,
-ocean-rainforest,O,3,Financial risk,P1,missing,not-collectable,
+ocean-rainforest,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 ocean-rainforest,O,4,Execution risk,P1,missing,not-collectable,
 ocean-rainforest,O,5,Customer concentration risk,P1,missing,not-collectable,
 ocean-rainforest,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -1177,7 +1159,6 @@ ocean-rainforest,T,8,CAC payback = time needed to recover customer acquisition c
 ocean-rainforest,T,9,NRR = (starting recurring revenue + expansion - contraction - churn) /,P2,missing,not-collectable,
 ocean-rainforest,T,10,Revenue concentration = revenue from largest customers / total revenue,P2,missing,not-collectable,
 ocean-rainforest,T,11,Capital efficiency = growth or revenue achieved relative to capital consumed,P2,missing,not-collectable,
-ocean-rainforest,T,12,Hiring growth = percentage change in headcount,P2,partial,empty,headcount snapshots across runs
 ocean-rainforest,T,13,Market penetration = relevant customers acquired / estimated addressable,P2,missing,not-collectable,
 ocean-rainforest,T,14,Pipeline coverage = qualified pipeline / target bookings or sales,P2,missing,not-collectable,
 ocean-rainforest,T,15,"Valuation-to-revenue = valuation / revenue, where revenue is meaningful",P2,missing,not-collectable,
@@ -1191,13 +1172,10 @@ ocean-rainforest,U,10,Consent status,P2,missing,not-collectable,
 ocean-rainforest,U,11,Update frequency,P2,missing,not-collectable,
 ocean-rainforest,U,13,Human review status,P2,missing,not-collectable,
 ocean-rainforest,U,16,Metric definition and calculation method,P2,missing,not-collectable,
-seabound,A,4,Country of incorporation,P0,partial,empty,"gleif_lei jurisdiction; uk_companies_house*, opencorporates*"
 seabound,A,10,Business model,P0,missing,not-collectable,
 seabound,A,11,Customer segment,P0,missing,not-collectable,
 seabound,A,12,Target geography,P0,missing,not-collectable,
 seabound,A,15,Employee growth,P0,missing,not-collectable,
-seabound,A,17,Legal structure,P0,partial,empty,gleif_lei legal form
-seabound,B,2,Founder roles,P0,partial,empty,serpapi_google knowledge panel (names only)
 seabound,B,3,Relevant industry experience,P0,missing,not-collectable,
 seabound,B,4,Relevant technical experience,P0,missing,not-collectable,
 seabound,B,5,Previous startup experience,P0,missing,not-collectable,
@@ -1217,7 +1195,6 @@ seabound,B,18,Key-person dependency,P0,missing,not-collectable,
 seabound,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 seabound,B,20,Employee turnover,P0,missing,not-collectable,
 seabound,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-seabound,B,22,Board composition and governance experience,P0,missing,not-collectable,
 seabound,B,23,References,P0,missing,not-collectable,
 seabound,C,1,Problem description,P0,missing,not-collectable,
 seabound,C,2,Target user,P0,missing,not-collectable,
@@ -1404,7 +1381,6 @@ seabound,K,8,Valuation growth between comparable rounds,P0,missing,not-collectab
 seabound,K,11,Investor concentration,P1,missing,not-collectable,
 seabound,K,12,Founder ownership,P1,missing,not-collectable,
 seabound,K,13,Employee option pool,P1,missing,not-collectable,
-seabound,K,14,Fully diluted share count,P1,missing,not-collectable,
 seabound,K,15,Convertible notes,P1,missing,not-collectable,
 seabound,K,16,SAFEs,P1,missing,not-collectable,
 seabound,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -1453,8 +1429,6 @@ seabound,M,17,Geographic operating complexity,P2,missing,not-collectable,
 seabound,M,18,Business continuity,P2,missing,not-collectable,
 seabound,M,19,Process automation,P2,missing,not-collectable,
 seabound,M,20,Management reporting quality,P2,missing,not-collectable,
-seabound,N,1,Incorporation status,P1,partial,empty,gleif_lei; uk_companies_house*
-seabound,N,2,Ownership verification and beneficial ownership,P1,partial,empty,gleif_lei parent relationships; uk_companies_house PSC*
 seabound,N,3,Litigation,P1,missing,not-collectable,
 seabound,N,4,Regulatory approvals and required licenses,P1,missing,not-collectable,
 seabound,N,5,Industry-specific compliance,P1,missing,not-collectable,
@@ -1472,10 +1446,9 @@ seabound,N,16,Tax compliance,P1,missing,not-collectable,
 seabound,N,17,Founder or shareholder disputes,P1,missing,not-collectable,
 seabound,N,18,Related-party transactions,P1,missing,not-collectable,
 seabound,N,19,Change-of-control restrictions,P1,missing,not-collectable,
-seabound,N,20,Outstanding guarantees and contingent liabilities,P1,missing,not-collectable,
 seabound,O,1,Market risk,P1,missing,not-collectable,
 seabound,O,2,Product risk,P1,missing,not-collectable,
-seabound,O,3,Financial risk,P1,missing,not-collectable,
+seabound,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 seabound,O,4,Execution risk,P1,missing,not-collectable,
 seabound,O,5,Customer concentration risk,P1,missing,not-collectable,
 seabound,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -1587,16 +1560,10 @@ seabound,U,10,Consent status,P2,missing,not-collectable,
 seabound,U,11,Update frequency,P2,missing,not-collectable,
 seabound,U,13,Human review status,P2,missing,not-collectable,
 seabound,U,16,Metric definition and calculation method,P2,missing,not-collectable,
-oceanium,A,4,Country of incorporation,P0,partial,empty,"gleif_lei jurisdiction; uk_companies_house*, opencorporates*"
-oceanium,A,9,Sub-industry,P0,partial,empty,yc_oss tags/subindustry
 oceanium,A,10,Business model,P0,missing,not-collectable,
 oceanium,A,11,Customer segment,P0,missing,not-collectable,
 oceanium,A,12,Target geography,P0,missing,not-collectable,
-oceanium,A,13,Operating status,P0,partial,empty,"gleif_lei status, yc_oss status"
-oceanium,A,14,Employee count,P0,partial,empty,"yc_oss team_size, serpapi_google knowledge panel; people_data_labs*"
 oceanium,A,15,Employee growth,P0,missing,not-collectable,
-oceanium,A,17,Legal structure,P0,partial,empty,gleif_lei legal form
-oceanium,B,2,Founder roles,P0,partial,empty,serpapi_google knowledge panel (names only)
 oceanium,B,3,Relevant industry experience,P0,missing,not-collectable,
 oceanium,B,4,Relevant technical experience,P0,missing,not-collectable,
 oceanium,B,5,Previous startup experience,P0,missing,not-collectable,
@@ -1616,7 +1583,6 @@ oceanium,B,18,Key-person dependency,P0,missing,not-collectable,
 oceanium,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 oceanium,B,20,Employee turnover,P0,missing,not-collectable,
 oceanium,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-oceanium,B,22,Board composition and governance experience,P0,missing,not-collectable,
 oceanium,B,23,References,P0,missing,not-collectable,
 oceanium,C,1,Problem description,P0,missing,not-collectable,
 oceanium,C,2,Target user,P0,missing,not-collectable,
@@ -1801,7 +1767,6 @@ oceanium,K,8,Valuation growth between comparable rounds,P0,missing,not-collectab
 oceanium,K,11,Investor concentration,P1,missing,not-collectable,
 oceanium,K,12,Founder ownership,P1,missing,not-collectable,
 oceanium,K,13,Employee option pool,P1,missing,not-collectable,
-oceanium,K,14,Fully diluted share count,P1,missing,not-collectable,
 oceanium,K,15,Convertible notes,P1,missing,not-collectable,
 oceanium,K,16,SAFEs,P1,missing,not-collectable,
 oceanium,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -1850,8 +1815,6 @@ oceanium,M,17,Geographic operating complexity,P2,missing,not-collectable,
 oceanium,M,18,Business continuity,P2,missing,not-collectable,
 oceanium,M,19,Process automation,P2,missing,not-collectable,
 oceanium,M,20,Management reporting quality,P2,missing,not-collectable,
-oceanium,N,1,Incorporation status,P1,partial,empty,gleif_lei; uk_companies_house*
-oceanium,N,2,Ownership verification and beneficial ownership,P1,partial,empty,gleif_lei parent relationships; uk_companies_house PSC*
 oceanium,N,3,Litigation,P1,missing,not-collectable,
 oceanium,N,4,Regulatory approvals and required licenses,P1,missing,not-collectable,
 oceanium,N,5,Industry-specific compliance,P1,missing,not-collectable,
@@ -1869,10 +1832,8 @@ oceanium,N,16,Tax compliance,P1,missing,not-collectable,
 oceanium,N,17,Founder or shareholder disputes,P1,missing,not-collectable,
 oceanium,N,18,Related-party transactions,P1,missing,not-collectable,
 oceanium,N,19,Change-of-control restrictions,P1,missing,not-collectable,
-oceanium,N,20,Outstanding guarantees and contingent liabilities,P1,missing,not-collectable,
 oceanium,O,1,Market risk,P1,missing,not-collectable,
 oceanium,O,2,Product risk,P1,missing,not-collectable,
-oceanium,O,3,Financial risk,P1,missing,not-collectable,
 oceanium,O,4,Execution risk,P1,missing,not-collectable,
 oceanium,O,5,Customer concentration risk,P1,missing,not-collectable,
 oceanium,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -1972,7 +1933,6 @@ oceanium,T,8,CAC payback = time needed to recover customer acquisition cost,P2,m
 oceanium,T,9,NRR = (starting recurring revenue + expansion - contraction - churn) /,P2,missing,not-collectable,
 oceanium,T,10,Revenue concentration = revenue from largest customers / total revenue,P2,missing,not-collectable,
 oceanium,T,11,Capital efficiency = growth or revenue achieved relative to capital consumed,P2,missing,not-collectable,
-oceanium,T,12,Hiring growth = percentage change in headcount,P2,partial,empty,headcount snapshots across runs
 oceanium,T,13,Market penetration = relevant customers acquired / estimated addressable,P2,missing,not-collectable,
 oceanium,T,14,Pipeline coverage = qualified pipeline / target bookings or sales,P2,missing,not-collectable,
 oceanium,T,15,"Valuation-to-revenue = valuation / revenue, where revenue is meaningful",P2,missing,not-collectable,
@@ -1986,14 +1946,12 @@ oceanium,U,10,Consent status,P2,missing,not-collectable,
 oceanium,U,11,Update frequency,P2,missing,not-collectable,
 oceanium,U,13,Human review status,P2,missing,not-collectable,
 oceanium,U,16,Metric definition and calculation method,P2,missing,not-collectable,
-seaforester,A,9,Sub-industry,P0,partial,empty,yc_oss tags/subindustry
 seaforester,A,10,Business model,P0,missing,not-collectable,
 seaforester,A,11,Customer segment,P0,missing,not-collectable,
 seaforester,A,12,Target geography,P0,missing,not-collectable,
-seaforester,A,14,Employee count,P0,partial,empty,"yc_oss team_size, serpapi_google knowledge panel; people_data_labs*"
 seaforester,A,15,Employee growth,P0,missing,not-collectable,
 seaforester,B,1,Number of founders,P0,partial,empty,serpapi_google knowledge panel; jina_reader team page
-seaforester,B,2,Founder roles,P0,partial,empty,serpapi_google knowledge panel (names only)
+seaforester,B,2,Founder roles,P0,partial,empty,uk_companies_house officer roles; serpapi_google knowledge panel
 seaforester,B,3,Relevant industry experience,P0,missing,not-collectable,
 seaforester,B,4,Relevant technical experience,P0,missing,not-collectable,
 seaforester,B,5,Previous startup experience,P0,missing,not-collectable,
@@ -2013,7 +1971,7 @@ seaforester,B,18,Key-person dependency,P0,missing,not-collectable,
 seaforester,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 seaforester,B,20,Employee turnover,P0,missing,not-collectable,
 seaforester,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-seaforester,B,22,Board composition and governance experience,P0,missing,not-collectable,
+seaforester,B,22,Board composition and governance experience,P0,partial,empty,uk_companies_house directors (board composition)
 seaforester,B,23,References,P0,missing,not-collectable,
 seaforester,C,1,Problem description,P0,missing,not-collectable,
 seaforester,C,2,Target user,P0,missing,not-collectable,
@@ -2200,7 +2158,7 @@ seaforester,K,8,Valuation growth between comparable rounds,P0,missing,not-collec
 seaforester,K,11,Investor concentration,P1,missing,not-collectable,
 seaforester,K,12,Founder ownership,P1,missing,not-collectable,
 seaforester,K,13,Employee option pool,P1,missing,not-collectable,
-seaforester,K,14,Fully diluted share count,P1,missing,not-collectable,
+seaforester,K,14,Fully diluted share count,P1,partial,empty,uk_companies_house statements of capital (SH01)
 seaforester,K,15,Convertible notes,P1,missing,not-collectable,
 seaforester,K,16,SAFEs,P1,missing,not-collectable,
 seaforester,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -2266,10 +2224,10 @@ seaforester,N,16,Tax compliance,P1,missing,not-collectable,
 seaforester,N,17,Founder or shareholder disputes,P1,missing,not-collectable,
 seaforester,N,18,Related-party transactions,P1,missing,not-collectable,
 seaforester,N,19,Change-of-control restrictions,P1,missing,not-collectable,
-seaforester,N,20,Outstanding guarantees and contingent liabilities,P1,missing,not-collectable,
+seaforester,N,20,Outstanding guarantees and contingent liabilities,P1,partial,empty,uk_companies_house insolvency + charges flags
 seaforester,O,1,Market risk,P1,missing,not-collectable,
 seaforester,O,2,Product risk,P1,missing,not-collectable,
-seaforester,O,3,Financial risk,P1,missing,not-collectable,
+seaforester,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 seaforester,O,4,Execution risk,P1,missing,not-collectable,
 seaforester,O,5,Customer concentration risk,P1,missing,not-collectable,
 seaforester,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -2370,7 +2328,6 @@ seaforester,T,8,CAC payback = time needed to recover customer acquisition cost,P
 seaforester,T,9,NRR = (starting recurring revenue + expansion - contraction - churn) /,P2,missing,not-collectable,
 seaforester,T,10,Revenue concentration = revenue from largest customers / total revenue,P2,missing,not-collectable,
 seaforester,T,11,Capital efficiency = growth or revenue achieved relative to capital consumed,P2,missing,not-collectable,
-seaforester,T,12,Hiring growth = percentage change in headcount,P2,partial,empty,headcount snapshots across runs
 seaforester,T,13,Market penetration = relevant customers acquired / estimated addressable,P2,missing,not-collectable,
 seaforester,T,14,Pipeline coverage = qualified pipeline / target bookings or sales,P2,missing,not-collectable,
 seaforester,T,15,"Valuation-to-revenue = valuation / revenue, where revenue is meaningful",P2,missing,not-collectable,
@@ -2384,16 +2341,14 @@ seaforester,U,10,Consent status,P2,missing,not-collectable,
 seaforester,U,11,Update frequency,P2,missing,not-collectable,
 seaforester,U,13,Human review status,P2,missing,not-collectable,
 seaforester,U,16,Metric definition and calculation method,P2,missing,not-collectable,
-kelp-blue,A,4,Country of incorporation,P0,partial,empty,"gleif_lei jurisdiction; uk_companies_house*, opencorporates*"
-kelp-blue,A,9,Sub-industry,P0,partial,empty,yc_oss tags/subindustry
+kelp-blue,A,4,Country of incorporation,P0,auto,empty,"uk_companies_house, gleif_lei; opencorporates*"
 kelp-blue,A,10,Business model,P0,missing,not-collectable,
 kelp-blue,A,11,Customer segment,P0,missing,not-collectable,
 kelp-blue,A,12,Target geography,P0,missing,not-collectable,
-kelp-blue,A,13,Operating status,P0,partial,empty,"gleif_lei status, yc_oss status"
-kelp-blue,A,14,Employee count,P0,partial,empty,"yc_oss team_size, serpapi_google knowledge panel; people_data_labs*"
+kelp-blue,A,13,Operating status,P0,auto,empty,"uk_companies_house status, gleif_lei, yc_oss"
 kelp-blue,A,15,Employee growth,P0,missing,not-collectable,
-kelp-blue,A,17,Legal structure,P0,partial,empty,gleif_lei legal form
-kelp-blue,B,2,Founder roles,P0,partial,empty,serpapi_google knowledge panel (names only)
+kelp-blue,A,17,Legal structure,P0,auto,empty,"uk_companies_house type, gleif_lei legal form"
+kelp-blue,B,2,Founder roles,P0,partial,empty,uk_companies_house officer roles; serpapi_google knowledge panel
 kelp-blue,B,3,Relevant industry experience,P0,missing,not-collectable,
 kelp-blue,B,4,Relevant technical experience,P0,missing,not-collectable,
 kelp-blue,B,5,Previous startup experience,P0,missing,not-collectable,
@@ -2413,7 +2368,7 @@ kelp-blue,B,18,Key-person dependency,P0,missing,not-collectable,
 kelp-blue,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 kelp-blue,B,20,Employee turnover,P0,missing,not-collectable,
 kelp-blue,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-kelp-blue,B,22,Board composition and governance experience,P0,missing,not-collectable,
+kelp-blue,B,22,Board composition and governance experience,P0,partial,empty,uk_companies_house directors (board composition)
 kelp-blue,B,23,References,P0,missing,not-collectable,
 kelp-blue,C,1,Problem description,P0,missing,not-collectable,
 kelp-blue,C,2,Target user,P0,missing,not-collectable,
@@ -2597,7 +2552,7 @@ kelp-blue,K,8,Valuation growth between comparable rounds,P0,missing,not-collecta
 kelp-blue,K,11,Investor concentration,P1,missing,not-collectable,
 kelp-blue,K,12,Founder ownership,P1,missing,not-collectable,
 kelp-blue,K,13,Employee option pool,P1,missing,not-collectable,
-kelp-blue,K,14,Fully diluted share count,P1,missing,not-collectable,
+kelp-blue,K,14,Fully diluted share count,P1,partial,empty,uk_companies_house statements of capital (SH01)
 kelp-blue,K,15,Convertible notes,P1,missing,not-collectable,
 kelp-blue,K,16,SAFEs,P1,missing,not-collectable,
 kelp-blue,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -2646,8 +2601,8 @@ kelp-blue,M,17,Geographic operating complexity,P2,missing,not-collectable,
 kelp-blue,M,18,Business continuity,P2,missing,not-collectable,
 kelp-blue,M,19,Process automation,P2,missing,not-collectable,
 kelp-blue,M,20,Management reporting quality,P2,missing,not-collectable,
-kelp-blue,N,1,Incorporation status,P1,partial,empty,gleif_lei; uk_companies_house*
-kelp-blue,N,2,Ownership verification and beneficial ownership,P1,partial,empty,gleif_lei parent relationships; uk_companies_house PSC*
+kelp-blue,N,1,Incorporation status,P1,auto,empty,"uk_companies_house, gleif_lei"
+kelp-blue,N,2,Ownership verification and beneficial ownership,P1,partial,empty,"uk_companies_house PSC register, gleif_lei parents"
 kelp-blue,N,3,Litigation,P1,missing,not-collectable,
 kelp-blue,N,4,Regulatory approvals and required licenses,P1,missing,not-collectable,
 kelp-blue,N,5,Industry-specific compliance,P1,missing,not-collectable,
@@ -2665,10 +2620,10 @@ kelp-blue,N,16,Tax compliance,P1,missing,not-collectable,
 kelp-blue,N,17,Founder or shareholder disputes,P1,missing,not-collectable,
 kelp-blue,N,18,Related-party transactions,P1,missing,not-collectable,
 kelp-blue,N,19,Change-of-control restrictions,P1,missing,not-collectable,
-kelp-blue,N,20,Outstanding guarantees and contingent liabilities,P1,missing,not-collectable,
+kelp-blue,N,20,Outstanding guarantees and contingent liabilities,P1,partial,empty,uk_companies_house insolvency + charges flags
 kelp-blue,O,1,Market risk,P1,missing,not-collectable,
 kelp-blue,O,2,Product risk,P1,missing,not-collectable,
-kelp-blue,O,3,Financial risk,P1,missing,not-collectable,
+kelp-blue,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 kelp-blue,O,4,Execution risk,P1,missing,not-collectable,
 kelp-blue,O,5,Customer concentration risk,P1,missing,not-collectable,
 kelp-blue,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -2765,7 +2720,6 @@ kelp-blue,T,8,CAC payback = time needed to recover customer acquisition cost,P2,
 kelp-blue,T,9,NRR = (starting recurring revenue + expansion - contraction - churn) /,P2,missing,not-collectable,
 kelp-blue,T,10,Revenue concentration = revenue from largest customers / total revenue,P2,missing,not-collectable,
 kelp-blue,T,11,Capital efficiency = growth or revenue achieved relative to capital consumed,P2,missing,not-collectable,
-kelp-blue,T,12,Hiring growth = percentage change in headcount,P2,partial,empty,headcount snapshots across runs
 kelp-blue,T,13,Market penetration = relevant customers acquired / estimated addressable,P2,missing,not-collectable,
 kelp-blue,T,14,Pipeline coverage = qualified pipeline / target bookings or sales,P2,missing,not-collectable,
 kelp-blue,T,15,"Valuation-to-revenue = valuation / revenue, where revenue is meaningful",P2,missing,not-collectable,
@@ -2779,19 +2733,15 @@ kelp-blue,U,10,Consent status,P2,missing,not-collectable,
 kelp-blue,U,11,Update frequency,P2,missing,not-collectable,
 kelp-blue,U,13,Human review status,P2,missing,not-collectable,
 kelp-blue,U,16,Metric definition and calculation method,P2,missing,not-collectable,
-clearbot,A,4,Country of incorporation,P0,partial,empty,"gleif_lei jurisdiction; uk_companies_house*, opencorporates*"
-clearbot,A,6,Date founded,P0,auto,empty,"seed; gleif_lei, wikidata_sparql, wayback_cdx, yc_oss"
-clearbot,A,7,Company age,P0,auto,empty,derived from founding date
-clearbot,A,9,Sub-industry,P0,partial,empty,yc_oss tags/subindustry
+clearbot,A,4,Country of incorporation,P0,auto,empty,"uk_companies_house, gleif_lei; opencorporates*"
 clearbot,A,10,Business model,P0,missing,not-collectable,
 clearbot,A,11,Customer segment,P0,missing,not-collectable,
 clearbot,A,12,Target geography,P0,missing,not-collectable,
-clearbot,A,13,Operating status,P0,partial,empty,"gleif_lei status, yc_oss status"
-clearbot,A,14,Employee count,P0,partial,empty,"yc_oss team_size, serpapi_google knowledge panel; people_data_labs*"
+clearbot,A,13,Operating status,P0,auto,empty,"uk_companies_house status, gleif_lei, yc_oss"
 clearbot,A,15,Employee growth,P0,missing,not-collectable,
-clearbot,A,17,Legal structure,P0,partial,empty,gleif_lei legal form
+clearbot,A,17,Legal structure,P0,auto,empty,"uk_companies_house type, gleif_lei legal form"
 clearbot,B,1,Number of founders,P0,partial,empty,serpapi_google knowledge panel; jina_reader team page
-clearbot,B,2,Founder roles,P0,partial,empty,serpapi_google knowledge panel (names only)
+clearbot,B,2,Founder roles,P0,partial,empty,uk_companies_house officer roles; serpapi_google knowledge panel
 clearbot,B,3,Relevant industry experience,P0,missing,not-collectable,
 clearbot,B,4,Relevant technical experience,P0,missing,not-collectable,
 clearbot,B,5,Previous startup experience,P0,missing,not-collectable,
@@ -2811,7 +2761,7 @@ clearbot,B,18,Key-person dependency,P0,missing,not-collectable,
 clearbot,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 clearbot,B,20,Employee turnover,P0,missing,not-collectable,
 clearbot,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-clearbot,B,22,Board composition and governance experience,P0,missing,not-collectable,
+clearbot,B,22,Board composition and governance experience,P0,partial,empty,uk_companies_house directors (board composition)
 clearbot,B,23,References,P0,missing,not-collectable,
 clearbot,C,1,Problem description,P0,missing,not-collectable,
 clearbot,C,2,Target user,P0,missing,not-collectable,
@@ -3000,7 +2950,7 @@ clearbot,K,8,Valuation growth between comparable rounds,P0,missing,not-collectab
 clearbot,K,11,Investor concentration,P1,missing,not-collectable,
 clearbot,K,12,Founder ownership,P1,missing,not-collectable,
 clearbot,K,13,Employee option pool,P1,missing,not-collectable,
-clearbot,K,14,Fully diluted share count,P1,missing,not-collectable,
+clearbot,K,14,Fully diluted share count,P1,partial,empty,uk_companies_house statements of capital (SH01)
 clearbot,K,15,Convertible notes,P1,missing,not-collectable,
 clearbot,K,16,SAFEs,P1,missing,not-collectable,
 clearbot,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -3030,7 +2980,6 @@ clearbot,L,14,Check-size fit,P2,missing,not-collectable,
 clearbot,L,15,Stage fit,P2,missing,not-collectable,
 clearbot,L,16,Geographic fit,P2,missing,not-collectable,
 clearbot,L,17,Follow-on capacity,P2,missing,not-collectable,
-clearbot,M,1,Operating history,P2,partial,empty,founding date; wayback_cdx
 clearbot,M,2,Milestone completion rate,P2,missing,not-collectable,
 clearbot,M,3,Product delivery time,P2,missing,not-collectable,
 clearbot,M,4,Hiring plan,P2,missing,not-collectable,
@@ -3050,8 +2999,8 @@ clearbot,M,17,Geographic operating complexity,P2,missing,not-collectable,
 clearbot,M,18,Business continuity,P2,missing,not-collectable,
 clearbot,M,19,Process automation,P2,missing,not-collectable,
 clearbot,M,20,Management reporting quality,P2,missing,not-collectable,
-clearbot,N,1,Incorporation status,P1,partial,empty,gleif_lei; uk_companies_house*
-clearbot,N,2,Ownership verification and beneficial ownership,P1,partial,empty,gleif_lei parent relationships; uk_companies_house PSC*
+clearbot,N,1,Incorporation status,P1,auto,empty,"uk_companies_house, gleif_lei"
+clearbot,N,2,Ownership verification and beneficial ownership,P1,partial,empty,"uk_companies_house PSC register, gleif_lei parents"
 clearbot,N,3,Litigation,P1,missing,not-collectable,
 clearbot,N,4,Regulatory approvals and required licenses,P1,missing,not-collectable,
 clearbot,N,5,Industry-specific compliance,P1,missing,not-collectable,
@@ -3069,10 +3018,10 @@ clearbot,N,16,Tax compliance,P1,missing,not-collectable,
 clearbot,N,17,Founder or shareholder disputes,P1,missing,not-collectable,
 clearbot,N,18,Related-party transactions,P1,missing,not-collectable,
 clearbot,N,19,Change-of-control restrictions,P1,missing,not-collectable,
-clearbot,N,20,Outstanding guarantees and contingent liabilities,P1,missing,not-collectable,
+clearbot,N,20,Outstanding guarantees and contingent liabilities,P1,partial,empty,uk_companies_house insolvency + charges flags
 clearbot,O,1,Market risk,P1,missing,not-collectable,
 clearbot,O,2,Product risk,P1,missing,not-collectable,
-clearbot,O,3,Financial risk,P1,missing,not-collectable,
+clearbot,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 clearbot,O,4,Execution risk,P1,missing,not-collectable,
 clearbot,O,5,Customer concentration risk,P1,missing,not-collectable,
 clearbot,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -3171,7 +3120,6 @@ clearbot,T,8,CAC payback = time needed to recover customer acquisition cost,P2,m
 clearbot,T,9,NRR = (starting recurring revenue + expansion - contraction - churn) /,P2,missing,not-collectable,
 clearbot,T,10,Revenue concentration = revenue from largest customers / total revenue,P2,missing,not-collectable,
 clearbot,T,11,Capital efficiency = growth or revenue achieved relative to capital consumed,P2,missing,not-collectable,
-clearbot,T,12,Hiring growth = percentage change in headcount,P2,partial,empty,headcount snapshots across runs
 clearbot,T,13,Market penetration = relevant customers acquired / estimated addressable,P2,missing,not-collectable,
 clearbot,T,14,Pipeline coverage = qualified pipeline / target bookings or sales,P2,missing,not-collectable,
 clearbot,T,15,"Valuation-to-revenue = valuation / revenue, where revenue is meaningful",P2,missing,not-collectable,

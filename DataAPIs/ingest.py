@@ -4,6 +4,8 @@
   python3 ingest.py               targeted per-startup pulls + funding/market pulls + gap analysis
   python3 ingest.py --gaps-only   only rebuild assessment_parameters / startup_parameter_status / GAPS.md
   python3 ingest.py --gaps-only --serpapi   only the SerpApi enrichment (2 searches per startup) + gaps
+  python3 ingest.py --gaps-only --pdl   only People Data Labs (1 credit per matched startup) + gaps
+  python3 ingest.py --gaps-only --uk   only the Companies House pull for UK startups + gaps
   python3 ingest.py --gdelt       also query GDELT per startup (slow: >= 6 s per call)
 
 Writes to DB/startupgo.db (or $STARTUPGO_DB). Creates it from DB/schema.sql + DB/seed.sql if missing,
@@ -269,12 +271,128 @@ def ingest_startup(conn, st, yc_all, use_gdelt=False):
         for a in (d or {}).get("articles", []) if isinstance(d, dict) else []:
             signal(conn, sid, "gdelt_doc", "news", a["title"], a["url"], a.get("seendate", "")[:8], details={"domain": a.get("domain")}, conf="low", fetch_id=f)
 
-    # Key-based sources: attempted so the gap report records why they are empty
     if st["country"] == "United Kingdom":
-        fetch(conn, "uk_companies_house", sid, q=name, items_per_page=5)
-    fetch(conn, "people_data_labs", sid, **({"website": dom} if dom else {"name": name}))
+        ingest_companies_house(conn, st)
+    # Key-based sources: attempted so the gap report records why they are empty
+    ingest_pdl(conn, st)
     fetch(conn, "opencorporates", sid, q=name)
     fetch(conn, "product_hunt", sid)
+    conn.commit()
+
+
+def ingest_companies_house(conn, st):
+    """UK register: pick the matching company, then profile, officers, PSC, capital filings, insolvency."""
+    sid, name, n = st["id"], st["name"], norm(st["name"])
+    d, f = fetch(conn, "uk_companies_house", sid, q=name, items_per_page=20)
+    assignees = {norm(r[0]) for r in conn.execute(
+        "SELECT json_extract(details,'$.assignee') FROM startup_signals WHERE startup_id=? AND signal_type='patent'", (sid,)) if r[0]}
+    best, best_score = None, 0
+    for c in (d or {}).get("items", []):
+        t = norm(c["title"])
+        if not t.startswith(n):
+            continue
+        base = lambda x: re.sub(r"(limited|ltd)$", "", x)  # noqa: E731
+        score = (3 if base(t) == n else 0) \
+            + (4 if any(base(t) == base(a) for a in assignees) else 0) \
+            + (-5 if c.get("company_status") == "dissolved" else 2) \
+            + (1 if st["city"] and st["city"].lower() in (c.get("address_snippet") or "").lower() else 0)
+        # patent assignee name beats a bare name match; a dissolved company is almost never the live startup
+        if score > best_score:
+            best, best_score = c, score
+    if not best:
+        return
+    num, conf = best["company_number"], "high" if best_score >= 6 else "medium"
+    ch_url = f"https://find-and-update.company-information.service.gov.uk/company/{num}"
+
+    prof, f = fetch(conn, "uk_companies_house_company", sid, number=num)
+    prof = prof or {}
+    addr = prof.get("registered_office_address") or {}
+    det = {"company_name": prof.get("company_name"), "status": prof.get("company_status"), "status_detail": prof.get("company_status_detail"),
+           "type": prof.get("type"), "jurisdiction": prof.get("jurisdiction"), "date_of_creation": prof.get("date_of_creation"),
+           "sic_codes": prof.get("sic_codes"), "registered_office": ", ".join(v for k, v in addr.items() if isinstance(v, str)),
+           "accounts_last_made_up_to": (prof.get("accounts") or {}).get("last_accounts", {}).get("made_up_to"),
+           "accounts_type": (prof.get("accounts") or {}).get("last_accounts", {}).get("type"),
+           "has_charges": prof.get("has_charges"), "has_insolvency_history": prof.get("has_insolvency_history")}
+    ext_id(conn, sid, "company_number", num, "uk_companies_house_company", ch_url, det, conf, f)
+    signal(conn, sid, "uk_companies_house_company", "registry", f"Companies House: {det['company_name']} ({det['status']})", ch_url,
+           det["date_of_creation"], details=det, conf=conf, fetch_id=f)
+    if det["date_of_creation"]:
+        suggest(conn, st, "founded_year", det["date_of_creation"][:4], "uk_companies_house_company", f"{num} date_of_creation {det['date_of_creation']}", conf, f)
+    if addr.get("locality"):
+        suggest(conn, st, "city", addr["locality"], "uk_companies_house_company", f"{num} registered office", "low", f)
+
+    d, f = fetch(conn, "uk_companies_house_company", sid, number=num, path="officers", items_per_page=100)
+    officers = (d or {}).get("items", [])
+    active = [o for o in officers if not o.get("resigned_on")]
+    if officers:
+        people = [{k: o.get(k) for k in ("name", "officer_role", "appointed_on", "resigned_on", "occupation", "nationality", "country_of_residence")} for o in officers]
+        signal(conn, sid, "uk_companies_house_company", "profile", f"Officers: {len(active)} active, {len(officers) - len(active)} resigned",
+               f"{ch_url}/officers", now()[:10], len(active), "officers", {"officers": people}, conf, f)
+        founding = [o["name"] for o in officers if o.get("officer_role") == "director" and o.get("appointed_on") == det["date_of_creation"]]
+        if founding:
+            signal(conn, sid, "uk_companies_house_company", "profile", f"Founding directors: {'; '.join(founding)}", f"{ch_url}/officers",
+                   det["date_of_creation"], len(founding), "founders", {"basis": "directors appointed on the incorporation date"}, "medium", f)
+
+    d, f = fetch(conn, "uk_companies_house_company", sid, number=num, path="persons-with-significant-control", items_per_page=100)
+    for p in (d or {}).get("items", []):
+        signal(conn, sid, "uk_companies_house_company", "registry", f"PSC: {p.get('name')}", f"{ch_url}/persons-with-significant-control",
+               p.get("notified_on"), None, "psc", {"kind": p.get("kind"), "natures_of_control": p.get("natures_of_control"), "ceased_on": p.get("ceased_on")}, conf, f)
+
+    d, f = fetch(conn, "uk_companies_house_company", sid, number=num, path="filing-history", category="capital", items_per_page=100)
+    for it in (d or {}).get("items", []):
+        dv = it.get("description_values") or {}
+        caps = dv.get("capital") or []
+        cap_txt = "; ".join(f"{c.get('currency')} {c.get('figure')}" for c in caps)
+        signal(conn, sid, "uk_companies_house_company", "filing", f"{it.get('type')}: {it.get('description', '').replace('-', ' ')}" + (f" ({cap_txt})" if cap_txt else ""),
+               f"https://find-and-update.company-information.service.gov.uk{(it.get('links') or {}).get('self', '')}", dv.get("date") or it.get("date"),
+               details={"type": it.get("type"), "capital": caps, "filed_on": it.get("date")}, conf=conf, fetch_id=f)
+
+    if det["has_insolvency_history"]:
+        d, f = fetch(conn, "uk_companies_house_company", sid, number=num, path="insolvency")
+        for case in (d or {}).get("cases", []):
+            dates = {x.get("type"): x.get("date") for x in case.get("dates", [])}
+            pract = [p.get("name") for p in case.get("practitioners", [])]
+            signal(conn, sid, "uk_companies_house_company", "registry", f"Insolvency case {case.get('number')}: {case.get('type')}", f"{ch_url}/insolvency",
+                   next(iter(dates.values()), None), None, "insolvency", {"dates": dates, "practitioners": pract}, "high", f)
+    conn.commit()
+
+
+def ingest_pdl(conn, st):
+    """People Data Labs company enrichment (1 credit per match): headcount, founded, funding totals, profiles."""
+    if not os.environ.get("PDL_API_KEY"):
+        fetch(conn, "people_data_labs", st["id"], name=st["name"])  # records the skip
+        return
+    sid, n = st["id"], norm(st["name"])
+    site = st["website"] or (conn.execute("SELECT value FROM field_suggestions WHERE startup_id=? AND field='website' AND status!='rejected' "
+                                          "ORDER BY match_confidence='high' DESC LIMIT 1", (sid,)).fetchone() or [None])[0]
+    q = {"website": domain(site)} if site else {"name": st["name"], "country": st["country"]}
+    d, f = fetch(conn, "people_data_labs", sid, **q, min_likelihood=4)
+    same_site = bool(site and d and d.get("website") == domain(site))  # e.g. clearbot.org is listed as "Clear Robotics"
+    if not d or d.get("status") != 200 or not (same_site or n in norm(d.get("display_name") or d.get("name"))):
+        return
+    conf = "high" if st["website"] and domain(st["website"]) == d.get("website") else "medium"
+    url = f"https://{d['linkedin_url']}" if d.get("linkedin_url") else None
+    loc = d.get("location") or {}
+    det = {k: d.get(k) for k in ("display_name", "size", "employee_count", "founded", "industry", "industry_v2", "type", "headline", "summary",
+                                 "linkedin_url", "profiles", "employee_count_by_country", "likelihood", "dataset_version")}
+    det["location"] = loc.get("name")
+    ext_id(conn, sid, "pdl_id", d["id"], "people_data_labs", url, det, conf, f)
+    if d.get("linkedin_url"):
+        ext_id(conn, sid, "linkedin_company", d["linkedin_url"], "people_data_labs", url, None, conf, f)
+    if d.get("employee_count") is not None:
+        signal(conn, sid, "people_data_labs", "profile", f"Employees: {d['employee_count']} ({d.get('size')})", url, now()[:10],
+               d["employee_count"], "employees", {"by_country": d.get("employee_count_by_country")}, conf, f)
+    if d.get("total_funding_raised"):
+        signal(conn, sid, "people_data_labs", "profile",
+               f"Funding: ${d['total_funding_raised']:,.0f} raised in {d.get('number_funding_rounds')} rounds; latest {d.get('latest_funding_stage')} on {d.get('last_funding_date')}",
+               url, d.get("last_funding_date"), d["total_funding_raised"], "usd_raised",
+               {"rounds": d.get("number_funding_rounds"), "stages": d.get("funding_stages"), "latest_stage": d.get("latest_funding_stage")}, conf, f)
+    if d.get("founded"):
+        suggest(conn, st, "founded_year", d["founded"], "people_data_labs", f"PDL founded (likelihood {d.get('likelihood')})", conf, f)
+    if loc.get("locality"):
+        suggest(conn, st, "city", loc["locality"].title(), "people_data_labs", f"PDL HQ: {loc.get('name')}", "low", f)
+    if not st["website"] and d.get("website"):
+        suggest(conn, st, "website", f"https://{d['website']}", "people_data_labs", "PDL website", conf, f)
     conn.commit()
 
 
@@ -420,21 +538,22 @@ COVER = {
     ("A", 1): ("auto", "col:id", "internal"),
     ("A", 2): ("auto", "col:name", "seed; gleif_lei legal name"),
     ("A", 3): ("auto", "col:website|suggest:website", "seed; wikidata_sparql"),
-    ("A", 4): ("partial", "ext:lei", "gleif_lei jurisdiction; uk_companies_house*, opencorporates*"),
+    ("A", 4): ("auto", "ext:company_number|ext:lei", "uk_companies_house, gleif_lei; opencorporates*"),
     ("A", 5): ("auto", "col:city|suggest:city", "seed; gleif_lei HQ; wikidata_sparql"),
     ("A", 6): ("auto", "col:founded_year|suggest:founded_year", "seed; gleif_lei, wikidata_sparql, wayback_cdx, yc_oss"),
     ("A", 7): ("auto", "col:founded_year|suggest:founded_year", "derived from founding date"),
     ("A", 8): ("auto", "col:sector", "seed"),
-    ("A", 9): ("partial", "ext:yc_slug", "yc_oss tags/subindustry"),
-    ("A", 13): ("partial", "ext:lei|ext:yc_slug", "gleif_lei status, yc_oss status"),
-    ("A", 14): ("partial", "unit:employees", "yc_oss team_size, serpapi_google knowledge panel; people_data_labs*"),
+    ("A", 9): ("partial", "ext:pdl_id|ext:yc_slug", "people_data_labs industry_v2, yc_oss tags"),
+    ("A", 13): ("auto", "ext:company_number|ext:lei|ext:yc_slug", "uk_companies_house status, gleif_lei, yc_oss"),
+    ("A", 14): ("auto", "unit:employees", "people_data_labs employee_count, yc_oss team_size"),
     ("A", 16): ("auto", "col:stage", "seed"),
-    ("A", 17): ("partial", "ext:lei", "gleif_lei legal form"),
+    ("A", 17): ("auto", "ext:company_number|ext:lei", "uk_companies_house type, gleif_lei legal form"),
     ("A", 18): ("auto", "col:tagline", "seed"),
     ("A", 19): ("partial", "col:description|signal:website", "seed description; jina_reader website text"),
     ("A", 20): ("partial", "col:sector", "seed"),
     ("B", 1): ("partial", "unit:founders|signal:website", "serpapi_google knowledge panel; jina_reader team page"),
-    ("B", 2): ("partial", "unit:founders", "serpapi_google knowledge panel (names only)"),
+    ("B", 2): ("partial", "unit:founders|unit:officers", "uk_companies_house officer roles; serpapi_google knowledge panel"),
+    ("B", 22): ("partial", "unit:officers", "uk_companies_house directors (board composition)"),
     ("B", 19): ("partial", "signal:job", "serpapi_google_jobs open roles"),
     ("D", 4): ("partial", "market", "world_bank, eurostat, oecd_sdmx"),
     ("D", 8): ("partial", "market", "world_bank, eurostat"),
@@ -450,17 +569,19 @@ COVER = {
     ("J", 1): ("partial", "peers", "same-sector startups in DB; yc_oss"),
     ("J", 3): ("partial", "peers", "funding_rounds of same-sector startups"),
     ("J", 13): ("auto", "signal:patent", "google_patents_xhr"),
-    ("K", 1): ("auto", "rounds", "funding_rounds; sec_edgar Form D; crunchbase*"),
-    ("K", 2): ("auto", "rounds", "funding_rounds"),
-    ("K", 3): ("auto", "rounds", "funding_rounds"),
-    ("K", 4): ("auto", "rounds", "funding_rounds"),
+    ("K", 1): ("auto", "unit:usd_raised|rounds", "people_data_labs total raised; funding_rounds; sec_edgar Form D"),
+    ("K", 2): ("auto", "unit:usd_raised|rounds", "people_data_labs round count; funding_rounds"),
+    ("K", 3): ("auto", "unit:usd_raised|rounds", "people_data_labs last funding date; funding_rounds"),
+    ("K", 4): ("auto", "unit:usd_raised|rounds", "people_data_labs latest stage; funding_rounds"),
     ("K", 5): ("auto", "rounds", "funding_rounds; sec_edgar Form D"),
     ("K", 9): ("auto", "rounds", "funding_rounds.lead_investors/notes"),
     ("K", 10): ("auto", "rounds", "funding_rounds.lead_investors"),
     ("L", 1): ("partial", "rounds", "investor names only; wikidata_sparql for profiles"),
     ("M", 1): ("partial", "col:founded_year|suggest:founded_year|signal:web_history", "founding date; wayback_cdx"),
-    ("N", 1): ("partial", "ext:lei", "gleif_lei; uk_companies_house*"),
-    ("N", 2): ("partial", "ext:lei", "gleif_lei parent relationships; uk_companies_house PSC*"),
+    ("N", 1): ("auto", "ext:company_number|ext:lei", "uk_companies_house, gleif_lei"),
+    ("N", 2): ("partial", "unit:psc|ext:lei", "uk_companies_house PSC register, gleif_lei parents"),
+    ("N", 20): ("partial", "unit:insolvency|ext:company_number", "uk_companies_house insolvency + charges flags"),
+    ("O", 3): ("partial", "unit:insolvency", "uk_companies_house insolvency cases"),
     ("Q", 4): ("auto", "signal:repo", "github_search_repos"),
     ("Q", 6): ("partial", "signal:job|ext:yc_slug", "serpapi_google_jobs; yc_oss isHiring"),
     ("Q", 7): ("partial", "signal:job", "serpapi_google_jobs"),
@@ -472,7 +593,8 @@ COVER = {
     ("Q", 14): ("auto", "signal:paper", "openalex, crossref"),
     ("Q", 15): ("auto", "signal:patent", "google_patents_xhr"),
     ("Q", 19): ("partial", "signal:web_history", "wayback_cdx, common_crawl_index"),
-    ("Q", 20): ("auto", "rounds|signal:filing", "funding_rounds, sec_edgar Form D"),
+    ("Q", 20): ("auto", "rounds|signal:filing", "funding_rounds, sec_edgar Form D, uk_companies_house SH01 allotments"),
+    ("K", 14): ("partial", "signal:filing", "uk_companies_house statements of capital (SH01)"),
     ("S", 3): ("partial", "kpi:D", "startup_ocean_kpis area D (climate)"),
     ("S", 4): ("partial", "kpi:E", "startup_ocean_kpis"),
     ("S", 5): ("partial", "kpi:B", "startup_ocean_kpis area B (pollution)"),
@@ -644,6 +766,14 @@ def main(argv):
             ingest_startup(conn, st, yc, use_gdelt="--gdelt" in argv)
         print("-> funding opportunities"); ingest_funding(conn)
         print("-> market indicators"); ingest_market(conn)
+    if "--pdl" in argv:
+        for st in conn.execute("SELECT * FROM startups ORDER BY id").fetchall():
+            print(f"-> pdl {st['name']}")
+            ingest_pdl(conn, st)
+    if "--uk" in argv:
+        for st in conn.execute("SELECT * FROM startups WHERE country='United Kingdom' ORDER BY id").fetchall():
+            print(f"-> companies house {st['name']}")
+            ingest_companies_house(conn, st)
     if "--serpapi" in argv or "--gaps-only" not in argv:
         for st in conn.execute("SELECT * FROM startups ORDER BY id").fetchall():
             print(f"-> serpapi {st['name']}")

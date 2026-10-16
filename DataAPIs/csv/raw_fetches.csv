@@ -135,3 +135,44 @@
 131,serpapi_google_jobs,7,"{""q"": ""Kelp Blue""}",ok,,25999,2026-10-16 21:20:16
 132,serpapi_google,8,"{""q"": ""\""Clearbot\"" Ocean cleanup company"", ""num"": 10}",ok,,61514,2026-10-16 21:20:17
 133,serpapi_google_jobs,8,"{""q"": ""Clearbot""}",ok,,25817,2026-10-16 21:20:18
+134,uk_companies_house,1,"{""q"": ""Notpla"", ""items_per_page"": 20}",ok,,2679,2026-10-16 22:05:31
+135,uk_companies_house_company,1,"{""number"": ""09147492""}",ok,,1706,2026-10-16 22:05:32
+136,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,8309,2026-10-16 22:05:32
+137,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,2955,2026-10-16 22:05:32
+138,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,33258,2026-10-16 22:05:33
+139,uk_companies_house,4,"{""q"": ""Seabound"", ""items_per_page"": 20}",ok,,2518,2026-10-16 22:05:33
+140,uk_companies_house_company,4,"{""number"": ""07149228""}",ok,,1115,2026-10-16 22:05:33
+141,uk_companies_house_company,4,"{""number"": ""07149228"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,2319,2026-10-16 22:05:34
+142,uk_companies_house_company,4,"{""number"": ""07149228"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,3581,2026-10-16 22:05:34
+143,uk_companies_house_company,4,"{""number"": ""07149228"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,647,2026-10-16 22:05:34
+144,uk_companies_house,5,"{""q"": ""Oceanium"", ""items_per_page"": 20}",ok,,720,2026-10-16 22:05:34
+145,uk_companies_house_company,5,"{""number"": ""SC600414""}",ok,,1554,2026-10-16 22:05:35
+146,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,6539,2026-10-16 22:05:35
+147,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,2113,2026-10-16 22:05:35
+148,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,11216,2026-10-16 22:05:36
+149,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""insolvency""}",ok,,606,2026-10-16 22:05:36
+150,uk_companies_house,1,"{""q"": ""Notpla"", ""items_per_page"": 20}",ok,,2679,2026-10-16 22:05:58
+151,uk_companies_house_company,1,"{""number"": ""09147492""}",ok,,1706,2026-10-16 22:05:58
+152,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,8309,2026-10-16 22:05:59
+153,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,2955,2026-10-16 22:05:59
+154,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,33258,2026-10-16 22:05:59
+155,uk_companies_house,4,"{""q"": ""Seabound"", ""items_per_page"": 20}",ok,,2518,2026-10-16 22:06:00
+156,uk_companies_house_company,4,"{""number"": ""14170323""}",ok,,1450,2026-10-16 22:06:00
+157,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,2178,2026-10-16 22:06:01
+158,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,1992,2026-10-16 22:06:01
+159,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,1719,2026-10-16 22:06:01
+160,uk_companies_house,5,"{""q"": ""Oceanium"", ""items_per_page"": 20}",ok,,720,2026-10-16 22:06:02
+161,uk_companies_house_company,5,"{""number"": ""SC600414""}",ok,,1554,2026-10-16 22:06:03
+162,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,6539,2026-10-16 22:06:03
+163,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,2113,2026-10-16 22:06:03
+164,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,11216,2026-10-16 22:06:04
+165,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""insolvency""}",ok,,606,2026-10-16 22:06:04
+166,people_data_labs,1,"{""website"": ""notpla.com"", ""min_likelihood"": 4}",ok,,1927,2026-10-16 22:44:33
+167,people_data_labs,2,"{""website"": ""sofarocean.com"", ""min_likelihood"": 4}",ok,,2063,2026-10-16 22:44:34
+168,people_data_labs,3,"{""website"": ""oceanrainforest.com"", ""min_likelihood"": 4}",ok,,2475,2026-10-16 22:44:36
+169,people_data_labs,4,"{""website"": ""seabound.co"", ""min_likelihood"": 4}",ok,,1587,2026-10-16 22:44:38
+170,people_data_labs,5,"{""website"": ""oceanium.world"", ""min_likelihood"": 4}",ok,,1674,2026-10-16 22:44:39
+171,people_data_labs,6,"{""website"": ""seaforester.org"", ""min_likelihood"": 4}",ok,,1883,2026-10-16 22:44:41
+172,people_data_labs,7,"{""website"": ""kelp.blue"", ""min_likelihood"": 4}",ok,,3227,2026-10-16 22:44:42
+173,people_data_labs,8,"{""website"": ""clearbot.org"", ""min_likelihood"": 4}",ok,,2430,2026-10-16 22:44:43
+174,people_data_labs,8,"{""website"": ""clearbot.org"", ""min_likelihood"": 4}",ok,,2430,2026-10-16 22:45:03

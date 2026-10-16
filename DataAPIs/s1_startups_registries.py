@@ -149,3 +149,15 @@ def companies_house(**p):
 def orbis(**p):
     need("ORBIS_API_KEY")
     raise NotImplementedError("vendor contract required")
+
+
+@source(name="uk_companies_house_company", section="2 Registries", access="key",
+        endpoint="https://api.company-information.service.gov.uk/company/{number}{/path}",
+        use="UK company profile, officers, PSC (beneficial owners), filing history, charges, insolvency",
+        params={"number": "company number e.g. 09147492", "path": "'' (profile) | officers | persons-with-significant-control | filing-history | charges | insolvency",
+                "category": "filing-history filter: capital, accounts, confirmation-statement, incorporation, officers, mortgage ...",
+                "items_per_page": "<=100", "start_index": "offset", "register_view": "officers: true|false", "order_by": "officers: appointed_on|resigned_on|surname"},
+        defaults={"number": "09147492"}, notes="env COMPANIES_HOUSE_KEY (HTTP Basic user)")
+def companies_house_company(number="09147492", path="", **p):
+    url = f"https://api.company-information.service.gov.uk/company/{number}" + (f"/{path}" if path else "")
+    return http(url, p, auth=(need("COMPANIES_HOUSE_KEY"), ""))

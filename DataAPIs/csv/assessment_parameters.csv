@@ -2,25 +2,25 @@
 1,A,Company Identity And Profile,1,Company ID,unique internal identifier,P0,auto,col:id,internal
 2,A,Company Identity And Profile,2,Company name,registered and trading name,P0,auto,col:name,seed; gleif_lei legal name
 3,A,Company Identity And Profile,3,Website,official URL,P0,auto,col:website|suggest:website,seed; wikidata_sparql
-4,A,Company Identity And Profile,4,Country of incorporation,legal jurisdiction,P0,partial,ext:lei,"gleif_lei jurisdiction; uk_companies_house*, opencorporates*"
+4,A,Company Identity And Profile,4,Country of incorporation,legal jurisdiction,P0,auto,ext:company_number|ext:lei,"uk_companies_house, gleif_lei; opencorporates*"
 5,A,Company Identity And Profile,5,Headquarters,city and country,P0,auto,col:city|suggest:city,seed; gleif_lei HQ; wikidata_sparql
 6,A,Company Identity And Profile,6,Date founded,incorporation or operating start date,P0,auto,col:founded_year|suggest:founded_year,"seed; gleif_lei, wikidata_sparql, wayback_cdx, yc_oss"
 7,A,Company Identity And Profile,7,Company age,years/months since founding,P0,auto,col:founded_year|suggest:founded_year,derived from founding date
 8,A,Company Identity And Profile,8,Industry,primary industry,P0,auto,col:sector,seed
-9,A,Company Identity And Profile,9,Sub-industry,specific market category,P0,partial,ext:yc_slug,yc_oss tags/subindustry
+9,A,Company Identity And Profile,9,Sub-industry,specific market category,P0,partial,ext:pdl_id|ext:yc_slug,"people_data_labs industry_v2, yc_oss tags"
 10,A,Company Identity And Profile,10,Business model,"SaaS, marketplace, hardware, services, etc.",P0,missing,,
 11,A,Company Identity And Profile,11,Customer segment,"B2B, B2C, B2G, B2B2C",P0,missing,,
 12,A,Company Identity And Profile,12,Target geography,markets served or targeted,P0,missing,,
-13,A,Company Identity And Profile,13,Operating status,"active, acquired, inactive, shut down",P0,partial,ext:lei|ext:yc_slug,"gleif_lei status, yc_oss status"
-14,A,Company Identity And Profile,14,Employee count,current headcount,P0,partial,unit:employees,"yc_oss team_size, serpapi_google knowledge panel; people_data_labs*"
+13,A,Company Identity And Profile,13,Operating status,"active, acquired, inactive, shut down",P0,auto,ext:company_number|ext:lei|ext:yc_slug,"uk_companies_house status, gleif_lei, yc_oss"
+14,A,Company Identity And Profile,14,Employee count,current headcount,P0,auto,unit:employees,"people_data_labs employee_count, yc_oss team_size"
 15,A,Company Identity And Profile,15,Employee growth,change in headcount over time,P0,missing,,
 16,A,Company Identity And Profile,16,Company stage,"idea, prototype, pre-seed, seed, Series A, etc.",P0,auto,col:stage,seed
-17,A,Company Identity And Profile,17,Legal structure,"corporation, limited company, other",P0,partial,ext:lei,gleif_lei legal form
+17,A,Company Identity And Profile,17,Legal structure,"corporation, limited company, other",P0,auto,ext:company_number|ext:lei,"uk_companies_house type, gleif_lei legal form"
 18,A,Company Identity And Profile,18,Mission and value proposition,what the business promises to deliver,P0,auto,col:tagline,seed
 19,A,Company Identity And Profile,19,Primary problem solved,customer problem being addressed,P0,partial,col:description|signal:website,seed description; jina_reader website text
 20,A,Company Identity And Profile,20,Product category,product or service classification,P0,partial,col:sector,seed
 21,B,Founding Team And Leadership,1,Number of founders,,P0,partial,unit:founders|signal:website,serpapi_google knowledge panel; jina_reader team page
-22,B,Founding Team And Leadership,2,Founder roles,"CEO, CTO, commercial lead, etc.",P0,partial,unit:founders,serpapi_google knowledge panel (names only)
+22,B,Founding Team And Leadership,2,Founder roles,"CEO, CTO, commercial lead, etc.",P0,partial,unit:founders|unit:officers,uk_companies_house officer roles; serpapi_google knowledge panel
 23,B,Founding Team And Leadership,3,Relevant industry experience,,P0,missing,,
 24,B,Founding Team And Leadership,4,Relevant technical experience,,P0,missing,,
 25,B,Founding Team And Leadership,5,Previous startup experience,,P0,missing,,
@@ -40,7 +40,7 @@
 39,B,Founding Team And Leadership,19,Hiring capability,,P0,partial,signal:job,serpapi_google_jobs open roles
 40,B,Founding Team And Leadership,20,Employee turnover,,P0,missing,,
 41,B,Founding Team And Leadership,21,Advisor network and actual contributions,,P0,missing,,
-42,B,Founding Team And Leadership,22,Board composition and governance experience,,P0,missing,,
+42,B,Founding Team And Leadership,22,Board composition and governance experience,,P0,partial,unit:officers,uk_companies_house directors (board composition)
 43,B,Founding Team And Leadership,23,References,verified references and feedback,P0,missing,,
 44,C,Problem Severity And Customer Need,1,Problem description,,P0,missing,,
 45,C,Problem Severity And Customer Need,2,Target user,,P0,missing,,
@@ -232,10 +232,10 @@
 231,J,Competition And Defensibility,20,Platform dependency,,P1,missing,,
 232,J,Competition And Defensibility,21,Competitive differentiation,,P1,missing,,
 233,J,Competition And Defensibility,22,Long-term moat potential,,P1,missing,,
-234,K,Funding History And Capitalization Table (Cap Table),1,Total capital raised,,P0,auto,rounds,funding_rounds; sec_edgar Form D; crunchbase*
-235,K,Funding History And Capitalization Table (Cap Table),2,Funding round count,,P0,auto,rounds,funding_rounds
-236,K,Funding History And Capitalization Table (Cap Table),3,Last funding date,,P0,auto,rounds,funding_rounds
-237,K,Funding History And Capitalization Table (Cap Table),4,Last funding stage,,P0,auto,rounds,funding_rounds
+234,K,Funding History And Capitalization Table (Cap Table),1,Total capital raised,,P0,auto,unit:usd_raised|rounds,people_data_labs total raised; funding_rounds; sec_edgar Form D
+235,K,Funding History And Capitalization Table (Cap Table),2,Funding round count,,P0,auto,unit:usd_raised|rounds,people_data_labs round count; funding_rounds
+236,K,Funding History And Capitalization Table (Cap Table),3,Last funding date,,P0,auto,unit:usd_raised|rounds,people_data_labs last funding date; funding_rounds
+237,K,Funding History And Capitalization Table (Cap Table),4,Last funding stage,,P0,auto,unit:usd_raised|rounds,people_data_labs latest stage; funding_rounds
 238,K,Funding History And Capitalization Table (Cap Table),5,Amount raised per round,,P0,auto,rounds,funding_rounds; sec_edgar Form D
 239,K,Funding History And Capitalization Table (Cap Table),6,Pre-money valuation,,P0,missing,,
 240,K,Funding History And Capitalization Table (Cap Table),7,Post-money valuation,,P0,missing,,
@@ -245,7 +245,7 @@
 244,K,Funding History And Capitalization Table (Cap Table),11,Investor concentration,,P1,missing,,
 245,K,Funding History And Capitalization Table (Cap Table),12,Founder ownership,,P1,missing,,
 246,K,Funding History And Capitalization Table (Cap Table),13,Employee option pool,,P1,missing,,
-247,K,Funding History And Capitalization Table (Cap Table),14,Fully diluted share count,,P1,missing,,
+247,K,Funding History And Capitalization Table (Cap Table),14,Fully diluted share count,,P1,partial,signal:filing,uk_companies_house statements of capital (SH01)
 248,K,Funding History And Capitalization Table (Cap Table),15,Convertible notes,,P1,missing,,
 249,K,Funding History And Capitalization Table (Cap Table),16,SAFEs,Simple Agreements for Future Equity,P1,missing,,
 250,K,Funding History And Capitalization Table (Cap Table),17,Liquidation preferences,,P1,missing,,
@@ -296,8 +296,8 @@
 295,M,Operations And Execution,18,Business continuity,,P2,missing,,
 296,M,Operations And Execution,19,Process automation,,P2,missing,,
 297,M,Operations And Execution,20,Management reporting quality,,P2,missing,,
-298,N,"Legal, Regulatory And Compliance Risks",1,Incorporation status,,P1,partial,ext:lei,gleif_lei; uk_companies_house*
-299,N,"Legal, Regulatory And Compliance Risks",2,Ownership verification and beneficial ownership,,P1,partial,ext:lei,gleif_lei parent relationships; uk_companies_house PSC*
+298,N,"Legal, Regulatory And Compliance Risks",1,Incorporation status,,P1,auto,ext:company_number|ext:lei,"uk_companies_house, gleif_lei"
+299,N,"Legal, Regulatory And Compliance Risks",2,Ownership verification and beneficial ownership,,P1,partial,unit:psc|ext:lei,"uk_companies_house PSC register, gleif_lei parents"
 300,N,"Legal, Regulatory And Compliance Risks",3,Litigation,material ongoing or past disputes,P1,missing,,
 301,N,"Legal, Regulatory And Compliance Risks",4,Regulatory approvals and required licenses,,P1,missing,,
 302,N,"Legal, Regulatory And Compliance Risks",5,Industry-specific compliance,,P1,missing,,
@@ -315,10 +315,10 @@
 314,N,"Legal, Regulatory And Compliance Risks",17,Founder or shareholder disputes,,P1,missing,,
 315,N,"Legal, Regulatory And Compliance Risks",18,Related-party transactions,,P1,missing,,
 316,N,"Legal, Regulatory And Compliance Risks",19,Change-of-control restrictions,,P1,missing,,
-317,N,"Legal, Regulatory And Compliance Risks",20,Outstanding guarantees and contingent liabilities,,P1,missing,,
+317,N,"Legal, Regulatory And Compliance Risks",20,Outstanding guarantees and contingent liabilities,,P1,partial,unit:insolvency|ext:company_number,uk_companies_house insolvency + charges flags
 318,O,Risk And Resilience,1,Market risk,,P1,missing,,
 319,O,Risk And Resilience,2,Product risk,,P1,missing,,
-320,O,Risk And Resilience,3,Financial risk,,P1,missing,,
+320,O,Risk And Resilience,3,Financial risk,,P1,partial,unit:insolvency,uk_companies_house insolvency cases
 321,O,Risk And Resilience,4,Execution risk,,P1,missing,,
 322,O,Risk And Resilience,5,Customer concentration risk,,P1,missing,,
 323,O,Risk And Resilience,6,Supplier dependency risk,,P1,missing,,
@@ -374,7 +374,7 @@
 373,Q,External Signals And Startup Momentum,17,App downloads,,P2,missing,,
 374,Q,External Signals And Startup Momentum,18,Public reviews,"volume, quality and trends",P2,missing,,
 375,Q,External Signals And Startup Momentum,19,Credible online visibility growth,,P2,partial,signal:web_history,"wayback_cdx, common_crawl_index"
-376,Q,External Signals And Startup Momentum,20,Funding announcements,,P2,auto,rounds|signal:filing,"funding_rounds, sec_edgar Form D"
+376,Q,External Signals And Startup Momentum,20,Funding announcements,,P2,auto,rounds|signal:filing,"funding_rounds, sec_edgar Form D, uk_companies_house SH01 allotments"
 377,Q,External Signals And Startup Momentum,21,Relevant leadership changes,,P2,missing,,
 378,R,Ai-Specific Assessment Parameters,1,AI use case,specific task solved,P2,missing,,
 379,R,Ai-Specific Assessment Parameters,2,AI necessity,material advantage over non-AI alternatives,P2,missing,,

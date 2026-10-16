@@ -217,6 +217,24 @@ Financial statements (stub)
 _No public API_
 
 
+### uk_companies_house_company  ·  key
+
+`https://api.company-information.service.gov.uk/company/{number}{/path}`  
+UK company profile, officers, PSC (beneficial owners), filing history, charges, insolvency  
+_env COMPANIES_HOUSE_KEY (HTTP Basic user)_
+
+| Parameter | Meaning |
+|---|---|
+| `number` | company number e.g. 09147492 |
+| `path` | '' (profile) | officers | persons-with-significant-control | filing-history | charges | insolvency |
+| `category` | filing-history filter: capital, accounts, confirmation-statement, incorporation, officers, mortgage ... |
+| `items_per_page` | <=100 |
+| `start_index` | offset |
+| `register_view` | officers: true|false |
+| `order_by` | officers: appointed_on|resigned_on|surname |
+
+Default: `{"number": "09147492"}`
+
 
 ## 3 Funding & grants
 
@@ -849,3 +867,48 @@ Species occurrences for impact claims (also /species, /dataset)
 | `facet` |  |
 
 Default: `{"scientificName": "Macrocystis pyrifera", "country": "US", "limit": 3}`
+
+
+## 7 Search & extraction
+
+### serpapi_google  ·  key
+
+`https://serpapi.com/search?engine=google`  
+Google web search: organic results + knowledge panel (founded, HQ, employees, founders)  
+_env SERPAPI_KEY; 1 search per call_
+
+| Parameter | Meaning |
+|---|---|
+| `q` |  |
+| `num` | results |
+| `start` | offset |
+| `gl` | country |
+| `hl` | language |
+| `location` |  |
+| `tbs` | time filter e.g. qdr:m |
+| `safe` | active|off |
+| `device` | desktop|mobile |
+
+Default: `{"q": "Clearbot ocean cleanup", "num": 10}`
+
+
+## 6 News & traction
+
+### serpapi_google_jobs  ·  key
+
+`https://serpapi.com/search?engine=google_jobs`  
+Job postings aggregated by Google (hiring signals)  
+_env SERPAPI_KEY; 1 search per call_
+
+| Parameter | Meaning |
+|---|---|
+| `q` |  |
+| `location` |  |
+| `gl` |  |
+| `hl` |  |
+| `lrad` | radius km |
+| `ltype` | 1 = work from home |
+| `uds` | filter token |
+| `next_page_token` |  |
+
+Default: `{"q": "Notpla"}`
