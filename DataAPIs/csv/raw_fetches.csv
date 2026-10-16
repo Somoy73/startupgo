@@ -1,0 +1,137 @@
+﻿id,source_name,startup_id,params,status,error,size_bytes,fetched_at
+1,yc_oss_companies,,"{""kind"": ""companies"", ""name"": ""all""}",ok,,9421756,2026-10-16 21:11:02
+2,gleif_lei,1,"{""filter[fulltext]"": ""Notpla"", ""page[size]"": 10}",ok,,425,2026-10-16 21:11:03
+3,wikidata_sparql,1,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Notpla\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:11:03
+4,google_patents_xhr,1,"{""q"": """", ""num"": 25, ""assignee"": ""Notpla""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:11:04
+5,serpapi_google_patents,1,"{""assignee"": ""Notpla"", ""num"": 50}",ok,,18454,2026-10-16 21:11:05
+6,openalex,1,"{""search"": ""\""Notpla\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3122,2026-10-16 21:11:06
+7,google_news_rss,1,"{""q"": ""\""Notpla\"""", ""limit"": 25}",ok,,11758,2026-10-16 21:11:07
+8,hn_algolia,1,"{""query"": ""Notpla"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,18176,2026-10-16 21:11:07
+9,github_search_repos,1,"{""q"": ""Notpla in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,55117,2026-10-16 21:11:09
+10,wayback_cdx,1,"{""url"": ""notpla.com"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,403,2026-10-16 21:11:20
+11,jina_reader,1,"{""url"": ""https://www.notpla.com""}",ok,,20457,2026-10-16 21:11:22
+12,uk_companies_house,1,"{""q"": ""Notpla"", ""items_per_page"": 5}",skipped,set env var COMPANIES_HOUSE_KEY,,2026-10-16 21:11:22
+13,people_data_labs,1,"{""website"": ""notpla.com""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:11:22
+14,opencorporates,1,"{""q"": ""Notpla""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:11:22
+15,product_hunt,1,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:11:22
+16,gleif_lei,2,"{""filter[fulltext]"": ""Sofar Ocean"", ""page[size]"": 10}",ok,,435,2026-10-16 21:11:23
+17,wikidata_sparql,2,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Sofar Ocean\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:11:23
+18,google_patents_xhr,2,"{""q"": """", ""num"": 25, ""assignee"": ""Sofar Ocean""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:11:24
+19,serpapi_google_patents,2,"{""assignee"": ""Sofar Ocean"", ""num"": 50}",ok,,19228,2026-10-16 21:11:26
+20,openalex,2,"{""search"": ""\""Sofar Ocean\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3265,2026-10-16 21:11:26
+21,google_news_rss,2,"{""q"": ""\""Sofar Ocean\"""", ""limit"": 25}",ok,,11903,2026-10-16 21:11:27
+22,hn_algolia,2,"{""query"": ""Sofar Ocean"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,59428,2026-10-16 21:11:27
+23,github_search_repos,2,"{""q"": ""Sofar Ocean in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,52237,2026-10-16 21:11:28
+24,sec_edgar_fulltext_formD,2,"{""q"": ""\""Sofar Ocean\"""", ""forms"": ""D,D/A""}",ok,,2443,2026-10-16 21:11:30
+25,wayback_cdx,2,"{""url"": ""sofarocean.com"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",error,"HTTP 503: <html><head><meta charset=""UTF-8""><title>Internet Archive: Temporarily Offline</title><style>p{font-size:24px;}img{margin-bottom:2rem;}</style></head>
+<body style=""padding:30px 0;"">
+<div style=""float:left;width:260px;text-align:center;"">
+<img xsrc=""logo_ia.jpg"" src=""data:image/jpeg;base64,iVBORw0KGg",,2026-10-16 21:11:36
+26,jina_reader,2,"{""url"": ""https://www.sofarocean.com""}",ok,,6839,2026-10-16 21:11:36
+27,people_data_labs,2,"{""website"": ""sofarocean.com""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:11:36
+28,opencorporates,2,"{""q"": ""Sofar Ocean""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:11:36
+29,product_hunt,2,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:11:36
+30,gleif_lei,3,"{""filter[fulltext]"": ""Ocean Rainforest"", ""page[size]"": 10}",ok,,2874,2026-10-16 21:11:37
+31,wikidata_sparql,3,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Ocean Rainforest\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:11:37
+32,google_patents_xhr,3,"{""q"": """", ""num"": 25, ""assignee"": ""Ocean Rainforest""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:11:37
+33,serpapi_google_patents,3,"{""assignee"": ""Ocean Rainforest"", ""num"": 50}",ok,,3983,2026-10-16 21:11:48
+34,openalex,3,"{""search"": ""\""Ocean Rainforest\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3253,2026-10-16 21:11:49
+35,google_news_rss,3,"{""q"": ""\""Ocean Rainforest\"""", ""limit"": 25}",ok,,11843,2026-10-16 21:11:49
+36,hn_algolia,3,"{""query"": ""Ocean Rainforest"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,1362,2026-10-16 21:11:50
+37,github_search_repos,3,"{""q"": ""Ocean Rainforest in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,47386,2026-10-16 21:11:51
+38,wayback_cdx,3,"{""url"": ""oceanrainforest.com"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,887,2026-10-16 21:12:14
+39,jina_reader,3,"{""url"": ""https://www.oceanrainforest.com""}",ok,,2076,2026-10-16 21:12:15
+40,people_data_labs,3,"{""website"": ""oceanrainforest.com""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:12:15
+41,opencorporates,3,"{""q"": ""Ocean Rainforest""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:12:15
+42,product_hunt,3,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:12:15
+43,gleif_lei,4,"{""filter[fulltext]"": ""Seabound"", ""page[size]"": 10}",ok,,2592,2026-10-16 21:12:15
+44,wikidata_sparql,4,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Seabound\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,829,2026-10-16 21:12:15
+45,google_patents_xhr,4,"{""q"": """", ""num"": 25, ""assignee"": ""Seabound""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:12:16
+46,serpapi_google_patents,4,"{""assignee"": ""Seabound"", ""num"": 50}",ok,,2749,2026-10-16 21:12:17
+47,openalex,4,"{""search"": ""\""Seabound\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3060,2026-10-16 21:12:18
+48,google_news_rss,4,"{""q"": ""\""Seabound\"""", ""limit"": 25}",ok,,11067,2026-10-16 21:12:19
+49,hn_algolia,4,"{""query"": ""Seabound"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,18322,2026-10-16 21:12:19
+50,github_search_repos,4,"{""q"": ""Seabound in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,53987,2026-10-16 21:12:20
+51,wayback_cdx,4,"{""url"": ""seabound.co"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,310,2026-10-16 21:12:41
+52,jina_reader,4,"{""url"": ""https://www.seabound.co""}",ok,,6440,2026-10-16 21:12:42
+53,uk_companies_house,4,"{""q"": ""Seabound"", ""items_per_page"": 5}",skipped,set env var COMPANIES_HOUSE_KEY,,2026-10-16 21:12:42
+54,people_data_labs,4,"{""website"": ""seabound.co""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:12:42
+55,opencorporates,4,"{""q"": ""Seabound""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:12:42
+56,product_hunt,4,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:12:42
+57,gleif_lei,5,"{""filter[fulltext]"": ""Oceanium"", ""page[size]"": 10}",ok,,429,2026-10-16 21:12:43
+58,wikidata_sparql,5,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Oceanium\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,591,2026-10-16 21:12:43
+59,google_patents_xhr,5,"{""q"": """", ""num"": 25, ""assignee"": ""Oceanium""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:12:43
+60,serpapi_google_patents,5,"{""assignee"": ""Oceanium"", ""num"": 50}",ok,,5303,2026-10-16 21:12:45
+61,openalex,5,"{""search"": ""\""Oceanium\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3450,2026-10-16 21:12:46
+62,google_news_rss,5,"{""q"": ""\""Oceanium\"""", ""limit"": 25}",ok,,10695,2026-10-16 21:12:46
+63,hn_algolia,5,"{""query"": ""Oceanium"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,19505,2026-10-16 21:12:47
+64,github_search_repos,5,"{""q"": ""Oceanium in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,11793,2026-10-16 21:12:47
+65,wayback_cdx,5,"{""url"": ""oceanium.world"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,309,2026-10-16 21:13:30
+66,jina_reader,5,"{""url"": ""https://www.oceanium.world""}",ok,,4113,2026-10-16 21:13:31
+67,uk_companies_house,5,"{""q"": ""Oceanium"", ""items_per_page"": 5}",skipped,set env var COMPANIES_HOUSE_KEY,,2026-10-16 21:13:31
+68,people_data_labs,5,"{""website"": ""oceanium.world""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:13:31
+69,opencorporates,5,"{""q"": ""Oceanium""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:13:31
+70,product_hunt,5,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:13:31
+71,gleif_lei,6,"{""filter[fulltext]"": ""SeaForester"", ""page[size]"": 10}",ok,,2930,2026-10-16 21:13:31
+72,wikidata_sparql,6,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""SeaForester\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:13:31
+73,google_patents_xhr,6,"{""q"": """", ""num"": 25, ""assignee"": ""SeaForester""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:13:32
+74,serpapi_google_patents,6,"{""assignee"": ""SeaForester"", ""num"": 50}",ok,,1963,2026-10-16 21:13:45
+75,openalex,6,"{""search"": ""\""SeaForester\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,2959,2026-10-16 21:13:46
+76,google_news_rss,6,"{""q"": ""\""SeaForester\"""", ""limit"": 25}",ok,,6602,2026-10-16 21:13:46
+77,hn_algolia,6,"{""query"": ""SeaForester"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,449,2026-10-16 21:13:46
+78,github_search_repos,6,"{""q"": ""SeaForester in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,5422,2026-10-16 21:13:48
+79,people_data_labs,6,"{""name"": ""SeaForester""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:13:48
+80,opencorporates,6,"{""q"": ""SeaForester""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:13:48
+81,product_hunt,6,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:13:48
+82,gleif_lei,7,"{""filter[fulltext]"": ""Kelp Blue"", ""page[size]"": 10}",ok,,431,2026-10-16 21:13:48
+83,wikidata_sparql,7,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Kelp Blue\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:13:49
+84,google_patents_xhr,7,"{""q"": """", ""num"": 25, ""assignee"": ""Kelp Blue""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:13:50
+85,serpapi_google_patents,7,"{""assignee"": ""Kelp Blue"", ""num"": 50}",ok,,2964,2026-10-16 21:13:52
+86,openalex,7,"{""search"": ""\""Kelp Blue\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3617,2026-10-16 21:13:53
+87,google_news_rss,7,"{""q"": ""\""Kelp Blue\"""", ""limit"": 25}",ok,,11401,2026-10-16 21:13:54
+88,hn_algolia,7,"{""query"": ""Kelp Blue"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,38198,2026-10-16 21:13:54
+89,github_search_repos,7,"{""q"": ""Kelp Blue in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,60998,2026-10-16 21:13:56
+90,wayback_cdx,7,"{""url"": ""kelp.blue"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,284,2026-10-16 21:14:14
+91,jina_reader,7,"{""url"": ""https://kelp.blue""}",ok,,26254,2026-10-16 21:14:15
+92,people_data_labs,7,"{""website"": ""kelp.blue""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:14:15
+93,opencorporates,7,"{""q"": ""Kelp Blue""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:14:15
+94,product_hunt,7,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:14:15
+95,gleif_lei,8,"{""filter[fulltext]"": ""Clearbot"", ""page[size]"": 10}",ok,,429,2026-10-16 21:14:15
+96,wikidata_sparql,8,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Clearbot\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:14:16
+97,google_patents_xhr,8,"{""q"": """", ""num"": 25, ""assignee"": ""Clearbot""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:14:16
+98,serpapi_google_patents,8,"{""assignee"": ""Clearbot"", ""num"": 50}",ok,,1065,2026-10-16 21:14:17
+99,openalex,8,"{""search"": ""\""Clearbot\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3433,2026-10-16 21:14:18
+100,google_news_rss,8,"{""q"": ""\""Clearbot\"""", ""limit"": 25}",ok,,12421,2026-10-16 21:14:19
+101,hn_algolia,8,"{""query"": ""Clearbot"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,21590,2026-10-16 21:14:20
+102,github_search_repos,8,"{""q"": ""Clearbot in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,54725,2026-10-16 21:14:21
+103,people_data_labs,8,"{""name"": ""Clearbot""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:14:21
+104,opencorporates,8,"{""q"": ""Clearbot""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:14:21
+105,product_hunt,8,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:14:21
+106,eu_sedia_calls,,"{""text"": ""ocean"", ""pageSize"": 50}",ok,,670506,2026-10-16 21:14:22
+107,grants_gov,,"{""keyword"": ""ocean"", ""rows"": 50, ""oppStatuses"": ""forecasted|posted""}",ok,,16692,2026-10-16 21:14:23
+108,ukri_gateway_to_research,,"{""q"": ""ocean"", ""s"": 50}",ok,,386923,2026-10-16 21:14:23
+109,ted_eu_tenders,,"{""query"": ""FT~ocean AND publication-date>=20250101"", ""limit"": 50}",ok,,469403,2026-10-16 21:14:24
+110,world_bank,,"{""iso"": ""NAM;FIN;HKG;FRO;PRT;USA;GBR"", ""code"": ""NY.GDP.MKTP.CD"", ""mrv"": 10, ""per_page"": 500}",ok,,16419,2026-10-16 21:14:25
+111,world_bank,,"{""iso"": ""NAM;FIN;HKG;FRO;PRT;USA;GBR"", ""code"": ""ER.FSH.AQUA.MT"", ""mrv"": 10, ""per_page"": 500}",ok,,17161,2026-10-16 21:14:25
+112,world_bank,,"{""iso"": ""NAM;FIN;HKG;FRO;PRT;USA;GBR"", ""code"": ""ER.FSH.CAPT.MT"", ""mrv"": 10, ""per_page"": 500}",ok,,17654,2026-10-16 21:14:26
+113,eurostat,,"{""code"": ""fish_aq2a"", ""geo"": ""FI"", ""species"": ""F00"", ""unit"": ""TLW"", ""aquaenv"": ""TOTAL"", ""aquameth"": ""TOTAL"", ""fishreg"": ""0"", ""sinceTimePeriod"": ""2015""}",ok,,1485,2026-10-16 21:14:27
+114,eurostat,,"{""code"": ""fish_aq2a"", ""geo"": ""PT"", ""species"": ""F00"", ""unit"": ""TLW"", ""aquaenv"": ""TOTAL"", ""aquameth"": ""TOTAL"", ""fishreg"": ""0"", ""sinceTimePeriod"": ""2015""}",ok,,1504,2026-10-16 21:14:28
+115,eurostat,,"{""code"": ""fish_aq2a"", ""geo"": ""NO"", ""species"": ""F00"", ""unit"": ""TLW"", ""aquaenv"": ""TOTAL"", ""aquameth"": ""TOTAL"", ""fishreg"": ""0"", ""sinceTimePeriod"": ""2015""}",ok,,1538,2026-10-16 21:14:30
+116,eurostat,,"{""code"": ""fish_aq2a"", ""geo"": ""EU27_2020"", ""species"": ""F00"", ""unit"": ""TLW"", ""aquaenv"": ""TOTAL"", ""aquameth"": ""TOTAL"", ""fishreg"": ""0"", ""sinceTimePeriod"": ""2015""}",ok,,1592,2026-10-16 21:14:31
+117,wayback_cdx,2,"{""url"": ""sofarocean.com"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,435,2026-10-16 21:15:11
+118,serpapi_google,1,"{""q"": ""\""Notpla\"" Materials & packaging company"", ""num"": 10}",ok,,58751,2026-10-16 21:19:15
+119,serpapi_google_jobs,1,"{""q"": ""Notpla""}",ok,,25831,2026-10-16 21:19:16
+120,serpapi_google,2,"{""q"": ""\""Sofar Ocean\"" Ocean data company"", ""num"": 10}",ok,,58210,2026-10-16 21:19:18
+121,serpapi_google_jobs,2,"{""q"": ""Sofar Ocean""}",ok,,126753,2026-10-16 21:19:20
+122,serpapi_google,3,"{""q"": ""\""Ocean Rainforest\"" Aquaculture company"", ""num"": 10}",ok,,60222,2026-10-16 21:19:21
+123,serpapi_google_jobs,3,"{""q"": ""Ocean Rainforest""}",ok,,30741,2026-10-16 21:19:23
+124,serpapi_google,4,"{""q"": ""\""Seabound\"" Shipping decarbonisation company"", ""num"": 10}",ok,,54560,2026-10-16 21:19:52
+125,serpapi_google_jobs,4,"{""q"": ""Seabound""}",ok,,25817,2026-10-16 21:19:54
+126,serpapi_google,5,"{""q"": ""\""Oceanium\"" Aquaculture company"", ""num"": 10}",ok,,74260,2026-10-16 21:19:59
+127,serpapi_google_jobs,5,"{""q"": ""Oceanium""}",ok,,25817,2026-10-16 21:20:00
+128,serpapi_google,6,"{""q"": ""\""SeaForester\"" Habitat restoration company"", ""num"": 10}",ok,,39803,2026-10-16 21:20:02
+129,serpapi_google_jobs,6,"{""q"": ""SeaForester""}",ok,,26111,2026-10-16 21:20:09
+130,serpapi_google,7,"{""q"": ""\""Kelp Blue\"" Aquaculture company"", ""num"": 10}",ok,,65604,2026-10-16 21:20:11
+131,serpapi_google_jobs,7,"{""q"": ""Kelp Blue""}",ok,,25999,2026-10-16 21:20:16
+132,serpapi_google,8,"{""q"": ""\""Clearbot\"" Ocean cleanup company"", ""num"": 10}",ok,,61514,2026-10-16 21:20:17
+133,serpapi_google_jobs,8,"{""q"": ""Clearbot""}",ok,,25817,2026-10-16 21:20:18

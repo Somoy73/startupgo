@@ -1,0 +1,11 @@
+﻿id,startup_id,round_type,amount,currency,announced_on,lead_investors,notes,source_url
+1,1,series-a,20000000.0,GBP,2024-09,UB Forest Industry Green Growth Fund,Series A+ (~EUR 23M).,https://maritime-forum.ec.europa.eu/eu4algae-highlight-stories-notpla-received-ps20-million-eu23-million-series-funding-revolutionise_en
+2,2,series-b,39000000.0,USD,2021-11,Union Square Ventures; Foundry Group,Aggregators list total raised between ~$47M and ~$73M; unverified.,https://techcrunch.com/2021/11/03/sofar-nets-a-39m-round-b-to-grow-its-ocean-monitoring-autonomous-buoy-network
+3,3,series-a,6200000.0,USD,2023-02,The Grantham Foundation,"With Katapult Ocean (Deep Blue fund), Builders Vision, Ocean Born Foundation, WWF-US.",https://www.undercurrentnews.com/2023/02/15/seaweed-farmer-ocean-rainforest-snags-6-2m-in-series-a-funding/
+4,4,seed,4400000.0,USD,2022-05,Lowercarbon Capital,"With Eastern Pacific Shipping, Emles, Hawktail, Rebel Fund, Soma Capital, Y Combinator.",https://techcrunch.com/2022/05/20/carbon-capture-container-ships
+5,4,grant,1100000.0,GBP,2025,UK Clean Maritime Demonstration Competition (Round 6),Reported by aggregators; verify against the UK DfT announcement.,
+6,5,seed,2000000.0,GBP,,Green Angel Syndicate,"Seed II first close; WWF anchor; Katapult Ocean, Sky Ocean Ventures, Scottish Enterprise previously invested.",https://www.seafoodsource.com/news/business-finance/kelp-focused-firm-oceanium-garners-gbp-2-million-investment
+7,5,seed,2600000.0,USD,2023-09,Builders Vision,Pre-Series A raise to commercialise; WWF and Green Angel Ventures participated.,https://www.foodnavigator.com/Article/2023/09/15/Seaweed-start-up-secures-fresh-funds-million-to-scale-and-commercialise
+8,6,seed,1900000.0,USD,2025-10,WWF; Schmidt Marine Technology Partners,Co-led.,https://seedtable.com/companies/seaforester/funding-rounds/seed-2025-10
+9,7,project-finance,60000000.0,USD,2023-12,Climate Fund Managers; Eos Capital,"In-principle commitment, released in phases, pending investment and Namibian regulatory approvals. A separate ~$80M blue bond was planned on the NSX.",https://thefishsite.com/es/articles/kelp-blue-seeks-80-million-blue-bond
+10,8,seed,,,2022-09,Alibaba Hong Kong Entrepreneurs Fund,"Amount undisclosed. Co-investors: Earth Venture Capital, Asia Sustainability Angels, CarbonX Capital.",https://hivelife.com/clearbot/

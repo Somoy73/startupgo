@@ -1,0 +1,56 @@
+﻿name,section,access,endpoint,use,notes,last_status,last_info,last_run_at
+yc_oss_meta,1 Startup & investor,free,https://yc-oss.github.io/api/meta.json,Counts and slugs for every YC batch / industry / tag,,ok,"54,297 bytes, 0.7s",
+yc_oss_companies,1 Startup & investor,free,https://yc-oss.github.io/api/{companies|batches|industries|tags}/{name}.json,"YC companies: batch, team size, hiring, tags (filtering is client-side)",companies/all.json is ~10 MB; the runner keeps only a 5-row sample on disk.,ok,ok,2026-10-16 21:11:02
+people_data_labs,1 Startup & investor,key,https://api.peopledatalabs.com/v5/company/enrich,"Headcount, industry, location",env PDL_API_KEY,skipped,set env var PDL_API_KEY,2026-10-16 21:14:21
+wikidata_sparql,1 Startup & investor,free,https://query.wikidata.org/sparql,"Companies, VCs, founding dates, websites",The wrapper builds an EntitySearch query from `search`; pass `query=` for your own SPARQL.,ok,ok,2026-10-16 21:14:16
+sec_edgar_submissions,1 Startup & investor,free,https://data.sec.gov/submissions/CIK{cik10}.json,Filing history for one filer (CIK zero-padded to 10),Needs User-Agent with contact (env SEC_USER_AGENT). 10 req/s.,ok,"178,076 bytes, 0.6s",
+sec_edgar_fulltext_formD,1 Startup & investor,free,https://efts.sec.gov/LATEST/search-index,"Full-text search of filings, e.g. Form D fundraises",,ok,ok,2026-10-16 21:11:30
+sec_company_tickers,1 Startup & investor,free,https://www.sec.gov/files/company_tickers.json,Public company CIK/ticker map,,ok,"1,837 bytes, 0.8s",
+crunchbase_v4,1 Startup & investor,paid,https://api.crunchbase.com/api/v4/searches/organizations,"Companies, rounds, investors",Enterprise licence. env CRUNCHBASE_KEY (X-cb-user-key).,skipped,set env var CRUNCHBASE_KEY,
+harmonic,1 Startup & investor,paid,https://api.harmonic.ai,Paid vendor (stub),"env HARMONIC_API_KEY; stub only, no public docs",skipped,set env var HARMONIC_API_KEY,
+dealroom,1 Startup & investor,paid,https://api.dealroom.co/api/v1,Paid vendor (stub),"env DEALROOM_API_KEY; stub only, no public docs",skipped,set env var DEALROOM_API_KEY,
+pitchbook,1 Startup & investor,paid,https://api.pitchbook.com,Paid vendor (stub),"env PITCHBOOK_API_KEY; stub only, no public docs",skipped,set env var PITCHBOOK_API_KEY,
+tracxn,1 Startup & investor,paid,https://platform.tracxn.com/api,Paid vendor (stub),"env TRACXN_API_KEY; stub only, no public docs",skipped,set env var TRACXN_API_KEY,
+prh_ytj_finland,2 Registries,free,https://avoindata.prh.fi/opendata-ytj-api/v3/companies,"Finnish business ID, industry, address, registration date",,ok,"96,720 bytes, 2.1s",
+gleif_lei,2 Registries,free,https://api.gleif.org/api/v1/lei-records,"Legal entities, parent/child links",,ok,ok,2026-10-16 21:14:15
+opencorporates,2 Registries,key,https://api.opencorporates.com/v0.4/companies/search,Multi-country registry data,env OPENCORPORATES_API_KEY,skipped,set env var OPENCORPORATES_API_KEY,2026-10-16 21:14:21
+uk_companies_house,2 Registries,key,https://api.company-information.service.gov.uk/search/companies,"UK profile, officers, filings, charges",env COMPANIES_HOUSE_KEY (HTTP Basic user),skipped,set env var COMPANIES_HOUSE_KEY,2026-10-16 21:13:31
+orbis_asiakastieto,2 Registries,paid,vendor portal,Financial statements (stub),No public API,skipped,set env var ORBIS_API_KEY,
+eu_sedia_calls,3 Funding & grants,free,https://api.tech.ec.europa.eu/search-api/prod/rest/search,"Open EU calls, deadlines, topics",,ok,ok,2026-10-16 21:14:22
+cordis_via_data_europa,3 Funding & grants,free,https://data.europa.eu/api/hub/search/search,"Find CORDIS / EU funding datasets (bulk CSV/JSON, EURIO SPARQL)",Real CORDIS project rows are in bulk downloads listed under each dataset's distributions.,ok,"1,087,988 bytes, 2.4s",
+data_europa_search,3 Funding & grants,free,https://data.europa.eu/api/hub/search/search,"Find EU datasets (FTS beneficiaries, EMFAF)",,ok,"554,355 bytes, 2.3s",
+avoindata_fi_ckan,3 Funding & grants,free,https://www.avoindata.fi/data/api/3/action/package_search,Finnish open datasets (Business Finland funding decisions),,ok,"155,268 bytes, 1.9s",
+grants_gov,3 Funding & grants,free,https://api.grants.gov/v1/api/search2,US grant opportunities,,ok,ok,2026-10-16 21:14:23
+ukri_gateway_to_research,3 Funding & grants,free,https://gtr.ukri.org/gtr/api/projects,UK-funded projects and organisations,,ok,ok,2026-10-16 21:14:23
+ted_eu_tenders,4 Procurement,free,https://api.ted.europa.eu/v3/notices/search,EU public buyers of ocean tech,,ok,ok,2026-10-16 21:14:24
+hilma_finland,4 Procurement,key,Hilma developer portal,Finnish public tenders (stub),Subscription key from hilma.fi developer portal (env HILMA_KEY),skipped,set env var HILMA_KEY,
+epo_ops,5 Patents & research,key,https://ops.epo.org/3.2/rest-services/published-data/search,European patents,env EPO_KEY + EPO_SECRET (OAuth client credentials),skipped,set env var EPO_KEY,
+google_patents_bigquery,5 Patents & research,free,BigQuery: patents-public-data.patents.publications,"Global patents, bulk SQL",Needs a GCP project + google-cloud-bigquery; not callable via plain HTTP here.,skipped,set env var GOOGLE_APPLICATION_CREDENTIALS,
+patentsview,5 Patents & research,key,https://search.patentsview.org/api/v1/patent/,US patents,env PATENTSVIEW_KEY (X-Api-Key),skipped,set env var PATENTSVIEW_KEY,
+lens_org,5 Patents & research,key,https://api.lens.org/patent/search,Patents and papers (also /scholarly/search),env LENS_TOKEN (Bearer),skipped,set env var LENS_TOKEN,
+openalex,5 Patents & research,free,https://api.openalex.org/works,"Papers, authors, institutions (also /authors, /institutions, /concepts, /funders)",,ok,ok,2026-10-16 21:14:18
+semantic_scholar,5 Patents & research,free,https://api.semanticscholar.org/graph/v1/paper/search,"Papers, citations",Heavily rate-limited without a key (env S2_API_KEY → x-api-key).,error,HTTP 429 after retries; set S2_API_KEY,
+crossref,5 Patents & research,free,https://api.crossref.org/works,Publication metadata,,ok,"1,249 bytes, 0.8s",
+github_search_repos,5 Patents & research,key,https://api.github.com/search/repositories,Open-source activity (token optional; 10 searches/min without),optional env GITHUB_TOKEN,ok,ok,2026-10-16 21:14:21
+google_patents_xhr,5 Patents & research,free,https://patents.google.com/xhr/query,Patent search with no key (unofficial web endpoint behind patents.google.com),"Unofficial: it can change or block heavy use. Filters go inside the inner `url` query string, the wrapper builds it.",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4",2026-10-16 21:14:16
+serpapi_google_patents,5 Patents & research,key,https://serpapi.com/search?engine=google_patents,"Google Patents search via SerpApi (stable, paid quota)",env SERPAPI_KEY,ok,ok,2026-10-16 21:14:17
+hn_firebase,6 News & traction,free,https://hacker-news.firebaseio.com/v0/{newstories|topstories|beststories|showstories|item/ID}.json,Stories and items,,ok,"5,162 bytes, 3.8s",
+hn_algolia,6 News & traction,free,https://hn.algolia.com/api/v1/search,"Show HN launches, points, comments (also /search_by_date)",,ok,ok,2026-10-16 21:14:20
+product_hunt,6 News & traction,key,https://api.producthunt.com/v2/api/graphql,"Launches, votes, makers",env PRODUCTHUNT_TOKEN (OAuth bearer),skipped,set env var PRODUCTHUNT_TOKEN,2026-10-16 21:14:21
+gdelt_doc,6 News & traction,free,https://api.gdeltproject.org/api/v2/doc/doc,"Global news mentions, tone",One request per ~5 s.,ok,"1,174 bytes, 31.9s",
+google_news_rss,6 News & traction,free,https://news.google.com/rss/search,Press coverage (unofficial RSS),,ok,ok,2026-10-16 21:14:19
+newsapi,6 News & traction,key,https://newsapi.org/v2/everything,News search (also /top-headlines),env NEWSAPI_KEY,skipped,set env var NEWSAPI_KEY,
+wayback_cdx,6 News & traction,free,https://web.archive.org/cdx/search/cdx,"Website history (pivots, growth)",,ok,ok,2026-10-16 21:15:11
+common_crawl_index,6 News & traction,free,https://index.commoncrawl.org/{collection}-index,Locate crawled pages (WARC offsets) for bulk text,,ok,"1,002 bytes, 5.8s",
+brave_search,7 Search & extraction,key,https://api.search.brave.com/res/v1/web/search,Web search,env BRAVE_API_KEY,skipped,set env var BRAVE_API_KEY,
+tavily,7 Search & extraction,key,https://api.tavily.com/search,AI search,env TAVILY_API_KEY,skipped,set env var TAVILY_API_KEY,
+exa,7 Search & extraction,key,https://api.exa.ai/search,AI search,env EXA_API_KEY,skipped,set env var EXA_API_KEY,
+jina_reader,7 Search & extraction,free,https://r.jina.ai/{url},Any page → markdown (s.jina.ai/<query> for search),,ok,ok,2026-10-16 21:14:15
+firecrawl,7 Search & extraction,key,https://api.firecrawl.dev/v1/scrape,"Scrape/crawl (also /v1/crawl, /v1/map)",env FIRECRAWL_API_KEY,skipped,set env var FIRECRAWL_API_KEY,
+eurostat,8 Market sizing,free,https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/{code},"EU statistics (e.g. fish_aq2a aquaculture, sbs_* business stats)",,ok,ok,2026-10-16 21:14:31
+oecd_sdmx,8 Market sizing,free,"https://sdmx.oecd.org/public/rest/data/{agency},{dataflow},{ver}/{key}",OECD indicators (e.g. ocean economy),Default = Sustainable Ocean Economy. Browse dataflows: GET https://sdmx.oecd.org/public/rest/dataflow/all/all/latest with Accept: application/vnd.sdmx.structure+json,ok,"93,641 bytes, 0.6s",
+world_bank,8 Market sizing,free,https://api.worldbank.org/v2/country/{iso}/indicator/{code},"Macro indicators (also /country, /indicator, /topic, /source)",,ok,ok,2026-10-16 21:14:26
+statfin_pxweb,8 Market sizing,free,https://pxdata.stat.fi/PXWeb/api/v1/en/{path},"Statistics Finland tables (GET = metadata, POST = data)",Sample lists the top-level database tree; POST a query to a table path for data.,ok,"9,301 bytes, 0.3s",
+gbif,8 Market sizing,free,https://api.gbif.org/v1/occurrence/search,"Species occurrences for impact claims (also /species, /dataset)",,ok,"609 bytes, 0.9s",
+serpapi_google,7 Search & extraction,key,https://serpapi.com/search?engine=google,"Google web search: organic results + knowledge panel (founded, HQ, employees, founders)",env SERPAPI_KEY; 1 search per call,ok,ok,2026-10-16 21:20:17
+serpapi_google_jobs,6 News & traction,key,https://serpapi.com/search?engine=google_jobs,Job postings aggregated by Google (hiring signals),env SERPAPI_KEY; 1 search per call,ok,ok,2026-10-16 21:20:18

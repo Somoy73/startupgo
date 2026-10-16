@@ -118,3 +118,150 @@ CREATE TABLE IF NOT EXISTS notes (
 CREATE INDEX IF NOT EXISTS idx_rounds_startup      ON funding_rounds(startup_id);
 CREATE INDEX IF NOT EXISTS idx_assessments_startup ON readiness_assessments(startup_id, assessed_on);
 CREATE INDEX IF NOT EXISTS idx_notes_startup       ON notes(startup_id);
+
+-- ---------------------------------------------------------------------------
+-- Ingestion from public APIs (DataAPIs/ingest.py) with per-record provenance
+-- ---------------------------------------------------------------------------
+
+-- One row per scraper in DataAPIs (mirrors its registry)
+CREATE TABLE IF NOT EXISTS data_sources (
+    name        TEXT PRIMARY KEY,
+    section     TEXT NOT NULL,
+    access      TEXT NOT NULL CHECK (access IN ('free','key','paid')),
+    endpoint    TEXT NOT NULL,
+    use         TEXT,
+    notes       TEXT,
+    last_status TEXT,            -- ok | error | skipped | stub | not-run
+    last_info   TEXT,
+    last_run_at TEXT
+);
+
+-- Every API call made by the ingester: what was asked, when, and what came back
+CREATE TABLE IF NOT EXISTS raw_fetches (
+    id          INTEGER PRIMARY KEY,
+    source_name TEXT NOT NULL REFERENCES data_sources(name),
+    startup_id  INTEGER REFERENCES startups(id) ON DELETE CASCADE,  -- NULL for non-startup pulls
+    params      TEXT NOT NULL,   -- JSON
+    status      TEXT NOT NULL CHECK (status IN ('ok','error','skipped')),
+    error       TEXT,
+    size_bytes  INTEGER,
+    payload     TEXT,            -- trimmed JSON response
+    fetched_at  TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Identifiers in other systems (LEI, Wikidata QID, YC slug, ...)
+CREATE TABLE IF NOT EXISTS startup_external_ids (
+    startup_id  INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    id_type     TEXT NOT NULL,   -- lei | wikidata_qid | yc_slug | sec_cik | business_id
+    external_id TEXT NOT NULL,
+    source_name TEXT NOT NULL REFERENCES data_sources(name),
+    url         TEXT,
+    details     TEXT,            -- JSON
+    match_confidence TEXT NOT NULL CHECK (match_confidence IN ('low','medium','high')),
+    fetch_id    INTEGER REFERENCES raw_fetches(id),
+    PRIMARY KEY (startup_id, id_type, external_id)
+);
+
+-- Evidence items found for a startup: patents, papers, news, launches, repos, web history
+CREATE TABLE IF NOT EXISTS startup_signals (
+    id          INTEGER PRIMARY KEY,
+    startup_id  INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    source_name TEXT NOT NULL REFERENCES data_sources(name),
+    signal_type TEXT NOT NULL
+        CHECK (signal_type IN ('patent','paper','news','launch','repo','web_history','website','registry','filing','profile','job')),
+    title       TEXT NOT NULL,
+    url         TEXT,
+    observed_on TEXT,            -- when the fact was true (publication / snapshot date)
+    value       REAL,            -- e.g. points, stars, citations, snapshot count
+    unit        TEXT,
+    details     TEXT,            -- JSON
+    match_confidence TEXT NOT NULL CHECK (match_confidence IN ('low','medium','high')),
+    fetch_id    INTEGER REFERENCES raw_fetches(id),
+    fetched_at  TEXT NOT NULL DEFAULT (datetime('now')),
+    UNIQUE (startup_id, source_name, signal_type, title, url)
+);
+
+-- Candidate values for curated startup fields; never overwrites startups.* automatically
+CREATE TABLE IF NOT EXISTS field_suggestions (
+    id          INTEGER PRIMARY KEY,
+    startup_id  INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    field       TEXT NOT NULL,   -- startups column name, e.g. founded_year
+    value       TEXT NOT NULL,
+    current_value TEXT,          -- what startups.* held when suggested (NULL = gap)
+    source_name TEXT NOT NULL REFERENCES data_sources(name),
+    evidence    TEXT,
+    match_confidence TEXT NOT NULL CHECK (match_confidence IN ('low','medium','high')),
+    status      TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','accepted','rejected')),
+    fetch_id    INTEGER REFERENCES raw_fetches(id),
+    UNIQUE (startup_id, field, value, source_name)
+);
+
+-- Open calls, grants, publicly funded projects and tenders (not tied to one startup)
+CREATE TABLE IF NOT EXISTS funding_opportunities (
+    id           INTEGER PRIMARY KEY,
+    source_name  TEXT NOT NULL REFERENCES data_sources(name),
+    external_ref TEXT NOT NULL,
+    kind         TEXT NOT NULL CHECK (kind IN ('grant_call','grant','project','tender')),
+    title        TEXT NOT NULL,
+    status       TEXT,
+    opens_on     TEXT,
+    deadline     TEXT,
+    amount       REAL,
+    currency     TEXT,
+    organisation TEXT,
+    url          TEXT,
+    fetch_id     INTEGER REFERENCES raw_fetches(id),
+    UNIQUE (source_name, external_ref)
+);
+
+-- Market-sizing time series
+CREATE TABLE IF NOT EXISTS market_indicators (
+    id             INTEGER PRIMARY KEY,
+    source_name    TEXT NOT NULL REFERENCES data_sources(name),
+    indicator_code TEXT NOT NULL,
+    indicator_name TEXT NOT NULL,
+    geo            TEXT NOT NULL,
+    period         TEXT NOT NULL,
+    value          REAL,
+    unit           TEXT,
+    fetch_id       INTEGER REFERENCES raw_fetches(id),
+    UNIQUE (source_name, indicator_code, geo, period)
+);
+
+-- VC assessment data dictionary (DataAPIs/parameters.txt, sections A-U) and how each item can be filled
+CREATE TABLE IF NOT EXISTS assessment_parameters (
+    id           INTEGER PRIMARY KEY,
+    section_code TEXT NOT NULL,
+    section_name TEXT NOT NULL,
+    item_no      INTEGER NOT NULL,
+    name         TEXT NOT NULL,
+    description  TEXT,
+    priority     TEXT CHECK (priority IN ('P0','P1','P2')),
+    coverage     TEXT NOT NULL CHECK (coverage IN ('auto','partial','missing')),
+        -- auto: filled from DB/API data; partial: indirect proxy only; missing: needs founder, VC or paid data
+    filled_by    TEXT,           -- rule evaluated per startup, e.g. col:website, signal:patent, rounds
+    sources      TEXT,           -- APIs that feed it (or could, with a key)
+    UNIQUE (section_code, item_no)
+);
+
+-- Per-startup fill state for every parameter (rebuilt by the ingester)
+CREATE TABLE IF NOT EXISTS startup_parameter_status (
+    startup_id   INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    parameter_id INTEGER NOT NULL REFERENCES assessment_parameters(id) ON DELETE CASCADE,
+    status       TEXT NOT NULL CHECK (status IN ('filled','proxy','empty','not-collectable')),
+    evidence_count INTEGER NOT NULL DEFAULT 0,
+    detail       TEXT,
+    PRIMARY KEY (startup_id, parameter_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_signals_startup  ON startup_signals(startup_id, signal_type);
+CREATE INDEX IF NOT EXISTS idx_fetches_source   ON raw_fetches(source_name, startup_id);
+CREATE INDEX IF NOT EXISTS idx_suggest_startup  ON field_suggestions(startup_id, field);
+
+-- Gaps: parameters a startup could have from public data but doesn't yet, plus those needing private data
+CREATE VIEW IF NOT EXISTS startup_gaps AS
+SELECT s.slug, p.section_code, p.item_no, p.name, p.priority, p.coverage, sps.status, p.sources
+FROM startup_parameter_status sps
+JOIN startups s ON s.id = sps.startup_id
+JOIN assessment_parameters p ON p.id = sps.parameter_id
+WHERE sps.status IN ('empty','not-collectable');

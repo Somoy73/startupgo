@@ -191,3 +191,20 @@ def statfin(path="StatFin/"):
 def gbif(**p):
     d = http("https://api.gbif.org/v1/occurrence/search", p)
     return {"count": d["count"], "results": [{k: r.get(k) for k in ("key", "scientificName", "country", "year", "decimalLatitude", "decimalLongitude")} for r in d["results"]]}
+
+
+@source(name="serpapi_google", section="7 Search & extraction", access="key", endpoint="https://serpapi.com/search?engine=google",
+        use="Google web search: organic results + knowledge panel (founded, HQ, employees, founders)",
+        params={"q": "", "num": "results", "start": "offset", "gl": "country", "hl": "language", "location": "", "tbs": "time filter e.g. qdr:m",
+                "safe": "active|off", "device": "desktop|mobile"},
+        defaults={"q": "Clearbot ocean cleanup", "num": 10}, notes="env SERPAPI_KEY; 1 search per call")
+def serpapi_google(**p):
+    return http("https://serpapi.com/search", {"engine": "google", **p, "api_key": need("SERPAPI_KEY")})
+
+
+@source(name="serpapi_google_jobs", section="6 News & traction", access="key", endpoint="https://serpapi.com/search?engine=google_jobs",
+        use="Job postings aggregated by Google (hiring signals)",
+        params={"q": "", "location": "", "gl": "", "hl": "", "lrad": "radius km", "ltype": "1 = work from home", "uds": "filter token", "next_page_token": ""},
+        defaults={"q": "Notpla"}, notes="env SERPAPI_KEY; 1 search per call")
+def serpapi_google_jobs(**p):
+    return http("https://serpapi.com/search", {"engine": "google_jobs", **p, "api_key": need("SERPAPI_KEY")})

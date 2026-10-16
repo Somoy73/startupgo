@@ -1,0 +1,8 @@
+﻿id,startup_id,field,value,current_value,source_name,evidence,match_confidence,status,fetch_id
+2,3,founded_year,2021,,gleif_lei,entity creationDate of Ocean Rainforest Sp/F,medium,pending,30
+3,3,founded_year,2008,,wayback_cdx,first archived capture of oceanrainforest.com (upper bound on founding),low,pending,38
+4,4,founded_year,2022,2021,yc_oss_companies,YC launched_at,medium,pending,
+5,5,founded_year,2021,,wayback_cdx,first archived capture of oceanium.world (upper bound on founding),low,pending,65
+6,6,founded_year,2022,,gleif_lei,"entity creationDate of SEAFORESTER, LDA",medium,pending,71
+7,6,website,https://www.seaforester.org,,serpapi_google,organic #1: SeaForester,medium,pending,128
+8,8,website,https://www.clearbot.org,,serpapi_google,organic #1: Clearbot- Creating the future of ocean mobility,medium,pending,132

@@ -1,0 +1,31 @@
+﻿code,area_code,name,qualitative_only
+A1,A,Volume of biomass preserved or restored,0
+A2,A,Volume of seafood waste reduced,0
+A3,A,Welfare of marine life,1
+A4,A,Tonnes of ocean-based seaweed and bivalves produced,0
+B1,B,Volume of primary micro-plastics diverted from nature (or landfill),0
+B2,B,Volume of macro-plastic diverted from nature (or landfill),0
+B3,B,Nitrogen/phosphorous pollution mitigated,0
+B4,B,Volume of contaminated waste water from land-based sources diverted from waterways,0
+B5,B,Invasive species reduced or avoided,1
+B6,B,"Reduction in other pollution (heavy metals, chemicals, sound, etc.)",0
+C1,C,Area of coral reefs protected or restored,0
+C2,C,Area of mangroves protected or restored,0
+C3,C,Area of seagrasses protected or restored,0
+C4,C,Area of salt marshes protected or restored,0
+C5,C,Area of kelp forest protected or restored,0
+C6,C,Area of other habitat protected or restored,0
+D1,D,GHG emissions reduced or avoided,0
+D2,D,GHG emissions generated,0
+D3,D,Carbon sequestered,0
+D4,D,NOx emissions mitigated,0
+D5,D,SOx emissions mitigated,0
+E1,E,Length of coastline protected,0
+E2,E,Use of ocean information products/services in climate adaptation decisions,0
+E3,E,Number of people supported to adapt to climate change,0
+E4,E,Enhanced food security,1
+F1,F,Number of jobs created,0
+F2,F,People completing education / training programmes,0
+F3,F,Share of employees that are women,0
+F4,F,Entry-level wage vs local minimum wage,0
+F5,F,Particulate emissions mitigated,0

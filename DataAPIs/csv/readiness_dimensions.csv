@@ -1,0 +1,7 @@
+﻿code,name,description,sort_order
+CRL,Customer,"Customer readiness: from a hunch about a need to scalable, repeatable sales.",1
+TRL,Technology,Technology readiness: from a research idea to a solution proven in actual operations.,2
+BRL,Business model,"Business readiness: from a vague idea to a proven, sustainable (economic + environmental + social) business model.",3
+IPRL,IP,IPR readiness: from hypothesised IP to a proven IP strategy with key rights granted.,4
+TMRL,Team,Team readiness: from a single founder to a high-performing organisation.,5
+FRL,Funding,Funding readiness: from no funding insight to secured runway and full financial control.,6

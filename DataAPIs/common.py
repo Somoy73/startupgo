@@ -9,6 +9,17 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
+def _load_env() -> None:
+    """Read KEY=VALUE lines from DataAPIs/.env (gitignored) without overriding the real environment."""
+    env = os.path.join(os.path.dirname(__file__), ".env")
+    if os.path.exists(env):
+        for line in open(env):
+            k, _, v = line.strip().partition("=")
+            if k and not k.startswith("#"):
+                os.environ.setdefault(k, v)
+
+
+_load_env()
 UA = os.environ.get("SCRAPER_USER_AGENT", "OceanOpportunityRadar/0.1 (contact: mayajshetty@gmail.com)")
 TIMEOUT = 75
 
