@@ -1,0 +1,14 @@
+[project]
+name = "scraper"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "selenium>=4.51.0",
+    "selenium-stealth>=1.0.6",
+    "selenium-wire>=5.1.0",
+    "undetected-chromedriver>=3.5.5",
+    "xvfbwrapper>=0.2.35",
+]
