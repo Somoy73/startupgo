@@ -1,0 +1,39 @@
+{
+  "params": {
+    "q": "ocean startup funding when:30d",
+    "limit": 5
+  },
+  "full_size_bytes": 2361,
+  "sample": [
+    {
+      "title": "Awtij Indigenous Marine Intelligence Wins MEOPAR and Ocean Exchange Funding Award - environment coastal & offshore",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOaG9Nc08waC1mb0lvVHFBR19xTlNrUG85bmhZV3cyS3doN1BmczhVWFFMSGRaYnZna1BOSmdqRTFSamktclBuUEdabjZaSGRhZkRvQVpLUWZSU3pReFlJUC1LQ2RGRnh1RndBTHFfVTlORHpmQnVzcHJycTJiTUU0Zzhna2s1ZkhGVzZjUk1IcWlFYm9RNWVLYkJGMmV3OUI0aUNCelhleXZ3RUxYRWs1VlVqZ0x2UlJiQTJr?oc=5",
+      "pubDate": "Thu, 08 Oct 2026 12:18:37 GMT",
+      "source": "environment coastal & offshore"
+    },
+    {
+      "title": "Exclusive: Maritime intelligence startup Quartermaster raises another $140M - TechCrunch",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNODBnWlo0RHpQUDM2SDZmMlFpREd3ZkRwa1hnTEZDUXN5VURqOGRPRU1TeE9oMDlyVjJ3VjkydkdhZ1hRVnBfNHIxSUxvMjZrN3Zackg1blZCTU5Ra1FQdjRtb3VMbEJrOFM5bjRaWk9JWE04ZmZBQThmT216azI1ajdpcmJsdFVXd3hwUk9pVWlEeUM2X3RFVFgyWXptbXc?oc=5",
+      "pubDate": "Mon, 28 Sep 2026 07:00:00 GMT",
+      "source": "TechCrunch"
+    },
+    {
+      "title": "Maritime intelligence startup Quartermaster raises $140M to build a real-time data network for the ocean - Tech Funding News",
+      "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxON1FCeVBnYVM1UVFzd1hVQTNjSjFialR0Umg0T0tIbjFWd1ZMU2hxVnR0NVRFU1BMT1pNR3YxVG1VWkp6c2pHY3RtOVVKSWlhclZUMWVWZ01BUkFILTVsNE9QcGgwOXJNc0RZaVdYYjctRTgzVlZxV19ueEg4Z0VvWC1MX3NQYlN6TGw4UkJPY2FMdFdpd1RTWTZ5aVhSc19zQnZfWlFOelpWSHd3YjBsMlRtNnJ0bm5TMVRONDBCU2JRamt5eWxuN2lCa3Q?oc=5",
+      "pubDate": "Tue, 29 Sep 2026 11:16:57 GMT",
+      "source": "Tech Funding News"
+    },
+    {
+      "title": "Silver Bow lands $88M funding and offtake package from Ocean Partners - Dealroom",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNaURaaHlhV3V4NzlXZ29fXzdRRkhoVUxwTlJ0T3Zud3NlZmcyVVRuTmVybUFaaUtwUXI0MFRFMEhSTmIyMk90Sm0tZllBU3NUS2s0ZWloSU1oR3JMdUxpTkd5azBPcXJ5bmVDN0R6ZU9BMlYzTVQ5clNVMEp1ejRhNllZS1BMeExGZmZYRzg2RlBrNFBKaDlsV25RNGdSenVIeU5rNQ?oc=5",
+      "pubDate": "Wed, 23 Sep 2026 21:53:11 GMT",
+      "source": "Dealroom"
+    },
+    {
+      "title": "Capital SEA: Southeast Asia’s funding landscape - Tech in Asia",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOR3pJZkp2dExtSWZkRnluZGhVUzA0aktIM0RUUXFDLXRyZW5mWEV5TVlqOFZ0ZUJTaWE2UnZ4Vkd4MEhJSFU1LVlBU0wtalo5QVAyU2pRb0NNSjhkNWU4ZGoxVlJzOWQ2LVR4eVBGaHNFRUlDY2sxNDk1azJtSUE1MUg0b1dQOG5vNldOWmFB?oc=5",
+      "pubDate": "Fri, 09 Oct 2026 08:00:00 GMT",
+      "source": "Tech in Asia"
+    }
+  ]
+}

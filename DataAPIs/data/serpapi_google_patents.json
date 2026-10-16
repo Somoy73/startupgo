@@ -1,0 +1,1274 @@
+{
+  "params": {
+    "q": "kelp",
+    "num": 10
+  },
+  "full_size_bytes": 42730,
+  "sample": {
+    "search_metadata": {
+      "id": "6ad28d4bb77a0a2e8ece1ac4",
+      "status": "Success",
+      "json_endpoint": "https://serpapi.com/searches/jdG8GAfaUYXb9EoEJ8evWcb8PLq3_QUeNA3YXrRvzeI/6ad28d4bb77a0a2e8ece1ac4.json",
+      "markdown_endpoint": "https://serpapi.com/searches/jdG8GAfaUYXb9EoEJ8evWcb8PLq3_QUeNA3YXrRvzeI/6ad28d4bb77a0a2e8ece1ac4.md",
+      "created_at": "2026-10-16 20:47:07 UTC",
+      "processed_at": "2026-10-16 20:47:07 UTC",
+      "google_patents_url": "https://patents.google.com/xhr/query?url=q%3Dkelp%26num%3D10",
+      "raw_html_file": "https://serpapi.com/searches/jdG8GAfaUYXb9EoEJ8evWcb8PLq3_QUeNA3YXrRvzeI/6ad28d4bb77a0a2e8ece1ac4.html",
+      "prettify_html_file": "https://serpapi.com/searches/jdG8GAfaUYXb9EoEJ8evWcb8PLq3_QUeNA3YXrRvzeI/6ad28d4bb77a0a2e8ece1ac4.prettify",
+      "total_time_taken": 11.27
+    },
+    "search_parameters": {
+      "engine": "google_patents",
+      "q": "kelp",
+      "num": "10"
+    },
+    "search_information": {
+      "total_results": 125048,
+      "total_pages": 100,
+      "page_number": 1
+    },
+    "organic_results": [
+      {
+        "position": 1,
+        "rank": 0,
+        "patent_id": "patent/JP7016469B2/en",
+        "patent_link": "https://patents.google.com/patent/JP7016469B2/en",
+        "serpapi_link": "https://serpapi.com/search.json?engine=google_patents_details&patent_id=patent%2FJP7016469B2%2Fen",
+        "title": "Kelp seedling clamp machine and kelp seedling cultivation method",
+        "snippet": "The gripper mechanism (5) includes a lift rod (52) driven by a gripper cylinder (51) and a seedling clamp plier (53) at the end of the lift rod (52), and the seedling clamp pliers (53) are kelp. The kelp seedling clamping machine according to any one of claims 1 to 4, characterized in that it is …",
+        "priority_date": "2020-06-10",
+        "filing_date": "2020-12-07",
+        "grant_date": "2022-02-07",
+        "publication_date": "2022-02-07",
+        "inventor": "忠遠 李",
+        "assignee": "山東金瓢食品機械股▲分▼有限公司",
+        "publication_number": "JP7016469B2",
+        "language": "en",
+        "thumbnail": "https://patentimages.storage.googleapis.com/b6/9e/49/061fcbe699e297/0007016469000001.png",
+        "pdf": "https://patentimages.storage.googleapis.com/2a/3d/1f/7668d90d36816b/JP7016469B2.pdf",
+        "figures": [
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/e8/52/c7/cd4cedac6ad48c/0007016469000001.png",
+            "full": "https://patentimages.storage.googleapis.com/78/ba/2c/43f4f6e77d836a/0007016469000001.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/40/30/d0/fe6f9ceffb7662/0007016469000002.png",
+            "full": "https://patentimages.storage.googleapis.com/37/c9/8e/b44af9e11957f4/0007016469000002.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/33/f2/27/09f34dd98ebe28/0007016469000003.png",
+            "full": "https://patentimages.storage.googleapis.com/af/4c/ea/946d94d77568f3/0007016469000003.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/cf/8d/3e/837f432efd1841/0007016469000004.png",
+            "full": "https://patentimages.storage.googleapis.com/5a/6b/95/922a37e378bc21/0007016469000004.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/0f/0b/f8/0797d35ed8ded5/0007016469000005.png",
+            "full": "https://patentimages.storage.googleapis.com/63/84/fc/67a9a95d1615e3/0007016469000005.png"
+          }
+        ],
+        "country_status": {
+          "CN": "ACTIVE",
+          "JP": "ACTIVE"
+        }
+      },
+      {
+        "position": 2,
+        "rank": 1,
+        "patent_id": "patent/CN108653059B/en",
+        "patent_link": "https://patents.google.com/patent/CN108653059B/en",
+        "serpapi_link": "https://serpapi.com/search.json?engine=google_patents_details&patent_id=patent%2FCN108653059B%2Fen",
+        "title": "Method for preparing seaweed fermentation liquid by fermentation of probiotics …",
+        "snippet": "The invention provides a method for preparing seaweed fermentation liquor by probiotic fermentation and application of the seaweed fermentation liquor in preparation of cosmetics, belonging to the technical field of microbial fermentation of seaweed, and the method comprises the following steps: 1 …",
+        "priority_date": "2018-06-20",
+        "filing_date": "2018-06-20",
+        "grant_date": "2020-10-23",
+        "publication_date": "2020-10-23",
+        "inventor": "徐超",
+        "assignee": "齐鲁工业大学",
+        "publication_number": "CN108653059B",
+        "language": "en",
+        "thumbnail": "https://patentimages.storage.googleapis.com/5e/c8/ab/7fa84486373518/HDA0001701483990000011.png",
+        "pdf": "https://patentimages.storage.googleapis.com/84/e8/d8/1ea058da258256/CN108653059B.pdf",
+        "figures": [
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/95/4e/bb/b17fedea480c74/HDA0001701483990000011.png",
+            "full": "https://patentimages.storage.googleapis.com/37/7b/1e/f136d3d89f59eb/HDA0001701483990000011.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/2c/c8/e9/02ddbc6ccf6a06/HDA0001701483990000012.png",
+            "full": "https://patentimages.storage.googleapis.com/8b/73/a4/4cd2e3944ff6b1/HDA0001701483990000012.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/13/0d/0c/9db204a0070c57/HDA0001701483990000021.png",
+            "full": "https://patentimages.storage.googleapis.com/e6/d4/28/e4d27d741b86c7/HDA0001701483990000021.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/3a/80/72/f06e9154c411a6/HDA0001701483990000022.png",
+            "full": "https://patentimages.storage.googleapis.com/fc/c8/81/4e3b109d92c77e/HDA0001701483990000022.png"
+          }
+        ],
+        "country_status": {
+          "CN": "ACTIVE"
+        }
+      },
+      {
+        "position": 3,
+        "rank": 2,
+        "patent_id": "patent/JP7659714B2/en",
+        "patent_link": "https://patents.google.com/patent/JP7659714B2/en",
+        "serpapi_link": "https://serpapi.com/search.json?engine=google_patents_details&patent_id=patent%2FJP7659714B2%2Fen",
+        "title": "Composition containing lactic acid bacteria production substance, method for …",
+        "snippet": "(14) In addition, in the composition containing a lactic acid bacteria production substance of the present invention, the hydrocharcoal further contains powder of Kagome kelp and citric acid. In addition to Kagome kelp, seaweed-derived materials such as akamoku, mekabu, ganiashi, and seaweed dulse …",
+        "priority_date": "2018-10-26",
+        "filing_date": "2024-02-29",
+        "grant_date": "2025-04-10",
+        "publication_date": "2025-04-10",
+        "inventor": "功 横山",
+        "assignee": "炭プラスラボ株式会社",
+        "publication_number": "JP7659714B2",
+        "language": "en",
+        "pdf": "https://patentimages.storage.googleapis.com/21/b4/7b/b8b7bbedc78845/JP7659714B2.pdf",
+        "country_status": {
+          "JP": "ACTIVE"
+        }
+      },
+      {
+        "position": 4,
+        "rank": 3,
+        "patent_id": "patent/CN108929878B/en",
+        "patent_link": "https://patents.google.com/patent/CN108929878B/en",
+        "serpapi_link": "https://serpapi.com/search.json?engine=google_patents_details&patent_id=patent%2FCN108929878B%2Fen",
+        "title": "Coding gene of alginate lyase and application thereof",
+        "snippet": "Algin is mainly present in brown algae such as kelp (Laminaria hyperborean), kelp (Macrocystis pyrifera), palmate kelp (Laminaria digitata), Ascophyllum nodosum (Ascophyllum nodosum), kelp (Laminaria japonica), kelp (Lessonia nigrescens), kelp (Macrocystis grandis), Antarctic seaweed (Durvillea …",
+        "priority_date": "2018-08-01",
+        "filing_date": "2018-08-01",
+        "grant_date": "2021-04-06",
+        "publication_date": "2021-04-06",
+        "inventor": "李福利",
+        "assignee": "中国科学院青岛生物能源与过程研究所",
+        "publication_number": "CN108929878B",
+        "language": "en",
+        "thumbnail": "https://patentimages.storage.googleapis.com/61/4a/8b/268b2882068b53/HDA0001811130290000011.png",
+        "pdf": "https://patentimages.storage.googleapis.com/f5/98/24/eeb724083fea00/CN108929878B.pdf",
+        "figures": [
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/38/da/d7/57195392510d2c/HDA0001811130290000011.png",
+            "full": "https://patentimages.storage.googleapis.com/34/46/b7/7978901464b46a/HDA0001811130290000011.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/59/ed/85/00298d68aea17d/HDA0001811130290000012.png",
+            "full": "https://patentimages.storage.googleapis.com/5b/2d/39/30a50e8a8f07da/HDA0001811130290000012.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/bb/08/83/fb8ce171b52130/HDA0001811130290000021.png",
+            "full": "https://patentimages.storage.googleapis.com/e4/ef/a9/94dfb583cbd613/HDA0001811130290000021.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/fc/e1/83/916b4f71e2b5bf/HDA0001811130290000022.png",
+            "full": "https://patentimages.storage.googleapis.com/0b/61/f7/30221f5b2db013/HDA0001811130290000022.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/68/4a/ee/4d78a70cdbb11c/HDA0001811130290000023.png",
+            "full": "https://patentimages.storage.googleapis.com/58/4c/6e/de4b12eb2efe7d/HDA0001811130290000023.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/a4/82/c8/c0b8b8a40e0010/HDA0001811130290000024.png",
+            "full": "https://patentimages.storage.googleapis.com/fe/29/39/e8d48331c895a4/HDA0001811130290000024.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/5b/9d/35/702369d0c24eb2/HDA0001811130290000031.png",
+            "full": "https://patentimages.storage.googleapis.com/1c/a5/9f/866ba3395a9eae/HDA0001811130290000031.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/c4/4c/ca/c23f1969a8301c/HDA0001811130290000032.png",
+            "full": "https://patentimages.storage.googleapis.com/cd/27/91/a7c1a3929d6f3e/HDA0001811130290000032.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/47/7a/5e/587b0d4e8c96fd/HDA0001811130290000033.png",
+            "full": "https://patentimages.storage.googleapis.com/0d/6a/30/8b83166c2e9d10/HDA0001811130290000033.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/78/06/4b/0c76385cbc6f1f/HDA0001811130290000041.png",
+            "full": "https://patentimages.storage.googleapis.com/c5/ca/96/3063b2e30a53d4/HDA0001811130290000041.png"
+          },
+          "... +7 more"
+        ],
+        "country_status": {
+          "CN": "ACTIVE"
+        }
+      },
+      {
+        "position": 5,
+        "rank": 4,
+        "patent_id": "patent/CN106614203B/en",
+        "patent_link": "https://patents.google.com/patent/CN106614203B/en",
+        "serpapi_link": "https://serpapi.com/search.json?engine=google_patents_details&patent_id=patent%2FCN106614203B%2Fen",
+        "title": "Combined artificial fish reef",
+        "snippet": "4. The modular artificial fish reef of claim 1 wherein artificial seaweed is attached between the top tabs and the corresponding bottom tabs. 5. The modular artificial fish reef of claim 4 wherein the artificial seaweed comprises a polyethylene rope and a seaweed-like rope section, the two ends of …",
+        "priority_date": "2016-10-27",
+        "filing_date": "2016-10-27",
+        "grant_date": "2022-08-02",
+        "publication_date": "2022-08-02",
+        "inventor": "王磊",
+        "assignee": "中国水产科学研究院东海水产研究所",
+        "publication_number": "CN106614203B",
+        "language": "en",
+        "thumbnail": "https://patentimages.storage.googleapis.com/2e/90/ea/1f42fee1f5391b/HDA0001142393840000011.png",
+        "pdf": "https://patentimages.storage.googleapis.com/1f/e7/94/9319fe4f03c400/CN106614203B.pdf",
+        "figures": [
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/ac/b4/00/89371316d17f7f/HDA0001142393840000011.png",
+            "full": "https://patentimages.storage.googleapis.com/34/5f/fd/d8be1d6d0ecf06/HDA0001142393840000011.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/39/5f/72/e7730ca250bf09/HDA0001142393840000021.png",
+            "full": "https://patentimages.storage.googleapis.com/7c/1d/c3/ea46e61c706887/HDA0001142393840000021.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/ea/9c/91/cc9cafe9e07286/HDA0001142393840000022.png",
+            "full": "https://patentimages.storage.googleapis.com/f8/d6/f9/dacc5c4d0f70cd/HDA0001142393840000022.png"
+          }
+        ],
+        "country_status": {
+          "CN": "ACTIVE"
+        }
+      },
+      {
+        "position": 6,
+        "rank": 5,
+        "patent_id": "patent/US10701913B2/en",
+        "patent_link": "https://patents.google.com/patent/US10701913B2/en",
+        "serpapi_link": "https://serpapi.com/search.json?engine=google_patents_details&patent_id=patent%2FUS10701913B2%2Fen",
+        "title": "Methods and apparatus for unmanned aircraft-based object detection",
+        "snippet": "For example, in some instances an object may be broadly identified as “plant life.” In other instances, it may be advantageous for the same object to be more narrowly identified as “kelp.” It still other instances it may be desirable for the same object to be identified even more specifically as “ …",
+        "priority_date": "2016-01-12",
+        "filing_date": "2017-01-12",
+        "grant_date": "2020-07-07",
+        "publication_date": "2020-07-07",
+        "inventor": "David Twining",
+        "assignee": "Planck Aerosystems Inc.",
+        "publication_number": "US10701913B2",
+        "language": "en",
+        "thumbnail": "https://patentimages.storage.googleapis.com/54/78/4f/27fc5f38220f53/US10701913-20200707-D00000.png",
+        "pdf": "https://patentimages.storage.googleapis.com/1f/e0/0f/b7119a8d652fda/US10701913.pdf",
+        "figures": [
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/bc/73/35/82583b66eabe85/US10701913-20200707-D00000.png",
+            "full": "https://patentimages.storage.googleapis.com/16/e4/40/d818f586747e1f/US10701913-20200707-D00000.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/07/ea/cf/7179c1b754b426/US10701913-20200707-D00001.png",
+            "full": "https://patentimages.storage.googleapis.com/9a/90/06/5aa2e6ac85c73c/US10701913-20200707-D00001.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/90/0f/9a/ba085316df3b85/US10701913-20200707-D00002.png",
+            "full": "https://patentimages.storage.googleapis.com/c4/77/d6/92b250923fc606/US10701913-20200707-D00002.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/b8/a8/e2/40cce67ff4cfaa/US10701913-20200707-D00003.png",
+            "full": "https://patentimages.storage.googleapis.com/d4/5e/94/7b48b4df954c7d/US10701913-20200707-D00003.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/c1/61/7e/64b1ec763cbb14/US10701913-20200707-D00004.png",
+            "full": "https://patentimages.storage.googleapis.com/9e/53/d8/6d9d1ad3193f33/US10701913-20200707-D00004.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/eb/1d/76/a2718336e304da/US10701913-20200707-D00005.png",
+            "full": "https://patentimages.storage.googleapis.com/c5/1e/bf/820abf93d876bc/US10701913-20200707-D00005.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/29/1e/ac/c4d631b9815bc6/US10701913-20200707-D00006.png",
+            "full": "https://patentimages.storage.googleapis.com/58/8a/87/f77798675bcfd8/US10701913-20200707-D00006.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/65/53/fc/7274e95a74ce2d/US10701913-20200707-D00007.png",
+            "full": "https://patentimages.storage.googleapis.com/fc/c9/ac/9df5599659f274/US10701913-20200707-D00007.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/00/bf/0b/a534c80e2e829e/US10701913-20200707-D00008.png",
+            "full": "https://patentimages.storage.googleapis.com/d1/3f/ec/59137b6e1b64ba/US10701913-20200707-D00008.png"
+          },
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/6e/4e/2f/39a0cce37945d4/US10701913-20200707-D00009.png",
+            "full": "https://patentimages.storage.googleapis.com/2a/45/3f/37eaedaa264674/US10701913-20200707-D00009.png"
+          }
+        ],
+        "country_status": {
+          "WO": "NOT_ACTIVE",
+          "EP": "NOT_ACTIVE",
+          "US": "ACTIVE"
+        }
+      },
+      {
+        "position": 7,
+        "rank": 6,
+        "patent_id": "patent/CN104262008B/en",
+        "patent_link": "https://patents.google.com/patent/CN104262008B/en",
+        "serpapi_link": "https://serpapi.com/search.json?engine=google_patents_details&patent_id=patent%2FCN104262008B%2Fen",
+        "title": "Process for preparing liquid seaweed fertilizer through enzymolysis and …",
+        "snippet": "1. A process for preparing seaweed liquid fertilizer by enzymolysis and fermentation is characterized in that it specifically comprises the following steps: (1) Seaweed pretreatment: wash the seaweed with clean water, remove impurities, and drain; cut the seaweed into 3-5 cm lengths with a knife;",
+        "priority_date": "2014-09-30",
+        "filing_date": "2014-09-30",
+        "grant_date": "2017-03-22",
+        "publication_date": "2017-03-22",
+        "inventor": "董书阁",
+        "assignee": "青岛嘉瑞生物技术有限公司",
+        "publication_number": "CN104262008B",
+        "language": "en",
+        "pdf": "https://patentimages.storage.googleapis.com/04/20/f8/6fc22f6059038e/CN104262008B.pdf",
+        "country_status": {
+          "CN": "ACTIVE"
+        }
+      },
+      {
+        "position": 8,
+        "rank": 7,
+        "patent_id": "patent/CN104151080B/en",
+        "patent_link": "https://patents.google.com/patent/CN104151080B/en",
+        "serpapi_link": "https://serpapi.com/search.json?engine=google_patents_details&patent_id=patent%2FCN104151080B%2Fen",
+        "title": "The preparation method of one plant nutrient liquor",
+        "snippet": "3. the preparation method of plant nutrition liquid according to claim 2, is characterized in that, the mass ratio of described complex microorganism enzyme and described fresh kelp paste is (0.3 ~ 3): 100; Or the mass ratio of described complex microorganism enzyme and described fresh kelp paste …",
+        "priority_date": "2014-08-26",
+        "filing_date": "2014-08-26",
+        "grant_date": "2016-03-30",
+        "publication_date": "2016-03-30",
+        "inventor": "李健",
+        "assignee": "威海市世代海洋生物科技有限公司",
+        "publication_number": "CN104151080B",
+        "language": "en",
+        "pdf": "https://patentimages.storage.googleapis.com/82/3e/52/349740e4457b5d/CN104151080B.pdf",
+        "country_status": {
+          "WO": "NOT_ACTIVE",
+          "US": "ACTIVE",
+          "CN": "ACTIVE"
+        }
+      },
+      {
+        "position": 9,
+        "rank": 8,
+        "patent_id": "patent/CN104387171B/en",
+        "patent_link": "https://patents.google.com/patent/CN104387171B/en",
+        "serpapi_link": "https://serpapi.com/search.json?engine=google_patents_details&patent_id=patent%2FCN104387171B%2Fen",
+        "title": "The method of organic marine alga fertilizer and manufactured fertilizer are …",
+        "snippet": "The invention belongs to the field of agricultural and forestry waste reuse and organic fertilizer production, and provides a method for processing algae waste to produce organic seaweed fertilizer and organic seaweed fertilizer and organic seaweed compound fertilizer prepared by the method. The …",
+        "priority_date": "2014-11-07",
+        "filing_date": "2014-11-07",
+        "grant_date": "2017-12-22",
+        "publication_date": "2017-12-22",
+        "inventor": "王长海",
+        "assignee": "南京农业大学",
+        "publication_number": "CN104387171B",
+        "language": "en",
+        "pdf": "https://patentimages.storage.googleapis.com/5c/5c/fb/f5761b7de4c9f2/CN104387171B.pdf",
+        "country_status": {
+          "CN": "ACTIVE"
+        }
+      },
+      {
+        "position": 10,
+        "rank": 9,
+        "patent_id": "patent/JP5916179B1/en",
+        "patent_link": "https://patents.google.com/patent/JP5916179B1/en",
+        "serpapi_link": "https://serpapi.com/search.json?engine=google_patents_details&patent_id=patent%2FJP5916179B1%2Fen",
+        "title": "Dashi stock extraction method and liquid seasoning using the stock",
+        "snippet": "In the method of extracting dashi using one or more flavor raw materials selected from fish buns, kelp, mushrooms, an aqueous extraction solvent containing at least soy sauce and vinegar and satisfying the following (a) is used. The extraction method for dashi is characterized by performing …",
+        "priority_date": "2015-07-14",
+        "filing_date": "2015-07-14",
+        "grant_date": "2016-05-11",
+        "publication_date": "2016-05-11",
+        "inventor": "健治 坂本",
+        "assignee": "ヤマサ醤油株式会社",
+        "publication_number": "JP5916179B1",
+        "language": "en",
+        "thumbnail": "https://patentimages.storage.googleapis.com/25/7f/68/f6039ee312154b/0005916179-9.png",
+        "pdf": "https://patentimages.storage.googleapis.com/82/b5/7d/69e47cb7a535cc/JP5916179B1.pdf",
+        "figures": [
+          {
+            "thumbnail": "https://patentimages.storage.googleapis.com/49/35/28/c81a03bc525cf4/0005916179-9.png",
+            "full": "https://patentimages.storage.googleapis.com/bd/2d/95/2ae4490529a29a/0005916179-9.png"
+          }
+        ],
+        "country_status": {
+          "JP": "ACTIVE"
+        }
+      }
+    ],
+    "summary": {
+      "assignee": [
+        {
+          "key": "Total",
+          "percentage": 100.0,
+          "frequency": [
+            {
+              "year_range": "2025-2028",
+              "percentage": 1.0
+            },
+            {
+              "year_range": "2022-2025",
+              "percentage": 6.1
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 15.4
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 20.7
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 20.7
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 16.2
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 12.2
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 1.7
+            },
+            {
+              "year_range": "2001-2004",
+              "percentage": 1.5
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 2.1
+            },
+            "... +12 more"
+          ]
+        },
+        {
+          "key": "中国水产科学研究院渔业机械仪器研究所",
+          "percentage": 1.9,
+          "frequency": [
+            {
+              "year_range": "2019-2022",
+              "percentage": 1.2
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 0.7
+            }
+          ]
+        },
+        {
+          "key": "福建农林大学",
+          "percentage": 1.7,
+          "frequency": [
+            {
+              "year_range": "2022-2025",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 0.5
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.6
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.2
+            }
+          ]
+        },
+        {
+          "key": "中国水产科学研究院黄海水产研究所",
+          "percentage": 1.0,
+          "frequency": [
+            {
+              "year_range": "2019-2022",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.5
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.1
+            }
+          ]
+        },
+        {
+          "key": "山东好当家海洋发展股份有限公司",
+          "percentage": 0.9,
+          "frequency": [
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.5
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.2
+            }
+          ]
+        },
+        {
+          "key": "山东省科学院生物研究所",
+          "percentage": 0.9,
+          "frequency": [
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.5
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.2
+            }
+          ]
+        },
+        {
+          "key": "(주)마린바이오프로세스",
+          "percentage": 0.9,
+          "frequency": [
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.7
+            }
+          ]
+        },
+        {
+          "key": "中国海洋大学",
+          "percentage": 0.9,
+          "frequency": [
+            {
+              "year_range": "2025-2028",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 0.4
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.1
+            }
+          ]
+        },
+        {
+          "key": "浙江劲膳美生物科技有限公司",
+          "percentage": 0.9,
+          "frequency": [
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.6
+            }
+          ]
+        },
+        {
+          "key": "浙江省海洋开发研究院",
+          "percentage": 0.9,
+          "frequency": [
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.6
+            }
+          ]
+        },
+        "... +10 more"
+      ],
+      "inventor": [
+        {
+          "key": "Total",
+          "percentage": 100.0,
+          "frequency": [
+            {
+              "year_range": "2025-2028",
+              "percentage": 1.0
+            },
+            {
+              "year_range": "2022-2025",
+              "percentage": 6.1
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 15.4
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 20.7
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 20.7
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 16.2
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 12.2
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 1.7
+            },
+            {
+              "year_range": "2001-2004",
+              "percentage": 1.5
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 2.1
+            },
+            "... +12 more"
+          ]
+        },
+        {
+          "key": "江涛",
+          "percentage": 1.5,
+          "frequency": [
+            {
+              "year_range": "2019-2022",
+              "percentage": 1.1
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 0.4
+            }
+          ]
+        },
+        {
+          "key": "朱烨",
+          "percentage": 1.4,
+          "frequency": [
+            {
+              "year_range": "2019-2022",
+              "percentage": 1.1
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 0.3
+            }
+          ]
+        },
+        {
+          "key": "洪扬",
+          "percentage": 1.3,
+          "frequency": [
+            {
+              "year_range": "2019-2022",
+              "percentage": 1.0
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 0.3
+            }
+          ]
+        },
+        {
+          "key": "郁之進 加藤",
+          "percentage": 1.1,
+          "frequency": [
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2001-2004",
+              "percentage": 0.4
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "1995-1998",
+              "percentage": 0.4
+            }
+          ]
+        },
+        {
+          "key": "张现广",
+          "percentage": 1.1,
+          "frequency": [
+            {
+              "year_range": "2019-2022",
+              "percentage": 1.1
+            }
+          ]
+        },
+        {
+          "key": "胡安然",
+          "percentage": 1.1,
+          "frequency": [
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.5
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.6
+            }
+          ]
+        },
+        {
+          "key": "胡炜",
+          "percentage": 1.0,
+          "frequency": [
+            {
+              "year_range": "2016-2019",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.5
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.2
+            }
+          ]
+        },
+        {
+          "key": "陈丽娇",
+          "percentage": 1.0,
+          "frequency": [
+            {
+              "year_range": "2016-2019",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.4
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.2
+            }
+          ]
+        },
+        {
+          "key": "杨会成",
+          "percentage": 0.9,
+          "frequency": [
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.6
+            }
+          ]
+        },
+        "... +10 more"
+      ],
+      "cpc": [
+        {
+          "key": "Total",
+          "percentage": 100.0,
+          "frequency": [
+            {
+              "year_range": "2025-2028",
+              "percentage": 1.0
+            },
+            {
+              "year_range": "2022-2025",
+              "percentage": 6.1
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 15.4
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 20.7
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 20.7
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 16.2
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 12.2
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 1.7
+            },
+            {
+              "year_range": "2001-2004",
+              "percentage": 1.5
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 2.1
+            },
+            "... +12 more"
+          ]
+        },
+        {
+          "key": "A23L",
+          "percentage": 24.2,
+          "frequency": [
+            {
+              "year_range": "2025-2028",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2022-2025",
+              "percentage": 2.0
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 4.0
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 4.9
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 4.8
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 4.2
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 2.9
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 0.4
+            },
+            {
+              "year_range": "2001-2004",
+              "percentage": 0.4
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 0.4
+            },
+            "... +1 more"
+          ]
+        },
+        {
+          "key": "A23V",
+          "percentage": 17.7,
+          "frequency": [
+            {
+              "year_range": "2025-2028",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2022-2025",
+              "percentage": 1.2
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 2.9
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 5.1
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 3.6
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 2.6
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 1.4
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2001-2004",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 0.3
+            },
+            "... +1 more"
+          ]
+        },
+        {
+          "key": "A61K",
+          "percentage": 14.0,
+          "frequency": [
+            {
+              "year_range": "2025-2028",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2022-2025",
+              "percentage": 1.1
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 2.8
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 2.6
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 1.5
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 1.9
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 2.1
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 0.4
+            },
+            {
+              "year_range": "2001-2004",
+              "percentage": 0.5
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 0.5
+            },
+            "... +3 more"
+          ]
+        },
+        {
+          "key": "Y02A",
+          "percentage": 9.4,
+          "frequency": [
+            {
+              "year_range": "2022-2025",
+              "percentage": 1.2
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 2.5
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 1.6
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 1.7
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 1.2
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.7
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "1977-1980",
+              "percentage": 0.1
+            }
+          ]
+        },
+        {
+          "key": "A61P",
+          "percentage": 7.1,
+          "frequency": [
+            {
+              "year_range": "2025-2028",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2022-2025",
+              "percentage": 0.8
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 1.7
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 0.8
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.5
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 1.1
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.7
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "2001-2004",
+              "percentage": 0.5
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 0.2
+            },
+            "... +2 more"
+          ]
+        },
+        {
+          "key": "A61Q",
+          "percentage": 6.8,
+          "frequency": [
+            {
+              "year_range": "2022-2025",
+              "percentage": 0.4
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 1.4
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 1.3
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.7
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 1.2
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.9
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "2001-2004",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "1995-1998",
+              "percentage": 0.1
+            },
+            "... +1 more"
+          ]
+        },
+        {
+          "key": "A01G",
+          "percentage": 4.9,
+          "frequency": [
+            {
+              "year_range": "2022-2025",
+              "percentage": 0.6
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 1.9
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 0.9
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.4
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 0.3
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "1977-1980",
+              "percentage": 0.1
+            }
+          ]
+        },
+        {
+          "key": "C05F",
+          "percentage": 4.6,
+          "frequency": [
+            {
+              "year_range": "2022-2025",
+              "percentage": 0.6
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 1.1
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 1.3
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 0.8
+            },
+            {
+              "year_range": "2010-2013",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "2004-2007",
+              "percentage": 0.2
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "1983-1986",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "1974-1977",
+              "percentage": 0.1
+            }
+          ]
+        },
+        {
+          "key": "C05G",
+          "percentage": 4.2,
+          "frequency": [
+            {
+              "year_range": "2022-2025",
+              "percentage": 0.5
+            },
+            {
+              "year_range": "2019-2022",
+              "percentage": 1.1
+            },
+            {
+              "year_range": "2016-2019",
+              "percentage": 1.3
+            },
+            {
+              "year_range": "2013-2016",
+              "percentage": 1.0
+            },
+            {
+              "year_range": "2007-2010",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "1998-2001",
+              "percentage": 0.1
+            },
+            {
+              "year_range": "1995-1998",
+              "percentage": 0.1
+            }
+          ]
+        },
+        "... +10 more"
+      ]
+    },
+    "pagination": {
+      "current": 1,
+      "next": "https://patents.google.com/xhr/query?url=q%3Dkelp%26page%3D2%26num%3D10"
+    },
+    "serpapi_pagination": {
+      "current": 1,
+      "next": "https://serpapi.com/search.json?engine=google_patents&num=10&page=2&q=kelp"
+    }
+  }
+}

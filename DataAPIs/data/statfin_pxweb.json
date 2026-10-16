@@ -1,0 +1,59 @@
+{
+  "params": {
+    "path": "StatFin/"
+  },
+  "full_size_bytes": 9301,
+  "sample": [
+    {
+      "id": "matk",
+      "type": "l",
+      "text": "Accommodation statistics"
+    },
+    {
+      "id": "adopt",
+      "type": "l",
+      "text": "Adoptions"
+    },
+    {
+      "id": "tilma",
+      "type": "l",
+      "text": "Air emission accounts"
+    },
+    {
+      "id": "ilma",
+      "type": "l",
+      "text": "Air transport"
+    },
+    {
+      "id": "mata",
+      "type": "l",
+      "text": "Balance of payments and international investment position"
+    },
+    {
+      "id": "kony",
+      "type": "l",
+      "text": "Bankruptcies and business restructuring proceedings"
+    },
+    {
+      "id": "synt",
+      "type": "l",
+      "text": "Births"
+    },
+    {
+      "id": "rki",
+      "type": "l",
+      "text": "Building cost index"
+    },
+    {
+      "id": "raku",
+      "type": "l",
+      "text": "Building stock and new production"
+    },
+    {
+      "id": "bdem",
+      "type": "l",
+      "text": "Business demography"
+    },
+    "... +125 more"
+  ]
+}

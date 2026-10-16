@@ -1,0 +1,96 @@
+{
+  "params": {
+    "list": "showstories",
+    "limit": 5
+  },
+  "full_size_bytes": 5162,
+  "sample": [
+    {
+      "by": "__cayenne__",
+      "descendants": 69,
+      "id": 50118688,
+      "kids": [
+        50119857,
+        50119842,
+        50121985,
+        50123645,
+        50119763,
+        50119191,
+        50119846,
+        50121494,
+        50120380,
+        50119301,
+        "... +18 more"
+      ],
+      "score": 152,
+      "text": "I&#x27;ve refreshed StarSkirmish Bench, a benchmark where LLMs play StarCraft BW by writing code, with results from the flagship models of OpenAI, Anthropic, Google, and Muse",
+      "time": 1792160324,
+      "title": "Show HN: Gemini 4 Argon plays StarCraft",
+      "type": "story",
+      "url": "https://starskirmish.com/bench/v0-2/"
+    },
+    {
+      "by": "_wesley",
+      "descendants": 3,
+      "id": 50122776,
+      "kids": [
+        50123424,
+        50123720,
+        50123668
+      ],
+      "score": 8,
+      "text": "Hi HN,<p>I&#x27;ve been through many finance tracking apps, starting with Personal Capital, then Monarch, and most recently Copilot. None of them have worked perfectly for my needs.<p>All of these apps tend to model “cash flow” as the net sum of your transactions during a month, yet while credit card charges are reported immediately, they are typically deducted from checking (cash) accounts the following month when the bill is due. As a result, I&#x27;ve always had to maintain a separate spreadsheet to track my actual cash flow.<p>These apps also have a huge focus on managing budgets, which ha... [2187 chars]",
+      "time": 1792176887,
+      "title": "Show HN: Stoke Money – Personal finance app built around a cash flow forecast",
+      "type": "story",
+      "url": "https://stoke.money"
+    },
+    {
+      "by": "stephenchung",
+      "descendants": 18,
+      "id": 50118876,
+      "kids": [
+        50118877,
+        50120962,
+        50121019,
+        50120632,
+        50122118,
+        50120693,
+        50120418,
+        50120704,
+        50121789,
+        50121482,
+        "... +2 more"
+      ],
+      "score": 42,
+      "time": 1792161343,
+      "title": "Show HN: rStation – A shared research lab for your AI agents",
+      "type": "story",
+      "url": "https://rstation.ai/"
+    },
+    {
+      "by": "Konnerm",
+      "descendants": 0,
+      "id": 50122767,
+      "score": 4,
+      "time": 1792176862,
+      "title": "Show HN: Weatherdeck – a read-only status board for AI coding agent lanes",
+      "type": "story",
+      "url": "https://github.com/Moshik21/weatherdeck"
+    },
+    {
+      "by": "andrewzeno",
+      "descendants": 2,
+      "id": 50123223,
+      "kids": [
+        50123481
+      ],
+      "score": 3,
+      "text": "Hi everyone!<p>About 2 years ago, I began to work on Donut Browser as a tool to manage browser profiles, which over time has evolved into a proper anti-detect browser.<p>Anti-detect browsers let you create browser profiles that look like as if you have a completely different computer. I believe Donut is the most private anti-detect browser because:\n- It has no telemetry and doesn&#x27;t track your browsing activity\n- It spoofs your browser identity in a way that looks like a real device for every profile\n- It notifies you when a website takes a snapshot of your browser identity\n- It is built o... [1125 chars]",
+      "time": 1792178668,
+      "title": "Show HN: Donut Browser, the most private anti-detect browser",
+      "type": "story",
+      "url": "https://github.com/donutbrowser/donutbrowser"
+    }
+  ]
+}

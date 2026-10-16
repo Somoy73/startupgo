@@ -1,0 +1,1853 @@
+{
+  "params": {
+    "name": "wärtsilä"
+  },
+  "full_size_bytes": 96720,
+  "sample": {
+    "totalResults": 31,
+    "companies": [
+      {
+        "businessId": {
+          "value": "0202901-8",
+          "registrationDate": "1978-06-30",
+          "source": "3"
+        },
+        "names": [
+          {
+            "name": "Kiint. Oy Wärtsilänkatu 12",
+            "type": "1",
+            "registrationDate": "2005-12-30",
+            "version": 1,
+            "source": "1"
+          },
+          {
+            "name": "Järvenpään Autoliike Ky",
+            "type": "1",
+            "registrationDate": "1999-11-29",
+            "endDate": "2005-12-29",
+            "version": 2,
+            "source": "1"
+          }
+        ],
+        "mainBusinessLine": {
+          "type": "68203",
+          "descriptions": [
+            {
+              "languageCode": "1",
+              "description": "Muu kiinteistöjen vuokraus ja hallinta"
+            },
+            {
+              "languageCode": "3",
+              "description": "Rental and operating of own or leased non-residential real estate"
+            },
+            {
+              "languageCode": "2",
+              "description": "Övrig uthyrning och förvaltning av fastigheter"
+            }
+          ],
+          "typeCodeSet": "TOIMI4",
+          "registrationDate": "2026-01-01",
+          "source": "2"
+        },
+        "companyForms": [
+          {
+            "type": "16",
+            "descriptions": [
+              {
+                "languageCode": "2",
+                "description": "Aktiebolag"
+              },
+              {
+                "languageCode": "3",
+                "description": "Limited company"
+              },
+              {
+                "languageCode": "1",
+                "description": "Osakeyhtiö"
+              }
+            ],
+            "registrationDate": "2005-12-30",
+            "endDate": "2021-01-14",
+            "version": 2,
+            "source": "1"
+          },
+          {
+            "type": "10",
+            "descriptions": [
+              {
+                "languageCode": "1",
+                "description": "Keskinäinen kiinteistöosakeyhtiö"
+              },
+              {
+                "languageCode": "3",
+                "description": "Mutual real estate limited company"
+              },
+              {
+                "languageCode": "2",
+                "description": "Ömsesidigt fastighetsaktiebolag"
+              }
+            ],
+            "registrationDate": "2021-01-15",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "companySituations": [],
+        "registeredEntries": [
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1965-06-11",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1978-06-30",
+            "register": "4",
+            "authority": "1"
+          },
+          {
+            "type": "55",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1995-03-01",
+            "register": "5",
+            "authority": "1"
+          },
+          {
+            "type": "82",
+            "descriptions": [
+              {
+                "languageCode": "2",
+                "description": "För överlåtelse av nyttjanderätten till en fastighet"
+              },
+              {
+                "languageCode": "1",
+                "description": "Kiinteistön käyttöoikeuden luovuttamisesta"
+              },
+              {
+                "languageCode": "3",
+                "description": "VAT-obliged for the transfer of rights to use immovable property"
+              }
+            ],
+            "registrationDate": "2026-01-07",
+            "register": "6",
+            "authority": "1"
+          },
+          {
+            "type": "41",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1965-04-01",
+            "endDate": "2002-04-30",
+            "register": "7",
+            "authority": "1"
+          }
+        ],
+        "addresses": [
+          {
+            "type": 1,
+            "street": "Wärtsilänkatu",
+            "postCode": "04410",
+            "postOffices": [
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "1",
+                "municipalityCode": "186"
+              },
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "2",
+                "municipalityCode": "186"
+              }
+            ],
+            "buildingNumber": "12b",
+            "entrance": "",
+            "apartmentNumber": "",
+            "apartmentIdSuffix": "",
+            "co": "",
+            "registrationDate": "2025-12-03",
+            "source": "0"
+          },
+          {
+            "type": 2,
+            "street": "Töölönlahdenkatu",
+            "postCode": "00100",
+            "postOffices": [
+              {
+                "city": "HELSINGFORS",
+                "languageCode": "2",
+                "municipalityCode": "091"
+              },
+              {
+                "city": "HELSINKI",
+                "languageCode": "1",
+                "municipalityCode": "091"
+              }
+            ],
+            "postOfficeBox": "",
+            "buildingNumber": "2",
+            "entrance": "",
+            "apartmentNumber": "",
+            "apartmentIdSuffix": "",
+            "co": "c/o Tilitoimisto Talenom",
+            "registrationDate": "2025-12-03",
+            "source": "0"
+          }
+        ],
+        "tradeRegisterStatus": "1",
+        "status": "2",
+        "registrationDate": "1965-06-11",
+        "lastModified": "2026-02-06T11:52:30"
+      },
+      {
+        "businessId": {
+          "value": "0361491-3",
+          "registrationDate": "1980-09-04",
+          "source": "3"
+        },
+        "names": [
+          {
+            "name": "Bohemian Flower Studio Oy",
+            "type": "1",
+            "registrationDate": "2021-05-20",
+            "endDate": "2025-09-16",
+            "version": 1,
+            "source": "1"
+          },
+          {
+            "name": "Wärtsilänkatu Kuusi Oy",
+            "type": "1",
+            "registrationDate": "1994-09-28",
+            "endDate": "2021-05-20",
+            "version": 2,
+            "source": "1"
+          }
+        ],
+        "mainBusinessLine": {
+          "type": "47761",
+          "descriptions": [
+            {
+              "languageCode": "2",
+              "description": "Detaljhandel med blommor"
+            },
+            {
+              "languageCode": "1",
+              "description": "Kukkien vähittäiskauppa"
+            },
+            {
+              "languageCode": "3",
+              "description": "Retail sale of flowers"
+            }
+          ],
+          "typeCodeSet": "TOIMI3",
+          "registrationDate": "2021-04-01",
+          "source": "2"
+        },
+        "companyForms": [
+          {
+            "type": "16",
+            "descriptions": [
+              {
+                "languageCode": "2",
+                "description": "Aktiebolag"
+              },
+              {
+                "languageCode": "3",
+                "description": "Limited company"
+              },
+              {
+                "languageCode": "1",
+                "description": "Osakeyhtiö"
+              }
+            ],
+            "registrationDate": "1994-09-28",
+            "endDate": "2025-09-16",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "companySituations": [],
+        "registeredEntries": [
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1980-06-19",
+            "endDate": "2025-09-15",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "4",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Ceased"
+              },
+              {
+                "languageCode": "1",
+                "description": "Lakannut"
+              },
+              {
+                "languageCode": "2",
+                "description": "Upphört"
+              }
+            ],
+            "registrationDate": "2025-09-16",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1980-09-04",
+            "endDate": "2025-07-09",
+            "register": "4",
+            "authority": "1"
+          },
+          {
+            "type": "55",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1995-03-01",
+            "endDate": "2025-07-09",
+            "register": "5",
+            "authority": "1"
+          },
+          {
+            "type": "80",
+            "descriptions": [
+              {
+                "languageCode": "1",
+                "description": "Liiketoiminnasta arvonlisäverovelvollinen"
+              },
+              {
+                "languageCode": "2",
+                "description": "Momsskyldig för rörelseverksamhet"
+              },
+              {
+                "languageCode": "3",
+                "description": "VAT-liable for business activity"
+              }
+            ],
+            "registrationDate": "2021-04-01",
+            "endDate": "2022-10-31",
+            "register": "6",
+            "authority": "1"
+          },
+          {
+            "type": "41",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "2021-05-01",
+            "endDate": "2022-10-31",
+            "register": "7",
+            "authority": "1"
+          }
+        ],
+        "addresses": [],
+        "tradeRegisterStatus": "4",
+        "status": "2",
+        "registrationDate": "1980-06-19",
+        "endDate": "2025-09-16",
+        "lastModified": "2026-09-17T01:30:04"
+      },
+      {
+        "businessId": {
+          "value": "0670290-0",
+          "registrationDate": "1987-10-07",
+          "source": "3"
+        },
+        "names": [
+          {
+            "name": "Metra Finance Oy Ab",
+            "type": "1",
+            "registrationDate": "1991-02-13",
+            "endDate": "2005-12-28",
+            "version": 1,
+            "source": "1"
+          },
+          {
+            "name": "Oy Wärtsilä Finance Ab",
+            "type": "1",
+            "registrationDate": "1988-09-14",
+            "endDate": "1991-02-12",
+            "version": 2,
+            "source": "1"
+          }
+        ],
+        "mainBusinessLine": {
+          "type": "65231",
+          "descriptions": [
+            {
+              "languageCode": "3",
+              "description": "Investment and development company activities"
+            },
+            {
+              "languageCode": "1",
+              "description": "Sijoitus- ja kehitysyhtiötoiminta"
+            },
+            {
+              "languageCode": "2",
+              "description": "Utvecklings o placeringsbolagsverks"
+            }
+          ],
+          "typeCodeSet": "TOIMI2",
+          "registrationDate": "2001-12-31",
+          "source": "2"
+        },
+        "companyForms": [
+          {
+            "type": "16",
+            "descriptions": [
+              {
+                "languageCode": "2",
+                "description": "Aktiebolag"
+              },
+              {
+                "languageCode": "3",
+                "description": "Limited company"
+              },
+              {
+                "languageCode": "1",
+                "description": "Osakeyhtiö"
+              }
+            ],
+            "endDate": "2005-12-28",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "companySituations": [],
+        "registeredEntries": [
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1987-04-15",
+            "endDate": "2005-12-27",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "4",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Ceased"
+              },
+              {
+                "languageCode": "1",
+                "description": "Lakannut"
+              },
+              {
+                "languageCode": "2",
+                "description": "Upphört"
+              }
+            ],
+            "registrationDate": "2005-12-28",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1987-10-07",
+            "endDate": "2005-12-21",
+            "register": "4",
+            "authority": "1"
+          },
+          {
+            "type": "55",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1995-03-01",
+            "endDate": "2005-12-21",
+            "register": "5",
+            "authority": "1"
+          },
+          {
+            "type": "41",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1991-03-01",
+            "endDate": "2005-12-21",
+            "register": "7",
+            "authority": "1"
+          }
+        ],
+        "addresses": [],
+        "tradeRegisterStatus": "4",
+        "status": "2",
+        "registrationDate": "1987-04-15",
+        "endDate": "2005-12-28",
+        "lastModified": "2018-02-28T09:15:14"
+      },
+      {
+        "businessId": {
+          "value": "0705418-3",
+          "registrationDate": "1988-06-29",
+          "source": "3"
+        },
+        "names": [
+          {
+            "name": "Asunto Oy Wärtsilänkatu 23",
+            "type": "1",
+            "registrationDate": "1988-02-03",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "mainBusinessLine": {
+          "type": "68202",
+          "descriptions": [
+            {
+              "languageCode": "1",
+              "description": "Asuntojen ja asuinkiinteistöjen hallinta"
+            },
+            {
+              "languageCode": "2",
+              "description": "Förvaltning av bostäder och bostadsfastigheter"
+            },
+            {
+              "languageCode": "3",
+              "description": "Operating of own or leased dwellings and residential real estate"
+            }
+          ],
+          "typeCodeSet": "TOIMI4",
+          "registrationDate": "2026-01-01",
+          "source": "2"
+        },
+        "companyForms": [
+          {
+            "type": "2",
+            "descriptions": [
+              {
+                "languageCode": "1",
+                "description": "Asunto-osakeyhtiö"
+              },
+              {
+                "languageCode": "2",
+                "description": "Bostadsaktiebolag"
+              },
+              {
+                "languageCode": "3",
+                "description": "Housing corporation"
+              }
+            ],
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "companySituations": [],
+        "registeredEntries": [
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1988-02-03",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1988-06-29",
+            "register": "4",
+            "authority": "1"
+          }
+        ],
+        "addresses": [
+          {
+            "type": 2,
+            "street": "WÄRTSILÄNKATU",
+            "postCode": "04400",
+            "postOffices": [
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "1",
+                "municipalityCode": "186"
+              },
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "2",
+                "municipalityCode": "186"
+              }
+            ],
+            "postOfficeBox": "",
+            "buildingNumber": "23",
+            "entrance": "",
+            "apartmentNumber": "",
+            "apartmentIdSuffix": "",
+            "co": "",
+            "source": "0"
+          }
+        ],
+        "tradeRegisterStatus": "1",
+        "status": "2",
+        "registrationDate": "1988-02-03",
+        "lastModified": "2025-12-31T07:39:20"
+      },
+      {
+        "businessId": {
+          "value": "0715411-7",
+          "registrationDate": "1988-10-24",
+          "source": "3"
+        },
+        "names": [
+          {
+            "name": "As. Oy Järvenpään Wärtsilänkatu 62",
+            "type": "1",
+            "registrationDate": "1988-05-04",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "mainBusinessLine": {
+          "type": "68202",
+          "descriptions": [
+            {
+              "languageCode": "1",
+              "description": "Asuntojen ja asuinkiinteistöjen hallinta"
+            },
+            {
+              "languageCode": "2",
+              "description": "Förvaltning av bostäder och bostadsfastigheter"
+            },
+            {
+              "languageCode": "3",
+              "description": "Operating of own or leased dwellings and residential real estate"
+            }
+          ],
+          "typeCodeSet": "TOIMI4",
+          "registrationDate": "2026-01-01",
+          "source": "2"
+        },
+        "companyForms": [
+          {
+            "type": "2",
+            "descriptions": [
+              {
+                "languageCode": "1",
+                "description": "Asunto-osakeyhtiö"
+              },
+              {
+                "languageCode": "2",
+                "description": "Bostadsaktiebolag"
+              },
+              {
+                "languageCode": "3",
+                "description": "Housing corporation"
+              }
+            ],
+            "registrationDate": "1988-05-04",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "companySituations": [],
+        "registeredEntries": [
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1988-05-04",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1988-10-24",
+            "register": "4",
+            "authority": "1"
+          }
+        ],
+        "addresses": [
+          {
+            "type": 1,
+            "street": "Wärtsilänkatu",
+            "postCode": "04440",
+            "postOffices": [
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "1",
+                "municipalityCode": "186"
+              },
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "2",
+                "municipalityCode": "186"
+              }
+            ],
+            "buildingNumber": "62",
+            "entrance": "A",
+            "apartmentNumber": "2",
+            "apartmentIdSuffix": "",
+            "co": "",
+            "registrationDate": "2013-07-18",
+            "source": "0"
+          },
+          {
+            "type": 2,
+            "street": "Wärtsilänkatu",
+            "postCode": "04440",
+            "postOffices": [
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "1",
+                "municipalityCode": "186"
+              },
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "2",
+                "municipalityCode": "186"
+              }
+            ],
+            "postOfficeBox": "",
+            "buildingNumber": "62",
+            "entrance": "A",
+            "apartmentNumber": "2",
+            "apartmentIdSuffix": "",
+            "co": "",
+            "registrationDate": "2013-07-18",
+            "source": "0"
+          }
+        ],
+        "tradeRegisterStatus": "1",
+        "status": "2",
+        "registrationDate": "1988-05-04",
+        "lastModified": "2025-12-31T07:39:20"
+      },
+      {
+        "businessId": {
+          "value": "0773744-3",
+          "registrationDate": "1989-12-14",
+          "source": "3"
+        },
+        "euId": {
+          "value": "FIFPRO.0773744-3",
+          "source": "1"
+        },
+        "names": [
+          {
+            "name": "Wärtsilä Finland Oy",
+            "type": "1",
+            "registrationDate": "2000-10-04",
+            "version": 1,
+            "source": "1"
+          },
+          {
+            "name": "Wärtsilä NSD Finland Oy",
+            "type": "1",
+            "registrationDate": "1997-06-17",
+            "endDate": "2000-10-03",
+            "version": 2,
+            "source": "1"
+          },
+          {
+            "name": "Wasa Pilot Power Plant",
+            "type": "3",
+            "registrationDate": "2005-09-30",
+            "version": 1,
+            "source": "1"
+          },
+          {
+            "name": "Gaspolator",
+            "type": "3",
+            "registrationDate": "2011-10-26",
+            "version": 1,
+            "source": "1"
+          },
+          {
+            "name": "Funa International",
+            "type": "3",
+            "registrationDate": "2016-12-31",
+            "version": 1,
+            "source": "1"
+          },
+          {
+            "name": "Eniram",
+            "type": "3",
+            "registrationDate": "2021-03-31",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "mainBusinessLine": {
+          "type": "28110",
+          "descriptions": [
+            {
+              "languageCode": "3",
+              "description": "Manufacture of engines and turbines, except aircraft, vehicle and cycle engines"
+            },
+            {
+              "languageCode": "1",
+              "description": "Moottorien ja turbiinien valmistus pois lukien lentokoneiden ja ajoneuvojen moottorit"
+            },
+            {
+              "languageCode": "2",
+              "description": "Tillverkning av motorer och turbiner utom för luftfartyg och fordon"
+            }
+          ],
+          "typeCodeSet": "TOIMI4",
+          "registrationDate": "2026-01-01",
+          "source": "2"
+        },
+        "companyForms": [
+          {
+            "type": "16",
+            "descriptions": [
+              {
+                "languageCode": "2",
+                "description": "Aktiebolag"
+              },
+              {
+                "languageCode": "3",
+                "description": "Limited company"
+              },
+              {
+                "languageCode": "1",
+                "description": "Osakeyhtiö"
+              }
+            ],
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "companySituations": [],
+        "registeredEntries": [
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1989-11-29",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1989-12-14",
+            "register": "4",
+            "authority": "1"
+          },
+          {
+            "type": "55",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1995-03-01",
+            "register": "5",
+            "authority": "1"
+          },
+          {
+            "type": "80",
+            "descriptions": [
+              {
+                "languageCode": "1",
+                "description": "Liiketoiminnasta arvonlisäverovelvollinen"
+              },
+              {
+                "languageCode": "2",
+                "description": "Momsskyldig för rörelseverksamhet"
+              },
+              {
+                "languageCode": "3",
+                "description": "VAT-liable for business activity"
+              }
+            ],
+            "registrationDate": "1994-06-01",
+            "register": "6",
+            "authority": "1"
+          },
+          {
+            "type": "82",
+            "descriptions": [
+              {
+                "languageCode": "2",
+                "description": "För överlåtelse av nyttjanderätten till en fastighet"
+              },
+              {
+                "languageCode": "1",
+                "description": "Kiinteistön käyttöoikeuden luovuttamisesta"
+              },
+              {
+                "languageCode": "3",
+                "description": "VAT-obliged for the transfer of rights to use immovable property"
+              }
+            ],
+            "registrationDate": "1994-07-19",
+            "register": "6",
+            "authority": "1"
+          },
+          {
+            "type": "41",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1990-01-01",
+            "register": "7",
+            "authority": "1"
+          }
+        ],
+        "addresses": [
+          {
+            "type": 1,
+            "street": "Teollisuuskatu",
+            "postCode": "65170",
+            "postOffices": [
+              {
+                "city": "VAASA",
+                "languageCode": "1",
+                "municipalityCode": "905"
+              },
+              {
+                "city": "VASA",
+                "languageCode": "2",
+                "municipalityCode": "905"
+              }
+            ],
+            "buildingNumber": "1",
+            "entrance": "",
+            "apartmentNumber": "",
+            "apartmentIdSuffix": "",
+            "co": "",
+            "registrationDate": "2023-02-01",
+            "source": "0"
+          },
+          {
+            "type": 2,
+            "street": "",
+            "postCode": "65101",
+            "postOffices": [
+              {
+                "city": "VAASA",
+                "languageCode": "1",
+                "municipalityCode": "905"
+              },
+              {
+                "city": "VASA",
+                "languageCode": "2",
+                "municipalityCode": "905"
+              }
+            ],
+            "postOfficeBox": "244",
+            "buildingNumber": "",
+            "entrance": "",
+            "apartmentNumber": "",
+            "apartmentIdSuffix": "",
+            "co": "",
+            "registrationDate": "2018-05-02",
+            "source": "0"
+          }
+        ],
+        "tradeRegisterStatus": "1",
+        "status": "2",
+        "registrationDate": "1989-11-29",
+        "lastModified": "2026-09-24T07:28:59"
+      },
+      {
+        "businessId": {
+          "value": "0774206-6",
+          "registrationDate": "1989-12-27",
+          "source": "3"
+        },
+        "euId": {
+          "value": "FIFPRO.0774206-6",
+          "source": "1"
+        },
+        "names": [
+          {
+            "name": "Wärtsilä Technology Oy Ab",
+            "type": "1",
+            "registrationDate": "2000-10-13",
+            "version": 1,
+            "source": "1"
+          },
+          {
+            "name": "Wärtsilä NSD Oy Ab",
+            "type": "1",
+            "registrationDate": "1997-04-10",
+            "endDate": "2000-10-12",
+            "version": 2,
+            "source": "1"
+          },
+          {
+            "name": "Wärtsilä Holding",
+            "type": "3",
+            "registrationDate": "2007-04-30",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "mainBusinessLine": {
+          "type": "64210",
+          "descriptions": [
+            {
+              "languageCode": "3",
+              "description": "Activities of holding companies"
+            },
+            {
+              "languageCode": "2",
+              "description": "Holdingverksamhet"
+            },
+            {
+              "languageCode": "1",
+              "description": "Holdingyhtiöiden toiminta"
+            }
+          ],
+          "typeCodeSet": "TOIMI4",
+          "registrationDate": "2026-01-01",
+          "source": "2"
+        },
+        "companyForms": [
+          {
+            "type": "16",
+            "descriptions": [
+              {
+                "languageCode": "2",
+                "description": "Aktiebolag"
+              },
+              {
+                "languageCode": "3",
+                "description": "Limited company"
+              },
+              {
+                "languageCode": "1",
+                "description": "Osakeyhtiö"
+              }
+            ],
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "companySituations": [],
+        "registeredEntries": [
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1989-11-29",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1989-12-27",
+            "register": "4",
+            "authority": "1"
+          },
+          {
+            "type": "55",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1995-03-01",
+            "register": "5",
+            "authority": "1"
+          },
+          {
+            "type": "80",
+            "descriptions": [
+              {
+                "languageCode": "1",
+                "description": "Liiketoiminnasta arvonlisäverovelvollinen"
+              },
+              {
+                "languageCode": "2",
+                "description": "Momsskyldig för rörelseverksamhet"
+              },
+              {
+                "languageCode": "3",
+                "description": "VAT-liable for business activity"
+              }
+            ],
+            "registrationDate": "1994-06-01",
+            "register": "6",
+            "authority": "1"
+          },
+          {
+            "type": "41",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1990-01-01",
+            "endDate": "2005-12-31",
+            "register": "7",
+            "authority": "1"
+          }
+        ],
+        "addresses": [
+          {
+            "type": 1,
+            "street": "Hiililaiturinkuja",
+            "postCode": "00180",
+            "postOffices": [
+              {
+                "city": "HELSINGFORS",
+                "languageCode": "2",
+                "municipalityCode": "091"
+              },
+              {
+                "city": "HELSINKI",
+                "languageCode": "1",
+                "municipalityCode": "091"
+              }
+            ],
+            "buildingNumber": "2",
+            "entrance": "",
+            "apartmentNumber": "",
+            "apartmentIdSuffix": "",
+            "co": "",
+            "registrationDate": "2018-11-01",
+            "source": "0"
+          },
+          {
+            "type": 2,
+            "street": "",
+            "postCode": "00080",
+            "postOffices": [
+              {
+                "city": "WÄRTSILÄ",
+                "languageCode": "1",
+                "municipalityCode": "091"
+              },
+              {
+                "city": "WÄRTSILÄ",
+                "languageCode": "2",
+                "municipalityCode": "091"
+              }
+            ],
+            "postOfficeBox": "196",
+            "buildingNumber": "",
+            "entrance": "",
+            "apartmentNumber": "",
+            "apartmentIdSuffix": "",
+            "co": "",
+            "registrationDate": "2018-11-01",
+            "source": "0"
+          }
+        ],
+        "tradeRegisterStatus": "1",
+        "status": "2",
+        "registrationDate": "1989-11-29",
+        "lastModified": "2026-03-13T11:14:16"
+      },
+      {
+        "businessId": {
+          "value": "0775771-9",
+          "registrationDate": "1990-01-08",
+          "source": "3"
+        },
+        "names": [
+          {
+            "name": "Asunto Oy Wärtsilänkatu 38",
+            "type": "1",
+            "registrationDate": "1989-12-13",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "mainBusinessLine": {
+          "type": "68202",
+          "descriptions": [
+            {
+              "languageCode": "1",
+              "description": "Asuntojen ja asuinkiinteistöjen hallinta"
+            },
+            {
+              "languageCode": "2",
+              "description": "Förvaltning av bostäder och bostadsfastigheter"
+            },
+            {
+              "languageCode": "3",
+              "description": "Operating of own or leased dwellings and residential real estate"
+            }
+          ],
+          "typeCodeSet": "TOIMI4",
+          "registrationDate": "2026-01-01",
+          "source": "2"
+        },
+        "companyForms": [
+          {
+            "type": "2",
+            "descriptions": [
+              {
+                "languageCode": "1",
+                "description": "Asunto-osakeyhtiö"
+              },
+              {
+                "languageCode": "2",
+                "description": "Bostadsaktiebolag"
+              },
+              {
+                "languageCode": "3",
+                "description": "Housing corporation"
+              }
+            ],
+            "registrationDate": "1989-12-13",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "companySituations": [],
+        "registeredEntries": [
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1989-12-13",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1990-01-08",
+            "register": "4",
+            "authority": "1"
+          }
+        ],
+        "addresses": [
+          {
+            "type": 2,
+            "street": "Wärtsilänkatu",
+            "postCode": "04400",
+            "postOffices": [
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "1",
+                "municipalityCode": "186"
+              },
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "2",
+                "municipalityCode": "186"
+              }
+            ],
+            "postOfficeBox": "",
+            "buildingNumber": "38",
+            "entrance": "C",
+            "apartmentNumber": "",
+            "apartmentIdSuffix": "",
+            "co": "",
+            "registrationDate": "2006-01-11",
+            "source": "0"
+          }
+        ],
+        "tradeRegisterStatus": "1",
+        "status": "2",
+        "registrationDate": "1989-12-13",
+        "lastModified": "2026-09-23T09:34:00"
+      },
+      {
+        "businessId": {
+          "value": "0809108-2",
+          "registrationDate": "1990-09-04",
+          "source": "3"
+        },
+        "names": [
+          {
+            "name": "Asunto Oy Järvenpään Wärtsilänkatu 30",
+            "type": "1",
+            "registrationDate": "1990-05-30",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "mainBusinessLine": {
+          "type": "68202",
+          "descriptions": [
+            {
+              "languageCode": "1",
+              "description": "Asuntojen ja asuinkiinteistöjen hallinta"
+            },
+            {
+              "languageCode": "2",
+              "description": "Förvaltning av bostäder och bostadsfastigheter"
+            },
+            {
+              "languageCode": "3",
+              "description": "Operating of own or leased dwellings and residential real estate"
+            }
+          ],
+          "typeCodeSet": "TOIMI4",
+          "registrationDate": "2026-01-01",
+          "source": "2"
+        },
+        "companyForms": [
+          {
+            "type": "2",
+            "descriptions": [
+              {
+                "languageCode": "1",
+                "description": "Asunto-osakeyhtiö"
+              },
+              {
+                "languageCode": "2",
+                "description": "Bostadsaktiebolag"
+              },
+              {
+                "languageCode": "3",
+                "description": "Housing corporation"
+              }
+            ],
+            "registrationDate": "1990-05-30",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "companySituations": [],
+        "registeredEntries": [
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1990-05-30",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1990-09-04",
+            "register": "4",
+            "authority": "1"
+          }
+        ],
+        "addresses": [
+          {
+            "type": 2,
+            "street": "WÄRTSILÄNKATU",
+            "postCode": "04400",
+            "postOffices": [
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "1",
+                "municipalityCode": "186"
+              },
+              {
+                "city": "JÄRVENPÄÄ",
+                "languageCode": "2",
+                "municipalityCode": "186"
+              }
+            ],
+            "postOfficeBox": "",
+            "buildingNumber": "30",
+            "entrance": "",
+            "apartmentNumber": "",
+            "apartmentIdSuffix": "",
+            "co": "",
+            "registrationDate": "1990-05-30",
+            "source": "0"
+          }
+        ],
+        "tradeRegisterStatus": "1",
+        "status": "2",
+        "registrationDate": "1990-05-30",
+        "lastModified": "2025-12-31T07:39:20"
+      },
+      {
+        "businessId": {
+          "value": "0819039-8",
+          "registrationDate": "1990-11-07",
+          "source": "3"
+        },
+        "names": [
+          {
+            "name": "Metra Oy Ab",
+            "type": "1",
+            "registrationDate": "2000-09-22",
+            "endDate": "2006-06-15",
+            "version": 1,
+            "source": "1"
+          },
+          {
+            "name": "Wärtsilä Oy Ab",
+            "type": "1",
+            "registrationDate": "1991-06-28",
+            "endDate": "2000-09-21",
+            "version": 2,
+            "source": "1"
+          },
+          {
+            "name": "Sanek",
+            "type": "3",
+            "registrationDate": "1990-12-31",
+            "endDate": "2006-06-15",
+            "version": 1,
+            "source": "1"
+          },
+          {
+            "name": "Saniara",
+            "type": "3",
+            "registrationDate": "1991-06-28",
+            "endDate": "2006-06-15",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "mainBusinessLine": {
+          "type": "28750",
+          "descriptions": [
+            {
+              "languageCode": "3",
+              "description": "Manufacture of other fabricated metal products n.e.c."
+            },
+            {
+              "languageCode": "1",
+              "description": "Muiden metallituotteiden valmistus"
+            },
+            {
+              "languageCode": "2",
+              "description": "Övrig metallvarutillverkning"
+            }
+          ],
+          "typeCodeSet": "TOIMI2",
+          "registrationDate": "2001-12-31",
+          "source": "2"
+        },
+        "companyForms": [
+          {
+            "type": "16",
+            "descriptions": [
+              {
+                "languageCode": "2",
+                "description": "Aktiebolag"
+              },
+              {
+                "languageCode": "3",
+                "description": "Limited company"
+              },
+              {
+                "languageCode": "1",
+                "description": "Osakeyhtiö"
+              }
+            ],
+            "endDate": "2006-06-15",
+            "version": 1,
+            "source": "1"
+          }
+        ],
+        "companySituations": [],
+        "registeredEntries": [
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1990-04-18",
+            "endDate": "2006-06-14",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "4",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Ceased"
+              },
+              {
+                "languageCode": "1",
+                "description": "Lakannut"
+              },
+              {
+                "languageCode": "2",
+                "description": "Upphört"
+              }
+            ],
+            "registrationDate": "2006-06-15",
+            "register": "1",
+            "authority": "2"
+          },
+          {
+            "type": "1",
+            "descriptions": [
+              {
+                "languageCode": "3",
+                "description": "Registered"
+              },
+              {
+                "languageCode": "2",
+                "description": "Registrerad"
+              },
+              {
+                "languageCode": "1",
+                "description": "Rekisterissä"
+              }
+            ],
+            "registrationDate": "1990-11-07",
+            "endDate": "2006-06-15",
+            "register": "4",
+            "authority": "1"
+          }
+        ],
+        "addresses": [],
+        "tradeRegisterStatus": "4",
+        "status": "2",
+        "registrationDate": "1990-04-18",
+        "endDate": "2006-06-15"
+      },
+      "... +21 more"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "params": {
+    "scientificName": "Macrocystis pyrifera",
+    "country": "US",
+    "limit": 3
+  },
+  "full_size_bytes": 609,
+  "sample": {
+    "count": 1491554,
+    "results": [
+      {
+        "key": 5938092330,
+        "scientificName": "Macrocystis pyrifera (L.) C.Agardh",
+        "country": "United States of America",
+        "year": 2026,
+        "decimalLatitude": 32.668203,
+        "decimalLongitude": -117.244728
+      },
+      {
+        "key": 5938109091,
+        "scientificName": "Macrocystis pyrifera (L.) C.Agardh",
+        "country": "United States of America",
+        "year": 2026,
+        "decimalLatitude": 37.520442,
+        "decimalLongitude": -122.51625
+      },
+      {
+        "key": 5938325204,
+        "scientificName": "Macrocystis pyrifera (L.) C.Agardh",
+        "country": "United States of America",
+        "year": 2026,
+        "decimalLatitude": 36.625995,
+        "decimalLongitude": -121.915567
+      }
+    ]
+  }
+}

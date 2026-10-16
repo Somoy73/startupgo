@@ -1,0 +1,449 @@
+{
+  "params": {
+    "filter[fulltext]": "wartsila",
+    "page[size]": 3
+  },
+  "full_size_bytes": 9407,
+  "sample": {
+    "meta": {
+      "goldenCopy": {
+        "publishDate": "2026-10-16T08:00:00Z"
+      },
+      "pagination": {
+        "currentPage": 1,
+        "perPage": 3,
+        "from": 1,
+        "to": 3,
+        "total": 31,
+        "lastPage": 11
+      }
+    },
+    "links": {
+      "first": "https://api.gleif.org/api/v1/lei-records?filter%5Bfulltext%5D=wartsila&page%5Bnumber%5D=1&page%5Bsize%5D=3",
+      "next": "https://api.gleif.org/api/v1/lei-records?filter%5Bfulltext%5D=wartsila&page%5Bnumber%5D=2&page%5Bsize%5D=3",
+      "last": "https://api.gleif.org/api/v1/lei-records?filter%5Bfulltext%5D=wartsila&page%5Bnumber%5D=11&page%5Bsize%5D=3"
+    },
+    "data": [
+      {
+        "type": "lei-records",
+        "id": "7437003775QEK2RVGF22",
+        "attributes": {
+          "lei": "7437003775QEK2RVGF22",
+          "entity": {
+            "legalName": {
+              "name": "Wilhelm Wahlforssin säätiö sr",
+              "language": "fi"
+            },
+            "otherNames": [
+              {
+                "name": "Wilhelm Wahlforss Stiftelse sr",
+                "language": "fi",
+                "type": "PREVIOUS_LEGAL_NAME"
+              }
+            ],
+            "transliteratedOtherNames": [],
+            "legalAddress": {
+              "language": "fi",
+              "addressLines": [
+                "PL 1834",
+                "00080 WÄRTSILÄ"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": "c/o Wärtsilä Oyj Abp",
+              "city": "WÄRTSILÄ",
+              "region": null,
+              "country": "FI",
+              "postalCode": "FI-00080"
+            },
+            "headquartersAddress": {
+              "language": "fi",
+              "addressLines": [
+                "Hiililaiturinkuja 2",
+                "00180 HELSINKI"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": "c/o Wärtsilä Oyj Abp",
+              "city": "HELSINKI",
+              "region": null,
+              "country": "FI",
+              "postalCode": "FI-00180"
+            },
+            "registeredAt": {
+              "id": "RA000188",
+              "other": null
+            },
+            "registeredAs": "1576758-9",
+            "jurisdiction": "FI",
+            "category": "GENERAL",
+            "legalForm": {
+              "id": "YK5G",
+              "other": null
+            },
+            "associatedEntity": {
+              "lei": null,
+              "name": null
+            },
+            "status": "ACTIVE",
+            "expiration": {
+              "date": null,
+              "reason": null
+            },
+            "successorEntity": {
+              "lei": null,
+              "name": null
+            },
+            "successorEntities": [],
+            "creationDate": "2000-01-25T22:00:00Z",
+            "subCategory": null,
+            "otherAddresses": [],
+            "eventGroups": [
+              {
+                "groupType": "STANDALONE",
+                "events": [
+                  {
+                    "validationDocuments": "REGULATORY_FILING",
+                    "effectiveDate": "2022-12-13T22:00:00Z",
+                    "recordedDate": "2022-12-14T20:19:08Z",
+                    "type": "CHANGE_LEGAL_NAME",
+                    "status": "COMPLETED"
+                  }
+                ]
+              }
+            ]
+          },
+          "registration": {
+            "initialRegistrationDate": "2018-01-25T22:00:00Z",
+            "lastUpdateDate": "2026-08-02T12:00:10Z",
+            "status": "ISSUED",
+            "nextRenewalDate": "2027-08-02T09:00:00Z",
+            "managingLou": "743700OO8O2N3TQKJC81",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "validatedAt": {
+              "id": "RA000188",
+              "other": null
+            },
+            "validatedAs": "1576758-9",
+            "otherValidationAuthorities": []
+          },
+          "bic": null,
+          "mic": null,
+          "ocid": null,
+          "qcc": "QFIER3E94V",
+          "gem": null,
+          "spglobal": [
+            "556283595"
+          ],
+          "conformityFlag": "CONFORMING"
+        },
+        "relationships": {
+          "managing-lou": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/7437003775QEK2RVGF22/managing-lou"
+            }
+          },
+          "lei-issuer": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/7437003775QEK2RVGF22/lei-issuer"
+            }
+          },
+          "field-modifications": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/7437003775QEK2RVGF22/field-modifications"
+            }
+          },
+          "direct-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/7437003775QEK2RVGF22/direct-parent-reporting-exception"
+            }
+          },
+          "ultimate-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/7437003775QEK2RVGF22/ultimate-parent-reporting-exception"
+            }
+          }
+        },
+        "links": {
+          "self": "https://api.gleif.org/api/v1/lei-records/7437003775QEK2RVGF22"
+        }
+      },
+      {
+        "type": "lei-records",
+        "id": "743700G7A9J1PHM3X223",
+        "attributes": {
+          "lei": "743700G7A9J1PHM3X223",
+          "entity": {
+            "legalName": {
+              "name": "Wärtsilä Oyj Abp",
+              "language": "fi"
+            },
+            "otherNames": [],
+            "transliteratedOtherNames": [],
+            "legalAddress": {
+              "language": "fi",
+              "addressLines": [
+                "PL 1834",
+                "00080 WÄRTSILÄ"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "WÄRTSILÄ",
+              "region": null,
+              "country": "FI",
+              "postalCode": "FI-00080"
+            },
+            "headquartersAddress": {
+              "language": "fi",
+              "addressLines": [
+                "Hiililaiturinkuja 2",
+                "00180 HELSINKI"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "HELSINKI",
+              "region": null,
+              "country": "FI",
+              "postalCode": "FI-00180"
+            },
+            "registeredAt": {
+              "id": "RA000188",
+              "other": null
+            },
+            "registeredAs": "0128631-1",
+            "jurisdiction": "FI",
+            "category": "GENERAL",
+            "legalForm": {
+              "id": "K6VE",
+              "other": null
+            },
+            "associatedEntity": {
+              "lei": null,
+              "name": null
+            },
+            "status": "ACTIVE",
+            "expiration": {
+              "date": null,
+              "reason": null
+            },
+            "successorEntity": {
+              "lei": null,
+              "name": null
+            },
+            "successorEntities": [],
+            "creationDate": "1978-03-14T22:00:00Z",
+            "subCategory": null,
+            "otherAddresses": [],
+            "eventGroups": []
+          },
+          "registration": {
+            "initialRegistrationDate": "2014-02-01T08:05:25Z",
+            "lastUpdateDate": "2026-02-05T13:00:15Z",
+            "status": "ISSUED",
+            "nextRenewalDate": "2027-02-05T10:00:00Z",
+            "managingLou": "743700OO8O2N3TQKJC81",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "validatedAt": {
+              "id": "RA000188",
+              "other": null
+            },
+            "validatedAs": "0128631-1",
+            "otherValidationAuthorities": []
+          },
+          "bic": [
+            "WRTCFIHHXXX"
+          ],
+          "mic": null,
+          "ocid": "fi/0128631-1",
+          "qcc": "QFI8CN1995",
+          "gem": "E100000000773",
+          "spglobal": [
+            "876135"
+          ],
+          "conformityFlag": "CONFORMING"
+        },
+        "relationships": {
+          "managing-lou": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/743700G7A9J1PHM3X223/managing-lou"
+            }
+          },
+          "lei-issuer": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/743700G7A9J1PHM3X223/lei-issuer"
+            }
+          },
+          "field-modifications": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/743700G7A9J1PHM3X223/field-modifications"
+            }
+          },
+          "direct-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/743700G7A9J1PHM3X223/direct-parent-reporting-exception"
+            }
+          },
+          "ultimate-parent": {
+            "links": {
+              "reporting-exception": "https://api.gleif.org/api/v1/lei-records/743700G7A9J1PHM3X223/ultimate-parent-reporting-exception"
+            }
+          },
+          "direct-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/743700G7A9J1PHM3X223/direct-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/743700G7A9J1PHM3X223/direct-children"
+            }
+          },
+          "ultimate-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/743700G7A9J1PHM3X223/ultimate-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/743700G7A9J1PHM3X223/ultimate-children"
+            }
+          }
+        },
+        "links": {
+          "self": "https://api.gleif.org/api/v1/lei-records/743700G7A9J1PHM3X223"
+        }
+      },
+      {
+        "type": "lei-records",
+        "id": "529900PB190HHDQ1RA26",
+        "attributes": {
+          "lei": "529900PB190HHDQ1RA26",
+          "entity": {
+            "legalName": {
+              "name": "Wärtsilä SAM Electronics GmbH",
+              "language": "de"
+            },
+            "otherNames": [],
+            "transliteratedOtherNames": [
+              {
+                "name": "Wartsila SAM Electronics GmbH",
+                "language": "de",
+                "type": "AUTO_ASCII_TRANSLITERATED_LEGAL_NAME"
+              }
+            ],
+            "legalAddress": {
+              "language": "de",
+              "addressLines": [
+                "Behringstr. 120"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Hamburg",
+              "region": "DE-HH",
+              "country": "DE",
+              "postalCode": "22763"
+            },
+            "headquartersAddress": {
+              "language": "de",
+              "addressLines": [
+                "Behringstr. 120"
+              ],
+              "addressNumber": null,
+              "addressNumberWithinBuilding": null,
+              "mailRouting": null,
+              "city": "Hamburg",
+              "region": "DE-HH",
+              "country": "DE",
+              "postalCode": "22763"
+            },
+            "registeredAt": {
+              "id": "RA000259",
+              "other": null
+            },
+            "registeredAs": "HRB 89408",
+            "jurisdiction": "DE",
+            "category": "GENERAL",
+            "legalForm": {
+              "id": "2HBR",
+              "other": null
+            },
+            "associatedEntity": {
+              "lei": null,
+              "name": null
+            },
+            "status": "ACTIVE",
+            "expiration": {
+              "date": null,
+              "reason": null
+            },
+            "successorEntity": {
+              "lei": null,
+              "name": null
+            },
+            "successorEntities": [],
+            "creationDate": "2004-01-12T23:00:00Z",
+            "subCategory": null,
+            "otherAddresses": [],
+            "eventGroups": []
+          },
+          "registration": {
+            "initialRegistrationDate": "2013-08-21T12:03:11Z",
+            "lastUpdateDate": "2026-01-14T00:30:04Z",
+            "status": "LAPSED",
+            "nextRenewalDate": "2026-01-14T07:21:06Z",
+            "managingLou": "5299000J2N45DDNE4Y28",
+            "corroborationLevel": "FULLY_CORROBORATED",
+            "validatedAt": {
+              "id": "RA000259",
+              "other": null
+            },
+            "validatedAs": "HRB 89408",
+            "otherValidationAuthorities": []
+          },
+          "bic": null,
+          "mic": null,
+          "ocid": null,
+          "qcc": "QDE0EQ7T5Q",
+          "gem": null,
+          "spglobal": [
+            "5497444"
+          ],
+          "conformityFlag": "NON_CONFORMING"
+        },
+        "relationships": {
+          "managing-lou": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/529900PB190HHDQ1RA26/managing-lou"
+            }
+          },
+          "lei-issuer": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/529900PB190HHDQ1RA26/lei-issuer"
+            }
+          },
+          "field-modifications": {
+            "links": {
+              "related": "https://api.gleif.org/api/v1/lei-records/529900PB190HHDQ1RA26/field-modifications"
+            }
+          },
+          "direct-parent": {
+            "links": {
+              "relationship-record": "https://api.gleif.org/api/v1/lei-records/529900PB190HHDQ1RA26/direct-parent-relationship",
+              "lei-record": "https://api.gleif.org/api/v1/lei-records/529900PB190HHDQ1RA26/direct-parent"
+            }
+          },
+          "ultimate-parent": {
+            "links": {
+              "relationship-record": "https://api.gleif.org/api/v1/lei-records/529900PB190HHDQ1RA26/ultimate-parent-relationship",
+              "lei-record": "https://api.gleif.org/api/v1/lei-records/529900PB190HHDQ1RA26/ultimate-parent"
+            }
+          },
+          "direct-children": {
+            "links": {
+              "relationship-records": "https://api.gleif.org/api/v1/lei-records/529900PB190HHDQ1RA26/direct-child-relationships",
+              "related": "https://api.gleif.org/api/v1/lei-records/529900PB190HHDQ1RA26/direct-children"
+            }
+          }
+        },
+        "links": {
+          "self": "https://api.gleif.org/api/v1/lei-records/529900PB190HHDQ1RA26"
+        }
+      }
+    ]
+  }
+}

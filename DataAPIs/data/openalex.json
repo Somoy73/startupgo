@@ -1,0 +1,1160 @@
+{
+  "params": {
+    "search": "kelp aquaculture",
+    "per-page": 5,
+    "select": "id,title,publication_year,cited_by_count,authorships"
+  },
+  "full_size_bytes": 29564,
+  "sample": {
+    "meta": {
+      "notice": "No API key, so this request shares one free daily budget ($0.10) with everyone on your network's IP address. Get a free key with its own $1/day at https://openalex.org/settings/api and add api_key=YOUR_KEY to your requests. An AI agent can get one for its user in one call: POST https://api.openalex.org/api-keys with {\"email\": \"<your user's email>\"}; we email them a link, and the key works once they click it. Docs for agents: https://help.openalex.org/llms.txt",
+      "count": 11637,
+      "db_response_time_ms": 84,
+      "page": 1,
+      "per_page": 5,
+      "groups_count": null,
+      "x_query": {
+        "oql": "get works where full text has (kelp aquaculture)",
+        "x_new_oql": "get works with (kelp aquaculture) in the full text",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "column_id": "fulltext.search",
+              "value": "kelp aquaculture",
+              "operator": "has"
+            }
+          ]
+        },
+        "url": "/works?filter=fulltext.search:kelp aquaculture&per_page=5"
+      },
+      "cost_usd": 0.001
+    },
+    "results": [
+      {
+        "id": "https://openalex.org/W3133374106",
+        "title": "Kelp aquaculture in China: a retrospective and future prospects",
+        "publication_year": 2021,
+        "cited_by_count": 161,
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5040955776",
+              "display_name": "Zi‐Min Hu",
+              "orcid": "https://orcid.org/0000-0002-1313-1785",
+              "observed_orcids": [
+                "https://orcid.org/0000-0002-1313-1785"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I18452120",
+                "display_name": "Yantai University",
+                "ror": "https://ror.org/01rp41m56",
+                "country_code": "CN",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I18452120"
+                ]
+              }
+            ],
+            "countries": [
+              "CN"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "Zi‐Min Hu",
+            "raw_affiliation_strings": [
+              "Ocean School Yantai University Yantai China",
+              "Ocean School, Yantai University, Yantai, China"
+            ],
+            "raw_orcid": "https://orcid.org/0000-0002-1313-1785",
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Ocean School Yantai University Yantai China",
+                "institution_ids": [
+                  "https://openalex.org/I18452120"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Ocean School, Yantai University, Yantai, China",
+                "institution_ids": [
+                  "https://openalex.org/I18452120"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5091744044",
+              "display_name": "Ti‐Feng Shan",
+              "orcid": null,
+              "observed_orcids": []
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I19820366",
+                "display_name": "Chinese Academy of Sciences",
+                "ror": "https://ror.org/034t30j35",
+                "country_code": "CN",
+                "type": "government",
+                "lineage": [
+                  "https://openalex.org/I19820366"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210101167",
+                "display_name": "Institute of Oceanology",
+                "ror": "https://ror.org/018yw5541",
+                "country_code": "CN",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I19820366",
+                  "https://openalex.org/I4210101167"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210113896",
+                "display_name": "Qingdao National Laboratory for Marine Science and Technology",
+                "ror": "https://ror.org/026sv7t11",
+                "country_code": "CN",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I4210113896"
+                ]
+              }
+            ],
+            "countries": [
+              "CN"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Ti‐Feng Shan",
+            "raw_affiliation_strings": [
+              "Key Laboratory of Experimental Marine Biology Center for Ocean Mega‐Science Institute of Oceanology Chinese Academy of Sciences Qingdao China",
+              "Laboratory for Marine Biology and Biotechnology Qingdao National Laboratory for Marine Science and Technology Qingdao China",
+              "Key Laboratory of Experimental Marine Biology, Center for Ocean Mega-Science, Institute of Oceanology, Chinese Academy of Sciences, Qingdao, China",
+              "Laboratory for Marine Biology and Biotechnology, Qingdao National Laboratory for Marine Science and Technology, Qingdao, China"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Key Laboratory of Experimental Marine Biology Center for Ocean Mega‐Science Institute of Oceanology Chinese Academy of Sciences Qingdao China",
+                "institution_ids": [
+                  "https://openalex.org/I19820366",
+                  "https://openalex.org/I4210101167"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Laboratory for Marine Biology and Biotechnology Qingdao National Laboratory for Marine Science and Technology Qingdao China",
+                "institution_ids": [
+                  "https://openalex.org/I4210113896"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Key Laboratory of Experimental Marine Biology, Center for Ocean Mega-Science, Institute of Oceanology, Chinese Academy of Sciences, Qingdao, China",
+                "institution_ids": [
+                  "https://openalex.org/I19820366",
+                  "https://openalex.org/I4210101167"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Laboratory for Marine Biology and Biotechnology, Qingdao National Laboratory for Marine Science and Technology, Qingdao, China",
+                "institution_ids": [
+                  "https://openalex.org/I4210113896"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5100436633",
+              "display_name": "Jie Zhang",
+              "orcid": "https://orcid.org/0000-0001-7531-8775",
+              "observed_orcids": [
+                "https://orcid.org/0000-0001-7531-8775"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I19820366",
+                "display_name": "Chinese Academy of Sciences",
+                "ror": "https://ror.org/034t30j35",
+                "country_code": "CN",
+                "type": "government",
+                "lineage": [
+                  "https://openalex.org/I19820366"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210101167",
+                "display_name": "Institute of Oceanology",
+                "ror": "https://ror.org/018yw5541",
+                "country_code": "CN",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I19820366",
+                  "https://openalex.org/I4210101167"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210113896",
+                "display_name": "Qingdao National Laboratory for Marine Science and Technology",
+                "ror": "https://ror.org/026sv7t11",
+                "country_code": "CN",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I4210113896"
+                ]
+              }
+            ],
+            "countries": [
+              "CN"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Jie Zhang",
+            "raw_affiliation_strings": [
+              "Key Laboratory of Experimental Marine Biology Center for Ocean Mega‐Science Institute of Oceanology Chinese Academy of Sciences Qingdao China",
+              "Laboratory for Marine Biology and Biotechnology Qingdao National Laboratory for Marine Science and Technology Qingdao China",
+              "Key Laboratory of Experimental Marine Biology, Center for Ocean Mega-Science, Institute of Oceanology, Chinese Academy of Sciences, Qingdao, China",
+              "Laboratory for Marine Biology and Biotechnology, Qingdao National Laboratory for Marine Science and Technology, Qingdao, China"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Key Laboratory of Experimental Marine Biology Center for Ocean Mega‐Science Institute of Oceanology Chinese Academy of Sciences Qingdao China",
+                "institution_ids": [
+                  "https://openalex.org/I19820366",
+                  "https://openalex.org/I4210101167"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Laboratory for Marine Biology and Biotechnology Qingdao National Laboratory for Marine Science and Technology Qingdao China",
+                "institution_ids": [
+                  "https://openalex.org/I4210113896"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Key Laboratory of Experimental Marine Biology, Center for Ocean Mega-Science, Institute of Oceanology, Chinese Academy of Sciences, Qingdao, China",
+                "institution_ids": [
+                  "https://openalex.org/I19820366",
+                  "https://openalex.org/I4210101167"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Laboratory for Marine Biology and Biotechnology, Qingdao National Laboratory for Marine Science and Technology, Qingdao, China",
+                "institution_ids": [
+                  "https://openalex.org/I4210113896"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5056107500",
+              "display_name": "Quan‐Sheng Zhang",
+              "orcid": null,
+              "observed_orcids": []
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I18452120",
+                "display_name": "Yantai University",
+                "ror": "https://ror.org/01rp41m56",
+                "country_code": "CN",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I18452120"
+                ]
+              }
+            ],
+            "countries": [
+              "CN"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Quan‐Sheng Zhang",
+            "raw_affiliation_strings": [
+              "Ocean School Yantai University Yantai China",
+              "Ocean School, Yantai University, Yantai, China"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Ocean School Yantai University Yantai China",
+                "institution_ids": [
+                  "https://openalex.org/I18452120"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Ocean School, Yantai University, Yantai, China",
+                "institution_ids": [
+                  "https://openalex.org/I18452120"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5005360269",
+              "display_name": "Alan Trevor Critchley",
+              "orcid": "https://orcid.org/0000-0003-1704-458X",
+              "observed_orcids": [
+                "https://orcid.org/0000-0003-1704-458X"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I10213569",
+                "display_name": "Cape Breton University",
+                "ror": "https://ror.org/052y05165",
+                "country_code": "CA",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I10213569"
+                ]
+              }
+            ],
+            "countries": [
+              "CA"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Alan T. Critchley",
+            "raw_affiliation_strings": [
+              "Verschuren Centre for Sustainability in Energy and Environment University of Cape Breton Sydney Nova Scotia Canada",
+              "Verschuren Centre for Sustainability in Energy and Environment, University of Cape Breton, Sydney, Nova Scotia, Canada"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Verschuren Centre for Sustainability in Energy and Environment University of Cape Breton Sydney Nova Scotia Canada",
+                "institution_ids": [
+                  "https://openalex.org/I10213569"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Verschuren Centre for Sustainability in Energy and Environment, University of Cape Breton, Sydney, Nova Scotia, Canada",
+                "institution_ids": [
+                  "https://openalex.org/I10213569"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5006395507",
+              "display_name": "Han‐Gil Choi",
+              "orcid": null,
+              "observed_orcids": []
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I77079311",
+                "display_name": "Wonkwang University",
+                "ror": "https://ror.org/006776986",
+                "country_code": "KR",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I77079311"
+                ]
+              }
+            ],
+            "countries": [
+              "KR"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Han‐Gil Choi",
+            "raw_affiliation_strings": [
+              "Faculty of Biological Science and Research Institute for Basic Science Wonkwang University Iksan Korea",
+              "Faculty of Biological Science and Research Institute for Basic Science, Wonkwang University, Iksan, Korea"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Faculty of Biological Science and Research Institute for Basic Science Wonkwang University Iksan Korea",
+                "institution_ids": [
+                  "https://openalex.org/I77079311"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Faculty of Biological Science and Research Institute for Basic Science, Wonkwang University, Iksan, Korea",
+                "institution_ids": [
+                  "https://openalex.org/I77079311"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5088174297",
+              "display_name": "Norishige Yotsukura",
+              "orcid": "https://orcid.org/0000-0002-1274-0036",
+              "observed_orcids": [
+                "https://orcid.org/0000-0002-1274-0036"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I205349734",
+                "display_name": "Hokkaido University",
+                "ror": "https://ror.org/02e16g702",
+                "country_code": "JP",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I205349734"
+                ]
+              }
+            ],
+            "countries": [
+              "JP"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Norishige Yotsukura",
+            "raw_affiliation_strings": [
+              "Field Science Centre for Northern Biosphere Hokkaido University Sapporo Japan",
+              "Field Science Centre for Northern Biosphere, Hokkaido University, Sapporo, Japan"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Field Science Centre for Northern Biosphere Hokkaido University Sapporo Japan",
+                "institution_ids": [
+                  "https://openalex.org/I205349734"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Field Science Centre for Northern Biosphere, Hokkaido University, Sapporo, Japan",
+                "institution_ids": [
+                  "https://openalex.org/I205349734"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5058269808",
+              "display_name": "Fu‐Li Liu",
+              "orcid": null,
+              "observed_orcids": []
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I4405261380",
+                "display_name": "Yellow Sea Fisheries Research Institute",
+                "ror": "https://ror.org/0578w5a44",
+                "country_code": "CN",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I4210127390",
+                  "https://openalex.org/I4210151987",
+                  "https://openalex.org/I4405261380",
+                  "https://openalex.org/I46529539"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I46529539",
+                "display_name": "Chinese Academy of Fishery Sciences",
+                "ror": "https://ror.org/02bwk9n38",
+                "country_code": "CN",
+                "type": "nonprofit",
+                "lineage": [
+                  "https://openalex.org/I4210127390",
+                  "https://openalex.org/I4210151987",
+                  "https://openalex.org/I46529539"
+                ]
+              }
+            ],
+            "countries": [
+              "CN"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "Fu‐Li Liu",
+            "raw_affiliation_strings": [
+              "Yellow Sea Fisheries Research Institute Chinese Academy of Fishery Sciences Qingdao China",
+              "Yellow Sea Fisheries Research Institute, Chinese Academy of Fishery Sciences, Qingdao, China"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Yellow Sea Fisheries Research Institute Chinese Academy of Fishery Sciences Qingdao China",
+                "institution_ids": [
+                  "https://openalex.org/I4405261380",
+                  "https://openalex.org/I46529539"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Yellow Sea Fisheries Research Institute, Chinese Academy of Fishery Sciences, Qingdao, China",
+                "institution_ids": [
+                  "https://openalex.org/I4405261380",
+                  "https://openalex.org/I46529539"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "last",
+            "author": {
+              "id": "https://openalex.org/A5110640372",
+              "display_name": "Delin Duan",
+              "orcid": "https://orcid.org/0000-0001-5179-5956",
+              "observed_orcids": [
+                "https://orcid.org/0000-0001-5179-5956"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I19820366",
+                "display_name": "Chinese Academy of Sciences",
+                "ror": "https://ror.org/034t30j35",
+                "country_code": "CN",
+                "type": "government",
+                "lineage": [
+                  "https://openalex.org/I19820366"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210101167",
+                "display_name": "Institute of Oceanology",
+                "ror": "https://ror.org/018yw5541",
+                "country_code": "CN",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I19820366",
+                  "https://openalex.org/I4210101167"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210113896",
+                "display_name": "Qingdao National Laboratory for Marine Science and Technology",
+                "ror": "https://ror.org/026sv7t11",
+                "country_code": "CN",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I4210113896"
+                ]
+              }
+            ],
+            "countries": [
+              "CN"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "De‐Lin Duan",
+            "raw_affiliation_strings": [
+              "Key Laboratory of Experimental Marine Biology Center for Ocean Mega‐Science Institute of Oceanology Chinese Academy of Sciences Qingdao China",
+              "Laboratory for Marine Biology and Biotechnology Qingdao National Laboratory for Marine Science and Technology Qingdao China",
+              "Key Laboratory of Experimental Marine Biology, Center for Ocean Mega-Science, Institute of Oceanology, Chinese Academy of Sciences, Qingdao, China",
+              "Laboratory for Marine Biology and Biotechnology, Qingdao National Laboratory for Marine Science and Technology, Qingdao, China"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Key Laboratory of Experimental Marine Biology Center for Ocean Mega‐Science Institute of Oceanology Chinese Academy of Sciences Qingdao China",
+                "institution_ids": [
+                  "https://openalex.org/I19820366",
+                  "https://openalex.org/I4210101167"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Laboratory for Marine Biology and Biotechnology Qingdao National Laboratory for Marine Science and Technology Qingdao China",
+                "institution_ids": [
+                  "https://openalex.org/I4210113896"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Key Laboratory of Experimental Marine Biology, Center for Ocean Mega-Science, Institute of Oceanology, Chinese Academy of Sciences, Qingdao, China",
+                "institution_ids": [
+                  "https://openalex.org/I19820366",
+                  "https://openalex.org/I4210101167"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Laboratory for Marine Biology and Biotechnology, Qingdao National Laboratory for Marine Science and Technology, Qingdao, China",
+                "institution_ids": [
+                  "https://openalex.org/I4210113896"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "https://openalex.org/W2972603144",
+        "title": "An ecosystem approach to kelp aquaculture in the Americas and Europe",
+        "publication_year": 2019,
+        "cited_by_count": 115,
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5073444621",
+              "display_name": "Gretchen Grebe",
+              "orcid": "https://orcid.org/0000-0003-4793-0312",
+              "observed_orcids": [
+                "https://orcid.org/0000-0003-4793-0312"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I275799156",
+                "display_name": "University of New England",
+                "ror": "https://ror.org/02n2ava60",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I275799156"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I7947594",
+                "display_name": "University of Maine",
+                "ror": "https://ror.org/01adr0w49",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I2802397601",
+                  "https://openalex.org/I7947594"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "Gretchen S. Grebe",
+            "raw_affiliation_strings": [
+              "Marine Science Center University of New England 11 Hills Beach Rd, Biddeford, ME 04405, USA",
+              "School of Marine Sciences 360 Aubert Hall University of Maine Orono, ME 04469-5706 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Marine Science Center University of New England 11 Hills Beach Rd, Biddeford, ME 04405, USA",
+                "institution_ids": [
+                  "https://openalex.org/I275799156"
+                ]
+              },
+              {
+                "raw_affiliation_string": "School of Marine Sciences 360 Aubert Hall University of Maine Orono, ME 04469-5706 USA",
+                "institution_ids": [
+                  "https://openalex.org/I7947594"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5020185244",
+              "display_name": "Carrie J. Byron",
+              "orcid": "https://orcid.org/0000-0003-3820-7392",
+              "observed_orcids": [
+                "https://orcid.org/0000-0003-3820-7392"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I275799156",
+                "display_name": "University of New England",
+                "ror": "https://ror.org/02n2ava60",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I275799156"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Carrie J. Byron",
+            "raw_affiliation_strings": [
+              "Marine Science Center University of New England 11 Hills Beach Rd, Biddeford, ME 04405, USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Marine Science Center University of New England 11 Hills Beach Rd, Biddeford, ME 04405, USA",
+                "institution_ids": [
+                  "https://openalex.org/I275799156"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5001581820",
+              "display_name": "Adam T. St. Gelais",
+              "orcid": "https://orcid.org/0000-0002-9007-0007",
+              "observed_orcids": [
+                "https://orcid.org/0000-0002-9007-0007"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I275799156",
+                "display_name": "University of New England",
+                "ror": "https://ror.org/02n2ava60",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I275799156"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Adam St. Gelais",
+            "raw_affiliation_strings": [
+              "Marine Science Center University of New England 11 Hills Beach Rd, Biddeford, ME 04405, USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Marine Science Center University of New England 11 Hills Beach Rd, Biddeford, ME 04405, USA",
+                "institution_ids": [
+                  "https://openalex.org/I275799156"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5064952372",
+              "display_name": "Dawn M. Kotowicz",
+              "orcid": "https://orcid.org/0000-0003-4614-9049",
+              "observed_orcids": [
+                "https://orcid.org/0000-0003-4614-9049"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I17626003",
+                "display_name": "University of Rhode Island",
+                "ror": "https://ror.org/013ckk937",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I17626003"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210103674",
+                "display_name": "Rhode Island Sea Grant",
+                "ror": "https://ror.org/018nbcn37",
+                "country_code": "US",
+                "type": "other",
+                "lineage": [
+                  "https://openalex.org/I1308126019",
+                  "https://openalex.org/I1343035065",
+                  "https://openalex.org/I17626003",
+                  "https://openalex.org/I2802992173",
+                  "https://openalex.org/I4210103674",
+                  "https://openalex.org/I4405269913"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Dawn M. Kotowicz",
+            "raw_affiliation_strings": [
+              "Coastal Resources Center/ Rhode Island Sea Grant Graduate School of Oceanography, The University of Rhode Island Narragansett Bay Campus, 220 South Ferry Road, Narragansett, RI 02882 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Coastal Resources Center/ Rhode Island Sea Grant Graduate School of Oceanography, The University of Rhode Island Narragansett Bay Campus, 220 South Ferry Road, Narragansett, RI 02882 USA",
+                "institution_ids": [
+                  "https://openalex.org/I17626003",
+                  "https://openalex.org/I4210103674"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "last",
+            "author": {
+              "id": "https://openalex.org/A5001514315",
+              "display_name": "Tollef K. Olson",
+              "orcid": null,
+              "observed_orcids": []
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": false,
+            "raw_author_name": "Tollef K. Olson",
+            "raw_affiliation_strings": [
+              "Ocean’s Balance 10 West Point Lane Building #10, Suite 105 Biddeford, ME 04005 USA",
+              "Ocean's Balance 10 West Point Lane Building #10, Suite 105 Biddeford, ME 04005 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Ocean’s Balance 10 West Point Lane Building #10, Suite 105 Biddeford, ME 04005 USA",
+                "institution_ids": []
+              },
+              {
+                "raw_affiliation_string": "Ocean's Balance 10 West Point Lane Building #10, Suite 105 Biddeford, ME 04005 USA",
+                "institution_ids": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "https://openalex.org/W4294011128",
+        "title": "Farms and forests: evaluating the biodiversity benefits of kelp aquaculture",
+        "publication_year": 2022,
+        "cited_by_count": 50,
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5019503824",
+              "display_name": "Hunter Forbes",
+              "orcid": "https://orcid.org/0000-0002-4416-0415",
+              "observed_orcids": [
+                "https://orcid.org/0000-0002-4416-0415"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I129801699",
+                "display_name": "University of Tasmania",
+                "ror": "https://ror.org/01nfmeh72",
+                "country_code": "AU",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I129801699"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4394709165",
+                "display_name": "Institute for Marine and Antarctic Studies",
+                "ror": "https://ror.org/00arpt780",
+                "country_code": null,
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I129801699",
+                  "https://openalex.org/I4394709165"
+                ]
+              }
+            ],
+            "countries": [
+              "AU"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "Hunter Forbes",
+            "raw_affiliation_strings": [
+              "Institute for Marine and Antarctic Studies, University of Tasmania, Hobart, Australia"
+            ],
+            "raw_orcid": "https://orcid.org/0000-0002-4416-0415",
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Institute for Marine and Antarctic Studies, University of Tasmania, Hobart, Australia",
+                "institution_ids": [
+                  "https://openalex.org/I129801699",
+                  "https://openalex.org/I4394709165"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5043741624",
+              "display_name": "Victor Shelamoff",
+              "orcid": "https://orcid.org/0000-0002-6510-0825",
+              "observed_orcids": [
+                "https://orcid.org/0000-0002-6510-0825"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I129801699",
+                "display_name": "University of Tasmania",
+                "ror": "https://ror.org/01nfmeh72",
+                "country_code": "AU",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I129801699"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4394709165",
+                "display_name": "Institute for Marine and Antarctic Studies",
+                "ror": "https://ror.org/00arpt780",
+                "country_code": null,
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I129801699",
+                  "https://openalex.org/I4394709165"
+                ]
+              }
+            ],
+            "countries": [
+              "AU"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Victor Shelamoff",
+            "raw_affiliation_strings": [
+              "Institute for Marine and Antarctic Studies, University of Tasmania, Hobart, Australia"
+            ],
+            "raw_orcid": "https://orcid.org/0000-0002-6510-0825",
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Institute for Marine and Antarctic Studies, University of Tasmania, Hobart, Australia",
+                "institution_ids": [
+                  "https://openalex.org/I129801699",
+                  "https://openalex.org/I4394709165"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5046616878",
+              "display_name": "Wouter Visch",
+              "orcid": "https://orcid.org/0000-0003-4291-6239",
+              "observed_orcids": [
+                "https://orcid.org/0000-0003-4291-6239"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I129801699",
+                "display_name": "University of Tasmania",
+                "ror": "https://ror.org/01nfmeh72",
+                "country_code": "AU",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I129801699"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4394709165",
+                "display_name": "Institute for Marine and Antarctic Studies",
+                "ror": "https://ror.org/00arpt780",
+                "country_code": null,
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I129801699",
+                  "https://openalex.org/I4394709165"
+                ]
+              }
+            ],
+            "countries": [
+              "AU"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Wouter Visch",
+            "raw_affiliation_strings": [
+              "Institute for Marine and Antarctic Studies, University of Tasmania, Hobart, Australia"
+            ],
+            "raw_orcid": "https://orcid.org/0000-0003-4291-6239",
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Institute for Marine and Antarctic Studies, University of Tasmania, Hobart, Australia",
+                "institution_ids": [
+                  "https://openalex.org/I129801699",
+                  "https://openalex.org/I4394709165"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "last",
+            "author": {
+              "id": "https://openalex.org/A5066878030",
+              "display_name": "Cayne Layton",
+              "orcid": "https://orcid.org/0000-0002-3390-6437",
+              "observed_orcids": [
+                "https://orcid.org/0000-0002-3390-6437"
+              ]
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I129801699",
+                "display_name": "University of Tasmania",
+                "ror": "https://ror.org/01nfmeh72",
+                "country_code": "AU",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I129801699"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210118312",
+                "display_name": "Centre for Marine Socioecology",
+                "ror": "https://ror.org/02xhx4j26",
+                "country_code": "AU",
+                "type": "other",
+                "lineage": [
+                  "https://openalex.org/I1292875679",
+                  "https://openalex.org/I129801699",
+                  "https://openalex.org/I1330876588",
+                  "https://openalex.org/I2801453606",
+                  "https://openalex.org/I4210118312",
+                  "https://openalex.org/I4387156119"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4394709165",
+                "display_name": "Institute for Marine and Antarctic Studies",
+                "ror": "https://ror.org/00arpt780",
+                "country_code": null,
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I129801699",
+                  "https://openalex.org/I4394709165"
+                ]
+              }
+            ],
+            "countries": [
+              "AU"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Cayne Layton",
+            "raw_affiliation_strings": [
+              "Centre for Marine Socioecology, University of Tasmania, Hobart, Australia",
+              "Institute for Marine and Antarctic Studies, University of Tasmania, Hobart, Australia"
+            ],
+            "raw_orcid": "https://orcid.org/0000-0002-3390-6437",
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Centre for Marine Socioecology, University of Tasmania, Hobart, Australia",
+                "institution_ids": [
+                  "https://openalex.org/I129801699",
+                  "https://openalex.org/I4210118312"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Institute for Marine and Antarctic Studies, University of Tasmania, Hobart, Australia",
+                "institution_ids": [
+                  "https://openalex.org/I129801699",
+                  "https://openalex.org/I4394709165"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "https://openalex.org/W2383165889",
+        "title": "Correlation Between Kelp Aquaculture and Carbon Sinks",
+        "publication_year": 2012,
+        "cited_by_count": 2,
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5022456543",
+              "display_name": "Yue DongDong",
+              "orcid": null,
+              "observed_orcids": []
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I4210151987",
+                "display_name": "Ministry of Agriculture and Rural Affairs",
+                "ror": "https://ror.org/05ckt8b96",
+                "country_code": "CN",
+                "type": "government",
+                "lineage": [
+                  "https://openalex.org/I4210127390",
+                  "https://openalex.org/I4210151987"
+                ]
+              }
+            ],
+            "countries": [
+              "CN"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "Yue DongDong",
+            "raw_affiliation_strings": [
+              "Key Laboratory of East China Sea and Oceanic Fishery Resources Exploitation,Ministry of Agriculture,P"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Key Laboratory of East China Sea and Oceanic Fishery Resources Exploitation,Ministry of Agriculture,P",
+                "institution_ids": [
+                  "https://openalex.org/I4210151987"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "https://openalex.org/W2767085408",
+        "title": "Aquaculture in Shared Waters Fact Sheet: Kelp Aquaculture",
+        "publication_year": 2016,
+        "cited_by_count": 1,
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5025713358",
+              "display_name": "Sarah Redmond",
+              "orcid": null,
+              "observed_orcids": []
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": false,
+            "raw_author_name": "Sarah Redmond",
+            "raw_affiliation_strings": [],
+            "raw_orcid": null,
+            "affiliations": []
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5056228569",
+              "display_name": "Sam Belknap",
+              "orcid": null,
+              "observed_orcids": []
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": false,
+            "raw_author_name": "Sam Belknap",
+            "raw_affiliation_strings": [],
+            "raw_orcid": null,
+            "affiliations": []
+          },
+          {
+            "author_position": "last",
+            "author": {
+              "id": "https://openalex.org/A5011002843",
+              "display_name": "Rebecca Clark Uchenna",
+              "orcid": null,
+              "observed_orcids": []
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": false,
+            "raw_author_name": "Rebecca Clark Uchenna",
+            "raw_affiliation_strings": [],
+            "raw_orcid": null,
+            "affiliations": []
+          }
+        ]
+      }
+    ],
+    "group_by": []
+  }
+}

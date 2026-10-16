@@ -1,0 +1,413 @@
+{
+  "params": {
+    "keyword": "ocean",
+    "rows": 5,
+    "oppStatuses": "forecasted|posted"
+  },
+  "full_size_bytes": 7080,
+  "sample": {
+    "errorcode": 0,
+    "msg": "Webservice Succeeds",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ImNGTXZvL1o4UngvQmhmMDRUMkkxZ3JScVE5dWFmSHhUQURnWEZBbkhRelk9Ig.Sgw65DXC89KOf1t-w1sYKTIkYpJhjPkvt9eFtVodQ9s",
+    "data": {
+      "searchParams": {
+        "resultType": "json",
+        "searchOnly": false,
+        "oppNum": "",
+        "cfda": "",
+        "sortBy": "",
+        "oppStatuses": "forecasted|posted",
+        "startRecordNum": 0,
+        "eligibilities": "",
+        "fundingInstruments": "",
+        "fundingCategories": "",
+        "agencies": "",
+        "rows": 5,
+        "keyword": "ocean",
+        "keywordEncoded": true
+      },
+      "hitCount": 35,
+      "startRecord": 0,
+      "oppHits": [
+        {
+          "id": "254073",
+          "number": "PD-14-5720",
+          "title": "Ocean Drilling Program",
+          "agencyCode": "NSF",
+          "agency": "U.S. National Science Foundation",
+          "openDate": "04/18/2014",
+          "closeDate": "",
+          "oppStatus": "posted",
+          "docType": "synopsis",
+          "cfdaList": [
+            "47.050"
+          ]
+        },
+        {
+          "id": "352741",
+          "number": "N00173-24-S-BA01",
+          "title": "NRL Long Range Broad Agency Announcement (BAA) for Basic and Applied Research",
+          "agencyCode": "DOD-ONR-NRL",
+          "agency": "Naval Research Laboratory",
+          "openDate": "03/01/2024",
+          "closeDate": "12/30/2026",
+          "oppStatus": "posted",
+          "docType": "synopsis",
+          "cfdaList": [
+            "12.300"
+          ]
+        },
+        {
+          "id": "363958",
+          "number": "NOAA-NOS-NCCOS-2026-32934",
+          "title": "Advancing coastal flood protection through public-private partnerships, innovative insurance products, and improved sediment management.",
+          "agencyCode": "DOC-DOCNOAAERA",
+          "agency": "DOC NOAA - ERA Production",
+          "openDate": "09/25/2026",
+          "closeDate": "02/12/2027",
+          "oppStatus": "posted",
+          "docType": "synopsis",
+          "cfdaList": [
+            "11.478"
+          ]
+        },
+        {
+          "id": "363684",
+          "number": "26-516",
+          "title": "Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)",
+          "agencyCode": "NSF",
+          "agency": "U.S. National Science Foundation",
+          "openDate": "08/21/2026",
+          "closeDate": "10/05/2076",
+          "oppStatus": "posted",
+          "docType": "synopsis",
+          "cfdaList": [
+            "47.050"
+          ]
+        },
+        {
+          "id": "344715",
+          "number": "23-525",
+          "title": "Oceanographic Facilities and Equipment Support",
+          "agencyCode": "NSF",
+          "agency": "U.S. National Science Foundation",
+          "openDate": "12/01/2022",
+          "closeDate": "01/11/2027",
+          "oppStatus": "posted",
+          "docType": "synopsis",
+          "cfdaList": [
+            "47.050"
+          ]
+        }
+      ],
+      "oppStatusOptions": [
+        {
+          "label": "posted",
+          "value": "posted",
+          "count": 33
+        },
+        {
+          "label": "closed",
+          "value": "closed",
+          "count": 511
+        },
+        {
+          "label": "archived",
+          "value": "archived",
+          "count": 3650
+        },
+        {
+          "label": "forecasted",
+          "value": "forecasted",
+          "count": 2
+        }
+      ],
+      "dateRangeOptions": [
+        {
+          "label": "Posted Date - Last 3 Days",
+          "value": "3",
+          "count": 1
+        },
+        {
+          "label": "Posted Date - Last 1 Week",
+          "value": "7",
+          "count": 2
+        },
+        {
+          "label": "Posted Date - Last 2 Weeks",
+          "value": "14",
+          "count": 2
+        },
+        {
+          "label": "Posted Date - Last 3 Weeks",
+          "value": "21",
+          "count": 4
+        },
+        {
+          "label": "Posted Date - Last 4 Weeks",
+          "value": "28",
+          "count": 7
+        },
+        {
+          "label": "Posted Date - Last 5 Weeks",
+          "value": "35",
+          "count": 7
+        },
+        {
+          "label": "Posted Date - Last 6 Weeks",
+          "value": "42",
+          "count": 9
+        },
+        {
+          "label": "Posted Date - Last 7 Weeks",
+          "value": "49",
+          "count": 10
+        },
+        {
+          "label": "Posted Date - Last 8 Weeks",
+          "value": "56",
+          "count": 11
+        }
+      ],
+      "suggestion": "",
+      "eligibilities": [
+        {
+          "label": "City or township governments",
+          "value": "02",
+          "count": 5
+        },
+        {
+          "label": "County governments",
+          "value": "01",
+          "count": 5
+        },
+        {
+          "label": "For profit organizations other than small businesses",
+          "value": "22",
+          "count": 4
+        },
+        {
+          "label": "Individuals",
+          "value": "21",
+          "count": 1
+        },
+        {
+          "label": "Native American tribal governments (Federally recognized)",
+          "value": "07",
+          "count": 5
+        },
+        {
+          "label": "Native American tribal organizations (other than Federally recognized tribal governments)",
+          "value": "11",
+          "count": 4
+        },
+        {
+          "label": "Nonprofits having a 501(c)(3) status with the IRS, other than institutions of higher education",
+          "value": "12",
+          "count": 5
+        },
+        {
+          "label": "Nonprofits that do not have a 501(c)(3) status with the IRS, other than institutions of higher education",
+          "value": "13",
+          "count": 2
+        },
+        {
+          "label": "Others (see text field entitled \"Additional Information on Eligibility\" for clarification)",
+          "value": "25",
+          "count": 24
+        },
+        {
+          "label": "Private institutions of higher education",
+          "value": "20",
+          "count": 5
+        },
+        "... +5 more"
+      ],
+      "fundingCategories": [
+        {
+          "label": "Agriculture",
+          "value": "AG",
+          "count": 2
+        },
+        {
+          "label": "Business and Commerce",
+          "value": "BC",
+          "count": 1
+        },
+        {
+          "label": "Disaster Prevention and Relief",
+          "value": "DPR",
+          "count": 1
+        },
+        {
+          "label": "Education",
+          "value": "ED",
+          "count": 2
+        },
+        {
+          "label": "Energy",
+          "value": "EN",
+          "count": 1
+        },
+        {
+          "label": "Environment",
+          "value": "ENV",
+          "count": 7
+        },
+        {
+          "label": "Natural Resources",
+          "value": "NR",
+          "count": 8
+        },
+        {
+          "label": "Opportunity Zone Benefits",
+          "value": "OZ",
+          "count": 1
+        },
+        {
+          "label": "Science and Technology and other Research and Development",
+          "value": "ST",
+          "count": 23
+        }
+      ],
+      "fundingInstruments": [
+        {
+          "label": "Cooperative Agreement",
+          "value": "CA",
+          "count": 23
+        },
+        {
+          "label": "Grant",
+          "value": "G",
+          "count": 28
+        },
+        {
+          "label": "Other",
+          "value": "O",
+          "count": 5
+        },
+        {
+          "label": "Procurement Contract",
+          "value": "PC",
+          "count": 4
+        }
+      ],
+      "agencies": [
+        {
+          "subAgencyOptions": [
+            {
+              "label": "Rural Business-Cooperative Service ",
+              "value": "USDA-RBCS",
+              "count": 2
+            }
+          ],
+          "label": "Department of Agriculture",
+          "value": "USDA",
+          "count": 2
+        },
+        {
+          "subAgencyOptions": [
+            {
+              "label": "Department of Commerce",
+              "value": "DOC",
+              "count": 1
+            },
+            {
+              "label": "DOC NOAA - ERA Production",
+              "value": "DOC-DOCNOAAERA",
+              "count": 6
+            }
+          ],
+          "label": "Department of Commerce",
+          "value": "DOC",
+          "count": 7
+        },
+        {
+          "subAgencyOptions": [
+            {
+              "label": "Air Force -- Research Lab",
+              "value": "DOD-AFRL",
+              "count": 4
+            },
+            {
+              "label": "Dept of the Army -- Materiel Command",
+              "value": "DOD-AMC",
+              "count": 1
+            },
+            {
+              "label": "National Geospatial-Intelligence Agency ",
+              "value": "DOD-NGIA",
+              "count": 1
+            },
+            {
+              "label": "Naval Research Laboratory",
+              "value": "DOD-ONR-NRL",
+              "count": 1
+            },
+            {
+              "label": "NSWC Dahlgren",
+              "value": "DOD-ONR-SEA-N00178",
+              "count": 1
+            },
+            {
+              "label": "Office of Naval Research",
+              "value": "DOD-ONR",
+              "count": 2
+            },
+            {
+              "label": "Washington Headquarters Services",
+              "value": "DOD-WHS",
+              "count": 4
+            }
+          ],
+          "label": "Department of Defense",
+          "value": "DOD",
+          "count": 14
+        },
+        {
+          "subAgencyOptions": [
+            {
+              "label": "Advanced Research Projects Agency Energy ",
+              "value": "DOE-ARPAE",
+              "count": 1
+            }
+          ],
+          "label": "Department of Energy",
+          "value": "DOE",
+          "count": 1
+        },
+        {
+          "subAgencyOptions": [
+            {
+              "label": "Bureau of Reclamation",
+              "value": "DOI-BOR",
+              "count": 2
+            },
+            {
+              "label": "Fish and Wildlife Service",
+              "value": "DOI-FWS",
+              "count": 2
+            }
+          ],
+          "label": "Department of the Interior",
+          "value": "DOI",
+          "count": 4
+        },
+        {
+          "subAgencyOptions": [],
+          "label": "Environmental Protection Agency",
+          "value": "EPA",
+          "count": 2
+        },
+        {
+          "subAgencyOptions": [],
+          "label": "U.S. National Science Foundation",
+          "value": "NSF",
+          "count": 5
+        }
+      ],
+      "accessKey": "",
+      "errorMsgs": []
+    }
+  }
+}

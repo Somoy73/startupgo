@@ -1,0 +1,1728 @@
+{
+  "params": {
+    "q": "Business Finland",
+    "rows": 5
+  },
+  "full_size_bytes": 155268,
+  "sample": {
+    "help": "https://avoindata.suomi.fi/data/api/3/action/help_show?name=package_search",
+    "success": true,
+    "result": {
+      "count": 5,
+      "facets": {},
+      "results": [
+        {
+          "author": null,
+          "author_email": null,
+          "collection_type": "Open Data",
+          "copyright_notice_translated": {
+            "en": "Source: Visit Finland, Border Survey",
+            "fi": "Lähde: Visit Finland, Matkailijamittari",
+            "sv": ""
+          },
+          "creator_user_id": "6af2bfe8-cbaf-4916-9040-6b94d5913dc6",
+          "deprecated": false,
+          "external_urls": [
+            "https://www.visitfinland.fi/suomen-matkailudata/matkailijamittari"
+          ],
+          "geographical_coverage": [],
+          "highvalue": "false",
+          "highvalue_category": [],
+          "id": "f25b49e8-b652-47c3-9ac2-a50badaa2ab6",
+          "international_benchmarks": [],
+          "isopen": false,
+          "keywords": {
+            "en": [
+              "Tourism",
+              "Transport"
+            ],
+            "fi": [
+              "Matkailu",
+              "Liikenne"
+            ]
+          },
+          "license_id": "cc-by-4.0",
+          "license_title": "Creative Commons Attribution 4.0",
+          "license_url": "http://creativecommons.org/licenses/by/4.0/",
+          "maintainer": "Tilastokeskus",
+          "maintainer_email": [
+            "liikenne.matkailu@stat.fi"
+          ],
+          "maintainer_website": "https://www.businessfinland.fi/",
+          "metadata_created": "2023-06-12T06:33:32.608409",
+          "metadata_modified": "2026-10-08T09:13:46.651638",
+          "name": "visit-finland-matkailijamittari",
+          "notes": "Matkailijamittari -tutkimuksen aineisto kerätään rajahaastatteluina. Matkailijamittarin kohdejoukkona on Suomesta poistuvat ulkomailla asuvat henkilöt. Haastatteluja tehdään rajanylityspisteillä, ympärivuotisesti Helsinki-Vantaan lentoasemalla sekä Helsingin satamassa ja kausiluonteisesti Turun satamassa sekä Kittilän, Rovaniemen, Kuusamon, Ivalon ja Tampereen lentoasemilla.\r\n\r\nMatkailijamittarin kyselylomakkeella kysytään tietoja seuraavista teemoista: kohdehenkilön taustatietoja, matkan tarkoitus ja ajankohta, kulkumuoto, matkan kohteet, majoitus, varaaminen ja rahankäyttö. \r\n\r\nAvoin data on... [1059 chars]",
+          "notes_translated": {
+            "en": "Visit Finland's Border Survey is a personal interview survey at Finnish borders. The target group of the survey are departing passengers with permanent residence abroad. Interviews are conducted at border crossing points, year-round at Helsinki-Vantaa airport and at the port of Helsinki, and seasonally at the Port of Turku and at Kittilä, Rovaniemi, Kuusamo, Ivalo and Tampere airports.\r\n\r\nInformation of the following topics is collected: background information, purpose and time of the trip, mode of transportation, destinations of the trip, accommodation, booking and expenditure.\r\n\r\nIn the Bord... [1091 chars]",
+            "fi": "Matkailijamittari -tutkimuksen aineisto kerätään rajahaastatteluina. Matkailijamittarin kohdejoukkona on Suomesta poistuvat ulkomailla asuvat henkilöt. Haastatteluja tehdään rajanylityspisteillä, ympärivuotisesti Helsinki-Vantaan lentoasemalla sekä Helsingin satamassa ja kausiluonteisesti Turun satamassa sekä Kittilän, Rovaniemen, Kuusamon, Ivalon ja Tampereen lentoasemilla.\r\n\r\nMatkailijamittarin kyselylomakkeella kysytään tietoja seuraavista teemoista: kohdehenkilön taustatietoja, matkan tarkoitus ja ajankohta, kulkumuoto, matkan kohteet, majoitus, varaaminen ja rahankäyttö. \r\n\r\nAvoin data on... [1059 chars]",
+            "sv": ""
+          },
+          "num_resources": 5,
+          "num_tags": 0,
+          "organization": {
+            "id": "24cdf50c-25c3-461a-b20b-12e15215f4ea",
+            "name": "business-finland",
+            "title": "Business Finland",
+            "type": "organization",
+            "description": "Business Finland tarjoaa yhtenäisen palvelupolun innovaatiotoimintaan, kansainvälistymiseen, investointeihin ja matkailun edistämiseen.",
+            "image_url": "2023-04-17-135501.018297bflogobluergb.jpg",
+            "created": "2023-04-17T13:35:29.974147",
+            "is_organization": true,
+            "approval_status": "approved",
+            "state": "active",
+            "description_translated": "{\"en\": \"Business Finland is the government organization for innovation funding and trade, travel and investment promotion.\", \"fi\": \"Business Finland tarjoaa yhten\\u00e4isen palvelupolun innovaatiotoimintaan, kansainv\\u00e4listymiseen, investointeihin ja matkailun edist\\u00e4miseen.\", \"sv\": \"Business Finland erbjuder en bred variation av service som finns till f\\u00f6r att st\\u00f6da innovationsverksamhet, internationalisering, investeringar och turism.\"}",
+            "edit_only_owned_datasets": "false",
+            "homepage": "www.businessfinland.fi",
+            "producer_type": "state-administration",
+            "public_administration_organization": "false",
+            "title_translated": "{\"en\": \"Business Finland\", \"fi\": \"Business Finland\", \"sv\": \"Business Finland\"}"
+          },
+          "owner_org": "24cdf50c-25c3-461a-b20b-12e15215f4ea",
+          "private": false,
+          "state": "active",
+          "title": "Visit Finland Matkailijamittari",
+          "title_translated": {
+            "en": "Visit Finland Border Survey",
+            "fi": "Visit Finland Matkailijamittari",
+            "sv": ""
+          },
+          "type": "dataset",
+          "update_frequency": {
+            "en": [
+              "Monthly",
+              "Quarterly"
+            ],
+            "fi": [
+              "Kuukausittain",
+              "Vuosineljänneksittäin"
+            ]
+          },
+          "url": null,
+          "valid_from": "2023-03-01",
+          "version": null,
+          "extras": [
+            {
+              "key": "categories",
+              "value": "[\"\"]"
+            }
+          ],
+          "resources": [
+            {
+              "_csrf_token": "IjdjZWFjMjkwMjAzMDhmMDM0YTkyOGUwY2YzM2ZmZDE1YTIwMjAwNGQi.af1xPA.6EXr6X7e1k3ESxpGGRG0NESbGsI",
+              "archiver": {
+                "resource_timestamp": null,
+                "status_id": 0,
+                "is_broken": false,
+                "reason": "",
+                "url_redirected_to": "https://avoindata-prod-datasets.s3.amazonaws.com/resources/ed9f8f56-331a-4bcc-8119-31ccdfeec67f/matkailijamittarin_datan_kuvaus.xlsx?AWSAccessKeyId=ASIA5ERTGXPJO2UEWPXF&Signature=uKaKECIkFViS0ZThq9r91113Gn4%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEBYaCWV1LXdlc3QtMSJHMEUCIQD%2Bp4xM1QcR%2B2wk%2Ff0OhMH8PzeydWqRjz0lBOmSBUrLFwIgEUBCaMmS%2FUz8%2B3a8TRZwhqVPWgIRRpu802RfdDlkx1UqvAQI3%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw5MDMxMjQyNzAwMzQiDAfx1n41aAJWYM2rrSqQBMMu64qvY0ss%2FGk102fP9XhsdXRhxFEO%2BVSzDNbvsLNyXOKIsqCVQwtf2Q1dhjWF%2FSWHf%2F9hgZamGumjJrsNatZNxIZp1Yi5Dpq62kTqYjBSqqt%2FkzDk6VonHaqcyslHywRQl%2... [1482 chars]",
+                "cache_filepath": "/srv/app/data/archiver/ed/ed9f8f56-331a-4bcc-8119-31ccdfeec67f/matkailijamittarin_datan_kuvaus.xlsx",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/ed/ed9f8f56-331a-4bcc-8119-31ccdfeec67f/matkailijamittarin_datan_kuvaus.xlsx",
+                "size": 36650,
+                "mimetype": "binary/octet-stream",
+                "hash": "d0a1609b54c1925528b242cc68a368f0f3a78932",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": null,
+                "last_success": "2026-10-16T05:33:57.818554",
+                "failure_count": 0,
+                "created": "2023-06-13T06:36:35.461934",
+                "updated": "2026-10-16T05:33:57.818554",
+                "status": "Archived successfully",
+                "is_broken_printable": "Downloaded OK"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2023-06-12T06:42:07.957025",
+              "datastore_active": true,
+              "description": "Matkailijamittarin datan muuttujat, koodiarvot ja luokitukset",
+              "description_translated": {
+                "fi": "Matkailijamittarin datan muuttujat, koodiarvot ja luokitukset",
+                "en": "Border Survey data variables, values and classifications",
+                "sv": ""
+              },
+              "format": "XLSX",
+              "hash": "c38a3393dcefc65d3f4c519d60a207e9",
+              "id": "ed9f8f56-331a-4bcc-8119-31ccdfeec67f",
+              "last_modified": "2026-05-08T05:15:09.209574",
+              "maturity": "current",
+              "metadata_modified": "2026-10-08T09:13:44.904052",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "Matkailijamittarin datan kuvaus",
+              "name_translated": {
+                "fi": "Matkailijamittarin datan kuvaus",
+                "en": "Border Survey data description",
+                "sv": ""
+              },
+              "package_id": "f25b49e8-b652-47c3-9ac2-a50badaa2ab6",
+              "position": 0,
+              "position_info": "",
+              "preview": true,
+              "preview_rows": 140,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:33:57.818554",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "XLSX",
+                "created": "2023-06-13T06:36:39.027188",
+                "updated": "2026-10-16T06:50:55.673014"
+              },
+              "resource_type": null,
+              "sha256": "a7a146b5d4b5a4bd4d4bceb373b08202bae3da1f9820759bfaf2251cdd57768b",
+              "size": 36650,
+              "state": "active",
+              "status_updated": "2026-05-08T05:15:47.023046+00:00",
+              "temporal_coverage_from": "2023-03-01",
+              "temporal_coverage_to": "2026-03-31",
+              "temporal_granularity-en": "",
+              "temporal_granularity-fi": "",
+              "temporal_granularity-sv": "",
+              "total_record_count": 140,
+              "url": "https://avoindata.suomi.fi/data/dataset/f25b49e8-b652-47c3-9ac2-a50badaa2ab6/resource/ed9f8f56-331a-4bcc-8119-31ccdfeec67f/download/matkailijamittarin_datan_kuvaus.xlsx",
+              "url_type": "upload"
+            },
+            {
+              "archiver": {
+                "resource_timestamp": null,
+                "status_id": 0,
+                "is_broken": false,
+                "reason": "",
+                "url_redirected_to": "https://avoindata-prod-datasets.s3.amazonaws.com/resources/5f863b94-2e3c-4a8c-8f53-f86686616659/matkailijamittari_datan_ohje_fi_en.pdf?AWSAccessKeyId=ASIA5ERTGXPJOV4GJ3MW&Signature=imJ2WBimSE60sM0fzhYbWcMJgNo%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEBYaCWV1LXdlc3QtMSJGMEQCIAS5q5p1pkx8XpIUOFMmzp1xOwxLNPVw8Yu5WghlujiDAiA%2B5uzJw6v1f2oj6O9xk1sZz9nQxt2Bs2WjkeBWLd%2F7Ryq8BAjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDkwMzEyNDI3MDAzNCIMw9%2Fb1bM0LHfSC1jAKpAENb2jfjakgQg1m1WRlwwjxS6TFvImViPXy1XRBBv3RabXnVM%2BN4nXy7qcmmwrmWSW6uTX6H%2F%2FqC4IyBIw4lXjXQOZm6PQbGNmVMhkugtMsw7REnf9akxqrxECAm1jH8zs0XfGKOX2aDajePh... [1458 chars]",
+                "cache_filepath": "/srv/app/data/archiver/5f/5f863b94-2e3c-4a8c-8f53-f86686616659/matkailijamittari_datan_ohje_fi_en.pdf",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/5f/5f863b94-2e3c-4a8c-8f53-f86686616659/matkailijamittari_datan_ohje_fi_en.pdf",
+                "size": 88977,
+                "mimetype": "binary/octet-stream",
+                "hash": "c6c331d71c0b8ccd10508cea11570541d206f8d0",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": null,
+                "last_success": "2026-10-16T05:33:58.127677",
+                "failure_count": 0,
+                "created": "2023-06-13T06:36:36.515065",
+                "updated": "2026-10-16T05:33:58.127677",
+                "status": "Archived successfully",
+                "is_broken_printable": "Downloaded OK"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2023-06-12T12:56:38.144146",
+              "datastore_active": false,
+              "description": "Lyhyt ohje Matkailijamittarin datasta",
+              "description_translated": {
+                "fi": "Lyhyt ohje Matkailijamittarin datasta",
+                "en": "Short guide for Border Survey data",
+                "sv": ""
+              },
+              "format": "PDF",
+              "hash": "",
+              "id": "5f863b94-2e3c-4a8c-8f53-f86686616659",
+              "last_modified": null,
+              "maturity": "current",
+              "metadata_modified": "2026-10-08T09:13:44.904213",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "Matkailijamittarin datan lyhyt ohje",
+              "name_translated": {
+                "fi": "Matkailijamittarin datan lyhyt ohje",
+                "en": "Border Survey data short guide",
+                "sv": ""
+              },
+              "package_id": "f25b49e8-b652-47c3-9ac2-a50badaa2ab6",
+              "position": 1,
+              "position_info": "",
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:33:58.127677",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "PDF",
+                "created": "2023-06-13T06:36:39.055111",
+                "updated": "2026-10-16T06:50:55.512410"
+              },
+              "resource_type": null,
+              "sha256": "afd0242aa57d36379d7c32d31126b854b9a58d0eb424e26ad2de0aa87638eb65",
+              "size": 88977,
+              "state": "active",
+              "status_updated": "2023-08-23T05:17:14.528537",
+              "temporal_coverage_from": "2023-03-01",
+              "temporal_granularity-en": "",
+              "temporal_granularity-fi": "",
+              "temporal_granularity-sv": "",
+              "url": "https://avoindata.suomi.fi/data/dataset/f25b49e8-b652-47c3-9ac2-a50badaa2ab6/resource/5f863b94-2e3c-4a8c-8f53-f86686616659/download/matkailijamittari_datan_ohje_fi_en.pdf",
+              "url_type": "upload"
+            },
+            {
+              "_csrf_token": "Ijg3OTlkZmE3ODY4NGUxMTVhN2E4NzgzZTlmNTIzNmExMmYwNDY4ODIi.aO4KMA.9o8FqGzUCwGqNj-0E4ImzRjcpqw",
+              "archiver": {
+                "resource_timestamp": null,
+                "status_id": 0,
+                "is_broken": false,
+                "reason": "",
+                "url_redirected_to": "https://avoindata-prod-datasets.s3.amazonaws.com/resources/787701d8-f529-4635-af4a-78698c3ecb90/matkailijamittari_data_muutokset.pdf?AWSAccessKeyId=ASIA5ERTGXPJEOYYSAUI&Signature=x%2B49aH0h5EyeuIhQmLb2s6F9IKQ%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEBYaCWV1LXdlc3QtMSJGMEQCIGp0OnRraVQGu9X7FA7zyp66f2fY%2BZvhUQKa4Bevn3mDAiBreD4LeRmOjQGdD9C6VRNqzmJnCBKLJLCvHglyvoW%2F6Sq8BAjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDkwMzEyNDI3MDAzNCIMKzSpq8%2BlYyTmYEi2KpAE%2B3pN%2FfEq5%2FkpK2XUNCeXSnZoVSkfCrELTgqIX8cPe%2FLdtd%2FvWVgEVNihlSW6gkn3Bs2XOSg4HInvmwsjnelpxS19STd3SXdWq068G6ZBsdCxj3K2RRba7SwwO3cXgojUSDCo%2BFJWU... [1488 chars]",
+                "cache_filepath": "/srv/app/data/archiver/78/787701d8-f529-4635-af4a-78698c3ecb90/matkailijamittari_data_muutokset.pdf",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/78/787701d8-f529-4635-af4a-78698c3ecb90/matkailijamittari_data_muutokset.pdf",
+                "size": 137465,
+                "mimetype": "binary/octet-stream",
+                "hash": "b1813f1882d2533308eef390364e166cb8ba394e",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": null,
+                "last_success": "2026-10-16T05:33:58.473405",
+                "failure_count": 0,
+                "created": "2023-08-08T20:51:10.350779",
+                "updated": "2026-10-16T05:33:58.473405",
+                "status": "Archived successfully",
+                "is_broken_printable": "Downloaded OK"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2023-08-08T05:27:05.253536",
+              "datastore_active": false,
+              "description": "Matkailijamittarin aineistossa tapahtuneet muutokset",
+              "description_translated": {
+                "fi": "Matkailijamittarin aineistossa tapahtuneet muutokset",
+                "en": "Changes in the Border Survey data",
+                "sv": ""
+              },
+              "format": "PDF",
+              "hash": "",
+              "id": "787701d8-f529-4635-af4a-78698c3ecb90",
+              "last_modified": "2025-10-14T08:31:00.883622",
+              "maturity": "",
+              "metadata_modified": "2026-10-08T09:13:44.904304",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "Matkailijamittarin datan muutokset",
+              "name_translated": {
+                "fi": "Matkailijamittarin datan muutokset",
+                "en": "Changes in the Border Survey data",
+                "sv": ""
+              },
+              "package_id": "f25b49e8-b652-47c3-9ac2-a50badaa2ab6",
+              "position": 2,
+              "position_info": "",
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:33:58.473405",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "PDF",
+                "created": "2023-08-22T09:52:32.453328",
+                "updated": "2026-10-16T06:50:55.494042"
+              },
+              "resource_type": null,
+              "sha256": "1f88d48ebddd46dc3106ad7fd7deebce5ac6b4fc0495c60803fff0f2e802c7a6",
+              "size": 137465,
+              "state": "active",
+              "status_updated": "2025-10-14T08:31:46.298009+00:00",
+              "temporal_coverage_from": "2023-03-01",
+              "temporal_granularity-en": "",
+              "temporal_granularity-fi": "",
+              "temporal_granularity-sv": "",
+              "url": "https://avoindata.suomi.fi/data/dataset/f25b49e8-b652-47c3-9ac2-a50badaa2ab6/resource/787701d8-f529-4635-af4a-78698c3ecb90/download/matkailijamittari_data_muutokset.pdf",
+              "url_type": "upload"
+            },
+            {
+              "_csrf_token": "IjVjZGJkMDQ2ODk4OTI4YzZkMGVhZDQ1NzEzNTFmZTU2YjU4NDY2Y2Ii.aobqRQ._IbEjsnUl_9TaF5Z55d77PvTnRA",
+              "archiver": {
+                "resource_timestamp": null,
+                "status_id": 0,
+                "is_broken": false,
+                "reason": "",
+                "url_redirected_to": "https://avoindata-prod-datasets.s3.amazonaws.com/resources/dc183519-d299-47a3-947e-b59bc890db6f/matkailijamittari_data.csv?AWSAccessKeyId=ASIA5ERTGXPJOV4GJ3MW&Signature=Nz2cUkLmIDrl2YcRxMqOJPYl%2Ftc%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEBYaCWV1LXdlc3QtMSJGMEQCIAS5q5p1pkx8XpIUOFMmzp1xOwxLNPVw8Yu5WghlujiDAiA%2B5uzJw6v1f2oj6O9xk1sZz9nQxt2Bs2WjkeBWLd%2F7Ryq8BAjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDkwMzEyNDI3MDAzNCIMw9%2Fb1bM0LHfSC1jAKpAENb2jfjakgQg1m1WRlwwjxS6TFvImViPXy1XRBBv3RabXnVM%2BN4nXy7qcmmwrmWSW6uTX6H%2F%2FqC4IyBIw4lXjXQOZm6PQbGNmVMhkugtMsw7REnf9akxqrxECAm1jH8zs0XfGKOX2aDajePhUlLeHRUn4%... [1448 chars]",
+                "cache_filepath": "/srv/app/data/archiver/dc/dc183519-d299-47a3-947e-b59bc890db6f/matkailijamittari_data.csv",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/dc/dc183519-d299-47a3-947e-b59bc890db6f/matkailijamittari_data.csv",
+                "size": 14995790,
+                "mimetype": "binary/octet-stream",
+                "hash": "dd1d830f84600ad45cc8626d3f37fc266dd9eab2",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": null,
+                "last_success": "2026-10-16T05:33:59.320093",
+                "failure_count": 0,
+                "created": "2026-08-12T07:50:54.508913",
+                "updated": "2026-10-16T05:33:59.320093",
+                "status": "Archived successfully",
+                "is_broken_printable": "Downloaded OK"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2026-08-12T07:50:40.807021",
+              "datastore_active": true,
+              "description": "Matkailijamittari on lentokentillä ja satamissa tehtävä ulkomailta Suomeen saapuvien matkailijoiden haastattelututkimus. Aineisto kuvaa matkailijoiden rahankäyttöä ja matkan ominaisuuksia.",
+              "description_translated": {
+                "fi": "Matkailijamittari on lentokentillä ja satamissa tehtävä ulkomailta Suomeen saapuvien matkailijoiden haastattelututkimus. Aineisto kuvaa matkailijoiden rahankäyttöä ja matkan ominaisuuksia.",
+                "en": "Border survey is survey for foreign visitors to Finland conducted at airports and ferry terminals. The data contains information on expenditure and trip characteristics of foreign visitors.",
+                "sv": ""
+              },
+              "format": "CSV",
+              "hash": "edecf45f37d8fc0062b2f561e89822ec",
+              "id": "dc183519-d299-47a3-947e-b59bc890db6f",
+              "last_modified": "2026-08-20T11:53:29.731256",
+              "maturity": "",
+              "metadata_modified": "2026-10-08T09:13:44.904388",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "Matkailijamittari aineisto (csv muodossa)",
+              "name_translated": {
+                "fi": "Matkailijamittari aineisto (csv muodossa)",
+                "en": "Border Survey data (csv format)",
+                "sv": ""
+              },
+              "package_id": "f25b49e8-b652-47c3-9ac2-a50badaa2ab6",
+              "position": 3,
+              "position_info": "",
+              "preview": true,
+              "preview_rows": 26138,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:33:59.320093",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "CSV",
+                "created": "2026-08-12T07:51:02.989117",
+                "updated": "2026-10-16T06:50:55.468028"
+              },
+              "resource_type": null,
+              "sha256": "c7fc48ff491423feecef837acf0aa6f508012cd2220c87f7a48199d112e81de3",
+              "size": 14995790,
+              "state": "active",
+              "status_updated": "2026-08-20T11:54:29.035085+00:00",
+              "temporal_coverage_from": "2023-03-01",
+              "temporal_coverage_to": "2026-06-30",
+              "temporal_granularity-sv": "",
+              "total_record_count": 26138,
+              "url": "https://avoindata.suomi.fi/data/dataset/f25b49e8-b652-47c3-9ac2-a50badaa2ab6/resource/dc183519-d299-47a3-947e-b59bc890db6f/download/matkailijamittari_data.csv",
+              "url_type": "upload"
+            },
+            {
+              "_csrf_token": "IjVlYjViYTc3MzVlYTY1ODE5NzgwOTc5MGM4ODAwOTVmYmMxMWQ3NzYi.asdd8g.a580QD_Q3KFVx8kTyEag5pPePyg",
+              "archiver": {
+                "resource_timestamp": null,
+                "status_id": 0,
+                "is_broken": false,
+                "reason": "",
+                "url_redirected_to": "https://avoindata-prod-datasets.s3.amazonaws.com/resources/28d5e8a4-c9f0-41ef-8ba4-0209d0a02682/matkailijamittari_data.xlsx?AWSAccessKeyId=ASIA5ERTGXPJO2UEWPXF&Signature=YXq6K7rH4jqPGbUTUXBXsqysQeo%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEBYaCWV1LXdlc3QtMSJHMEUCIQD%2Bp4xM1QcR%2B2wk%2Ff0OhMH8PzeydWqRjz0lBOmSBUrLFwIgEUBCaMmS%2FUz8%2B3a8TRZwhqVPWgIRRpu802RfdDlkx1UqvAQI3%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw5MDMxMjQyNzAwMzQiDAfx1n41aAJWYM2rrSqQBMMu64qvY0ss%2FGk102fP9XhsdXRhxFEO%2BVSzDNbvsLNyXOKIsqCVQwtf2Q1dhjWF%2FSWHf%2F9hgZamGumjJrsNatZNxIZp1Yi5Dpq62kTqYjBSqqt%2FkzDk6VonHaqcyslHywRQl%2BMLCsyE%2... [1473 chars]",
+                "cache_filepath": "/srv/app/data/archiver/28/28d5e8a4-c9f0-41ef-8ba4-0209d0a02682/matkailijamittari_data.xlsx",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/28/28d5e8a4-c9f0-41ef-8ba4-0209d0a02682/matkailijamittari_data.xlsx",
+                "size": 25242387,
+                "mimetype": "binary/octet-stream",
+                "hash": "33d49e30e4cac8ed522279bd7454ac7726f20d30",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": null,
+                "last_success": "2026-10-16T05:34:02.555227",
+                "failure_count": 0,
+                "created": "2026-08-13T10:07:34.925661",
+                "updated": "2026-10-16T05:34:02.555227",
+                "status": "Archived successfully",
+                "is_broken_printable": "Downloaded OK"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2026-08-13T10:07:17.242987",
+              "datastore_active": true,
+              "description": "Matkailijamittari on lentokentillä ja satamissa tehtävä ulkomailta Suomeen saapuvien matkailijoiden haastattelututkimus. Aineisto kuvaa matkailijoiden rahankäyttöä ja matkan ominaisuuksia.",
+              "description_translated": {
+                "fi": "Matkailijamittari on lentokentillä ja satamissa tehtävä ulkomailta Suomeen saapuvien matkailijoiden haastattelututkimus. Aineisto kuvaa matkailijoiden rahankäyttöä ja matkan ominaisuuksia.",
+                "en": "Border survey is survey for foreign visitors to Finland conducted at airports and ferry terminals. The data contains information on expenditure and trip characteristics of foreign visitors.",
+                "sv": ""
+              },
+              "format": "XLSX",
+              "hash": "c690b6a24318d30a9dd3d1703dfa1789",
+              "id": "28d5e8a4-c9f0-41ef-8ba4-0209d0a02682",
+              "last_modified": "2026-10-08T09:12:55.325584",
+              "maturity": "",
+              "metadata_modified": "2026-10-08T09:13:46.662426",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "Matkailijamittari aineisto (xlsx muodossa)",
+              "name_translated": {
+                "fi": "Matkailijamittari aineisto (xlsx muodossa)",
+                "en": "Border Survey data (xlsx format)",
+                "sv": ""
+              },
+              "package_id": "f25b49e8-b652-47c3-9ac2-a50badaa2ab6",
+              "position": 4,
+              "position_info": "",
+              "preview": true,
+              "preview_rows": 28624,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:34:02.555227",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "XLSX",
+                "created": "2026-08-13T12:32:43.523913",
+                "updated": "2026-10-16T06:50:55.654537"
+              },
+              "resource_type": null,
+              "sha256": "1ec16bb25511ba8e0b20faba638b13b668c6e7a68f6c8f98cb207f0cc101aaf4",
+              "size": 25242387,
+              "state": "active",
+              "status_updated": "2026-10-08T09:13:44.635608+00:00",
+              "temporal_coverage_from": "2023-03-01",
+              "temporal_coverage_to": "2026-08-31",
+              "temporal_granularity-sv": "",
+              "total_record_count": 28624,
+              "url": "https://avoindata.suomi.fi/data/dataset/f25b49e8-b652-47c3-9ac2-a50badaa2ab6/resource/28d5e8a4-c9f0-41ef-8ba4-0209d0a02682/download/matkailijamittari_data.xlsx",
+              "url_type": "upload"
+            }
+          ]
+        },
+        {
+          "author": null,
+          "author_email": null,
+          "collection_type": "Open Data",
+          "copyright_notice_translated": {
+            "en": "Mention the original source. Services based on the data are not allowed to use the PRH or Finnish Business Information System logos, or in some other manner mix up the services with the PRH’s services by using a similar layout.",
+            "fi": "Mainitse alkuperäinen lähde. Tietojen pohjalta tarjottavissa palveluissa ei saa käyttää PRH:n tai YTJ:n logoa tai muuten sekaannuttaa palvelua ulkoasullaan PRH:n palveluihin.",
+            "sv": "Ange ursprunglig källa. I de tjänster som är baserade på uppgifterna får man inte använda PRS eller företags- och organisationsdatasystemets logotyper eller på annat sätt blanda ihop tjänsten med PRS tjänster genom ett likadant utseende."
+          },
+          "creator_user_id": "b8975235-d5f0-4a2e-b6c7-fe2a929b7c00",
+          "deprecated": false,
+          "external_urls": [
+            "http://avoindata.prh.fi/"
+          ],
+          "geographical_coverage": [
+            "finland"
+          ],
+          "highvalue": "false",
+          "highvalue_category": [],
+          "id": "dd9dc2c5-9682-4bab-bfe0-9728160ba5e9",
+          "international_benchmarks": [
+            "open data barometer",
+            "global open data index"
+          ],
+          "isopen": false,
+          "keywords": {
+            "fi": [
+              "Company Register",
+              "Finland",
+              "business information",
+              "kaupparekisteri",
+              "yritystieto",
+              "ytj"
+            ]
+          },
+          "license_id": "cc-by-4.0",
+          "license_title": "Creative Commons Attribution 4.0",
+          "license_url": "http://creativecommons.org/licenses/by/4.0/",
+          "maintainer": "Patentti- ja rekisterihallitus",
+          "maintainer_email": [
+            "avoindata@prh.fi"
+          ],
+          "maintainer_note_translated": {
+            "en": "",
+            "fi": "",
+            "sv": ""
+          },
+          "maintainer_website": "http://www.prh.fi",
+          "metadata_created": "2015-03-03T06:55:28.124097",
+          "metadata_modified": "2024-08-15T11:37:21.307569",
+          "name": "prh-avoin-data",
+          "notes": "API: YTJ-tietojen rajapinnasta haet sovellukseesi yritys- ja yhteisötietojärjestelmän (YTJ) perustietoja yrityksistä.\r\nHuomaa:  Saat tiedot vain kaupparekisteriin merkityistä ja vireillä olevista yrityksistä.   Et saa tietoja yksityisistä elinkeinonharjoittajista (toiminimiyrittäjistä).   Tiedoissa ei ole yritysten sähköpostiosoitteita ja puhelinnumeroja.\r\n\r\nVoimassaolevien yritysten tiedot voi ladata kerralla pakattuna JSON-tiedostona. \r\n\r\nTiedot ovat digitaalisessa muodossa ja maksuttomia. Tiedot päivitetään kerran vuorokaudessa.\r\n",
+          "notes_translated": {
+            "en": "Use the API: Finnish Business Information System interface to add basic details of companies from the Finnish Business Information System at ytj.fi to your application.\r\n\r\nPlease note the following:   You will only get access to details of companies registered or pending at the Finnish Trade Register. See the company forms at the Finnish Trade Register.   Details of private traders are not available.  Email addresses and phone numbers are not included in the company details.\r\n\r\nYou can get all companies on the Finnish Trade Register as a JSON file.\r\n\r\nThe data are digital and available free of... [643 chars]",
+            "fi": "API: YTJ-tietojen rajapinnasta haet sovellukseesi yritys- ja yhteisötietojärjestelmän (YTJ) perustietoja yrityksistä.\r\nHuomaa:  Saat tiedot vain kaupparekisteriin merkityistä ja vireillä olevista yrityksistä.   Et saa tietoja yksityisistä elinkeinonharjoittajista (toiminimiyrittäjistä).   Tiedoissa ei ole yritysten sähköpostiosoitteita ja puhelinnumeroja.\r\n\r\nVoimassaolevien yritysten tiedot voi ladata kerralla pakattuna JSON-tiedostona. \r\n\r\nTiedot ovat digitaalisessa muodossa ja maksuttomia. Tiedot päivitetään kerran vuorokaudessa.\r\n",
+            "sv": "Via gränssnittet API: Företags- och organisationsdatasystemet hämtar du grunduppgifter om företag från företags- och organisationsdatasystemet på ytj.fi för att användas i din applikation.\r\n\r\nObservera följande: Du får bara tillgång till uppgifter om företag som förts in i handelsregistret eller som är under handläggning.  Du får inga uppgifter om enskilda näringsidkare (företagare med firma). Uppgifterna innehåller inte företagens e-postadresser och telefonnummer.\r\n\r\nAlla företag i handelsregistret kan hämtas som JSON-fil.\r\n\r\nUppgifterna är digitala och gratis. Uppgifterna uppdateras en gång ... [611 chars]"
+          },
+          "num_resources": 1,
+          "num_tags": 7,
+          "organization": {
+            "id": "patentti-ja-rekisterihallitus",
+            "name": "patentti-ja-rekisterihallitus",
+            "title": "Patentti- ja rekisterihallitus",
+            "type": "organization",
+            "description": "Ylläpitää kaupparekisteriä, yrityskiinnitysrekisteriä, yhdistysrekisteriä ja säätiörekisteriä sekä myöntää patentteja, hyödyllisyysmalleja, mallioikeuksia ja tavaramerkkejä. Lisäksi PRH rekisteröi yritysten tilinpäätöksiä. PRH ylläpitää myös yhdessä verohallinnon kanssa yritys- ja yhteisötietojärjestelmää, YTJ:tä. PRH:ssa työskentelee noin 400 työntekijää. Patentti- ja rekisterihallitus (PRH) kuuluu työ- ja elinkeinoministeriön (TEM) konserniin.",
+            "image_url": "2017-06-26-085517.272409prhlogo.png",
+            "created": "2014-06-18T11:16:12.740406",
+            "is_organization": true,
+            "approval_status": "approved",
+            "state": "active",
+            "producer_type": "country",
+            "homepage": "https://www.prh.fi/",
+            "features": "[\"public_administration_organization\"]",
+            "description_translated": "{\"fi\": \"Yll\\u00e4pit\\u00e4\\u00e4 kaupparekisteri\\u00e4, yrityskiinnitysrekisteri\\u00e4, yhdistysrekisteri\\u00e4 ja s\\u00e4\\u00e4ti\\u00f6rekisteri\\u00e4 sek\\u00e4 my\\u00f6nt\\u00e4\\u00e4 patentteja, hy\\u00f6dyllisyysmalleja, mallioikeuksia ja tavaramerkkej\\u00e4. Lis\\u00e4ksi PRH rekister\\u00f6i yritysten tilinp\\u00e4\\u00e4t\\u00f6ksi\\u00e4. PRH yll\\u00e4pit\\u00e4\\u00e4 my\\u00f6s yhdess\\u00e4 verohallinnon kanssa yritys- ja yhteis\\u00f6tietoj\\u00e4rjestelm\\u00e4\\u00e4, YTJ:t\\u00e4. PRH:ssa ty\\u00f6skentelee noin 400 ty\\u00f6ntekij\\u00e4\\u00e4. Patentti- ja rekisterihallitus (PRH) kuuluu ty\\u00f6-... [669 chars]",
+            "title_translated": "{\"fi\": \"Patentti- ja rekisterihallitus\", \"en\": \"\", \"sv\": \"\"}"
+          },
+          "owner_org": "patentti-ja-rekisterihallitus",
+          "private": false,
+          "state": "active",
+          "title": "API: YTJ-tiedot kaupparekisteriin merkityistä yrityksistä",
+          "title_translated": {
+            "en": "API: Finnish Business Information System",
+            "fi": "API: YTJ-tiedot kaupparekisteriin merkityistä yrityksistä",
+            "sv": "API: Företags- och organisationsdatasystemet "
+          },
+          "type": "dataset",
+          "update_frequency": {
+            "en": [
+              "everyday"
+            ],
+            "fi": [
+              "joka päivä"
+            ]
+          },
+          "url": null,
+          "valid_from": "2014-11-07",
+          "version": null,
+          "extras": [
+            {
+              "key": "categories",
+              "value": ""
+            },
+            {
+              "key": "content_type",
+              "value": "{\"fi\": [\"JSON\", \"Up to date information\", \"avoin data\", \"avoin rajapinta\", \"REST\", \"Machine readability\", \"API\"]}"
+            },
+            {
+              "key": "owner",
+              "value": "Patentti- ja rekisterihallitus"
+            }
+          ]
+        },
+        {
+          "author": null,
+          "author_email": null,
+          "collection_type": "Open Data",
+          "creator_user_id": "5cc316a0-a178-4bf9-86fd-6047d26ea3d2",
+          "date_released": "2015-05-20T00:00:00.000000",
+          "deprecated": false,
+          "external_urls": [
+            "https://www.hel.fi/static/avoindata/kymp/Ymparistotilinpidon_alaluokkien_tarkemmat_kuvaukset.pdf"
+          ],
+          "geographical_coverage": [
+            "helsinki"
+          ],
+          "highvalue": "false",
+          "highvalue_category": [],
+          "id": "323de482-a070-4b28-9bf0-78f1bc5f6be1",
+          "isopen": false,
+          "keywords": {
+            "en": [
+              "environment",
+              "environmental protection"
+            ],
+            "fi": [
+              "ympäristö",
+              "ympäristönsuojelu",
+              "ympäristövastuu"
+            ]
+          },
+          "license_id": "cc-by-4.0",
+          "license_title": "Creative Commons Attribution 4.0",
+          "license_url": "http://creativecommons.org/licenses/by/4.0/",
+          "maintainer": "Helsingin kaupunkiympäristön toimiala / Ympäristöpalvelut",
+          "maintainer_email": [
+            "ymk@hel.fi"
+          ],
+          "maintainer_website": "",
+          "metadata_created": "2015-05-20T00:00:00.000000",
+          "metadata_modified": "2026-09-14T22:43:39.118752",
+          "name": "helsingin-kaupungin-ymparistotilinpito",
+          "notes": "Helsingin kaupungin ympäristötilinpito on osa kaupungin ympäristöraporttia. Siinä kuvataan kaupungin tuotot, kulut ja investoinnit, jotka ovat syntyneet ensisijaisesti ympäristönsuojelullisista syistä. Ympäristötilinpitoon kuuluvien tuottojen, kulujen ja investointien kuvausta päivitetään vuosittain yhteistyössä Suomen kuuden suurimman kaupungin (Helsinki, Espoo, Vantaa, Tampere, Turku, Oulu) kesken. Ympäristötilinpito raportoidaan vuosittain kaupunginvaltuustolle päätöksenteon tueksi osana ympäristöraporttia. Ympäristöraportti löytyy [kaupungin talouden, hallinnon ja strategian julkaisuarkist... [1290 chars]",
+          "notes_translated": {
+            "en": "The City of Helsinki's environmental accounts are part of the city's environmental report. It describes the city's income, expenses and investments that have been generated primarily for environmental protection reasons. The description of the income, expenses and investments included in the environmental accounts is updated annually in cooperation among Finland's six largest cities (Helsinki, Espoo, Vantaa, Tampere, Turku, Oulu). environmental accounts are reported annually to the City Council in support of decision-making as part of the environmental report. The environmental report can be f... [1400 chars]",
+            "fi": "Helsingin kaupungin ympäristötilinpito on osa kaupungin ympäristöraporttia. Siinä kuvataan kaupungin tuotot, kulut ja investoinnit, jotka ovat syntyneet ensisijaisesti ympäristönsuojelullisista syistä. Ympäristötilinpitoon kuuluvien tuottojen, kulujen ja investointien kuvausta päivitetään vuosittain yhteistyössä Suomen kuuden suurimman kaupungin (Helsinki, Espoo, Vantaa, Tampere, Turku, Oulu) kesken. Ympäristötilinpito raportoidaan vuosittain kaupunginvaltuustolle päätöksenteon tueksi osana ympäristöraporttia. Ympäristöraportti löytyy [kaupungin talouden, hallinnon ja strategian julkaisuarkist... [1290 chars]",
+            "sv": ""
+          },
+          "num_resources": 1,
+          "num_tags": 3,
+          "organization": {
+            "id": "a66b14c4-131b-4b98-a208-b41de4bb15de",
+            "name": "helsingin-kaupunkiympariston-toimiala",
+            "title": "Helsingin kaupunkiympäristön toimiala",
+            "type": "organization",
+            "description": "Helsingin kaupunkiympäristön toimiala huolehtii kaupunkiympäristön suunnittelusta, rakentamisesta ja ylläpidosta.",
+            "image_url": "",
+            "created": "2017-08-22T09:00:11.580450",
+            "is_organization": true,
+            "approval_status": "approved",
+            "state": "active",
+            "public_administration_organization": "false",
+            "edit_only_owned_datasets": "false",
+            "producer_type": "cities",
+            "homepage": "",
+            "last_harvested_harvester": "HRI",
+            "features": "[]",
+            "title_translated": "{\"fi\": \"Helsingin kaupunkiympäristön toimiala\", \"en\": \"\", \"sv\": \"\"}",
+            "description_translated": "{\"fi\": \"Helsingin kaupunkiympäristön toimiala huolehtii kaupunkiympäristön suunnittelusta, rakentamisesta ja ylläpidosta.\", \"en\": \"\", \"sv\": \"\"}",
+            "last_harvested": "2026-09-21"
+          },
+          "owner_org": "a66b14c4-131b-4b98-a208-b41de4bb15de",
+          "private": false,
+          "state": "active",
+          "title": "Helsingin kaupungin ympäristötilinpito",
+          "title_translated": {
+            "en": "City of Helsinki environmental accounts",
+            "fi": "Helsingin kaupungin ympäristötilinpito",
+            "sv": ""
+          },
+          "type": "dataset",
+          "update_frequency": {
+            "en": [
+              "year"
+            ],
+            "fi": [
+              "vuosi"
+            ],
+            "sv": [
+              "år"
+            ]
+          },
+          "url": "Helsingin kaupungin toimialat ja liikelaitokset",
+          "version": null,
+          "extras": [
+            {
+              "key": "Original url",
+              "value": "https://hri.fi/data/dataset/323de482-a070-4b28-9bf0-78f1bc5f6be1"
+            },
+            {
+              "key": "harvest_object_id",
+              "value": "e32945f6-b22c-4636-9eb1-5c6737e2933c"
+            },
+            {
+              "key": "harvest_source_id",
+              "value": "6904e892-6869-4110-86e9-e99e8c5506af"
+            },
+            {
+              "key": "harvest_source_title",
+              "value": "HRI"
+            }
+          ],
+          "groups": [
+            {
+              "__extras": {
+                "approval_status": "approved",
+                "created": "2018-07-13T13:41:38.669916",
+                "description_translated": {
+                  "en": "Elections and voting, politics, government and decision-making, hospitality and gifts, public sector data, glossaries",
+                  "fi": "Vaalit ja äänestäminen, politiikka, hallinto ja päätöksenteko, vieraanvaraisuus ja lahjat, julkisen sektorin data, sanastot",
+                  "sv": "Val och omröstning, politik, regering och beslutsfattande, gästfrihet och gåvor, offentlig sektors data, ordförråd"
+                },
+                "image_url": "2026-04-28-105638.546253valtioneuvosto-ja-julkinen-sektori.svg",
+                "is_organization": false,
+                "num_followers": 0,
+                "package_count": 243,
+                "state": "active",
+                "title_translated": {
+                  "en": "Government and Public Sector",
+                  "fi": "Valtioneuvosto ja julkinen sektori",
+                  "sv": "Regeringen och den offentliga sektorn"
+                },
+                "type": "group"
+              },
+              "description": "Vaalit ja äänestäminen, politiikka, hallinto ja päätöksenteko, vieraanvaraisuus ja lahjat, julkisen sektorin data, sanastot",
+              "display_name": "Valtioneuvosto ja julkinen sektori",
+              "id": "624d9966-456b-4aa8-8fa0-8bb1bbb82e2d",
+              "image_display_url": "https://avoindata.suomi.fi/data/uploads/group/2026-04-28-105638.546253valtioneuvosto-ja-julkinen-sektori.svg",
+              "name": "valtioneuvosto-ja-julkinen-sektori",
+              "title": "Valtioneuvosto ja julkinen sektori"
+            },
+            {
+              "__extras": {
+                "approval_status": "approved",
+                "created": "2018-03-19T10:58:25.574728",
+                "description_translated": {
+                  "en": "Weather, natural environment, deterioration of the environment, waste and water management",
+                  "fi": "Sää, luonnonympäristö, ympäristön pilaantuminen, jäte- ja vesihuolto",
+                  "sv": "Väder, naturmiljo, försämring av miljön, avfallshantering & vattenförvaltning"
+                },
+                "image_url": "2026-04-28-105727.395110ymparisto.svg",
+                "is_organization": false,
+                "num_followers": 0,
+                "package_count": 185,
+                "state": "active",
+                "title_translated": {
+                  "en": "Environment",
+                  "fi": "Ympäristö",
+                  "sv": "Miljö"
+                },
+                "type": "group"
+              },
+              "description": "Sää, luonnonympäristö, ympäristön pilaantuminen, jäte- ja vesihuolto",
+              "display_name": "Ympäristö",
+              "id": "c5152ebf-5fff-4876-af52-b719ef845310",
+              "image_display_url": "https://avoindata.suomi.fi/data/uploads/group/2026-04-28-105727.395110ymparisto.svg",
+              "name": "ymparisto",
+              "title": "Ympäristö"
+            }
+          ],
+          "resources": [
+            {
+              "archiver": {
+                "resource_timestamp": "2022-03-17T14:22:10.360394",
+                "status_id": 0,
+                "is_broken": false,
+                "reason": "",
+                "url_redirected_to": null,
+                "cache_filepath": "/srv/app/data/archiver/94/94cf1311-4d40-44c3-ade8-e5998b3a0e80/Helsingin_kaupungin_ymparistotilinpito_2013-2025.xlsx",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/94/94cf1311-4d40-44c3-ade8-e5998b3a0e80/Helsingin_kaupungin_ymparistotilinpito_2013-2025.xlsx",
+                "size": 82900,
+                "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "hash": "e16d9c9a98dde32519d62f0b76f1cce5ee3acf24",
+                "etag": "\"6aa3e12f-143d4\"",
+                "last_modified": "Fri, 11 Sep 2026 11:08:31 GMT",
+                "first_failure": null,
+                "last_success": "2026-09-14T22:43:49.578618",
+                "failure_count": 0,
+                "created": "2018-07-11T13:55:05.326674",
+                "updated": "2026-09-14T22:43:49.578618",
+                "status": "Archived successfully",
+                "is_broken_printable": "Downloaded OK"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2018-06-12T12:24:19.877895",
+              "datastore_active": false,
+              "date_updated": "2026-09-14",
+              "description": "",
+              "description_translated": {
+                "en": "",
+                "fi": "",
+                "sv": ""
+              },
+              "file_size": "81000",
+              "format": "XLSX",
+              "hash": "",
+              "id": "94cf1311-4d40-44c3-ade8-e5998b3a0e80",
+              "last_modified": null,
+              "metadata_modified": "2026-09-14T22:43:39.124464",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "Excel-tiedosto",
+              "name_translated": {
+                "en": "Excel file",
+                "fi": "Excel-tiedosto",
+                "sv": "Excel fil"
+              },
+              "package_id": "323de482-a070-4b28-9bf0-78f1bc5f6be1",
+              "position": 0,
+              "position_info": "",
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-09-14T22:43:49.578618",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "XLSX",
+                "created": "2019-05-16T06:20:19.106108",
+                "updated": "2026-10-16T02:14:16.700034"
+              },
+              "resource_type": null,
+              "state": "active",
+              "temporal_granularity": {
+                "en": [
+                  "year"
+                ],
+                "fi": [
+                  "vuosi"
+                ],
+                "sv": [
+                  "år"
+                ]
+              },
+              "time_series_end": "",
+              "url": "https://www.hel.fi/static/avoindata/kymp/Helsingin_kaupungin_ymparistotilinpito_2013-2025.xlsx"
+            }
+          ],
+          "tags": [
+            {
+              "display_name": "ympäristö",
+              "id": "8d6cf3ae-8a88-41c8-b4df-cff9b0b3a7f4",
+              "name": "ympäristö",
+              "state": "active",
+              "vocabulary_id": null
+            },
+            {
+              "display_name": "ympäristönsuojelu",
+              "id": "afb5efd3-ac44-49af-91ec-c47f61e7b32e",
+              "name": "ympäristönsuojelu",
+              "state": "active",
+              "vocabulary_id": null
+            },
+            {
+              "display_name": "ympäristövastuu",
+              "id": "b662bead-e856-480c-a43f-fc90a9b680fe",
+              "name": "ympäristövastuu",
+              "state": "active",
+              "vocabulary_id": null
+            }
+          ]
+        },
+        {
+          "author": null,
+          "author_email": null,
+          "collection_type": "Open Data",
+          "copyright_notice_translated": {},
+          "creator_user_id": "5cc316a0-a178-4bf9-86fd-6047d26ea3d2",
+          "date_released": "2020-03-10T00:00:00.000000",
+          "deprecated": false,
+          "external_urls": [
+            "https://www.hsy.fi/ilmanlaatu-ja-ilmasto/tyopaikat-helsingin-seudulla/"
+          ],
+          "geographical_coverage": [
+            "pääkaupunkiseutu",
+            "helsinki",
+            "espoo",
+            "vantaa",
+            "kauniainen",
+            "kirkkonummi",
+            "vihti",
+            "tuusula",
+            "hyvinkää",
+            "nurmijärvi",
+            "... +5 more"
+          ],
+          "highvalue": "false",
+          "highvalue_category": [],
+          "id": "6c42497e-eb5a-480b-a4df-1b42f9625f9a",
+          "isopen": false,
+          "keywords": {
+            "en": [
+              "jobs",
+              "enterprises",
+              "establishments",
+              "employees"
+            ],
+            "fi": [
+              "työpaikat",
+              "henkilöstö",
+              "yritykset",
+              "toimipaikat"
+            ],
+            "sv": [
+              "företag",
+              "byrå"
+            ]
+          },
+          "license_id": "cc-by-4.0",
+          "license_title": "Creative Commons Attribution 4.0",
+          "license_url": "http://creativecommons.org/licenses/by/4.0/",
+          "maintainer": "Helsingin seudun ympäristöpalvelut HSY",
+          "maintainer_email": [
+            "avoindata@hsy.fi"
+          ],
+          "maintainer_note_translated": {},
+          "maintainer_website": "https://www.hsy.fi/avoindata",
+          "metadata_created": "2020-03-10T00:00:00.000000",
+          "metadata_modified": "2026-08-26T21:20:49.773483",
+          "name": "helsingin-seudun-tyopaikkaruudukko",
+          "notes": "Ruutukohtaista summatietoa työpaikkojen (henkilötyövuosia) ja toimipaikkojen määrästä Helsingin seudulla. Sisältää tietoa myös suurimmista toimialoista ja henkilöstömääristä.\r\n\r\nTiedot on laskettu HSY:n yritys- ja toimipaikka-aineistosta 250m * 250m ruutuihin. Aineistosta on poistettu tietosuojasyistä yksittäisiä yrityksiä/toimipaikkoja koskeva tiedot, sekä ilmoitettu arvolla -1 ruudut, joiden henkilöstömäärä on 3 tai alle. Lähtöaineistossa sijainnittomat kohteet on sijoitettu työpaikkaruudukossa kunnittain luokiteltuna merelle. Huom. Aineisto sisältää vain yritysten ja voittoa tavoittelematto... [1222 chars]",
+          "notes_translated": {
+            "en": "Grid-based sum dataset on the number of jobs (full-time equivalents) and establishments in the Helsinki region. The dataset also contains information on the largest industries and personnel numbers.\r\n\r\nThe data has been calculated from HSY’s enterprise and establishment data on a 250m * 250m grid. Data on individual enterprises/establishments has been deleted for privacy reasons. Grid cells with three or fewer employees have been marked with -1. Enterprises and establishments with no location in the source material have been classified by municipality and located at sea. NB! The dataset only i... [1282 chars]",
+            "fi": "Ruutukohtaista summatietoa työpaikkojen (henkilötyövuosia) ja toimipaikkojen määrästä Helsingin seudulla. Sisältää tietoa myös suurimmista toimialoista ja henkilöstömääristä.\r\n\r\nTiedot on laskettu HSY:n yritys- ja toimipaikka-aineistosta 250m * 250m ruutuihin. Aineistosta on poistettu tietosuojasyistä yksittäisiä yrityksiä/toimipaikkoja koskeva tiedot, sekä ilmoitettu arvolla -1 ruudut, joiden henkilöstömäärä on 3 tai alle. Lähtöaineistossa sijainnittomat kohteet on sijoitettu työpaikkaruudukossa kunnittain luokiteltuna merelle. Huom. Aineisto sisältää vain yritysten ja voittoa tavoittelematto... [1222 chars]",
+            "sv": "Information om antalet arbetsplatser (manår) och verksamhetsställen i Helsingforsregionen per ruta. Innehåller också information om de största branscherna och personalantalen.\r\n\r\nUppgifterna har beräknats från HRM:s material om företag och verksamhetsställen i rutor på 250m * 250m. Av dataskyddsskäl har uppgifter om enskilda företag/verksamhetsställen tagits bort från materialet och rutor med ett personalantal på 3 eller mindre har rapporterats vara -1. Ställen utan läge i källmaterialet har i arbetsplatsnätet klassificerats enligt kommun och placerats på havet. Obs. Materialet omfattar endast... [1326 chars]"
+          },
+          "num_resources": 16,
+          "num_tags": 0,
+          "organization": {
+            "id": "d6a069a0-c9f7-450b-9481-0047394d6a8b",
+            "name": "helsingin-seudun-ymparistopalvelut",
+            "title": "Helsingin seudun ympäristöpalvelut (HSY)",
+            "type": "organization",
+            "description": "",
+            "image_url": "",
+            "created": "2015-03-05T15:28:46.865306",
+            "is_organization": true,
+            "approval_status": "approved",
+            "state": "active",
+            "public_administration_organization": "true",
+            "edit_only_owned_datasets": "false",
+            "homepage": "",
+            "description_translated": "{\"fi\": \"\", \"en\": \"\", \"sv\": \"\"}",
+            "features": "[\"public_administration_organization\"]",
+            "producer_type": "cities",
+            "title_translated": "{\"fi\": \"Helsingin seudun ympäristöpalvelut (HSY)\", \"en\": \"\", \"sv\": \"\"}",
+            "last_harvested": "2026-09-21",
+            "last_harvested_harvester": "HRI"
+          },
+          "owner_org": "d6a069a0-c9f7-450b-9481-0047394d6a8b",
+          "private": false,
+          "state": "active",
+          "title": "Helsingin seudun työpaikkaruudukko",
+          "title_translated": {
+            "en": "Grid data on enterprises and establishments in the Helsinki region",
+            "fi": "Helsingin seudun työpaikkaruudukko",
+            "sv": "Helsingforsregionens arbetsplatsnät"
+          },
+          "type": "dataset",
+          "update_frequency": {
+            "en": [
+              "year"
+            ],
+            "fi": [
+              "vuosi"
+            ],
+            "sv": [
+              "år"
+            ]
+          },
+          "url": "Tiedot perustuu Tilastokeskuksen dataan",
+          "version": null,
+          "extras": [
+            {
+              "key": "Original url",
+              "value": "https://hri.fi/data/dataset/6c42497e-eb5a-480b-a4df-1b42f9625f9a"
+            },
+            {
+              "key": "harvest_object_id",
+              "value": "4af9e1d1-13b6-4e49-b9cb-2de2f09b96a2"
+            },
+            {
+              "key": "harvest_source_id",
+              "value": "6904e892-6869-4110-86e9-e99e8c5506af"
+            },
+            {
+              "key": "harvest_source_title",
+              "value": "HRI"
+            }
+          ],
+          "groups": [
+            {
+              "__extras": {
+                "approval_status": "approved",
+                "created": "2017-06-07T15:30:45.988399",
+                "description_translated": {
+                  "en": "Economic policy, taxation, financing and investments, consumption, trade and trade policy, tariffs, business",
+                  "fi": "Talouspolitiikka, verotus, rahoitus ja investoinnit, kulutus, kauppa ja kauppapolitiikka, tariffit, elinkeinot ja yritykset",
+                  "sv": "Ekonomisk politik, beskattning, finansiering och investeringar, handel och handelspolitik, tariffer, näringar och företag"
+                },
+                "image_url": "2026-04-28-105348.099771talous-ja-raha-asiat.svg",
+                "is_organization": false,
+                "num_followers": 0,
+                "package_count": 243,
+                "state": "active",
+                "title_translated": {
+                  "en": "Economy and Finance",
+                  "fi": "Talous ja raha-asiat",
+                  "sv": "Ekonomi och finans"
+                },
+                "type": "group"
+              },
+              "description": "Talouspolitiikka, verotus, rahoitus ja investoinnit, kulutus, kauppa ja kauppapolitiikka, tariffit, elinkeinot ja yritykset",
+              "display_name": "Talous ja raha-asiat",
+              "id": "06edfdc5-3fb3-4264-9ee6-914db717ee2c",
+              "image_display_url": "https://avoindata.suomi.fi/data/uploads/group/2026-04-28-105348.099771talous-ja-raha-asiat.svg",
+              "name": "talous-ja-raha-asiat",
+              "title": "Talous ja raha-asiat"
+            },
+            {
+              "__extras": {
+                "approval_status": "approved",
+                "created": "2018-03-19T11:00:55.655906",
+                "description_translated": {
+                  "en": "Population demographics, employment, social policy, housing, immigration, social security",
+                  "fi": "Väestön koostumus, työllisyys, sosiaalipolitiikka, asuminen, maahanmuutto, sosiaaliturva",
+                  "sv": "Befolkningens sammansättning, sysselsättning, socialpolitik, invandring, social trygghet"
+                },
+                "image_url": "2026-04-28-105542.286585vaesto-ja-yhteiskunta.svg",
+                "is_organization": false,
+                "num_followers": 0,
+                "package_count": 253,
+                "state": "active",
+                "title_translated": {
+                  "en": "Population and Society",
+                  "fi": "Väestö ja yhteiskunta",
+                  "sv": "Befolkning och samhälle"
+                },
+                "type": "group"
+              },
+              "description": "Väestön koostumus, työllisyys, sosiaalipolitiikka, asuminen, maahanmuutto, sosiaaliturva",
+              "display_name": "Väestö ja yhteiskunta",
+              "id": "7cd4f539-e6ed-4d60-81c8-2288c681b538",
+              "image_display_url": "https://avoindata.suomi.fi/data/uploads/group/2026-04-28-105542.286585vaesto-ja-yhteiskunta.svg",
+              "name": "vaesto-ja-yhteiskunta",
+              "title": "Väestö ja yhteiskunta"
+            }
+          ]
+        },
+        {
+          "author": null,
+          "author_email": null,
+          "collection_type": "Open Data",
+          "copyright_notice_translated": {
+            "en": "",
+            "fi": "",
+            "sv": ""
+          },
+          "creator_user_id": "e70128c9-0a54-4443-a009-658c90466ec9",
+          "deprecated": false,
+          "external_urls": [],
+          "geographical_coverage": [
+            "finland"
+          ],
+          "highvalue": "false",
+          "highvalue_category": [],
+          "id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+          "international_benchmarks": [
+            "global open data index",
+            "open data barometer"
+          ],
+          "isopen": false,
+          "keywords": {
+            "en": [
+              "government spending",
+              "spending",
+              "government",
+              "godi",
+              "high value datasets"
+            ],
+            "fi": [
+              "budjettitalous",
+              "julkiset hankinnat",
+              "valtiontalous",
+              "ostolaskut",
+              "valtio",
+              "kunnat",
+              "kuntatalous"
+            ]
+          },
+          "license_id": "cc-by-4.0",
+          "license_title": "Creative Commons Attribution 4.0",
+          "license_url": "http://creativecommons.org/licenses/by/4.0/",
+          "maintainer": "Hansel Oy",
+          "maintainer_email": [
+            "analyysipalvelut@hansel.fi"
+          ],
+          "maintainer_note_translated": {
+            "en": "",
+            "fi": "",
+            "sv": ""
+          },
+          "maintainer_website": "https://tutkihankintoja.fi/",
+          "metadata_created": "2017-09-06T11:48:24.581710",
+          "metadata_modified": "2026-10-13T18:57:49.418437",
+          "name": "tutkihankintoja-data",
+          "notes": "## Tutkihankintoja.fi-palvelun data\r\n\r\nTietoaineiston metatiedot ja tietoaineistot ovat nyt myös haettavissa API:n kautta.\r\n\r\nAineisto koostuu Tutkihankintoja.fi-sivuston valtion, kuntien ja muiden organisaatioiden ostolaskudatasta. Aineistoon kuuluvat kaikki valtion hankintoihin liittyvät ostolaskut vuoden 2016 alusta alkaen. Poikkeuksen muodostavat Suojelupoliisi, rajavartiolaitos, poliisihallitus sekä puolustusministeriön hallinnonala, joiden hankinnat eivät ole mukana aineistossa. Muista organisaatioista mukana on Helsingin, Vantaan, Järvenpään ja Forssan kaupunkien, Tampereen yliopiston s... [6063 chars]",
+          "notes_translated": {
+            "en": "## Data from the OpenProcurement.fi service\r\n\r\nThe metadata of the dataset and the datasets themselves are now also available via the API.\r\n\r\nThe data consists of the procurement spend of the Finnish Government and other public organisations. The data includes the Finnish central government’s procurement related invoices from the beginning of 2016. The invoices of the Security Intelligence Service, the Border Guard, the National Police Board, and the Ministry of Defence’s administrative branch are not included in the publication. Other included organisations are at the moment the cities of Hel... [6310 chars]",
+            "fi": "## Tutkihankintoja.fi-palvelun data\r\n\r\nTietoaineiston metatiedot ja tietoaineistot ovat nyt myös haettavissa API:n kautta.\r\n\r\nAineisto koostuu Tutkihankintoja.fi-sivuston valtion, kuntien ja muiden organisaatioiden ostolaskudatasta. Aineistoon kuuluvat kaikki valtion hankintoihin liittyvät ostolaskut vuoden 2016 alusta alkaen. Poikkeuksen muodostavat Suojelupoliisi, rajavartiolaitos, poliisihallitus sekä puolustusministeriön hallinnonala, joiden hankinnat eivät ole mukana aineistossa. Muista organisaatioista mukana on Helsingin, Vantaan, Järvenpään ja Forssan kaupunkien, Tampereen yliopiston s... [6063 chars]",
+            "sv": "## Data från Granskaupphandlingar.fi-tjänsten\r\n\r\nDatamängdens metadata och själva datamängderna kan nu också hämtas via API:et.\r\n\r\nI materialet ingår upphandlingsutgifter från staten och andra organisationer. I materialet ingår samtliga inköpsfakturor i anslutning till statens upphandlingar sedan 2016. Undantag utgör Skyddspolisen, Gränsbevakningsväsendet, Polisstyrelsen samt försvarsministeriets förvaltningsområde, vilkas upphandling inte ingår i materialet. Andra inkluderade organisationer är för tillfället städerna Helsingfors, Vanda, Träskända och Forssa, Tammerfors universitet samt Birkal... [5689 chars]"
+          },
+          "num_resources": 12,
+          "num_tags": 3,
+          "organization": {
+            "id": "3d10807b-ca4e-4034-b15a-048d5c3a861c",
+            "name": "hansel",
+            "title": "Hansel",
+            "type": "organization",
+            "description": "Hansel on valtion yhteishankintayksikkö",
+            "image_url": "https://www.hansel.fi/static/images/hansel-logo.148f061c08b8.png",
+            "created": "2017-09-05T13:31:16.467838",
+            "is_organization": true,
+            "approval_status": "approved",
+            "state": "active",
+            "homepage": "https://www.hansel.fi",
+            "features": "[\"public_administration_organization\"]",
+            "title_translated": "{\"fi\": \"Hansel\", \"en\": \"\", \"sv\": \"\"}",
+            "description_translated": "{\"fi\": \"Hansel on valtion yhteishankintayksikk\\u00f6\", \"en\": \"\", \"sv\": \"\"}",
+            "producer_type": "country"
+          },
+          "owner_org": "3d10807b-ca4e-4034-b15a-048d5c3a861c",
+          "private": false,
+          "state": "active",
+          "title": "Tutkihankintoja.fi-palvelun data (valtion ja kuntien ostolaskut)",
+          "title_translated": {
+            "en": "Data from the OpenProcurement.fi service",
+            "fi": "Tutkihankintoja.fi-palvelun data (valtion ja kuntien ostolaskut)",
+            "sv": "Granskaupphandlingar.fi-tjänstens data"
+          },
+          "type": "dataset",
+          "url": null,
+          "valid_from": "2017-09-06",
+          "version": null,
+          "extras": [
+            {
+              "key": "categories",
+              "value": "[\"\"]"
+            }
+          ],
+          "resources": [
+            {
+              "archiver": {
+                "resource_timestamp": "2022-04-28T02:03:17.976936",
+                "status_id": 21,
+                "is_broken": null,
+                "reason": "Content-length 268845924 exceeds maximum allowed value 50000000",
+                "url_redirected_to": null,
+                "cache_filepath": "/srv/app/data/archiver/77/77d10094-c8a9-445d-97da-feeb82859f62/th_data_2016.csv",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/77/77d10094-c8a9-445d-97da-feeb82859f62/th_data_2016.csv",
+                "size": 198,
+                "mimetype": "text/csv",
+                "hash": "2c44492061b352eefe4d9555ec49b6e3dd85148e",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": "2026-09-25T09:51:57.821876",
+                "last_success": "2026-09-25T05:01:50.782417",
+                "failure_count": 256,
+                "created": "2018-10-09T18:14:03.695898",
+                "updated": "2026-10-16T05:20:04.912786",
+                "status": "Chose not to download",
+                "is_broken_printable": "Not sure if broken"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2017-09-06T11:49:51.747985",
+              "datastore_active": true,
+              "description": null,
+              "format": "TSV",
+              "hash": "6f5c27c4d74fba0d0248ab98646bf6ec",
+              "id": "77d10094-c8a9-445d-97da-feeb82859f62",
+              "last_modified": "2026-09-28T23:14:15.424272",
+              "metadata_modified": "2026-10-13T18:57:49.446207",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "th_data_2016.csv",
+              "package_id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+              "position": 0,
+              "preview": true,
+              "preview_rows": 1178101,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:20:04.912786",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "TXT",
+                "created": "2019-01-29T16:16:32.515580",
+                "updated": "2026-10-16T06:42:31.981144"
+              },
+              "resource_type": null,
+              "sha256": "aebbfd09edb3ed4a59824f5e07df3c5ad56e0b5a6492518268d0a3d71ed63ae6",
+              "size": 274099502,
+              "state": "active",
+              "status_updated": "2026-10-12T23:12:51.391115+00:00",
+              "total_record_count": 1178101,
+              "url": "https://avoindata.suomi.fi/data/dataset/ba96a638-67bf-4747-b084-c78ccfe052e9/resource/77d10094-c8a9-445d-97da-feeb82859f62/download/th_data_2016.csv",
+              "url_type": "upload"
+            },
+            {
+              "archiver": {
+                "resource_timestamp": "2022-04-28T02:02:57.425599",
+                "status_id": 21,
+                "is_broken": null,
+                "reason": "Content-length 271563389 exceeds maximum allowed value 50000000",
+                "url_redirected_to": null,
+                "cache_filepath": "/srv/app/data/archiver/54/5467d131-d495-4e2f-8377-86d3e8e67668/th_data_2017.csv",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/54/5467d131-d495-4e2f-8377-86d3e8e67668/th_data_2017.csv",
+                "size": 198,
+                "mimetype": "text/csv",
+                "hash": "2c44492061b352eefe4d9555ec49b6e3dd85148e",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": "2026-09-25T09:52:23.420178",
+                "last_success": "2026-09-25T09:51:58.360487",
+                "failure_count": 255,
+                "created": "2018-10-09T18:14:04.677804",
+                "updated": "2026-10-16T05:20:05.479388",
+                "status": "Chose not to download",
+                "is_broken_printable": "Not sure if broken"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2017-09-06T11:53:47.220048",
+              "datastore_active": true,
+              "description": null,
+              "format": "TSV",
+              "hash": "1e66120f3f932ff7f51ee3f099773140",
+              "id": "5467d131-d495-4e2f-8377-86d3e8e67668",
+              "last_modified": "2026-09-28T23:14:37.624624",
+              "metadata_modified": "2026-10-13T18:57:49.446449",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "th_data_2017.csv",
+              "package_id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+              "position": 1,
+              "preview": true,
+              "preview_rows": 1179658,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:20:05.479388",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "TXT",
+                "created": "2019-01-29T16:16:32.534789",
+                "updated": "2026-10-16T06:42:32.118355"
+              },
+              "resource_type": null,
+              "sha256": "824d67fa5a67b1975bdd9c516a8fe6511644343c0a200964d3c4ce3dcc807b7b",
+              "size": 276571256,
+              "state": "active",
+              "status_updated": "2026-10-12T23:13:17.719794+00:00",
+              "total_record_count": 1179658,
+              "url": "https://avoindata.suomi.fi/data/dataset/ba96a638-67bf-4747-b084-c78ccfe052e9/resource/5467d131-d495-4e2f-8377-86d3e8e67668/download/th_data_2017.csv",
+              "url_type": "upload"
+            },
+            {
+              "archiver": {
+                "resource_timestamp": "2022-04-27T07:54:56.379962",
+                "status_id": 21,
+                "is_broken": null,
+                "reason": "Content-length 462313224 exceeds maximum allowed value 50000000",
+                "url_redirected_to": null,
+                "cache_filepath": "/srv/app/data/archiver/1f/1f5657c2-9d84-4f0f-bb0b-6727432bf127/th_data_2018.csv",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/1f/1f5657c2-9d84-4f0f-bb0b-6727432bf127/th_data_2018.csv",
+                "size": 198,
+                "mimetype": "text/csv",
+                "hash": "2c44492061b352eefe4d9555ec49b6e3dd85148e",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": "2026-09-25T09:53:02.596837",
+                "last_success": "2026-09-25T09:52:23.687565",
+                "failure_count": 254,
+                "created": "2018-10-09T18:14:05.654170",
+                "updated": "2026-10-16T05:20:05.829207",
+                "status": "Chose not to download",
+                "is_broken_printable": "Not sure if broken"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2018-01-22T16:21:28.998347",
+              "datastore_active": true,
+              "description": null,
+              "format": "TSV",
+              "hash": "8f1e83fbff3c00a6d9fba5225d1fbb78",
+              "id": "1f5657c2-9d84-4f0f-bb0b-6727432bf127",
+              "last_modified": "2026-09-28T23:15:11.798125",
+              "metadata_modified": "2026-10-13T18:57:49.446616",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "th_data_2018.csv",
+              "package_id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+              "position": 2,
+              "preview": true,
+              "preview_rows": 2008508,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:20:05.829207",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "TXT",
+                "created": "2019-01-29T16:16:32.547793",
+                "updated": "2026-10-16T06:42:31.894840"
+              },
+              "resource_type": null,
+              "sha256": "174e6dd12697181b3ed0c0540d179377d52744a070c6f4cb4b800de6b04a4b4d",
+              "size": 460494605,
+              "state": "active",
+              "status_updated": "2026-10-12T23:13:56.282884+00:00",
+              "total_record_count": 2008508,
+              "url": "https://avoindata.suomi.fi/data/dataset/ba96a638-67bf-4747-b084-c78ccfe052e9/resource/1f5657c2-9d84-4f0f-bb0b-6727432bf127/download/th_data_2018.csv",
+              "url_type": "upload"
+            },
+            {
+              "archiver": {
+                "resource_timestamp": "2022-04-26T10:25:46.210219",
+                "status_id": 21,
+                "is_broken": null,
+                "reason": "Content-length 467991749 exceeds maximum allowed value 50000000",
+                "url_redirected_to": null,
+                "cache_filepath": "/srv/app/data/archiver/9e/9e7f65ab-0d27-4ed9-ac8a-f50a2e04fbd8/th_data_2019.csv",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/9e/9e7f65ab-0d27-4ed9-ac8a-f50a2e04fbd8/th_data_2019.csv",
+                "size": 198,
+                "mimetype": "text/csv",
+                "hash": "2c44492061b352eefe4d9555ec49b6e3dd85148e",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": "2026-09-25T09:53:36.214916",
+                "last_success": "2026-09-25T09:53:02.926523",
+                "failure_count": 253,
+                "created": "2019-01-29T16:16:28.468258",
+                "updated": "2026-10-16T05:20:06.147630",
+                "status": "Chose not to download",
+                "is_broken_printable": "Not sure if broken"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2019-01-29T14:16:10.551205",
+              "datastore_active": true,
+              "description": null,
+              "format": "TSV",
+              "hash": "1a90d4165a2fcbb18c53a095aac16079",
+              "id": "9e7f65ab-0d27-4ed9-ac8a-f50a2e04fbd8",
+              "last_modified": "2026-09-28T23:15:49.636028",
+              "metadata_modified": "2026-10-13T18:57:49.446767",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "th_data_2019.csv",
+              "package_id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+              "position": 3,
+              "preview": true,
+              "preview_rows": 2022464,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:20:06.147630",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "TXT",
+                "created": "2019-01-29T16:16:32.727868",
+                "updated": "2026-10-16T06:42:32.255126"
+              },
+              "resource_type": null,
+              "sha256": "e510ba9acf438fce8a61e35b84b59cf94123221c04987203e3c9b7c7634f93d9",
+              "size": 389260248,
+              "state": "active",
+              "status_updated": "2026-10-12T23:14:40.189908+00:00",
+              "total_record_count": 2022464,
+              "url": "https://avoindata.suomi.fi/data/dataset/ba96a638-67bf-4747-b084-c78ccfe052e9/resource/9e7f65ab-0d27-4ed9-ac8a-f50a2e04fbd8/download/th_data_2019.csv",
+              "url_type": "upload"
+            },
+            {
+              "archiver": {
+                "resource_timestamp": "2022-04-25T18:55:08.644221",
+                "status_id": 21,
+                "is_broken": null,
+                "reason": "Content-length 370340970 exceeds maximum allowed value 50000000",
+                "url_redirected_to": null,
+                "cache_filepath": "/srv/app/data/archiver/10/10d9ee7a-6eb9-4326-bb36-96f9c0f6a768/th_data_2020.csv",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/10/10d9ee7a-6eb9-4326-bb36-96f9c0f6a768/th_data_2020.csv",
+                "size": 198,
+                "mimetype": "text/csv",
+                "hash": "2c44492061b352eefe4d9555ec49b6e3dd85148e",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": "2026-09-25T09:54:04.241127",
+                "last_success": "2026-09-25T09:53:36.497601",
+                "failure_count": 252,
+                "created": "2020-03-13T13:11:11.561872",
+                "updated": "2026-10-16T05:20:06.449888",
+                "status": "Chose not to download",
+                "is_broken_printable": "Not sure if broken"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2020-03-13T13:10:47.356372",
+              "datastore_active": true,
+              "description": null,
+              "format": "TSV",
+              "hash": "d2212b3c588b6c03542af5d0f470e7d2",
+              "id": "10d9ee7a-6eb9-4326-bb36-96f9c0f6a768",
+              "last_modified": "2026-09-28T23:16:21.344953",
+              "metadata_modified": "2026-10-13T18:57:49.446917",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "th_data_2020.csv",
+              "package_id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+              "position": 4,
+              "preview": true,
+              "preview_rows": 1593626,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:20:06.449888",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "TXT",
+                "created": "2020-03-13T13:11:14.677545",
+                "updated": "2026-10-16T06:42:32.207904"
+              },
+              "resource_type": null,
+              "sha256": "83db478cd89360bd9e8fe0a19eee3d2cc89c72c3142c778ea077acd98240d969",
+              "size": 39981884,
+              "state": "active",
+              "status_updated": "2026-10-12T23:15:11.396253+00:00",
+              "total_record_count": 1593626,
+              "url": "https://avoindata.suomi.fi/data/dataset/ba96a638-67bf-4747-b084-c78ccfe052e9/resource/10d9ee7a-6eb9-4326-bb36-96f9c0f6a768/download/th_data_2020.csv",
+              "url_type": "upload"
+            },
+            {
+              "archiver": {
+                "resource_timestamp": "2022-04-25T18:55:07.054034",
+                "status_id": 21,
+                "is_broken": null,
+                "reason": "Content-length 482417042 exceeds maximum allowed value 50000000",
+                "url_redirected_to": null,
+                "cache_filepath": "/srv/app/data/archiver/b9/b9d7dae0-efc5-4139-8ef1-b87af0eca6a1/th_data_2021.csv",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/b9/b9d7dae0-efc5-4139-8ef1-b87af0eca6a1/th_data_2021.csv",
+                "size": 198,
+                "mimetype": "text/csv",
+                "hash": "2c44492061b352eefe4d9555ec49b6e3dd85148e",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": "2026-09-25T09:54:42.805554",
+                "last_success": "2026-09-25T09:54:04.513838",
+                "failure_count": 251,
+                "created": "2021-02-02T11:08:15.079316",
+                "updated": "2026-10-16T05:20:06.745493",
+                "status": "Chose not to download",
+                "is_broken_printable": "Not sure if broken"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2021-02-02T11:07:37.712650",
+              "datastore_active": true,
+              "description": "",
+              "description_translated": {
+                "en": "",
+                "fi": "",
+                "sv": ""
+              },
+              "format": "TSV",
+              "hash": "071a85a707cd4bcfe96afdb53b08a649",
+              "id": "b9d7dae0-efc5-4139-8ef1-b87af0eca6a1",
+              "last_modified": "2026-09-25T12:31:48.169466",
+              "maturity": "",
+              "metadata_modified": "2026-10-13T18:57:49.447068",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "Tutkihankintoja data 2021",
+              "name_translated": {
+                "en": "",
+                "fi": "Tutkihankintoja data 2021",
+                "sv": ""
+              },
+              "package_id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+              "position": 5,
+              "position_info": "",
+              "preview": true,
+              "preview_rows": 2021494,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:20:06.745493",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "TXT",
+                "created": "2021-02-02T11:08:24.786637",
+                "updated": "2026-10-16T06:42:32.026239"
+              },
+              "resource_type": null,
+              "sha256": "4afb756ef44c8b954e370815dfc7e26f7201053302762fc381a93b6a82b02ef9",
+              "size": 6887224,
+              "state": "active",
+              "status_updated": "2026-10-12T23:15:44.437219+00:00",
+              "temporal_granularity-en": "",
+              "temporal_granularity-fi": "",
+              "temporal_granularity-sv": "",
+              "total_record_count": 2021494,
+              "url": "https://avoindata.suomi.fi/data/dataset/ba96a638-67bf-4747-b084-c78ccfe052e9/resource/b9d7dae0-efc5-4139-8ef1-b87af0eca6a1/download/th_data_2021.csv",
+              "url_type": "upload"
+            },
+            {
+              "archiver": {
+                "resource_timestamp": "2022-04-28T02:02:30.744949",
+                "status_id": 0,
+                "is_broken": false,
+                "reason": "",
+                "url_redirected_to": "https://avoindata-prod-datasets.s3.amazonaws.com/resources/33a2e72f-c37d-4bb6-8bc7-882c2e5522b4/th_kaannokset.xlsx?AWSAccessKeyId=ASIA5ERTGXPJONXLDJVS&Signature=ebTvvXEKMqlMqEthwZQ7RkWed2k%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEBUaCWV1LXdlc3QtMSJHMEUCIHdo6aZcQCtUafhvW1gH8%2F4lzdJj2WVgdXXuznaIprSQAiEAkLJU7VrY0uLfEiSExrpbwlAOA6NyDou9oU3gknn4obwqvAQI3v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw5MDMxMjQyNzAwMzQiDHx5hUhiJYmVawmTwSqQBD8kqFV1O18teKSrbUUVF%2FOqjskJTkQ8ti4WbumkJRvaByRKZneUQBo7Nqzcxs7N0Jz40%2FlkyUREKoc0i3BBslN7UN%2FIqTIt0w8tKkiR85dQ%2BtOu6lw%2FZhn9UxvEqIqpu2gM2kpnoUOrW2a8R2nOGCDF7azDW1cPc4A... [1462 chars]",
+                "cache_filepath": "/srv/app/data/archiver/33/33a2e72f-c37d-4bb6-8bc7-882c2e5522b4/th_kaannokset.xlsx",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/33/33a2e72f-c37d-4bb6-8bc7-882c2e5522b4/th_kaannokset.xlsx",
+                "size": 19886,
+                "mimetype": "application/octet-stream",
+                "hash": "f64fae0782083611e3fff41df589954bc157022f",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": null,
+                "last_success": "2026-10-16T05:20:07.134961",
+                "failure_count": 0,
+                "created": "2020-03-26T09:51:16.399186",
+                "updated": "2026-10-16T05:20:07.134961",
+                "status": "Archived successfully",
+                "is_broken_printable": "Downloaded OK"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2020-03-26T09:50:58.961886",
+              "datastore_active": true,
+              "description": "",
+              "format": "XLSX",
+              "hash": "db70dbc23b5360f240e95864a363147a",
+              "id": "33a2e72f-c37d-4bb6-8bc7-882c2e5522b4",
+              "last_modified": "2026-08-21T11:48:55.369180",
+              "metadata_modified": "2026-10-13T18:57:49.447210",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "th_kaannokset.xlsx",
+              "name_translated": {
+                "fi": "th_kaannokset.xlsx"
+              },
+              "package_id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+              "position": 6,
+              "preview": true,
+              "preview_rows": 173,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:20:07.134961",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "XLSX",
+                "created": "2020-03-26T09:51:19.570903",
+                "updated": "2026-10-16T06:42:32.316862"
+              },
+              "resource_type": null,
+              "sha256": "e068b1b2f7a1f60a6b6cf5a8cdbdd865d6eb904821e9a6a7e285bdd23787f91c",
+              "size": 17332,
+              "state": "active",
+              "status_updated": "2026-10-12T23:19:34.026813+00:00",
+              "total_record_count": 173,
+              "url": "https://avoindata.suomi.fi/data/dataset/ba96a638-67bf-4747-b084-c78ccfe052e9/resource/33a2e72f-c37d-4bb6-8bc7-882c2e5522b4/download/th_kaannokset.xlsx",
+              "url_type": "upload"
+            },
+            {
+              "archiver": {
+                "resource_timestamp": null,
+                "status_id": 21,
+                "is_broken": null,
+                "reason": "Content-length 427193448 exceeds maximum allowed value 50000000",
+                "url_redirected_to": null,
+                "cache_filepath": "/srv/app/data/archiver/2a/2a2e861b-f7a8-4a12-9d87-df66e8f06df9/th_data_2022.csv",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/2a/2a2e861b-f7a8-4a12-9d87-df66e8f06df9/th_data_2022.csv",
+                "size": 198,
+                "mimetype": "text/csv",
+                "hash": "2c44492061b352eefe4d9555ec49b6e3dd85148e",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": "2026-09-25T09:55:16.140233",
+                "last_success": "2026-09-25T09:54:43.422852",
+                "failure_count": 250,
+                "created": "2022-09-12T02:37:52.595355",
+                "updated": "2026-10-16T05:20:07.458878",
+                "status": "Chose not to download",
+                "is_broken_printable": "Not sure if broken"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2022-07-12T12:29:29.695234",
+              "datastore_active": true,
+              "description": null,
+              "format": "CSV",
+              "hash": "48a01cca7496a8c456ab4042cd4f2a70",
+              "id": "2a2e861b-f7a8-4a12-9d87-df66e8f06df9",
+              "last_modified": "2026-10-12T23:15:22.838519",
+              "metadata_modified": "2026-10-13T18:57:49.447357",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "th_data_2022.csv",
+              "package_id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+              "position": 7,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:20:07.458878",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "TXT",
+                "created": "2022-09-26T17:00:17.932879",
+                "updated": "2026-10-16T06:42:31.853604"
+              },
+              "resource_type": null,
+              "sha256": "38b1b28ebbd5e11b9f441ef078e50a73f6464883da55c777c6da85af75b3555e",
+              "state": "active",
+              "status_updated": "2026-10-12T23:16:11.713803+00:00",
+              "url": "https://avoindata.suomi.fi/data/dataset/ba96a638-67bf-4747-b084-c78ccfe052e9/resource/2a2e861b-f7a8-4a12-9d87-df66e8f06df9/download/th_data_2022.csv",
+              "url_type": "upload"
+            },
+            {
+              "archiver": {
+                "resource_timestamp": null,
+                "status_id": 21,
+                "is_broken": null,
+                "reason": "Content-length 789702509 exceeds maximum allowed value 50000000",
+                "url_redirected_to": null,
+                "cache_filepath": "/srv/app/data/archiver/fd/fdc83caf-bd53-40ec-82d9-3549562b9660/th_data_2023.csv",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/fd/fdc83caf-bd53-40ec-82d9-3549562b9660/th_data_2023.csv",
+                "size": 198,
+                "mimetype": "text/csv",
+                "hash": "2c44492061b352eefe4d9555ec49b6e3dd85148e",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": "2026-09-25T09:56:08.437605",
+                "last_success": "2026-09-25T09:55:16.389407",
+                "failure_count": 249,
+                "created": "2023-03-10T14:21:14.767439",
+                "updated": "2026-10-16T05:20:07.788706",
+                "status": "Chose not to download",
+                "is_broken_printable": "Not sure if broken"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2023-03-10T14:20:12.416102",
+              "datastore_active": true,
+              "description": null,
+              "format": "CSV",
+              "hash": "48a01cca7496a8c456ab4042cd4f2a70",
+              "id": "fdc83caf-bd53-40ec-82d9-3549562b9660",
+              "last_modified": "2026-10-12T23:16:14.344570",
+              "metadata_modified": "2026-10-13T18:57:49.447498",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "th_data_2023.csv",
+              "package_id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+              "position": 8,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:20:07.788706",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "TXT",
+                "created": "2023-03-10T14:21:16.443324",
+                "updated": "2026-10-16T06:42:32.298905"
+              },
+              "resource_type": null,
+              "sha256": "708ae381cf21b92edbdc9e93afd8448234e22048a6d1b202a000afa095a39bae",
+              "state": "active",
+              "status_updated": "2026-10-12T23:17:24.898400+00:00",
+              "url": "https://avoindata.suomi.fi/data/dataset/ba96a638-67bf-4747-b084-c78ccfe052e9/resource/fdc83caf-bd53-40ec-82d9-3549562b9660/download/th_data_2023.csv",
+              "url_type": "upload"
+            },
+            {
+              "archiver": {
+                "resource_timestamp": null,
+                "status_id": 21,
+                "is_broken": null,
+                "reason": "Content-length 807201841 exceeds maximum allowed value 50000000",
+                "url_redirected_to": null,
+                "cache_filepath": "/srv/app/data/archiver/d4/d4d0df6f-70f0-48da-b5c6-c8fb7398d528/th_data_2024.csv",
+                "cache_url": "https://avoindata.suomi.fi/resource_cache/d4/d4d0df6f-70f0-48da-b5c6-c8fb7398d528/th_data_2024.csv",
+                "size": 198,
+                "mimetype": "text/csv",
+                "hash": "2c44492061b352eefe4d9555ec49b6e3dd85148e",
+                "etag": null,
+                "last_modified": null,
+                "first_failure": "2026-09-25T09:57:00.662948",
+                "last_success": "2026-09-25T09:56:08.683820",
+                "failure_count": 248,
+                "created": "2024-01-17T14:36:29.574007",
+                "updated": "2026-10-16T05:20:08.200947",
+                "status": "Chose not to download",
+                "is_broken_printable": "Not sure if broken"
+              },
+              "cache_last_updated": null,
+              "cache_url": null,
+              "created": "2024-01-17T14:36:22.085035",
+              "datastore_active": true,
+              "description": null,
+              "format": "CSV",
+              "hash": "48a01cca7496a8c456ab4042cd4f2a70",
+              "id": "d4d0df6f-70f0-48da-b5c6-c8fb7398d528",
+              "last_modified": "2026-10-12T23:17:17.256014",
+              "metadata_modified": "2026-10-13T18:57:49.447640",
+              "mimetype": null,
+              "mimetype_inner": null,
+              "name": "th_data_2024.csv",
+              "package_id": "ba96a638-67bf-4747-b084-c78ccfe052e9",
+              "position": 9,
+              "qa": {
+                "resource_timestamp": null,
+                "archival_timestamp": "2026-10-16T05:20:08.200947",
+                "openness_score": 0,
+                "openness_score_reason": "License not open",
+                "format": "TXT",
+                "created": "2024-01-22T00:09:42.700455",
+                "updated": "2026-10-16T06:42:31.804206"
+              },
+              "resource_type": null,
+              "sha256": "7ab8ae69b37e40122ceec09db81a7ed1bd0891eda0ba149a1f58827371f01ea8",
+              "state": "active",
+              "status_updated": "2026-10-12T23:18:27.270222+00:00",
+              "url": "https://avoindata.suomi.fi/data/dataset/ba96a638-67bf-4747-b084-c78ccfe052e9/resource/d4d0df6f-70f0-48da-b5c6-c8fb7398d528/download/th_data_2024.csv",
+              "url_type": "upload"
+            },
+            "... +2 more"
+          ]
+        }
+      ],
+      "sort": "score desc, metadata_created desc",
+      "search_facets": {}
+    }
+  }
+}

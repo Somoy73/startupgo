@@ -1,0 +1,887 @@
+VC STARTUP RECOMMENDATION SYSTEM
+COMPREHENSIVE DATA DICTIONARY AND ASSESSMENT PARAMETERS
+================================================================
+
+PURPOSE
+-------
+This document lists parameters that can be collected, calculated, and assessed
+for a startup recommendation system intended to support venture-capital (VC)
+screening and due diligence.
+
+Important distinctions:
+- Not every parameter is publicly available.
+- Some parameters require founder-submitted information or confidential VC data.
+- A measurable parameter is not automatically a reliable predictor of returns.
+- Missing data must be distinguished from poor performance.
+- Recommendations should be evidence-backed and should communicate uncertainty.
+- This framework is a starting point, not a validated predictive model.
+
+================================================================
+A. COMPANY IDENTITY AND PROFILE
+================================================================
+Purpose: Identify the startup, establish context, and enable fair comparisons.
+
+1. Company ID — unique internal identifier
+2. Company name — registered and trading name
+3. Website — official URL
+4. Country of incorporation — legal jurisdiction
+5. Headquarters — city and country
+6. Date founded — incorporation or operating start date
+7. Company age — years/months since founding
+8. Industry — primary industry
+9. Sub-industry — specific market category
+10. Business model — SaaS, marketplace, hardware, services, etc.
+11. Customer segment — B2B, B2C, B2G, B2B2C
+12. Target geography — markets served or targeted
+13. Operating status — active, acquired, inactive, shut down
+14. Employee count — current headcount
+15. Employee growth — change in headcount over time
+16. Company stage — idea, prototype, pre-seed, seed, Series A, etc.
+17. Legal structure — corporation, limited company, other
+18. Mission and value proposition — what the business promises to deliver
+19. Primary problem solved — customer problem being addressed
+20. Product category — product or service classification
+
+Assessment:
+- Company maturity
+- Comparability with other startups
+- Sector classification
+- Operating history
+- Fit with the VC's investment mandate
+
+================================================================
+B. FOUNDING TEAM AND LEADERSHIP
+================================================================
+Purpose: Assess whether the team can execute the business plan.
+
+1. Number of founders
+2. Founder roles — CEO, CTO, commercial lead, etc.
+3. Relevant industry experience
+4. Relevant technical experience
+5. Previous startup experience
+6. Previous exits — acquisitions or IPOs involving prior companies
+7. Previous startup outcomes — successes, failures and lessons
+8. Domain expertise
+9. Education and qualifications
+10. Technical capability
+11. Commercial capability
+12. Leadership experience
+13. Founder commitment — full-time, part-time, other employment
+14. Founder-market fit
+15. Founder equity ownership
+16. Vesting arrangements
+17. Team complementarity — coverage of technical, product and sales skills
+18. Key-person dependency
+19. Hiring capability
+20. Employee turnover
+21. Advisor network and actual contributions
+22. Board composition and governance experience
+23. References — verified references and feedback
+
+Assessment:
+- Execution capability
+- Team gaps
+- Key-person risk
+- Founder-market fit
+- Leadership strength
+
+Caution: Prestige, famous employers, elite universities, or large networks
+should not automatically produce high scores. Evaluate relevant performance
+and verified evidence.
+
+================================================================
+C. PROBLEM SEVERITY AND CUSTOMER NEED
+================================================================
+1. Problem description
+2. Target user
+3. Problem frequency
+4. Problem severity — financial, operational or personal impact
+5. Current solution
+6. Cost of existing solution
+7. Customer dissatisfaction with current alternatives
+8. Urgency
+9. Willingness to pay — verified intent or actual payment
+10. Customer interviews — number and quality
+11. Validated pain points
+12. Budget availability
+13. Buying authority — who controls purchasing decisions
+14. Purchase cycle
+15. Switching barriers
+16. Unmet demand
+17. Problem recurrence
+
+Assessment:
+- Whether the problem is important enough to support a sustainable business
+- Whether customers are motivated to change or pay
+
+================================================================
+D. MARKET SIZE AND MARKET OPPORTUNITY
+================================================================
+1. Total Addressable Market (TAM)
+2. Serviceable Addressable Market (SAM)
+3. Serviceable Obtainable Market (SOM)
+4. Market growth rate — historical and forecast
+5. Market maturity — emerging, growing, mature or declining
+6. Target customer count
+7. Average customer spending
+8. Geographic opportunity — market size by country or region
+9. Customer segment distribution
+10. Market concentration — dominance of large incumbents
+11. Industry fragmentation
+12. Market entry barriers — capital, regulatory, technical or distribution
+13. Regulatory outlook
+14. Technology adoption rate
+15. Market timing — evidence that the market is ready now
+16. Macro sensitivity — interest rates, economic cycles, etc.
+17. Market expansion potential — adjacent sectors or geographies
+18. Market growth evidence from independent sources
+19. Market estimate methodology — bottom-up, top-down, etc.
+20. Realistic revenue ceiling under plausible assumptions
+
+Assessment:
+- Whether the market can support venture-scale growth
+- Credibility of the startup's market estimates
+
+Prefer bottom-up estimates. Example: 8,000 reachable companies x EUR 25,000
+potential annual contract value = EUR 200 million in annual market opportunity.
+This is more informative than citing a huge global industry without explaining
+the realistically reachable segment.
+
+================================================================
+E. PRODUCT AND TECHNOLOGY
+================================================================
+1. Product description — core functionality
+2. Product maturity — concept, prototype, MVP, production
+3. Product launch date
+4. Product usage — active users, sessions, usage frequency
+5. Product adoption — new users or customers over time
+6. Feature completeness
+7. Product reliability — availability, failure rate, error rate
+8. Technical performance — latency, accuracy, throughput, etc.
+9. Customer outcomes — measurable benefit delivered
+10. Product roadmap
+11. Development velocity — meaningful improvements shipped
+12. Technical debt
+13. Architecture quality — scalability, maintainability, resilience
+14. Integration capability
+15. Deployment complexity
+16. Proprietary technology
+17. Intellectual property — patents, trade secrets, relevant rights
+18. Patent quality — relevance, enforceability and coverage
+19. Research validation
+20. Technology readiness in intended setting
+21. Technical feasibility
+22. Vendor dependency — external models, APIs or infrastructure
+23. Cybersecurity posture
+24. Data privacy compliance
+25. Technical scalability
+
+AI-specific product fields:
+- AI use case and specific task solved
+- Whether AI materially improves on non-AI alternatives
+- Model ownership — proprietary or third-party
+- Model performance on task-specific benchmarks
+- Evaluation quality and methodology
+- Training data provenance and legal rights
+- Proprietary dataset size and relevance
+- Data freshness
+- Data advantage
+- Inference cost per request, task or customer
+- Inference latency
+- Model serving capacity and throughput
+- Accuracy on representative tasks
+- Hallucination rate, where relevant
+- Material system failure rate
+- Human intervention or correction rate
+- Model evaluation coverage, including edge cases
+- Model drift over time
+- Fine-tuning cost
+- Compute dependency — GPUs or external infrastructure
+- GPU utilization
+- Model portability and ability to switch providers
+- AI gross margin after model/inference costs
+- Data moat and permitted feedback-data collection
+- AI safety controls
+- Reproducibility of claimed results
+- Benchmark validity and fair comparison
+- Regulatory readiness for the use case and jurisdiction
+
+Assessment:
+- Product quality
+- Technical feasibility
+- Customer value
+- Implementation risk
+- Scalability
+- Differentiation
+- AI reliability and delivery economics
+
+================================================================
+F. TRACTION AND CUSTOMER VALIDATION
+================================================================
+1. Total customers
+2. Paying customers
+3. Active customers
+4. Monthly Active Users (MAU)
+5. Daily Active Users (DAU)
+6. DAU/MAU ratio — frequency of engagement
+7. New customer growth
+8. Revenue growth — monthly, quarterly and annual
+9. User growth
+10. Customer retention
+11. Logo churn — percentage of customers lost
+12. Revenue churn — recurring revenue lost from existing customers
+13. Net Revenue Retention (NRR)
+14. Gross Revenue Retention (GRR)
+15. Cohort retention
+16. Repeat purchase rate
+17. Product activation rate
+18. Conversion rate through the funnel
+19. Waitlist size
+20. Pilot customers
+21. Pilot-to-paid conversion
+22. Design partners
+23. Customer references — verified references from actual customers
+24. Customer satisfaction — CSAT or similar
+25. Net Promoter Score (NPS)
+26. Customer concentration — share of revenue from largest customers
+27. Expansion revenue from existing customers
+28. Contract renewal rate
+29. Backlog — contracted work/orders not yet fulfilled
+30. Qualified sales pipeline
+31. Pipeline conversion — percentage of qualified opportunities won
+
+Assessment:
+- Whether demand is real, repeatable, growing and likely to persist
+
+Evidence hierarchy depends on the business model, but a waitlist is generally
+weaker evidence than active use, and active use is generally weaker than repeat
+payment and retention.
+
+================================================================
+G. REVENUE AND BUSINESS MODEL
+================================================================
+1. Revenue model — subscription, transaction fee, licensing, hardware, services
+2. Annual Recurring Revenue (ARR)
+3. Monthly Recurring Revenue (MRR)
+4. Annual recognized revenue
+5. Revenue by product
+6. Revenue by geography
+7. Revenue by customer segment
+8. Average Revenue Per Account (ARPA)
+9. Average Contract Value (ACV)
+10. Average Order Value (AOV)
+11. Contract length
+12. Revenue predictability
+13. Recurring revenue share
+14. One-time revenue share
+15. Deferred revenue
+16. Bookings — signed customer contract value, consistently defined
+17. Revenue backlog — future contracted revenue not yet recognized
+18. Revenue concentration
+19. Pricing model — per user, usage-based, tiered, fixed fee, etc.
+20. Pricing power
+21. Cross-selling potential
+22. Upselling potential
+23. Revenue diversification
+24. Revenue forecast accuracy
+
+Assessment:
+- Predictability
+- Recurring revenue quality
+- Pricing strength
+- Potential to scale
+
+================================================================
+H. FINANCIAL HEALTH AND UNIT ECONOMICS
+================================================================
+1. Gross profit
+2. Gross margin
+3. Operating expenses
+4. EBITDA
+5. Operating profit/loss
+6. Net profit/loss
+7. Cash balance
+8. Monthly burn rate
+9. Gross burn
+10. Net burn
+11. Runway
+12. Accounts receivable
+13. Accounts payable
+14. Working capital
+15. Debt
+16. Debt maturity
+17. Customer Acquisition Cost (CAC)
+18. Lifetime Value (LTV)
+19. LTV/CAC ratio
+20. CAC payback period
+21. Contribution margin
+22. Revenue per employee
+23. Gross profit per employee
+24. Cost to serve
+25. Cash conversion cycle
+26. Financial forecast variance
+27. Break-even point
+28. Capital efficiency
+29. Infrastructure cost — hosting, compute, cloud, etc.
+30. Customer payment delay
+
+Assessment:
+- Financial sustainability
+- Capital efficiency
+- Margins
+- Additional funding required to reach the next milestone
+
+Notes:
+- LTV/CAC, CAC payback and recurring-revenue metrics are especially useful for
+  subscription businesses but may be unsuitable for pre-revenue startups or
+  businesses with infrequent purchases.
+- Runway estimates should account for expected changes in burn and upcoming
+  liabilities, not merely divide cash by a single historical month.
+
+================================================================
+I. SALES AND GO-TO-MARKET STRATEGY
+================================================================
+1. Primary acquisition channels — sales, search, partnerships, referrals, etc.
+2. Customer acquisition cost by channel
+3. Lead volume
+4. Lead quality — percentage meeting qualification criteria
+5. Lead-to-customer conversion
+6. Sales cycle length
+7. Win rate
+8. Sales pipeline value
+9. Sales pipeline coverage — pipeline relative to target
+10. Average deal size
+11. Sales productivity — revenue/bookings per salesperson
+12. Sales team ramp time
+13. Marketing efficiency
+14. Referral rate
+15. Organic acquisition share
+16. Channel partner contribution
+17. Distribution access
+18. International expansion cost
+19. Customer onboarding time
+20. Implementation cost
+21. Sales forecast accuracy
+
+Assessment:
+- Repeatability and efficiency of customer acquisition
+- Scalability of the go-to-market model
+
+================================================================
+J. COMPETITION AND DEFENSIBILITY
+================================================================
+1. Direct competitors
+2. Indirect competitors and alternative solutions
+3. Competitor funding
+4. Competitor revenue — public or verified estimates
+5. Competitor pricing
+6. Competitor growth
+7. Product feature comparison
+8. Performance comparison using independent/reproducible benchmarks
+9. Market share
+10. Switching costs
+11. Network effects
+12. Proprietary data advantage
+13. Intellectual property protection
+14. Brand strength
+15. Distribution advantage
+16. Customer lock-in through integrations/workflows
+17. Replicability — ease of copying the product
+18. Incumbent response risk
+19. Open-source substitution risk
+20. Platform dependency
+21. Competitive differentiation
+22. Long-term moat potential
+
+Assessment:
+- Durability of competitive advantage
+- Whether the advantage may strengthen or erode over time
+
+================================================================
+K. FUNDING HISTORY AND CAPITALIZATION TABLE (CAP TABLE)
+================================================================
+1. Total capital raised
+2. Funding round count
+3. Last funding date
+4. Last funding stage
+5. Amount raised per round
+6. Pre-money valuation
+7. Post-money valuation
+8. Valuation growth between comparable rounds
+9. Investor identities
+10. Lead investor
+11. Investor concentration
+12. Founder ownership
+13. Employee option pool
+14. Fully diluted share count
+15. Convertible notes
+16. SAFEs — Simple Agreements for Future Equity
+17. Liquidation preferences
+18. Anti-dilution provisions
+19. Outstanding debt
+20. Capital raised versus spent
+21. Runway after funding
+22. Proposed raise amount
+23. Proposed valuation
+24. Planned use of funds
+25. Expected dilution
+26. Next-round capital requirement
+27. Down-round risk
+
+Assessment:
+- Attractiveness of investment terms
+- Founder incentives and ownership
+- Ability to finance upcoming milestones
+- Risk from excessive burn, dilution or financing needs
+
+A large amount of capital raised is not inherently positive. It may signal
+investor confidence, but can also indicate high cash consumption, expensive
+expectations or substantial dilution.
+
+================================================================
+L. INVESTOR QUALITY AND FUNDRAISING NETWORK
+================================================================
+1. Existing investor profile — type, sector and stage focus
+2. Investor portfolio — comparable companies backed
+3. Relevant investment experience
+4. Follow-on participation in later rounds
+5. Investor ownership
+6. Board participation — seats or observer rights
+7. Strategic contribution — introductions, expertise and operational help
+8. Syndicate quality and complementarity
+9. Lead investor availability
+10. Fundraising progress — commitments, term sheets, capital secured
+11. Investor concentration risk
+12. Investor conflicts of interest or competing portfolio companies
+13. VC thesis alignment
+14. Check-size fit
+15. Stage fit
+16. Geographic fit
+17. Follow-on capacity
+
+Assessment:
+- Fundraising compatibility
+- Potential value of the investor network
+- Alignment with the VC's mandate
+
+Investor reputation is contextual evidence, not proof of startup quality.
+
+================================================================
+M. OPERATIONS AND EXECUTION
+================================================================
+1. Operating history
+2. Milestone completion rate
+3. Product delivery time
+4. Hiring plan
+5. Hiring success rate
+6. Employee productivity
+7. Staff turnover
+8. Supplier concentration
+9. Supply-chain resilience
+10. Inventory turnover, where relevant
+11. Production capacity
+12. Manufacturing cost per unit
+13. Fulfillment time
+14. Quality defect rate
+15. Customer support burden
+16. Service-level compliance
+17. Geographic operating complexity
+18. Business continuity
+19. Process automation
+20. Management reporting quality
+
+Assessment:
+- Ability to execute the growth plan
+- Operational resilience
+- Risk of costs or complexity growing uncontrollably
+
+================================================================
+N. LEGAL, REGULATORY AND COMPLIANCE RISKS
+================================================================
+1. Incorporation status
+2. Ownership verification and beneficial ownership
+3. Litigation — material ongoing or past disputes
+4. Regulatory approvals and required licenses
+5. Industry-specific compliance
+6. Data protection compliance
+7. Intellectual property ownership
+8. Employment compliance
+9. Contractual obligations
+10. Customer concentration clauses, exclusivity or dependency restrictions
+11. Applicable sanctions exposure
+12. Anti-bribery controls
+13. Cybersecurity incidents
+14. Insurance coverage
+15. Environmental obligations
+16. Tax compliance
+17. Founder or shareholder disputes
+18. Related-party transactions
+19. Change-of-control restrictions
+20. Outstanding guarantees and contingent liabilities
+
+Assessment:
+- Deal-breaking risks
+- Potential liabilities
+- Transaction restrictions
+- Compliance costs that could undermine the investment
+
+A public-data screen cannot reliably establish that a company has no legal or
+compliance problems. Appropriate professional due diligence may be required.
+
+================================================================
+O. RISK AND RESILIENCE
+================================================================
+1. Market risk
+2. Product risk
+3. Financial risk
+4. Execution risk
+5. Customer concentration risk
+6. Supplier dependency risk
+7. Founder dependency risk
+8. Regulatory risk
+9. Technology obsolescence risk
+10. Cybersecurity risk
+11. Data availability and licensing risk
+12. AI model dependency risk
+13. Foreign exchange risk
+14. Interest-rate risk
+15. Geopolitical risk
+16. Climate or environmental risk, where material
+17. Business continuity risk
+18. Downside scenario
+19. Sensitivity analysis
+20. Risk mitigation plan
+
+For each material risk, where possible, record:
+- Probability/likelihood
+- Severity/impact
+- Time horizon
+- Detectability or warning signals
+- Mitigations and responsible owner
+- Evidence and confidence
+
+Assessment:
+- Potential to cause failure or poor returns
+- Ability to identify and mitigate material risks
+
+================================================================
+P. EXIT POTENTIAL AND INVESTOR RETURNS
+================================================================
+1. Potential acquirers
+2. Comparable acquisitions
+3. Comparable IPOs
+4. Comparable exit multiples
+5. Likely exit routes — acquisition, IPO, secondary sale, etc.
+6. Estimated time to exit, with assumptions
+7. Potential exit valuation, by scenario
+8. Expected ownership at exit after future dilution
+9. Initial investment amount
+10. Future follow-on investment
+11. Exit proceeds
+12. Gross Multiple on Invested Capital (MOIC)
+13. Internal Rate of Return (IRR)
+14. Probability-weighted return across scenarios
+15. Downside recovery
+16. Liquidation waterfall
+17. Fund ownership target
+18. Potential contribution to overall fund returns
+19. Return relative to alternatives
+
+Assessment:
+- Whether possible outcomes justify entry valuation, risk, capital commitment
+  and time horizon
+
+Exit values and returns are uncertain. Show scenarios and assumptions rather
+than presenting speculative estimates as facts.
+
+================================================================
+Q. EXTERNAL SIGNALS AND STARTUP MOMENTUM
+================================================================
+1. Website traffic and growth
+2. Search interest and trends
+3. Social engagement trends
+4. GitHub activity — public repository activity, contributors and releases
+5. Open-source adoption — relevant downloads, users or project adoption
+6. Technical hiring signals
+7. Commercial hiring signals
+8. Job posting growth
+9. Product launch frequency
+10. Verified customer announcements
+11. Partnerships
+12. Press mentions from credible outlets
+13. Relevant conference participation and demonstrations
+14. Research publications
+15. Patent filings
+16. Developer adoption, where measurable
+17. App downloads
+18. Public reviews — volume, quality and trends
+19. Credible online visibility growth
+20. Funding announcements
+21. Relevant leadership changes
+
+Assessment:
+- Momentum
+- Emerging demand
+- Technical activity
+- Startup sourcing opportunities
+
+These are indirect signals. Website traffic, social engagement and hiring can
+be manipulated or misleading; use them to identify questions, not to declare
+a company successful.
+
+================================================================
+R. AI-SPECIFIC ASSESSMENT PARAMETERS
+================================================================
+1. AI use case — specific task solved
+2. AI necessity — material advantage over non-AI alternatives
+3. Model ownership — proprietary versus third-party
+4. Model performance on relevant benchmarks
+5. Evaluation quality and methodology
+6. Training data provenance and legal rights
+7. Proprietary dataset size and relevance
+8. Data freshness
+9. Data advantage
+10. Inference cost per request, task or customer
+11. Inference latency
+12. Model serving capacity and throughput
+13. Accuracy on representative tasks
+14. Hallucination rate, where relevant
+15. Material system failure rate
+16. Human intervention/correction rate
+17. Model evaluation coverage, including edge cases
+18. Model drift over time
+19. Fine-tuning cost
+20. Compute dependency — GPUs or external infrastructure
+21. GPU utilization
+22. Model portability and ability to switch providers
+23. AI gross margin after model and inference costs
+24. Data moat and permitted feedback-data collection
+25. AI safety controls
+26. Reproducibility of claimed results
+27. Benchmark validity and fair comparisons
+28. Regulatory readiness for the use case and jurisdiction
+
+Assessment:
+- Whether AI works reliably
+- Whether it delivers measurable value
+- Whether it can be delivered economically
+- Whether its advantage can resist imitation
+
+================================================================
+S. SUSTAINABILITY AND IMPACT
+================================================================
+Use where relevant to an impact-investing, climate-tech or sustainability thesis.
+
+1. Carbon emissions — relevant direct and indirect emissions
+2. Energy consumption
+3. Carbon reduction potential — emissions avoided
+4. Resource efficiency — materials, water or energy saved
+5. Waste reduction
+6. Social impact
+7. Jobs created
+8. Accessibility and availability to underserved groups
+9. Impact measurement methodology
+10. Impact additionality — whether benefits would occur without the product
+11. Impact durability
+12. Sustainability compliance and reporting requirements
+
+Assessment:
+- Verifiable impact
+- Alignment with investor mandate
+- Credibility of impact claims
+
+================================================================
+T. DERIVED PARAMETERS / CALCULATED METRICS
+================================================================
+These metrics are calculated from raw fields and should have clearly defined
+formulas, time periods, units and assumptions.
+
+1. Revenue growth — change in revenue over a defined period
+2. Customer growth — change in paying customers over a defined period
+3. Gross margin = (Revenue - cost of revenue) / Revenue
+4. Net burn = cash outflows - cash inflows
+5. Runway = available cash / estimated monthly net burn, when burn is positive
+6. CAC = acquisition-related costs / new customers acquired
+7. LTV/CAC = estimated customer lifetime value / CAC
+8. CAC payback = time needed to recover customer acquisition cost
+9. NRR = (starting recurring revenue + expansion - contraction - churn) /
+   starting recurring revenue
+10. Revenue concentration = revenue from largest customers / total revenue
+11. Capital efficiency = growth or revenue achieved relative to capital consumed
+12. Hiring growth = percentage change in headcount
+13. Market penetration = relevant customers acquired / estimated addressable
+    customers
+14. Pipeline coverage = qualified pipeline / target bookings or sales
+15. Valuation-to-revenue = valuation / revenue, where revenue is meaningful
+16. Dilution estimate = ownership impact of proposed and future financing
+17. Implied investor MOIC = estimated investor proceeds / total invested capital
+18. Scenario-weighted return = returns weighted by explicit scenario probabilities
+19. Data completeness = percentage of required fields populated
+20. Evidence confidence = reliability, recency and independent verification
+21. Risk-adjusted assessment = investment attractiveness after defined risks and
+    uncertainty are considered
+22. VC thesis fit = alignment with sector, stage, geography and check size
+
+Notes:
+- Define all formulas consistently.
+- Handle zero denominators and unavailable values explicitly.
+- Avoid comparing metrics across incompatible business models or stages.
+- Short histories can make LTV, retention and growth estimates unstable.
+
+================================================================
+U. DATA PROVENANCE AND QUALITY PARAMETERS
+================================================================
+These fields make the recommendation auditable and trustworthy.
+
+1. Source URL or document — origin of each claim
+2. Collection timestamp — when retrieved
+3. Fact effective date — when the fact was true
+4. Verification status — unverified, cross-checked, independently verified
+5. Source reliability
+6. Confidence score for extracted information
+7. Conflicting values from different sources
+8. Missingness indicator — distinguish missing from zero
+9. Data license — permitted use and redistribution
+10. Consent status — authorization for confidential information
+11. Update frequency
+12. Extraction method — API, document extraction, manual review, etc.
+13. Human review status
+14. Historical snapshot — what was known at a past decision date
+15. Currency and units
+16. Metric definition and calculation method
+
+Without these fields, a system can produce convincing recommendations from
+outdated, contradictory or unsupported information.
+
+================================================================
+V. PRIORITIZATION FOR AN MVP
+================================================================
+
+P0 — CORE COMPANY AND MARKET DATA
+- Company identity
+- Sector and sub-sector
+- Founding date and stage
+- Founders and relevant experience
+- Product and customer problem
+- TAM/SAM/SOM with methodology
+- Funding history and valuation, where available
+- Target VC fit and investment constraints
+
+P0 — DEMAND AND TRACTION
+- Paying customers
+- Revenue and growth
+- Retention
+- Customer references
+- Pilot conversion
+- Evidence of willingness to pay
+
+P1 — FINANCIAL HEALTH AND DEFENSIBILITY
+- Gross margin
+- Burn and runway
+- CAC and payback, where appropriate
+- Competitive advantage
+- Technical differentiation
+- Product reliability
+
+P1 — RISK AND INVESTMENT TERMS
+- Cap table
+- Proposed valuation
+- Expected dilution
+- Regulatory exposure
+- Key-person risk
+- Future financing needs
+- Downside scenarios
+
+P2 — ADVANCED PREDICTION FEATURES
+- Historical investor returns
+- Longitudinal operating metrics
+- Follow-on funding patterns
+- Exit outcomes
+- Proprietary VC decision data
+
+P0 means important for a useful initial assessment, not that every field must
+be available for every startup. P1 and P2 can be added as data access and
+validation improve.
+
+================================================================
+W. FINAL VC RECOMMENDATION OUTPUT
+================================================================
+For each startup, provide:
+
+1. Investment fit
+   - How well it matches the VC's strategy and constraints
+
+2. Evidence-based assessment
+   - Strengths and weaknesses supported by sourced data
+
+3. Risk analysis
+   - Most important risks and unanswered questions
+
+4. Comparable companies
+   - Similar startups at a similar stage, with historical outcomes where known
+
+5. Recommended next action
+   - Reject, monitor, request information, or advance to due diligence
+
+Avoid presenting a single score such as "87/100 — invest" without context.
+Prefer separate dimensions, evidence confidence and explicit reasons to
+proceed or stop.
+
+Keep three assessments separate:
+- Startup quality
+- Quality/completeness of available evidence
+- Fit for a specific VC
+
+A strong startup may be a poor fit for one fund. An incomplete profile should
+trigger further investigation rather than automatic rejection.
+
+================================================================
+X. IMPORTANT MODELING AND DATA-COLLECTION WARNINGS
+================================================================
+1. Survivorship bias:
+   Include failed, acquired, inactive and still-operating startups. Public data
+   often overrepresents visible winners.
+
+2. Look-ahead leakage:
+   For historical prediction, only use information that was available at the
+   actual decision date. Do not use future funding rounds or exits as features
+   when predicting what was knowable earlier.
+
+3. Define outcomes:
+   Raising another round is not equivalent to being a good investment.
+   Define the target precisely, such as follow-on funding, revenue milestones,
+   exit outcome or realized investor returns.
+
+4. Missing versus negative:
+   Unknown revenue is not zero revenue. Unreported churn is not proof of good
+   retention. Preserve missingness explicitly.
+
+5. Stage and sector comparability:
+   Compare companies with similar stage, business model, sector, geography and
+   time period whenever possible.
+
+6. Evidence quality:
+   Distinguish founder claims, public announcements, third-party estimates and
+   independently verified metrics.
+
+7. Data licensing and privacy:
+   Check API terms and commercial data licenses. Obtain permission for
+   confidential financials, pitch decks, internal VC memos and customer data.
+   Use access controls and appropriate retention policies.
+
+8. Avoid false precision:
+   Scores and probabilities must be validated against relevant outcomes.
+   Report uncertainty and assumptions. Do not imply that a score guarantees
+   investment success.
+
+9. Bias and fairness:
+   Review whether proxies such as school prestige, location, network size or
+   past investor backing introduce unfair or irrelevant bias.
+
+10. Human decision support:
+    The system should support, not replace, professional investment judgment
+    and due diligence.
+
+================================================================
+END OF DOCUMENT
+================================================================

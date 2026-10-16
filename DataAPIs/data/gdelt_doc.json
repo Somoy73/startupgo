@@ -1,0 +1,44 @@
+{
+  "params": {
+    "query": "\"ocean technology\"",
+    "mode": "artlist",
+    "format": "json",
+    "maxrecords": 5,
+    "timespan": "1week"
+  },
+  "full_size_bytes": 1174,
+  "sample": {
+    "articles": [
+      {
+        "url": "https://www.hellenicshippingnews.com/signal-ocean-acquires-lgmar-to-bring-communication-and-data-together-for-maritime-professionals/",
+        "url_mobile": "",
+        "title": "Signal Ocean Acquires Lgmar to Bring Communication and Data Together for Maritime Professionals",
+        "seendate": "20261015T214500Z",
+        "socialimage": "",
+        "domain": "hellenicshippingnews.com",
+        "language": "English",
+        "sourcecountry": "China"
+      },
+      {
+        "url": "https://www.westhawaiitoday.com/2026/10/15/opinion/letters-your-voice-october-15/",
+        "url_mobile": "",
+        "title": "Letters your voice October 15 | West Hawaii Today",
+        "seendate": "20261015T134500Z",
+        "socialimage": "",
+        "domain": "westhawaiitoday.com",
+        "language": "English",
+        "sourcecountry": "United States"
+      },
+      {
+        "url": "https://royaldutchshellplc.com/2026/10/15/the-shell-leaks-files-15-october-2026/",
+        "url_mobile": "",
+        "title": "THE SHELL LEAKS FILES : 15 OCTOBER 2026 – Royal Dutch Shell Plc . com",
+        "seendate": "20261015T190000Z",
+        "socialimage": "https://royaldutchshellplc.com/wp-content/uploads/2026/10/Screenshot-2026-10-15-at-19.23.05.jpg",
+        "domain": "royaldutchshellplc.com",
+        "language": "English",
+        "sourcecountry": "Netherlands"
+      }
+    ]
+  }
+}

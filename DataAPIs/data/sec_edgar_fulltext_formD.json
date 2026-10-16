@@ -1,0 +1,689 @@
+{
+  "params": {
+    "q": "\"ocean\"",
+    "forms": "D"
+  },
+  "full_size_bytes": 65678,
+  "sample": {
+    "took": 68,
+    "timed_out": false,
+    "_shards": {
+      "total": 50,
+      "successful": 50,
+      "skipped": 0,
+      "failed": 0
+    },
+    "hits": {
+      "total": {
+        "value": 2083,
+        "relation": "eq"
+      },
+      "max_score": 9.9736395,
+      "hits": [
+        {
+          "_index": "edgar_file",
+          "_id": "0000950142-11-000587:primary_doc.xml",
+          "_score": 9.9736395,
+          "_source": {
+            "ciks": [
+              "0001514242"
+            ],
+            "period_ending": null,
+            "file_num": [
+              "021-157180"
+            ],
+            "display_names": [
+              "Bauer Performance Sports Ltd.  (CIK 0001514242)"
+            ],
+            "xsl": "xslFormDX01",
+            "schema_version": "X0704",
+            "sequence": 1,
+            "root_forms": [
+              "D"
+            ],
+            "file_date": "2011-03-22",
+            "biz_states": [
+              "NH"
+            ],
+            "sics": [],
+            "form": "D",
+            "adsh": "0000950142-11-000587",
+            "film_num": [
+              "11704424"
+            ],
+            "biz_locations": [
+              "Greenland, NH"
+            ],
+            "file_type": "D",
+            "file_description": null,
+            "inc_states": [
+              "A1"
+            ],
+            "items": [
+              "06"
+            ]
+          }
+        },
+        {
+          "_index": "edgar_file",
+          "_id": "0001493152-23-021329:primary_doc.xml",
+          "_score": 9.967494,
+          "_source": {
+            "ciks": [
+              "0001869974"
+            ],
+            "period_ending": null,
+            "file_num": [
+              "021-484276"
+            ],
+            "display_names": [
+              "Ocean Biomedical, Inc.  (OCEA, OCEAW)  (CIK 0001869974)"
+            ],
+            "xsl": "xslFormDX01",
+            "schema_version": "X0708",
+            "sequence": 1,
+            "root_forms": [
+              "D"
+            ],
+            "file_date": "2023-06-15",
+            "biz_states": [
+              "NY"
+            ],
+            "sics": [
+              "2834"
+            ],
+            "form": "D",
+            "adsh": "0001493152-23-021329",
+            "film_num": [
+              "231015798"
+            ],
+            "biz_locations": [
+              "New York, NY"
+            ],
+            "file_type": "D",
+            "file_description": null,
+            "inc_states": [
+              "DE"
+            ],
+            "items": [
+              "06B"
+            ]
+          }
+        },
+        {
+          "_index": "edgar_file",
+          "_id": "0001365038-11-000006:primary_doc.xml",
+          "_score": 9.919249,
+          "_source": {
+            "ciks": [
+              "0001365038"
+            ],
+            "period_ending": null,
+            "file_num": [
+              "021-164867"
+            ],
+            "display_names": [
+              "DEMAND MEDIA INC.  (CIK 0001365038)"
+            ],
+            "xsl": "xslFormDX01",
+            "schema_version": "X0704",
+            "sequence": 1,
+            "root_forms": [
+              "D"
+            ],
+            "file_date": "2011-08-24",
+            "biz_states": [
+              "CA"
+            ],
+            "sics": [
+              "7374"
+            ],
+            "form": "D",
+            "adsh": "0001365038-11-000006",
+            "film_num": [
+              "111053297"
+            ],
+            "biz_locations": [
+              "Santa Monica, CA"
+            ],
+            "file_type": "D",
+            "file_description": null,
+            "inc_states": [
+              "DE"
+            ],
+            "items": [
+              "06"
+            ]
+          }
+        },
+        {
+          "_index": "edgar_file",
+          "_id": "0001452340-11-000001:primary_doc.xml",
+          "_score": 9.91124,
+          "_source": {
+            "ciks": [
+              "0001452340"
+            ],
+            "period_ending": null,
+            "file_num": [
+              "021-125236"
+            ],
+            "display_names": [
+              "OCEAN GATE OPPORTUNITY FUND LP  (CIK 0001452340)"
+            ],
+            "xsl": "xslFormDX01",
+            "schema_version": "X0704",
+            "sequence": 1,
+            "root_forms": [
+              "D"
+            ],
+            "file_date": "2011-12-15",
+            "biz_states": [
+              "MA"
+            ],
+            "sics": [],
+            "form": "D/A",
+            "adsh": "0001452340-11-000001",
+            "film_num": [
+              "111263366"
+            ],
+            "biz_locations": [
+              "Marblehead, MA"
+            ],
+            "file_type": "D/A",
+            "file_description": null,
+            "inc_states": [
+              "DE"
+            ],
+            "items": [
+              "06",
+              "3C",
+              "3C.1"
+            ]
+          }
+        },
+        {
+          "_index": "edgar_file",
+          "_id": "0001365038-11-000005:primary_doc.xml",
+          "_score": 9.90081,
+          "_source": {
+            "ciks": [
+              "0001365038"
+            ],
+            "period_ending": null,
+            "file_num": [
+              "021-164784"
+            ],
+            "display_names": [
+              "DEMAND MEDIA INC.  (CIK 0001365038)"
+            ],
+            "xsl": "xslFormDX01",
+            "schema_version": "X0704",
+            "sequence": 1,
+            "root_forms": [
+              "D"
+            ],
+            "file_date": "2011-08-22",
+            "biz_states": [
+              "CA"
+            ],
+            "sics": [
+              "7374"
+            ],
+            "form": "D",
+            "adsh": "0001365038-11-000005",
+            "film_num": [
+              "111049528"
+            ],
+            "biz_locations": [
+              "Santa Monica, CA"
+            ],
+            "file_type": "D",
+            "file_description": null,
+            "inc_states": [
+              "DE"
+            ],
+            "items": [
+              "06"
+            ]
+          }
+        },
+        {
+          "_index": "edgar_file",
+          "_id": "0001442346-10-000002:primary_doc.xml",
+          "_score": 9.899537,
+          "_source": {
+            "ciks": [
+              "0001442346"
+            ],
+            "period_ending": null,
+            "file_num": [
+              "021-121209"
+            ],
+            "display_names": [
+              "FISHERMENS ENERGY OF NEW JERSEY LLC  (CIK 0001442346)"
+            ],
+            "xsl": "xslFormDX01",
+            "schema_version": "X0603",
+            "sequence": 1,
+            "root_forms": [
+              "D"
+            ],
+            "file_date": "2010-04-07",
+            "biz_states": [
+              "NJ"
+            ],
+            "sics": [],
+            "form": "D",
+            "adsh": "0001442346-10-000002",
+            "film_num": [
+              "10735895"
+            ],
+            "biz_locations": [
+              "Cape May, NJ"
+            ],
+            "file_type": "D",
+            "file_description": null,
+            "inc_states": [
+              "NJ"
+            ],
+            "items": [
+              "06"
+            ]
+          }
+        },
+        {
+          "_index": "edgar_file",
+          "_id": "0001567619-19-022602:primary_doc.xml",
+          "_score": 9.896412,
+          "_source": {
+            "ciks": [
+              "0001364250"
+            ],
+            "period_ending": null,
+            "file_num": [
+              "021-354684"
+            ],
+            "display_names": [
+              "Douglas Emmett Inc  (DEI)  (CIK 0001364250)"
+            ],
+            "xsl": "xslFormDX01",
+            "schema_version": "X0708",
+            "sequence": 1,
+            "root_forms": [
+              "D"
+            ],
+            "file_date": "2019-12-04",
+            "biz_states": [
+              "CA"
+            ],
+            "sics": [
+              "6798"
+            ],
+            "form": "D",
+            "adsh": "0001567619-19-022602",
+            "film_num": [
+              "191266810"
+            ],
+            "biz_locations": [
+              "Santa Monica, CA"
+            ],
+            "file_type": "D",
+            "file_description": null,
+            "inc_states": [
+              "MD"
+            ],
+            "items": [
+              "06B"
+            ]
+          }
+        },
+        {
+          "_index": "edgar_file",
+          "_id": "0001365611-16-000001:primary_doc.xml",
+          "_score": 9.865187,
+          "_source": {
+            "ciks": [
+              "0001365611"
+            ],
+            "period_ending": null,
+            "file_num": [
+              "021-274296"
+            ],
+            "display_names": [
+              "REVISION OPTICS INC  (CIK 0001365611)"
+            ],
+            "xsl": "xslFormDX01",
+            "schema_version": "X0707",
+            "sequence": 1,
+            "root_forms": [
+              "D"
+            ],
+            "file_date": "2016-11-10",
+            "biz_states": [
+              "CA"
+            ],
+            "sics": [],
+            "form": "D",
+            "adsh": "0001365611-16-000001",
+            "film_num": [
+              "161989146"
+            ],
+            "biz_locations": [
+              "Lake Forest, CA"
+            ],
+            "file_type": "D",
+            "file_description": null,
+            "inc_states": [
+              "DE"
+            ],
+            "items": [
+              "06B"
+            ]
+          }
+        },
+        {
+          "_index": "edgar_file",
+          "_id": "0001365611-13-000001:primary_doc.xml",
+          "_score": 9.852376,
+          "_source": {
+            "ciks": [
+              "0001365611"
+            ],
+            "period_ending": null,
+            "file_num": [
+              "021-195083"
+            ],
+            "display_names": [
+              "REVISION OPTICS INC  (CIK 0001365611)"
+            ],
+            "xsl": "xslFormDX01",
+            "schema_version": "X0706",
+            "sequence": 1,
+            "root_forms": [
+              "D"
+            ],
+            "file_date": "2013-04-16",
+            "biz_states": [
+              "CA"
+            ],
+            "sics": [],
+            "form": "D",
+            "adsh": "0001365611-13-000001",
+            "film_num": [
+              "13763707"
+            ],
+            "biz_locations": [
+              "Lake Forest, CA"
+            ],
+            "file_type": "D",
+            "file_description": null,
+            "inc_states": [
+              "DE"
+            ],
+            "items": [
+              "06"
+            ]
+          }
+        },
+        {
+          "_index": "edgar_file",
+          "_id": "0001452340-10-000002:primary_doc.xml",
+          "_score": 9.851677,
+          "_source": {
+            "ciks": [
+              "0001452340"
+            ],
+            "period_ending": null,
+            "file_num": [
+              "021-125236"
+            ],
+            "display_names": [
+              "OCEAN GATE OPPORTUNITY FUND LP  (CIK 0001452340)"
+            ],
+            "xsl": "xslFormDX01",
+            "schema_version": "X0704",
+            "sequence": 1,
+            "root_forms": [
+              "D"
+            ],
+            "file_date": "2010-12-17",
+            "biz_states": [
+              "MA"
+            ],
+            "sics": [],
+            "form": "D/A",
+            "adsh": "0001452340-10-000002",
+            "film_num": [
+              "101259874"
+            ],
+            "biz_locations": [
+              "Marblehead, MA"
+            ],
+            "file_type": "D/A",
+            "file_description": null,
+            "inc_states": [
+              "DE"
+            ],
+            "items": [
+              "06",
+              "3C",
+              "3C.1"
+            ]
+          }
+        },
+        "... +90 more"
+      ]
+    },
+    "aggregations": {
+      "entity_filter": {
+        "doc_count_error_upper_bound": 1,
+        "sum_other_doc_count": 1823,
+        "buckets": [
+          {
+            "key": "OCEAN FUND LTD  (CIK 0001169982)",
+            "doc_count": 19
+          },
+          {
+            "key": "VECTORMAX Corp  (CIK 0001136418)",
+            "doc_count": 18
+          },
+          {
+            "key": "Wilshire Institutional Master Fund II SPC  (CIK 0001518631)",
+            "doc_count": 16
+          },
+          {
+            "key": "Freedom Telecom Services, Inc.  (CIK 0001652134)",
+            "doc_count": 14
+          },
+          {
+            "key": "Ocean Partners LLC  (CIK 0001319621)",
+            "doc_count": 14
+          },
+          {
+            "key": "Wilshire Solutions Funds Trust  (CIK 0001574159)",
+            "doc_count": 13
+          },
+          {
+            "key": "Blue Ocean Portfolios, LLC  (CIK 0001519398)",
+            "doc_count": 12
+          },
+          {
+            "key": "PENTSAO FUND LP  (CIK 0001421194)",
+            "doc_count": 12
+          },
+          {
+            "key": "Arete Macro US Feeder Fund  (CIK 0001676493)",
+            "doc_count": 11
+          },
+          {
+            "key": "NATIONWIDE PRIVATE PLACEMENT VARIABLE ACCOUNT  (CIK 0001135856)",
+            "doc_count": 10
+          },
+          "... +20 more"
+        ]
+      },
+      "sic_filter": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 2,
+        "buckets": [
+          {
+            "key": "1000",
+            "doc_count": 14
+          },
+          {
+            "key": "6798",
+            "doc_count": 8
+          },
+          {
+            "key": "2834",
+            "doc_count": 6
+          },
+          {
+            "key": "3714",
+            "doc_count": 4
+          },
+          {
+            "key": "8742",
+            "doc_count": 4
+          },
+          {
+            "key": "0900",
+            "doc_count": 3
+          },
+          {
+            "key": "3630",
+            "doc_count": 3
+          },
+          {
+            "key": "4931",
+            "doc_count": 3
+          },
+          {
+            "key": "6770",
+            "doc_count": 3
+          },
+          {
+            "key": "1382",
+            "doc_count": 2
+          },
+          "... +20 more"
+        ]
+      },
+      "biz_states_filter": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 151,
+        "buckets": [
+          {
+            "key": "CA",
+            "doc_count": 539
+          },
+          {
+            "key": "FL",
+            "doc_count": 316
+          },
+          {
+            "key": "NY",
+            "doc_count": 209
+          },
+          {
+            "key": "E9",
+            "doc_count": 201
+          },
+          {
+            "key": "NJ",
+            "doc_count": 64
+          },
+          {
+            "key": "CT",
+            "doc_count": 60
+          },
+          {
+            "key": "MD",
+            "doc_count": 44
+          },
+          {
+            "key": "TX",
+            "doc_count": 41
+          },
+          {
+            "key": "MA",
+            "doc_count": 39
+          },
+          {
+            "key": "N4",
+            "doc_count": 39
+          },
+          "... +20 more"
+        ]
+      },
+      "form_filter": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 0,
+        "buckets": [
+          {
+            "key": "D",
+            "doc_count": 2083
+          }
+        ]
+      }
+    },
+    "query": {
+      "_source": {
+        "exclude": [
+          "doc_text"
+        ]
+      },
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "match_phrase": {
+                "doc_text": "ocean"
+              }
+            }
+          ],
+          "must_not": [],
+          "should": [],
+          "filter": [
+            {
+              "terms": {
+                "root_forms": [
+                  "D"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "from": 0,
+      "size": 100,
+      "aggregations": {
+        "form_filter": {
+          "terms": {
+            "field": "root_forms",
+            "size": 30
+          }
+        },
+        "entity_filter": {
+          "terms": {
+            "field": "display_names.raw",
+            "size": 30
+          }
+        },
+        "sic_filter": {
+          "terms": {
+            "field": "sics",
+            "size": 30
+          }
+        },
+        "biz_states_filter": {
+          "terms": {
+            "field": "biz_states",
+            "size": 30
+          }
+        }
+      }
+    }
+  }
+}

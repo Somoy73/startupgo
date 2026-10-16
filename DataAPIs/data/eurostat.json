@@ -1,0 +1,291 @@
+{
+  "params": {
+    "code": "fish_aq2a",
+    "geo": "FI",
+    "lastTimePeriod": 1
+  },
+  "full_size_bytes": 33580,
+  "sample": {
+    "label": "Production from aquaculture excluding hatcheries and nurseries (from 2008 onwards)",
+    "id": [
+      "freq",
+      "aquameth",
+      "aquaenv",
+      "species",
+      "fishreg",
+      "unit",
+      "geo",
+      "time"
+    ],
+    "size": [
+      1,
+      10,
+      6,
+      277,
+      10,
+      3,
+      1,
+      1
+    ],
+    "dimension": {
+      "freq": {
+        "label": "Time frequency",
+        "category": {
+          "index": {
+            "A": 0
+          },
+          "label": {
+            "A": "Annual"
+          }
+        }
+      },
+      "aquameth": {
+        "label": "Aquaculture method",
+        "category": {
+          "index": {
+            "TOTAL": 0,
+            "PON": 1,
+            "TNK": 2,
+            "ENC": 3,
+            "CAG": 4,
+            "RES": 5,
+            "ONB": 6,
+            "OFB": 7,
+            "OTH": 8,
+            "NSP": 9
+          },
+          "label": {
+            "TOTAL": "All methods",
+            "PON": "Ponds",
+            "TNK": "Tanks and raceways",
+            "ENC": "Enclosures and pens",
+            "CAG": "Cages",
+            "RES": "Recirculation systems",
+            "ONB": "On bottom",
+            "OFB": "Off bottom",
+            "OTH": "Other methods",
+            "NSP": "Not specified"
+          }
+        }
+      },
+      "aquaenv": {
+        "label": "Aquatic environment",
+        "category": {
+          "index": {
+            "TOTAL": 0,
+            "FRW": 1,
+            "SBW": 2,
+            "SEA": 3,
+            "BRK": 4,
+            "NSP": 5
+          },
+          "label": {
+            "TOTAL": "Total",
+            "FRW": "Freshwater",
+            "SBW": "Sea and brackish water (total)",
+            "SEA": "Seawater",
+            "BRK": "Brackish water",
+            "NSP": "Not specified"
+          }
+        }
+      },
+      "species": {
+        "label": "Fish species",
+        "category": {
+          "index": {
+            "F00": 0,
+            "F01": 1,
+            "F02": 2,
+            "F04": 3,
+            "F07": 4,
+            "F08": 5,
+            "F10": 6,
+            "F11": 7,
+            "F12": 8,
+            "F13": 9,
+            "F20": 10,
+            "F21": 11,
+            "F22": 12,
+            "F23": 13,
+            "F25": 14,
+            "F30": 15,
+            "F31": 16,
+            "F32": 17,
+            "F33": 18,
+            "F36": 19,
+            "F37": 20,
+            "F39": 21,
+            "F40": 22,
+            "F41": 23,
+            "F42": 24,
+            "F43": 25,
+            "F45": 26,
+            "F47": 27,
+            "F50": 28,
+            "F51": 29,
+            "F52": 30,
+            "F53": 31,
+            "F54": 32,
+            "F55": 33,
+            "F56": 34,
+            "F57": 35,
+            "F58": 36,
+            "F70": 37,
+            "F71": 38,
+            "F77": 39
+          },
+          "label": {
+            "F00": "TOTAL FISHERY PRODUCTS",
+            "F01": "TOTAL AQUATIC ANIMALS",
+            "F02": "TOTAL FRESHWATER AND DIADROMOUS FISH",
+            "F04": "TOTAL SHELLFISH",
+            "F07": "TOTAL FINFISH",
+            "F08": "TOTAL FINFISH AND SHELLFISH",
+            "F10": "Freshwater fishes",
+            "F11": "Carps, barbels and other cyprinids",
+            "F12": "Tilapias and other cichlids",
+            "F13": "Miscellaneous freshwater fishes",
+            "F20": "Diadromous fishes",
+            "F21": "Sturgeons, paddlefishes",
+            "F22": "River eels",
+            "F23": "Salmons, trouts, smelts",
+            "F25": "Miscellaneous diadromous fishes",
+            "F30": "Marine fishes",
+            "F31": "Flounders, halibuts, soles",
+            "F32": "Cods, hakes, haddocks",
+            "F33": "Miscellaneous coastal fishes",
+            "F36": "Tunas, bonitos, billfishes",
+            "F37": "Miscellaneous pelagic fishes",
+            "F39": "Marine fishes not identified",
+            "F40": "Crustaceans",
+            "F41": "Freshwater crustaceans",
+            "F42": "Crabs, sea-spiders",
+            "F43": "Lobsters, spiny-rock lobsters",
+            "F45": "Shrimps, prawns",
+            "F47": "Miscellaneous marine crustaceans",
+            "F50": "Molluscs",
+            "F51": "Freshwater molluscs",
+            "F52": "Abalones, winkles, conchs",
+            "F53": "Oysters",
+            "F54": "Mussels",
+            "F55": "Scallops, pectens",
+            "F56": "Clams, cockles, arkshells",
+            "F57": "Squids, cuttlefishes, octopuses",
+            "F58": "Miscellaneous marine molluscs",
+            "F70": "Miscellaneous aquatic animals",
+            "F71": "Frogs and other amphibians",
+            "F77": "Miscellaneous aquatic invertebrates"
+          }
+        }
+      },
+      "fishreg": {
+        "label": "Fishing regions",
+        "category": {
+          "index": {
+            "0": 0,
+            "9": 1,
+            "1": 2,
+            "4": 3,
+            "5": 4,
+            "10": 5,
+            "27": 6,
+            "34": 7,
+            "37": 8,
+            "NSP": 9
+          },
+          "label": {
+            "0": "Total fishing areas",
+            "9": "Inland waters - total",
+            "1": "Inland waters - Africa",
+            "4": "Inland waters - Asia",
+            "5": "Inland waters - Europe",
+            "10": "Marine areas",
+            "27": "Atlantic, Northeast",
+            "34": "Atlantic, Eastern Central",
+            "37": "Mediterranean and Black Sea",
+            "NSP": "Not specified"
+          }
+        }
+      },
+      "unit": {
+        "label": "Unit of measure",
+        "category": {
+          "index": {
+            "EUR": 0,
+            "EUR_T": 1,
+            "TLW": 2
+          },
+          "label": {
+            "EUR": "Euro",
+            "EUR_T": "Euro per tonne",
+            "TLW": "Tonnes live weight"
+          }
+        }
+      },
+      "geo": {
+        "label": "Geopolitical entity (reporting)",
+        "category": {
+          "index": {
+            "FI": 0
+          },
+          "label": {
+            "FI": "Finland"
+          }
+        }
+      },
+      "time": {
+        "label": "Time",
+        "category": {
+          "index": {
+            "2024": 0
+          },
+          "label": {
+            "2024": "2024"
+          }
+        }
+      }
+    },
+    "value": {
+      "207750": 3370093.4,
+      "207751": 4922,
+      "207752": 684.7,
+      "207762": 3370093.4,
+      "207763": 4922,
+      "207764": 684.7,
+      "207753": 3370093.4,
+      "207754": 4922,
+      "207755": 684.7,
+      "207780": 3370093.4,
+      "207781": 4922,
+      "207782": 684.7,
+      "207792": 3370093.4,
+      "207793": 4922,
+      "207794": 684.7,
+      "207783": 3370093.4,
+      "207784": 4922,
+      "207785": 684.7,
+      "207810": 3370093.4,
+      "207811": 4922,
+      "207812": 684.7,
+      "207822": 3370093.4,
+      "207823": 4922,
+      "207824": 684.7,
+      "207813": 3370093.4,
+      "207814": 4922,
+      "207815": 684.7,
+      "207870": 3370093.4,
+      "207871": 4922,
+      "207872": 684.7,
+      "207882": 3370093.4,
+      "207883": 4922,
+      "207884": 684.7,
+      "207873": 3370093.4,
+      "207874": 4922,
+      "207875": 684.7,
+      "207900": 3370093.4,
+      "207901": 4922,
+      "207902": 684.7,
+      "207912": 3370093.4
+    }
+  }
+}
