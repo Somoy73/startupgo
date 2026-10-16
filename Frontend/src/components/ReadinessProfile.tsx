@@ -41,7 +41,12 @@ export function ReadinessProfile({ levels, lagging }: Props) {
             <p className="level-text">
               <strong className="tabular">L{l.level}</strong> {l.summary}
               {isLagging && <strong> · Lagging: 3+ levels below the median</strong>}
-              {l.next_summary && <span className="next"> Next (L{l.level + 1}): {l.next_summary}</span>}
+              {l.next_summary && (
+                <span className="next">
+                  {" "}
+                  Next (L{l.level + 1}): {l.next_summary}
+                </span>
+              )}
             </p>
           </div>
         );
