@@ -8,16 +8,10 @@ import { useAsync } from "../../lib/useAsync";
 
 const loadMemo = (slug: string) =>
   backend.memo(slug).catch((e: unknown) => {
-    if (e instanceof ApiError && e.status === 404) throw new Error(`No startup “${slug}” in the database.`);
+    if (e instanceof ApiError && e.status === 404)
+      throw new Error(`No startup “${slug}” in the database.`);
     throw e;
   });
-
-const ENGINES: Record<string, string> = {
-  agent: "StartupGo research agent",
-  "seed-estimate": "Analyst seed estimate",
-  analyst: "Analyst assessment",
-  "startupgo-pipeline": "StartupGo pipeline",
-};
 
 const pct = (n: number) => `${Math.round(n * 100)}%`;
 const money = (amount: number | null, currency: string | null) =>
@@ -54,30 +48,17 @@ export function MemoPage() {
 }
 
 function MemoDocument({ memo }: { memo: InvestmentMemo }) {
-  const { startup: s, recommendation: rec, assessment } = memo;
+  const { startup: s, recommendation: rec } = memo;
   const location = [s.city, s.country].filter((x, i, a) => x && a.indexOf(x) === i).join(", ");
   const rubric = s.investment;
   const kpis = s.ocean_kpis.filter((k) => k.evidence_level > 0);
 
   // Sections are numbered in the order they appear; empty ones are left out.
   const sections: { title: string; body: ReactNode }[] = [];
-  const add = (title: string, show: boolean, body: ReactNode) => show && sections.push({ title, body });
+  const add = (title: string, show: boolean, body: ReactNode) =>
+    show && sections.push({ title, body });
 
-  add(
-    "Executive summary",
-    true,
-    <>
-      <p className="memo-lead">{s.description}</p>
-      {assessment && (
-        <p className="memo-muted">
-          Scores from the {ENGINES[assessment.engine] ?? assessment.engine} of {assessment.assessed_on.slice(0, 10)}{" "}
-          (confidence: {assessment.confidence}
-          {assessment.judge_status ? `, judge: ${assessment.judge_status.replaceAll("_", " ")}` : ""}).
-          {assessment.rationale && <> Basis: {assessment.rationale}</>}
-        </p>
-      )}
-    </>,
-  );
+  add("Executive summary", true, <p className="memo-summary">{memo.summary.join(" ")}</p>);
 
   add(
     "Investment highlights and key risks",
@@ -108,7 +89,10 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
       </thead>
       <tbody>
         {s.levels.map((l) => (
-          <tr key={l.dimension} className={s.scores.lagging_dimensions.includes(l.dimension) ? "is-lagging" : undefined}>
+          <tr
+            key={l.dimension}
+            className={s.scores.lagging_dimensions.includes(l.dimension) ? "is-lagging" : undefined}
+          >
             <td>
               <strong>{l.name}</strong>
               <div className="memo-muted">{l.dimension}</div>
@@ -164,8 +148,11 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
     rubric && (
       <>
         <p className="memo-muted">
-          {rubric.source === "agent" ? "The research agent's assessment" : "The agent's rubric applied to the facts on record"}:
-          overall {rubric.investment_score?.toFixed(1) ?? "n/a"}/5, evidence confidence {pct(rubric.overall_confidence)}.
+          {rubric.source === "agent"
+            ? "The research agent's assessment"
+            : "The agent's rubric applied to the facts on record"}
+          : overall {rubric.investment_score?.toFixed(1) ?? "n/a"}/5, evidence confidence{" "}
+          {pct(rubric.overall_confidence)}.
         </p>
         <table className="memo-table">
           <thead>
@@ -177,26 +164,38 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
             </tr>
           </thead>
           <tbody>
-            {rubric.criteria.filter((c) => c.score != null).map((c) => (
-              <tr key={c.name}>
-                <td>
-                  <strong>{c.name}</strong>
-                </td>
-                <td>
-                  <Dots value={c.score} max={5} />
-                </td>
-                <td className="memo-muted">
-                  {c.confidence_label} ({c.fields_found}/{c.fields_total} fields)
-                </td>
-                <td>{c.reasons.length ? c.reasons.join("; ") : <span className="memo-muted">No facts</span>}</td>
-              </tr>
-            ))}
+            {rubric.criteria
+              .filter((c) => c.score != null)
+              .map((c) => (
+                <tr key={c.name}>
+                  <td>
+                    <strong>{c.name}</strong>
+                  </td>
+                  <td>
+                    <Dots value={c.score} max={5} />
+                  </td>
+                  <td className="memo-muted">
+                    {c.confidence_label} ({c.fields_found}/{c.fields_total} fields)
+                  </td>
+                  <td>
+                    {c.reasons.length ? (
+                      c.reasons.join("; ")
+                    ) : (
+                      <span className="memo-muted">No facts</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
         {rubric.criteria.some((c) => c.score == null) && (
           <p className="memo-muted memo-note">
             Not scored yet (no facts on record):{" "}
-            {rubric.criteria.filter((c) => c.score == null).map((c) => c.name).join(", ")}.
+            {rubric.criteria
+              .filter((c) => c.score == null)
+              .map((c) => c.name)
+              .join(", ")}
+            .
           </p>
         )}
       </>
@@ -260,7 +259,9 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
           <tr key={i}>
             <td className="tabular">{f.event_date ?? "—"}</td>
             <td>
-              {f.round_label ? stageLabel(f.round_label) : stageLabel(f.event_type.replaceAll("_", " "))}
+              {f.round_label
+                ? stageLabel(f.round_label)
+                : stageLabel(f.event_type.replaceAll("_", " "))}
               <div className="memo-muted">{f.status}</div>
             </td>
             <td className="num">{money(f.amount, f.currency)}</td>
@@ -308,7 +309,11 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
                 {g.is_eic && <span className="memo-chip evidence-3">EIC</span>}
                 {g.is_mission_ocean && <span className="memo-chip evidence-2">Mission Ocean</span>}
                 <div className="memo-muted">
-                  {[g.role, g.start_date?.slice(0, 4), g.ec_contribution != null && money(g.ec_contribution, g.currency ?? "EUR")]
+                  {[
+                    g.role,
+                    g.start_date?.slice(0, 4),
+                    g.ec_contribution != null && money(g.ec_contribution, g.currency ?? "EUR"),
+                  ]
                     .filter(Boolean)
                     .join(" · ")}
                 </div>
@@ -335,7 +340,13 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
         {memo.peers.map((p) => (
           <tr key={p.name}>
             <td>
-              <strong>{p.name}</strong>
+              {p.slug ? (
+                <Link to={`/startups/${p.slug}`} className="memo-peer-link">
+                  <strong>{p.name}</strong>
+                </Link>
+              ) : (
+                <strong>{p.name}</strong>
+              )}
             </td>
             <td>{p.sector ?? "—"}</td>
             <td className="num">{pct(p.similarity)}</td>
@@ -390,7 +401,12 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
           <Fact label="Location" value={location || "—"} />
           <Fact label="Stage" value={stageLabel(s.stage)} />
           <Fact label="Founded" value={s.founded_year ? String(s.founded_year) : "—"} />
-          <Fact label="Pipeline" value={PIPELINE_LABELS[s.pipeline_stage as keyof typeof PIPELINE_LABELS] ?? s.pipeline_stage} />
+          <Fact
+            label="Pipeline"
+            value={
+              PIPELINE_LABELS[s.pipeline_stage as keyof typeof PIPELINE_LABELS] ?? s.pipeline_stage
+            }
+          />
           <Fact
             label="Website"
             value={
@@ -411,14 +427,28 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
           <span className="memo-eyebrow">Recommendation</span>
           <strong className="memo-verdict-title">{rec.verdict}</strong>
         </div>
-        <p>{rec.rationale}</p>
+        <ul className="memo-verdict-points">
+          {rec.points.map((point) => (
+            <li key={point}>{point}</li>
+          ))}
+        </ul>
       </section>
 
       {s.assessed && (
         <div className="memo-metrics">
-          <Metric label="Investment potential" value={Math.round(s.scores.potential)} suffix="/100" note={s.scores.band} />
+          <Metric
+            label="Investment potential"
+            value={Math.round(s.scores.potential)}
+            suffix="/100"
+            note={s.scores.band}
+          />
           <Metric label="Readiness index" value={Math.round(s.scores.readiness)} suffix="/100" />
-          <Metric label="Ocean impact" value={Math.round(s.scores.ocean_impact)} suffix="/100" note={s.scores.ocean_evidence_label} />
+          <Metric
+            label="Ocean impact"
+            value={Math.round(s.scores.ocean_impact)}
+            suffix="/100"
+            note={s.scores.ocean_evidence_label}
+          />
           <Metric label="Funding momentum" value={Math.round(s.scores.momentum)} suffix="/100" />
           <Metric
             label="Disclosed funding"
@@ -466,7 +496,17 @@ function Fact({ label, value }: { label: string; value: ReactNode }) {
   );
 }
 
-function Metric({ label, value, suffix, note }: { label: string; value: ReactNode; suffix?: string | undefined; note?: string | undefined }) {
+function Metric({
+  label,
+  value,
+  suffix,
+  note,
+}: {
+  label: string;
+  value: ReactNode;
+  suffix?: string | undefined;
+  note?: string | undefined;
+}) {
   return (
     <div className="memo-metric">
       <span className="memo-eyebrow">{label}</span>
@@ -519,7 +559,13 @@ function SourceLink({ url }: { url: string }) {
   return (
     <>
       {" "}
-      <a href={url} target="_blank" rel="noreferrer" className="memo-src" aria-label={`Source: ${host(url)}`}>
+      <a
+        href={url}
+        target="_blank"
+        rel="noreferrer"
+        className="memo-src"
+        aria-label={`Source: ${host(url)}`}
+      >
         <IconExternal />
       </a>
     </>

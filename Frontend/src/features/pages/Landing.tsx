@@ -1,9 +1,8 @@
-import { ArrowRight, CalendarDays, TrendingUp } from "lucide-react";
+import { ArrowRight, CalendarDays, Trophy, Waves } from "lucide-react";
 import type { ReactNode } from "react";
 import { backend } from "../../api/backend";
 import type { StartupSummary } from "../../api/backend-types";
 import { CordisWidget } from "../../components/CordisWidget";
-import { Meter } from "../../components/Scores";
 import { score } from "../../lib/format";
 import { Link } from "../../lib/navigation";
 import { navItems } from "../../lib/nav-items";
@@ -15,14 +14,30 @@ const dashboards = (startups: StartupSummary[]) => {
   return {
     // Most recently found first; startups found in the same batch, youngest company first.
     newest: [...startups]
-      .sort((a, b) => (b.created_at ?? "").localeCompare(a.created_at ?? "") || (b.founded_year ?? 0) - (a.founded_year ?? 0))
+      .sort(
+        (a, b) =>
+          (b.created_at ?? "").localeCompare(a.created_at ?? "") ||
+          (b.founded_year ?? 0) - (a.founded_year ?? 0),
+      )
       .slice(0, 5),
-    trending: [...assessed].sort((a, b) => b.scores.momentum - a.scores.momentum).slice(0, 5),
-    topImpact: [...assessed].sort((a, b) => b.scores.ocean_impact - a.scores.ocean_impact).slice(0, 3),
+    // The VC Investment Score (the agent's rubric, 0-100), highest first.
+    topVc: startups
+      .filter((s) => s.investment?.investment_percent != null)
+      .sort((a, b) => vcScore(b) - vcScore(a) || a.name.localeCompare(b.name))
+      .slice(0, 5),
+    // Ocean Impact Readiness (1-5), highest first; ties by the ocean impact score.
+    topImpact: startups
+      .filter((s) => s.investment?.ocean_impact_readiness != null)
+      .sort((a, b) => oir(b) - oir(a) || b.scores.ocean_impact - a.scores.ocean_impact)
+      .slice(0, 3),
   };
 };
 
-const foundOn = (createdAt: string | null | undefined) => (createdAt ? createdAt.slice(0, 10) : "—");
+const vcScore = (s: StartupSummary) => s.investment?.investment_percent ?? 0;
+const oir = (s: StartupSummary) => s.investment?.ocean_impact_readiness ?? 0;
+
+const foundOn = (createdAt: string | null | undefined) =>
+  createdAt ? createdAt.slice(0, 10) : "—";
 
 export function Landing() {
   const { data, loading, error } = useAsync(() => backend.startups().then(dashboards), []);
@@ -78,14 +93,17 @@ export function Landing() {
 
           <section className="dash-card" aria-labelledby="trending-heading">
             <div className="dash-card-head">
-              <h2 id="trending-heading">Trending</h2>
-              <span className="small muted">By funding momentum</span>
+              <h2 id="trending-heading">Top VC startups</h2>
+              <span className="small muted">VC investment score out of 100</span>
             </div>
             <div className="rank-list">
-              {data.trending.map((s, i) => (
+              {data.topVc.map((s, i) => (
                 <RankRow key={s.slug} rank={i + 1} startup={s}>
-                  <span className="growth-pill">
-                    <TrendingUp /> Momentum {score(s.scores.momentum)}
+                  <span
+                    className="growth-pill"
+                    title="VC investment score: the agent's rubric on 10 criteria, 0-100"
+                  >
+                    <Trophy /> {score(vcScore(s))}
                   </span>
                 </RankRow>
               ))}
@@ -95,12 +113,14 @@ export function Landing() {
           <section className="dash-card" aria-labelledby="impact-heading">
             <div className="dash-card-head">
               <h2 id="impact-heading">Top ocean impact</h2>
-              <span className="small muted">Score out of 100</span>
+              <span className="small muted">Ocean Impact Readiness (OIR) out of 5</span>
             </div>
             <div className="rank-list">
               {data.topImpact.map((s, i) => (
                 <RankRow key={s.slug} rank={i + 1} startup={s}>
-                  <Meter value={s.scores.ocean_impact} label="Ocean impact" />
+                  <span className="growth-pill" title="Ocean Impact Readiness, 1-5">
+                    <Waves /> OIR {oir(s)}/5
+                  </span>
                 </RankRow>
               ))}
             </div>

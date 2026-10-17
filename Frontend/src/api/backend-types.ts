@@ -257,7 +257,15 @@ export type InvestmentMemo = {
     rationale: string | null;
     judge_status: string | null;
   } | null;
-  recommendation: { verdict: string; tone: "positive" | "neutral" | "caution"; rationale: string };
+  recommendation: {
+    verdict: string;
+    tone: "positive" | "neutral" | "caution";
+    rationale: string;
+    /** The recommendation's reasons, one per bullet. */
+    points: string[];
+  };
+  /** Executive summary: paragraphs justifying the recommendation. */
+  summary: string[];
   highlights: string[];
   risks: string[];
   questions: string[];
