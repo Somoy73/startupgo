@@ -51,6 +51,20 @@ def test_research_stores_the_entry_and_the_assessment(tmp_path, monkeypatch, age
     assert run["trl"] == 6 and "agent entry acme-fi" in run["rationale"]
 
 
+def test_research_logs_what_the_agent_retrieved(tmp_path, monkeypatch, agent):
+    s = settings(tmp_path, monkeypatch)
+    fake_agent, _ = agent
+    fake_agent.loader.log = fake_agent.log  # what factory.build_agent does
+    pipeline = ResearchPipeline(s, build=lambda settings, refresh: agent)
+    pipeline.research(Candidate("Acme Ocean", "https://acme.fi"))
+    (run,) = rows(s.database, "SELECT * FROM agent_runs")
+    assert (run["name"], run["status"], run["entry_id"]) == ("Acme Ocean", "ok", "acme-fi")
+    pages = rows(s.database, "SELECT * FROM agent_retrievals WHERE run_id = ? ORDER BY seq", run["id"])
+    assert pages and pages[0]["url"] == "https://acme.fi/" and pages[0]["kind"] == "page"
+    assert any(p["used"] for p in pages)
+    assert fake_agent.log.items == []  # drained for the next candidate
+
+
 def test_candidates_are_pending_database_startups_then_new_discovered_leads(tmp_path, monkeypatch, agent):
     s = settings(tmp_path, monkeypatch, discover='{ source = "wellfound", url = "https://wellfound.com/startups/industry/x" }')
     fake_agent, _ = agent

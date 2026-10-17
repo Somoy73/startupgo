@@ -597,3 +597,38 @@ CREATE INDEX IF NOT EXISTS idx_entities_kind ON entities(kind);
 CREATE INDEX IF NOT EXISTS idx_entities_domain ON entities(domain);
 CREATE INDEX IF NOT EXISTS idx_facts_entity ON facts(entity_id, section, field);
 CREATE INDEX IF NOT EXISTS idx_assessments_entity ON assessments(entity_id, engine, assessed_at);
+
+-- Retrieval log: what the Agent looked at on each research run (Modules/Agent retrievals.py). One run per
+-- candidate researched; every page loaded and web search made is one retrieval, in order.
+-- Facts cite their retrieval through facts.source_url = agent_retrievals.url.
+CREATE TABLE IF NOT EXISTS agent_runs (
+    id          INTEGER PRIMARY KEY,
+    entity_id   INTEGER REFERENCES entities(id) ON DELETE SET NULL,  -- NULL until the startup exists
+    name        TEXT NOT NULL,
+    website     TEXT NOT NULL,
+    status      TEXT NOT NULL CHECK (status IN ('ok','error')),
+    started_at  TEXT NOT NULL,
+    finished_at TEXT NOT NULL,
+    entry_id    TEXT,                       -- Modules/Agent output/startups/<entry_id>.json produced by this run
+    error       TEXT
+);
+
+CREATE TABLE IF NOT EXISTS agent_retrievals (
+    id           INTEGER PRIMARY KEY,
+    run_id       INTEGER NOT NULL REFERENCES agent_runs(id) ON DELETE CASCADE,
+    seq          INTEGER NOT NULL,          -- order within the run
+    kind         TEXT NOT NULL CHECK (kind IN ('page','search')),
+    url          TEXT,                      -- page URL
+    query        TEXT,                      -- search query, for kind = 'search'
+    provider     TEXT,                      -- search provider (gemini | brave)
+    source_type  TEXT,                      -- website | pitch_deck | news | registry | ... (Agent source types)
+    status       TEXT NOT NULL CHECK (status IN ('ok','error','skipped','cached')),
+    detail       TEXT,                      -- error message, skip reason, or JSON list of search hits
+    used         INTEGER NOT NULL DEFAULT 0, -- 1 when a stored fact cites this URL
+    retrieved_at TEXT NOT NULL,
+    UNIQUE (run_id, seq)
+);
+
+CREATE INDEX IF NOT EXISTS idx_agent_runs_entity ON agent_runs(entity_id, started_at);
+CREATE INDEX IF NOT EXISTS idx_agent_retr_run    ON agent_retrievals(run_id, seq);
+CREATE INDEX IF NOT EXISTS idx_agent_retr_url    ON agent_retrievals(url);

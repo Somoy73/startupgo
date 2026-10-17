@@ -41,6 +41,25 @@ class TestRank:
         assert notpla.matched == ("Seaweed", "Kelp")  # its own name isn't a match term
         assert (kelpco.slug, kelpco.entry, kelpco.info) == (None, "kelpco", {"trl": 4}) and 0 < kelpco.relevance < 1
 
+    def test_matches_are_database_entities_by_key(self):
+        documents = {
+            "startup:notpla": {"key": "startup:notpla", "kind": "startup", "name": "Notpla", "startup": "notpla", "entry": None, "info": {}},
+            "entry:notpla-com": {"key": "startup:notpla", "kind": "startup", "name": "Notpla Ltd", "startup": "notpla", "entry": "notpla-com", "info": {}},
+            "blueinvest:84": {"key": "blueinvest:84", "kind": "candidate", "name": "Skizo", "startup": None, "entry": None, "info": {}},
+            "entry:kelpco": {"key": "entry:kelpco", "kind": "entry", "name": "KelpCo", "startup": None, "entry": "kelpco", "info": {}},
+        }
+        data = {"chunks": [item("entry:notpla-com"), item("blueinvest:84"), item("entry:kelpco")]}
+        found = [(m.key, m.kind, m.slug, m.entry) for m in rank(data, documents)]
+        assert found == [
+            ("startup:notpla", "startup", "notpla", "notpla-com"),
+            ("blueinvest:84", "candidate", None, None),
+            ("entry:kelpco", "entry", None, "kelpco"),
+        ]
+
+    def test_manifests_from_before_entity_keys_still_group_by_startup(self):
+        notpla, kelpco = rank({"chunks": [item("entry:notpla-com"), item("entry:kelpco")]}, DOCUMENTS)
+        assert (notpla.key, notpla.kind, kelpco.key, kelpco.kind) == ("startup:notpla", "startup", "entry:kelpco", "entry")
+
     def test_a_long_document_does_not_win_by_size(self):
         many = [item("startup:sofar", entity_name=f"Topic {i}") for i in range(1, 12)]
         data = {"entities": [item("startup:notpla", entity_name="Seaweed"), *many], "chunks": [item("startup:notpla"), item("startup:sofar")]}

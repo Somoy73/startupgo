@@ -27,7 +27,7 @@ def parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
     parser.add_argument("--verbose", action="store_true", help="Show LightRAG's progress log")
     commands = parser.add_subparsers(dest="command", required=True)
 
-    documents = commands.add_parser("documents", help="Print the documents process-storage turns into storage (no model calls)")
+    documents = commands.add_parser("documents", help="Print the documents process-storage turns into storage, best first (no model calls)")
     documents.add_argument("--id", help="Print one document's full text, e.g. startup:notpla")
 
     query = commands.add_parser("query", help="Search the processed startups")
@@ -55,16 +55,16 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 def _documents(settings: SearchSettings, doc_id: str | None) -> int:
-    documents = load_documents(settings.database, settings.entries)
+    documents = load_documents(settings.database, settings.entries, settings.kinds)
     if doc_id:
         match = next((d for d in documents if d.id == doc_id), None)
         if match is None:
             raise SearchError(f"no document {doc_id}")
         print(match.text)
         return 0
-    for doc in documents:
-        link = f" -> startup:{doc.startup}" if doc.entry and doc.startup else ""
-        print(f"{doc.id:<40} {len(doc.text):>6} chars  {doc.name}{link}")
+    for rank, doc in enumerate(documents, 1):  # in processing order: process-storage --limit N takes the first N
+        link = f" -> {doc.key}" if doc.entry and doc.key else ""
+        print(f"{rank:>4}  {doc.id:<40} {len(doc.text):>6} chars  {doc.name}{link}")
     return 0
 
 
@@ -78,7 +78,7 @@ async def _query(settings: SearchSettings, args: argparse.Namespace) -> int:
         print(json.dumps([asdict(m) for m in matches], indent=2, ensure_ascii=False))
         return 0
     for match in matches:
-        where = f"startup:{match.slug}" if match.slug else f"agent entry {match.entry}"
+        where = match.key if match.kind != "entry" else f"agent entry {match.entry}"
         terms = f"  matched: {', '.join(match.matched)}" if match.matched else ""
         print(f"{match.relevance:5.2f}  {match.name} ({where}){terms}")
     if not matches:

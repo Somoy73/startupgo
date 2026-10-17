@@ -26,6 +26,7 @@ from .llm import (
     gemini_client,
 )
 from .registry import PRHRegistry
+from .retrievals import RetrievalLog
 from .search import BraveSearch, CachedSearch, GeminiGoogleSearch, WebSearch, resolve_redirect
 
 
@@ -100,6 +101,7 @@ def build_agent(settings: AgentSettings, *, refresh: bool = False) -> tuple[Star
         else None
     )
     stats = UsageStats()
+    log = RetrievalLog()
     session = build_gemini_session(settings, stats) if settings.llm.provider == "gemini" else None
     searcher = build_search(settings, session, user_agent=fetcher.user_agent)
     agent = StartupAgent(
@@ -108,11 +110,11 @@ def build_agent(settings: AgentSettings, *, refresh: bool = False) -> tuple[Star
             CachedLLM(build_llm(settings, session), cache, stats=stats),
             PromptTemplates.load(settings.system_prompt, settings.section_prompt),
         ),
-        loader=PageLoader(fetcher.fetch_text, cache=cache, robots=robots, today=today, page_chars=settings.crawl.page_chars),
+        loader=PageLoader(fetcher.fetch_text, cache=cache, robots=robots, today=today, page_chars=settings.crawl.page_chars, log=log),
         registry=PRHRegistry(fetcher.fetch_json, today=today),
         max_pages=settings.crawl.max_pages,
         section_chars=settings.crawl.section_chars,
-        searcher=CachedSearch(searcher, cache, stats=stats) if searcher else None,
+        searcher=CachedSearch(searcher, cache, stats=stats, log=log) if searcher else None,
         search_queries=settings.search.queries,
         max_search_pages=settings.search.max_pages,
         results_per_query=settings.search.results_per_query,
@@ -120,4 +122,5 @@ def build_agent(settings: AgentSettings, *, refresh: bool = False) -> tuple[Star
         usage=stats,
         today=today,
     )
+    agent.log = log
     return agent, fetcher

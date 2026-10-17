@@ -34,7 +34,8 @@ class FakeSearch:
 
 def match(slug, entry, name, relevance, matched=(), info=None):
     documents = tuple(d for d in (slug and f"startup:{slug}", entry and f"entry:{entry}") if d)
-    return StartupMatch(slug, entry, name, None, info or {}, relevance, tuple(matched), documents)
+    key, kind = (f"startup:{slug}", "startup") if slug else (f"entry:{entry}", "entry")
+    return StartupMatch(key, kind, slug, entry, name, None, info or {}, relevance, tuple(matched), documents)
 
 
 def test_natural_language_search_returns_startups_and_agent_entries(client):
@@ -144,3 +145,35 @@ def test_score_preview_matches_stored_scores(client):
         "last_round_on": stored["last_round_on"],
     }
     assert client.post("/api/scoring/preview", json=req).json() == stored["scores"]
+
+
+def test_investment_scores_are_the_agents_rubric(client):
+    """Every startup has the agent's Investment Score Matrix: scored from its facts, or the agent's own assessment."""
+    import json
+
+    from startup_agent import AgentSettings
+    from startup_agent.database import scores_of
+
+    from app.db import connect
+
+    notpla = client.get("/api/startups/notpla").json()["investment"]
+    conn = connect()
+    expected = scores_of(conn, 1, AgentSettings.load().weights)
+    assert notpla == expected and notpla["source"] == "facts"
+    assert [c["name"] for c in notpla["criteria"]][:2] == ["Market", "Product"] and len(notpla["criteria"]) == 10
+
+    criteria = [{**c, "score": 4} for c in notpla["criteria"]]
+    conn.execute("INSERT INTO assessments (entity_id, assessed_at, engine, crl, trl, brl, iprl, tmrl, frl, oir, levels_basis, criteria, "
+                 "investment_score, overall_confidence, judge_status) VALUES (1, '2026-10-18 09:00:00', 'agent', 6, 7, 6, 1, 5, 6, 3, ?, ?, 4.0, "
+                 "0.61, 'accepted')",
+                 (json.dumps({"trl": {"level": 7}, "brl": {"level": 6}, "oir": {"level": 3}}), json.dumps(criteria)))
+    conn.commit()
+    conn.close()
+    agent = client.get("/api/startups/notpla").json()["investment"]
+    assert (agent["source"], agent["trl"], agent["ocean_impact_readiness"], agent["investment_score"], agent["investment_percent"]) == (
+        "agent", 7, 3, 4.0, 75.0)
+    assert [c["score"] for c in agent["criteria"]] == [4] * 10
+
+    ranked = client.get("/api/startups", params={"sort": "investment"}).json()
+    assert ranked[0]["slug"] == "notpla" and all("investment" in s for s in ranked)
+    assert client.get("/api/frameworks").json()["investment_weights"]["Impact"] > 0

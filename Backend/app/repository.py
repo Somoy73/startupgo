@@ -12,13 +12,14 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 from typing import Any
 
-from startup_agent.database import domain
+from startup_agent.database import domain, scores_of
 
 from . import scoring
 from .schemas import (
     AssessmentCreate,
     FundingRound,
     FundingRoundInput,
+    InvestmentScores,
     LevelDetail,
     Note,
     OceanKpiEvidence,
@@ -99,6 +100,7 @@ def _summary(conn: sqlite3.Connection, row: sqlite3.Row) -> StartupSummary:
         pipeline_stage=row["pipeline_stage"],
         readiness=readiness,
         scores=Scores(**asdict(breakdown)),
+        investment=InvestmentScores(**scores_of(conn, row["id"], scoring.investment_weights())),
         total_disclosed_usd=sum(disclosed) if disclosed else None,
         last_round_on=last_round_on,
     )
@@ -137,6 +139,7 @@ SORT_KEYS = {
     "readiness": lambda s: -s.scores.readiness,
     "ocean": lambda s: -s.scores.ocean_impact,
     "momentum": lambda s: -s.scores.momentum,
+    "investment": lambda s: (s.investment.investment_score is None, -(s.investment.investment_score or 0)),
     "trl": lambda s: -s.readiness.trl,
     "brl": lambda s: -s.readiness.brl,
     "name": lambda s: s.name.lower(),
@@ -306,6 +309,7 @@ def frameworks(conn: sqlite3.Connection) -> dict:
         "ocean_impact_areas": areas,
         "evidence_scale": [{"level": k, "label": v} for k, v in scoring.EVIDENCE_LABELS.items()],
         "potential_weights": scoring.POTENTIAL_WEIGHTS,
+        "investment_weights": scoring.investment_weights(),
         "max_healthy_spread": scoring.MAX_HEALTHY_SPREAD,
         "penalty_per_extra_level": scoring.PENALTY_PER_EXTRA_LEVEL,
     }

@@ -12,7 +12,10 @@ reopened when ProcessStorage has written a new one.
 Search uses LightRAG's retrieval only (``aquery_data``), not its answer generation: the chat model
 picks keywords from the query, then entities, relations and text chunks are retrieved from the
 knowledge graph and the vector store. A startup scores by its best position in each of the three
-lists (reciprocal-rank fusion); its documents (database row, agent entry) count together.
+lists (reciprocal-rank fusion); its documents (database entity, agent entry) count together.
+
+A match is a database entity (``key`` "startup:notpla", ``kind`` "startup"; other kinds such as
+"candidate" when [sources] kinds indexes them) or an agent entry no database entity has (``kind`` "entry").
 """
 
 from __future__ import annotations
@@ -41,7 +44,9 @@ CACHED_QUERIES = 256
 class StartupMatch:
     """A startup the search found, with the info stored when its documents were processed."""
 
-    slug: str | None  # StartupGo database slug; None if only an agent entry knows the startup
+    key: str  # database entity key ("startup:notpla", "blueinvest:84"), or "entry:<id>" for an agent-only startup
+    kind: str  # entity kind: "startup", "candidate", ...; "entry" if only an agent entry knows it
+    slug: str | None  # StartupGo startup slug (kind "startup"); None otherwise
     entry: str | None  # agent entry id, if there is one
     name: str
     website: str | None
@@ -173,28 +178,39 @@ def rank(data: dict[str, Any], documents: dict[str, dict[str, Any]]) -> list[Sta
         return []
     top = max(scores.values())
     ordered = sorted(scores, key=lambda key: (-scores[key], groups[key]["name"].casefold()))
-    return [
-        StartupMatch(
-            slug=groups[key]["slug"],
-            entry=groups[key]["entry"],
-            name=groups[key]["name"],
-            website=groups[key]["website"],
-            info=groups[key]["info"],
-            relevance=round(scores[key] / top, 3),
-            matched=_matched_terms(matched[key], groups[key]["name"]),
-            documents=tuple(groups[key]["documents"]),
-        )
-        for key in ordered
-    ]
+    return [_match(key, groups[key], scores[key] / top, matched[key]) for key in ordered]
+
+
+def _match(key: str, group: dict[str, Any], relevance: float, terms: list[str]) -> StartupMatch:
+    return StartupMatch(
+        key=key,
+        kind=group["kind"],
+        slug=group["slug"],
+        entry=group["entry"],
+        name=group["name"],
+        website=group["website"],
+        info=group["info"],
+        relevance=round(relevance, 3),
+        matched=_matched_terms(terms, group["name"]),
+        documents=tuple(group["documents"]),
+    )
 
 
 def _groups(documents: dict[str, dict[str, Any]]) -> dict[str, dict[str, Any]]:
-    """One group per startup: the database row's name and website win over an agent entry's."""
+    """One group per entity: the database entity's name and website win over an agent entry's."""
     groups: dict[str, dict[str, Any]] = {}
     for doc_id, meta in sorted(documents.items(), key=lambda item: item[1].get("entry") is not None):
         group = groups.setdefault(
             _group_key(doc_id, meta),
-            {"slug": meta.get("startup"), "entry": None, "name": meta["name"], "website": meta.get("website"), "info": {}, "documents": []},
+            {
+                "kind": meta.get("kind") or ("startup" if meta.get("startup") else "entry"),
+                "slug": meta.get("startup"),
+                "entry": None,
+                "name": meta["name"],
+                "website": meta.get("website"),
+                "info": {},
+                "documents": [],
+            },
         )
         group["documents"].append(doc_id)
         group["info"] = {**(meta.get("info") or {}), **group["info"]}
@@ -204,7 +220,8 @@ def _groups(documents: dict[str, dict[str, Any]]) -> dict[str, dict[str, Any]]:
 
 
 def _group_key(doc_id: str, meta: dict[str, Any]) -> str:
-    return f"startup:{meta['startup']}" if meta.get("startup") else doc_id
+    """The entity a document is about; manifests from before entity keys fall back to the startup slug."""
+    return meta.get("key") or (f"startup:{meta['startup']}" if meta.get("startup") else doc_id)
 
 
 def _sources(item: dict[str, Any]) -> list[str]:

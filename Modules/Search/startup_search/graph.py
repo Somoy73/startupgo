@@ -16,7 +16,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import Any
 
-from .search import SOURCE_SEP, StartupMatch, _group_key, _groups, _matched_terms, _sources
+from .search import SOURCE_SEP, StartupMatch, _group_key, _groups, _match, _sources
 
 MAX_DESCRIPTION = 300
 MAX_HOPS = 3
@@ -28,7 +28,7 @@ class GraphNode:
     type: str | None
     description: str
     hop: int  # steps from the nearest seed
-    startups: tuple[str, ...]  # keys of the startups it was extracted from: "startup:<slug>" or "entry:<id>"
+    startups: tuple[str, ...]  # entity keys of the startups it was extracted from: "startup:<slug>", "entry:<id>", ...
 
 
 @dataclass(frozen=True, slots=True)
@@ -119,19 +119,7 @@ def reached(nodes: tuple[GraphNode, ...], documents: dict[str, dict[str, Any]], 
         return ()
     top = max(scores.values())
     ordered = sorted(scores, key=lambda key: (-scores[key], groups[key]["name"].casefold()))
-    return tuple(
-        StartupMatch(
-            slug=groups[key]["slug"],
-            entry=groups[key]["entry"],
-            name=groups[key]["name"],
-            website=groups[key]["website"],
-            info=groups[key]["info"],
-            relevance=round(scores[key] / top, 3),
-            matched=_matched_terms(terms[key], groups[key]["name"]),
-            documents=tuple(groups[key]["documents"]),
-        )
-        for key in ordered
-    )
+    return tuple(_match(key, groups[key], scores[key] / top, terms[key]) for key in ordered)
 
 
 async def startup_seeds(graph: Any, documents: dict[str, dict[str, Any]], key: str) -> list[str]:

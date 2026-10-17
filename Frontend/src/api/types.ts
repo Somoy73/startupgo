@@ -62,6 +62,26 @@ export type StartupDetail = {
     ocean_areas_covered: string[];
     ocean_evidence_label: string;
   };
+  // The agent's Investment Score Matrix: its latest accepted assessment, else its rubric on the startup's facts.
+  investment?: {
+    source: "agent" | "facts";
+    assessed_at: string | null;
+    trl: number | null;
+    brl: number | null;
+    ocean_impact_readiness: number | null;
+    investment_score: number | null;
+    investment_percent: number | null;
+    overall_confidence: number;
+    criteria: {
+      name: string;
+      score: number | null;
+      confidence: number;
+      confidence_label: string;
+      fields_found: number;
+      fields_total: number;
+      reasons: string[];
+    }[];
+  };
   funding_rounds: {
     round_type: string;
     announced_on: string;

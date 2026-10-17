@@ -12,6 +12,10 @@ Outputs (all 0-100):
   * potential       - blended Investment Potential, minus an imbalance penalty
 
 See RESEARCH.md for the rationale behind each component.
+
+The Investment Score Matrix (10 criteria, 1-5) is not recomputed here: it is the research agent's rubric
+(Modules/Agent/startup_agent/scoring.py) with the agent's [weights], through score_facts / score_entry and,
+per database startup, startup_agent.database.scores_of.
 """
 
 from dataclasses import dataclass, field
@@ -53,6 +57,13 @@ EVIDENCE_LABELS = {0: "None", 1: "Claimed", 2: "Evidenced", 3: "Measured", 4: "V
 
 # Approximate static FX to USD, only used to total disclosed funding.
 FX_TO_USD = {"USD": 1.0, "EUR": 1.08, "GBP": 1.27, "NOK": 0.093, "DKK": 0.145}
+
+
+def investment_weights() -> dict[str, float]:
+    """The agent's criterion weights ([weights] in Modules/Agent/config.toml, or $STARTUPGO_AGENT_CONFIG's)."""
+    from startup_agent import AgentSettings
+
+    return AgentSettings.load().weights
 
 
 def score_facts(facts: Facts, weights: dict[str, float] | None = None) -> AgentScores:
