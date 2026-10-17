@@ -44,7 +44,8 @@ chunk_top_k = 20               # text chunks retrieved
 min_similarity = 0.2           # vector matches below this cosine similarity are ignored (LightRAG's default)
 max_results = 20               # startups returned
 
-# What process-storage processes: the StartupGo database and the agent's entries.
+# What process-storage processes: the StartupGo database (STARTUPGO_DB overrides it, as in the
+# Backend) and the agent's entries.
 [sources]
 database = "../../DB/startupgo.db"
 entries = "../Agent/output/startups"

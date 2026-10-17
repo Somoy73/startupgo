@@ -144,7 +144,8 @@ class SearchSettings:
                 min_similarity=float(query.get("min_similarity", 0.2)),
                 max_results=int(query.get("max_results", 20)),
             ),
-            database=root / sources.get("database", "../../DB/startupgo.db"),
+            # The Backend's STARTUPGO_DB override applies here too, so both read the same database.
+            database=Path(_value(env, "STARTUPGO_DB") or root / sources.get("database", "../../DB/startupgo.db")),
             entries=root / sources.get("entries", "../Agent/output/startups"),
         )
 

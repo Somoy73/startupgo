@@ -1,5 +1,11 @@
 """What gets indexed: one text document per startup in the StartupGo database and per agent entry.
 
+From the database, each startup's document combines: startups (profile), the latest
+readiness_assessments row with each level's meaning from readiness_levels, startup_ocean_kpis with
+their ocean_kpis / ocean_impact_areas names, funding_rounds and the titles of its sources. Analyst
+notes and pipeline_stage are left out: they are internal workflow state and change often (each
+change would mean processing the startup again).
+
 A document's id is also its LightRAG file_path ("startup:<slug>" or "entry:<id>"), so every
 retrieved entity, relation and chunk leads back to the startup it came from. An agent entry whose
 website matches a database startup is linked to that startup and found as it.
@@ -70,10 +76,11 @@ def load_documents(database: Path, entries: Path) -> list[Document]:
 
 def database_documents(conn: sqlite3.Connection) -> list[Document]:
     dimensions = _rows(conn, "SELECT code, name FROM readiness_dimensions ORDER BY sort_order")
+    meanings = {(r["dimension_code"], r["level"]): r["summary"] for r in _rows(conn, "SELECT * FROM readiness_levels")}
     return [
         Document(
             id=f"startup:{row['slug']}",
-            text=_startup_text(conn, row, dimensions),
+            text=_startup_text(conn, row, dimensions, meanings),
             name=row["name"],
             website=row["website"],
             startup=row["slug"],
@@ -83,7 +90,12 @@ def database_documents(conn: sqlite3.Connection) -> list[Document]:
     ]
 
 
-def _startup_text(conn: sqlite3.Connection, row: dict[str, Any], dimensions: list[dict[str, Any]]) -> str:
+def _startup_text(
+    conn: sqlite3.Connection,
+    row: dict[str, Any],
+    dimensions: list[dict[str, Any]],
+    meanings: dict[tuple[str, int], str],
+) -> str:
     city, country = row["city"], row["country"]
     location = f"{city}, {country}" if city and city != country else country
     lines = [
@@ -108,8 +120,11 @@ def _startup_text(conn: sqlite3.Connection, row: dict[str, Any], dimensions: lis
     )
     if assessment:
         a = assessment[0]
-        levels = ", ".join(f"{d['name']} ({d['code']}) {a[d['code'].lower()]}" for d in dimensions)
-        lines += ["", f"## Readiness (KTH Innovation Readiness Level 1-9, assessed {a['assessed_on']})", levels]
+        lines += ["", f"## Readiness (KTH Innovation Readiness Level 1-9, assessed {a['assessed_on']}, {a['confidence']} confidence)"]
+        for d in dimensions:
+            level = a[d["code"].lower()]
+            meaning = meanings.get((d["code"], level))
+            lines.append(f"- {d['name']} ({d['code']}) {level}" + (f": {meaning}" if meaning else ""))
         if a["rationale"]:
             lines.append(a["rationale"])
 
@@ -132,6 +147,11 @@ def _startup_text(conn: sqlite3.Connection, row: dict[str, Any], dimensions: lis
     if rounds:
         lines += ["", "## Funding"]
         lines += [_round_line(r) for r in rounds]
+
+    sources = _rows(conn, "SELECT title FROM sources WHERE startup_id = ? ORDER BY id", (row["id"],))
+    if sources:
+        lines += ["", "## Sources"]
+        lines += [f"- {r['title']}" for r in sources]
     return "\n".join(lines).strip() + "\n"
 
 

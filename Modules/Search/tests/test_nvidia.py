@@ -2,6 +2,7 @@
 
 import asyncio
 import os
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -97,6 +98,11 @@ def test_dotenv_file_is_read_and_the_environment_wins(tmp_path, monkeypatch):
     s = SearchSettings.load(tmp_path / "config.toml")
     assert (s.chat.model, s.embedding.model, s.embedding.dim) == ("from-environment", "quoted-model", 1024)
     assert "EMBEDDING_MODEL" not in os.environ  # .env values aren't copied into the process environment
+
+
+def test_database_follows_the_backends_override(tmp_path):
+    assert settings(tmp_path, env={"STARTUPGO_DB": "/data/other.db"}).database == Path("/data/other.db")
+    assert settings(tmp_path).database == tmp_path / "../../DB/startupgo.db"
 
 
 def test_bad_settings(tmp_path):

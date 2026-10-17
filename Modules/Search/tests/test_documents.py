@@ -67,13 +67,16 @@ def test_one_document_per_database_startup(database):
         "# Notpla",
         "Sector: Materials & packaging",
         "Location: London, United Kingdom",
-        "Technology (TRL) 8",
+        "assessed 2026-10-16, low confidence",
+        "- Technology (TRL) 8: Complete technology proven in actual operations by first users.",
         "A clean ocean",
         "(qualitative evidence)",
         "- series-a: 20,000,000 GBP (2024-09), led by UB Forest Industry Green Growth Fund",
+        "## Sources\n- EU Maritime Forum: Notpla £20M Series A+",
     ):
         assert expected in notpla
     assert "Location: Faroe Islands\n" in docs["startup:ocean-rainforest"].text  # city == country: once
+    assert "pipeline" not in notpla.lower()  # workflow state (pipeline_stage, notes) isn't indexed
     assert docs["startup:notpla"].info == {
         "tagline": "Seaweed-based packaging that replaces single-use plastic",
         "sector": "Materials & packaging",

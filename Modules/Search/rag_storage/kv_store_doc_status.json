@@ -1,0 +1,276 @@
+{
+  "startup:sofar-ocean": {
+    "status": "processed",
+    "content_summary": "# Sofar Ocean\nReal-time ocean data from a global network of Spotter buoys\n\nBuilds solar-powered Spotter buoys that report wind, wave, temperature and current data, and sells marine weather intelligence. Formed from the merger of OpenROV and Spoondrif...",
+    "content_length": 1684,
+    "created_at": "2026-10-17T00:23:32.850311+00:00",
+    "updated_at": "2026-10-17T00:36:22.875615+00:00",
+    "file_path": "startup:sofar-ocean",
+    "track_id": "insert_20261017_032332_d074d288",
+    "content_hash": "805c45316bc9bb24b95d636f346665bb",
+    "metadata": {
+      "parse_start_time": 1792196612,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792196613,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792197149,
+      "process_end_time": 1792197382,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:sofar-ocean-chunk-000"
+    ]
+  },
+  "startup:kelp-blue": {
+    "status": "processed",
+    "content_summary": "# Kelp Blue\nGiant kelp forests for carbon, biodiversity and biostimulants\n\nDutch-headquartered company cultivating giant kelp forests off Lüderitz, Namibia. Received the Zayed Sustainability Prize (Climate Action) at COP28.\n\nSector: Aquaculture\nLocat...",
+    "content_length": 1938,
+    "created_at": "2026-10-17T00:23:32.850292+00:00",
+    "updated_at": "2026-10-17T00:27:54.395796+00:00",
+    "file_path": "startup:kelp-blue",
+    "track_id": "insert_20261017_032332_d074d288",
+    "content_hash": "73199d743ab8d100a62e64978363ca6c",
+    "metadata": {
+      "parse_start_time": 1792196612,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792196612,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792196613,
+      "process_end_time": 1792196874,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:kelp-blue-chunk-000"
+    ]
+  },
+  "startup:oceanium": {
+    "status": "failed",
+    "content_summary": "# Oceanium\nSeaweed biorefinery for food, materials and biodegradable products\n\nProcesses farmed kelp into food ingredients, biodegradable materials and other products through its biorefinery technology.\n\nSector: Aquaculture\nLocation: Oban, United Kin...",
+    "content_length": 1702,
+    "created_at": "2026-10-17T00:23:32.850301+00:00",
+    "updated_at": "2026-10-17T00:32:29.283009+00:00",
+    "file_path": "startup:oceanium",
+    "track_id": "insert_20261017_032332_d074d288",
+    "content_hash": "bcbb791113c52b5dd9a4e5f138f6ffbe",
+    "metadata": {
+      "parse_start_time": 1792196612,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792196612,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "pre_graph",
+      "process_start_time": 1792196874,
+      "process_end_time": 1792197149,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "error_msg": "C[1/1]: startup:oceanium-chunk-000: extract LLM func: Worker execution timeout after 240s",
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:oceanium-chunk-000"
+    ]
+  },
+  "startup:clearbot": {
+    "status": "processed",
+    "content_summary": "# Clearbot\nAutonomous electric boats that collect floating waste\n\nSpun out of University of Hong Kong students; builds self-driving electric boats that each collect 250-300 kg of waste per trip. Reported deployments in Hong Kong, India and Panama.\n\nS...",
+    "content_length": 1524,
+    "created_at": "2026-10-17T00:23:32.850278+00:00",
+    "updated_at": "2026-10-17T00:30:14.716777+00:00",
+    "file_path": "startup:clearbot",
+    "track_id": "insert_20261017_032332_d074d288",
+    "content_hash": "95ba0ba7a29ec92bdb435ee77b10b6e9",
+    "metadata": {
+      "parse_start_time": 1792196612,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792196612,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792196613,
+      "process_end_time": 1792197014,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:clearbot-chunk-000"
+    ]
+  },
+  "entry:reeldata-ai": {
+    "status": "failed",
+    "content_summary": "# ReelData AI\nWebsite: http://www.reeldata.ai/\n\n## Identity and registry\nName: ReelData AI\nWebsite domain: reeldata.ai\nCountry: Canada\nCity: Dartmouth\n\n## Blue-economy profile\nBlue sector: aquaculture\nOcean problem: Aquaculture operations face high f...",
+    "content_length": 2103,
+    "created_at": "2026-10-17T00:23:32.850318+00:00",
+    "updated_at": "2026-10-17T00:40:22.616434+00:00",
+    "file_path": "entry:reeldata-ai",
+    "track_id": "insert_20261017_032332_d074d288",
+    "content_hash": "f5d934f0abd9c6672979b2317fe49631",
+    "metadata": {
+      "parse_start_time": 1792196612,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792196613,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "pre_graph",
+      "process_start_time": 1792197370,
+      "process_end_time": 1792197622,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "error_msg": "C[1/1]: entry:reeldata-ai-chunk-000: extract LLM func: Worker execution timeout after 240s",
+    "chunks_count": 1,
+    "chunks_list": [
+      "entry:reeldata-ai-chunk-000"
+    ]
+  },
+  "startup:notpla": {
+    "status": "processed",
+    "content_summary": "# Notpla\nSeaweed-based packaging that replaces single-use plastic\n\nDevelops packaging and coatings made from seaweed and plants as an alternative to single-use plastic.\n\nSector: Materials & packaging\nLocation: London, United Kingdom\nStage: series-a\nF...",
+    "content_length": 1526,
+    "created_at": "2026-10-17T00:23:32.850295+00:00",
+    "updated_at": "2026-10-17T00:27:36.663326+00:00",
+    "file_path": "startup:notpla",
+    "track_id": "insert_20261017_032332_d074d288",
+    "content_hash": "35dd9343780cfaa16b6cfbd50af0d152",
+    "metadata": {
+      "parse_start_time": 1792196612,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792196612,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792196613,
+      "process_end_time": 1792196856,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:notpla-chunk-000"
+    ]
+  },
+  "entry:originbyocean-com": {
+    "status": "failed",
+    "content_summary": "# Origin by Ocean\nWebsite: https://www.originbyocean.com/\n\n## Identity and registry\nName: Origin by Ocean Oy\nAliases: Nauvu, Ocean Orchard Oy\nWebsite domain: originbyocean.com\nBusiness id: 2982879-2\nCountry: Finland\nCity: Espoo\nLegal form: limited co...",
+    "content_length": 3687,
+    "created_at": "2026-10-17T00:23:32.850315+00:00",
+    "updated_at": "2026-10-17T00:40:10.523699+00:00",
+    "file_path": "entry:originbyocean-com",
+    "track_id": "insert_20261017_032332_d074d288",
+    "content_hash": "5796bb54a8f1cf8ba59ca551cca13e6c",
+    "metadata": {
+      "parse_start_time": 1792196612,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792196613,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "pre_graph",
+      "process_start_time": 1792197335,
+      "process_end_time": 1792197610,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "error_msg": "C[1/1]: entry:originbyocean-com-chunk-000: extract LLM func: Worker execution timeout after 240s",
+    "chunks_count": 1,
+    "chunks_list": [
+      "entry:originbyocean-com-chunk-000"
+    ]
+  },
+  "startup:seaforester": {
+    "status": "processed",
+    "content_summary": "# SeaForester\nRestoring marine forests\n\nMarine restoration company focused on restoring kelp and other marine forests.\n\nSector: Habitat restoration\nLocation: Lisbon, Portugal\nStage: seed\n\n## Readiness (KTH Innovation Readiness Level 1-9, assessed 202...",
+    "content_length": 1432,
+    "created_at": "2026-10-17T00:23:32.850306+00:00",
+    "updated_at": "2026-10-17T00:35:35.917783+00:00",
+    "file_path": "startup:seaforester",
+    "track_id": "insert_20261017_032332_d074d288",
+    "content_hash": "7de62703e2fbf379ff1d2e49b881e2e4",
+    "metadata": {
+      "parse_start_time": 1792196612,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792196613,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792197131,
+      "process_end_time": 1792197335,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:seaforester-chunk-000"
+    ]
+  },
+  "startup:seabound": {
+    "status": "failed",
+    "content_summary": "# Seabound\nOnboard carbon capture for ships\n\nBuilds carbon capture equipment that fits on ships to capture exhaust CO2 at the source. Y Combinator alumnus.\n\nSector: Shipping decarbonisation\nLocation: London, United Kingdom\nStage: seed\nFounded: 2021\nW...",
+    "content_length": 1613,
+    "created_at": "2026-10-17T00:23:32.850303+00:00",
+    "updated_at": "2026-10-17T00:36:10.521815+00:00",
+    "file_path": "startup:seabound",
+    "track_id": "insert_20261017_032332_d074d288",
+    "content_hash": "6cde869421013c1880412e758e54ff2d",
+    "metadata": {
+      "parse_start_time": 1792196612,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792196613,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "pre_graph",
+      "process_start_time": 1792197014,
+      "process_end_time": 1792197370,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "error_msg": "C[1/1]: startup:seabound-chunk-000: extract LLM func: Worker execution timeout after 240s",
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:seabound-chunk-000"
+    ]
+  },
+  "startup:ocean-rainforest": {
+    "status": "processed",
+    "content_summary": "# Ocean Rainforest\nOffshore seaweed cultivation at scale\n\nCultivates seaweed offshore in the Faroe Islands and develops seaweed products and markets.\n\nSector: Aquaculture\nLocation: Faroe Islands\nStage: series-a\nWebsite: https://www.oceanrainforest.co...",
+    "content_length": 1606,
+    "created_at": "2026-10-17T00:23:32.850298+00:00",
+    "updated_at": "2026-10-17T00:32:11.203478+00:00",
+    "file_path": "startup:ocean-rainforest",
+    "track_id": "insert_20261017_032332_d074d288",
+    "content_hash": "7a69d65a7a9231933a30bc7993b5a488",
+    "metadata": {
+      "parse_start_time": 1792196612,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792196612,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792196856,
+      "process_end_time": 1792197131,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:ocean-rainforest-chunk-000"
+    ]
+  }
+}

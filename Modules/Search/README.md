@@ -44,8 +44,10 @@ database rows / agent entries -> one text document per startup        (documents
   -> embeddings of chunks, entities and relations              -> VectorDB
 ```
 
-- **Documents.** For a database startup: name, tagline, description, sector, location, stage,
-  founding year, KTH readiness levels, ocean-impact evidence and funding rounds. For an agent entry:
+- **Documents.** For a database startup: its profile (`startups`), the latest readiness assessment
+  with what each KTH level means (`readiness_assessments`, `readiness_levels`), ocean-impact evidence
+  (`startup_ocean_kpis` with KPI and area names), funding rounds and source titles. Analyst notes and
+  pipeline stage are left out: they change often and are internal workflow state. For an agent entry:
   every extracted fact and the agent's scores. Preview them without model calls:
   `uv run startup-search documents`.
 - An agent entry whose website matches a database startup is found as that startup.
