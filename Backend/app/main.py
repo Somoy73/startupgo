@@ -8,11 +8,14 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
-from startup_search import SearchError, SearchUnavailable, StartupSearch
+from startup_agent import Candidate
+from startup_agent.database import domain
+from startup_search import SearchError, SearchUnavailable, StartupMatch, StartupSearch, Subgraph
 
-from . import features_repo, repository
-from .db import get_conn, init_db
+from . import features_repo, repository, research
+from .db import connect, get_conn, init_db
 from .schemas import (
+    AgentEntryInfo,
     AgentEntryMatch,
     AssessmentCreate,
     BlueInvestProfile,
@@ -21,6 +24,9 @@ from .schemas import (
     FeatureDefinition,
     FilterOptions,
     FundingEvent,
+    GraphEdgeOut,
+    GraphNodeOut,
+    GraphResponse,
     InvestorLink,
     NaturalLanguageSearchRequest,
     NaturalLanguageSearchResponse,
@@ -30,13 +36,18 @@ from .schemas import (
     Peer,
     Person,
     PipelineUpdate,
+    ResearchJob,
+    ResearchRequest,
     ScorePreviewRequest,
     Scores,
+    SearchFilters,
     SearchMatch,
     StartupCreate,
     StartupDetail,
     StartupFeatures,
+    StartupResearch,
     StartupSummary,
+    ThesisGraphRequest,
 )
 
 
@@ -44,7 +55,14 @@ from .schemas import (
 async def lifespan(app: FastAPI):
     init_db()
     app.state.search = StartupSearch()  # LightRAG (Modules/Search); opens on the first search
+    app.state.research = research.ResearchJobs()  # agent research jobs (Modules/Agent), one at a time
+    conn = connect()
+    try:
+        app.state.research.recover(conn)
+    finally:
+        conn.close()
     yield
+    app.state.research.shutdown()
     await app.state.search.close()
 
 
@@ -109,17 +127,116 @@ async def natural_language_search(body: NaturalLanguageSearchRequest, request: R
     except SearchError as exc:
         raise HTTPException(502, str(exc)) from exc
 
+    results, entries = _matches(conn, matches, body.filters)
+    return NaturalLanguageSearchResponse(query=body.query, results=results, entries=entries)
+
+
+def _matches(conn: sqlite3.Connection, matches: list[StartupMatch], filters: SearchFilters) -> tuple[list[SearchMatch], list[AgentEntryMatch]]:
+    """Search or graph matches as database summaries and agent-only entries, filtered, in the given order."""
     summaries = repository.summaries(conn, [m.slug for m in matches if m.slug])
     results, entries = [], []
     for match in matches:
         found = {"relevance": match.relevance, "matched": list(match.matched)}
         if match.slug:
-            if summary := summaries.get(match.slug):  # missing if deleted since it was processed
+            summary = summaries.get(match.slug)  # missing if deleted since it was processed
+            if summary and repository.passes(summary, filters):
                 results.append(SearchMatch(**summary.model_dump(), **found, entry=match.entry))
         elif match.entry:
             scores = {k: match.info.get(k) for k in AgentEntryMatch.SCORES}
-            entries.append(AgentEntryMatch(entry=match.entry, name=match.name, website=match.website, **found, **scores))
-    return NaturalLanguageSearchResponse(query=body.query, results=results, entries=entries)
+            if repository.entry_passes(scores["trl"], scores["brl"], filters):
+                entries.append(AgentEntryMatch(entry=match.entry, name=match.name, website=match.website, **found, **scores))
+    return results, entries
+
+
+# --- Matching: N-hop graphs over the search's knowledge graph ------------------------------------
+
+
+@app.get("/api/startups/{slug}/graph", response_model=GraphResponse)
+async def startup_graph(
+    slug: str,
+    request: Request,
+    hops: int = Query(2, ge=0, le=3),
+    max_nodes: int = Query(150, ge=1, le=500),
+    conn: sqlite3.Connection = Conn,
+):
+    """The knowledge graph within ``hops`` of a startup, and the startups it reaches (most shared entities first)."""
+    _found(conn.execute("SELECT 1 FROM startups WHERE slug = ?", (slug,)).fetchone(), slug)
+    graph = await _graph(request.app.state.search.startup_graph(slug, hops=hops, max_nodes=max_nodes))
+    return _graph_response(conn, graph, SearchFilters())
+
+
+@app.post("/api/match/graph", response_model=GraphResponse)
+async def thesis_graph(body: ThesisGraphRequest, request: Request, conn: sqlite3.Connection = Conn):
+    """An investor thesis in words: the entities it retrieves, their N-hop neighbourhood and the startups in it."""
+    graph = await _graph(request.app.state.search.thesis_graph(body.thesis, hops=body.hops, max_nodes=body.max_nodes, seeds=body.seeds))
+    return _graph_response(conn, graph, body.filters)
+
+
+async def _graph(pending) -> Subgraph:
+    try:
+        return await pending
+    except SearchUnavailable as exc:
+        raise HTTPException(503, str(exc)) from exc
+    except SearchError as exc:
+        raise HTTPException(502, str(exc)) from exc
+
+
+def _graph_response(conn: sqlite3.Connection, graph: Subgraph, filters: SearchFilters) -> GraphResponse:
+    results, entries = _matches(conn, list(graph.startups), filters)
+    return GraphResponse(
+        seeds=list(graph.seeds),
+        nodes=[GraphNodeOut(id=n.id, type=n.type, description=n.description, hop=n.hop, startups=list(n.startups)) for n in graph.nodes],
+        edges=[GraphEdgeOut(source=e.source, target=e.target, keywords=e.keywords, description=e.description, weight=e.weight) for e in graph.edges],
+        truncated=graph.truncated,
+        results=results,
+        entries=entries,
+    )
+
+
+# --- Agent research: assess a startup that has no agent assessment yet ----------------------------
+
+
+@app.post("/api/research", response_model=ResearchJob, status_code=202)
+def start_research(body: ResearchRequest, request: Request, conn: sqlite3.Connection = Conn):
+    """Queue the agent on a database startup (slug) or a new one (name + website). Poll GET /api/research/{id}.
+
+    Only startups without a score are researched: one that already has an assessment gets 409 (read its score
+    from GET /api/startups/{slug}). A name + website whose domain is a database startup counts as that startup.
+    """
+    slug, name, website = body.slug, body.name, body.website
+    if slug:
+        row = _found(conn.execute("SELECT id, name, website FROM startups WHERE slug = ?", (slug,)).fetchone(), slug)
+    else:
+        own = domain(website)
+        row = next((r for r in conn.execute("SELECT id, slug, name, website FROM startups WHERE website IS NOT NULL")
+                    if domain(r["website"]) == own), None)
+        slug = row["slug"] if row else None
+    startup_id = row["id"] if row else None
+    if row and conn.execute("SELECT 1 FROM readiness_assessments WHERE startup_id = ?", (startup_id,)).fetchone():
+        raise HTTPException(409, f"{slug} already has a score: read it from GET /api/startups/{slug}")
+    if row:
+        name, website = row["name"], website or row["website"]
+        if not website:
+            raise repository.InvalidInput(f"{slug} has no website: give one to research it")
+    candidate = Candidate(name, website, slug=slug, business_id=body.business_id, extra_urls=tuple(body.urls))
+    return request.app.state.research.submit(conn, candidate, startup_id)
+
+
+@app.get("/api/research/{job_id}", response_model=ResearchJob)
+def research_job(job_id: int, conn: sqlite3.Connection = Conn):
+    job = research.get_job(conn, job_id)
+    if job is None:
+        raise HTTPException(404, f"research job {job_id} not found")
+    return job
+
+
+@app.get("/api/startups/{slug}/research", response_model=StartupResearch)
+def startup_research(slug: str, conn: sqlite3.Connection = Conn):
+    """Whether the agent has assessed the startup, and its latest research job."""
+    row = _found(conn.execute("SELECT id FROM startups WHERE slug = ?", (slug,)).fetchone(), slug)
+    entry = conn.execute("SELECT * FROM agent_entries WHERE startup_id = ?", (row["id"],)).fetchone()
+    agent = AgentEntryInfo(**{k: entry[k] for k in AgentEntryInfo.model_fields}) if entry else None
+    return StartupResearch(slug=slug, has_agent_assessment=agent is not None, agent=agent, job=research.latest_job(conn, row["id"]))
 
 
 @app.post("/api/startups", response_model=StartupDetail, status_code=201)

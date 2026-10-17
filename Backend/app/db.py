@@ -22,16 +22,19 @@ def connect(path: Path | None = None) -> sqlite3.Connection:
 
 
 def init_db(path: Path | None = None, *, reset: bool = False) -> Path:
-    """Create the database from schema.sql and load seed.sql if it doesn't exist yet."""
+    """Create the database from schema.sql and load seed.sql if it doesn't exist yet.
+
+    schema.sql is all CREATE ... IF NOT EXISTS, so it is re-applied to an existing database to add new tables.
+    """
     path = path or db_path()
     if reset and path.exists():
         path.unlink()
-    if path.exists():
-        return path
+    fresh = not path.exists()
     conn = connect(path)
     try:
         conn.executescript((SQL_DIR / "schema.sql").read_text())
-        conn.executescript((SQL_DIR / "seed.sql").read_text())
+        if fresh:
+            conn.executescript((SQL_DIR / "seed.sql").read_text())
         conn.commit()
     finally:
         conn.close()

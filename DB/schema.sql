@@ -482,3 +482,34 @@ CREATE TABLE IF NOT EXISTS refresh_steps (
     detail      TEXT,                   -- error message or skip reason
     PRIMARY KEY (run_id, step)
 );
+
+-- ---------------------------------------------------------------------------
+-- Agent pipeline (Modules/Agent): the judge-approved entry behind each startup's agent assessment,
+-- and research jobs the Backend runs when a startup has no agent assessment yet.
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS agent_entries (
+    startup_id         INTEGER PRIMARY KEY REFERENCES startups(id) ON DELETE CASCADE,
+    entry_id           TEXT NOT NULL,       -- Modules/Agent output/startups/<entry_id>.json
+    generated_at       TEXT NOT NULL,
+    stored_at          TEXT NOT NULL DEFAULT (datetime('now')),
+    assessment_id      INTEGER REFERENCES readiness_assessments(id) ON DELETE SET NULL,
+    review_status      TEXT,                -- accepted | accepted_with_issues
+    open_issues        INTEGER NOT NULL DEFAULT 0,
+    investment_score   REAL,                -- agent's 1-5 investment score
+    overall_confidence REAL                 -- agent's 0-1 confidence
+);
+
+CREATE TABLE IF NOT EXISTS agent_jobs (
+    id          INTEGER PRIMARY KEY,
+    startup_id  INTEGER REFERENCES startups(id) ON DELETE SET NULL,  -- set when the job finishes for a new startup
+    name        TEXT NOT NULL,
+    website     TEXT NOT NULL,
+    request     TEXT NOT NULL,              -- JSON: business_id, urls
+    status      TEXT NOT NULL CHECK (status IN ('queued','running','done','error')),
+    created_at  TEXT NOT NULL DEFAULT (datetime('now')),
+    started_at  TEXT,
+    finished_at TEXT,
+    result      TEXT,                       -- JSON: the stored entry's slug, scores and judge review
+    error       TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_agent_jobs_startup ON agent_jobs(startup_id, created_at);

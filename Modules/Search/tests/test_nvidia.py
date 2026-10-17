@@ -105,6 +105,17 @@ def test_database_follows_the_backends_override(tmp_path):
     assert settings(tmp_path).database == tmp_path / "../../DB/startupgo.db"
 
 
+def test_config_file_follows_the_runtime_override(tmp_path, monkeypatch):
+    runtime = tmp_path / "runtime" / "config.toml"
+    runtime.parent.mkdir()
+    runtime.write_text('[storage]\nworking_dir = "rag_storage"\n', encoding="utf-8")
+    monkeypatch.setenv("STARTUPGO_SEARCH_CONFIG", str(runtime))
+    assert SearchSettings.load(env={}).storage.working_dir == runtime.parent / "rag_storage"
+    assert SearchSettings.load(DEFAULT_CONFIG, env={}).storage.working_dir == DEFAULT_CONFIG.parent / "rag_storage"  # an explicit path wins
+    monkeypatch.delenv("STARTUPGO_SEARCH_CONFIG")
+    assert SearchSettings.load(env={}).storage.working_dir == DEFAULT_CONFIG.parent / "rag_storage"
+
+
 def test_bad_settings(tmp_path):
     with pytest.raises(SearchError, match="mode"):
         settings(tmp_path, '[query]\nmode = "fast"\n')

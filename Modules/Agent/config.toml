@@ -71,3 +71,18 @@ Financials = 1.0
 Tech = 1.0
 "Deal dynamics" = 1.0
 Impact = 1.0
+
+# Judge-approved entries are stored in the StartupGo database (startups, readiness_assessments,
+# startup_ocean_kpis, funding_rounds, sources, agent_entries). STARTUPGO_DB overrides the path.
+[database]
+store = true
+path = "../../DB/startupgo.db"
+
+# `startup-agent pipeline`: database startups without a recent agent entry, plus startups discovered
+# below, are researched, judged and stored. Run process-storage afterwards (refresh.py does both).
+[pipeline]
+limit = 5                      # startups researched per run (each costs a few LLM calls)
+max_age_days = 30              # an agent entry older than this is researched again
+discover = [                   # discovery sources; new leads are added as startups once the judge accepts them
+    # { source = "wellfound", url = "https://wellfound.com/startups/industry/aquaculture", limit = 10 },
+]

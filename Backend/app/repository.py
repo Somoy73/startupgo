@@ -15,6 +15,7 @@ from .schemas import (
     Readiness,
     Scores,
     ScorePreviewRequest,
+    SearchFilters,
     Source,
     StartupCreate,
     StartupDetail,
@@ -100,6 +101,25 @@ def summaries(conn: sqlite3.Connection, slugs: list[str]) -> dict[str, StartupSu
     marks = ", ".join("?" * len(slugs))
     rows = conn.execute(f"SELECT * FROM startups WHERE slug IN ({marks})", slugs).fetchall()
     return {r["slug"]: _summary(conn, r) for r in rows}
+
+
+def passes(summary: StartupSummary, f: SearchFilters) -> bool:
+    """Whether a startup matches the filters (same meaning as list_startups' parameters)."""
+    profile = (("sector", f.sector), ("country", f.country), ("stage", f.stage), ("pipeline_stage", f.pipeline_stage))
+    return (
+        all(v is None or getattr(summary, k) == v for k, v in profile)
+        and (f.impact_area is None or f.impact_area in summary.scores.ocean_areas_covered)
+        and (f.min_trl is None or summary.readiness.trl >= f.min_trl)
+        and (f.min_brl is None or summary.readiness.brl >= f.min_brl)
+        and (f.min_potential is None or summary.scores.potential >= f.min_potential)
+    )
+
+
+def entry_passes(trl: int | None, brl: int | None, f: SearchFilters) -> bool:
+    """Agent-only entries know only TRL and BRL: any other filter leaves them out."""
+    if any(v is not None for v in (f.sector, f.country, f.stage, f.pipeline_stage, f.impact_area, f.min_potential)):
+        return False
+    return (f.min_trl is None or (trl or 0) >= f.min_trl) and (f.min_brl is None or (brl or 0) >= f.min_brl)
 
 
 SORT_KEYS = {

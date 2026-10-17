@@ -2,6 +2,8 @@
 
     search = StartupSearch()                                   # settings from Search/config.toml
     matches = await search.search("seaweed packaging startups")  # list[StartupMatch], best first
+    graph = await search.startup_graph("notpla", hops=2)       # Subgraph: entities, relations, startups reached
+    graph = await search.thesis_graph("kelp carbon removal")   # same, seeded by what the thesis retrieves
     await search.close()                                       # on shutdown
 
 The storage is opened on the first search (so the Backend starts without a key or an index) and
@@ -20,11 +22,14 @@ from collections import defaultdict
 from collections.abc import Callable
 from dataclasses import dataclass
 from functools import partial
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from .config import SearchSettings
 from .errors import SearchError, SearchUnavailable
 from .storage import Manifest, Rag, build_rag
+
+if TYPE_CHECKING:
+    from .graph import Subgraph
 
 RRF_K = 10  # lists are short (top_k items): first place counts 1/11, tenth 1/20, thirtieth 1/40
 MAX_MATCHED = 5
@@ -69,33 +74,63 @@ class StartupSearch:
 
     async def search(self, query: str, *, limit: int | None = None, mode: str | None = None) -> list[StartupMatch]:
         """Startups matching ``query``, best first (at most ``limit``, default [query] max_results)."""
-        from lightrag import QueryParam
-
         query = " ".join(query.split())
         if not query:
             raise SearchError("empty search query")
-        rag = await self._open()
-        if not self._documents:
-            raise SearchUnavailable("nothing has been processed yet: run process-storage")
-        settings = self.settings.query
-        mode = mode or settings.mode
-        limit = limit or settings.max_results
+        await self._open_processed()
+        mode = mode or self.settings.query.mode
+        limit = limit or self.settings.query.max_results
         if (query, mode) in self._cache:
             return self._cache[query, mode][:limit]
 
-        param = QueryParam(mode=mode, top_k=settings.top_k, chunk_top_k=settings.chunk_top_k, enable_rerank=False)
-        try:
-            response = await rag.aquery_data(query, param)
-        except Exception as exc:  # model, network and storage errors from LightRAG's layers
-            raise SearchError(f"search failed: {exc}") from exc
-        if response.get("status") != "success":
-            raise SearchError(f"search failed: {response.get('message') or 'unknown error'}")
-
-        matches = rank(response.get("data") or {}, self._documents)
+        matches = rank(await self._retrieve(query, mode), self._documents)
         if len(self._cache) >= CACHED_QUERIES:
             self._cache.pop(next(iter(self._cache)))
         self._cache[query, mode] = matches
         return matches[:limit]
+
+    async def startup_graph(self, slug: str, *, hops: int = 2, max_nodes: int = 150) -> Subgraph:
+        """The knowledge graph within ``hops`` of a database startup, and the other startups it reaches."""
+        from .graph import startup_seeds, subgraph
+
+        rag = await self._open_processed()
+        key = f"startup:{slug}"
+        seeds = await startup_seeds(rag.chunk_entity_relation_graph, self._documents, key)
+        if not seeds:
+            raise SearchUnavailable(f"{slug} has not been processed yet: run process-storage")
+        return await subgraph(rag.chunk_entity_relation_graph, self._documents, seeds, hops=hops, max_nodes=max_nodes, exclude=key)
+
+    async def thesis_graph(self, thesis: str, *, hops: int = 1, max_nodes: int = 150, seeds: int = 10) -> Subgraph:
+        """The knowledge graph within ``hops`` of the entities retrieved for ``thesis``, and the startups it reaches."""
+        from .graph import subgraph
+
+        thesis = " ".join(thesis.split())
+        if not thesis:
+            raise SearchError("empty thesis")
+        rag = await self._open_processed()
+        data = await self._retrieve(thesis, self.settings.query.mode)
+        entities = list(dict.fromkeys(str(e["entity_name"]) for e in data.get("entities") or [] if e.get("entity_name")))
+        return await subgraph(rag.chunk_entity_relation_graph, self._documents, entities[:seeds], hops=hops, max_nodes=max_nodes)
+
+    async def _open_processed(self) -> Rag:
+        rag = await self._open()
+        if not self._documents:
+            raise SearchUnavailable("nothing has been processed yet: run process-storage")
+        return rag
+
+    async def _retrieve(self, query: str, mode: str) -> dict[str, Any]:
+        """LightRAG's retrieval for ``query``: its entities, relationships and chunks, best first."""
+        from lightrag import QueryParam
+
+        settings = self.settings.query
+        param = QueryParam(mode=mode, top_k=settings.top_k, chunk_top_k=settings.chunk_top_k, enable_rerank=False)
+        try:
+            response = await self._rag.aquery_data(query, param)
+        except Exception as exc:  # model, network and storage errors from LightRAG's layers
+            raise SearchError(f"search failed: {exc}") from exc
+        if response.get("status") != "success":
+            raise SearchError(f"search failed: {response.get('message') or 'unknown error'}")
+        return response.get("data") or {}
 
     async def close(self) -> None:
         if self._rag is not None:

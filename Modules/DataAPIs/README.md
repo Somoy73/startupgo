@@ -18,7 +18,7 @@ uv run python refresh.py snapshot         # copy the runtime DB to DB/startupgo.
 | Location | What | In git |
 |---|---|---|
 | `DB/runtime/startupgo.db` | Live DB every script writes to (override with `STARTUPGO_DB`); copied from the snapshot on first use | no |
-| `DB/runtime/config/{agent,search}/config.toml` | Generated from main's `Modules/Agent` and `Modules/Search` configs with only the paths changed (runtime DB, runtime index, runtime Agent output); `.env` is a symlink to main's | no |
+| `DB/runtime/config/{agent,search}/config.toml` | Generated from main's `Modules/Agent` and `Modules/Search` configs with only the paths changed (runtime DB, runtime index, runtime Agent output); `.env` is a symlink to main's. The Backend uses them through `STARTUPGO_AGENT_CONFIG` / `STARTUPGO_SEARCH_CONFIG` (see the main README) | no |
 | `DB/runtime/rag_storage/`, `DB/runtime/agent_output/`, `DB/runtime/GAPS.md` | Runtime search index, Agent entries, gap report | no |
 | `DB/startupgo.db`, `csv/`, `GAPS.md` | Snapshot for commits; changed only by `refresh.py snapshot` | yes |
 

@@ -164,6 +164,24 @@ def step_gaps(ctx: Context):
     ingest.build_gaps(ctx.conn)
 
 
+def step_agent(ctx: Context):
+    cfg = write_configs()["agent"]
+    env = {**_dotenv(AGENT_DIR / ".env"), **os.environ, "STARTUPGO_DB": str(ingest.db_path())}
+    key = tomllib.loads(cfg.read_text(encoding="utf-8")).get("llm", {}).get("api_key_env", "GEMINI_API_KEY")
+    if not env.get(key):
+        raise Skip(f"Agent key missing: {key} in Modules/Agent/.env")
+    if shutil.which("uv"):
+        cmd = ["uv", "run", "--package", "startup-agent", "startup-agent", "--config", str(cfg), "pipeline"]
+    elif importlib.util.find_spec("startup_agent"):
+        cmd = [sys.executable, "-m", "startup_agent", "--config", str(cfg), "pipeline"]
+    else:
+        raise Skip("startup-agent not installed (uv sync --all-packages in Modules)")
+    p = subprocess.run(cmd, cwd=MODULES, env=env, capture_output=True, text=True, timeout=4 * 3600)
+    if p.returncode != 0:
+        raise RuntimeError(f"startup-agent pipeline exited {p.returncode}: {(p.stderr or p.stdout)[-500:]}")
+    return (p.stdout.strip().splitlines() or ["no candidates"])[-1][:200]
+
+
 def step_search_index(ctx: Context):
     cfg = write_configs()["search"]
     env = {**_dotenv(SEARCH_DIR / ".env"), **os.environ, "STARTUPGO_DB": str(ingest.db_path())}
@@ -195,6 +213,7 @@ STEPS = [
     Step("founders", ("full",), step_founders, "non-UK founders and boards via PDL person search (credits)"),
     Step("job_boards", ("daily", "full"), step_jobs, "open roles from the company's own job board"),
     Step("peers", ("daily", "full"), step_peers, "competitor universe from the BlueInvest pipeline"),
+    Step("agent", ("full",), step_agent, "agent research + judge on startups without a recent agent entry and discovered leads (LLM calls)"),
     Step("features", ("daily", "full"), step_features, "funding timeline, investors, founders, grants, patents, risk features"),
     Step("gaps", ("daily", "full"), step_gaps, "parameter coverage per startup + GAPS.md (runtime copy)"),
     Step("search_index", ("daily", "full"), step_search_index, "rebuild the runtime LightRAG index with main's process-storage"),
@@ -310,6 +329,7 @@ def write_configs() -> dict[str, Path]:
                          ("judge_prompt", "prompts/judge.md")):
         paths[key] = str((AGENT_DIR / paths.get(key, default)).resolve())  # shared cache: reruns cost nothing
     paths["output_dir"] = str((ingest.RUNTIME_DIR / "agent_output").resolve())
+    agent.setdefault("database", {})["path"] = str(ingest.db_path().resolve())
     search = tomllib.loads((SEARCH_DIR / "config.toml").read_text(encoding="utf-8"))
     search.setdefault("storage", {})["working_dir"] = str((ingest.RUNTIME_DIR / "rag_storage").resolve())
     search.setdefault("sources", {}).update(database=str(ingest.db_path().resolve()),

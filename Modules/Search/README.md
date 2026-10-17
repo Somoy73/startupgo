@@ -30,6 +30,21 @@ await search.close()                                    # on shutdown
 | `matched` | knowledge-graph entities that led to it, e.g. `("Seaweed", "Packaging")` |
 | `documents` | the matched documents, e.g. `("startup:notpla", "entry:notpla-com")` |
 
+For matching, two N-hop subgraphs of the knowledge graph (`startup_search/graph.py`):
+
+```python
+graph = await search.startup_graph("notpla", hops=2, max_nodes=150)      # around a database startup
+graph = await search.thesis_graph("kelp carbon removal", hops=1, seeds=10)  # around what a thesis retrieves
+```
+
+A `Subgraph` has `seeds`, `nodes` (entity, type, description, `hop` from the nearest seed, the startups it
+was extracted from), `edges` (relations among the nodes) and `startups`: the `StartupMatch`es the subgraph
+reaches, each scoring 1 / (hop + 1) per entity, so shared seeds count most. A startup's seed is its own
+entity (else every entity from its documents) and it is left out of its own `startups`. A thesis is seeded
+with the entities the search's retrieval returns for it. The walk keeps the best-connected entities of the
+last level when `max_nodes` cuts it (`truncated`). It reads the graph storage through LightRAG's batch
+methods only, so it works on any graph storage.
+
 The storage opens on the first search, so the Backend starts without a key or processed storage.
 After `process-storage` writes new storage, the next search loads it; no restart is needed. Errors are
 `SearchUnavailable` (no key, nothing processed yet; the Backend answers 503) and `SearchError`
@@ -92,7 +107,9 @@ and their keys; `config.toml` (`[chat]`, `[embedding]`) sets how they are called
 | `CHAT_MODEL`, `CHAT_API_KEY` | `nvidia/nemotron-3.5-lightning-30b-a3b` | process-storage: entities and relations from every chunk; search: keywords from each query |
 | `EMBEDDING_MODEL`, `EMBEDDING_API_KEY`, `EMBEDDING_DIM` | `nvidia/llama-3.2-nv-embedqa-1b-v1`, `2048` | process-storage: chunks, entities and relations; search: each query |
 
-A model left unset in `.env` uses the default; environment variables override `.env`. Keys are free at
+A model left unset in `.env` uses the default; environment variables override `.env`.
+`STARTUPGO_SEARCH_CONFIG` picks another `config.toml` (with its own `.env` next to it) when no `--config` is
+given, e.g. the runtime one `refresh.py` generates; the Backend uses it to search the runtime index. Keys are free at
 build.nvidia.com, and one NVIDIA key can be used for both.
 
 Why these models:

@@ -1,4 +1,4 @@
-"""Command line: run the research/evaluation workflow, profile or discover startups, rescore, export the schema."""
+"""Command line: run the research pipeline or workflow, profile or discover startups, rescore, export the schema."""
 
 from __future__ import annotations
 
@@ -10,9 +10,11 @@ from pathlib import Path
 from typing import Any
 
 from .config import AgentSettings
+from .database import StartupDatabase
 from .errors import AgentError
 from .factory import build_agent, build_judge
 from .graph import build_agent_graph
+from .pipeline import ResearchPipeline
 from .record import StartupRecord, record_json_schema
 from .store import RecordStore
 
@@ -62,6 +64,16 @@ def parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
     graph.add_argument("--json", action="store_true", help="Print the final workflow state as JSON")
     graph.add_argument("--refresh", action="store_true")
 
+    pipeline = commands.add_parser("pipeline", help="Research database startups without a recent agent entry (and discovered leads); store what the judge accepts")
+    pipeline.add_argument("--limit", type=int, help="Startups to research (default: [pipeline] limit)")
+    pipeline.add_argument("--slug", action="append", default=[], help="Research this database startup; repeatable")
+    pipeline.add_argument("--no-discover", action="store_true", help="Skip the [pipeline] discover sources")
+    pipeline.add_argument("--discover-url", help="Research only startups discovered on this page, e.g. https://wellfound.com/startups/industry/aquaculture")
+    pipeline.add_argument("--source", default="wellfound", choices=("wellfound", "generic", "osm"), help="Discovery source for --discover-url")
+    pipeline.add_argument("--dry-run", action="store_true", help="List the candidates without researching them")
+    pipeline.add_argument("--json", action="store_true", help="Print the results as JSON")
+    pipeline.add_argument("--refresh", action="store_true")
+
     return parser.parse_args(argv)
 
 
@@ -79,6 +91,8 @@ def main(argv: Sequence[str] | None = None) -> int:
 
         if args.command == "graph":
             return _run_graph(args, settings, store)
+        if args.command == "pipeline":
+            return _run_pipeline(args, settings)
 
         agent, fetcher = build_agent(settings, refresh=args.refresh)
         try:
@@ -145,8 +159,13 @@ def _run_graph(args: argparse.Namespace, settings: AgentSettings, store: RecordS
         print(_review_line(review))
 
     entries = result.get("evaluated") if args.mode != "research" else result.get("records")
+    database = StartupDatabase(settings.database) if settings.database else None
     for entry in entries or []:
-        _report(*store.save(StartupRecord.from_dict(entry), weights=settings.weights))
+        path, saved = store.save(StartupRecord.from_dict(entry), weights=settings.weights)
+        _report(path, saved)
+        if database:
+            stored = database.save(saved)
+            print(f"  database: {stored.skipped or ('new startup ' if stored.created else 'assessment for ') + stored.slug}")
     for assessment in result.get("assessments", []):
         print(_assessment_line(assessment))
     for skipped in result.get("skipped", []):
@@ -156,6 +175,37 @@ def _run_graph(args: argparse.Namespace, settings: AgentSettings, store: RecordS
     if args.json:
         _write_json(result, None)
     return 0 if entries else 1
+
+
+def _run_pipeline(args: argparse.Namespace, settings: AgentSettings) -> int:
+    pipeline = ResearchPipeline(settings, refresh=args.refresh)
+    try:
+        limit = args.limit or settings.pipeline.limit
+        # Ask for extra leads: some have no website or are already in the database.
+        sources = ([{"source": args.source, "url": args.discover_url, "query": None, "location": "", "limit": 3 * limit}]
+                   if args.discover_url else None)
+        candidates, problems = pipeline.candidates(limit=limit, slugs=args.slug, discover=not args.no_discover, sources=sources)
+        for problem in problems:
+            print(f"error: {problem}", file=sys.stderr)
+        if args.dry_run:
+            for c in candidates:
+                print(f"{c.name} ({c.website})" + (f" [{c.slug}]" if c.slug else " [new]"))
+            return 0
+        results = pipeline.run(candidates)
+    finally:
+        pipeline.close()
+        print(f"usage: {pipeline.usage()}", file=sys.stderr)
+    if args.json:
+        _write_json(results, None)
+    for r in results:
+        if r.get("error"):
+            print(f"failed {r['name']}: {r['error']}", file=sys.stderr)
+            continue
+        where = f"stored as {r['slug']}" + (" (new)" if r["created"] else "") if r["stored"] else f"not stored: {r['skipped']}"
+        print(f"{r['name']}: TRL {r['trl'] or '?'} · BRL {r['brl'] or '?'} · OIR {r['ocean_impact_readiness'] or '?'} · "
+              f"investment {r['investment_score']} · judge {r['review_status']} → {where}")
+    print(f"{sum(1 for r in results if r.get('stored'))} of {len(results)} startup(s) stored")
+    return 1 if results and all(r.get("error") for r in results) else 0
 
 
 def _review_line(review: dict[str, Any]) -> str:
