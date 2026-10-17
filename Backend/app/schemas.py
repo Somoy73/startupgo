@@ -414,6 +414,7 @@ class ResearchJob(BaseModel):
     slug: str | None  # the startup, once known (a new startup gets one when the judge accepts it)
     business_id: str | None
     urls: list[str]
+    refresh: bool  # researched again, ignoring the agent's cache: the last score had no evidence for TRL or BRL
     created_at: str
     started_at: str | None
     finished_at: str | None
@@ -437,6 +438,7 @@ class StartupResearch(BaseModel):
     slug: str
     has_agent_assessment: bool
     agent: AgentEntryInfo | None
+    researched_at: str | None  # last agent research run (UTC), whatever the judge decided; researched again 30 days later
     job: ResearchJob | None  # latest research job
 
 

@@ -200,8 +200,10 @@ def _graph_response(conn: sqlite3.Connection, graph: Subgraph, filters: SearchFi
 def start_research(body: ResearchRequest, request: Request, conn: sqlite3.Connection = Conn):
     """Queue the agent on a database startup (slug) or a new one (name + website). Poll GET /api/research/{id}.
 
-    Only startups without a score are researched: one that already has an assessment gets 409 (read its score
-    from GET /api/startups/{slug}). A name + website whose domain is a database startup counts as that startup.
+    Only startups without a usable score are researched: none yet, or one where the agent found no evidence for
+    TRL or BRL (researched again, ignoring the agent's cache). Any other assessment gets 409 (read its score from
+    GET /api/startups/{slug}). A name + website whose domain is a database startup counts as that startup.
+    A startup the agent researched in the last 30 days (the agent's max_age_days) also gets 409, whatever the result.
     """
     slug, name, website = body.slug, body.name, body.website
     if slug:
@@ -212,14 +214,18 @@ def start_research(body: ResearchRequest, request: Request, conn: sqlite3.Connec
                     if domain(r["website"]) == own), None)
         slug = row["slug"] if row else None
     startup_id = row["id"] if row else None
-    if row and conn.execute("SELECT 1 FROM readiness_assessments WHERE startup_id = ?", (startup_id,)).fetchone():
+    if row and (recent := research.researched_recently(conn, startup_id)):
+        ran, days = recent
+        raise HTTPException(409, f"{slug} was researched by the agent at {ran} UTC: it is researched again {days} days after that")
+    refresh = bool(row and conn.execute("SELECT 1 FROM readiness_assessments WHERE startup_id = ?", (startup_id,)).fetchone())
+    if refresh and not research.needs_research(conn, startup_id):
         raise HTTPException(409, f"{slug} already has a score: read it from GET /api/startups/{slug}")
     if row:
         name, website = row["name"], website or row["website"]
         if not website:
             raise repository.InvalidInput(f"{slug} has no website: give one to research it")
     candidate = Candidate(name, website, slug=slug, business_id=body.business_id, extra_urls=tuple(body.urls))
-    return request.app.state.research.submit(conn, candidate, startup_id)
+    return request.app.state.research.submit(conn, candidate, startup_id, refresh=refresh)
 
 
 @app.get("/api/research/{job_id}", response_model=ResearchJob)
@@ -233,10 +239,11 @@ def research_job(job_id: int, conn: sqlite3.Connection = Conn):
 @app.get("/api/startups/{slug}/research", response_model=StartupResearch)
 def startup_research(slug: str, conn: sqlite3.Connection = Conn):
     """Whether the agent has assessed the startup, and its latest research job."""
-    row = _found(conn.execute("SELECT id FROM startups WHERE slug = ?", (slug,)).fetchone(), slug)
+    row = _found(conn.execute("SELECT id, agent_researched_at FROM startups WHERE slug = ?", (slug,)).fetchone(), slug)
     entry = conn.execute("SELECT * FROM agent_entries WHERE startup_id = ?", (row["id"],)).fetchone()
     agent = AgentEntryInfo(**{k: entry[k] for k in AgentEntryInfo.model_fields}) if entry else None
-    return StartupResearch(slug=slug, has_agent_assessment=agent is not None, agent=agent, job=research.latest_job(conn, row["id"]))
+    return StartupResearch(slug=slug, has_agent_assessment=agent is not None, agent=agent, researched_at=row["agent_researched_at"],
+                           job=research.latest_job(conn, row["id"]))
 
 
 @app.post("/api/startups", response_model=StartupDetail, status_code=201)
