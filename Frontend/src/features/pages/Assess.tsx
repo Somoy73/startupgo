@@ -160,9 +160,7 @@ export function Assess() {
           </div>
           <p className="small secondary" style={{ marginBottom: 10 }}>
             Investment potential is a weighted blend of readiness ({pct(w.readiness)}), ocean impact
-            ({pct(w.ocean_impact)}) and funding momentum ({pct(w.momentum)}), with a penalty when
-            the readiness dimensions are far apart — a company that is strong on technology but
-            undeveloped everywhere else is riskier than the average suggests.
+            ({pct(w.ocean_impact)}) and funding momentum ({pct(w.momentum)}).
           </p>
           <div className="row-gap" style={{ flexWrap: "wrap" }}>
             <span className="chip">Strong ≥ 70</span>
@@ -171,8 +169,8 @@ export function Assess() {
             <span className="chip">Early &lt; 40</span>
           </div>
           <p className="small secondary" style={{ marginTop: 14 }}>
-            The exact formula, weights and imbalance penalty are all shown on this page. You can
-            also see the method applied side by side in <Link to="/matching">Matching</Link>.
+            The exact formula and weights are all shown on this page. You can also see the method
+            applied side by side in <Link to="/matching">Matching</Link>.
           </p>
         </section>
       </div>

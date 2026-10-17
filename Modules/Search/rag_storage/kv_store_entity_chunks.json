@@ -478,11 +478,12 @@
   },
   "European Commission": {
     "chunk_ids": [
-      "startup:swedish-algae-factory-ab-chunk-000"
+      "startup:swedish-algae-factory-ab-chunk-000",
+      "startup:aquabiotech-group-chunk-000",
+      "startup:pharem-chunk-000"
     ],
-    "count": 1,
-    "create_time": 1792250370,
-    "update_time": 1792250370,
+    "count": 3,
+    "update_time": 1792255887,
     "_id": "European Commission"
   },
   "Horizon Multiply": {
@@ -524,10 +525,14 @@
   "BlueInvest Project Pipeline": {
     "chunk_ids": [
       "startup:sundew-chunk-000",
-      "startup:nauticspot-chunk-000"
+      "startup:nauticspot-chunk-000",
+      "startup:healix-chunk-000",
+      "startup:pharem-chunk-000",
+      "startup:paras-aqua-oy-chunk-000",
+      "startup:reeftox-chunk-000"
     ],
-    "count": 2,
-    "update_time": 1792251894,
+    "count": 6,
+    "update_time": 1792256674,
     "_id": "BlueInvest Project Pipeline"
   },
   "Nauticspot": {
@@ -550,11 +555,12 @@
   },
   "France": {
     "chunk_ids": [
-      "startup:nauticspot-chunk-000"
+      "startup:nauticspot-chunk-000",
+      "startup:xsun-sas-chunk-000",
+      "startup:reeftox-chunk-000"
     ],
-    "count": 1,
-    "create_time": 1792251894,
-    "update_time": 1792251894,
+    "count": 3,
+    "update_time": 1792256674,
     "_id": "France"
   },
   "NAUTICSPOT": {
@@ -565,5 +571,491 @@
     "create_time": 1792251894,
     "update_time": 1792251894,
     "_id": "NAUTICSPOT"
+  },
+  "SaMMY": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "SaMMY"
+  },
+  "Marinas": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Marinas"
+  },
+  "Tourist Ports": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Tourist Ports"
+  },
+  "Smart Parking": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Smart Parking"
+  },
+  "Smart Environment": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Smart Environment"
+  },
+  "Coastal and Environmental Protection": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Coastal and Environmental Protection"
+  },
+  "Greece": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Greece"
+  },
+  "Blue Invest": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Blue Invest"
+  },
+  "SaMMY AYT": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "SaMMY AYT"
+  },
+  "Environmental Protection and Regeneration": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Environmental Protection and Regeneration"
+  },
+  "Commercial Operation": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Commercial Operation"
+  },
+  "Active Registry": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Active Registry"
+  },
+  "Team of 8": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Team of 8"
+  },
+  "Employees 1-9": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Employees 1-9"
+  },
+  "500,000 EUR": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "500,000 EUR"
+  },
+  "Next Generation Marina": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Next Generation Marina"
+  },
+  "Multi-purpose Sensor Grid": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Multi-purpose Sensor Grid"
+  },
+  "Unified Booking and Operating Management Systems": {
+    "chunk_ids": [
+      "startup:sammy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "Unified Booking and Operating Management Systems"
+  },
+  "AquaBioTech Limited": {
+    "chunk_ids": [
+      "startup:aquabiotech-group-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253125,
+    "update_time": 1792253125,
+    "_id": "AquaBioTech Limited"
+  },
+  "Healix": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Healix"
+  },
+  "Netherlands": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Netherlands"
+  },
+  "Raising now": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Raising now"
+  },
+  "Total raised": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Total raised"
+  },
+  "Employees": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Employees"
+  },
+  "Team size": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Team size"
+  },
+  "Website": {
+    "chunk_ids": [
+      "startup:healix-chunk-000",
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1792256414,
+    "_id": "Website"
+  },
+  "Blue economy sector": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Blue economy sector"
+  },
+  "Development stage": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Development stage"
+  },
+  "Sector": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Sector"
+  },
+  "Xsun": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "Xsun"
+  },
+  "SolarXOne": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "SolarXOne"
+  },
+  "BlueTech": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "BlueTech"
+  },
+  "AerialSurvey": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "AerialSurvey"
+  },
+  "XSun SAS": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "XSun SAS"
+  },
+  "XSun SolarXOne": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "XSun SolarXOne"
+  },
+  "replaces": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "replaces"
+  },
+  "Pharem": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "Pharem"
+  },
+  "Zymatic": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "Zymatic"
+  },
+  "EIC": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "EIC"
+  },
+  "H2020 PFS": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "H2020 PFS"
+  },
+  "H2020 DePharm": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "H2020 DePharm"
+  },
+  "Grant: H2020 PFS": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "Grant: H2020 PFS"
+  },
+  "Grant: H2020 DePharm": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "Grant: H2020 DePharm"
+  },
+  "PaRAS Aqua Oy": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "PaRAS Aqua Oy"
+  },
+  "Finland": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "Finland"
+  },
+  "Aquaculture": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "Aquaculture"
+  },
+  "PaRAS": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "PaRAS"
+  },
+  "commercial operation": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000",
+      "startup:reeftox-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1792256674,
+    "_id": "commercial operation"
+  },
+  "1,000,000 EUR": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "1,000,000 EUR"
+  },
+  "1-9": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000",
+      "startup:reeftox-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1792256674,
+    "_id": "1-9"
+  },
+  "ReefTox": {
+    "chunk_ids": [
+      "startup:reeftox-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256674,
+    "update_time": 1792256674,
+    "_id": "ReefTox"
+  },
+  "Coastal and environmental protection and regeneration": {
+    "chunk_ids": [
+      "startup:reeftox-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256674,
+    "update_time": 1792256674,
+    "_id": "Coastal and environmental protection and regeneration"
+  },
+  "Environmental protection and regeneration": {
+    "chunk_ids": [
+      "startup:reeftox-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256674,
+    "update_time": 1792256674,
+    "_id": "Environmental protection and regeneration"
+  },
+  "2,000,000 EUR": {
+    "chunk_ids": [
+      "startup:reeftox-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256674,
+    "update_time": 1792256674,
+    "_id": "2,000,000 EUR"
   }
 }

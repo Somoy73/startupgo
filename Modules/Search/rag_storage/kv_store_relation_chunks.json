@@ -178,5 +178,302 @@
     "create_time": 1792251033,
     "update_time": 1792251033,
     "_id": "BlueInvest Project Pipeline<SEP>Sundew"
+  },
+  "BlueInvest Project Pipeline<SEP>Healix": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "BlueInvest Project Pipeline<SEP>Healix"
+  },
+  "Healix<SEP>Total raised": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Healix<SEP>Total raised"
+  },
+  "Healix<SEP>Raising now": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Healix<SEP>Raising now"
+  },
+  "Employees<SEP>Healix": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Employees<SEP>Healix"
+  },
+  "Healix<SEP>Team size": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Healix<SEP>Team size"
+  },
+  "Healix<SEP>Website": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Healix<SEP>Website"
+  },
+  "Blue economy sector<SEP>Healix": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Blue economy sector<SEP>Healix"
+  },
+  "Development stage<SEP>Healix": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Development stage<SEP>Healix"
+  },
+  "Healix<SEP>Sector": {
+    "chunk_ids": [
+      "startup:healix-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "Healix<SEP>Sector"
+  },
+  "SolarXOne<SEP>Xsun": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "SolarXOne<SEP>Xsun"
+  },
+  "AerialSurvey<SEP>Xsun": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "AerialSurvey<SEP>Xsun"
+  },
+  "BlueTech<SEP>SolarXOne": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "BlueTech<SEP>SolarXOne"
+  },
+  "SolarXOne<SEP>XSun SAS": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "SolarXOne<SEP>XSun SAS"
+  },
+  "BlueTech<SEP>Xsun": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "BlueTech<SEP>Xsun"
+  },
+  "AerialSurvey<SEP>XSun SAS": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "AerialSurvey<SEP>XSun SAS"
+  },
+  "XSun SolarXOne<SEP>replaces": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "XSun SolarXOne<SEP>replaces"
+  },
+  "BlueTech<SEP>XSun SAS": {
+    "chunk_ids": [
+      "startup:xsun-sas-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "BlueTech<SEP>XSun SAS"
+  },
+  "European Commission<SEP>Pharem": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "European Commission<SEP>Pharem"
+  },
+  "EIC<SEP>Pharem": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "EIC<SEP>Pharem"
+  },
+  "European Commission<SEP>Zymatic": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "European Commission<SEP>Zymatic"
+  },
+  "BlueInvest Project Pipeline<SEP>Pharem": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "BlueInvest Project Pipeline<SEP>Pharem"
+  },
+  "Grant: H2020 PFS<SEP>Pharem": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "Grant: H2020 PFS<SEP>Pharem"
+  },
+  "BlueInvest Project Pipeline<SEP>Zymatic": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "BlueInvest Project Pipeline<SEP>Zymatic"
+  },
+  "Grant: H2020 DePharm<SEP>Pharem": {
+    "chunk_ids": [
+      "startup:pharem-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "Grant: H2020 DePharm<SEP>Pharem"
+  },
+  "Finland<SEP>PaRAS Aqua Oy": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "Finland<SEP>PaRAS Aqua Oy"
+  },
+  "Aquaculture<SEP>PaRAS Aqua Oy": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "Aquaculture<SEP>PaRAS Aqua Oy"
+  },
+  "PaRAS Aqua Oy<SEP>Website": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "PaRAS Aqua Oy<SEP>Website"
+  },
+  "BlueInvest Project Pipeline<SEP>PaRAS Aqua Oy": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "BlueInvest Project Pipeline<SEP>PaRAS Aqua Oy"
+  },
+  "PaRAS Aqua Oy<SEP>commercial operation": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "PaRAS Aqua Oy<SEP>commercial operation"
+  },
+  "1,000,000 EUR<SEP>PaRAS Aqua Oy": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "1,000,000 EUR<SEP>PaRAS Aqua Oy"
+  },
+  "1-9<SEP>PaRAS Aqua Oy": {
+    "chunk_ids": [
+      "startup:paras-aqua-oy-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "1-9<SEP>PaRAS Aqua Oy"
+  },
+  "France<SEP>ReefTox": {
+    "chunk_ids": [
+      "startup:reeftox-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256674,
+    "update_time": 1792256674,
+    "_id": "France<SEP>ReefTox"
+  },
+  "BlueInvest Project Pipeline<SEP>ReefTox": {
+    "chunk_ids": [
+      "startup:reeftox-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792256674,
+    "update_time": 1792256674,
+    "_id": "BlueInvest Project Pipeline<SEP>ReefTox"
   }
 }

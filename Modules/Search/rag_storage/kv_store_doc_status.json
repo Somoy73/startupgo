@@ -1,10 +1,10 @@
 {
   "startup:seabound": {
-    "status": "processing",
+    "status": "processed",
     "content_summary": "# Seabound\nOnboard carbon capture for ships\n\nBuilds carbon capture equipment that fits on ships to capture exhaust CO2 at the source. Y Combinator alumnus.\n\nSeabound is raising a Series A round to scale-up the team, technology, and commercial deploym...",
     "content_length": 2367,
     "created_at": "2026-10-17T13:47:53.772808+00:00",
-    "updated_at": "2026-10-17T13:47:53.794668+00:00",
+    "updated_at": "2026-10-17T13:59:59.085603+00:00",
     "file_path": "startup:seabound",
     "track_id": "insert_20261017_164753_390d4496",
     "content_hash": "5b05d42721dab916834bf73efd947a1c",
@@ -15,14 +15,534 @@
       "parse_engine": "legacy",
       "analyzing_start_time": 1792244873,
       "analyzing_stage_skipped": true,
-      "kg_write_state": "pre_graph",
+      "kg_write_state": "graph_mutation_started",
       "process_start_time": 1792244873,
+      "process_end_time": 1792245599,
       "chunk_method": "legacy_chunking_func",
       "chunk_opts": "size=1200, split_only=False, overlap=100"
     },
     "chunks_count": 1,
     "chunks_list": [
       "startup:seabound-chunk-000"
+    ]
+  },
+  "startup:oceanium": {
+    "status": "failed",
+    "content_summary": "# Oceanium\nSeaweed biorefinery for food, materials and biodegradable products\n\nProcesses farmed kelp into food ingredients, biodegradable materials and other products through its biorefinery technology.\n\nOceanium is an impact business formed to enabl...",
+    "content_length": 3317,
+    "created_at": "2026-10-17T14:00:04.096258+00:00",
+    "updated_at": "2026-10-17T14:10:04.171565+00:00",
+    "file_path": "startup:oceanium",
+    "track_id": "insert_20261017_170004_8babfe6d",
+    "content_hash": "e333b5272a2a4d55ea08416bc78569a7",
+    "metadata": {
+      "parse_start_time": 1792245604,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792245604,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "pre_graph",
+      "process_start_time": 1792245604,
+      "process_end_time": 1792246204,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "error_msg": "C[1/1]: startup:oceanium-chunk-000: extract LLM func: Worker execution timeout after 600s",
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:oceanium-chunk-000"
+    ]
+  },
+  "startup:notpla": {
+    "status": "failed",
+    "content_summary": "# Notpla\nSeaweed-based packaging that replaces single-use plastic\n\nDevelops packaging and coatings made from seaweed and plants as an alternative to single-use plastic.\n\nSector: Materials & packaging\nLocation: London, United Kingdom\nStage: series-a\nF...",
+    "content_length": 2695,
+    "created_at": "2026-10-17T14:10:09.184370+00:00",
+    "updated_at": "2026-10-17T14:20:09.275466+00:00",
+    "file_path": "startup:notpla",
+    "track_id": "insert_20261017_171009_52e04a4d",
+    "content_hash": "10da8327a32a64f2dfcbe4dd93b0ada8",
+    "metadata": {
+      "parse_start_time": 1792246209,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792246209,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "pre_graph",
+      "process_start_time": 1792246209,
+      "process_end_time": 1792246809,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "error_msg": "C[1/1]: startup:notpla-chunk-000: extract LLM func: Worker execution timeout after 600s",
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:notpla-chunk-000"
+    ]
+  },
+  "startup:seaforester": {
+    "status": "failed",
+    "content_summary": "# SeaForester\nRestoring marine forests\n\nMarine restoration company focused on restoring kelp and other marine forests.\n\nSeaForester is environmental impact company restoring ocean ecosystems through seaweed reforestation. Based in Portugal (Cascais a...",
+    "content_length": 2023,
+    "created_at": "2026-10-17T14:20:14.294984+00:00",
+    "updated_at": "2026-10-17T14:30:14.374487+00:00",
+    "file_path": "startup:seaforester",
+    "track_id": "insert_20261017_172014_acefdd22",
+    "content_hash": "a770ed703d9cb823cad35a5804393bb1",
+    "metadata": {
+      "parse_start_time": 1792246814,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792246814,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "pre_graph",
+      "process_start_time": 1792246814,
+      "process_end_time": 1792247414,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "error_msg": "C[1/1]: startup:seaforester-chunk-000: extract LLM func: Worker execution timeout after 600s",
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:seaforester-chunk-000"
+    ]
+  },
+  "startup:kelp-blue": {
+    "status": "processed",
+    "content_summary": "# Kelp Blue\nGiant kelp forests for carbon, biodiversity and biostimulants\n\nDutch-headquartered company cultivating giant kelp forests off Lüderitz, Namibia. Received the Zayed Sustainability Prize (Climate Action) at COP28.\n\nOrganic kelp forbiostimul...",
+    "content_length": 2444,
+    "created_at": "2026-10-17T14:30:19.394063+00:00",
+    "updated_at": "2026-10-17T14:39:31.221562+00:00",
+    "file_path": "startup:kelp-blue",
+    "track_id": "insert_20261017_173019_b2c94724",
+    "content_hash": "a7062e1eec16eda455c90b19433347c1",
+    "metadata": {
+      "parse_start_time": 1792247419,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792247419,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792247419,
+      "process_end_time": 1792247971,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:kelp-blue-chunk-000"
+    ]
+  },
+  "startup:ocean-rainforest": {
+    "status": "failed",
+    "content_summary": "# Ocean Rainforest\nOffshore seaweed cultivation at scale\n\nCultivates seaweed offshore in the Faroe Islands and develops seaweed products and markets.\n\nSector: Aquaculture\nLocation: Faroe Islands\nStage: series-a\nWebsite: https://www.oceanrainforest.co...",
+    "content_length": 2421,
+    "created_at": "2026-10-17T14:39:36.227474+00:00",
+    "updated_at": "2026-10-17T14:49:36.300390+00:00",
+    "file_path": "startup:ocean-rainforest",
+    "track_id": "insert_20261017_173936_ad366746",
+    "content_hash": "168e31dd660b08f0ba42b6664c95f254",
+    "metadata": {
+      "parse_start_time": 1792247976,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792247976,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "pre_graph",
+      "process_start_time": 1792247976,
+      "process_end_time": 1792248576,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "error_msg": "C[1/1]: startup:ocean-rainforest-chunk-000: extract LLM func: Worker execution timeout after 600s",
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:ocean-rainforest-chunk-000"
+    ]
+  },
+  "startup:sofar-ocean": {
+    "status": "failed",
+    "content_summary": "# Sofar Ocean\nReal-time ocean data from a global network of Spotter buoys\n\nBuilds solar-powered Spotter buoys that report wind, wave, temperature and current data, and sells marine weather intelligence. Formed from the merger of OpenROV and Spoondrif...",
+    "content_length": 2570,
+    "created_at": "2026-10-17T14:49:41.337033+00:00",
+    "updated_at": "2026-10-17T14:59:41.461113+00:00",
+    "file_path": "startup:sofar-ocean",
+    "track_id": "insert_20261017_174941_12df0e81",
+    "content_hash": "00a33333c875ce617915367677341956",
+    "metadata": {
+      "parse_start_time": 1792248581,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792248581,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "pre_graph",
+      "process_start_time": 1792248581,
+      "process_end_time": 1792249181,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "error_msg": "C[1/1]: startup:sofar-ocean-chunk-000: extract LLM func: Worker execution timeout after 600s",
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:sofar-ocean-chunk-000"
+    ]
+  },
+  "startup:clearbot": {
+    "status": "processed",
+    "content_summary": "# Clearbot\nAutonomous electric boats that collect floating waste\n\nSpun out of University of Hong Kong students; builds self-driving electric boats that each collect 250-300 kg of waste per trip. Reported deployments in Hong Kong, India and Panama.\n\nS...",
+    "content_length": 1945,
+    "created_at": "2026-10-17T14:59:46.478521+00:00",
+    "updated_at": "2026-10-17T15:06:39.154805+00:00",
+    "file_path": "startup:clearbot",
+    "track_id": "insert_20261017_175946_16fb2951",
+    "content_hash": "8033ac0e3d811693b6ef88e7f1b6e2ba",
+    "metadata": {
+      "parse_start_time": 1792249186,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792249186,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792249186,
+      "process_end_time": 1792249599,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:clearbot-chunk-000"
+    ]
+  },
+  "startup:hivelife": {
+    "status": "processed",
+    "content_summary": "# HiveLife\nHiveLife\n\nSector: Unknown\nLocation: Hong Kong\nStage: unknown\nFounded: 2016\nWebsite: https://hivelife.com/\n\n## Readiness\nKTH Innovation Readiness Level 1-9, assessed 2026-10-17, low confidence\n- Customer (CRL) 1: A possible need is assumed;...",
+    "content_length": 1226,
+    "created_at": "2026-10-17T15:06:44.160134+00:00",
+    "updated_at": "2026-10-17T15:13:04.710488+00:00",
+    "file_path": "startup:hivelife",
+    "track_id": "insert_20261017_180644_0454faf6",
+    "content_hash": "d813e39ad4ab95565bce20304c5032b9",
+    "metadata": {
+      "parse_start_time": 1792249604,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792249604,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792249604,
+      "process_end_time": 1792249984,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:hivelife-chunk-000"
+    ]
+  },
+  "startup:swedish-algae-factory-ab": {
+    "status": "processed",
+    "content_summary": "# Swedish Algae Factory AB\nSwedish Algae Factory\n\nCultivation and extraction of material from algae\n\nSector: Blue biotechnology\nLocation: Sweden\nStage: unknown\nWebsite: https://swedishalgaefactory.com\nBlue economy sector: blue biotechnology\nDevelopme...",
+    "content_length": 719,
+    "created_at": "2026-10-17T15:13:09.720969+00:00",
+    "updated_at": "2026-10-17T15:19:31.385514+00:00",
+    "file_path": "startup:swedish-algae-factory-ab",
+    "track_id": "insert_20261017_181309_54b0f13d",
+    "content_hash": "0a72572b5e7ffe9a214ceb92c9c4d458",
+    "metadata": {
+      "parse_start_time": 1792249989,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792249989,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792249989,
+      "process_end_time": 1792250371,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ]
+  },
+  "startup:sundew": {
+    "status": "processed",
+    "content_summary": "# Sundew\nCombatting aquatic pests, diseases & invasive spp.\n\nSector: Blue biotechnology\nLocation: Denmark\nStage: unknown\nWebsite: https://sundew.bio\nBlue economy sector: blue biotechnology\nDevelopment stage: commercial operation\nRegistry status: acti...",
+    "content_length": 391,
+    "created_at": "2026-10-17T15:19:36.392429+00:00",
+    "updated_at": "2026-10-17T15:30:33.945843+00:00",
+    "file_path": "startup:sundew",
+    "track_id": "insert_20261017_181936_e79bd917",
+    "content_hash": "0a370da09f4dc502fc2a7327bb7ac695",
+    "metadata": {
+      "parse_start_time": 1792250376,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792250376,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792250376,
+      "process_end_time": 1792251033,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:sundew-chunk-000"
+    ]
+  },
+  "startup:nauticspot": {
+    "status": "processed",
+    "content_summary": "# NAUTICSPOT\nSmart mooring buoy to preserve seabed & posidonia\n\nSector: Shipping & ports\nLocation: France\nStage: unknown\nWebsite: https://nauticspot.com\nBlue economy sector: shipping and ports\nDevelopment stage: commercial operation\nRegistry status: ...",
+    "content_length": 375,
+    "created_at": "2026-10-17T15:30:38.956310+00:00",
+    "updated_at": "2026-10-17T15:44:54.939454+00:00",
+    "file_path": "startup:nauticspot",
+    "track_id": "insert_20261017_183038_8001e991",
+    "content_hash": "68a4e0857f81436e1328464fe2368c2c",
+    "metadata": {
+      "parse_start_time": 1792251038,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792251038,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792251038,
+      "process_end_time": 1792251894,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:nauticspot-chunk-000"
+    ]
+  },
+  "startup:sammy": {
+    "status": "processed",
+    "content_summary": "# SAMMY\nSaMMY is a serious attempt to introduce new services and systems in the global marinas and tourist ports market, similar to the previous market breakthrough success of the smart pa\n\nSaMMY is a serious attempt to introduce new services and sys...",
+    "content_length": 1505,
+    "created_at": "2026-10-17T15:44:59.951065+00:00",
+    "updated_at": "2026-10-17T16:02:35.605934+00:00",
+    "file_path": "startup:sammy",
+    "track_id": "insert_20261017_184459_4a2058b8",
+    "content_hash": "63f7bb54087bb2276daab89bb8e9f13a",
+    "metadata": {
+      "parse_start_time": 1792251899,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792251899,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792251899,
+      "process_end_time": 1792252955,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:sammy-chunk-000"
+    ]
+  },
+  "startup:aquabiotech-group": {
+    "status": "processed",
+    "content_summary": "# AquaBioTech Group\nAquaBioTech Limited\n\nConsulting, engineering, and contract research services and turnkey technological solutions.\n\nSector: Aquaculture\nLocation: Malta\nStage: unknown\nWebsite: https://aquabt.com\nBlue economy sector: aquaculture\nDev...",
+    "content_length": 504,
+    "created_at": "2026-10-17T16:02:40.612214+00:00",
+    "updated_at": "2026-10-17T16:05:26.252262+00:00",
+    "file_path": "startup:aquabiotech-group",
+    "track_id": "insert_20261017_190240_a050a664",
+    "content_hash": "56692312df0464ef77273c80a9f040bf",
+    "metadata": {
+      "parse_start_time": 1792252960,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792252960,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792252960,
+      "process_end_time": 1792253126,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:aquabiotech-group-chunk-000"
+    ]
+  },
+  "startup:healix": {
+    "status": "processed",
+    "content_summary": "# Healix\nRecycling nets & ropes into high-quality polymers\n\nSector: Coastal and environmental protection and regeneration\nLocation: Netherlands\nStage: unknown\nWebsite: https://healix.eco\nBlue economy sector: environmental protection and regeneration\n...",
+    "content_length": 426,
+    "created_at": "2026-10-17T16:05:31.263165+00:00",
+    "updated_at": "2026-10-17T16:12:43.149756+00:00",
+    "file_path": "startup:healix",
+    "track_id": "insert_20261017_190531_8ec54048",
+    "content_hash": "65c2fb01a13e4e8458928a52e3038544",
+    "metadata": {
+      "parse_start_time": 1792253131,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792253131,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792253131,
+      "process_end_time": 1792253563,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:healix-chunk-000"
+    ]
+  },
+  "startup:xocean": {
+    "status": "failed",
+    "content_summary": "# XOCEAN\nOcean data, delivered\n\nSector: Blue renewable energy\nLocation: Ireland\nStage: unknown\nWebsite: https://xocean.com\nBlue economy sector: blue renewable energy\nDevelopment stage: commercial operation\nTeam size: 213\nEmployees: 50-249\nTotal raise...",
+    "content_length": 405,
+    "created_at": "2026-10-17T16:12:48.154792+00:00",
+    "updated_at": "2026-10-17T16:26:17.347888+00:00",
+    "file_path": "startup:xocean",
+    "track_id": "insert_20261017_191248_0470afc0",
+    "content_hash": "78ec12b3b057a00bfcbcff84220ed011",
+    "metadata": {
+      "parse_start_time": 1792253568,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792253568,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "pre_graph",
+      "process_start_time": 1792253568,
+      "process_end_time": 1792254377,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "error_msg": "C[1/1]: startup:xocean-chunk-000: extract LLM func: Worker execution timeout after 600s",
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:xocean-chunk-000"
+    ]
+  },
+  "startup:xsun-sas": {
+    "status": "processed",
+    "content_summary": "# XSun SAS\nXSun is a manufacturer of environmentally friendly long range solar drones.\n\nXSun is a manufacturer of environmentally friendly long range solar drones. The endurance is 12h+ and range 600+. Operational payload is 5kg. This is perfect for ...",
+    "content_length": 889,
+    "created_at": "2026-10-17T16:26:22.362394+00:00",
+    "updated_at": "2026-10-17T16:39:08.643217+00:00",
+    "file_path": "startup:xsun-sas",
+    "track_id": "insert_20261017_192622_53082a65",
+    "content_hash": "33ced8bd21ba6cccb04f9a4b6d098ec4",
+    "metadata": {
+      "parse_start_time": 1792254382,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792254382,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792254382,
+      "process_end_time": 1792255148,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:xsun-sas-chunk-000"
+    ]
+  },
+  "startup:pharem": {
+    "status": "processed",
+    "content_summary": "# Pharem\nZymatic\n\nZymtic - Natural and sustainable water treatment\n\nSector: Ocean pollution & water management\nLocation: Sweden\nStage: unknown\nWebsite: https://zymatic.com\nBlue economy sector: water management\nTeam size: 14\nEmployees: 10-49\nTotal rai...",
+    "content_length": 495,
+    "created_at": "2026-10-17T16:39:13.649689+00:00",
+    "updated_at": "2026-10-17T16:51:28.239976+00:00",
+    "file_path": "startup:pharem",
+    "track_id": "insert_20261017_193913_fed82980",
+    "content_hash": "091adfd53b65c06905dbf90da6be45a1",
+    "metadata": {
+      "parse_start_time": 1792255153,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792255153,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792255153,
+      "process_end_time": 1792255888,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:pharem-chunk-000"
+    ]
+  },
+  "startup:paras-aqua-oy": {
+    "status": "processed",
+    "content_summary": "# PaRAS Aqua Oy\nPaRAS Aqua Oy\n\nPaRAS is a modular full scale space saving aquaculture system.\n\nSector: Aquaculture\nLocation: Finland\nStage: unknown\nWebsite: https://parasaqua.com\nBlue economy sector: aquaculture\nDevelopment stage: commercial operatio...",
+    "content_length": 370,
+    "created_at": "2026-10-17T16:51:33.245786+00:00",
+    "updated_at": "2026-10-17T17:00:14.737496+00:00",
+    "file_path": "startup:paras-aqua-oy",
+    "track_id": "insert_20261017_195133_3713b74d",
+    "content_hash": "57edec86fea01f168db4894131d58a41",
+    "metadata": {
+      "parse_start_time": 1792255893,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792255893,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792255893,
+      "process_end_time": 1792256414,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:paras-aqua-oy-chunk-000"
+    ]
+  },
+  "startup:reeftox": {
+    "status": "processed",
+    "content_summary": "# ReefTox\nTest the toxicity of compounds on corals\n\nSector: Coastal and environmental protection and regeneration\nLocation: France\nStage: unknown\nWebsite: https://reeftox.com\nBlue economy sector: environmental protection and regeneration\nDevelopment ...",
+    "content_length": 390,
+    "created_at": "2026-10-17T17:00:19.746728+00:00",
+    "updated_at": "2026-10-17T17:04:35.274810+00:00",
+    "file_path": "startup:reeftox",
+    "track_id": "insert_20261017_200019_d40bc031",
+    "content_hash": "03c0df9489f714f5fe0715dd0eb9fb18",
+    "metadata": {
+      "parse_start_time": 1792256419,
+      "parse_stage_skipped": true,
+      "parse_format": "raw",
+      "parse_engine": "legacy",
+      "analyzing_start_time": 1792256419,
+      "analyzing_stage_skipped": true,
+      "kg_write_state": "graph_mutation_started",
+      "process_start_time": 1792256419,
+      "process_end_time": 1792256675,
+      "chunk_method": "legacy_chunking_func",
+      "chunk_opts": "size=1200, split_only=False, overlap=100"
+    },
+    "chunks_count": 1,
+    "chunks_list": [
+      "startup:reeftox-chunk-000"
     ]
   }
 }

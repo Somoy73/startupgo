@@ -13,16 +13,19 @@ def test_readiness_index_bounds():
     assert scoring.readiness_index(ALL_FIVES) == 50
 
 
-def test_imbalance_penalises_spread_beyond_three_levels():
+def test_imbalance_reports_spread_and_lagging_without_penalising():
     levels = {**ALL_FIVES, "trl": 9, "iprl": 1}  # spread 8
-    spread, lagging, penalty = scoring.imbalance(levels)
+    spread, lagging = scoring.imbalance(levels)
     assert spread == 8
     assert lagging == ["IPRL"]
-    assert penalty == (8 - 3) * scoring.PENALTY_PER_EXTRA_LEVEL
-
-
-def test_balanced_profile_has_no_penalty():
-    assert scoring.imbalance(ALL_FIVES)[2] == 0
+    balanced = scoring.score_startup(ALL_FIVES, [], "Seed", None)
+    lopsided = scoring.score_startup({**ALL_FIVES, "trl": 9, "iprl": 1}, [], "Seed", None)
+    assert lopsided.potential == round(
+        scoring.POTENTIAL_WEIGHTS["readiness"] * lopsided.readiness
+        + scoring.POTENTIAL_WEIGHTS["momentum"] * lopsided.momentum,
+        1,
+    )
+    assert balanced.readiness_spread == 0
 
 
 def test_ocean_impact_zero_without_evidence():

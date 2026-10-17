@@ -495,10 +495,10 @@
     <node id="European Commission">
       <data key="d0">European Commission</data>
       <data key="d1">organization</data>
-      <data key="d2">The executive body of the European Union responsible for granting funding and overseeing research programs.</data>
-      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
-      <data key="d4">startup:swedish-algae-factory-ab</data>
-      <data key="d5">1792250370</data>
+      <data key="d2">The executive body of the European Union responsible for granting funding and overseeing research programs.&lt;SEP&gt;European Commission is the source of the HORIZON 3M-2MNP-FE grant awarded to AquaBioTech Limited in 2024.&lt;SEP&gt;The European Commission providing H2020 grants for Pharem's water treatment research and development.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000&lt;SEP&gt;startup:aquabiotech-group-chunk-000&lt;SEP&gt;startup:pharem-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab&lt;SEP&gt;startup:aquabiotech-group&lt;SEP&gt;startup:pharem</data>
+      <data key="d5">1792255887</data>
       <data key="d6" />
     </node>
     <node id="Horizon Multiply">
@@ -540,10 +540,10 @@
     <node id="BlueInvest Project Pipeline">
       <data key="d0">BlueInvest Project Pipeline</data>
       <data key="d1">organization</data>
-      <data key="d2">Registry source listing Sundew's project pipeline&lt;SEP&gt;Source of information for NAUTICSPOT</data>
-      <data key="d3">startup:sundew-chunk-000&lt;SEP&gt;startup:nauticspot-chunk-000</data>
-      <data key="d4">startup:sundew&lt;SEP&gt;startup:nauticspot</data>
-      <data key="d5">1792251894</data>
+      <data key="d2">Registry source listing Sundew's project pipeline&lt;SEP&gt;Source of information for NAUTICSPOT&lt;SEP&gt;Source organization that featured Healix in the BlueInvest Project Pipeline&lt;SEP&gt;A pipeline initiative identifying and supporting blue economy projects, specifically in water management sector.&lt;SEP&gt;Source document referencing PaRAS Aqua Oy&lt;SEP&gt;BlueInvest Project Pipeline: source listing ReefTox.</data>
+      <data key="d3">startup:sundew-chunk-000&lt;SEP&gt;startup:nauticspot-chunk-000&lt;SEP&gt;startup:healix-chunk-000&lt;SEP&gt;startup:pharem-chunk-000&lt;SEP&gt;startup:paras-aqua-oy-chunk-000&lt;SEP&gt;startup:reeftox-chunk-000</data>
+      <data key="d4">startup:sundew&lt;SEP&gt;startup:nauticspot&lt;SEP&gt;startup:healix&lt;SEP&gt;startup:pharem&lt;SEP&gt;startup:paras-aqua-oy&lt;SEP&gt;startup:reeftox</data>
+      <data key="d5">1792256674</data>
       <data key="d6" />
     </node>
     <node id="Nauticspot">
@@ -567,10 +567,10 @@
     <node id="France">
       <data key="d0">France</data>
       <data key="d1">location</data>
-      <data key="d2">Location of NAUTICSPOT operations</data>
-      <data key="d3">startup:nauticspot-chunk-000</data>
-      <data key="d4">startup:nauticspot</data>
-      <data key="d5">1792251894</data>
+      <data key="d2">Location of NAUTICSPOT operations&lt;SEP&gt;France, location of XSun operations and manufacturing.&lt;SEP&gt;Location where ReefTox operates.</data>
+      <data key="d3">startup:nauticspot-chunk-000&lt;SEP&gt;startup:xsun-sas-chunk-000&lt;SEP&gt;startup:reeftox-chunk-000</data>
+      <data key="d4">startup:nauticspot&lt;SEP&gt;startup:xsun-sas&lt;SEP&gt;startup:reeftox</data>
+      <data key="d5">1792256674</data>
       <data key="d6" />
     </node>
     <node id="NAUTICSPOT">
@@ -580,6 +580,492 @@
       <data key="d3">startup:nauticspot-chunk-000</data>
       <data key="d4">startup:nauticspot</data>
       <data key="d5">1792251894</data>
+      <data key="d6" />
+    </node>
+    <node id="SaMMY">
+      <data key="d0">SaMMY</data>
+      <data key="d1">technology</data>
+      <data key="d2">SaMMY is a serious attempt to introduce new services and systems in the global marinas and tourist ports market, similar to the previous market breakthrough success of the smart parking and smart environment solutions. It allows captains/crew members to easily search, compare, book and securely pay a berth space using on-demand services.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Marinas">
+      <data key="d0">Marinas</data>
+      <data key="d1">location</data>
+      <data key="d2">Marinas are global facilities for recreational boats and yachts, central to the market that SaMMY targets for introducing new services and systems.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Tourist Ports">
+      <data key="d0">Tourist Ports</data>
+      <data key="d1">location</data>
+      <data key="d2">Tourist ports are harbors and facilities catering to tourists visiting by sea, forming part of the global market targeted by SaMMY.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Smart Parking">
+      <data key="d0">Smart Parking</data>
+      <data key="d1">concept</data>
+      <data key="d2">Smart parking is a previous market breakthrough solution that SaMMY is similar to, involving the use of technology to manage parking spaces efficiently.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Smart Environment">
+      <data key="d0">Smart Environment</data>
+      <data key="d1">concept</data>
+      <data key="d2">Smart environment is a previous market breakthrough solution that SaMMY is similar to, involving technology to manage environmental aspects efficiently.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Coastal and Environmental Protection">
+      <data key="d0">Coastal and Environmental Protection</data>
+      <data key="d1">concept</data>
+      <data key="d2">Coastal and environmental protection and regeneration is the sector that SaMMY operates within.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Greece">
+      <data key="d0">Greece</data>
+      <data key="d1">location</data>
+      <data key="d2">Greece is the location where SaMMY is based, situated in the global marinas and tourist ports market.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Blue Invest">
+      <data key="d0">Blue Invest</data>
+      <data key="d1">organization</data>
+      <data key="d2">BlueInvest Project Pipeline is the source of information regarding SAMMY.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="SaMMY AYT">
+      <data key="d0">SaMMY AYT</data>
+      <data key="d1">organization</data>
+      <data key="d2">SaMMY is a project with the website https://sammyacht.com and registry status active.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Environmental Protection and Regeneration">
+      <data key="d0">Environmental Protection and Regeneration</data>
+      <data key="d1">blueeconomysector</data>
+      <data key="d2">The blue economy sector for SaMMY is environmental protection and regeneration.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Commercial Operation">
+      <data key="d0">Commercial Operation</data>
+      <data key="d1">developmentstage</data>
+      <data key="d2">SaMMY is in the commercial operation development stage.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Active Registry">
+      <data key="d0">Active Registry</data>
+      <data key="d1">registrystatus</data>
+      <data key="d2">SaMMY has an active registry status.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Team of 8">
+      <data key="d0">Team of 8</data>
+      <data key="d1">teamsize</data>
+      <data key="d2">SaMMY has a team size of 8.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Employees 1-9">
+      <data key="d0">Employees 1-9</data>
+      <data key="d1">employees</data>
+      <data key="d2">SaMMY has 1-9 employees.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="500,000 EUR">
+      <data key="d0">500,000 EUR</data>
+      <data key="d1">data</data>
+      <data key="d2">SaMMY is raising 500,000 EUR currently, which is open for funding.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Next Generation Marina">
+      <data key="d0">Next Generation Marina</data>
+      <data key="d1">concept</data>
+      <data key="d2">Next Generation Marina is the concept introduced by SaMMY, offering multipurpose sensor grids, unified booking and operating management systems to optimize marina processes and increase traffic and revenues.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Multi-purpose Sensor Grid">
+      <data key="d0">Multi-purpose Sensor Grid</data>
+      <data key="d1">artifact</data>
+      <data key="d2">The multi-purpose sensor grid is a technological breakthrough used in the maritime environment for collecting real-time water data, environmental data, boat positioning, behavior, and docking area occupancy.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="Unified Booking and Operating Management Systems">
+      <data key="d0">Unified Booking and Operating Management Systems</data>
+      <data key="d1">method</data>
+      <data key="d2">Unified booking and operating management systems are part of the Next Generation Marina concept introduced by SaMMY, optimizing marina processes.&gt;</data>
+      <data key="d3">startup:sammy-chunk-000</data>
+      <data key="d4">startup:sammy</data>
+      <data key="d5">1792252954</data>
+      <data key="d6" />
+    </node>
+    <node id="AquaBioTech Limited">
+      <data key="d0">AquaBioTech Limited</data>
+      <data key="d1">organization</data>
+      <data key="d2">AquaBioTech Limited is a company providing consulting, engineering, and contract research services and turnkey technological solutions in the aquaculture sector, based in Malta with a commercial operation stage and a team size of 69 employees ranging from 50 to 249.</data>
+      <data key="d3">startup:aquabiotech-group-chunk-000</data>
+      <data key="d4">startup:aquabiotech-group</data>
+      <data key="d5">1792253125</data>
+      <data key="d6" />
+    </node>
+    <node id="Healix">
+      <data key="d0">Healix</data>
+      <data key="d1">organization</data>
+      <data key="d2">Netherlands-based company that recycles nets and ropes into high-quality polymers for coastal and environmental protection and regeneration</data>
+      <data key="d3">startup:healix-chunk-000</data>
+      <data key="d4">startup:healix</data>
+      <data key="d5">1792253561</data>
+      <data key="d6" />
+    </node>
+    <node id="Netherlands">
+      <data key="d0">Netherlands</data>
+      <data key="d1">location</data>
+      <data key="d2">European country where Healix is located</data>
+      <data key="d3">startup:healix-chunk-000</data>
+      <data key="d4">startup:healix</data>
+      <data key="d5">1792253561</data>
+      <data key="d6" />
+    </node>
+    <node id="Raising now">
+      <data key="d0">Raising now</data>
+      <data key="d1">data</data>
+      <data key="d2">3,000,000 EUR currently being raised by Healix</data>
+      <data key="d3">startup:healix-chunk-000</data>
+      <data key="d4">startup:healix</data>
+      <data key="d5">1792253561</data>
+      <data key="d6" />
+    </node>
+    <node id="Total raised">
+      <data key="d0">Total raised</data>
+      <data key="d3">startup:healix-chunk-000</data>
+      <data key="d2">Healix has raised a total of 11,722,793 EUR</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">startup:healix</data>
+      <data key="d5">1792253561</data>
+      <data key="d6" />
+    </node>
+    <node id="Employees">
+      <data key="d0">Employees</data>
+      <data key="d3">startup:healix-chunk-000</data>
+      <data key="d2">Healix has a team size of 1-9 employees</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">startup:healix</data>
+      <data key="d5">1792253561</data>
+      <data key="d6" />
+    </node>
+    <node id="Team size">
+      <data key="d0">Team size</data>
+      <data key="d3">startup:healix-chunk-000</data>
+      <data key="d2">Healix has a team size of 1-9</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">startup:healix</data>
+      <data key="d5">1792253561</data>
+      <data key="d6" />
+    </node>
+    <node id="Website">
+      <data key="d0">Website</data>
+      <data key="d3">startup:healix-chunk-000&lt;SEP&gt;startup:paras-aqua-oy-chunk-000</data>
+      <data key="d2">https://healix.eco official website of Healix&lt;SEP&gt;Website address https://parasaqua.com</data>
+      <data key="d1">data</data>
+      <data key="d4">startup:healix&lt;SEP&gt;startup:paras-aqua-oy</data>
+      <data key="d5">1792256414</data>
+      <data key="d6" />
+    </node>
+    <node id="Blue economy sector">
+      <data key="d0">Blue economy sector</data>
+      <data key="d3">startup:healix-chunk-000</data>
+      <data key="d2">Healix operates in the blue economy sector of environmental protection and regeneration</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">startup:healix</data>
+      <data key="d5">1792253561</data>
+      <data key="d6" />
+    </node>
+    <node id="Development stage">
+      <data key="d0">Development stage</data>
+      <data key="d3">startup:healix-chunk-000</data>
+      <data key="d2">Healix is in the development stage of commercial operation</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">startup:healix</data>
+      <data key="d5">1792253561</data>
+      <data key="d6" />
+    </node>
+    <node id="Sector">
+      <data key="d0">Sector</data>
+      <data key="d3">startup:healix-chunk-000</data>
+      <data key="d2">Healix operates in the sector of coastal and environmental protection and regeneration</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">startup:healix</data>
+      <data key="d5">1792253561</data>
+      <data key="d6" />
+    </node>
+    <node id="Xsun">
+      <data key="d0">Xsun</data>
+      <data key="d1">organization</data>
+      <data key="d2">XSun is a manufacturer of environmentally friendly long range solar drones and a service provider for aerial survey projects based in France.</data>
+      <data key="d3">startup:xsun-sas-chunk-000</data>
+      <data key="d4">startup:xsun-sas</data>
+      <data key="d5">1792255147</data>
+      <data key="d6" />
+    </node>
+    <node id="SolarXOne">
+      <data key="d0">SolarXOne</data>
+      <data key="d1">artifact</data>
+      <data key="d2">SolarXOne drone manufactured by XSun with 12h+ endurance, 600+ range, and 5kg operational payload.</data>
+      <data key="d3">startup:xsun-sas-chunk-000</data>
+      <data key="d4">startup:xsun-sas</data>
+      <data key="d5">1792255147</data>
+      <data key="d6" />
+    </node>
+    <node id="BlueTech">
+      <data key="d0">BlueTech</data>
+      <data key="d1">concept</data>
+      <data key="d2">Blue tech and ocean observation sector encompassing environmentally friendly aviation and ocean monitoring.</data>
+      <data key="d3">startup:xsun-sas-chunk-000</data>
+      <data key="d4">startup:xsun-sas</data>
+      <data key="d5">1792255147</data>
+      <data key="d6" />
+    </node>
+    <node id="AerialSurvey">
+      <data key="d0">AerialSurvey</data>
+      <data key="d1">method</data>
+      <data key="d2">Aerial survey and surveillance method utilizing solar drones for extended endurance operations.</data>
+      <data key="d3">startup:xsun-sas-chunk-000</data>
+      <data key="d4">startup:xsun-sas</data>
+      <data key="d5">1792255147</data>
+      <data key="d6" />
+    </node>
+    <node id="XSun SAS">
+      <data key="d0">XSun SAS</data>
+      <data key="d1">organization</data>
+      <data key="d2">XSun SAS is the company/organization developing and manufacturing environmentally friendly solar drones, based in France.</data>
+      <data key="d3">startup:xsun-sas-chunk-000</data>
+      <data key="d4">startup:xsun-sas</data>
+      <data key="d5">1792255147</data>
+      <data key="d6" />
+    </node>
+    <node id="XSun SolarXOne">
+      <data key="d0">XSun SolarXOne</data>
+      <data key="d3">startup:xsun-sas-chunk-000</data>
+      <data key="d2">XSun SolarXOne can replace helicopter and planes due to exceptional endurance.</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">startup:xsun-sas</data>
+      <data key="d5">1792255147</data>
+      <data key="d6" />
+    </node>
+    <node id="replaces">
+      <data key="d0">replaces</data>
+      <data key="d3">startup:xsun-sas-chunk-000</data>
+      <data key="d2">XSun SolarXOne can replace helicopter and planes due to exceptional endurance.</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">startup:xsun-sas</data>
+      <data key="d5">1792255147</data>
+      <data key="d6" />
+    </node>
+    <node id="Pharem">
+      <data key="d0">Pharem</data>
+      <data key="d1">organization</data>
+      <data key="d2">An organization involved in the BlueInvest Project Pipeline related to zymatic water treatment solutions.</data>
+      <data key="d3">startup:pharem-chunk-000</data>
+      <data key="d4">startup:pharem</data>
+      <data key="d5">1792255887</data>
+      <data key="d6" />
+    </node>
+    <node id="Zymatic">
+      <data key="d0">Zymatic</data>
+      <data key="d1">organization</data>
+      <data key="d2">Zymatic - Natural and sustainable water treatment company operating in the ocean pollution &amp; water management sector, based in Sweden.</data>
+      <data key="d3">startup:pharem-chunk-000</data>
+      <data key="d4">startup:pharem</data>
+      <data key="d5">1792255887</data>
+      <data key="d6" />
+    </node>
+    <node id="EIC">
+      <data key="d0">EIC</data>
+      <data key="d1">organization</data>
+      <data key="d2">European Innovation Council, acting as coordinator for H2020 grants awarded to Pharem.</data>
+      <data key="d3">startup:pharem-chunk-000</data>
+      <data key="d4">startup:pharem</data>
+      <data key="d5">1792255887</data>
+      <data key="d6" />
+    </node>
+    <node id="H2020 PFS">
+      <data key="d0">H2020 PFS</data>
+      <data key="d1">grant</data>
+      <data key="d2">A H2020 Proof of Concept grant from the European Commission worth 2,073,750 EUR in 2018, with Pharem as coordinator.</data>
+      <data key="d3">startup:pharem-chunk-000</data>
+      <data key="d4">startup:pharem</data>
+      <data key="d5">1792255887</data>
+      <data key="d6" />
+    </node>
+    <node id="H2020 DePharm">
+      <data key="d0">H2020 DePharm</data>
+      <data key="d1">grant</data>
+      <data key="d2">A H2020 grant from the European Commission worth 50,000 EUR in 2016, with Pharem as coordinator.</data>
+      <data key="d3">startup:pharem-chunk-000</data>
+      <data key="d4">startup:pharem</data>
+      <data key="d5">1792255887</data>
+      <data key="d6" />
+    </node>
+    <node id="Grant: H2020 PFS">
+      <data key="d0">Grant: H2020 PFS</data>
+      <data key="d1">grant</data>
+      <data key="d2">Grant: H2020 Proof of Concept funding from the European Commission, 2,073,750 EUR (2018), coordinator: EIC.</data>
+      <data key="d3">startup:pharem-chunk-000</data>
+      <data key="d4">startup:pharem</data>
+      <data key="d5">1792255887</data>
+      <data key="d6" />
+    </node>
+    <node id="Grant: H2020 DePharm">
+      <data key="d0">Grant: H2020 DePharm</data>
+      <data key="d1">grant</data>
+      <data key="d2">Grant: H2020 funding from the European Commission, 50,000 EUR (2016), coordinator: EIC.</data>
+      <data key="d3">startup:pharem-chunk-000</data>
+      <data key="d4">startup:pharem</data>
+      <data key="d5">1792255887</data>
+      <data key="d6" />
+    </node>
+    <node id="PaRAS Aqua Oy">
+      <data key="d0">PaRAS Aqua Oy</data>
+      <data key="d1">organization</data>
+      <data key="d2">Organization developing a modular full scale space saving aquaculture system located in Finland</data>
+      <data key="d3">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d4">startup:paras-aqua-oy</data>
+      <data key="d5">1792256414</data>
+      <data key="d6" />
+    </node>
+    <node id="Finland">
+      <data key="d0">Finland</data>
+      <data key="d1">location</data>
+      <data key="d2">Location where PaRAS Aqua Oy is based</data>
+      <data key="d3">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d4">startup:paras-aqua-oy</data>
+      <data key="d5">1792256414</data>
+      <data key="d6" />
+    </node>
+    <node id="Aquaculture">
+      <data key="d0">Aquaculture</data>
+      <data key="d1">concept</data>
+      <data key="d2">Sector and blue economy sector related to PaRAS Aqua Oy's industry</data>
+      <data key="d3">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d4">startup:paras-aqua-oy</data>
+      <data key="d5">1792256414</data>
+      <data key="d6" />
+    </node>
+    <node id="PaRAS">
+      <data key="d0">PaRAS</data>
+      <data key="d1">concept</data>
+      <data key="d2">Name of the modular full scale space saving aquaculture system</data>
+      <data key="d3">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d4">startup:paras-aqua-oy</data>
+      <data key="d5">1792256414</data>
+      <data key="d6" />
+    </node>
+    <node id="commercial operation">
+      <data key="d0">commercial operation</data>
+      <data key="d1">concept</data>
+      <data key="d2">Development stage of PaRAS Aqua Oy&lt;SEP&gt;Development stage indicating ReefTox is in commercial operation.</data>
+      <data key="d3">startup:paras-aqua-oy-chunk-000&lt;SEP&gt;startup:reeftox-chunk-000</data>
+      <data key="d4">startup:paras-aqua-oy&lt;SEP&gt;startup:reeftox</data>
+      <data key="d5">1792256674</data>
+      <data key="d6" />
+    </node>
+    <node id="1,000,000 EUR">
+      <data key="d0">1,000,000 EUR</data>
+      <data key="d1">data</data>
+      <data key="d2">Funding amount currently open for PaRAS Aqua Oy</data>
+      <data key="d3">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d4">startup:paras-aqua-oy</data>
+      <data key="d5">1792256414</data>
+      <data key="d6" />
+    </node>
+    <node id="1-9">
+      <data key="d0">1-9</data>
+      <data key="d1">other</data>
+      <data key="d2">Employees count of PaRAS Aqua Oy&lt;SEP&gt;Employees count range of 1-9.</data>
+      <data key="d3">startup:paras-aqua-oy-chunk-000&lt;SEP&gt;startup:reeftox-chunk-000</data>
+      <data key="d4">startup:paras-aqua-oy&lt;SEP&gt;startup:reeftox</data>
+      <data key="d5">1792256674</data>
+      <data key="d6" />
+    </node>
+    <node id="ReefTox">
+      <data key="d0">ReefTox</data>
+      <data key="d1">organization</data>
+      <data key="d2">Organization focused on testing the toxicity of compounds on corals for coastal and environmental protection and regeneration.</data>
+      <data key="d3">startup:reeftox-chunk-000</data>
+      <data key="d4">startup:reeftox</data>
+      <data key="d5">1792256674</data>
+      <data key="d6" />
+    </node>
+    <node id="Coastal and environmental protection and regeneration">
+      <data key="d0">Coastal and environmental protection and regeneration</data>
+      <data key="d1">concept</data>
+      <data key="d2">Sector related to coastal and environmental protection and regeneration.</data>
+      <data key="d3">startup:reeftox-chunk-000</data>
+      <data key="d4">startup:reeftox</data>
+      <data key="d5">1792256674</data>
+      <data key="d6" />
+    </node>
+    <node id="Environmental protection and regeneration">
+      <data key="d0">Environmental protection and regeneration</data>
+      <data key="d1">concept</data>
+      <data key="d2">Blue economy sector related to environmental protection and regeneration.</data>
+      <data key="d3">startup:reeftox-chunk-000</data>
+      <data key="d4">startup:reeftox</data>
+      <data key="d5">1792256674</data>
+      <data key="d6" />
+    </node>
+    <node id="2,000,000 EUR">
+      <data key="d0">2,000,000 EUR</data>
+      <data key="d1">data</data>
+      <data key="d2">Raising amount of 2,000,000 EUR currently open.</data>
+      <data key="d3">startup:reeftox-chunk-000</data>
+      <data key="d4">startup:reeftox</data>
+      <data key="d5">1792256674</data>
       <data key="d6" />
     </node>
     <edge source="Seabound" target="Lowercarbon Capital">
@@ -753,6 +1239,24 @@
       <data key="d12">1792249983</data>
       <data key="d13" />
     </edge>
+    <edge source="European Commission" target="Pharem">
+      <data key="d7">1.0</data>
+      <data key="d8">Pharem received grant funding from the European Commission for water treatment research.</data>
+      <data key="d9">funding,grant</data>
+      <data key="d10">startup:pharem-chunk-000</data>
+      <data key="d11">startup:pharem</data>
+      <data key="d12">1792255887</data>
+      <data key="d13" />
+    </edge>
+    <edge source="European Commission" target="Zymatic">
+      <data key="d7">1.0</data>
+      <data key="d8">Zymatic benefits from or is associated with European Commission H2020 grant funding context.</data>
+      <data key="d9">funding,grant</data>
+      <data key="d10">startup:pharem-chunk-000</data>
+      <data key="d11">startup:pharem</data>
+      <data key="d12">1792255887</data>
+      <data key="d13" />
+    </edge>
     <edge source="Sundew" target="BlueInvest Project Pipeline">
       <data key="d7">1.0</data>
       <data key="d8">Lists Sundew in project pipeline</data>
@@ -760,6 +1264,285 @@
       <data key="d10">startup:sundew-chunk-000</data>
       <data key="d11">startup:sundew</data>
       <data key="d12">1792251033</data>
+      <data key="d13" />
+    </edge>
+    <edge source="BlueInvest Project Pipeline" target="Healix">
+      <data key="d7">1.0</data>
+      <data key="d8">Healix was featured in the BlueInvest Project Pipeline</data>
+      <data key="d9">featured in,pipeline inclusion</data>
+      <data key="d10">startup:healix-chunk-000</data>
+      <data key="d11">startup:healix</data>
+      <data key="d12">1792253561</data>
+      <data key="d13" />
+    </edge>
+    <edge source="BlueInvest Project Pipeline" target="Pharem">
+      <data key="d7">1.0</data>
+      <data key="d8">Pharem is part of the BlueInvest Project Pipeline for water management.</data>
+      <data key="d9">inclusion</data>
+      <data key="d10">startup:pharem-chunk-000</data>
+      <data key="d11">startup:pharem</data>
+      <data key="d12">1792255887</data>
+      <data key="d13" />
+    </edge>
+    <edge source="BlueInvest Project Pipeline" target="Zymatic">
+      <data key="d7">1.0</data>
+      <data key="d8">Zymatic is connected to the BlueInvest Project Pipeline in the water management sector.</data>
+      <data key="d9">affiliation</data>
+      <data key="d10">startup:pharem-chunk-000</data>
+      <data key="d11">startup:pharem</data>
+      <data key="d12">1792255887</data>
+      <data key="d13" />
+    </edge>
+    <edge source="BlueInvest Project Pipeline" target="PaRAS Aqua Oy">
+      <data key="d7">1.0</data>
+      <data key="d8">Referenced in the BlueInvest Project Pipeline source document</data>
+      <data key="d9">Event</data>
+      <data key="d10">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d11">startup:paras-aqua-oy</data>
+      <data key="d12">1792256414</data>
+      <data key="d13" />
+    </edge>
+    <edge source="BlueInvest Project Pipeline" target="ReefTox">
+      <data key="d7">1.0</data>
+      <data key="d8">ReefTox listed as a project in the BlueInvest Project Pipeline.</data>
+      <data key="d9">Source</data>
+      <data key="d10">startup:reeftox-chunk-000</data>
+      <data key="d11">startup:reeftox</data>
+      <data key="d12">1792256674</data>
+      <data key="d13" />
+    </edge>
+    <edge source="France" target="ReefTox">
+      <data key="d7">1.0</data>
+      <data key="d8">ReefTox operates in France within the coastal and environmental protection and regeneration sector.</data>
+      <data key="d9">Location,Sector</data>
+      <data key="d10">startup:reeftox-chunk-000</data>
+      <data key="d11">startup:reeftox</data>
+      <data key="d12">1792256674</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Healix" target="Total raised">
+      <data key="d7">1.0</data>
+      <data key="d8">Healix has raised a total of 11,722,793 EUR</data>
+      <data key="d9">financial metric,has funding of</data>
+      <data key="d10">startup:healix-chunk-000</data>
+      <data key="d11">startup:healix</data>
+      <data key="d12">1792253561</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Healix" target="Raising now">
+      <data key="d7">1.0</data>
+      <data key="d8">Healix is currently raising 3,000,000 EUR</data>
+      <data key="d9">current fundraising,is raising</data>
+      <data key="d10">startup:healix-chunk-000</data>
+      <data key="d11">startup:healix</data>
+      <data key="d12">1792253561</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Healix" target="Employees">
+      <data key="d7">1.0</data>
+      <data key="d8">Healix has a team size of 1-9 employees</data>
+      <data key="d9">employee count,team size</data>
+      <data key="d10">startup:healix-chunk-000</data>
+      <data key="d11">startup:healix</data>
+      <data key="d12">1792253561</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Healix" target="Team size">
+      <data key="d7">1.0</data>
+      <data key="d8">Healix has a team size of 1-9</data>
+      <data key="d9">employee count</data>
+      <data key="d10">startup:healix-chunk-000</data>
+      <data key="d11">startup:healix</data>
+      <data key="d12">1792253561</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Healix" target="Website">
+      <data key="d7">1.0</data>
+      <data key="d8">https://healix.eco official website of Healix</data>
+      <data key="d9">URL</data>
+      <data key="d10">startup:healix-chunk-000</data>
+      <data key="d11">startup:healix</data>
+      <data key="d12">1792253561</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Healix" target="Blue economy sector">
+      <data key="d7">1.0</data>
+      <data key="d8">Healix operates in the blue economy sector of environmental protection and regeneration</data>
+      <data key="d9">business sector</data>
+      <data key="d10">startup:healix-chunk-000</data>
+      <data key="d11">startup:healix</data>
+      <data key="d12">1792253561</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Healix" target="Development stage">
+      <data key="d7">1.0</data>
+      <data key="d8">Healix is in the development stage of commercial operation</data>
+      <data key="d9">business stage</data>
+      <data key="d10">startup:healix-chunk-000</data>
+      <data key="d11">startup:healix</data>
+      <data key="d12">1792253561</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Healix" target="Sector">
+      <data key="d7">1.0</data>
+      <data key="d8">Healix operates in the sector of coastal and environmental protection and regeneration</data>
+      <data key="d9">industry sector</data>
+      <data key="d10">startup:healix-chunk-000</data>
+      <data key="d11">startup:healix</data>
+      <data key="d12">1792253561</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Website" target="PaRAS Aqua Oy">
+      <data key="d7">1.0</data>
+      <data key="d8">Organization with website https://parasaqua.com</data>
+      <data key="d9">Data</data>
+      <data key="d10">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d11">startup:paras-aqua-oy</data>
+      <data key="d12">1792256414</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Xsun" target="SolarXOne">
+      <data key="d7">1.0</data>
+      <data key="d8">XSun manufactures the SolarXOne drone.</data>
+      <data key="d9">manufactures,produces</data>
+      <data key="d10">startup:xsun-sas-chunk-000</data>
+      <data key="d11">startup:xsun-sas</data>
+      <data key="d12">1792255147</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Xsun" target="AerialSurvey">
+      <data key="d7">1.0</data>
+      <data key="d8">XSun provides aerial survey services using solar drones.</data>
+      <data key="d9">provides service for</data>
+      <data key="d10">startup:xsun-sas-chunk-000</data>
+      <data key="d11">startup:xsun-sas</data>
+      <data key="d12">1792255147</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Xsun" target="BlueTech">
+      <data key="d7">1.0</data>
+      <data key="d8">XSun operates in the blue tech and ocean observation sector.</data>
+      <data key="d9">operates in</data>
+      <data key="d10">startup:xsun-sas-chunk-000</data>
+      <data key="d11">startup:xsun-sas</data>
+      <data key="d12">1792255147</data>
+      <data key="d13" />
+    </edge>
+    <edge source="SolarXOne" target="BlueTech">
+      <data key="d7">1.0</data>
+      <data key="d8">SolarXOne drone operates within blue tech and ocean observation sector.</data>
+      <data key="d9">utilizes blue tech capabilities</data>
+      <data key="d10">startup:xsun-sas-chunk-000</data>
+      <data key="d11">startup:xsun-sas</data>
+      <data key="d12">1792255147</data>
+      <data key="d13" />
+    </edge>
+    <edge source="SolarXOne" target="XSun SAS">
+      <data key="d7">1.0</data>
+      <data key="d8">XSun SAS manufactures the SolarXOne drone.</data>
+      <data key="d9">manufactures</data>
+      <data key="d10">startup:xsun-sas-chunk-000</data>
+      <data key="d11">startup:xsun-sas</data>
+      <data key="d12">1792255147</data>
+      <data key="d13" />
+    </edge>
+    <edge source="BlueTech" target="XSun SAS">
+      <data key="d7">1.0</data>
+      <data key="d8">XSun SAS operates in the blue tech and ocean observation sector.</data>
+      <data key="d9">operates in</data>
+      <data key="d10">startup:xsun-sas-chunk-000</data>
+      <data key="d11">startup:xsun-sas</data>
+      <data key="d12">1792255147</data>
+      <data key="d13" />
+    </edge>
+    <edge source="AerialSurvey" target="XSun SAS">
+      <data key="d7">1.0</data>
+      <data key="d8">XSun SAS provides service for aerial survey projects.</data>
+      <data key="d9">provides service for</data>
+      <data key="d10">startup:xsun-sas-chunk-000</data>
+      <data key="d11">startup:xsun-sas</data>
+      <data key="d12">1792255147</data>
+      <data key="d13" />
+    </edge>
+    <edge source="XSun SolarXOne" target="replaces">
+      <data key="d7">1.0</data>
+      <data key="d8">XSun SolarXOne can replace helicopter and planes due to exceptional endurance.</data>
+      <data key="d9">helicopter and planes</data>
+      <data key="d10">startup:xsun-sas-chunk-000</data>
+      <data key="d11">startup:xsun-sas</data>
+      <data key="d12">1792255147</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Pharem" target="EIC">
+      <data key="d7">1.0</data>
+      <data key="d8">Pharem served as coordinator for European Innovation Council (EIC) H2020 grants.</data>
+      <data key="d9">coordination,grant</data>
+      <data key="d10">startup:pharem-chunk-000</data>
+      <data key="d11">startup:pharem</data>
+      <data key="d12">1792255887</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Pharem" target="Grant: H2020 PFS">
+      <data key="d7">1.0</data>
+      <data key="d8">Pharem was the coordinator for the H2020 PFS grant from the European Commission.</data>
+      <data key="d9">coordination,grant</data>
+      <data key="d10">startup:pharem-chunk-000</data>
+      <data key="d11">startup:pharem</data>
+      <data key="d12">1792255887</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Pharem" target="Grant: H2020 DePharm">
+      <data key="d7">1.0</data>
+      <data key="d8">Pharem was the coordinator for the H2020 DePharm grant from the European Commission.</data>
+      <data key="d9">coordination,grant</data>
+      <data key="d10">startup:pharem-chunk-000</data>
+      <data key="d11">startup:pharem</data>
+      <data key="d12">1792255887</data>
+      <data key="d13" />
+    </edge>
+    <edge source="PaRAS Aqua Oy" target="Finland">
+      <data key="d7">1.0</data>
+      <data key="d8">Organization based in Finland operating in the aquaculture sector</data>
+      <data key="d9">Aquaculture,Location</data>
+      <data key="d10">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d11">startup:paras-aqua-oy</data>
+      <data key="d12">1792256414</data>
+      <data key="d13" />
+    </edge>
+    <edge source="PaRAS Aqua Oy" target="Aquaculture">
+      <data key="d7">1.0</data>
+      <data key="d8">Organization operating in the aquaculture sector with blue economy sector aquaculture</data>
+      <data key="d9">Sector,blue economy sector</data>
+      <data key="d10">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d11">startup:paras-aqua-oy</data>
+      <data key="d12">1792256414</data>
+      <data key="d13" />
+    </edge>
+    <edge source="PaRAS Aqua Oy" target="commercial operation">
+      <data key="d7">1.0</data>
+      <data key="d8">Organization in the development stage of commercial operation</data>
+      <data key="d9">Concept</data>
+      <data key="d10">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d11">startup:paras-aqua-oy</data>
+      <data key="d12">1792256414</data>
+      <data key="d13" />
+    </edge>
+    <edge source="PaRAS Aqua Oy" target="1,000,000 EUR">
+      <data key="d7">1.0</data>
+      <data key="d8">Organization with open funding amount of 1,000,000 EUR</data>
+      <data key="d9">Data</data>
+      <data key="d10">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d11">startup:paras-aqua-oy</data>
+      <data key="d12">1792256414</data>
+      <data key="d13" />
+    </edge>
+    <edge source="PaRAS Aqua Oy" target="1-9">
+      <data key="d7">1.0</data>
+      <data key="d8">Organization with 1-9 employees</data>
+      <data key="d9">Data</data>
+      <data key="d10">startup:paras-aqua-oy-chunk-000</data>
+      <data key="d11">startup:paras-aqua-oy</data>
+      <data key="d12">1792256414</data>
       <data key="d13" />
     </edge>
   </graph>
