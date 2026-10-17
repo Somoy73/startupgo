@@ -1,43 +1,56 @@
-"""Stores judge-approved entries in the StartupGo database, and lists the startups still to research.
+"""Reads and writes startup scores in the StartupGo database: entities, facts, assessments (DB/unified.sql).
 
-An entry becomes (DB/schema.sql):
+Which startups to research comes from the assessments table: startups with a website and no usable score (no
+assessment with all six KTH levels, or the agent's latest one without evidence for TRL or BRL), that the agent
+hasn't researched in the last max_age_days, never researched first.
 
-    startups               found by slug or website domain, else created; existing profile fields are only filled in when blank
-    readiness_assessments  a dated snapshot: TRL/BRL from the agent's scores, CRL/IPRL/TMRL/FRL from kth.py
-                           (a dimension without evidence is stored as 1, and the rationale says so)
-    startup_ocean_kpis     Navigator KPI evidence from navigator.py; never lowers a level already stored
-    funding_rounds         equity rounds and grants not stored yet
-    sources                pages the facts came from
-    agent_entries          which entry is behind the startup's agent assessment
+An evaluated, judge-reviewed entry becomes:
 
-Only entries the judge accepted are stored. Saving the same entry again changes nothing.
+    entities     the startup, found by slug or website domain (a BlueInvest candidate becomes a startup), else created;
+                 existing profile fields are only filled in when blank
+    assessments  one row per agent run: engine 'agent', assessed_at = the entry's generated_at (UTC)
+                 - judge accepted: the scores. TRL, BRL, OIR and the 10 criteria from scoring.py, CRL/IPRL/TMRL/FRL from
+                   kth.py; a dimension without evidence is stored as 1 and levels_basis gives its level as null
+                 - judged but not accepted: only the run (judge status, levels_basis, criteria), no score columns, so
+                   it never becomes the startup's score but still counts as researched
+    facts        accepted entries only, source_name 'agent': the entry's facts (replacing the agent's earlier ones),
+                 Navigator KPI evidence from navigator.py (never lowers a level already stored), and the pages the
+                 facts came from (reference). A round already stored from another source is kept, not current
+
+A new startup whose entry the judge didn't accept isn't stored. Saving the same entry again changes nothing.
 """
 
 from __future__ import annotations
 
+import json
 import re
 import sqlite3
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
-from .derive import Facts, items, value
+from .derive import Facts, value
 from .errors import AgentError
+from .facts import INFERRED_CONFIDENCE
 from .kth import score_kth
 from .navigator import ocean_kpis
 from .record import StartupRecord, slugify
 from .scoring import confidence_label
 
+ENGINE = "agent"  # assessments.engine and facts.source_name of everything the agent writes
 ASSESSOR = "StartupGo agent"
 ACCEPTED = ("accepted", "accepted_with_issues")
 UNKNOWN = "Unknown"
 DIMENSIONS = ("crl", "trl", "brl", "iprl", "tmrl", "frl")
+REQUIRED_LEVELS = ("trl", "brl")  # a score without evidence for one of these is researched again
+HAS_LEVELS = " AND ".join(f"{d} IS NOT NULL" for d in DIMENSIONS)
 STAGES = {"pre_seed": "pre-seed", "seed": "seed", "series_a": "series-a", "series_b_plus": "series-b"}
 ROUND_TYPES = {**STAGES, "other": "equity"}
 PLACEHOLDERS = ("", UNKNOWN, "unknown")  # profile values the agent may replace
 MAX_EXTRA_URLS = 3
+TIMESTAMP = "%Y-%m-%d %H:%M:%S"  # SQLite datetime('now') format, UTC
 
 
 @dataclass(frozen=True, slots=True)
@@ -55,10 +68,44 @@ class Candidate:
 @dataclass(slots=True)
 class Stored:
     slug: str
-    created: bool  # a new startup row
-    assessment_id: int | None
-    skipped: str = ""  # why nothing was written (not accepted, already stored)
+    created: bool  # a new startup
+    assessment_id: int | None  # the stored score
+    skipped: str = ""  # why no score was stored (not accepted, already stored)
     kpis: list[str] = field(default_factory=list)
+
+
+# --- scores in the assessments table (also used by the Backend) -------------------------------------
+
+
+def has_score(conn: sqlite3.Connection, entity_id: int) -> bool:
+    """Whether the startup has an assessment with all six KTH levels (from any engine)."""
+    return conn.execute(f"SELECT 1 FROM assessments WHERE entity_id = ? AND {HAS_LEVELS}", (entity_id,)).fetchone() is not None
+
+
+def missing_levels(conn: sqlite3.Connection, entity_id: int) -> list[str]:
+    """Dimensions the startup's latest score has no evidence for (the agent stored them as 1); [] without a score."""
+    row = conn.execute(
+        f"SELECT levels_basis FROM assessments WHERE entity_id = ? AND {HAS_LEVELS} ORDER BY assessed_at DESC, id DESC LIMIT 1",
+        (entity_id,),
+    ).fetchone()
+    basis = json.loads(row[0]) if row and row[0] else {}
+    return [d for d in DIMENSIONS if d in basis and basis[d]["level"] is None]
+
+
+def needs_score(conn: sqlite3.Connection, entity_id: int) -> bool:
+    """No score yet, or the latest has no evidence for TRL or BRL."""
+    return not has_score(conn, entity_id) or any(d in REQUIRED_LEVELS for d in missing_levels(conn, entity_id))
+
+
+def researched_at(conn: sqlite3.Connection, entity_id: int) -> str | None:
+    """When the agent last researched the startup (UTC), whatever the judge decided."""
+    return conn.execute("SELECT MAX(assessed_at) FROM assessments WHERE entity_id = ? AND engine = ?", (entity_id, ENGINE)).fetchone()[0]
+
+
+def researched_within(conn: sqlite3.Connection, entity_id: int, days: int) -> str | None:
+    """When the agent last researched the startup, if that was in the last ``days``."""
+    ran = researched_at(conn, entity_id)
+    return ran if ran and ran >= (datetime.now(timezone.utc) - timedelta(days=days)).strftime(TIMESTAMP) else None
 
 
 class StartupDatabase:
@@ -71,48 +118,47 @@ class StartupDatabase:
         conn = sqlite3.connect(self.path, timeout=30)
         conn.row_factory = sqlite3.Row
         conn.execute("PRAGMA foreign_keys = ON")
-        if not conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='agent_entries'").fetchone():
+        tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
+        if missing := {"entities", "facts", "assessments"} - tables:
             conn.close()
-            raise AgentError(f"{self.path} has no agent_entries table: start the Backend once (or run refresh.py init) to update it")
+            raise AgentError(f"{self.path} has no {', '.join(sorted(missing))} table: use the unified database (DB/startupgo_unified.db)")
         return conn
 
     # --- reading -------------------------------------------------------------------------------
 
     def pending(self, *, limit: int, max_age_days: int, slugs: tuple[str, ...] = ()) -> list[Candidate]:
-        """Startups with a website and no agent entry younger than ``max_age_days``, never researched first."""
-        cutoff = (datetime.now(timezone.utc) - timedelta(days=max_age_days)).strftime("%Y-%m-%d %H:%M:%S")
-        where, args = "s.website IS NOT NULL AND s.website != ''", []
-        if slugs:
-            where += f" AND s.slug IN ({', '.join('?' * len(slugs))})"
-            args += slugs
-        else:
-            where += " AND (e.stored_at IS NULL OR e.stored_at < ?)"
-            args.append(cutoff)
+        """Startups with a website that need a score and weren't researched in ``max_age_days``; ``slugs`` picks them instead."""
         conn = self.connect()
         try:
-            rows = conn.execute(
-                f"""SELECT s.id, s.slug, s.name, s.website FROM startups s LEFT JOIN agent_entries e ON e.startup_id = s.id
-                    WHERE {where} ORDER BY e.stored_at IS NOT NULL, e.stored_at, s.id LIMIT ?""",
-                (*args, limit),
-            ).fetchall()
-            return [self._candidate(conn, row) for row in rows]
+            sql = f"""SELECT e.id, e.slug, e.name, e.website,
+                             (SELECT MAX(assessed_at) FROM assessments a WHERE a.entity_id = e.id AND a.engine = '{ENGINE}') AS ran
+                      FROM entities e WHERE e.kind = 'startup' AND e.website IS NOT NULL AND e.website != ''"""
+            if slugs:
+                rows = conn.execute(f"{sql} AND e.slug IN ({', '.join('?' * len(slugs))}) ORDER BY e.id", slugs).fetchall()
+            else:
+                rows = [r for r in conn.execute(f"{sql} ORDER BY ran IS NOT NULL, ran, e.id")
+                        if needs_score(conn, r["id"]) and not researched_within(conn, r["id"], max_age_days)]
+            return [self._candidate(conn, row) for row in rows[:limit]]
         finally:
             conn.close()
 
     def _candidate(self, conn: sqlite3.Connection, row: sqlite3.Row) -> Candidate:
         business_id = conn.execute(
-            "SELECT external_id FROM startup_external_ids WHERE startup_id = ? AND id_type = 'business_id' LIMIT 1", (row["id"],)
+            "SELECT value FROM facts WHERE entity_id = ? AND field = 'business_id' AND is_current = 1 ORDER BY confidence DESC, id LIMIT 1",
+            (row["id"],),
         ).fetchone()
         own = domain(row["website"])
-        urls = [r["url"] for r in conn.execute("SELECT url FROM sources WHERE startup_id = ? ORDER BY id", (row["id"],))]
+        urls = [r[0] for r in conn.execute(
+            "SELECT source_url FROM facts WHERE entity_id = ? AND field = 'reference' AND source_url IS NOT NULL ORDER BY id", (row["id"],))]
         extra = tuple(u for u in dict.fromkeys(urls) if domain(u) and domain(u) != own)[:MAX_EXTRA_URLS]
-        return Candidate(row["name"], row["website"], slug=row["slug"], business_id=business_id[0] if business_id else None, extra_urls=extra)
+        return Candidate(row["name"], row["website"], slug=row["slug"], business_id=json.loads(business_id[0]) if business_id else None,
+                         extra_urls=extra)
 
     def known_domains(self) -> dict[str, str]:
         """Website domain -> slug of every database startup."""
         conn = self.connect()
         try:
-            return {d: r["slug"] for r in conn.execute("SELECT slug, website FROM startups") if (d := domain(r["website"]))}
+            return {d: r["slug"] for r in conn.execute("SELECT slug, website FROM entities WHERE kind = 'startup'") if (d := domain(r["website"]))}
         finally:
             conn.close()
 
@@ -121,131 +167,173 @@ class StartupDatabase:
     def save(self, entry: dict[str, Any], *, slug: str | None = None) -> Stored:
         """Store an evaluated, judge-reviewed entry (``StartupRecord.to_dict()``); ``slug`` pins the startup."""
         status = (entry.get("review") or {}).get("status")
+        accepted = status in ACCEPTED
         record = StartupRecord.from_dict(entry)
+        assessed_at = _utc(entry["generated_at"])
         conn = self.connect()
         try:
             with conn:  # one transaction: committed on return, rolled back on an error
-                startup_id, slug, created = self._startup(conn, entry, record.facts, slug, write=status in ACCEPTED)
-                if status not in ACCEPTED:
-                    return Stored(slug or "", False, None, skipped=f"judge status {status or 'missing'}")
-                known = conn.execute("SELECT entry_id, generated_at, assessment_id FROM agent_entries WHERE startup_id = ?", (startup_id,)).fetchone()
-                if known and (known["entry_id"], known["generated_at"]) == (entry["id"], entry["generated_at"]):
-                    return Stored(slug, False, known["assessment_id"], skipped="entry already stored")
-                assessment_id = self._assessment(conn, startup_id, entry, record.facts)
-                kpis = self._kpis(conn, startup_id, record.facts)
-                self._rounds(conn, startup_id, record.facts)
-                self._sources(conn, startup_id, entry.get("sources", []))
-                self._link(conn, startup_id, entry, assessment_id)
+                found = self._find(conn, entry["website"], slug)
+                skipped = "" if accepted else f"judge status {status or 'missing'}"
+                if not accepted and (found is None or status is None):  # a new startup, or an entry the judge never saw
+                    return Stored(found["slug"] if found else "", False, None, skipped=skipped)
+                if found is not None and (known := conn.execute(
+                        "SELECT id, trl FROM assessments WHERE entity_id = ? AND engine = ? AND assessed_at = ?",
+                        (found["id"], ENGINE, assessed_at)).fetchone()):
+                    return Stored(found["slug"], False, known["id"] if known["trl"] is not None else None, skipped="entry already stored")
+                if not accepted:
+                    self._assessment(conn, found["id"], entry, record.facts, assessed_at, accepted=False)
+                    return Stored(found["slug"], False, None, skipped=skipped)
+                entity_id, slug, created = self._startup(conn, found, entry, record.facts)
+                assessment_id = self._assessment(conn, entity_id, entry, record.facts, assessed_at, accepted=True)
+                self._facts(conn, entity_id, entry)
+                kpis = self._kpis(conn, entity_id, record.facts, assessed_at)
+                self._sources(conn, entity_id, entry.get("sources", []))
                 return Stored(slug, created, assessment_id, kpis=kpis)
         finally:
             conn.close()
 
-    def _startup(self, conn: sqlite3.Connection, entry: dict[str, Any], facts: Facts, slug: str | None, *, write: bool) -> tuple[int, str, bool]:
-        row = None
+    def _find(self, conn: sqlite3.Connection, website: str, slug: str | None) -> sqlite3.Row | None:
         if slug:
-            row = conn.execute("SELECT * FROM startups WHERE slug = ?", (slug,)).fetchone()
+            row = conn.execute("SELECT * FROM entities WHERE kind = 'startup' AND slug = ?", (slug,)).fetchone()
             if row is None:
                 raise AgentError(f"no startup with slug {slug!r} in {self.path}")
-        elif own := domain(entry["website"]):
-            row = next((r for r in conn.execute("SELECT * FROM startups WHERE website IS NOT NULL") if domain(r["website"]) == own), None)
-        profile = _profile(entry, facts)
-        if row is not None:
-            blanks = {k: v for k, v in profile.items() if row[k] in (*PLACEHOLDERS, None) and v not in (*PLACEHOLDERS, None)}
-            if blanks and write:
-                sets = ", ".join(f"{k} = ?" for k in blanks)
-                conn.execute(f"UPDATE startups SET {sets}, updated_at = datetime('now') WHERE id = ?", (*blanks.values(), row["id"]))
-            return row["id"], row["slug"], False
-        if not write:
-            return 0, "", False
-        new_slug = _unique_slug(conn, entry["name"])
-        cur = conn.execute(
-            f"INSERT INTO startups (slug, {', '.join(profile)}) VALUES (?, {', '.join('?' * len(profile))})",
-            (new_slug, *profile.values()),
-        )
-        return cur.lastrowid, new_slug, True
+            return row
+        own = domain(website)
+        rows = conn.execute("SELECT * FROM entities WHERE kind IN ('startup', 'candidate') AND website IS NOT NULL ORDER BY kind != 'startup', id")
+        return next((r for r in rows if own and (r["domain"] or domain(r["website"])) == own), None)
 
-    def _assessment(self, conn: sqlite3.Connection, startup_id: int, entry: dict[str, Any], facts: Facts) -> int:
+    def _startup(self, conn: sqlite3.Connection, row: sqlite3.Row | None, entry: dict[str, Any], facts: Facts) -> tuple[int, str, bool]:
+        """The startup's entity id, slug and whether it is new: fills blank profile fields, turns a candidate into a startup."""
+        profile = _profile(entry, facts)
+        if row is None:
+            slug = _unique_slug(conn, entry["name"])
+            cols = {"key": f"startup:{slug}", "kind": "startup", "slug": slug, "pipeline_stage": "sourced", **profile}
+            cur = conn.execute(f"INSERT INTO entities ({', '.join(cols)}) VALUES ({', '.join('?' * len(cols))})", tuple(cols.values()))
+            return cur.lastrowid, slug, True
+        updates = {k: v for k, v in profile.items() if row[k] in (*PLACEHOLDERS, None) and v not in (*PLACEHOLDERS, None)}
+        created = row["kind"] == "candidate"
+        if created:  # a BlueInvest lead the judge accepted: now a startup
+            updates |= {"kind": "startup", "slug": row["slug"] or _unique_slug(conn, row["name"]), "pipeline_stage": "sourced"}
+        if updates:
+            sets = ", ".join(f"{k} = ?" for k in updates)
+            conn.execute(f"UPDATE entities SET {sets}, updated_at = datetime('now') WHERE id = ?", (*updates.values(), row["id"]))
+        return row["id"], updates.get("slug") or row["slug"], created
+
+    def _assessment(self, conn: sqlite3.Connection, entity_id: int, entry: dict[str, Any], facts: Facts, assessed_at: str,
+                    *, accepted: bool) -> int:
         scores = entry["scores"]
-        levels = {"trl": scores["trl"], "brl": scores["brl"], **{k: _plain(v) for k, v in score_kth(facts).items()}}
-        values = {d: levels[d]["level"] or 1 for d in DIMENSIONS}
-        unknown = [d.upper() for d in DIMENSIONS if levels[d]["level"] is None]
-        reasons = [f"{d.upper()} {levels[d]['level']}: {levels[d]['basis'][0]}" for d in DIMENSIONS if levels[d]["level"] is not None]
+        basis = {"trl": scores["trl"], "brl": scores["brl"], **{k: asdict(v) for k, v in score_kth(facts).items()},
+                 "oir": scores["ocean_impact_readiness"]}
+        unknown = [d.upper() for d in DIMENSIONS if basis[d]["level"] is None]
         review = entry.get("review") or {}
         issues = len(review.get("open_issues", []))
-        rationale = "; ".join(
-            [
-                *reasons,
-                *([f"no evidence for {', '.join(unknown)} (stored as 1)"] if unknown else []),
-                f"judge {review.get('status')}" + (f" with {issues} open issue(s)" if issues else ""),
-                f"agent entry {entry['id']}",
-            ]
-        )
-        cur = conn.execute(
-            f"""INSERT INTO readiness_assessments (startup_id, assessed_on, assessor, confidence, {', '.join(DIMENSIONS)}, rationale)
-                VALUES (?, ?, ?, ?, {', '.join('?' * len(DIMENSIONS))}, ?)""",
-            (startup_id, entry["generated_at"][:10], ASSESSOR, confidence_label(scores["overall_confidence"]),
-             *(values[d] for d in DIMENSIONS), rationale[:2000]),
-        )
+        rationale = "; ".join([
+            *(f"{d.upper()} {basis[d]['level']}: {basis[d]['basis'][0]}" for d in DIMENSIONS if basis[d]["level"] is not None),
+            *([f"no evidence for {', '.join(unknown)}" + (" (stored as 1)" if accepted else "")] if unknown else []),
+            f"judge {review.get('status')}" + (f" with {issues} open issue(s)" if issues else ""),
+            f"agent entry {entry['id']}",
+        ])
+        levels = {d: (basis[d]["level"] or 1) if accepted else None for d in DIMENSIONS}
+        kpis = {k.code: {"level": k.level, "claim": k.claim, "source_url": k.source_url} for k in ocean_kpis(facts)}
+        cols = {
+            "entity_id": entity_id, "assessed_at": assessed_at, "engine": ENGINE, "assessor": ASSESSOR,
+            "confidence": confidence_label(scores["overall_confidence"]), **levels,
+            "oir": basis["oir"]["level"] if accepted else None,
+            "levels_basis": _json(basis), "navigator_kpis": _json(kpis), "criteria": _json(scores["criteria"]),
+            "investment_score": scores["investment_score"] if accepted else None,
+            "overall_confidence": scores["overall_confidence"] if accepted else None,
+            "data_gaps": _json(entry.get("data_gaps", [])), "next_steps": _json(entry.get("next_steps", [])),
+            "rationale": rationale[:2000], "judge_status": review.get("status"),
+        }
+        cur = conn.execute(f"INSERT INTO assessments ({', '.join(cols)}) VALUES ({', '.join('?' * len(cols))})", tuple(cols.values()))
         return cur.lastrowid
 
-    def _kpis(self, conn: sqlite3.Connection, startup_id: int, facts: Facts) -> list[str]:
+    def _facts(self, conn: sqlite3.Connection, entity_id: int, entry: dict[str, Any]) -> None:
+        """The entry's facts in place of the agent's earlier ones; rounds also carry the funding_rounds view's keys."""
+        conn.execute("UPDATE facts SET is_current = 0 WHERE entity_id = ? AND source_name = ? AND field NOT IN ('navigator_kpi', 'reference')",
+                     (entity_id, ENGINE))
+        rounds = {tuple(r) for r in conn.execute(
+            "SELECT json_extract(value, '$.round_type'), json_extract(value, '$.announced_on') FROM facts "
+            "WHERE entity_id = ? AND field IN ('equity_rounds', 'grants') AND is_current = 1 AND json_extract(value, '$.round_type') IS NOT NULL",
+            (entity_id,))}
+        for section_id, section in entry["sections"].items():
+            for name, found in section["facts"].items():
+                if name == "last_changed" or found is None:
+                    continue
+                for fact in found if isinstance(found, list) else [found]:
+                    current = True
+                    if name in ("equity_rounds", "grants"):
+                        fact = {**fact, "value": _round(name, fact)}
+                        key = (fact["value"]["round_type"], fact["value"]["announced_on"])
+                        current = key not in rounds
+                        rounds.add(key)
+                    _insert_fact(conn, entity_id, section_id, fact, current=current)
+
+    def _kpis(self, conn: sqlite3.Connection, entity_id: int, facts: Facts, assessed_at: str) -> list[str]:
+        """Navigator KPI evidence; a KPI is replaced only by a higher level."""
         found = ocean_kpis(facts)
         for kpi in found:
-            conn.execute(
-                """INSERT INTO startup_ocean_kpis (startup_id, kpi_code, evidence_level, claim, source_url) VALUES (?, ?, ?, ?, ?)
-                   ON CONFLICT (startup_id, kpi_code) DO UPDATE SET evidence_level = excluded.evidence_level,
-                     claim = excluded.claim, source_url = excluded.source_url
-                   WHERE excluded.evidence_level > startup_ocean_kpis.evidence_level""",
-                (startup_id, kpi.code, kpi.level, kpi.claim, kpi.source_url),
-            )
+            stored = conn.execute(
+                "SELECT MAX(json_extract(value, '$.level')) FROM facts WHERE entity_id = ? AND field = 'navigator_kpi' AND is_current = 1 "
+                "AND json_extract(value, '$.kpi') = ?", (entity_id, kpi.code)).fetchone()[0]
+            if stored is not None and kpi.level <= stored:
+                continue
+            conn.execute("UPDATE facts SET is_current = 0 WHERE entity_id = ? AND field = 'navigator_kpi' AND json_extract(value, '$.kpi') = ?",
+                         (entity_id, kpi.code))
+            _insert_fact(conn, entity_id, "X", {
+                "field": "navigator_kpi", "value": {"kpi": kpi.code, "level": kpi.level, "claim": kpi.claim}, "evidence": kpi.claim,
+                "source_url": kpi.source_url, "source_type": "manual", "retrieved_at": assessed_at[:10], "status": "inferred",
+                "confidence": INFERRED_CONFIDENCE,
+            })
         return [k.code for k in found]
 
-    def _rounds(self, conn: sqlite3.Connection, startup_id: int, facts: Facts) -> None:
-        stored = {(r["round_type"], r["announced_on"]) for r in conn.execute("SELECT round_type, announced_on FROM funding_rounds WHERE startup_id = ?", (startup_id,))}
-        rounds = [
-            (ROUND_TYPES.get(r.value.get("stage") or "other", "equity"), r.value.get("date"), r.value.get("amount"), r.value.get("currency"),
-             ", ".join(r.value.get("investors") or []) or None, r)
-            for r in items(facts, "equity_rounds")
-        ] + [
-            ("grant", str(g.value["year"]) if g.value.get("year") else None, g.value.get("amount"), g.value.get("currency"),
-             g.value.get("funder"), g)
-            for g in items(facts, "grants")
-        ]
-        for round_type, announced_on, amount, currency, investors, fact in rounds:
-            if (round_type, announced_on) in stored:
-                continue
-            stored.add((round_type, announced_on))
-            currency = currency.upper() if isinstance(currency, str) and re.fullmatch(r"[A-Za-z]{3}", currency) else None
-            conn.execute(
-                """INSERT INTO funding_rounds (startup_id, round_type, amount, currency, announced_on, lead_investors, notes, source_url)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-                (startup_id, round_type, amount, currency, announced_on, investors, f"{ASSESSOR}: {fact.evidence}"[:500], fact.source_url or None),
-            )
-
-    def _sources(self, conn: sqlite3.Connection, startup_id: int, sources: list[dict[str, Any]]) -> None:
-        stored = {r["url"] for r in conn.execute("SELECT url FROM sources WHERE startup_id = ?", (startup_id,))}
+    def _sources(self, conn: sqlite3.Connection, entity_id: int, sources: list[dict[str, Any]]) -> None:
+        stored = {r[0] for r in conn.execute("SELECT source_url FROM facts WHERE entity_id = ? AND field = 'reference'", (entity_id,))}
         for source in sources:
             if (url := source.get("url")) and url not in stored:
                 stored.add(url)
-                conn.execute("INSERT INTO sources (startup_id, title, url) VALUES (?, ?, ?)", (startup_id, source.get("title") or url, url))
+                title = source.get("title") or url
+                _insert_fact(conn, entity_id, "X", {
+                    "field": "reference", "value": {"title": title}, "evidence": title, "source_url": url, "source_type": "website",
+                    "retrieved_at": source.get("retrieved_at"), "status": "claimed", "confidence": INFERRED_CONFIDENCE,
+                })
 
-    def _link(self, conn: sqlite3.Connection, startup_id: int, entry: dict[str, Any], assessment_id: int) -> None:
-        review, scores = entry.get("review") or {}, entry["scores"]
-        conn.execute(
-            """INSERT INTO agent_entries (startup_id, entry_id, generated_at, stored_at, assessment_id, review_status, open_issues,
-                                          investment_score, overall_confidence)
-               VALUES (?, ?, ?, datetime('now'), ?, ?, ?, ?, ?)
-               ON CONFLICT (startup_id) DO UPDATE SET entry_id = excluded.entry_id, generated_at = excluded.generated_at,
-                 stored_at = excluded.stored_at, assessment_id = excluded.assessment_id, review_status = excluded.review_status,
-                 open_issues = excluded.open_issues, investment_score = excluded.investment_score,
-                 overall_confidence = excluded.overall_confidence""",
-            (startup_id, entry["id"], entry["generated_at"], assessment_id, review.get("status"), len(review.get("open_issues", [])),
-             scores["investment_score"], scores["overall_confidence"]),
-        )
+
+def _insert_fact(conn: sqlite3.Connection, entity_id: int, section: str, fact: dict[str, Any], *, current: bool = True) -> None:
+    """A fact in the agent's format (facts.Fact.to_dict()) as a facts row."""
+    conn.execute(
+        """INSERT INTO facts (entity_id, section, field, value, evidence, source_url, source_type, source_name, status, confidence,
+                              retrieved_at, observed_on, is_current)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (entity_id, section, fact["field"], _json(fact["value"]), (fact.get("evidence") or "")[:2000], fact.get("source_url") or None,
+         fact["source_type"], ENGINE, fact["status"], fact["confidence"], fact.get("retrieved_at"), _observed(fact["value"]), int(current)),
+    )
+
+
+def _round(name: str, fact: dict[str, Any]) -> dict[str, Any]:
+    """A round or grant value plus the keys the funding_rounds view reads (round_type, announced_on, lead_investors, notes)."""
+    v = fact["value"]
+    currency = v.get("currency")
+    currency = currency.upper() if isinstance(currency, str) and re.fullmatch(r"[A-Za-z]{3}", currency) else None
+    if name == "grants":
+        view = {"round_type": "grant", "announced_on": str(v["year"]) if v.get("year") else None, "lead_investors": v.get("funder")}
+    else:
+        view = {"round_type": ROUND_TYPES.get(v.get("stage") or "other", "equity"), "announced_on": v.get("date"),
+                "lead_investors": ", ".join(v.get("investors") or []) or None}
+    return {**v, **view, "currency": currency, "notes": f"{ASSESSOR}: {fact.get('evidence') or ''}"[:500]}
+
+
+def _observed(value: Any) -> str | None:
+    """When the fact was true, if its value says (a round's date, a grant's year)."""
+    if isinstance(value, dict):
+        when = value.get("date") or value.get("announced_on") or value.get("year")
+        return str(when) if when else None
+    return None
 
 
 def _profile(entry: dict[str, Any], facts: Facts) -> dict[str, Any]:
-    """The startups row the entry describes; unknown required fields are "Unknown"."""
+    """The startup's entity columns the entry describes; unknown required fields are "Unknown"."""
     lead = entry.get("lead") or {}
     summary = value(facts, "solution_summary") or value(facts, "value_proposition") or lead.get("tagline") or ""
     parts = [value(facts, n) for n in ("solution_summary", "tech_description", "value_proposition", "ocean_problem", "impact_claim")]
@@ -258,24 +346,32 @@ def _profile(entry: dict[str, Any], facts: Facts) -> dict[str, Any]:
         "tagline": (summary or entry["name"])[:200],
         "description": description or summary or entry["name"],
         "sector": sector.replace("_", " ").capitalize() if sector and sector != "other" else lead.get("sector") or UNKNOWN,
+        "blue_sector": sector,
         "country": value(facts, "country") or UNKNOWN,
         "city": value(facts, "city"),
         "founded_year": int(founded) if founded.isdigit() else None,
         "website": entry["website"],
+        "domain": domain(entry["website"]) or None,
         "stage": STAGES.get(stage, "unknown") if stage != "grant_only" else "pre-seed",
     }
-
-
-def _plain(level: Any) -> dict[str, Any]:
-    return {"level": level.level, "basis": level.basis}
 
 
 def _unique_slug(conn: sqlite3.Connection, name: str) -> str:
     base = slug = slugify(name)
     n = 2
-    while conn.execute("SELECT 1 FROM startups WHERE slug = ?", (slug,)).fetchone():
+    while conn.execute("SELECT 1 FROM entities WHERE slug = ?", (slug,)).fetchone():
         slug, n = f"{base}-{n}", n + 1
     return slug
+
+
+def _utc(timestamp: str) -> str:
+    """An ISO timestamp as UTC in SQLite's datetime('now') format (naive ones are taken as UTC)."""
+    when = datetime.fromisoformat(timestamp)
+    return (when if when.tzinfo else when.replace(tzinfo=timezone.utc)).astimezone(timezone.utc).strftime(TIMESTAMP)
+
+
+def _json(data: Any) -> str:
+    return json.dumps(data, ensure_ascii=False, default=str)
 
 
 def domain(url: str | None) -> str:
@@ -306,4 +402,3 @@ def entry_summary(entry: dict[str, Any], stored: Stored | None) -> dict[str, Any
         "open_issues": len(review.get("open_issues", [])),
         "ocean_kpis": stored.kpis if stored else [],
     }
-

@@ -1,11 +1,12 @@
-"""Judge-approved entries into the StartupGo database: KTH levels, Navigator KPIs, startups, rounds, sources."""
+"""Scores in the StartupGo database (entities, facts, assessments): which startups need one, and what an entry stores."""
 
+import json
 import sqlite3
 from pathlib import Path
 
 import pytest
 
-from startup_agent.database import StartupDatabase, domain
+from startup_agent.database import StartupDatabase, domain, missing_levels, needs_score, researched_within
 from startup_agent.errors import AgentError
 from startup_agent.graph import build_agent_graph
 from startup_agent.kth import score_crl, score_frl, score_iprl, score_tmrl
@@ -16,10 +17,31 @@ from .helpers import fact
 DB_DIR = Path(__file__).resolve().parents[3] / "DB"
 
 
+# Two scored startups (one without a website), two to score; notpla has Navigator KPI evidence B2 at 2 and D1 at 1.
+FIXTURE = """
+INSERT INTO entities (id, key, kind, slug, name, website, domain, country, sector, tagline, description, stage, pipeline_stage) VALUES
+  (1, 'startup:notpla', 'startup', 'notpla', 'Notpla', 'https://www.notpla.com', 'notpla.com', 'United Kingdom', 'Packaging',
+   'Seaweed packaging', 'Seaweed-based packaging', 'series-a', 'diligence'),
+  (2, 'startup:seaforester', 'startup', 'seaforester', 'SeaForester', NULL, NULL, 'Portugal', 'Habitat restoration', 'Kelp', 'Kelp', 'seed', 'sourced'),
+  (3, 'startup:healix', 'startup', 'healix', 'Healix', 'https://healix.example', 'healix.example', NULL, NULL, NULL, NULL, 'unknown', 'sourced'),
+  (4, 'startup:sammy', 'startup', 'sammy', 'Sammy', 'https://sammy.example', 'sammy.example', 'Unknown', 'Unknown', 'Unknown', 'Unknown',
+   'unknown', 'sourced');
+INSERT INTO assessments (entity_id, assessed_at, engine, assessor, confidence, crl, trl, brl, iprl, tmrl, frl) VALUES
+  (1, '2026-10-16', 'seed-estimate', 'Startup Go seed estimate', 'low', 8, 8, 7, 6, 7, 8),
+  (2, '2026-10-16', 'seed-estimate', 'Startup Go seed estimate', 'low', 4, 5, 4, 3, 5, 5);
+INSERT INTO assessments (entity_id, assessed_at, engine, features) VALUES (3, '2026-10-17', 'startupgo-pipeline', '{}');
+INSERT INTO facts (entity_id, section, field, value, evidence, source_url, source_type, source_name, status, confidence) VALUES
+  (1, 'X', 'navigator_kpi', '{"kpi": "B2", "level": 2, "claim": "Replaces plastic"}', 'Replaces plastic', NULL, 'manual', 'seed', 'claimed', 0.9),
+  (1, 'X', 'navigator_kpi', '{"kpi": "D1", "level": 1, "claim": "Lower CO2"}', 'Lower CO2', NULL, 'manual', 'seed', 'claimed', 0.9),
+  (3, 'X', 'reference', '{"title": "Healix raises"}', 'Healix raises', 'https://news.example/healix', 'manual', 'seed', 'claimed', 0.9),
+  (3, 'A', 'business_id', '"1234567-8"', 'business id 1234567-8', NULL, 'registry', 'prh', 'verified', 0.95);
+"""
+
+
 def make_db(path: Path) -> StartupDatabase:
     conn = sqlite3.connect(path)
-    conn.executescript((DB_DIR / "schema.sql").read_text())
-    conn.executescript((DB_DIR / "seed.sql").read_text())
+    conn.executescript((DB_DIR / "unified.sql").read_text())
+    conn.executescript(FIXTURE)
     conn.close()
     return StartupDatabase(path)
 
@@ -84,68 +106,172 @@ def test_navigator_maps_impact_facts_to_kpis_with_evidence_levels():
 # --- storing -----------------------------------------------------------------------------------
 
 
-def test_new_startup_is_created_with_a_full_assessment(tmp_path, entry):
+def agent_runs(path: Path, slug: str):
+    return rows(path, "SELECT a.* FROM assessments a JOIN entities e ON e.id = a.entity_id WHERE e.slug = ? AND a.engine = 'agent' "
+                      "ORDER BY a.id", slug)
+
+
+def with_seed_round(entry):
+    entry["sections"]["G"]["facts"]["equity_rounds"] = [fact(
+        "equity_rounds", {"stage": "seed", "date": "2025-05", "amount": 1500000, "currency": "eur", "investors": ["Blue Fund"]},
+        source_type="news", status="verified").to_dict()]
+    return entry
+
+
+def test_new_startup_is_created_with_its_scores(tmp_path, entry):
     db = make_db(tmp_path / "db.sqlite")
-    stored = db.save(entry)
+    stored = db.save(with_seed_round(entry))
     assert (stored.slug, stored.created, stored.skipped) == ("acme-ocean", True, "")
 
-    (startup,) = rows(db.path, "SELECT * FROM startups WHERE slug = 'acme-ocean'")
-    assert (startup["website"], startup["country"], startup["tagline"]) == ("https://acme.fi/", "Finland", "Sediment sensors for ports")
-    (assessment,) = rows(db.path, "SELECT * FROM readiness_assessments WHERE startup_id = ?", startup["id"])
-    assert (assessment["assessor"], assessment["trl"], assessment["tmrl"]) == ("StartupGo agent", 6, 5)
-    assert assessment["iprl"] == 1 and "no evidence for" in assessment["rationale"] and "IPRL" in assessment["rationale"]
+    (startup,) = rows(db.path, "SELECT * FROM entities WHERE slug = 'acme-ocean'")
+    assert (startup["kind"], startup["key"], startup["pipeline_stage"]) == ("startup", "startup:acme-ocean", "sourced")
+    assert (startup["website"], startup["domain"], startup["country"], startup["tagline"]) == (
+        "https://acme.fi/", "acme.fi", "Finland", "Sediment sensors for ports")
+    (run,) = agent_runs(db.path, "acme-ocean")
+    assert (run["id"], run["assessor"], run["trl"], run["tmrl"], run["judge_status"]) == (stored.assessment_id, "StartupGo agent", 6, 5,
+                                                                                        entry["review"]["status"])
+    assert len(run["assessed_at"]) == 19 and run["assessed_at"][10] == " "  # UTC, as SQLite's datetime('now')
+    assert run["investment_score"] == entry["scores"]["investment_score"] and run["oir"] == entry["scores"]["ocean_impact_readiness"]["level"]
+    assert len(json.loads(run["criteria"])) == 10 and json.loads(run["next_steps"]) == entry["next_steps"]
+    basis = json.loads(run["levels_basis"])
+    assert run["iprl"] == 1 and basis["iprl"]["level"] is None and "IPRL" in run["rationale"]  # no evidence: stored as 1
+    assert basis["trl"]["level"] == 6 and basis["trl"]["evidence"]
+
+    # The views read the scores like the older tables
+    (readiness,) = rows(db.path, "SELECT * FROM readiness_assessments WHERE startup_id = ?", startup["id"])
+    assert (readiness["assessor"], readiness["trl"]) == ("StartupGo agent", 6)
+    assert rows(db.path, "SELECT slug FROM startups WHERE slug = 'acme-ocean'")
     assert {r["url"] for r in rows(db.path, "SELECT url FROM sources WHERE startup_id = ?", startup["id"])} >= {"https://acme.fi/technology"}
-    (link,) = rows(db.path, "SELECT * FROM agent_entries")
-    assert (link["entry_id"], link["assessment_id"]) == ("acme-fi", assessment["id"])
+    (seed,) = rows(db.path, "SELECT * FROM funding_rounds WHERE startup_id = ?", startup["id"])
+    assert (seed["round_type"], seed["announced_on"], seed["amount"], seed["currency"], seed["lead_investors"]) == (
+        "seed", "2025-05", 1500000, "EUR", "Blue Fund")
+
+    facts = rows(db.path, "SELECT * FROM facts WHERE entity_id = ? AND field NOT IN ('reference', 'navigator_kpi')", startup["id"])
+    assert facts and {f["source_name"] for f in facts} == {"agent"} and all(f["is_current"] for f in facts)
+    assert {f["section"] for f in facts if f["field"] == "equity_rounds"} == {"G"}
 
 
 def test_saving_again_is_a_no_op_and_existing_startups_are_matched_by_domain(tmp_path, entry):
     db = make_db(tmp_path / "db.sqlite")
     conn = sqlite3.connect(db.path)
-    conn.execute("INSERT INTO startups (slug, name, tagline, description, sector, country, stage, website) "
-                 "VALUES ('acme', 'Acme', 'Analyst tagline', '', 'Ocean data', 'Unknown', 'seed', 'http://www.acme.fi/')")
+    conn.execute("INSERT INTO entities (key, kind, slug, name, tagline, description, sector, country, stage, pipeline_stage, website) "
+                 "VALUES ('startup:acme', 'startup', 'acme', 'Acme', 'Analyst tagline', '', 'Ocean data', 'Unknown', 'seed', 'screening', "
+                 "'http://www.acme.fi/')")
     conn.commit()
     conn.close()
 
     first = db.save(entry)
     assert (first.slug, first.created) == ("acme", False)
-    (startup,) = rows(db.path, "SELECT * FROM startups WHERE slug = 'acme'")
-    assert startup["tagline"] == "Analyst tagline"  # analyst data is kept
+    (startup,) = rows(db.path, "SELECT * FROM entities WHERE slug = 'acme'")
+    assert startup["tagline"] == "Analyst tagline" and startup["pipeline_stage"] == "screening"  # analyst data is kept
     assert startup["country"] == "Finland" and startup["description"]  # blanks are filled in
+    facts = len(rows(db.path, "SELECT * FROM facts"))
     assert db.save(entry).skipped == "entry already stored"
-    assert len(rows(db.path, "SELECT * FROM readiness_assessments WHERE startup_id = ?", startup["id"])) == 1
+    assert len(agent_runs(db.path, "acme")) == 1 and len(rows(db.path, "SELECT * FROM facts")) == facts
 
 
-def test_only_accepted_entries_are_stored(tmp_path, entry):
+def test_a_blueinvest_candidate_becomes_a_startup(tmp_path, entry):
     db = make_db(tmp_path / "db.sqlite")
-    stored = db.save({**entry, "review": {**entry["review"], "status": "redo_requested"}})
+    conn = sqlite3.connect(db.path)
+    conn.execute("INSERT INTO entities (id, key, kind, name, website, domain, sector, pipeline_stage, blueinvest_id) "
+                 "VALUES (100001, 'blueinvest:807', 'candidate', 'Acme Oy', 'https://www.acme.fi', 'acme.fi', 'Blue tech', 'candidate', '807')")
+    conn.commit()
+    conn.close()
+    stored = db.save(entry)
+    assert (stored.slug, stored.created) == ("acme-oy", True)
+    (startup,) = rows(db.path, "SELECT * FROM entities WHERE id = 100001")
+    assert (startup["kind"], startup["slug"], startup["pipeline_stage"], startup["blueinvest_id"]) == ("startup", "acme-oy", "sourced", "807")
+    assert startup["sector"] == "Blue tech"  # kept
+
+
+def test_judged_runs_that_were_not_accepted_are_kept_without_a_score(tmp_path, entry):
+    db = make_db(tmp_path / "db.sqlite")
+    redo = {**entry, "review": {**entry["review"], "status": "redo_requested"}}
+    stored = db.save(redo)  # a new startup: nothing to keep
     assert stored.skipped == "judge status redo_requested"
-    assert not rows(db.path, "SELECT * FROM startups WHERE website = 'https://acme.fi'")
+    assert not rows(db.path, "SELECT * FROM entities WHERE website = 'https://acme.fi/'")
+
+    stored = db.save(redo, slug="sammy")  # a database startup: the run counts as research, without a score
+    assert (stored.slug, stored.assessment_id, stored.skipped) == ("sammy", None, "judge status redo_requested")
+    (run,) = agent_runs(db.path, "sammy")
+    assert (run["judge_status"], run["trl"], run["oir"], run["investment_score"]) == ("redo_requested", None, None, None)
+    assert json.loads(run["levels_basis"])["trl"]["level"] == 6
+    assert not rows(db.path, "SELECT * FROM readiness_assessments WHERE startup_id = 4")
+    assert not rows(db.path, "SELECT * FROM facts WHERE entity_id = 4")
+    conn = db.connect()
+    assert researched_within(conn, 4, 30) == run["assessed_at"] and needs_score(conn, 4)
+    conn.close()
+    assert db.save({**redo, "review": None}, slug="healix").skipped == "judge status missing"  # never judged: not a run
+    assert not agent_runs(db.path, "healix")
 
 
 def test_kpi_evidence_is_raised_but_never_lowered(tmp_path, entry):
-    db = make_db(tmp_path / "db.sqlite")  # seed: notpla B2 at 2 (evidenced), D1 at 1 (claimed)
+    db = make_db(tmp_path / "db.sqlite")  # notpla: B2 at 2 (evidenced), D1 at 1 (claimed)
     facts = entry["sections"]["E"]["facts"]
     facts["impact_claim"] = fact("impact_claim", "Replaces plastic packaging").to_dict()  # B2 claimed: 1 < 2
     facts["impact_measured"] = [fact("impact_measured", {"metric": "CO2 avoided", "value": "40 t", "period": "2025"}).to_dict()]  # D1 measured: 3
     assert db.save(entry, slug="notpla").kpis == ["B2", "D1"]
-    levels = {r["kpi_code"]: r["evidence_level"] for r in rows(
-        db.path, "SELECT kpi_code, evidence_level FROM startup_ocean_kpis k JOIN startups s ON s.id = k.startup_id WHERE s.slug = 'notpla'")}
+    levels = {r["kpi_code"]: r["evidence_level"] for r in rows(db.path, "SELECT kpi_code, evidence_level FROM startup_ocean_kpis WHERE startup_id = 1")}
     assert levels == {"B2": 2, "D1": 3}
+    (run,) = agent_runs(db.path, "notpla")
+    assert {k: v["level"] for k, v in json.loads(run["navigator_kpis"]).items()} == {"B2": 1, "D1": 3}  # the agent's own evidence
 
 
-def test_pending_lists_startups_without_a_recent_entry(tmp_path, entry):
+def test_a_new_entry_replaces_the_agents_earlier_facts(tmp_path, entry):
+    db = make_db(tmp_path / "db.sqlite")
+    entry = with_seed_round(entry)
+    db.save(entry, slug="sammy")
+    db.save({**entry, "generated_at": "2026-12-01T10:00:00+02:00"}, slug="sammy")
+    assert [r["assessed_at"] for r in agent_runs(db.path, "sammy")][-1] == "2026-12-01 08:00:00"
+    agent_facts = "SELECT * FROM facts WHERE entity_id = 4 AND source_name = 'agent' AND field = ? AND is_current = 1"
+    assert len(rows(db.path, agent_facts, "equity_rounds")) == 1 and len(rows(db.path, agent_facts, "dev_stage")) == 1
+    assert len(rows(db.path, "SELECT * FROM funding_rounds WHERE startup_id = 4")) == 1
+
+
+def test_a_round_stored_from_another_source_is_not_repeated(tmp_path, entry):
+    db = make_db(tmp_path / "db.sqlite")
+    conn = sqlite3.connect(db.path)
+    conn.execute("""INSERT INTO facts (entity_id, section, field, value, source_type, source_name, status, confidence)
+                    VALUES (4, 'G', 'equity_rounds', '{"round_type": "seed", "announced_on": "2025-05", "amount": 1600000}', 'news',
+                            'funding_rounds', 'verified', 0.8)""")
+    conn.commit()
+    conn.close()
+    db.save(with_seed_round(entry), slug="sammy")
+    (seed,) = rows(db.path, "SELECT * FROM funding_rounds WHERE startup_id = 4")
+    assert seed["amount"] == 1600000
+    (kept,) = rows(db.path, "SELECT * FROM facts WHERE entity_id = 4 AND source_name = 'agent' AND field = 'equity_rounds'")
+    assert kept["is_current"] == 0 and kept["observed_on"] == "2025-05"
+
+
+def test_pending_lists_startups_without_a_usable_score(tmp_path, entry):
     db = make_db(tmp_path / "db.sqlite")
     pending = db.pending(limit=20, max_age_days=30)
-    assert "notpla" in {c.slug for c in pending} and "seaforester" not in {c.slug for c in pending}  # no website
-    db.save(entry, slug="notpla")
-    assert "notpla" not in {c.slug for c in db.pending(limit=20, max_age_days=30)}
+    assert [c.slug for c in pending] == ["healix", "sammy"]  # notpla and seaforester are scored; seaforester has no website
+    assert (pending[0].business_id, pending[0].extra_urls) == ("1234567-8", ("https://news.example/healix",))
+    db.save(entry, slug="healix")
+    assert [c.slug for c in db.pending(limit=20, max_age_days=30)] == ["sammy"]
     assert [c.slug for c in db.pending(limit=20, max_age_days=30, slugs=("notpla",))] == ["notpla"]
     assert db.known_domains()["notpla.com"] == "notpla"
 
 
-def test_missing_tables_are_reported(tmp_path):
-    sqlite3.connect(tmp_path / "old.db").close()
-    with pytest.raises(AgentError, match="agent_entries"):
+def test_scores_without_trl_or_brl_evidence_are_researched_again(tmp_path):
+    db = make_db(tmp_path / "db.sqlite")
+    conn = db.connect()
+    with conn:
+        conn.execute("INSERT INTO assessments (entity_id, assessed_at, engine, crl, trl, brl, iprl, tmrl, frl, levels_basis) "
+                     "VALUES (4, '2026-01-01 10:00:00', 'agent', 1, 6, 1, 1, 1, 1, ?)",
+                     (json.dumps({d: {"level": 6 if d == "trl" else None} for d in ("crl", "trl", "brl", "iprl", "tmrl", "frl")}),))
+    assert missing_levels(conn, 4) == ["crl", "brl", "iprl", "tmrl", "frl"] and needs_score(conn, 4)
+    assert missing_levels(conn, 1) == [] and not needs_score(conn, 1)  # the seed estimate has no levels_basis: all known
+    assert researched_within(conn, 4, 30) is None  # researched long ago
+    conn.close()
+    assert "sammy" in {c.slug for c in db.pending(limit=20, max_age_days=30)}
+
+
+def test_older_databases_are_reported(tmp_path):
+    conn = sqlite3.connect(tmp_path / "old.db")
+    conn.execute("CREATE TABLE startups (id INTEGER PRIMARY KEY)")
+    conn.close()
+    with pytest.raises(AgentError, match="assessments, entities, facts"):
         StartupDatabase(tmp_path / "old.db").pending(limit=1, max_age_days=1)
     assert domain("HTTPS://www.Acme.fi:8080/x") == "acme.fi"

@@ -11,6 +11,8 @@
   python3 refresh.py snapshot                 runtime DB -> DB/startupgo.db + CSVs + GAPS.md, for committing
 
 Files: the runtime DB, generated configs, the runtime search index and reports live in DB/runtime/ (untracked).
+The search_index step also writes DB/runtime/startupgo_unified.db, the runtime DB's 3-table copy (unify.py --preview)
+with the agent's scores: the search index is built from it, and the Backend serves it.
 Tracked files (DB/startupgo.db, csv/, GAPS.md) change only through `snapshot`. Main's modules (Agent, Search,
 Scraper) are not modified: they are driven through their own CLIs with generated --config files.
 """
@@ -239,12 +241,19 @@ def step_agent(ctx: Context):
     return (p.stdout.strip().splitlines() or ["no candidates"])[-1][:200]
 
 
+def unified_path() -> Path:
+    """The runtime DB's 3-table copy, next to it."""
+    return ingest.db_path().with_name("startupgo_unified.db")
+
+
 def step_search_index(ctx: Context):
+    ctx.conn.commit()
+    unified = unify.preview(ingest.db_path(), unified_path())  # after the agent step: includes its scores
     cfg = write_configs()["search"]
     env = {
         **_dotenv(SEARCH_DIR / ".env"),
         **os.environ,
-        "STARTUPGO_DB": str(ingest.db_path()),
+        "STARTUPGO_DB": str(unified),
     }
     if not (env.get("CHAT_API_KEY") and env.get("EMBEDDING_API_KEY")):
         raise Skip(
@@ -350,12 +359,6 @@ STEPS = [
         "competitor universe from the BlueInvest pipeline",
     ),
     Step(
-        "agent",
-        ("full",),
-        step_agent,
-        "agent research + judge on startups without a recent agent entry and discovered leads (LLM calls)",
-    ),
-    Step(
         "features",
         ("daily", "full"),
         step_features,
@@ -374,10 +377,16 @@ STEPS = [
         "rebuild the 3-table model: entities, facts (Agent format), assessments",
     ),
     Step(
+        "agent",
+        ("full",),
+        step_agent,
+        "agent research + judge on startups without a usable score in assessments, and discovered leads (LLM calls)",
+    ),
+    Step(
         "search_index",
         ("daily", "full"),
         step_search_index,
-        "rebuild the runtime LightRAG index with main's process-storage",
+        "write the 3-table copy (startupgo_unified.db) and rebuild the runtime LightRAG index from it",
     ),
 ]
 
@@ -574,7 +583,7 @@ def write_configs() -> dict[str, Path]:
         (ingest.RUNTIME_DIR / "rag_storage").resolve()
     )
     search.setdefault("sources", {}).update(
-        database=str(ingest.db_path().resolve()),
+        database=str(unified_path().resolve()),
         entries=str((ingest.RUNTIME_DIR / "agent_output" / "startups").resolve()),
     )
     written = {}

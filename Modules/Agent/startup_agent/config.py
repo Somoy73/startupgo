@@ -74,7 +74,7 @@ class SearchSettings:
 @dataclass(frozen=True, slots=True)
 class PipelineSettings:
     limit: int  # startups researched per pipeline run
-    max_age_days: int  # an agent entry older than this is researched again
+    max_age_days: int  # a startup the agent researched is left alone this many days, whatever the result
     discover: tuple[dict[str, Any], ...]  # discovery sources: {source, url, query, location, limit}
 
 
@@ -162,7 +162,7 @@ class AgentSettings:
                 discover=tuple(_discover_source(d) for d in pipeline.get("discover", [])),
             ),
             # The Backend's STARTUPGO_DB override applies here too, so all modules use the same database.
-            database=(Path(os.environ.get("STARTUPGO_DB") or root / database.get("path", "../../DB/startupgo.db"))
+            database=(Path(os.environ.get("STARTUPGO_DB") or root / database.get("path", "../../DB/startupgo_unified.db"))
                       if database.get("store", True) else None),
             cache_dir=root / paths.get("cache_dir", "cache"),
             output_dir=root / paths.get("output_dir", "output"),

@@ -1,9 +1,9 @@
 """The research pipeline: candidates (name + website + info) → agent → judge → entry file + database.
 
-    candidates  database startups without a recent agent entry, then leads from the [pipeline]
+    candidates  database startups without a usable score (database.py), then leads from the [pipeline]
                 discover sources (Wellfound, directories, OSM) that aren't in the database yet
     research    per candidate, the LangGraph workflow (graph.py): research → judge → evaluation → judge
-    store       the evaluated entry → output/startups/<id>.json; if the judge accepted it → database.py
+    store       the evaluated entry → output/startups/<id>.json, its scores → the assessments table (database.py)
 
 Search sees the new data after `process-storage` runs (refresh.py's agent and search_index steps
 run both). The Backend's research jobs call ``research`` for one candidate.

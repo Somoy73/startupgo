@@ -64,7 +64,7 @@ def parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
     graph.add_argument("--json", action="store_true", help="Print the final workflow state as JSON")
     graph.add_argument("--refresh", action="store_true")
 
-    pipeline = commands.add_parser("pipeline", help="Research database startups without a recent agent entry (and discovered leads); store what the judge accepts")
+    pipeline = commands.add_parser("pipeline", help="Research database startups without a usable score (and discovered leads); store their scores")
     pipeline.add_argument("--limit", type=int, help="Startups to research (default: [pipeline] limit)")
     pipeline.add_argument("--slug", action="append", default=[], help="Research this database startup; repeatable")
     pipeline.add_argument("--no-discover", action="store_true", help="Skip the [pipeline] discover sources")

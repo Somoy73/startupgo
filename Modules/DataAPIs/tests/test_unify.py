@@ -85,3 +85,28 @@ def test_unassessed_startups_are_hidden_from_mains_view(db, tmp_path):
     assert conn.execute("SELECT COUNT(*) FROM entities WHERE slug='newco'").fetchone()[0] == 1
     new = sqlite3.connect(unify.preview(path, tmp_path / "three.db"))
     assert new.execute("SELECT COUNT(*) FROM startups WHERE slug='newco'").fetchone()[0] == 0  # no assessment yet
+
+
+def test_schema_script_builds_the_3_table_database(db, tmp_path):
+    conn, _ = db
+    script = unify.unified_sql(conn)
+    new = sqlite3.connect(tmp_path / "unified.db")
+    new.executescript(script)
+    new.executescript(script)  # applying it again changes nothing (the Backend does on every start)
+    kinds = dict(new.execute("SELECT name, type FROM sqlite_master WHERE name NOT LIKE 'sqlite_%' AND type IN ('table', 'view')"))
+    assert {n for n, t in kinds.items() if t == "table"} == {"entities", "facts", "assessments"}
+    assert {*unify.COMPAT_VIEWS, *unify.REFERENCE_TABLES} <= {n for n, t in kinds.items() if t == "view"}
+    assert new.execute("SELECT COUNT(*) FROM readiness_levels").fetchone()[0] == 54
+
+
+def test_a_lead_the_agent_made_a_startup_stays_one(db):
+    conn, _ = db
+    conn.execute("INSERT INTO blueinvest_profiles (other_id, name, trl, sector, company, url) "
+                 "VALUES (807, 'Kelp project', 6, 'Aquaculture', 'KelpCo', 'https://example/807')")
+    unify.build(conn)
+    conn.execute("UPDATE entities SET kind='startup', slug='kelpco', pipeline_stage='sourced' WHERE key='blueinvest:807'")
+    eid = conn.execute("SELECT id FROM entities WHERE key='blueinvest:807'").fetchone()[0]
+    conn.execute("INSERT INTO assessments (entity_id, assessed_at, engine, trl) VALUES (?, '2026-10-17 10:00:00', 'agent', 6)", (eid,))
+    conn.commit()
+    unify.build(conn)
+    assert tuple(conn.execute("SELECT kind, slug FROM entities WHERE key='blueinvest:807'").fetchone()) == ("startup", "kelpco")

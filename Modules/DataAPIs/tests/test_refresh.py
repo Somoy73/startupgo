@@ -141,7 +141,7 @@ def test_generated_configs_change_only_paths(dbs, tmp_path, monkeypatch):
     assert all(Path(v).is_absolute() for v in agent["paths"].values())
     assert agent["paths"]["output_dir"].startswith(str((tmp_path / "rt").resolve()))
     assert Path(agent["paths"]["system_prompt"]).exists()
-    assert search["sources"]["database"] == str(dbs[1].resolve())
+    assert search["sources"]["database"] == str(dbs[1].with_name("startupgo_unified.db").resolve())  # the 3-table copy
     assert search["storage"]["working_dir"].startswith(str((tmp_path / "rt").resolve()))
     assert {k: v for k, v in search.items() if k not in ("sources", "storage")} == {k: v for k, v in orig_search.items() if k not in ("sources", "storage")}
     assert {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in tracked} == tracked  # main's files untouched

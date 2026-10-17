@@ -148,7 +148,7 @@ class SearchSettings:
                 max_results=int(query.get("max_results", 20)),
             ),
             # The Backend's STARTUPGO_DB override applies here too, so both read the same database.
-            database=Path(_value(env, "STARTUPGO_DB") or root / sources.get("database", "../../DB/startupgo.db")),
+            database=Path(_value(env, "STARTUPGO_DB") or root / sources.get("database", "../../DB/startupgo_unified.db")),
             entries=root / sources.get("entries", "../Agent/output/startups"),
         )
 

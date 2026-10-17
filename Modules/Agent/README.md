@@ -62,10 +62,12 @@ search failures and other problems are reported but never stop the run.
 `startup-agent pipeline` is the agent's part of the StartupGo pipeline (`startup_agent/pipeline.py`):
 
 ```
-candidates   database startups with a website and no agent entry younger than [pipeline] max_age_days,
-             then leads from the [pipeline] discover sources (Wellfound, ...) that aren't in the database
+candidates   database startups with a website and no usable score in the assessments table (no assessment
+             with all six KTH levels, or the agent's latest without evidence for TRL or BRL) that the agent
+             hasn't researched in [pipeline] max_age_days, then leads from the [pipeline] discover sources
+             (Wellfound, ...) that aren't in the database
 research     per candidate: the workflow above (research → judge → evaluation → judge)
-store        output/startups/<id>.json, and, if the judge accepted it, the database ([database] path)
+store        output/startups/<id>.json, and the run's scores in the database ([database] path)
 ```
 
 ```bash
@@ -74,19 +76,17 @@ uv run startup-agent pipeline                    # research [pipeline] limit of 
 uv run startup-agent pipeline --slug notpla      # one database startup
 ```
 
-`graph` stores accepted entries in the database too. What an entry becomes (`startup_agent/database.py`):
+`graph` stores accepted entries in the database too. The database is the 3-table model in
+`DB/unified.sql` (`DB/startupgo_unified.db`). What an entry becomes (`startup_agent/database.py`):
 
 | Table | From the entry |
 |---|---|
-| `startups` | found by slug or website domain, else created; an existing startup's fields are only filled in when blank (`Unknown`, empty) |
-| `readiness_assessments` | a dated snapshot by "StartupGo agent": TRL and BRL from the scores, CRL, IPRL, TMRL and FRL from the facts by code (`kth.py`). A dimension with no evidence is stored as 1 and the rationale lists it |
-| `startup_ocean_kpis` | Ocean Impact Navigator KPI evidence: section E facts matched to the 30 KPIs by keyword (`navigator.py`), claimed 1, independently stated 2, measured 3, verified 4. A level already stored is never lowered |
-| `funding_rounds` | equity rounds and grants not stored yet |
-| `sources`, `agent_entries` | the pages the facts came from; the entry behind the assessment (judge status, investment score) |
+| `entities` | the startup: found by slug or website domain (a BlueInvest `candidate` becomes a `startup`), else created; an existing startup's fields are only filled in when blank (`Unknown`, empty) |
+| `assessments` | one row per run, `engine = 'agent'`, `assessed_at` = the entry's `generated_at` (UTC). Accepted: TRL, BRL, OIR, the 10 criteria and the investment score from the scores, CRL, IPRL, TMRL and FRL from the facts by code (`kth.py`), Navigator KPIs, next steps and data gaps. A dimension with no evidence is stored as 1 and `levels_basis` gives its level as `null`. Not accepted: only the run (judge status, `levels_basis`, criteria), so it never becomes the startup's score |
+| `facts` | accepted entries, `source_name = 'agent'`: every fact of the entry (replacing the agent's earlier ones; rounds and grants also carry the keys the `funding_rounds` view reads, and one already stored from another source isn't current); `navigator_kpi`: section E facts matched to the 30 Ocean Impact Navigator KPIs by keyword (`navigator.py`), claimed 1, independently stated 2, measured 3, verified 4, a level already stored is never lowered; `reference`: the pages the facts came from |
 
-Only `accepted` and `accepted_with_issues` entries are stored, and saving the same entry twice changes
-nothing. `STARTUPGO_DB` overrides the database path. The database needs the `agent_entries` table: the
-Backend adds it on start, `refresh.py` on every run. The Backend runs the same research for one startup as
+A new startup is stored only if the judge accepted it (`accepted`, `accepted_with_issues`), and saving the
+same entry twice changes nothing. `STARTUPGO_DB` overrides the database path. The Backend runs the same research for one startup as
 a job (`POST /api/research`), and `refresh.py`'s `agent` step (full tier) runs `pipeline` on the runtime DB.
 
 ### Searching the entries

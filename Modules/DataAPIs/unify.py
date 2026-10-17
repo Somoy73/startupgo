@@ -4,6 +4,8 @@
   python3 unify.py                 rebuild entities / facts / assessments in the runtime DB
   python3 unify.py --preview PATH  also write a copy of the DB that has ONLY the 3 tables, plus views named like
                                    main's tables (startups, readiness_assessments, funding_rounds, ...) for reading
+  python3 unify.py --sql PATH      also write that copy's schema (3 tables + views) as SQL: DB/unified.sql, which the
+                                   Backend applies to DB/startupgo_unified.db on start
 
 Facts use the Agent's fact format (Modules/Agent/startup_agent/facts.py): section A-J and field names from its spec,
 values in its vocabulary, source_type / status / confidence by its rules (independent sources verify, the startup's
@@ -359,7 +361,11 @@ def priced_rounds(events: list) -> list[dict]:
 
 def _candidates(b: Builder) -> None:
     for p in b.conn.execute("SELECT * FROM blueinvest_profiles WHERE startup_id IS NULL").fetchall():
-        eid = b.entity(f"blueinvest:{p['other_id']}", "candidate", p["company"] or p["name"], website=p["website"],
+        key = f"blueinvest:{p['other_id']}"
+        if b.conn.execute("SELECT 1 FROM entities WHERE key=? AND kind='startup'", (key,)).fetchone():
+            b.seen.add(key)  # the Agent made this lead a startup (its entry was accepted): keep it one
+            continue
+        eid = b.entity(key, "candidate", p["company"] or p["name"], website=p["website"],
                        domain=domain(p["website"]) if p["website"] else None, country=p["country"], sector=p["sector"],
                        blue_sector=BLUE_SECTOR.get((p["sector"] or "").lower(), "other"), tagline=p["name"][:200],
                        description=p["summary"], blueinvest_id=str(p["other_id"]), pipeline_stage="candidate")
@@ -429,15 +435,18 @@ COMPAT_VIEWS = {
                                  FROM assessments WHERE {LEVELS}""",
     "startup_ocean_kpis": """SELECT entity_id AS startup_id, json_extract(value,'$.kpi') AS kpi_code, json_extract(value,'$.level') AS evidence_level,
                                     json_extract(value,'$.claim') AS claim, source_url FROM facts WHERE field='navigator_kpi' AND is_current=1""",
+    # Rounds from the funding_rounds table, analysts (Backend) and the Agent: their values carry these keys.
     "funding_rounds": """SELECT id, entity_id AS startup_id, json_extract(value,'$.round_type') AS round_type, json_extract(value,'$.amount') AS amount,
                                 json_extract(value,'$.currency') AS currency, json_extract(value,'$.announced_on') AS announced_on,
                                 json_extract(value,'$.lead_investors') AS lead_investors, json_extract(value,'$.notes') AS notes, source_url
-                         FROM facts WHERE source_name='funding_rounds' AND field IN ('equity_rounds','grants') AND is_current=1""",
+                         FROM facts WHERE source_name IN ('funding_rounds','analyst','agent') AND field IN ('equity_rounds','grants') AND is_current=1""",
     "sources": """SELECT id, entity_id AS startup_id, json_extract(value,'$.title') AS title, source_url AS url FROM facts WHERE field='reference'""",
     "notes": """SELECT id, entity_id AS startup_id, json_extract(value,'$.author') AS author, json_extract(value,'$.body') AS body,
                        json_extract(value,'$.created_at') AS created_at FROM facts WHERE field='analyst_note'""",
 }
-REFERENCE_TABLES = ("readiness_dimensions", "readiness_levels", "ocean_impact_areas", "ocean_kpis")  # frameworks, stored as VALUES views
+REFERENCE_TABLES = ("readiness_dimensions", "readiness_levels", "ocean_impact_areas", "ocean_kpis",
+                    "feature_definitions")  # frameworks and the feature catalogue, stored as VALUES views
+SCHEMA_SQL = Path(__file__).resolve().parents[2] / "DB" / "schema.sql"
 
 
 def compat_sql(conn: sqlite3.Connection) -> list[str]:
@@ -448,8 +457,21 @@ def compat_sql(conn: sqlite3.Connection) -> list[str]:
         rows = conn.execute(f"SELECT {', '.join(cols)} FROM {t}").fetchall()
         lit = lambda x: "NULL" if x is None else str(x) if isinstance(x, (int, float)) else "'" + str(x).replace("'", "''") + "'"  # noqa: E731
         values = ", ".join("(" + ", ".join(lit(x) for x in r) + ")" for r in rows)
-        stmts.append(f"CREATE VIEW {t}({', '.join(cols)}) AS VALUES {values}")
+        body = f"VALUES {values}" if rows else f"SELECT {', '.join(['NULL'] * len(cols))} WHERE 0"  # an empty table: an empty view
+        stmts.append(f"CREATE VIEW {t}({', '.join(cols)}) AS {body}")
     return stmts
+
+
+def unified_sql(conn: sqlite3.Connection) -> str:
+    """The 3-table copy's schema as a script: the tables from schema.sql, then the views (dropped and created again)."""
+    schema = SCHEMA_SQL.read_text(encoding="utf-8")
+    tables = schema[schema.index("-- One row per real-world thing."):].strip()
+    views = [f"DROP VIEW IF EXISTS {name};\n{stmt};" for name, stmt in
+             zip([*COMPAT_VIEWS, *REFERENCE_TABLES], compat_sql(conn))]
+    header = ("-- StartupGo's database: 3 tables (entities, facts, assessments) and read-only views named like the older tables.\n"
+              "-- Generated by Modules/DataAPIs/unify.py --sql from DB/schema.sql and the runtime DB's reference tables; do not edit.\n"
+              "-- Writers (Backend, Agent) write the 3 tables; the views are for reading.")
+    return "\n\n".join([header, tables, *views]) + "\n"
 
 
 def preview(src: Path, dst: Path) -> Path:
@@ -476,12 +498,16 @@ def preview(src: Path, dst: Path) -> Path:
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--preview", type=Path, help="also write a 3-table-only copy with compatibility views here")
+    p.add_argument("--sql", type=Path, help="also write the 3-table copy's schema (tables + views) as SQL here")
     a = p.parse_args(argv)
     conn = ingest.open_db()
     counts = build(conn)
     print("unified:", ", ".join(f"{k} {v}" for k, v in counts.items()))
     if a.preview:
         print(f"preview written: {preview(ingest.db_path(), a.preview)}")
+    if a.sql:
+        a.sql.write_text(unified_sql(conn), encoding="utf-8")
+        print(f"schema written: {a.sql}")
     return 0
 
 

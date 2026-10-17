@@ -1,7 +1,7 @@
 """The four KTH Innovation Readiness Levels the agent doesn't score itself: CRL, IPRL, TMRL and FRL.
 
 TRL and BRL come from scoring.py. These four are computed by code from the same facts, so the
-database gets a full six-dimension assessment (DB/schema.sql readiness_assessments). Each rule cites
+database gets a full six-dimension assessment (DB/unified.sql assessments). Each rule cites
 the KTH level summary it stands for (DB/seed.sql readiness_levels). The levels are calibrated to the
 seed estimates: a seed-funded startup lands around FRL 6, a Series A around FRL 7.
 """

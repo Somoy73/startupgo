@@ -47,7 +47,8 @@ def test_research_stores_the_entry_and_the_assessment(tmp_path, monkeypatch, age
     assert (result["slug"], result["created"], result["stored"], result["trl"]) == ("acme-ocean", True, True, 6)
     assert result["review_status"].startswith("accepted")
     assert (s.output_dir / "startups" / "acme-fi.json").exists()
-    assert rows(s.database, "SELECT entry_id FROM agent_entries")[0][0] == "acme-fi"
+    (run,) = rows(s.database, "SELECT * FROM assessments WHERE engine = 'agent'")
+    assert run["trl"] == 6 and "agent entry acme-fi" in run["rationale"]
 
 
 def test_candidates_are_pending_database_startups_then_new_discovered_leads(tmp_path, monkeypatch, agent):
@@ -62,10 +63,11 @@ def test_candidates_are_pending_database_startups_then_new_discovered_leads(tmp_
 
     found, problems = pipeline.candidates(limit=7)
     assert problems == []
-    assert [c.slug for c in found[:6]] == ["notpla", "sofar-ocean", "ocean-rainforest", "seabound", "oceanium", "kelp-blue"]
-    assert (found[6].name, found[6].slug, found[6].lead["tagline"]) == ("Acme Ocean", None, "Port sensors")  # notpla.com is known
-    assert pipeline.candidates(limit=2)[0][1].slug == "sofar-ocean"
-    assert [c.slug for c in pipeline.candidates(slugs=["kelp-blue"])[0]] == ["kelp-blue"]
+    assert [c.slug for c in found[:2]] == ["healix", "sammy"]  # without a score
+    assert (found[2].name, found[2].slug, found[2].lead["tagline"]) == ("Acme Ocean", None, "Port sensors")  # notpla.com is known
+    assert len(found) == 3
+    assert [c.slug for c in pipeline.candidates(limit=1)[0]] == ["healix"]
+    assert [c.slug for c in pipeline.candidates(slugs=["notpla"])[0]] == ["notpla"]  # scored, but asked for
 
 
 def test_a_failed_candidate_does_not_stop_the_run(tmp_path, monkeypatch, agent):
@@ -92,3 +94,29 @@ def test_a_discovery_url_makes_discovered_startups_the_only_candidates(tmp_path,
     found, _ = pipeline.candidates(limit=3, sources=[source])
     assert [c.name for c in found] == ["Lead 0", "Lead 1", "Lead 2"]  # no database startups
     assert asked == [source]
+
+
+def test_scores_land_in_the_unified_database(tmp_path, monkeypatch, agent):
+    """On a copy of DB/startupgo_unified.db: an unscored startup is a candidate, then has the agent's score in the views."""
+    import shutil
+    import sqlite3
+
+    from .test_database import DB_DIR
+
+    db = tmp_path / "startupgo_unified.db"
+    shutil.copyfile(DB_DIR / "startupgo_unified.db", db)
+    settings(tmp_path, monkeypatch)  # writes config.toml
+    monkeypatch.setenv("STARTUPGO_DB", str(db))  # the copy, in place of config.toml's database
+    s = AgentSettings.load(tmp_path / "config.toml")
+    pipeline = ResearchPipeline(s, build=lambda settings, refresh: agent)
+    pending = pipeline.candidates(limit=50, discover=False)[0]
+    assert "healix" in {c.slug for c in pending} and "notpla" not in {c.slug for c in pending}  # notpla has a seed estimate
+
+    result = pipeline.research(Candidate("Healix", "https://acme.fi", slug="healix"))  # the fake agent knows acme.fi's pages
+    assert (result["slug"], result["stored"], result["created"]) == ("healix", True, False)
+    assert "healix" not in {c.slug for c in pipeline.candidates(limit=50, discover=False)[0]}
+    conn = sqlite3.connect(db)
+    (trl, assessor) = conn.execute("SELECT r.trl, r.assessor FROM readiness_assessments r JOIN startups s ON s.id = r.startup_id "
+                                   "WHERE s.slug = 'healix'").fetchone()
+    conn.close()
+    assert (trl, assessor) == (6, "StartupGo agent")

@@ -15,7 +15,8 @@ Background research, the DeepTree feature notes and paper references are in [RES
 ```
 Frontend/   React + TypeScript (Vite): search, assess, matching, pipeline, compare, methodology
 Backend/    Python (FastAPI): REST API + scoring model (app/scoring.py)
-DB/         SQL: schema.sql + seed.sql (SQLite in dev, written to port to PostgreSQL)
+DB/         startupgo_unified.db: the database (entities, facts, assessments; schema and read views in unified.sql).
+            schema.sql + seed.sql: the DataAPIs pipeline's tables, from which unify.py builds it
 Modules/    uv workspace (one uv.lock, one .venv) for the Python modules below
   Scraper/  Python: public page fetching (HTTP or stealth Chrome) and startup discovery (Wellfound, OSM, generic)
   Agent/    Python: builds evidence-backed startup entries per the Ocean Opportunity Radar extraction
@@ -33,28 +34,31 @@ Modules/    uv workspace (one uv.lock, one .venv) for the Python modules below
 DataAPIs: registries, patents, funding, people, jobs ─┐
 Scraper: Wellfound, directories (discovered leads)   ─┴→ candidates: name + website + info
   → Agent: research → judge → evaluation → judge        (startup-agent pipeline)
-  → DB: startups, readiness_assessments (all six KTH levels), ocean KPIs, funding rounds, sources, agent_entries
+  → DB: entities (startups) · assessments (one per scoring run: six KTH levels, OIR, criteria, investment score)
+        · facts (evidence in the Agent's format: KPIs, rounds, sources, ...)
   → process-storage: LightRAG knowledge graph + vectors
   → Backend: search (+ filters) · assess (+ research jobs) · match (N-hop graph)
 ```
 
-- **Run it all:** `cd Modules/DataAPIs && uv run python refresh.py run --tier full` (sources → `agent` → `features`, `gaps` →
-  `search_index`), or only the agent and the index: `refresh.py run --steps agent,search_index`. Both write the runtime DB
-  (`DB/runtime/`). Serve it, with its search index and agent settings:
+- **Run it all:** `cd Modules/DataAPIs && uv run python refresh.py run --tier full` (sources → `features`, `gaps` → `unify` →
+  `agent` → `search_index`), or only the agent and the index: `refresh.py run --steps agent,search_index`. Both write the
+  runtime DB (`DB/runtime/`); `search_index` also writes its 3-table copy, `DB/runtime/startupgo_unified.db`, and indexes it.
+  Serve that copy, with its search index and agent settings (research jobs write to the copy, which the next refresh replaces):
 
   ```bash
-  cd Backend && STARTUPGO_DB=../DB/runtime/startupgo.db \
+  cd Backend && STARTUPGO_DB=../DB/runtime/startupgo_unified.db \
     STARTUPGO_SEARCH_CONFIG=../DB/runtime/config/search/config.toml \
     STARTUPGO_AGENT_CONFIG=../DB/runtime/config/agent/config.toml \
     uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
   ```
 
   A running Backend picks up the index the next refresh writes; no restart needed.
-- **Agent only:** `cd Modules/Agent && uv run startup-agent pipeline` (`--dry-run` lists the candidates first).
+- **Agent only:** `cd Modules/Agent && uv run startup-agent pipeline` (`--dry-run` lists the candidates first): startups
+  without a usable score in `assessments` are researched, and each run's scores are stored there (`engine = 'agent'`).
   For startups discovered on a page instead: `startup-agent pipeline --discover-url https://wellfound.com/startups/industry/clean-technology --limit 5`,
   then `cd ../Search && uv run process-storage` for search.
 - **One startup from the API:** `POST /api/research` queues a job for a startup without a score; the new assessment is in the
-  database when it finishes. A startup that already has a score isn't researched (409).
+  `assessments` table when it finishes. A startup that already has a score isn't researched (409).
 
 ## Features
 
@@ -71,7 +75,8 @@ Frontend layout: `src/lib/` holds pure, unit-tested logic (`search.ts`, `matchin
 
 ## Run locally
 
-Backend (Python 3.11, managed with [uv](https://docs.astral.sh/uv/)). It creates `DB/startupgo.db` from the SQL files on first start:
+Backend (Python 3.11, managed with [uv](https://docs.astral.sh/uv/)). It serves `DB/startupgo_unified.db` (`STARTUPGO_DB` overrides it; a
+missing file starts as a copy of it) and applies `DB/unified.sql` on start:
 
 ```bash
 cd Backend
@@ -98,7 +103,8 @@ cp Search/.env.example Search/.env   # add CHAT_API_KEY, EMBEDDING_API_KEY
 cd Search && uv run process-storage  # DB + agent entries -> LightRAG storage, for POST /api/startups/search
 ```
 
-To reset the database after editing `DB/*.sql`, delete `DB/startupgo.db` and restart the backend.
+`DB/unified.sql` is generated: `cd Modules/DataAPIs && python3 unify.py --sql ../../DB/unified.sql`. The Backend applies it
+on every start, so view changes reach the existing database.
 
 ## Tests
 
@@ -121,7 +127,7 @@ cd Modules/Search && uv run pytest            # search: documents, process-stora
 | POST | `/api/match/graph` | Matching from a thesis: `{"thesis": "kelp carbon removal", "hops": 1, "filters": {...}}` seeds the graph with the entities the thesis retrieves |
 | POST | `/api/research` | Queue the agent on `{"slug": ...}` or a new `{"name", "website"}` (optional `business_id`, `urls`). 202 with the job; 409 if the startup (by slug or website domain) already has a score |
 | GET | `/api/research/{id}` | Job status (`queued`, `running`, `done`, `error`) and result: scores, judge review, whether it was stored |
-| GET | `/api/startups/{slug}/research` | Whether the agent has assessed the startup, and its latest job |
+| GET | `/api/startups/{slug}/research` | The agent's latest accepted assessment of the startup, when it last ran (any verdict), and its latest job since the Backend started |
 | POST | `/api/startups` | Create a startup with its first assessment (and optional funding round) |
 | GET | `/api/startups/{slug}` | Profile: level text, ocean KPIs, funding rounds, sources, notes |
 | POST | `/api/startups/{slug}/assessments` | Add a dated readiness + ocean-impact assessment |

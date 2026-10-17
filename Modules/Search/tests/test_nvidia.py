@@ -70,7 +70,7 @@ def test_defaults_when_env_sets_no_models():
     assert s.chat.model == "nvidia/nemotron-3.5-lightning-30b-a3b" and s.chat.reasoning is False
     assert (s.embedding.model, s.embedding.dim) == ("nvidia/llama-3.2-nv-embedqa-1b-v1", 2048)
     assert s.chat.api_key == s.embedding.api_key == ""
-    assert s.query.mode == "mix" and s.database.name == "startupgo.db" and s.entries.parts[-2:] == ("output", "startups")
+    assert s.query.mode == "mix" and s.database.name == "startupgo_unified.db" and s.entries.parts[-2:] == ("output", "startups")
 
 
 def test_models_and_their_keys_come_from_env(tmp_path):
@@ -102,7 +102,7 @@ def test_dotenv_file_is_read_and_the_environment_wins(tmp_path, monkeypatch):
 
 def test_database_follows_the_backends_override(tmp_path):
     assert settings(tmp_path, env={"STARTUPGO_DB": "/data/other.db"}).database == Path("/data/other.db")
-    assert settings(tmp_path).database == tmp_path / "../../DB/startupgo.db"
+    assert settings(tmp_path).database == tmp_path / "../../DB/startupgo_unified.db"
 
 
 def test_config_file_follows_the_runtime_override(tmp_path, monkeypatch):

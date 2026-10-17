@@ -47,5 +47,5 @@ max_results = 20               # startups returned
 # What process-storage processes: the StartupGo database (STARTUPGO_DB overrides it, as in the
 # Backend) and the agent's entries.
 [sources]
-database = "../../DB/startupgo.db"
+database = "../../DB/startupgo_unified.db"
 entries = "../Agent/output/startups"
