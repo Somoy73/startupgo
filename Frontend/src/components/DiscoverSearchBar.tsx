@@ -15,22 +15,18 @@ const EXAMPLES = [
 interface DiscoverSearchBarProps {
   query: string;
   filters: SearchFilters;
-  type: "startups" | "eu-projects";
   busy: boolean;
   onSearch: (query: string) => void;
   onFiltersChange: (filters: SearchFilters) => void;
-  onTypeChange: (type: "startups" | "eu-projects") => void;
   onClear: () => void;
 }
 
 export function DiscoverSearchBar({
   query,
   filters,
-  type,
   busy,
   onSearch,
   onFiltersChange,
-  onTypeChange,
   onClear,
 }: DiscoverSearchBarProps) {
   const [draft, setDraft] = useState(query);
@@ -38,8 +34,6 @@ export function DiscoverSearchBar({
   useEffect(() => {
     setDraft(query);
   }, [query]);
-
-  const euProjects = type === "eu-projects";
 
   // Build active filter chips
   const chips = (
@@ -76,19 +70,6 @@ export function DiscoverSearchBar({
 
   return (
     <div className="discover-controls">
-      <div className="discover-mode">
-        <Button
-          type="button"
-          size="sm"
-          variant={euProjects ? "default" : "outline"}
-          className="rounded-full discover-mode-toggle"
-          aria-pressed={euProjects}
-          onClick={() => onTypeChange(euProjects ? "startups" : "eu-projects")}
-        >
-          EU Projects
-        </Button>
-      </div>
-
       <form
         role="search"
         className="search-bar discover-input"
@@ -130,48 +111,46 @@ export function DiscoverSearchBar({
         </Button>
       </form>
 
-      {!euProjects && (
-        <div className="discover-chips" aria-live="polite">
-          {busy ? (
-            <span className="small">Searching…</span>
-          ) : (
-            chips.map((chip) => (
-              <Button
-                key={chip.id}
-                variant="secondary"
-                size="sm"
-                className="rounded-full"
-                onClick={chip.remove}
-                aria-label={`Remove filter ${chip.label}`}
-              >
-                {chip.label}
-                <X />
-              </Button>
-            ))
-          )}
+      <div className="discover-chips" aria-live="polite">
+        {busy ? (
+          <span className="small">Searching…</span>
+        ) : (
+          chips.map((chip) => (
+            <Button
+              key={chip.id}
+              variant="secondary"
+              size="sm"
+              className="rounded-full"
+              onClick={chip.remove}
+              aria-label={`Remove filter ${chip.label}`}
+            >
+              {chip.label}
+              <X />
+            </Button>
+          ))
+        )}
 
-          {!query &&
-            !chips.length &&
-            EXAMPLES.map((example) => (
-              <Button
-                key={example}
-                variant="outline"
-                size="sm"
-                className="rounded-full"
-                onClick={() => {
-                  setDraft(example);
-                  onSearch(example);
-                }}
-              >
-                {example}
-              </Button>
-            ))}
+        {!query &&
+          !chips.length &&
+          EXAMPLES.map((example) => (
+            <Button
+              key={example}
+              variant="outline"
+              size="sm"
+              className="rounded-full"
+              onClick={() => {
+                setDraft(example);
+                onSearch(example);
+              }}
+            >
+              {example}
+            </Button>
+          ))}
 
-          {query && !busy && (
-            <span className="small">Matches for “{query}”</span>
-          )}
-        </div>
-      )}
+        {query && !busy && (
+          <span className="small">Matches for “{query}”</span>
+        )}
+      </div>
     </div>
   );
 }
