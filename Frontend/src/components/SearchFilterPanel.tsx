@@ -27,12 +27,10 @@ export function SearchFilterPanel({ filters, onChange }: Props) {
         onChange={(stages) => set({ stages })}
       />
       <Facet
-        label="Region"
-        options={[...new Set(startups.map((s) => s.region))]
-          .sort()
-          .map((r) => ({ value: r, label: r }))}
-        selected={filters.regions}
-        onChange={(regions) => set({ regions })}
+        label="Country"
+        options={uniqueSorted(startups.map((s) => s.country)).map((c) => ({ value: c, label: c }))}
+        selected={filters.countries}
+        onChange={(countries) => set({ countries })}
       />
       <Facet
         label="Sector"

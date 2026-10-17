@@ -153,7 +153,13 @@ section.card { border-radius: var(--radius-xl); box-shadow: none; background: tr
 .grow { flex: 1; min-width: 0; }
 .level-pill { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--wash); color: var(--primary); font-weight: 800; }
 .chip { display: inline-block; padding: 5px 10px; border-radius: 24px; background: var(--accent); color: var(--accent-foreground); font-size: 10px; font-weight: 800; white-space: nowrap; }
-.band { background: var(--wash); color: var(--primary); }
+/* Chip tones (components/Chip.tsx): one meaning per colour across evidence, fact status and bands. */
+.chip.tone-neutral { background: var(--wash); color: var(--muted-foreground); }
+.chip.tone-info { background: color-mix(in oklch, var(--ocean) 15%, transparent); color: color-mix(in oklch, var(--ocean) 70%, black); }
+.chip.tone-primary { background: color-mix(in oklch, var(--primary) 15%, transparent); color: color-mix(in oklch, var(--primary) 80%, black); }
+.chip.tone-success { background: color-mix(in oklch, var(--success) 15%, transparent); color: color-mix(in oklch, var(--success) 75%, black); }
+.chip.tone-warning { background: color-mix(in oklch, oklch(0.666 0.179 58.318) 16%, transparent); color: oklch(0.47 0.12 58); }
+.chip.tone-danger { background: color-mix(in oklch, var(--destructive) 13%, transparent); color: color-mix(in oklch, var(--destructive) 80%, black); }
 .meter { display: flex; align-items: center; gap: 9px; min-width: 115px; }
 .meter strong { font-size: 13px; }
 progress { width: 100%; min-width: 50px; height: 7px; appearance: none; border: none; border-radius: 12px; overflow: hidden; background: var(--accent); }

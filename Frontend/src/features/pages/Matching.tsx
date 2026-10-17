@@ -15,11 +15,9 @@ export function Matching() {
   const [selected, setSelected] = useState<string | null>(null);
   const [page, setPage] = useState(1);
 
-  // All assessed matches ranked (top 10 for both pages)
-  const allMatches = useMemo(() => {
-    const ranked = rankByReadiness(startups ?? []);
-    return ranked.slice(0, PAGE_SIZE * TOTAL_PAGES);
-  }, [startups]);
+  // Every assessed startup ranked; the radar and list show the top 10 (both pages).
+  const ranked = useMemo(() => rankByReadiness(startups ?? []), [startups]);
+  const allMatches = useMemo(() => ranked.slice(0, PAGE_SIZE * TOTAL_PAGES), [ranked]);
 
   // Handle dot or list item click: selects item & switches page if needed
   const toggle = (slug: string) => {
@@ -42,6 +40,8 @@ export function Matching() {
   }, [allMatches, page]);
 
   const picked = allMatches.find((m) => m.startup.slug === selected) ?? null;
+  // Similar startups come from every ranked startup, not only the top 10.
+  const similar = picked ? similarStartups(picked, ranked) : [];
 
   return (
     <>

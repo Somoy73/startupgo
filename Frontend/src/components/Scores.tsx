@@ -1,5 +1,6 @@
+import { BAND_TONES, Chip } from "./Chip";
 export function BandBadge({ band }: { band: string }) {
-  return <span className="chip band">{band}</span>;
+  return <Chip tone={BAND_TONES[band] ?? "neutral"}>{band}</Chip>;
 }
 export function LevelPill({ level, label }: { level: number; label: string }) {
   return (
