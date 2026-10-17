@@ -57,6 +57,38 @@ Entries are saved to `output/startups/<id>.json` and listed in `output/index.jso
 printed one line per startup; add `--json` for the full workflow state. Leads without a website,
 search failures and other problems are reported but never stop the run.
 
+## Pipeline and database
+
+`startup-agent pipeline` is the agent's part of the StartupGo pipeline (`startup_agent/pipeline.py`):
+
+```
+candidates   database startups with a website and no agent entry younger than [pipeline] max_age_days,
+             then leads from the [pipeline] discover sources (Wellfound, ...) that aren't in the database
+research     per candidate: the workflow above (research → judge → evaluation → judge)
+store        output/startups/<id>.json, and, if the judge accepted it, the database ([database] path)
+```
+
+```bash
+uv run startup-agent pipeline --dry-run          # which startups would be researched
+uv run startup-agent pipeline                    # research [pipeline] limit of them
+uv run startup-agent pipeline --slug notpla      # one database startup
+```
+
+`graph` stores accepted entries in the database too. What an entry becomes (`startup_agent/database.py`):
+
+| Table | From the entry |
+|---|---|
+| `startups` | found by slug or website domain, else created; an existing startup's fields are only filled in when blank (`Unknown`, empty) |
+| `readiness_assessments` | a dated snapshot by "StartupGo agent": TRL and BRL from the scores, CRL, IPRL, TMRL and FRL from the facts by code (`kth.py`). A dimension with no evidence is stored as 1 and the rationale lists it |
+| `startup_ocean_kpis` | Ocean Impact Navigator KPI evidence: section E facts matched to the 30 KPIs by keyword (`navigator.py`), claimed 1, independently stated 2, measured 3, verified 4. A level already stored is never lowered |
+| `funding_rounds` | equity rounds and grants not stored yet |
+| `sources`, `agent_entries` | the pages the facts came from; the entry behind the assessment (judge status, investment score) |
+
+Only `accepted` and `accepted_with_issues` entries are stored, and saving the same entry twice changes
+nothing. `STARTUPGO_DB` overrides the database path. The database needs the `agent_entries` table: the
+Backend adds it on start, `refresh.py` on every run. The Backend runs the same research for one startup as
+a job (`POST /api/research`), and `refresh.py`'s `agent` step (full tier) runs `pipeline` on the runtime DB.
+
 ### Searching the entries
 
 The Backend's natural-language search is the `Search` module (`Modules/Search`, LightRAG). Its

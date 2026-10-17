@@ -72,6 +72,13 @@ class SearchSettings:
 
 
 @dataclass(frozen=True, slots=True)
+class PipelineSettings:
+    limit: int  # startups researched per pipeline run
+    max_age_days: int  # an agent entry older than this is researched again
+    discover: tuple[dict[str, Any], ...]  # discovery sources: {source, url, query, location, limit}
+
+
+@dataclass(frozen=True, slots=True)
 class AgentSettings:
     root: Path
     llm: LLMSettings
@@ -80,6 +87,8 @@ class AgentSettings:
     judge: JudgeSettings
     browser: BrowserSettings
     weights: dict[str, float]
+    pipeline: PipelineSettings
+    database: Path | None  # judge-approved entries are stored here; None = JSON files only
     cache_dir: Path
     output_dir: Path
     system_prompt: Path
@@ -102,6 +111,8 @@ class AgentSettings:
         judge: dict[str, Any] = data.get("judge", {})
         judge_defaults = JudgeSettings()
         paths: dict[str, Any] = data.get("paths", {})
+        database: dict[str, Any] = data.get("database", {})
+        pipeline: dict[str, Any] = data.get("pipeline", {})
         weights = {**DEFAULT_WEIGHTS, **{k: float(v) for k, v in data.get("weights", {}).items()}}
         if unknown := set(weights) - set(DEFAULT_WEIGHTS):
             raise AgentError(f"unknown [weights] criteria: {', '.join(sorted(unknown))}")
@@ -144,12 +155,29 @@ class AgentSettings:
             ),
             browser=BrowserSettings.from_mapping(data.get("browser", {})),
             weights=weights,
+            pipeline=PipelineSettings(
+                limit=int(pipeline.get("limit", 5)),
+                max_age_days=int(pipeline.get("max_age_days", 30)),
+                discover=tuple(_discover_source(d) for d in pipeline.get("discover", [])),
+            ),
+            # The Backend's STARTUPGO_DB override applies here too, so all modules use the same database.
+            database=(Path(os.environ.get("STARTUPGO_DB") or root / database.get("path", "../../DB/startupgo.db"))
+                      if database.get("store", True) else None),
             cache_dir=root / paths.get("cache_dir", "cache"),
             output_dir=root / paths.get("output_dir", "output"),
             system_prompt=root / paths.get("system_prompt", "prompts/system.md"),
             section_prompt=root / paths.get("section_prompt", "prompts/section.md"),
             judge_prompt=root / paths.get("judge_prompt", "prompts/judge.md"),
         )
+
+
+def _discover_source(source: Any) -> dict[str, Any]:
+    if not isinstance(source, dict) or not (source.get("url") or source.get("query")):
+        raise AgentError(f"[pipeline] discover entries need a url or a query, got {source!r}")
+    if (name := source.get("source", "wellfound")) not in ("wellfound", "generic", "osm"):
+        raise AgentError(f"[pipeline] discover source must be wellfound, generic or osm, got {name!r}")
+    return {"source": name, "url": source.get("url"), "query": source.get("query"),
+            "location": str(source.get("location", "")), "limit": int(source.get("limit", 10))}
 
 
 def _section_groups(groups: Any) -> tuple[tuple[str, ...], ...]:

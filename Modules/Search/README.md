@@ -30,6 +30,21 @@ await search.close()                                    # on shutdown
 | `matched` | knowledge-graph entities that led to it, e.g. `("Seaweed", "Packaging")` |
 | `documents` | the matched documents, e.g. `("startup:notpla", "entry:notpla-com")` |
 
+For matching, two N-hop subgraphs of the knowledge graph (`startup_search/graph.py`):
+
+```python
+graph = await search.startup_graph("notpla", hops=2, max_nodes=150)      # around a database startup
+graph = await search.thesis_graph("kelp carbon removal", hops=1, seeds=10)  # around what a thesis retrieves
+```
+
+A `Subgraph` has `seeds`, `nodes` (entity, type, description, `hop` from the nearest seed, the startups it
+was extracted from), `edges` (relations among the nodes) and `startups`: the `StartupMatch`es the subgraph
+reaches, each scoring 1 / (hop + 1) per entity, so shared seeds count most. A startup's seed is its own
+entity (else every entity from its documents) and it is left out of its own `startups`. A thesis is seeded
+with the entities the search's retrieval returns for it. The walk keeps the best-connected entities of the
+last level when `max_nodes` cuts it (`truncated`). It reads the graph storage through LightRAG's batch
+methods only, so it works on any graph storage.
+
 The storage opens on the first search, so the Backend starts without a key or processed storage.
 After `process-storage` writes new storage, the next search loads it; no restart is needed. Errors are
 `SearchUnavailable` (no key, nothing processed yet; the Backend answers 503) and `SearchError`

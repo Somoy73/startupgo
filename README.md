@@ -19,10 +19,30 @@ DB/         SQL: schema.sql + seed.sql (SQLite in dev, written to port to Postgr
 Modules/    uv workspace (one uv.lock, one .venv) for the Python modules below
   Scraper/  Python: public page fetching (HTTP or stealth Chrome) and startup discovery (Wellfound, OSM, generic)
   Agent/    Python: builds evidence-backed startup entries per the Ocean Opportunity Radar extraction
-            schema (facts → TRL/BRL/OIR, investment criteria, next steps). See Modules/Agent/README.md
+            schema (facts → TRL/BRL/OIR, investment criteria, next steps); stores judge-approved entries
+            in the DB; `startup-agent pipeline` researches startups still to assess. See Modules/Agent/README.md
   Search/   Python: natural-language startup search with LightRAG and NVIDIA models; process-storage
-            turns the DB + agent entries into its vector and graph storage. See Modules/Search/README.md
+            turns the DB + agent entries into its vector and graph storage; N-hop graphs for matching.
+            See Modules/Search/README.md
+  DataAPIs/ Python: public API scrapers and refresh.py, the whole data pipeline as one command
 ```
+
+## Pipeline
+
+```
+DataAPIs: registries, patents, funding, people, jobs ─┐
+Scraper: Wellfound, directories (discovered leads)   ─┴→ candidates: name + website + info
+  → Agent: research → judge → evaluation → judge        (startup-agent pipeline)
+  → DB: startups, readiness_assessments (all six KTH levels), ocean KPIs, funding rounds, sources, agent_entries
+  → process-storage: LightRAG knowledge graph + vectors
+  → Backend: search (+ filters) · assess (+ research jobs) · match (N-hop graph)
+```
+
+- **Run it all:** `cd Modules/DataAPIs && uv run python refresh.py run --tier full` (sources → `agent` → `features`, `gaps` →
+  `search_index`), or only the agent and the index: `refresh.py run --steps agent,search_index`. Both write the runtime DB.
+- **Agent only:** `cd Modules/Agent && uv run startup-agent pipeline` (`--dry-run` lists the candidates first).
+- **One startup from the API:** `POST /api/research` queues a job for a startup without a score; the new assessment is in the
+  database when it finishes. A startup that already has a score isn't researched (409).
 
 ## Features
 
@@ -84,7 +104,12 @@ cd Modules/Search && uv run pytest            # search: documents, process-stora
 | Method | Path | Purpose |
 |--------|------|---------|
 | GET | `/api/startups` | List with scores. Filters: `q`, `sector`, `country`, `stage`, `pipeline_stage`, `impact_area` (A–F), `min_trl`, `min_brl`, `min_potential`. Sort: `potential`, `readiness`, `ocean`, `momentum`, `trl`, `brl`, `name` |
-| POST | `/api/startups/search` | Natural-language search, e.g. `{"query": "seaweed packaging replacing plastic"}`: database startups (`results`, with `relevance` and the `matched` graph entities) and agent-only entries (`entries`). 503 until `process-storage` has run |
+| POST | `/api/startups/search` | Natural-language search, e.g. `{"query": "seaweed packaging replacing plastic", "filters": {"min_trl": 5, "impact_area": "B"}}`: database startups (`results`, with `relevance` and the `matched` graph entities) and agent-only entries (`entries`). `filters` (optional) takes the `GET /api/startups` filters. 503 until `process-storage` has run |
+| GET | `/api/startups/{slug}/graph` | Matching: the knowledge graph within `hops` (0–3, default 2) of the startup (`nodes`, `edges`) and the startups it reaches, most shared entities first |
+| POST | `/api/match/graph` | Matching from a thesis: `{"thesis": "kelp carbon removal", "hops": 1, "filters": {...}}` seeds the graph with the entities the thesis retrieves |
+| POST | `/api/research` | Queue the agent on `{"slug": ...}` or a new `{"name", "website"}` (optional `business_id`, `urls`). 202 with the job; 409 if the startup (by slug or website domain) already has a score |
+| GET | `/api/research/{id}` | Job status (`queued`, `running`, `done`, `error`) and result: scores, judge review, whether it was stored |
+| GET | `/api/startups/{slug}/research` | Whether the agent has assessed the startup, and its latest job |
 | POST | `/api/startups` | Create a startup with its first assessment (and optional funding round) |
 | GET | `/api/startups/{slug}` | Profile: level text, ocean KPIs, funding rounds, sources, notes |
 | POST | `/api/startups/{slug}/assessments` | Add a dated readiness + ocean-impact assessment |

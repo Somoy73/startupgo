@@ -20,7 +20,7 @@ from __future__ import annotations
 import operator
 from typing import Annotated, Any, Literal, TypedDict
 
-from .agent import StartupAgent
+from .agent import StartupAgent, lead_document, lead_from_summary
 from .errors import AgentError
 from .judge import Judge, ResearchFeedback
 from .record import StartupRecord, rank_key
@@ -35,6 +35,7 @@ class AgentState(TypedDict, total=False):
     website: str
     business_id: str | None
     extra_urls: list[str]
+    lead: dict[str, Any] | None  # discovery listing behind name + website (tagline, description, ...)
     source: str  # discovery source: wellfound, generic, osm
     discover_url: str | None
     query: str | None
@@ -73,11 +74,14 @@ def build_agent_graph(agent: StartupAgent, *, judge: Judge | None = None, weight
             return {**_redo_research(state["records"], feedback), "research_round": round_, "feedback": {}}
         try:
             if state.get("name") and state.get("website"):
+                lead = lead_from_summary(state["name"], state.get("lead"))
                 record = agent.profile(
                     name=state["name"],
                     website=state["website"],
                     business_id=state.get("business_id"),
                     extra_urls=state.get("extra_urls", []),
+                    seed_documents=[lead_document(lead, agent.today)] if lead else (),
+                    lead=state.get("lead"),
                 )
                 return {"records": [record.to_dict(weights=weights)], "research_round": round_}
             leads = agent.discover(

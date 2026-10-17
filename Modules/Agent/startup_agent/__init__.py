@@ -2,10 +2,12 @@
 
 from .agent import StartupAgent
 from .config import AgentSettings
+from .database import Candidate, StartupDatabase
 from .errors import AgentError
 from .factory import build_agent, build_judge
 from .graph import AgentState, build_agent_graph
 from .judge import Judge, JudgeSettings
+from .pipeline import ResearchPipeline
 from .record import StartupRecord, record_json_schema
 from .scoring import score_all
 
@@ -13,8 +15,11 @@ __all__ = [
     "AgentError",
     "AgentSettings",
     "AgentState",
+    "Candidate",
     "Judge",
     "JudgeSettings",
+    "ResearchPipeline",
+    "StartupDatabase",
     "StartupAgent",
     "StartupRecord",
     "build_agent",

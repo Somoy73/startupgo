@@ -52,8 +52,25 @@ class StartupSummary(BaseModel):
     last_round_on: str | None
 
 
+class SearchFilters(BaseModel):
+    """Structured filters applied to search and match results (same meaning as GET /api/startups).
+
+    Agent-only entries have no profile, so only min_trl / min_brl apply to them; any other filter leaves them out.
+    """
+
+    sector: str | None = None
+    country: str | None = None
+    stage: str | None = None
+    pipeline_stage: PipelineStage | None = None
+    impact_area: str | None = Field(default=None, pattern=r"^[A-F]$")
+    min_trl: int | None = Field(default=None, ge=1, le=9)
+    min_brl: int | None = Field(default=None, ge=1, le=9)
+    min_potential: float | None = Field(default=None, ge=0, le=100)
+
+
 class NaturalLanguageSearchRequest(BaseModel):
     query: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=500)]
+    filters: SearchFilters = Field(default_factory=SearchFilters)
 
 
 class SearchMatch(StartupSummary):
@@ -364,3 +381,98 @@ class ExternalPeer(BaseModel):
     trl: int | None
     sector: str | None
     url: str | None
+
+
+# ---------------------------------------------------------------------------
+# Agent research jobs (app/research.py, Modules/Agent)
+# ---------------------------------------------------------------------------
+
+JobStatus = Literal["queued", "running", "done", "error"]
+
+
+class ResearchRequest(BaseModel):
+    """Research a database startup (slug) or a new one (name + website); urls are extra pages to read."""
+
+    slug: str | None = None
+    name: str | None = Field(default=None, min_length=1, max_length=120)
+    website: str | None = Field(default=None, pattern=r"^https?://\S+$", max_length=300)
+    business_id: str | None = Field(default=None, max_length=40)
+    urls: list[Annotated[str, StringConstraints(pattern=r"^https?://\S+$", max_length=500)]] = Field(default_factory=list, max_length=5)
+
+    @model_validator(mode="after")
+    def _target(self) -> "ResearchRequest":
+        if not self.slug and not (self.name and self.website):
+            raise ValueError("give a slug, or a name and a website")
+        return self
+
+
+class ResearchJob(BaseModel):
+    id: int
+    status: JobStatus
+    name: str
+    website: str
+    slug: str | None  # the startup, once known (a new startup gets one when the judge accepts it)
+    business_id: str | None
+    urls: list[str]
+    created_at: str
+    started_at: str | None
+    finished_at: str | None
+    result: dict | None  # scores, judge review and whether it was stored
+    error: str | None
+
+
+class AgentEntryInfo(BaseModel):
+    """The judge-approved agent entry behind a startup's agent assessment."""
+
+    entry_id: str
+    generated_at: str
+    stored_at: str
+    review_status: str | None
+    open_issues: int
+    investment_score: float | None  # agent's 1-5 score
+    overall_confidence: float | None
+
+
+class StartupResearch(BaseModel):
+    slug: str
+    has_agent_assessment: bool
+    agent: AgentEntryInfo | None
+    job: ResearchJob | None  # latest research job
+
+
+# ---------------------------------------------------------------------------
+# Matching graph: N-hop subgraphs of the search's knowledge graph (Modules/Search graph.py)
+# ---------------------------------------------------------------------------
+
+
+class GraphNodeOut(BaseModel):
+    id: str  # entity name
+    type: str | None
+    description: str
+    hop: int
+    startups: list[str]  # "startup:<slug>" or "entry:<agent entry id>"
+
+
+class GraphEdgeOut(BaseModel):
+    source: str
+    target: str
+    keywords: str
+    description: str
+    weight: float
+
+
+class GraphResponse(BaseModel):
+    seeds: list[str]
+    nodes: list[GraphNodeOut]
+    edges: list[GraphEdgeOut]
+    truncated: bool
+    results: list[SearchMatch]  # database startups the graph reaches, best first
+    entries: list[AgentEntryMatch]
+
+
+class ThesisGraphRequest(BaseModel):
+    thesis: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=1000)]
+    hops: int = Field(default=1, ge=0, le=3)
+    max_nodes: int = Field(default=150, ge=1, le=500)
+    seeds: int = Field(default=10, ge=1, le=40)
+    filters: SearchFilters = Field(default_factory=SearchFilters)

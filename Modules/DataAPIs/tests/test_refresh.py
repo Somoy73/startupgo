@@ -136,7 +136,8 @@ def test_generated_configs_change_only_paths(dbs, tmp_path, monkeypatch):
     agent, search = (tomllib.loads(out[k].read_text()) for k in ("agent", "search"))
     orig_agent = tomllib.loads((refresh.AGENT_DIR / "config.toml").read_text())
     orig_search = tomllib.loads((refresh.SEARCH_DIR / "config.toml").read_text())
-    assert {k: v for k, v in agent.items() if k != "paths"} == {k: v for k, v in orig_agent.items() if k != "paths"}
+    assert {k: v for k, v in agent.items() if k not in ("paths", "database")} == {k: v for k, v in orig_agent.items() if k not in ("paths", "database")}
+    assert agent["database"] == {**orig_agent.get("database", {}), "path": str(dbs[1].resolve())}
     assert all(Path(v).is_absolute() for v in agent["paths"].values())
     assert agent["paths"]["output_dir"].startswith(str((tmp_path / "rt").resolve()))
     assert Path(agent["paths"]["system_prompt"]).exists()
