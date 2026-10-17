@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "documents": {
+    "startup:clearbot": {
+      "digest": "ae2ee03a9a2ae97220faa194329fff61780e069a9ac75872ba1f1a7dd21a45b2",
+      "name": "Clearbot",
+      "website": null,
+      "startup": "clearbot",
+      "entry": null,
+      "info": {
+        "tagline": "Autonomous electric boats that collect floating waste",
+        "sector": "Ocean cleanup",
+        "country": "Hong Kong",
+        "city": "Hong Kong",
+        "stage": "seed"
+      }
+    },
+    "startup:kelp-blue": {
+      "digest": "9736296c4110656a95462e935f13170506429fb302378ec75a6082f23b3648bd",
+      "name": "Kelp Blue",
+      "website": "https://kelp.blue",
+      "startup": "kelp-blue",
+      "entry": null,
+      "info": {
+        "tagline": "Giant kelp forests for carbon, biodiversity and biostimulants",
+        "sector": "Aquaculture",
+        "country": "Namibia",
+        "city": "Lüderitz",
+        "stage": "project-finance"
+      }
+    },
+    "startup:notpla": {
+      "digest": "afba88903319ff4ddea33cfeb2674e9baed3d057e88d6eaede3990ec73285fa2",
+      "name": "Notpla",
+      "website": "https://www.notpla.com",
+      "startup": "notpla",
+      "entry": null,
+      "info": {
+        "tagline": "Seaweed-based packaging that replaces single-use plastic",
+        "sector": "Materials & packaging",
+        "country": "United Kingdom",
+        "city": "London",
+        "stage": "series-a"
+      }
+    },
+    "startup:ocean-rainforest": {
+      "digest": "6628ce0a0075606235333a7acdeaf1975ed98033b05cb30234269c0262b3e695",
+      "name": "Ocean Rainforest",
+      "website": "https://www.oceanrainforest.com",
+      "startup": "ocean-rainforest",
+      "entry": null,
+      "info": {
+        "tagline": "Offshore seaweed cultivation at scale",
+        "sector": "Aquaculture",
+        "country": "Faroe Islands",
+        "city": "Faroe Islands",
+        "stage": "series-a"
+      }
+    },
+    "startup:seaforester": {
+      "digest": "09b170449036e87ecbff4249aadbc5e8e5e4626554174eca9cb73b47adcb6a1e",
+      "name": "SeaForester",
+      "website": null,
+      "startup": "seaforester",
+      "entry": null,
+      "info": {
+        "tagline": "Restoring marine forests",
+        "sector": "Habitat restoration",
+        "country": "Portugal",
+        "city": "Lisbon",
+        "stage": "seed"
+      }
+    },
+    "startup:sofar-ocean": {
+      "digest": "439c580c7cabef94e0df7a303d7c91d316e3a34a1d8a8c87dac11843b640822c",
+      "name": "Sofar Ocean",
+      "website": "https://www.sofarocean.com",
+      "startup": "sofar-ocean",
+      "entry": null,
+      "info": {
+        "tagline": "Real-time ocean data from a global network of Spotter buoys",
+        "sector": "Ocean data",
+        "country": "United States",
+        "city": "San Francisco",
+        "stage": "series-b"
+      }
+    }
+  }
+}

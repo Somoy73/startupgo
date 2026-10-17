@@ -1,0 +1,97 @@
+{
+  "startup:notpla": {
+    "entity_names": [
+      "London",
+      "Notpla",
+      "Seaweed-based packaging",
+      "UB Forest Industry Green Growth Fund",
+      "United Kingdom",
+      "single-use plastic"
+    ],
+    "count": 6,
+    "create_time": 1792196856,
+    "update_time": 1792196856,
+    "_id": "startup:notpla"
+  },
+  "startup:kelp-blue": {
+    "entity_names": [
+      "Carbon Fund Managers",
+      "Carbon capture",
+      "Carbon sequestered",
+      "Climate Fund Managers",
+      "Eos Capital",
+      "Funding",
+      "Jobs created",
+      "Kelp Blue",
+      "Kelp forest habitat",
+      "Lüderitz",
+      "Namibia",
+      "Number of jobs created",
+      "The Brief",
+      "The Fish Site",
+      "Thriving and restored marine habitats",
+      "Zayed Sustainability Prize",
+      "blue bond",
+      "project-finance"
+    ],
+    "count": 18,
+    "create_time": 1792196873,
+    "update_time": 1792196873,
+    "_id": "startup:kelp-blue"
+  },
+  "startup:clearbot": {
+    "entity_names": [
+      "Clearbot",
+      "Clearbot Autonomous Electric Boats",
+      "University of Hong Kong"
+    ],
+    "count": 3,
+    "create_time": 1792197014,
+    "update_time": 1792197014,
+    "_id": "startup:clearbot"
+  },
+  "startup:ocean-rainforest": {
+    "entity_names": [
+      "Builders Vision",
+      "Carbon sequestered",
+      "Deep Blue fund",
+      "Enhanced food security",
+      "Faroe Islands",
+      "Katapult Ocean",
+      "Ocean Born Foundation",
+      "Ocean Rainforest",
+      "Offshore",
+      "Seaweed",
+      "Seaweed cultivation",
+      "Sustainably managed ocean resources",
+      "The Grantham Foundation",
+      "WWF-US"
+    ],
+    "count": 14,
+    "create_time": 1792197130,
+    "update_time": 1792197130,
+    "_id": "startup:ocean-rainforest"
+  },
+  "startup:seaforester": {
+    "entity_names": [
+      "Lisbon",
+      "Schmidt Marine Technology Partners",
+      "SeaForester",
+      "WWF"
+    ],
+    "count": 4,
+    "create_time": 1792197335,
+    "update_time": 1792197335,
+    "_id": "startup:seaforester"
+  },
+  "startup:sofar-ocean": {
+    "entity_names": [
+      "Sofar Ocean",
+      "Union Square Ventures"
+    ],
+    "count": 2,
+    "create_time": 1792197382,
+    "update_time": 1792197382,
+    "_id": "startup:sofar-ocean"
+  }
+}
