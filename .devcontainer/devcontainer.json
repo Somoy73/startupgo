@@ -1,0 +1,39 @@
+{
+  "name": "Startupgo",
+  "image": "mcr.microsoft.com/devcontainers/base:resolute",
+  "features": {
+    "ghcr.io/devcontainers/features/node:2": {},
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "csharpier.csharpier-vscode",
+        "anthropic.claude-code",
+        "christian-kohler.npm-intellisense",
+        "christian-kohler.path-intellisense",
+        "davidanson.vscode-markdownlint",
+        "eamodio.gitlens",
+        "ecmel.vscode-html-css",
+        "editorconfig.editorconfig",
+        "esbenp.prettier-vscode",
+        "eshojaei.mbake-makefile-formatter",
+        "formulahendry.auto-complete-tag",
+        "pkief.material-icon-theme",
+        "redhat.vscode-xml",
+        "redhat.vscode-yaml",
+        "voldemortensen.rainbow-tags"
+      ]
+    }
+  },
+  "forwardPorts": [5173, 8000],
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=claude-code-config-startupgo,target=/home/vscode/.claude,type=volume"
+  ],
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+  }
+}

@@ -12,11 +12,20 @@ export function score(value: number): string {
   return Math.round(value).toString();
 }
 
-export function titleCase(slug: string): string {
-  return slug
-    .split("-")
-    .map((w) => (w.length <= 2 ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
-    .join(" ");
+const STAGE_LABELS: Record<string, string> = {
+  "pre-seed": "Pre-seed",
+  seed: "Seed",
+  "series-a": "Series A",
+  "series-b": "Series B",
+  "series-c+": "Series C+",
+  growth: "Growth",
+  "project-finance": "Project finance",
+  grant: "Grant",
+};
+
+/** Human label for a funding stage or round type slug, e.g. "series-a" → "Series A". */
+export function stageLabel(slug: string): string {
+  return STAGE_LABELS[slug] ?? slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, " ");
 }
 
 export function partialDate(value: string | null): string {

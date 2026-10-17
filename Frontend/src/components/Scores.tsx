@@ -4,7 +4,15 @@ import { score } from "../lib/format";
 export function Meter({ value, label, showValue = true }: { value: number; label: string; showValue?: boolean }) {
   const pct = Math.max(0, Math.min(100, value));
   return (
-    <div className="meter" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pct)} aria-label={label} title={`${label}: ${score(value)} / 100`}>
+    <div
+      className="meter"
+      role="meter"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(pct)}
+      aria-label={label}
+      title={`${label}: ${score(value)} / 100`}
+    >
       <div className="meter-track">
         <div className="meter-fill" style={{ width: `${pct}%` }} />
       </div>

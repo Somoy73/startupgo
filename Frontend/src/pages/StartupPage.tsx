@@ -6,11 +6,13 @@ import { IconAlert, IconBack, IconExternal } from "../components/Icons";
 import { OceanImpact } from "../components/OceanImpact";
 import { ReadinessProfile } from "../components/ReadinessProfile";
 import { BandBadge, Meter } from "../components/Scores";
-import { compactMoney, partialDate, PIPELINE_LABELS, score, titleCase } from "../lib/format";
+import { compactMoney, partialDate, PIPELINE_LABELS, score, stageLabel } from "../lib/format";
 import { useAsync } from "../lib/useAsync";
+import { useAppData } from "../state/AppData";
 
 export function StartupPage() {
   const { slug = "" } = useParams();
+  const { upsertStartup } = useAppData();
   const { data: s, error, loading, setData } = useAsync(() => api.startup(slug), [slug]);
   const [note, setNote] = useState("");
   const [saving, setSaving] = useState(false);
@@ -22,7 +24,7 @@ export function StartupPage() {
   const changeStage = async (stage: PipelineStage) => {
     setActionError(null);
     try {
-      await api.setPipeline(s.slug, stage);
+      upsertStartup(await api.setPipeline(s.slug, stage));
       setData({ ...s, pipeline_stage: stage });
     } catch (e) {
       setActionError((e as Error).message);
@@ -49,7 +51,9 @@ export function StartupPage() {
 
   return (
     <>
-      <Link to="/" className="back"><IconBack /> Deal flow</Link>
+      <Link to="/" className="back">
+        <IconBack /> Deal flow
+      </Link>
       <div className="page-head">
         <div>
           <div className="row-gap" style={{ marginBottom: 6 }}>
@@ -59,33 +63,52 @@ export function StartupPage() {
           <p>{s.tagline}</p>
           <p className="small muted" style={{ marginTop: 6 }}>
             {s.sector} · {[s.city, s.country].filter((x, i, a) => x && a.indexOf(x) === i).join(", ")}
-            {s.founded_year && ` · Founded ${s.founded_year}`} · {titleCase(s.stage)}
+            {s.founded_year && ` · Founded ${s.founded_year}`} · {stageLabel(s.stage)}
             {s.website && (
               <>
                 {" · "}
-                <a href={s.website} target="_blank" rel="noreferrer">Website <IconExternal /></a>
+                <a href={s.website} target="_blank" rel="noreferrer">
+                  Website <IconExternal />
+                </a>
               </>
             )}
           </p>
         </div>
-        <div className="field">
-          <label htmlFor="stage">Pipeline stage</label>
-          <select id="stage" className="select" value={s.pipeline_stage} onChange={(e) => changeStage(e.target.value as PipelineStage)}>
-            {PIPELINE_STAGES.map((p) => (
-              <option key={p} value={p}>{PIPELINE_LABELS[p]}</option>
-            ))}
-          </select>
+        <div className="row-gap" style={{ alignItems: "flex-end" }}>
+          <Link to={`/assess/${s.slug}`} className="btn">
+            Re-assess
+          </Link>
+          <div className="field">
+            <label htmlFor="stage">Pipeline stage</label>
+            <select
+              id="stage"
+              className="select"
+              value={s.pipeline_stage}
+              onChange={(e) => changeStage(e.target.value as PipelineStage)}
+            >
+              {PIPELINE_STAGES.map((p) => (
+                <option key={p} value={p}>
+                  {PIPELINE_LABELS[p]}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
-      {actionError && <p className="error small" style={{ marginBottom: 12 }}>{actionError}</p>}
+      {actionError && (
+        <p className="error small" style={{ marginBottom: 12 }}>
+          {actionError}
+        </p>
+      )}
 
       {readiness.confidence === "low" && (
         <div className="notice">
           <IconAlert />
           <span>
-            Readiness and impact-evidence levels are a <strong>{readiness.assessor}</strong> ({partialDate(readiness.assessed_on)}, confidence: low)
-            built from public sources. Validate with the founders before relying on them.
+            Readiness and impact-evidence levels are a <strong>{readiness.assessor}</strong> (
+            {partialDate(readiness.assessed_on)}, confidence: low) built from public sources. Validate with the founders
+            before relying on them.
           </span>
         </div>
       )}
@@ -102,7 +125,9 @@ export function StartupPage() {
           <span className="label">Readiness index (KTH IRL)</span>
           <span className="value">{score(scores.readiness)}</span>
           <Meter value={scores.readiness} label="Readiness index" showValue={false} />
-          <span className="sub">TRL {readiness.trl} · BRL {readiness.brl} · spread {scores.readiness_spread}</span>
+          <span className="sub">
+            TRL {readiness.trl} · BRL {readiness.brl} · spread {scores.readiness_spread}
+          </span>
         </div>
         <div className="card stat">
           <span className="label">Ocean impact readiness</span>
@@ -128,11 +153,17 @@ export function StartupPage() {
               <span className="small muted">KTH Innovation Readiness Level, 1–9</span>
             </div>
             <ReadinessProfile levels={s.levels} lagging={scores.lagging_dimensions} />
-            {readiness.rationale && <p className="small secondary" style={{ marginTop: 14 }}>{readiness.rationale}</p>}
+            {readiness.rationale && (
+              <p className="small secondary" style={{ marginTop: 14 }}>
+                {readiness.rationale}
+              </p>
+            )}
           </section>
 
           <section className="card card-pad">
-            <div className="card-head"><h2>About</h2></div>
+            <div className="card-head">
+              <h2>About</h2>
+            </div>
             <p className="secondary">{s.description}</p>
           </section>
 
@@ -144,19 +175,31 @@ export function StartupPage() {
             <div className="table-wrap">
               <table className="data">
                 <thead>
-                  <tr><th>Round</th><th>Date</th><th className="num">Amount</th><th>Lead</th></tr>
+                  <tr>
+                    <th>Round</th>
+                    <th>Date</th>
+                    <th className="num">Amount</th>
+                    <th>Lead</th>
+                  </tr>
                 </thead>
                 <tbody>
                   {s.funding_rounds.map((r, i) => (
                     <tr key={i}>
                       <td>
-                        {titleCase(r.round_type)}
+                        {stageLabel(r.round_type)}
                         {r.source_url && (
-                          <> <a href={r.source_url} target="_blank" rel="noreferrer" aria-label="Source"><IconExternal /></a></>
+                          <>
+                            {" "}
+                            <a href={r.source_url} target="_blank" rel="noreferrer" aria-label="Source">
+                              <IconExternal />
+                            </a>
+                          </>
                         )}
                       </td>
                       <td className="tabular">{partialDate(r.announced_on)}</td>
-                      <td className="num">{r.amount != null && r.currency ? compactMoney(r.amount, r.currency) : "Undisclosed"}</td>
+                      <td className="num">
+                        {r.amount != null && r.currency ? compactMoney(r.amount, r.currency) : "Undisclosed"}
+                      </td>
                       <td className="small secondary">
                         {r.lead_investors}
                         {r.notes && <div className="muted">{r.notes}</div>}
@@ -179,12 +222,24 @@ export function StartupPage() {
           </section>
 
           <section className="card card-pad">
-            <div className="card-head"><h2>Analyst notes</h2></div>
+            <div className="card-head">
+              <h2>Analyst notes</h2>
+            </div>
             <form onSubmit={submitNote} className="stack" style={{ gap: 8, marginBottom: 14 }}>
-              <label className="visually-hidden" htmlFor="note">New note</label>
-              <textarea id="note" className="textarea" placeholder="Add a diligence note…" value={note} onChange={(e) => setNote(e.target.value)} />
+              <label className="visually-hidden" htmlFor="note">
+                New note
+              </label>
+              <textarea
+                id="note"
+                className="textarea"
+                placeholder="Add a diligence note…"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+              />
               <div>
-                <button className="btn btn-primary" disabled={saving || !note.trim()}>{saving ? "Saving…" : "Add note"}</button>
+                <button className="btn btn-primary" disabled={saving || !note.trim()}>
+                  {saving ? "Saving…" : "Add note"}
+                </button>
               </div>
             </form>
             <div className="notes">
@@ -192,17 +247,25 @@ export function StartupPage() {
               {s.notes.map((n) => (
                 <div className="note" key={n.id}>
                   <p>{n.body}</p>
-                  <span className="small muted">{n.author} · {new Date(n.created_at + "Z").toLocaleString()}</span>
+                  <span className="small muted">
+                    {n.author} · {new Date(n.created_at + "Z").toLocaleString()}
+                  </span>
                 </div>
               ))}
             </div>
           </section>
 
           <section className="card card-pad">
-            <div className="card-head"><h2>Sources</h2></div>
+            <div className="card-head">
+              <h2>Sources</h2>
+            </div>
             <ul style={{ margin: 0, paddingLeft: 18 }}>
               {s.sources.map((src) => (
-                <li key={src.url}><a href={src.url} target="_blank" rel="noreferrer">{src.title}</a></li>
+                <li key={src.url}>
+                  <a href={src.url} target="_blank" rel="noreferrer">
+                    {src.title}
+                  </a>
+                </li>
               ))}
             </ul>
           </section>

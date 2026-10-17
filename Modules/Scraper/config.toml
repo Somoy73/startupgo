@@ -1,0 +1,17 @@
+# Runtime configuration for the StartupGo scraper (page fetching and discovery).
+# Command-line flags override these values. AI settings live in ../Agent/config.toml.
+
+[scraper]
+timeout = 30.0
+delay = 1.5                  # minimum seconds between requests
+browser = true               # render pages with Chrome; options below
+
+# Chrome options, used when [scraper] browser = true.
+[browser]
+driver = "undetected"        # "undetected" (undetected-chromedriver) or "selenium"
+stealth = true               # apply selenium-stealth fingerprint masking
+headless = true
+chrome_version = 0           # 0 = auto-detect; set your Chrome major version if the driver mismatches
+settle_seconds = 2.0         # extra wait after page load for client-side rendering
+user_data_dir = ""           # optional persistent Chrome profile directory
+virtual_display = false      # Linux only: headed Chrome inside Xvfb

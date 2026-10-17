@@ -1,0 +1,31 @@
+[project]
+name = "startup-agent"
+version = "0.1.0"
+description = "Schema-driven startup fact extraction, scoring and next-step agent for StartupGo"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "google-genai>=2.31.0",
+    "langgraph>=0.6.0",
+    "scraper",
+]
+
+[project.scripts]
+startup-agent = "startup_agent.cli:main"
+
+[tool.uv.sources]
+scraper = { workspace = true }
+
+[dependency-groups]
+dev = ["pytest>=8.3"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["startup_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

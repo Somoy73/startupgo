@@ -1,8 +1,28 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { IconBook, IconCompare, IconDeals, IconMoon, IconPipeline, IconSun } from "./Icons";
+import { CommandPalette } from "./CommandPalette";
+import {
+  IconBook,
+  IconClipboard,
+  IconCompare,
+  IconDeals,
+  IconMoon,
+  IconPipeline,
+  IconSearch,
+  IconSun,
+  IconTarget,
+} from "./Icons";
 
 type Theme = "light" | "dark";
+
+const NAV = [
+  { to: "/", label: "Deal flow", icon: IconDeals, end: true },
+  { to: "/matching", label: "Matching", icon: IconTarget },
+  { to: "/assess", label: "Assess", icon: IconClipboard },
+  { to: "/pipeline", label: "Pipeline", icon: IconPipeline },
+  { to: "/compare", label: "Compare", icon: IconCompare },
+  { to: "/methodology", label: "Methodology", icon: IconBook },
+];
 
 function initialTheme(): Theme {
   try {
@@ -16,6 +36,8 @@ function initialTheme(): Theme {
 
 export function Layout() {
   const [theme, setTheme] = useState<Theme>(initialTheme);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const closePalette = useCallback(() => setPaletteOpen(false), []);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -26,6 +48,17 @@ export function Layout() {
     }
   }, [theme]);
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setPaletteOpen((o) => !o);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   return (
     <div className="shell">
       <aside className="sidebar">
@@ -33,19 +66,17 @@ export function Layout() {
           <img src="/favicon.svg" alt="" />
           <span>Startup Go</span>
         </NavLink>
+        <button className="quick-search" onClick={() => setPaletteOpen(true)} aria-label="Quick search">
+          <IconSearch />
+          <span>Quick search</span>
+          <kbd>⌘K</kbd>
+        </button>
         <nav className="nav" aria-label="Main">
-          <NavLink to="/" end>
-            <IconDeals /> <span>Deal flow</span>
-          </NavLink>
-          <NavLink to="/pipeline">
-            <IconPipeline /> <span>Pipeline</span>
-          </NavLink>
-          <NavLink to="/compare">
-            <IconCompare /> <span>Compare</span>
-          </NavLink>
-          <NavLink to="/methodology">
-            <IconBook /> <span>Methodology</span>
-          </NavLink>
+          {NAV.map(({ to, label, icon: Icon, end }) => (
+            <NavLink key={to} to={to} end={end}>
+              <Icon /> <span>{label}</span>
+            </NavLink>
+          ))}
         </nav>
         <div className="sidebar-foot">
           <button
@@ -61,6 +92,7 @@ export function Layout() {
       <main className="main">
         <Outlet />
       </main>
+      <CommandPalette open={paletteOpen} onClose={closePalette} />
     </div>
   );
 }

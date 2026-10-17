@@ -1,0 +1,27 @@
+[project]
+name = "startup-search"
+version = "0.1.0"
+description = "LightRAG search over StartupGo startups, with NVIDIA-hosted models"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "lightrag-hku==1.5.7",  # same as the `uv tool install lightrag-hku[api]` server, so both read this storage
+    "openai>=2.0.0,<4",  # LightRAG's OpenAI/NVIDIA adapters need it (otherwise it pip-installs it at runtime)
+]
+
+[project.scripts]
+startup-search = "startup_search.cli:main"
+process-storage = "startup_search.process_storage:main"
+
+[dependency-groups]
+dev = ["pytest>=8.3"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["startup_search"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

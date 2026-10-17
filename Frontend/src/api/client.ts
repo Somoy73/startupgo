@@ -1,10 +1,12 @@
 import type {
-  FilterOptions,
+  AssessmentInput,
   Frameworks,
   Note,
   PipelineStage,
+  Scores,
+  ScorePreviewInput,
   StartupDetail,
-  StartupQuery,
+  StartupInput,
   StartupSummary,
 } from "./types";
 
@@ -16,31 +18,34 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     headers: { "Content-Type": "application/json", ...init?.headers },
   });
   if (!res.ok) {
-    const detail = await res.json().catch(() => null);
-    throw new Error(detail?.detail ?? `${res.status} ${res.statusText}`);
+    const body = await res.json().catch(() => null);
+    throw new Error(errorMessage(body?.detail) ?? `${res.status} ${res.statusText}`);
   }
   return res.json() as Promise<T>;
 }
 
-function qs(params: Record<string, string | undefined>): string {
-  const entries = Object.entries(params).filter(([, v]) => v !== undefined && v !== "");
-  return entries.length ? `?${new URLSearchParams(entries as [string, string][])}` : "";
+/** FastAPI returns either a string or a list of validation errors. */
+function errorMessage(detail: unknown): string | null {
+  if (typeof detail === "string") return detail;
+  if (Array.isArray(detail)) return detail.map((d) => d?.msg ?? String(d)).join("; ");
+  return null;
 }
 
+const post = <T>(path: string, body: unknown) => request<T>(path, { method: "POST", body: JSON.stringify(body) });
+const slugPath = (slug: string) => `/startups/${encodeURIComponent(slug)}`;
+
 export const api = {
-  startups: (query: StartupQuery = {}) => request<StartupSummary[]>(`/startups${qs({ ...query })}`),
-  startup: (slug: string) => request<StartupDetail>(`/startups/${encodeURIComponent(slug)}`),
-  compare: (slugs: string[]) => request<StartupDetail[]>(`/compare${qs({ slugs: slugs.join(",") })}`),
-  filters: () => request<FilterOptions>("/filters"),
+  startups: () => request<StartupSummary[]>("/startups"),
+  startup: (slug: string) => request<StartupDetail>(slugPath(slug)),
+  createStartup: (input: StartupInput) => post<StartupDetail>("/startups", input),
+  addAssessment: (slug: string, input: AssessmentInput) => post<StartupDetail>(`${slugPath(slug)}/assessments`, input),
+  previewScores: (input: ScorePreviewInput) => post<Scores>("/scoring/preview", input),
+  compare: (slugs: string[]) => request<StartupDetail[]>(`/compare?${new URLSearchParams({ slugs: slugs.join(",") })}`),
   frameworks: () => request<Frameworks>("/frameworks"),
   setPipeline: (slug: string, pipeline_stage: PipelineStage) =>
-    request<StartupSummary>(`/startups/${encodeURIComponent(slug)}/pipeline`, {
+    request<StartupSummary>(`${slugPath(slug)}/pipeline`, {
       method: "PATCH",
       body: JSON.stringify({ pipeline_stage }),
     }),
-  addNote: (slug: string, body: string) =>
-    request<Note>(`/startups/${encodeURIComponent(slug)}/notes`, {
-      method: "POST",
-      body: JSON.stringify({ body }),
-    }),
+  addNote: (slug: string, body: string) => post<Note>(`${slugPath(slug)}/notes`, { body }),
 };

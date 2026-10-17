@@ -1,10 +1,13 @@
 """API response/request models."""
 
-from typing import Literal
+from typing import Annotated, ClassVar, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StringConstraints, model_validator
 
 PipelineStage = Literal["sourced", "screening", "diligence", "term-sheet", "portfolio", "passed"]
+FundingStage = Literal["pre-seed", "seed", "series-a", "series-b", "series-c+", "growth", "project-finance"]
+Confidence = Literal["low", "medium", "high"]
+PARTIAL_DATE = r"^\d{4}(-\d{2}(-\d{2})?)?$"
 
 
 class Scores(BaseModel):
@@ -23,7 +26,7 @@ class Scores(BaseModel):
 class Readiness(BaseModel):
     assessed_on: str
     assessor: str
-    confidence: Literal["low", "medium", "high"]
+    confidence: Confidence
     crl: int
     trl: int
     brl: int
@@ -37,6 +40,7 @@ class StartupSummary(BaseModel):
     slug: str
     name: str
     tagline: str
+    description: str
     sector: str
     country: str
     city: str | None
@@ -46,6 +50,41 @@ class StartupSummary(BaseModel):
     scores: Scores
     total_disclosed_usd: float | None
     last_round_on: str | None
+
+
+class NaturalLanguageSearchRequest(BaseModel):
+    query: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=500)]
+
+
+class SearchMatch(StartupSummary):
+    """A startup in the database that the search found."""
+
+    relevance: float  # 0-1, relative to the best match
+    matched: list[str]  # knowledge-graph entities that led to it
+    entry: str | None  # the agent's entry about it, if any
+
+
+class AgentEntryMatch(BaseModel):
+    """A startup found only in the agent's entries (not in the database yet), with the agent's scores."""
+
+    SCORES: ClassVar[tuple[str, ...]] = ("trl", "brl", "ocean_impact_readiness", "investment_score", "overall_confidence")
+
+    entry: str
+    name: str
+    website: str | None
+    relevance: float
+    matched: list[str]
+    trl: int | None = None
+    brl: int | None = None
+    ocean_impact_readiness: int | None = None
+    investment_score: float | None = None
+    overall_confidence: float | None = None
+
+
+class NaturalLanguageSearchResponse(BaseModel):
+    query: str
+    results: list[SearchMatch]  # most relevant first
+    entries: list[AgentEntryMatch]
 
 
 class FundingRound(BaseModel):
@@ -91,7 +130,6 @@ class Note(BaseModel):
 
 
 class StartupDetail(StartupSummary):
-    description: str
     founded_year: int | None
     website: str | None
     levels: list[LevelDetail]
@@ -116,6 +154,71 @@ class FilterOptions(BaseModel):
     stages: list[str]
     pipeline_stages: list[str]
     impact_areas: list[dict]
+
+
+# ---------------------------------------------------------------------------
+# Assessment & creation inputs
+# ---------------------------------------------------------------------------
+
+
+class LevelsInput(BaseModel):
+    crl: int = Field(ge=1, le=9)
+    trl: int = Field(ge=1, le=9)
+    brl: int = Field(ge=1, le=9)
+    iprl: int = Field(ge=1, le=9)
+    tmrl: int = Field(ge=1, le=9)
+    frl: int = Field(ge=1, le=9)
+
+
+class KpiLevel(BaseModel):
+    kpi_code: str = Field(pattern=r"^[A-F][1-6]$")
+    evidence_level: int = Field(ge=0, le=4)
+
+
+class KpiEvidenceInput(KpiLevel):
+    claim: str = Field(default="", max_length=500)
+    source_url: str | None = Field(default=None, max_length=500)
+
+    @model_validator(mode="after")
+    def claim_required_for_evidence(self) -> "KpiEvidenceInput":
+        if self.evidence_level > 0 and not self.claim.strip():
+            raise ValueError(f"{self.kpi_code}: a claim is required when evidence_level > 0")
+        return self
+
+
+class AssessmentCreate(LevelsInput):
+    assessor: str = Field(min_length=1, max_length=80)
+    confidence: Confidence
+    rationale: str | None = Field(default=None, max_length=2000)
+    ocean_kpis: list[KpiEvidenceInput] = Field(default_factory=list)
+
+
+class FundingRoundInput(BaseModel):
+    round_type: str = Field(min_length=1, max_length=40)
+    amount: float | None = Field(default=None, ge=0)
+    currency: str | None = Field(default=None, pattern=r"^[A-Z]{3}$")
+    announced_on: str | None = Field(default=None, pattern=PARTIAL_DATE)
+    lead_investors: str | None = Field(default=None, max_length=200)
+
+
+class StartupCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=120)
+    tagline: str = Field(min_length=1, max_length=200)
+    description: str = Field(min_length=1, max_length=4000)
+    sector: str = Field(min_length=1, max_length=80)
+    country: str = Field(min_length=1, max_length=80)
+    city: str | None = Field(default=None, max_length=80)
+    founded_year: int | None = Field(default=None, ge=1900, le=2100)
+    website: str | None = Field(default=None, max_length=300)
+    stage: FundingStage
+    funding_round: FundingRoundInput | None = None
+    assessment: AssessmentCreate
+
+
+class ScorePreviewRequest(LevelsInput):
+    ocean_kpis: list[KpiLevel] = Field(default_factory=list)
+    stage: str
+    last_round_on: str | None = Field(default=None, pattern=PARTIAL_DATE)
 
 
 # --- Success-prediction features (DataAPIs/features.py) ---

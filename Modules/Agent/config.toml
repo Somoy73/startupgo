@@ -1,0 +1,73 @@
+# StartupGo agent configuration. Secrets go in .env (see .env.example).
+
+[llm]
+provider = "gemini"            # "gemini" or "openai-compatible"
+model = "gemini-3.5-flash-lite"
+api_key_env = "GEMINI_API_KEY"
+endpoint = ""                  # base URL for openai-compatible providers
+temperature = 0.0
+# Speed and rate limits. All Gemini calls (extraction, judge, search) share one pacer.
+requests_per_minute = 10       # your plan's limit: free tier ~10, paid tiers far higher; 0 = no pacing
+thinking = "minimal"           # extraction needs no reasoning; "minimal" is fastest and cheapest ("" = model default)
+# Sections extracted together in one LLM call: 3 calls per startup instead of 10.
+# For one call per section (slower, slightly sharper quotes) use [["A"], ["B"], ..., ["J"]].
+section_groups = [["A", "B", "H", "I"], ["C", "D", "E"], ["F", "G", "J"]]
+
+[crawl]
+max_pages = 12                 # pages per startup website, homepage included
+page_chars = 15000             # text kept per page
+section_chars = 30000          # document text sent with each extraction call
+timeout = 30.0
+delay = 1.5                    # seconds between requests
+browser = false                # render pages with Chrome; options in [browser]
+respect_robots = true
+
+# Web search for independent pages about each startup (news, partners, programmes).
+# Results are fetched through the scraper and go through the same quote-verified extraction.
+[search]
+provider = "gemini"            # "gemini" (Google Search via Gemini grounding, uses the [llm] key), "brave", or "none"
+api_key_env = "BRAVE_API_KEY"  # only for provider = "brave"
+results_per_query = 5
+max_pages = 6                  # search-result pages fetched per startup
+queries = [                    # {name} = startup name, {domain} = website domain
+    '"{name}" startup funding investment',
+    '"{name}" pilot partnership customers',
+    '"{name}" news award',
+]
+
+# The judge reviews both agents' work and sends it back with instructions when it isn't good enough.
+[judge]
+max_research_rounds = 1        # redo passes the judge may request from the research agent (each costs LLM calls)
+max_evaluation_rounds = 1      # redo passes the judge may request from the evaluation agent
+check_support = true           # LLM check that every quote really supports its extracted value
+max_rejected_per_section = 2   # more rejected values in a section than this → redo the section
+min_confidence = 0.35          # weaker assessments are sent back for targeted research
+required_fields = ["dev_stage", "customer_validation", "business_model", "impact_claim"]
+
+# Chrome options when [crawl] browser = true (passed to the scraper module).
+[browser]
+driver = "undetected"
+stealth = true
+headless = true
+chrome_version = 0
+settle_seconds = 2.0
+
+[paths]
+cache_dir = "cache"            # raw pages and LLM outputs, for free and reproducible reruns
+output_dir = "output"          # startups/<id>.json entries and index.json
+system_prompt = "prompts/system.md"
+section_prompt = "prompts/section.md"
+judge_prompt = "prompts/judge.md"
+
+# Investment-potential weights per criterion (a mentor question; defaults are equal).
+[weights]
+Market = 1.0
+Product = 1.0
+Team = 1.0
+"Business model" = 1.0
+Competition = 1.0
+"Marketing and distribution" = 1.0
+Financials = 1.0
+Tech = 1.0
+"Deal dynamics" = 1.0
+Impact = 1.0

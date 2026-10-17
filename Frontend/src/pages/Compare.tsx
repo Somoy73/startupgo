@@ -5,6 +5,7 @@ import { DIMENSIONS, type StartupDetail } from "../api/types";
 import { BandBadge } from "../components/Scores";
 import { compactMoney, score } from "../lib/format";
 import { useAsync } from "../lib/useAsync";
+import { useAppData } from "../state/AppData";
 
 // First three categorical slots validate all-pairs in both modes (dataviz palette), so max 3.
 const SERIES = ["var(--series-1)", "var(--series-2)", "var(--series-3)"];
@@ -13,7 +14,8 @@ const MAX = 3;
 export function Compare() {
   const [params, setParams] = useSearchParams();
   const slugs = (params.get("s") ?? "").split(",").filter(Boolean).slice(0, MAX);
-  const all = useAsync(() => api.startups({ sort: "name" }), []);
+  const { startups } = useAppData();
+  const options = [...startups].sort((a, b) => a.name.localeCompare(b.name));
   const picked = useAsync(() => (slugs.length ? api.compare(slugs) : Promise.resolve([])), [slugs.join(",")]);
 
   const setSlugs = (next: string[]) => setParams(next.length ? { s: next.join(",") } : {}, { replace: true });
@@ -32,7 +34,9 @@ export function Compare() {
         {Array.from({ length: MAX }, (_, i) => (
           <div className="row-gap" key={i}>
             <span aria-hidden style={{ width: 10, height: 10, borderRadius: "50%", background: SERIES[i] }} />
-            <label className="visually-hidden" htmlFor={`pick-${i}`}>Startup {i + 1}</label>
+            <label className="visually-hidden" htmlFor={`pick-${i}`}>
+              Startup {i + 1}
+            </label>
             <select
               id={`pick-${i}`}
               className="select"
@@ -45,10 +49,12 @@ export function Compare() {
               }}
             >
               <option value="">Startup {i + 1}…</option>
-              {all.data
-                ?.filter((s) => s.slug === slugs[i] || !slugs.includes(s.slug))
+              {options
+                .filter((s) => s.slug === slugs[i] || !slugs.includes(s.slug))
                 .map((s) => (
-                  <option key={s.slug} value={s.slug}>{s.name}</option>
+                  <option key={s.slug} value={s.slug}>
+                    {s.name}
+                  </option>
                 ))}
             </select>
           </div>
@@ -68,7 +74,9 @@ export function Compare() {
           </section>
 
           <section className="card card-pad">
-            <div className="card-head"><h2>Scores</h2></div>
+            <div className="card-head">
+              <h2>Scores</h2>
+            </div>
             <div className="table-wrap">
               <table className="data">
                 <thead>
@@ -77,7 +85,10 @@ export function Compare() {
                     {items.map((s, i) => (
                       <th key={s.slug}>
                         <span className="row-gap">
-                          <span aria-hidden style={{ width: 10, height: 10, borderRadius: "50%", background: SERIES[i] }} />
+                          <span
+                            aria-hidden
+                            style={{ width: 10, height: 10, borderRadius: "50%", background: SERIES[i] }}
+                          />
                           <Link to={`/startups/${s.slug}`}>{s.name}</Link>
                         </span>
                       </th>
@@ -85,12 +96,29 @@ export function Compare() {
                   </tr>
                 </thead>
                 <tbody>
-                  <Row label="Investment potential" items={items} render={(s) => <span className="row-gap"><strong className="tabular">{score(s.scores.potential)}</strong><BandBadge band={s.scores.band} /></span>} />
+                  <Row
+                    label="Investment potential"
+                    items={items}
+                    render={(s) => (
+                      <span className="row-gap">
+                        <strong className="tabular">{score(s.scores.potential)}</strong>
+                        <BandBadge band={s.scores.band} />
+                      </span>
+                    )}
+                  />
                   <Row label="Readiness index" items={items} render={(s) => score(s.scores.readiness)} />
                   <Row label="Ocean impact" items={items} render={(s) => score(s.scores.ocean_impact)} />
                   <Row label="Funding momentum" items={items} render={(s) => score(s.scores.momentum)} />
-                  <Row label="Imbalance penalty" items={items} render={(s) => (s.scores.imbalance_penalty ? `−${s.scores.imbalance_penalty}` : "None")} />
-                  <Row label="Ocean impact areas" items={items} render={(s) => s.scores.ocean_areas_covered.join(", ") || "None"} />
+                  <Row
+                    label="Imbalance penalty"
+                    items={items}
+                    render={(s) => (s.scores.imbalance_penalty ? `−${s.scores.imbalance_penalty}` : "None")}
+                  />
+                  <Row
+                    label="Ocean impact areas"
+                    items={items}
+                    render={(s) => s.scores.ocean_areas_covered.join(", ") || "None"}
+                  />
                   <Row label="Best impact evidence" items={items} render={(s) => s.scores.ocean_evidence_label} />
                   <Row label="Disclosed funding" items={items} render={(s) => compactMoney(s.total_disclosed_usd)} />
                   <Row label="Sector" items={items} render={(s) => s.sector} />
@@ -107,12 +135,22 @@ export function Compare() {
   );
 }
 
-function Row({ label, items, render }: { label: string; items: StartupDetail[]; render: (s: StartupDetail) => React.ReactNode }) {
+function Row({
+  label,
+  items,
+  render,
+}: {
+  label: string;
+  items: StartupDetail[];
+  render: (s: StartupDetail) => React.ReactNode;
+}) {
   return (
     <tr>
       <td className="secondary">{label}</td>
       {items.map((s) => (
-        <td key={s.slug} className="tabular">{render(s)}</td>
+        <td key={s.slug} className="tabular">
+          {render(s)}
+        </td>
       ))}
     </tr>
   );
@@ -143,11 +181,18 @@ function DotPlot({ items }: { items: StartupDetail[] }) {
 
   return (
     <div style={{ position: "relative" }}>
-      <svg className="dotplot" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Readiness levels by dimension for the selected startups">
+      <svg
+        className="dotplot"
+        viewBox={`0 0 ${width} ${height}`}
+        role="img"
+        aria-label="Readiness levels by dimension for the selected startups"
+      >
         {Array.from({ length: 9 }, (_, i) => (
           <g key={i}>
             <line className="gridline" x1={x(i + 1)} x2={x(i + 1)} y1={top - 8} y2={height - 8} />
-            <text x={x(i + 1)} y={14} textAnchor="middle">{i + 1}</text>
+            <text x={x(i + 1)} y={14} textAnchor="middle">
+              {i + 1}
+            </text>
           </g>
         ))}
         {DIMENSIONS.map((d, row) => {
@@ -155,8 +200,12 @@ function DotPlot({ items }: { items: StartupDetail[] }) {
           const values = items.map((s) => s.readiness[d.key]);
           return (
             <g key={d.key}>
-              <text className="dim-label" x={0} y={cy - 2}>{d.code}</text>
-              <text x={0} y={cy + 13}>{d.name}</text>
+              <text className="dim-label" x={0} y={cy - 2}>
+                {d.code}
+              </text>
+              <text x={0} y={cy + 13}>
+                {d.name}
+              </text>
               <line className="range" x1={x(Math.min(...values))} x2={x(Math.max(...values))} y1={cy} y2={cy} />
               {items.map((s, i) => {
                 const v = s.readiness[d.key];
@@ -192,7 +241,11 @@ function DotPlot({ items }: { items: StartupDetail[] }) {
           );
         })}
       </svg>
-      {tip && <div className="tooltip" style={{ left: tip.x, top: tip.y }}>{tip.text}</div>}
+      {tip && (
+        <div className="tooltip" style={{ left: tip.x, top: tip.y }}>
+          {tip.text}
+        </div>
+      )}
     </div>
   );
 }

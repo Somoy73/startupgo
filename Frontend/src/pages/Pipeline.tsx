@@ -4,23 +4,23 @@ import { api } from "../api/client";
 import { PIPELINE_STAGES, type PipelineStage } from "../api/types";
 import { BandBadge, Meter } from "../components/Scores";
 import { PIPELINE_LABELS } from "../lib/format";
-import { useAsync } from "../lib/useAsync";
+import { useAppData } from "../state/AppData";
 
 export function Pipeline() {
-  const { data, error, setData } = useAsync(() => api.startups(), []);
+  const { startups, error, upsertStartup } = useAppData();
   const [dragging, setDragging] = useState<string | null>(null);
   const [over, setOver] = useState<PipelineStage | null>(null);
   const [moveError, setMoveError] = useState<string | null>(null);
 
   const move = async (slug: string, stage: PipelineStage) => {
-    if (!data) return;
-    const previous = data;
-    setData(data.map((s) => (s.slug === slug ? { ...s, pipeline_stage: stage } : s)));
+    const startup = startups.find((s) => s.slug === slug);
+    if (!startup || startup.pipeline_stage === stage) return;
+    upsertStartup({ ...startup, pipeline_stage: stage }); // optimistic
     setMoveError(null);
     try {
       await api.setPipeline(slug, stage);
     } catch (e) {
-      setData(previous);
+      upsertStartup(startup);
       setMoveError((e as Error).message);
     }
   };
@@ -37,7 +37,7 @@ export function Pipeline() {
       {moveError && <p className="error small">Couldn't move deal: {moveError}</p>}
       <div className="board">
         {PIPELINE_STAGES.map((stage) => {
-          const deals = (data ?? []).filter((s) => s.pipeline_stage === stage);
+          const deals = startups.filter((s) => s.pipeline_stage === stage);
           return (
             <section
               key={stage}
@@ -68,12 +68,16 @@ export function Pipeline() {
                   onDragEnd={() => setDragging(null)}
                 >
                   <div className="row">
-                    <Link to={`/startups/${s.slug}`}><strong>{s.name}</strong></Link>
+                    <Link to={`/startups/${s.slug}`}>
+                      <strong>{s.name}</strong>
+                    </Link>
                     <BandBadge band={s.scores.band} />
                   </div>
                   <span className="small secondary">{s.sector}</span>
                   <Meter value={s.scores.potential} label="Investment potential" />
-                  <label className="visually-hidden" htmlFor={`stage-${s.slug}`}>Stage for {s.name}</label>
+                  <label className="visually-hidden" htmlFor={`stage-${s.slug}`}>
+                    Stage for {s.name}
+                  </label>
                   <select
                     id={`stage-${s.slug}`}
                     className="select small"
@@ -81,7 +85,9 @@ export function Pipeline() {
                     onChange={(e) => move(s.slug, e.target.value as PipelineStage)}
                   >
                     {PIPELINE_STAGES.map((p) => (
-                      <option key={p} value={p}>{PIPELINE_LABELS[p]}</option>
+                      <option key={p} value={p}>
+                        {PIPELINE_LABELS[p]}
+                      </option>
                     ))}
                   </select>
                 </article>

@@ -1,8 +1,7 @@
-import { api } from "../api/client";
-import { useAsync } from "../lib/useAsync";
+import { useAppData } from "../state/AppData";
 
 export function Methodology() {
-  const { data: fw, error } = useAsync(() => api.frameworks(), []);
+  const { frameworks: fw, error } = useAppData();
   if (error) return <p className="empty error">{error}</p>;
   if (!fw) return <p className="empty">Loading…</p>;
 
@@ -20,9 +19,11 @@ export function Methodology() {
 
       <div className="stack">
         <section className="card card-pad">
-          <div className="card-head"><h2>Investment Potential</h2></div>
+          <div className="card-head">
+            <h2>Investment Potential</h2>
+          </div>
           <pre className="formula">
-{`potential = ${w.readiness} × Readiness index
+            {`potential = ${w.readiness} × Readiness index
           + ${w.ocean_impact} × Ocean impact
           + ${w.momentum} × Funding momentum
           − ${fw.penalty_per_extra_level} × max(0, readiness spread − ${fw.max_healthy_spread})
@@ -48,10 +49,14 @@ Bands: Strong ≥ 70 · Promising ≥ 55 · Watch ≥ 40 · Early < 40`}
             {fw.readiness_dimensions.map((d) => (
               <details className="fw" key={d.code}>
                 <summary>
-                  <span>{d.code} · {d.name}</span>
+                  <span>
+                    {d.code} · {d.name}
+                  </span>
                   <span className="small muted">weight {pct(d.weight)}</span>
                 </summary>
-                <p className="small secondary" style={{ marginTop: 8 }}>{d.description}</p>
+                <p className="small secondary" style={{ marginTop: 8 }}>
+                  {d.description}
+                </p>
                 <ol>
                   {d.levels.map((l) => (
                     <li key={l.level}>{l.summary}</li>
@@ -78,10 +83,14 @@ Bands: Strong ≥ 70 · Promising ≥ 55 · Watch ≥ 40 · Early < 40`}
             {fw.ocean_impact_areas.map((a) => (
               <details className="fw" key={a.code}>
                 <summary>
-                  <span>{a.code} · {a.name}</span>
+                  <span>
+                    {a.code} · {a.name}
+                  </span>
                   <span className="small muted">{a.kpis.length} KPIs</span>
                 </summary>
-                <p className="small secondary" style={{ marginTop: 8 }}>{a.orientation}</p>
+                <p className="small secondary" style={{ marginTop: 8 }}>
+                  {a.orientation}
+                </p>
                 <ol style={{ listStyle: "none", paddingLeft: 0 }}>
                   {a.kpis.map((k) => (
                     <li key={k.code}>
