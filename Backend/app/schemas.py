@@ -1,8 +1,8 @@
 """API response/request models."""
 
-from typing import Literal
+from typing import Annotated, ClassVar, Literal
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, StringConstraints, model_validator
 
 PipelineStage = Literal["sourced", "screening", "diligence", "term-sheet", "portfolio", "passed"]
 FundingStage = Literal["pre-seed", "seed", "series-a", "series-b", "series-c+", "growth", "project-finance"]
@@ -50,6 +50,41 @@ class StartupSummary(BaseModel):
     scores: Scores
     total_disclosed_usd: float | None
     last_round_on: str | None
+
+
+class NaturalLanguageSearchRequest(BaseModel):
+    query: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=500)]
+
+
+class SearchMatch(StartupSummary):
+    """A startup in the database that the search found."""
+
+    relevance: float  # 0-1, relative to the best match
+    matched: list[str]  # knowledge-graph entities that led to it
+    entry: str | None  # the agent's entry about it, if any
+
+
+class AgentEntryMatch(BaseModel):
+    """A startup found only in the agent's entries (not in the database yet), with the agent's scores."""
+
+    SCORES: ClassVar[tuple[str, ...]] = ("trl", "brl", "ocean_impact_readiness", "investment_score", "overall_confidence")
+
+    entry: str
+    name: str
+    website: str | None
+    relevance: float
+    matched: list[str]
+    trl: int | None = None
+    brl: int | None = None
+    ocean_impact_readiness: int | None = None
+    investment_score: float | None = None
+    overall_confidence: float | None = None
+
+
+class NaturalLanguageSearchResponse(BaseModel):
+    query: str
+    results: list[SearchMatch]  # most relevant first
+    entries: list[AgentEntryMatch]
 
 
 class FundingRound(BaseModel):

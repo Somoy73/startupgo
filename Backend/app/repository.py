@@ -93,6 +93,15 @@ def _summary(conn: sqlite3.Connection, row: sqlite3.Row) -> StartupSummary:
     )
 
 
+def summaries(conn: sqlite3.Connection, slugs: list[str]) -> dict[str, StartupSummary]:
+    """Summaries of the given startups by slug; unknown slugs are left out."""
+    if not slugs:
+        return {}
+    marks = ", ".join("?" * len(slugs))
+    rows = conn.execute(f"SELECT * FROM startups WHERE slug IN ({marks})", slugs).fetchall()
+    return {r["slug"]: _summary(conn, r) for r in rows}
+
+
 SORT_KEYS = {
     "potential": lambda s: -s.scores.potential,
     "readiness": lambda s: -s.scores.readiness,

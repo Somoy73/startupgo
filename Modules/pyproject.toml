@@ -4,6 +4,7 @@
 #   uv sync --all-packages                      # install every member + dev tools
 #   uv run --package scraper ...                # run within one member
 #   cd Agent && uv run startup-agent graph ...  # or from a member's directory
+#   cd Search && uv run startup-search index
 
 [tool.uv.workspace]
-members = ["Agent", "Scraper"]
+members = ["Agent", "Scraper", "Search"]

@@ -18,6 +18,8 @@ Modules/    uv workspace (one uv.lock, one .venv) for the Python modules below
   Scraper/  Python: public page fetching (HTTP or stealth Chrome) and startup discovery (Wellfound, OSM, generic)
   Agent/    Python: builds evidence-backed startup entries per the Ocean Opportunity Radar extraction
             schema (facts → TRL/BRL/OIR, investment criteria, next steps). See Modules/Agent/README.md
+  Search/   Python: natural-language startup search with LightRAG and NVIDIA models; process-storage
+            turns the DB + agent entries into its vector and graph storage. See Modules/Search/README.md
 ```
 
 ## Features
@@ -51,13 +53,15 @@ npm install
 npm run dev        # http://localhost:5173
 ```
 
-Agent and Scraper (Python 3.11, [uv](https://docs.astral.sh/uv/)). One shared environment for both:
+Agent, Scraper and Search (Python 3.11, [uv](https://docs.astral.sh/uv/)). One shared environment:
 
 ```bash
 cd Modules
 uv sync --all-packages
 cp Agent/.env.example Agent/.env     # add GEMINI_API_KEY
 uv run --package startup-agent startup-agent graph --name "Origin by Ocean" --website https://www.originbyocean.com
+cp Search/.env.example Search/.env   # add CHAT_API_KEY, EMBEDDING_API_KEY
+cd Search && uv run process-storage  # DB + agent entries -> LightRAG storage, for POST /api/startups/search
 ```
 
 To reset the database after editing `DB/*.sql`, delete `DB/startupgo.db` and restart the backend.
@@ -70,6 +74,7 @@ cd Frontend && npm run check                  # typecheck + lint + unit tests
 cd Frontend && npm run format                 # prettier
 cd Modules/Agent && uv run pytest             # agent: extraction, scoring, judge, workflow
 cd Modules/Scraper && uv run python -m unittest discover -s tests -t .   # scraper
+cd Modules/Search && uv run pytest            # search: documents, process-storage, LightRAG with fake models
 ```
 
 ## API
@@ -77,6 +82,7 @@ cd Modules/Scraper && uv run python -m unittest discover -s tests -t .   # scrap
 | Method | Path | Purpose |
 |--------|------|---------|
 | GET | `/api/startups` | List with scores. Filters: `q`, `sector`, `country`, `stage`, `pipeline_stage`, `impact_area` (A–F), `min_trl`, `min_brl`, `min_potential`. Sort: `potential`, `readiness`, `ocean`, `momentum`, `trl`, `brl`, `name` |
+| POST | `/api/startups/search` | Natural-language search, e.g. `{"query": "seaweed packaging replacing plastic"}`: database startups (`results`, with `relevance` and the `matched` graph entities) and agent-only entries (`entries`). 503 until `process-storage` has run |
 | POST | `/api/startups` | Create a startup with its first assessment (and optional funding round) |
 | GET | `/api/startups/{slug}` | Profile: level text, ocean KPIs, funding rounds, sources, notes |
 | POST | `/api/startups/{slug}/assessments` | Add a dated readiness + ocean-impact assessment |

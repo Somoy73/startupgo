@@ -204,7 +204,17 @@ class GeminiClient:
 class OpenAICompatibleClient:
     """Any /chat/completions endpoint that supports response_format json_schema."""
 
-    def __init__(self, *, endpoint: str, api_key: str, model: str, temperature: float = 0.0, timeout: float = 120):
+    def __init__(
+        self,
+        *,
+        endpoint: str,
+        api_key: str,
+        model: str,
+        temperature: float = 0.0,
+        timeout: float = 120,
+        max_tokens: int | None = None,
+        extra_body: dict[str, Any] | None = None,  # provider-specific fields, e.g. NVIDIA's chat_template_kwargs
+    ):
         if not endpoint:
             raise AgentError("[llm] endpoint is required for the openai-compatible provider")
         self.endpoint = endpoint.rstrip("/")
@@ -212,26 +222,41 @@ class OpenAICompatibleClient:
         self.model = model
         self.temperature = temperature
         self.timeout = timeout
+        self.max_tokens = max_tokens
+        self.extra_body = extra_body or {}
 
     def complete_json(self, *, system: str, user: str, schema: dict[str, Any]) -> dict[str, Any]:
         payload = {
             "model": self.model,
             "temperature": self.temperature,
             "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-            "response_format": {"type": "json_schema", "json_schema": {"name": "facts", "schema": schema, "strict": True}},
+            "response_format": {"type": "json_schema", "json_schema": {"name": "result", "schema": schema, "strict": True}},
+            **({"max_tokens": self.max_tokens} if self.max_tokens else {}),
+            **self.extra_body,
         }
         request = Request(
             f"{self.endpoint}/chat/completions",
             data=json.dumps(payload).encode("utf-8"),
-            headers={"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"},
+            headers={"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json", "Accept": "application/json"},
             method="POST",
         )
         try:
             with urlopen(request, timeout=self.timeout) as response:
                 body = json.loads(response.read().decode("utf-8"))
-            return _parse(body["choices"][0]["message"]["content"])
-        except (HTTPError, URLError, TimeoutError, KeyError, IndexError, json.JSONDecodeError) as exc:
+        except HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")[:300]
+            raise AgentError(f"LLM request failed ({exc.code}): {detail}") from exc
+        except (URLError, TimeoutError, json.JSONDecodeError) as exc:
             raise AgentError(f"LLM request failed: {exc}") from exc
+        try:
+            choice = body["choices"][0]
+            content = choice["message"].get("content")
+        except (KeyError, IndexError, TypeError) as exc:
+            raise AgentError("LLM response has no choices") from exc
+        if not content:
+            # Reasoning models can spend the whole token budget thinking and return no answer.
+            raise AgentError(f"LLM returned no content (finish_reason {choice.get('finish_reason')!r})")
+        return _parse(content)
 
 
 class LazyLLM:

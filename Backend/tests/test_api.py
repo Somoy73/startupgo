@@ -1,3 +1,6 @@
+from startup_search import SearchError, SearchUnavailable, StartupMatch
+
+
 def test_list_sorted_by_potential(client):
     data = client.get("/api/startups").json()
     assert len(data) == 8
@@ -9,6 +12,55 @@ def test_filters(client):
     assert {s["slug"] for s in client.get("/api/startups", params={"impact_area": "C"}).json()} == {"seaforester", "kelp-blue"}
     assert all(s["readiness"]["trl"] >= 7 for s in client.get("/api/startups", params={"min_trl": 7}).json())
     assert [s["slug"] for s in client.get("/api/startups", params={"q": "kelp namibia"}).json()] == ["kelp-blue"]
+
+
+class FakeSearch:
+    """Stands in for StartupSearch: returns fixed matches, or raises."""
+
+    def __init__(self, matches=(), error=None):
+        self.matches = list(matches)
+        self.error = error
+        self.queries = []
+
+    async def search(self, query):
+        self.queries.append(query)
+        if self.error:
+            raise self.error
+        return self.matches
+
+    async def close(self):
+        pass
+
+
+def match(slug, entry, name, relevance, matched=(), info=None):
+    documents = tuple(d for d in (slug and f"startup:{slug}", entry and f"entry:{entry}") if d)
+    return StartupMatch(slug, entry, name, None, info or {}, relevance, tuple(matched), documents)
+
+
+def test_natural_language_search_returns_startups_and_agent_entries(client):
+    scores = {"trl": 4, "brl": 3, "ocean_impact_readiness": 2, "investment_score": 2.5, "overall_confidence": 0.4}
+    search = FakeSearch([
+        match("notpla", "notpla-com", "Notpla", 1.0, ("Seaweed", "Packaging")),
+        match("deleted-since", None, "Gone", 0.8),  # processed, then removed from the database
+        match(None, "kelpco", "KelpCo", 0.5, ("Kelp",), scores),
+    ])
+    client.app.state.search = search
+    body = client.post("/api/startups/search", json={"query": "  seaweed packaging  "}).json()
+    assert search.queries == ["seaweed packaging"]
+    [notpla] = body["results"]
+    assert (notpla["slug"], notpla["relevance"], notpla["matched"], notpla["entry"]) == ("notpla", 1.0, ["Seaweed", "Packaging"], "notpla-com")
+    assert notpla["readiness"]["trl"] == 8 and notpla["scores"]["potential"] > 0  # the full database summary
+    assert body["entries"] == [{"entry": "kelpco", "name": "KelpCo", "website": None, "relevance": 0.5, "matched": ["Kelp"], **scores}]
+
+
+def test_natural_language_search_errors(client):
+    client.app.state.search = FakeSearch(error=SearchUnavailable("missing NVIDIA credential"))
+    r = client.post("/api/startups/search", json={"query": "kelp"})
+    assert r.status_code == 503 and "NVIDIA" in r.json()["detail"]
+
+    client.app.state.search = FakeSearch(error=SearchError("search failed: rate limited"))
+    assert client.post("/api/startups/search", json={"query": "kelp"}).status_code == 502
+    assert client.post("/api/startups/search", json={"query": "   "}).status_code == 422
 
 
 def test_detail(client):

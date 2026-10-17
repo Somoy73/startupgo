@@ -6,17 +6,22 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from startup_search import SearchError, SearchUnavailable, StartupSearch
 
 from . import repository
 from .db import get_conn, init_db
 from .schemas import (
+    AgentEntryMatch,
     AssessmentCreate,
     FilterOptions,
+    NaturalLanguageSearchRequest,
+    NaturalLanguageSearchResponse,
     Note,
     NoteCreate,
     PipelineUpdate,
     ScorePreviewRequest,
     Scores,
+    SearchMatch,
     StartupCreate,
     StartupDetail,
     StartupSummary,
@@ -24,9 +29,11 @@ from .schemas import (
 
 
 @asynccontextmanager
-async def lifespan(_: FastAPI):
+async def lifespan(app: FastAPI):
     init_db()
+    app.state.search = StartupSearch()  # LightRAG (Modules/Search); opens on the first search
     yield
+    await app.state.search.close()
 
 
 app = FastAPI(title="Startup Go API", version="0.1.0", lifespan=lifespan)
@@ -78,6 +85,29 @@ def list_startups(
         min_potential=min_potential,
         sort=sort,
     )
+
+
+@app.post("/api/startups/search", response_model=NaturalLanguageSearchResponse)
+async def natural_language_search(body: NaturalLanguageSearchRequest, request: Request, conn: sqlite3.Connection = Conn):
+    """Search startups by what they do (LightRAG over the database and the agent's entries)."""
+    try:
+        matches = await request.app.state.search.search(body.query)
+    except SearchUnavailable as exc:
+        raise HTTPException(503, str(exc)) from exc
+    except SearchError as exc:
+        raise HTTPException(502, str(exc)) from exc
+
+    summaries = repository.summaries(conn, [m.slug for m in matches if m.slug])
+    results, entries = [], []
+    for match in matches:
+        found = {"relevance": match.relevance, "matched": list(match.matched)}
+        if match.slug:
+            if summary := summaries.get(match.slug):  # missing if deleted since it was processed
+                results.append(SearchMatch(**summary.model_dump(), **found, entry=match.entry))
+        elif match.entry:
+            scores = {k: match.info.get(k) for k in AgentEntryMatch.SCORES}
+            entries.append(AgentEntryMatch(entry=match.entry, name=match.name, website=match.website, **found, **scores))
+    return NaturalLanguageSearchResponse(query=body.query, results=results, entries=entries)
 
 
 @app.post("/api/startups", response_model=StartupDetail, status_code=201)
