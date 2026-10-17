@@ -73,3 +73,22 @@ def test_a_failed_candidate_does_not_stop_the_run(tmp_path, monkeypatch, agent):
     results = pipeline.run([Candidate("Nowhere", "https://nowhere.example"), Candidate("Acme Ocean", "https://acme.fi")])
     assert results[0]["stored"] is False and results[0]["error"]
     assert results[1]["stored"] is True
+
+
+def test_config_file_follows_the_runtime_override(tmp_path, monkeypatch):
+    s = settings(tmp_path, monkeypatch)
+    monkeypatch.setenv("STARTUPGO_AGENT_CONFIG", str(tmp_path / "config.toml"))
+    assert AgentSettings.load().output_dir == s.output_dir
+
+
+def test_a_discovery_url_makes_discovered_startups_the_only_candidates(tmp_path, monkeypatch, agent):
+    fake_agent, _ = agent
+    leads = [StartupLead(name=f"Lead {i}", source="wellfound", source_url="https://wellfound.com/x", website=f"https://lead{i}.example")
+             for i in range(4)]
+    asked = []
+    monkeypatch.setattr(fake_agent, "discover", lambda **kw: asked.append(kw) or leads)
+    pipeline = ResearchPipeline(settings(tmp_path, monkeypatch), build=lambda settings, refresh: agent)
+    source = {"source": "wellfound", "url": "https://wellfound.com/startups/industry/aquaculture", "query": None, "location": "", "limit": 9}
+    found, _ = pipeline.candidates(limit=3, sources=[source])
+    assert [c.name for c in found] == ["Lead 0", "Lead 1", "Lead 2"]  # no database startups
+    assert asked == [source]

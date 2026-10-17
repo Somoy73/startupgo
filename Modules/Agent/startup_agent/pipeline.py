@@ -45,16 +45,31 @@ class ResearchPipeline:
             self._agent, self._fetcher = self._build(self.settings, refresh=self._refresh)
         return self._agent
 
-    def candidates(self, *, limit: int | None = None, slugs: Iterable[str] = (), discover: bool = True) -> tuple[list[Candidate], list[str]]:
-        """Up to ``limit`` startups to research (pending database startups first), and discovery problems."""
+    def candidates(
+        self,
+        *,
+        limit: int | None = None,
+        slugs: Iterable[str] = (),
+        discover: bool = True,
+        sources: Iterable[dict[str, Any]] | None = None,
+    ) -> tuple[list[Candidate], list[str]]:
+        """Up to ``limit`` startups to research (pending database startups first), and discovery problems.
+
+        ``sources`` replaces the [pipeline] discover sources, and then only discovered startups are candidates.
+        """
         limit = limit or self.settings.pipeline.limit
         slugs = tuple(slugs)
-        found = self.database.pending(limit=limit, max_age_days=self.settings.pipeline.max_age_days, slugs=slugs) if self.database else []
+        only_discovered = sources is not None
+        sources = list(self.settings.pipeline.discover if sources is None else sources)
+        found = [] if only_discovered or not self.database else self.database.pending(
+            limit=limit, max_age_days=self.settings.pipeline.max_age_days, slugs=slugs)
         problems: list[str] = []
         if not discover or slugs or len(found) >= limit:
             return found[:limit], problems
         seen = set(self.database.known_domains() if self.database else {}) | {domain(c.website) for c in found}
-        for source in self.settings.pipeline.discover:
+        for source in sources:
+            if len(found) >= limit:
+                break
             try:
                 leads = self.agent.discover(**source)
             except AgentError as exc:

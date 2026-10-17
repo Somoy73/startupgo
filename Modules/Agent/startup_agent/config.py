@@ -97,7 +97,8 @@ class AgentSettings:
 
     @classmethod
     def load(cls, path: Path | None = None) -> AgentSettings:
-        path = path or DEFAULT_CONFIG
+        """Read ``path``, else $STARTUPGO_AGENT_CONFIG (e.g. refresh.py's runtime config), else config.toml next to the package."""
+        path = path or Path(os.environ.get("STARTUPGO_AGENT_CONFIG") or DEFAULT_CONFIG)
         root = path.resolve().parent
         load_dotenv(root / ".env")
         try:

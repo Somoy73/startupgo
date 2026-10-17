@@ -68,6 +68,8 @@ def parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
     pipeline.add_argument("--limit", type=int, help="Startups to research (default: [pipeline] limit)")
     pipeline.add_argument("--slug", action="append", default=[], help="Research this database startup; repeatable")
     pipeline.add_argument("--no-discover", action="store_true", help="Skip the [pipeline] discover sources")
+    pipeline.add_argument("--discover-url", help="Research only startups discovered on this page, e.g. https://wellfound.com/startups/industry/aquaculture")
+    pipeline.add_argument("--source", default="wellfound", choices=("wellfound", "generic", "osm"), help="Discovery source for --discover-url")
     pipeline.add_argument("--dry-run", action="store_true", help="List the candidates without researching them")
     pipeline.add_argument("--json", action="store_true", help="Print the results as JSON")
     pipeline.add_argument("--refresh", action="store_true")
@@ -178,7 +180,11 @@ def _run_graph(args: argparse.Namespace, settings: AgentSettings, store: RecordS
 def _run_pipeline(args: argparse.Namespace, settings: AgentSettings) -> int:
     pipeline = ResearchPipeline(settings, refresh=args.refresh)
     try:
-        candidates, problems = pipeline.candidates(limit=args.limit, slugs=args.slug, discover=not args.no_discover)
+        limit = args.limit or settings.pipeline.limit
+        # Ask for extra leads: some have no website or are already in the database.
+        sources = ([{"source": args.source, "url": args.discover_url, "query": None, "location": "", "limit": 3 * limit}]
+                   if args.discover_url else None)
+        candidates, problems = pipeline.candidates(limit=limit, slugs=args.slug, discover=not args.no_discover, sources=sources)
         for problem in problems:
             print(f"error: {problem}", file=sys.stderr)
         if args.dry_run:

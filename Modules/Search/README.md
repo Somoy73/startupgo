@@ -107,7 +107,9 @@ and their keys; `config.toml` (`[chat]`, `[embedding]`) sets how they are called
 | `CHAT_MODEL`, `CHAT_API_KEY` | `nvidia/nemotron-3.5-lightning-30b-a3b` | process-storage: entities and relations from every chunk; search: keywords from each query |
 | `EMBEDDING_MODEL`, `EMBEDDING_API_KEY`, `EMBEDDING_DIM` | `nvidia/llama-3.2-nv-embedqa-1b-v1`, `2048` | process-storage: chunks, entities and relations; search: each query |
 
-A model left unset in `.env` uses the default; environment variables override `.env`. Keys are free at
+A model left unset in `.env` uses the default; environment variables override `.env`.
+`STARTUPGO_SEARCH_CONFIG` picks another `config.toml` (with its own `.env` next to it) when no `--config` is
+given, e.g. the runtime one `refresh.py` generates; the Backend uses it to search the runtime index. Keys are free at
 build.nvidia.com, and one NVIDIA key can be used for both.
 
 Why these models:

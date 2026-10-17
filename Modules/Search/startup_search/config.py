@@ -5,6 +5,9 @@
 
 Unset model names and the dimension fall back to the defaults below. Environment variables win
 over .env.
+
+STARTUPGO_SEARCH_CONFIG picks the config.toml when none is passed, e.g. the one refresh.py generates
+for the runtime database (DB/runtime/config/search/config.toml); its .env is read from its folder.
 """
 
 from __future__ import annotations
@@ -88,9 +91,9 @@ class SearchSettings:
 
     @classmethod
     def load(cls, path: Path | None = None, *, env: Mapping[str, str] | None = None) -> SearchSettings:
-        """Read ``path`` (default: config.toml next to the package) and ``env`` (default: .env next
-        to it, overridden by the environment)."""
-        path = path or DEFAULT_CONFIG
+        """Read ``path`` (default: $STARTUPGO_SEARCH_CONFIG, else config.toml next to the package) and
+        ``env`` (default: .env next to it, overridden by the environment)."""
+        path = path or Path(os.environ.get("STARTUPGO_SEARCH_CONFIG") or DEFAULT_CONFIG)
         root = path.resolve().parent
         if env is None:
             env = {**read_dotenv(root / ".env"), **os.environ}

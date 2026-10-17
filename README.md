@@ -39,8 +39,20 @@ Scraper: Wellfound, directories (discovered leads)   ─┴→ candidates: name 
 ```
 
 - **Run it all:** `cd Modules/DataAPIs && uv run python refresh.py run --tier full` (sources → `agent` → `features`, `gaps` →
-  `search_index`), or only the agent and the index: `refresh.py run --steps agent,search_index`. Both write the runtime DB.
+  `search_index`), or only the agent and the index: `refresh.py run --steps agent,search_index`. Both write the runtime DB
+  (`DB/runtime/`). Serve it, with its search index and agent settings:
+
+  ```bash
+  cd Backend && STARTUPGO_DB=../DB/runtime/startupgo.db \
+    STARTUPGO_SEARCH_CONFIG=../DB/runtime/config/search/config.toml \
+    STARTUPGO_AGENT_CONFIG=../DB/runtime/config/agent/config.toml \
+    uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
+  ```
+
+  A running Backend picks up the index the next refresh writes; no restart needed.
 - **Agent only:** `cd Modules/Agent && uv run startup-agent pipeline` (`--dry-run` lists the candidates first).
+  For startups discovered on a page instead: `startup-agent pipeline --discover-url https://wellfound.com/startups/industry/clean-technology --limit 5`,
+  then `cd ../Search && uv run process-storage` for search.
 - **One startup from the API:** `POST /api/research` queues a job for a startup without a score; the new assessment is in the
   database when it finishes. A startup that already has a score isn't researched (409).
 
