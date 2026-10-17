@@ -1,6 +1,8 @@
 from datetime import date
 
 from app import scoring
+from startup_agent.facts import Fact
+from startup_agent.scoring import score_all
 
 ALL_FIVES = {d: 5 for d in scoring.DIMENSIONS}
 
@@ -62,3 +64,29 @@ def test_to_usd():
     assert scoring.to_usd(1_000_000, "GBP") == 1_270_000
     assert scoring.to_usd(None, "USD") is None
     assert scoring.to_usd(5, "XYZ") is None
+
+
+def test_backend_uses_agent_investment_matrix():
+    facts = {
+        "value_proposition": Fact("value_proposition", "Monitoring", "quote", "https://example.com", "website", "2026-10-17", "claimed", 0.7),
+        "customer_validation": Fact("customer_validation", "paying_customers", "quote", "https://example.com", "news", "2026-10-17", "verified", 0.8),
+        "dev_stage": Fact("dev_stage", "prototype_relevant_env", "quote", "https://example.com", "website", "2026-10-17", "claimed", 0.7),
+    }
+    backend = scoring.score_facts(facts)
+    agent = score_all(facts)
+    assert backend.to_dict() == agent.to_dict()
+
+
+def test_backend_rehydrates_serialized_agent_entry():
+    fact_data = {
+        "field": "customer_validation",
+        "value": "recurring_revenue",
+        "evidence": "quote",
+        "source_url": "https://example.com",
+        "source_type": "news",
+        "retrieved_at": "2026-10-17",
+        "status": "verified",
+        "confidence": 0.8,
+    }
+    entry = {"sections": {"D": {"facts": {"customer_validation": fact_data}}}}
+    assert scoring.score_entry(entry).brl.level == 8

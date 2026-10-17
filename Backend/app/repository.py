@@ -1,14 +1,24 @@
-"""Data access: SQL queries that assemble startups with their scores."""
+"""Data access: SQL queries that assemble startups with their scores.
 
+Reads go through the views in DB/unified.sql (startups, readiness_assessments, ...); writes go to the 3 tables:
+an analyst's assessment is an assessments row (engine 'analyst'), notes, rounds and KPI evidence are facts
+(source_name 'analyst'), a new startup is an entities row.
+"""
+
+import json
 import re
 import sqlite3
 from dataclasses import asdict
-from datetime import date
+from datetime import datetime, timezone
+from typing import Any
+
+from startup_agent.database import domain
 
 from . import scoring
 from .schemas import (
     AssessmentCreate,
     FundingRound,
+    FundingRoundInput,
     LevelDetail,
     Note,
     OceanKpiEvidence,
@@ -243,21 +253,24 @@ def get_startup(conn: sqlite3.Connection, slug: str) -> StartupDetail | None:
 
 
 def set_pipeline_stage(conn: sqlite3.Connection, slug: str, stage: str) -> bool:
+    """Move a listed startup (one with a score) to another pipeline stage."""
     cur = conn.execute(
-        "UPDATE startups SET pipeline_stage = ?, updated_at = datetime('now') WHERE slug = ?", (stage, slug)
+        "UPDATE entities SET pipeline_stage = ?, updated_at = datetime('now') WHERE id IN (SELECT id FROM startups WHERE slug = ?)",
+        (stage, slug),
     )
     conn.commit()
     return cur.rowcount > 0
 
 
 def add_note(conn: sqlite3.Connection, slug: str, body: str, author: str) -> Note | None:
-    row = conn.execute("SELECT id FROM startups WHERE slug = ?", (slug,)).fetchone()
-    if row is None:
+    startup_id = _startup_id(conn, slug)
+    if startup_id is None:
         return None
-    cur = conn.execute("INSERT INTO notes (startup_id, author, body) VALUES (?, ?, ?)", (row["id"], author, body))
+    created_at = _now()
+    note_id = _fact(conn, startup_id, "X", "analyst_note", {"author": author, "body": body, "created_at": created_at}, body,
+                    observed_on=created_at)
     conn.commit()
-    note = conn.execute("SELECT id, author, body, created_at FROM notes WHERE id = ?", (cur.lastrowid,)).fetchone()
-    return Note(**dict(note))
+    return Note(id=note_id, author=author, body=body, created_at=created_at)
 
 
 def filter_options(conn: sqlite3.Connection) -> dict:
@@ -307,17 +320,44 @@ def _slugify(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "startup"
 
 
+ANALYST = "analyst"  # assessments.engine and facts.source_name of what analysts enter
+ROUND_STAGE = {"pre-seed": "pre_seed", "seed": "seed", "series-a": "series_a", "series-b": "series_b_plus",
+               "series-c+": "series_b_plus", "growth": "series_b_plus"}  # FundingStage -> the Agent's stage vocabulary
+
+
+def _now() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+
+def _startup_id(conn: sqlite3.Connection, slug: str) -> int | None:
+    """Any database startup, with or without a score."""
+    row = conn.execute("SELECT id FROM entities WHERE kind = 'startup' AND slug = ?", (slug,)).fetchone()
+    return row["id"] if row else None
+
+
 def _unique_slug(conn: sqlite3.Connection, name: str) -> str:
     base = slug = _slugify(name)
     n = 2
-    while conn.execute("SELECT 1 FROM startups WHERE slug = ?", (slug,)).fetchone():
+    while conn.execute("SELECT 1 FROM entities WHERE slug = ?", (slug,)).fetchone():
         slug = f"{base}-{n}"
         n += 1
     return slug
 
 
+def _fact(conn: sqlite3.Connection, entity_id: int, section: str, field: str, value: Any, evidence: str, *,
+          source_url: str | None = None, observed_on: str | None = None) -> int:
+    """A fact an analyst entered: claimed, from manual input."""
+    cur = conn.execute(
+        """INSERT INTO facts (entity_id, section, field, value, evidence, source_url, source_type, source_name, status, confidence,
+                              retrieved_at, observed_on)
+           VALUES (?, ?, ?, ?, ?, ?, 'manual', ?, 'claimed', 0.9, ?, ?)""",
+        (entity_id, section, field, json.dumps(value, ensure_ascii=False), evidence[:2000], source_url, ANALYST, _now()[:10], observed_on),
+    )
+    return cur.lastrowid
+
+
 def _insert_assessment(conn: sqlite3.Connection, startup_id: int, a: AssessmentCreate) -> None:
-    """Store a dated readiness snapshot and replace the startup's ocean KPI evidence."""
+    """Store a readiness snapshot (assessments) and replace the startup's ocean KPI evidence (navigator_kpi facts)."""
     codes = [k.kpi_code for k in a.ocean_kpis]
     if len(codes) != len(set(codes)):
         raise InvalidInput("Each ocean KPI may appear only once")
@@ -325,33 +365,31 @@ def _insert_assessment(conn: sqlite3.Connection, startup_id: int, a: AssessmentC
     if unknown := sorted(set(codes) - known):
         raise InvalidInput(f"Unknown ocean KPI codes: {', '.join(unknown)}")
 
+    kpis = [k for k in a.ocean_kpis if k.evidence_level > 0]
     conn.execute(
         """
-        INSERT INTO readiness_assessments
-            (startup_id, assessed_on, assessor, confidence, crl, trl, brl, iprl, tmrl, frl, rationale)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT OR REPLACE INTO assessments
+            (entity_id, assessed_at, engine, assessor, confidence, crl, trl, brl, iprl, tmrl, frl, navigator_kpis, rationale)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
-        (startup_id, date.today().isoformat(), a.assessor, a.confidence,
-         a.crl, a.trl, a.brl, a.iprl, a.tmrl, a.frl, a.rationale),
+        (startup_id, _now(), ANALYST, a.assessor, a.confidence, a.crl, a.trl, a.brl, a.iprl, a.tmrl, a.frl,
+         json.dumps({k.kpi_code: {"level": k.evidence_level, "claim": k.claim.strip(), "source_url": k.source_url or None} for k in kpis}),
+         a.rationale),
     )
-    conn.execute("DELETE FROM startup_ocean_kpis WHERE startup_id = ?", (startup_id,))
-    conn.executemany(
-        "INSERT INTO startup_ocean_kpis (startup_id, kpi_code, evidence_level, claim, source_url) VALUES (?, ?, ?, ?, ?)",
-        [
-            (startup_id, k.kpi_code, k.evidence_level, k.claim.strip(), k.source_url or None)
-            for k in a.ocean_kpis
-            if k.evidence_level > 0
-        ],
-    )
-    conn.execute("UPDATE startups SET updated_at = datetime('now') WHERE id = ?", (startup_id,))
+    conn.execute("UPDATE facts SET is_current = 0 WHERE entity_id = ? AND field = 'navigator_kpi'", (startup_id,))
+    for k in kpis:
+        _fact(conn, startup_id, "X", "navigator_kpi", {"kpi": k.kpi_code, "level": k.evidence_level, "claim": k.claim.strip()},
+              k.claim.strip(), source_url=k.source_url or None)
+    conn.execute("UPDATE entities SET updated_at = datetime('now') WHERE id = ?", (startup_id,))
 
 
 def add_assessment(conn: sqlite3.Connection, slug: str, assessment: AssessmentCreate) -> StartupDetail | None:
-    row = conn.execute("SELECT id FROM startups WHERE slug = ?", (slug,)).fetchone()
-    if row is None:
+    """A new score for any database startup (also its first)."""
+    startup_id = _startup_id(conn, slug)
+    if startup_id is None:
         return None
     with conn:
-        _insert_assessment(conn, row["id"], assessment)
+        _insert_assessment(conn, startup_id, assessment)
     return get_startup(conn, slug)
 
 
@@ -360,23 +398,32 @@ def create_startup(conn: sqlite3.Connection, data: StartupCreate) -> StartupDeta
     with conn:
         cur = conn.execute(
             """
-            INSERT INTO startups (slug, name, tagline, description, sector, country, city, founded_year, website, stage)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO entities (key, kind, slug, name, tagline, description, sector, country, city, founded_year, website, domain,
+                                  stage, pipeline_stage)
+            VALUES (?, 'startup', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sourced')
             """,
-            (slug, data.name.strip(), data.tagline.strip(), data.description.strip(), data.sector.strip(),
-             data.country.strip(), data.city, data.founded_year, data.website, data.stage),
+            (f"startup:{slug}", slug, data.name.strip(), data.tagline.strip(), data.description.strip(), data.sector.strip(),
+             data.country.strip(), data.city, data.founded_year, data.website, domain(data.website) or None, data.stage),
         )
         startup_id = cur.lastrowid
         if r := data.funding_round:
-            conn.execute(
-                """
-                INSERT INTO funding_rounds (startup_id, round_type, amount, currency, announced_on, lead_investors)
-                VALUES (?, ?, ?, ?, ?, ?)
-                """,
-                (startup_id, r.round_type, r.amount, r.currency, r.announced_on, r.lead_investors),
-            )
+            _add_round(conn, startup_id, r)
         _insert_assessment(conn, startup_id, data.assessment)
     return get_startup(conn, slug)
+
+
+def _add_round(conn: sqlite3.Connection, startup_id: int, r: FundingRoundInput) -> None:
+    """A round as a fact in the Agent's format plus the keys the funding_rounds view reads."""
+    raw = {"round_type": r.round_type, "amount": r.amount, "currency": r.currency, "announced_on": r.announced_on,
+           "lead_investors": r.lead_investors, "notes": None}
+    investors = [x.strip() for x in (r.lead_investors or "").split(";") if x.strip()]
+    if r.round_type == "grant":
+        year = (r.announced_on or "")[:4]
+        field, value = "grants", {**raw, "funder": r.lead_investors, "year": int(year) if year.isdigit() else None}
+    else:
+        field, value = "equity_rounds", {**raw, "date": r.announced_on, "stage": ROUND_STAGE.get(r.round_type, "other"), "investors": investors}
+    evidence = f"{r.round_type} {r.amount or 'undisclosed'} {r.currency or ''} ({r.lead_investors or ''})"
+    _fact(conn, startup_id, "G", field, value, evidence, observed_on=r.announced_on)
 
 
 def preview_scores(req: ScorePreviewRequest) -> Scores:

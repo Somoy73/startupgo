@@ -17,6 +17,12 @@ See RESEARCH.md for the rationale behind each component.
 from dataclasses import dataclass, field
 from datetime import date
 from statistics import median
+from typing import Any
+
+from startup_agent.derive import Facts
+from startup_agent.facts import Fact
+from startup_agent.scoring import Scores as AgentScores
+from startup_agent.scoring import score_all as score_agent_facts
 
 DIMENSIONS = ("crl", "trl", "brl", "iprl", "tmrl", "frl")
 
@@ -47,6 +53,34 @@ EVIDENCE_LABELS = {0: "None", 1: "Claimed", 2: "Evidenced", 3: "Measured", 4: "V
 
 # Approximate static FX to USD, only used to total disclosed funding.
 FX_TO_USD = {"USD": 1.0, "EUR": 1.08, "GBP": 1.27, "NOK": 0.093, "DKK": 0.145}
+
+
+def score_facts(facts: Facts, weights: dict[str, float] | None = None) -> AgentScores:
+    """Run the canonical evidence-backed Investment Score Matrix.
+
+    The research agent owns this rubric. Backend callers should use this function for
+    agent records instead of recreating criterion rules from database summary fields.
+    """
+    return score_agent_facts(facts, weights)
+
+
+def facts_from_entry(entry: dict[str, Any]) -> Facts:
+    """Convert a serialized agent entry into the facts accepted by the canonical scorer."""
+    facts: Facts = {}
+    for section in entry.get("sections", {}).values():
+        for name, raw in section.get("facts", {}).items():
+            if raw is None:
+                continue
+            values = raw if isinstance(raw, list) else [raw]
+            parsed = [Fact.from_dict(value) for value in values if isinstance(value, dict)]
+            if parsed:
+                facts[name] = parsed if isinstance(raw, list) else parsed[0]
+    return facts
+
+
+def score_entry(entry: dict[str, Any], weights: dict[str, float] | None = None) -> AgentScores:
+    """Score a serialized, judge-reviewed research entry with the agent rubric."""
+    return score_facts(facts_from_entry(entry), weights)
 
 
 @dataclass
