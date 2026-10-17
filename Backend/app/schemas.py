@@ -610,6 +610,7 @@ class MemoRecommendation(BaseModel):
     verdict: str  # Advance to due diligence | Take a first call | Monitor | Pass for now | Research first
     tone: Literal["positive", "neutral", "caution"]
     rationale: str
+    points: list[str]  # the recommendation's reasons, one per bullet
 
 
 class MemoNextStep(BaseModel):
@@ -631,6 +632,7 @@ class InvestmentMemo(BaseModel):
     startup: StartupDetail
     assessment: MemoAssessment | None  # None until the startup is assessed
     recommendation: MemoRecommendation
+    summary: list[str]  # executive summary: paragraphs justifying the recommendation
     highlights: list[str]
     risks: list[str]
     questions: list[str]  # due-diligence questions for the first call (the agent's data gaps)

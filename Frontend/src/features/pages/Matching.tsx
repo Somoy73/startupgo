@@ -77,7 +77,11 @@ export function Matching() {
               </div>
 
               {/* List displays only the 5 for the current page */}
+<<<<<<< HEAD
               <div className="mg-list">
+=======
+              <div className="mg-list max-w-[400px]">
+>>>>>>> 5ac2aba5f16ae40cd56bb7fa28996eeafe8a4cde
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
                   <h2 className="mg-eyebrow" style={{ margin: 0 }}>Top matches</h2>
                   <span className="small muted" style={{ fontWeight: 600 }}>

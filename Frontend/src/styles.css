@@ -417,6 +417,9 @@ section.mg-card { padding: 28px; overflow: visible; }
 
 .memo-verdict { display: grid; grid-template-columns: 220px 1fr; gap: 22px; align-items: center; margin: 28px 0 18px; padding: 18px 22px; border-radius: 10px; border-left: 5px solid; background: var(--memo-wash); }
 .memo-verdict p { margin: 0; }
+.memo-verdict-points { margin: 0; padding-left: 16px; display: grid; gap: 3px; font-size: 12px; line-height: 1.5; }
+.memo-verdict-points li::marker { color: var(--memo-muted); }
+.memo-summary { margin: 0; font-size: 14px; line-height: 1.75; text-align: justify; hyphens: auto; }
 .memo-verdict-title { display: block; font: 700 21px/1.2 var(--font-display); margin-top: 4px; }
 .memo-verdict.is-positive { border-color: var(--success); background: oklch(0.96 0.04 155); }
 .memo-verdict.is-positive .memo-verdict-title { color: oklch(0.45 0.13 155); }
@@ -507,6 +510,7 @@ section.mg-card { padding: 28px; overflow: visible; }
   .memo-sources { columns: 2; }
 }
 .memo-note { margin: 10px 0 0; }
+<<<<<<< HEAD
 /* Agent scraper */
 .scrape-list { display: flex; flex-direction: column; gap: 6px; padding-left: 20px; list-style: disc; font-size: 13px; }
 .scrape-list.plain { padding-left: 0; list-style: none; }
@@ -517,3 +521,7 @@ section.mg-card { padding: 28px; overflow: visible; }
 @media(max-width:800px) { .header-scraper { padding: 8px 12px; } }
 .scrape-source { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--border); border-radius: 8px; padding: 14px; min-width: 0; }
 .scrape-source .row-gap { font-size: 13px; }
+=======
+.memo-doc .memo-peer-link { color: var(--memo-ink); text-decoration: underline; text-decoration-color: color-mix(in oklch, var(--primary) 45%, transparent); text-underline-offset: 3px; }
+.memo-doc .memo-peer-link:hover { color: var(--primary); text-decoration-color: currentColor; }
+>>>>>>> 5ac2aba5f16ae40cd56bb7fa28996eeafe8a4cde
