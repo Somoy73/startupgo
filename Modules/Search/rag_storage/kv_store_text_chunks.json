@@ -151,5 +151,114 @@
     "create_time": 1792251038,
     "update_time": 1792251894,
     "_id": "startup:nauticspot-chunk-000"
+  },
+  "startup:sammy-chunk-000": {
+    "tokens": 287,
+    "content": "# SAMMY\nSaMMY is a serious attempt to introduce new services and systems in the global marinas and tourist ports market, similar to the previous market breakthrough success of the smart pa\n\nSaMMY is a serious attempt to introduce new services and systems in the global marinas and tourist ports market, similar to the previous market breakthrough success of the smart parking and smart environment solutions. SaMMY allows captains/crew members to easily search, compare, book and securely pay a berth space using on-demand services. The novelty of the system relies on the wide-use of assisting and notification mechanisms that further exploit the capabilities of the smart/mobile devices and the technological breakthrough of using a multi-purpose sensor grid in the maritime environment (for collecting real-time water data, environmental data, boat positioning and behavior or docking areas occupancy). As a disruptive solution SaMMY introduces the concept of Next Generation Marina, by offering multipurpose sensor grids, unified booking and operating management systems, optimizing the marinas processes and increase traffic and revenues.\n\nSector: Coastal and environmental protection and regeneration\nLocation: Greece\nStage: unknown\nWebsite: https://sammyacht.com\nBlue economy sector: environmental protection and regeneration\nDevelopment stage: commercial operation\nRegistry status: active\nTeam size: 8\nEmployees: 1-9\nRaising now: 500,000 EUR (open)\n\n## Sources\n- BlueInvest Project Pipeline: SAMMY",
+    "chunk_order_index": 0,
+    "full_doc_id": "startup:sammy",
+    "file_path": "startup:sammy",
+    "llm_cache_list": [
+      "default:extract:1921f029d3b050a423b1a05913489be8",
+      "default:extract:679561f1d102710502731feaa315caef"
+    ],
+    "create_time": 1792251899,
+    "update_time": 1792252954,
+    "_id": "startup:sammy-chunk-000"
+  },
+  "startup:aquabiotech-group-chunk-000": {
+    "tokens": 128,
+    "content": "# AquaBioTech Group\nAquaBioTech Limited\n\nConsulting, engineering, and contract research services and turnkey technological solutions.\n\nSector: Aquaculture\nLocation: Malta\nStage: unknown\nWebsite: https://aquabt.com\nBlue economy sector: aquaculture\nDevelopment stage: commercial operation\nTeam size: 69\nEmployees: 50-249\nRaising now: 3,000,000 EUR (open)\n\n## Funding\n- Grant: HORIZON 3M-2MNP-FE from European Commission (2024), associatedPartner\n\n## Sources\n- BlueInvest Project Pipeline: AquaBioTech Group",
+    "chunk_order_index": 0,
+    "full_doc_id": "startup:aquabiotech-group",
+    "file_path": "startup:aquabiotech-group",
+    "llm_cache_list": [
+      "default:extract:6f01594699cd57a663be9d56d992aebf",
+      "default:extract:2da2e69db0c80ce853a8790aa1b95591"
+    ],
+    "create_time": 1792252960,
+    "update_time": 1792253125,
+    "_id": "startup:aquabiotech-group-chunk-000"
+  },
+  "startup:healix-chunk-000": {
+    "tokens": 103,
+    "content": "# Healix\nRecycling nets & ropes into high-quality polymers\n\nSector: Coastal and environmental protection and regeneration\nLocation: Netherlands\nStage: unknown\nWebsite: https://healix.eco\nBlue economy sector: environmental protection and regeneration\nDevelopment stage: commercial operation\nTeam size: 7\nEmployees: 1-9\nTotal raised: 11,722,793\nRaising now: 3,000,000 EUR (open)\n\n## Sources\n- BlueInvest Project Pipeline: Healix",
+    "chunk_order_index": 0,
+    "full_doc_id": "startup:healix",
+    "file_path": "startup:healix",
+    "llm_cache_list": [
+      "default:extract:8a4bf5e3135c8befcadc50b2e35f31cd",
+      "default:extract:b10d0b1e25698b5af1a6bfb814628955"
+    ],
+    "create_time": 1792253131,
+    "update_time": 1792253561,
+    "_id": "startup:healix-chunk-000"
+  },
+  "startup:xocean-chunk-000": {
+    "tokens": 107,
+    "content": "# XOCEAN\nOcean data, delivered\n\nSector: Blue renewable energy\nLocation: Ireland\nStage: unknown\nWebsite: https://xocean.com\nBlue economy sector: blue renewable energy\nDevelopment stage: commercial operation\nTeam size: 213\nEmployees: 50-249\nTotal raised: 193,089,677\n\n## Funding\n- Grant: H2020 RAPID from European Commission, 453,750 EUR (2020), participant\n\n## Sources\n- BlueInvest Project Pipeline: XOCEAN",
+    "chunk_order_index": 0,
+    "full_doc_id": "startup:xocean",
+    "file_path": "startup:xocean",
+    "llm_cache_list": [],
+    "create_time": 1792253568,
+    "update_time": 1792253568,
+    "_id": "startup:xocean-chunk-000"
+  },
+  "startup:xsun-sas-chunk-000": {
+    "tokens": 197,
+    "content": "# XSun SAS\nXSun is a manufacturer of environmentally friendly long range solar drones.\n\nXSun is a manufacturer of environmentally friendly long range solar drones. The endurance is 12h+ and range 600+. Operational payload is 5kg. This is perfect for excellent sensors for aerial survey and surveillance. With the exceptional endurance XSun SolarXOne can replace helicopter and planes. XSun sells the SolarXOne drone and is also a service provider for aerial survey projects. Our vision is to change aviation to environmentally friendly sustainable business.\n\nSector: Blue tech and ocean observation\nLocation: France\nStage: unknown\nWebsite: https://xsun.fr\nBlue economy sector: blue tech and ocean observation\nDevelopment stage: commercial operation\nTeam size: 13\nEmployees: 10-49\nTotal raised: 7,869,710\nRaising now: 7,000,000 EUR (open)\n\n## Sources\n- BlueInvest Project Pipeline: XSun SAS",
+    "chunk_order_index": 0,
+    "full_doc_id": "startup:xsun-sas",
+    "file_path": "startup:xsun-sas",
+    "llm_cache_list": [
+      "default:extract:d133c50c466eabee19889e217de719d3",
+      "default:extract:d0d5eee7307fd83e966dcb282c25874f"
+    ],
+    "create_time": 1792254382,
+    "update_time": 1792255147,
+    "_id": "startup:xsun-sas-chunk-000"
+  },
+  "startup:pharem-chunk-000": {
+    "tokens": 139,
+    "content": "# Pharem\nZymatic\n\nZymtic - Natural and sustainable water treatment\n\nSector: Ocean pollution & water management\nLocation: Sweden\nStage: unknown\nWebsite: https://zymatic.com\nBlue economy sector: water management\nTeam size: 14\nEmployees: 10-49\nTotal raised: 154,263\n\n## Funding\n- Grant: H2020 PFS from European Commission, 2,073,750 EUR (2018), coordinator [EIC]\n- Grant: H2020 DePharm from European Commission, 50,000 EUR (2016), coordinator [EIC]\n\n## Sources\n- BlueInvest Project Pipeline: Pharem",
+    "chunk_order_index": 0,
+    "full_doc_id": "startup:pharem",
+    "file_path": "startup:pharem",
+    "llm_cache_list": [
+      "default:extract:fe1c0afd1437b6f4aac68446bca1aaf8",
+      "default:extract:626b3e5de9209d34b3e63a4b3fd5108d"
+    ],
+    "create_time": 1792255153,
+    "update_time": 1792255887,
+    "_id": "startup:pharem-chunk-000"
+  },
+  "startup:paras-aqua-oy-chunk-000": {
+    "tokens": 99,
+    "content": "# PaRAS Aqua Oy\nPaRAS Aqua Oy\n\nPaRAS is a modular full scale space saving aquaculture system.\n\nSector: Aquaculture\nLocation: Finland\nStage: unknown\nWebsite: https://parasaqua.com\nBlue economy sector: aquaculture\nDevelopment stage: commercial operation\nTeam size: 4\nEmployees: 1-9\nRaising now: 1,000,000 EUR (open)\n\n## Sources\n- BlueInvest Project Pipeline: PaRAS Aqua Oy",
+    "chunk_order_index": 0,
+    "full_doc_id": "startup:paras-aqua-oy",
+    "file_path": "startup:paras-aqua-oy",
+    "llm_cache_list": [
+      "default:extract:36ac229cd6e894d3807255aede935a23",
+      "default:extract:17b039d8502a4488e52d8884a565b993"
+    ],
+    "create_time": 1792255893,
+    "update_time": 1792256414,
+    "_id": "startup:paras-aqua-oy-chunk-000"
+  },
+  "startup:reeftox-chunk-000": {
+    "tokens": 94,
+    "content": "# ReefTox\nTest the toxicity of compounds on corals\n\nSector: Coastal and environmental protection and regeneration\nLocation: France\nStage: unknown\nWebsite: https://reeftox.com\nBlue economy sector: environmental protection and regeneration\nDevelopment stage: commercial operation\nTeam size: 2\nEmployees: 1-9\nRaising now: 2,000,000 EUR (open)\n\n## Sources\n- BlueInvest Project Pipeline: ReefTox",
+    "chunk_order_index": 0,
+    "full_doc_id": "startup:reeftox",
+    "file_path": "startup:reeftox",
+    "llm_cache_list": [
+      "default:extract:9c857affd75118583e1c6560ef0ffce9",
+      "default:extract:246585b0612c429233d85647fb79ebf7"
+    ],
+    "create_time": 1792256419,
+    "update_time": 1792256674,
+    "_id": "startup:reeftox-chunk-000"
   }
 }

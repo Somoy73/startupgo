@@ -194,11 +194,15 @@ def test_startups_researched_in_the_last_30_days_are_not_researched_again(client
 
 
 def test_databases_start_as_a_copy_of_the_unified_one_and_older_ones_are_refused(tmp_path):
-    from app.db import init_db
+    from app.db import DEFAULT_DB_PATH, init_db
 
     fresh = init_db(tmp_path / "new" / "startupgo.db")
     conn = sqlite3.connect(fresh)
-    assert conn.execute("SELECT COUNT(*) FROM startups").fetchone()[0] == 9
+    source = sqlite3.connect(DEFAULT_DB_PATH)
+    scored = source.execute("SELECT COUNT(*) FROM startups").fetchone()[0]
+    source.close()
+    assert scored > 0  # the count grows as the agent scores startups, so compare with the source copy
+    assert conn.execute("SELECT COUNT(*) FROM startups").fetchone()[0] == scored
     assert conn.execute("SELECT type FROM sqlite_master WHERE name = 'funding_rounds'").fetchone()[0] == "view"
     conn.close()
     init_db(fresh)  # applying the schema again changes nothing

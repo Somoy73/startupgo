@@ -1,6 +1,22 @@
 {
   "version": 1,
   "documents": {
+    "startup:aquabiotech-group": {
+      "digest": "fa18654d9f76a45d070acbfa9eb19f2eef8425303f2c7cf37c39193376750389",
+      "key": "startup:aquabiotech-group",
+      "kind": "startup",
+      "name": "AquaBioTech Group",
+      "website": "https://aquabt.com",
+      "startup": "aquabiotech-group",
+      "entry": null,
+      "info": {
+        "tagline": "AquaBioTech Limited",
+        "sector": "Aquaculture",
+        "country": "Malta",
+        "city": null,
+        "stage": "unknown"
+      }
+    },
     "startup:clearbot": {
       "digest": "79068d350818c68266bdad8abda72f287f5a723fd347bc2372d55c54db17e78d",
       "key": "startup:clearbot",
@@ -15,6 +31,22 @@
         "country": "Hong Kong",
         "city": "Hong Kong",
         "stage": "seed"
+      }
+    },
+    "startup:healix": {
+      "digest": "504445157a30ad2a933a0ddead6ad9c355861abad9acfdd2281ee049c381cbc4",
+      "key": "startup:healix",
+      "kind": "startup",
+      "name": "Healix",
+      "website": "https://healix.eco",
+      "startup": "healix",
+      "entry": null,
+      "info": {
+        "tagline": "Recycling nets & ropes into high-quality polymers",
+        "sector": "Coastal and environmental protection and regeneration",
+        "country": "Netherlands",
+        "city": null,
+        "stage": "unknown"
       }
     },
     "startup:hivelife": {
@@ -65,6 +97,70 @@
         "stage": "unknown"
       }
     },
+    "startup:paras-aqua-oy": {
+      "digest": "549a8642cc90bd9d8f3116028f8998dae029d2993018a3277a69b08e9f3c89e5",
+      "key": "startup:paras-aqua-oy",
+      "kind": "startup",
+      "name": "PaRAS Aqua Oy",
+      "website": "https://parasaqua.com",
+      "startup": "paras-aqua-oy",
+      "entry": null,
+      "info": {
+        "tagline": "PaRAS Aqua Oy",
+        "sector": "Aquaculture",
+        "country": "Finland",
+        "city": null,
+        "stage": "unknown"
+      }
+    },
+    "startup:pharem": {
+      "digest": "4a635b14fbe12079c469e992f02fd1c0a0c448e1decaff14f6548adce93b2947",
+      "key": "startup:pharem",
+      "kind": "startup",
+      "name": "Pharem",
+      "website": "https://zymatic.com",
+      "startup": "pharem",
+      "entry": null,
+      "info": {
+        "tagline": "Zymatic",
+        "sector": "Ocean pollution & water management",
+        "country": "Sweden",
+        "city": null,
+        "stage": "unknown"
+      }
+    },
+    "startup:reeftox": {
+      "digest": "647cb5ba455e55b15857c6e6f1b52938894f156a0c550f2b1b822bf035029a3b",
+      "key": "startup:reeftox",
+      "kind": "startup",
+      "name": "ReefTox",
+      "website": "https://reeftox.com",
+      "startup": "reeftox",
+      "entry": null,
+      "info": {
+        "tagline": "Test the toxicity of compounds on corals",
+        "sector": "Coastal and environmental protection and regeneration",
+        "country": "France",
+        "city": null,
+        "stage": "unknown"
+      }
+    },
+    "startup:sammy": {
+      "digest": "4e8d268f299b5e20cfd8da3f7aeea08518a96f5784c0dfb87ccb67bafc6a7b83",
+      "key": "startup:sammy",
+      "kind": "startup",
+      "name": "SAMMY",
+      "website": "https://sammyacht.com",
+      "startup": "sammy",
+      "entry": null,
+      "info": {
+        "tagline": "SaMMY is a serious attempt to introduce new services and systems in the global marinas and tourist ports market, similar to the previous market breakthrough success of the smart pa",
+        "sector": "Coastal and environmental protection and regeneration",
+        "country": "Greece",
+        "city": null,
+        "stage": "unknown"
+      }
+    },
     "startup:seabound": {
       "digest": "d4fcef99909e0f7583f4c6c8e8a5b065102d78e4482b7b480bf371df61161364",
       "key": "startup:seabound",
@@ -109,6 +205,22 @@
         "tagline": "Swedish Algae Factory",
         "sector": "Blue biotechnology",
         "country": "Sweden",
+        "city": null,
+        "stage": "unknown"
+      }
+    },
+    "startup:xsun-sas": {
+      "digest": "65dfef7a2178a8f7d88aecac06aa481ac1a7412580947d84e5351e5d4747c03e",
+      "key": "startup:xsun-sas",
+      "kind": "startup",
+      "name": "XSun SAS",
+      "website": "https://xsun.fr",
+      "startup": "xsun-sas",
+      "entry": null,
+      "info": {
+        "tagline": "XSun is a manufacturer of environmentally friendly long range solar drones.",
+        "sector": "Blue tech and ocean observation",
+        "country": "France",
         "city": null,
         "stage": "unknown"
       }

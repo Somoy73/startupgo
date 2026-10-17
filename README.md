@@ -6,7 +6,7 @@ Deal intelligence for VCs investing in ocean and deep-tech startups. Startups ar
 
 - **Technology readiness (TRL)** and **business readiness (BRL)**: the full KTH Innovation Readiness Level (CRL, TRL, BRL, IPRL, TMRL, FRL, each 1–9)
 - **Ocean impact readiness**: evidence (0–4) against the Ocean Impact Navigator's 30 KPIs in 6 impact areas
-- **Investment potential**: a transparent blend of readiness, ocean impact and funding momentum, minus a penalty when readiness dimensions are badly out of balance
+- **Investment potential**: a transparent blend of readiness, ocean impact and funding momentum
 
 Background research, the DeepTree feature notes and paper references are in [RESEARCH.md](RESEARCH.md).
 

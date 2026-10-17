@@ -14,6 +14,7 @@ from . import features_repo, repository
 from .schemas import InvestmentMemo, MemoAssessment, MemoNextStep, MemoRecommendation, StartupDetail
 
 MAX_QUESTIONS = 10
+UNBALANCED_SPREAD = 4  # levels between the strongest and the weakest KTH dimension
 
 VERDICTS = {  # band (scoring.band_for) -> verdict, tone
     "Strong": ("Advance to due diligence", "positive"),
@@ -91,8 +92,8 @@ def _risks(s: StartupDetail, row: sqlite3.Row | None) -> list[str]:
         d = by_code.get(code)
         if d:
             out.append(f"{d.name} lags at level {d.level}/9" + (f"; next milestone: {d.next_summary}" if d.next_summary else "."))
-    if s.scores.imbalance_penalty > 0:
-        out.append(f"Unbalanced readiness profile (spread of {s.scores.readiness_spread} levels) costs {s.scores.imbalance_penalty:.0f} points of potential.")
+    if s.scores.readiness_spread >= UNBALANCED_SPREAD:
+        out.append(f"Unbalanced readiness profile: {s.scores.readiness_spread} levels between the strongest and the weakest dimension.")
     out += [f"{c.name} scores only {c.score}/5 on the investment rubric" + (f" ({'; '.join(c.reasons[:2])})." if c.reasons else ".")
             for c in s.investment.criteria if c.score and c.score <= 2]
     for flag in _json(row["red_flags"] if row else None):
