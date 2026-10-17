@@ -1,5 +1,7 @@
 # Startup Go
 
+<img width="1454" height="868" alt="Start_View" src="https://github.com/user-attachments/assets/c1699709-6576-490c-b584-79b9726c3a75" />
+
 Deal intelligence for VCs investing in ocean and deep-tech startups. Startups are ranked on:
 
 - **Technology readiness (TRL)** and **business readiness (BRL)**: the full KTH Innovation Readiness Level (CRL, TRL, BRL, IPRL, TMRL, FRL, each 1–9)
