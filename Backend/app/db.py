@@ -1,13 +1,19 @@
-"""SQLite connection handling and first-run initialisation from DB/schema.sql + DB/seed.sql."""
+"""SQLite connection handling for the unified database: DB/startupgo_unified.db (entities, facts, assessments).
+
+The Backend reads through the views in DB/unified.sql (startups, readiness_assessments, funding_rounds, ...) and
+writes the 3 tables.
+"""
 
 import os
+import shutil
 import sqlite3
 from collections.abc import Iterator
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SQL_DIR = REPO_ROOT / "DB"
-DEFAULT_DB_PATH = SQL_DIR / "startupgo.db"
+DEFAULT_DB_PATH = SQL_DIR / "startupgo_unified.db"
+SCHEMA = SQL_DIR / "unified.sql"
 
 
 def db_path() -> Path:
@@ -21,37 +27,28 @@ def connect(path: Path | None = None) -> sqlite3.Connection:
     return conn
 
 
-def init_db(path: Path | None = None, *, reset: bool = False) -> Path:
-    """Create the database from schema.sql and load seed.sql if it doesn't exist yet.
+def init_db(path: Path | None = None) -> Path:
+    """Copy DB/startupgo_unified.db to ``path`` if it doesn't exist yet, then apply DB/unified.sql.
 
-    schema.sql is all CREATE ... IF NOT EXISTS, so it is re-applied to an existing database to add new tables.
+    unified.sql creates missing tables and recreates the views, so view changes reach existing databases.
     """
     path = path or db_path()
-    if reset and path.exists():
-        path.unlink()
-    fresh = not path.exists()
+    if not path.exists():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(DEFAULT_DB_PATH, path)
     conn = connect(path)
     try:
-        migrate(conn)
-        conn.executescript((SQL_DIR / "schema.sql").read_text())
-        if fresh:
-            conn.executescript((SQL_DIR / "seed.sql").read_text())
+        tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
+        if "startups" in tables:
+            raise RuntimeError(
+                f"{path} has the older schema (a startups table): serve its 3-table copy instead, "
+                "written by `python3 Modules/DataAPIs/unify.py --preview <path>`"
+            )
+        conn.executescript(SCHEMA.read_text())
         conn.commit()
     finally:
         conn.close()
     return path
-
-
-def migrate(conn: sqlite3.Connection) -> None:
-    """Add columns schema.sql gained since the database was created (CREATE IF NOT EXISTS cannot alter tables).
-
-    Modules/DataAPIs/ingest.py migrate() does the same for the runtime database.
-    """
-    tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-    if "startups" in tables and "agent_researched_at" not in {r[1] for r in conn.execute("PRAGMA table_info(startups)")}:
-        conn.execute("ALTER TABLE startups ADD COLUMN agent_researched_at TEXT")
-        if "agent_entries" in tables:  # runs before the column existed: the stored entries
-            conn.execute("UPDATE startups SET agent_researched_at = (SELECT stored_at FROM agent_entries e WHERE e.startup_id = startups.id)")
 
 
 def get_conn() -> Iterator[sqlite3.Connection]:

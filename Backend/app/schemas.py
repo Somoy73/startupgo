@@ -269,26 +269,25 @@ class StartupFeatures(BaseModel):
 
 
 class FundingEvent(BaseModel):
-    event_date: str
+    """A round, grant or raised total from one source (a facts row: equity_rounds, grants, total_raised)."""
+
+    event_date: str | None
     source_name: str
-    event_type: str
+    event_type: str  # announced_round, priced_round (UK SH01), form_d, eu_grant, grant, aggregate
     round_label: str | None
     amount: float | None
     currency: str | None
-    share_class: str | None
-    shares_allotted: int | None
     price_per_share: float | None
-    total_shares_after: int | None
-    implied_post_money: float | None
     investor_count: int | None
     source_url: str | None
-    match_confidence: str
+    status: str  # verified, claimed, inferred
+    confidence: float
     details: dict | None
 
 
 class Venture(BaseModel):
     company_name: str
-    company_number: str
+    company_number: str | None
     company_status: str | None
     role: str | None
     appointed_on: str | None
@@ -299,10 +298,9 @@ class Venture(BaseModel):
 class Person(BaseModel):
     name: str
     role: str
-    is_founder: bool
+    is_founder: bool  # else a current board member
     appointed_on: str | None
-    resigned_on: str | None
-    nationality: str | None
+    active: bool | None  # founders: still with the company
     source_name: str
     education: list[dict] | None = None  # degree level and school, from PDL; never scored for prestige
     ventures: list[Venture]
@@ -318,11 +316,10 @@ class InvestorLink(BaseModel):
 
 
 class Peer(BaseModel):
-    slug: str
+    slug: str | None
     name: str
-    sector: str
+    sector: str | None
     similarity: float
-    shared_tags: list[str]
 
 
 # --- EU and ocean-specific sources (Modules/DataAPIs/ingest_eu.py) ---
@@ -330,32 +327,24 @@ class Peer(BaseModel):
 
 class EuGrant(BaseModel):
     project_id: str
-    acronym: str | None
-    title: str | None
-    framework: str | None
-    role: str
+    programme: str | None  # framework and acronym, e.g. "H2020 UCUP"
+    role: str | None
     ec_contribution: float | None
-    project_ec_max: float | None
-    sme: bool | None
-    partners: int | None
+    currency: str | None
     start_date: str | None
-    end_date: str | None
-    status: str | None
     is_eic: bool
     is_mission_ocean: bool
-    topic_codes: list[str]
-    categories: list[str]
     url: str | None
 
 
-class PatentWithClasses(BaseModel):
+class Patent(BaseModel):
     publication_number: str
     title: str
     url: str | None
     priority_date: str | None
     legal_status: str | None
+    granted: str | None
     ocean_groups: list[str]
-    cpc_codes: list[str]
 
 
 class BlueInvestProfile(BaseModel):
@@ -369,18 +358,17 @@ class BlueInvestProfile(BaseModel):
     funding_sought_eur: float | None
     website: str | None
     matched_slug: str | None
-    url: str
+    url: str | None
 
 
 class ExternalPeer(BaseModel):
     source: str
-    external_id: str
+    external_id: str | None  # BlueInvest id of the lead, when its project name finds one
     name: str
     similarity: float
-    shared_tags: list[str]
     trl: int | None
     sector: str | None
-    url: str | None
+    website: str | None
 
 
 # ---------------------------------------------------------------------------
@@ -422,14 +410,14 @@ class ResearchJob(BaseModel):
     error: str | None
 
 
-class AgentEntryInfo(BaseModel):
-    """The judge-approved agent entry behind a startup's agent assessment."""
+class AgentAssessment(BaseModel):
+    """The agent's latest judge-approved assessment of a startup (assessments row, engine 'agent')."""
 
-    entry_id: str
-    generated_at: str
-    stored_at: str
-    review_status: str | None
-    open_issues: int
+    assessed_at: str  # UTC
+    judge_status: str
+    trl: int
+    brl: int
+    oir: int | None  # Ocean Impact Readiness 1-5
     investment_score: float | None  # agent's 1-5 score
     overall_confidence: float | None
 
@@ -437,9 +425,9 @@ class AgentEntryInfo(BaseModel):
 class StartupResearch(BaseModel):
     slug: str
     has_agent_assessment: bool
-    agent: AgentEntryInfo | None
+    agent: AgentAssessment | None
     researched_at: str | None  # last agent research run (UTC), whatever the judge decided; researched again 30 days later
-    job: ResearchJob | None  # latest research job
+    job: ResearchJob | None  # latest research job since the Backend started
 
 
 # ---------------------------------------------------------------------------

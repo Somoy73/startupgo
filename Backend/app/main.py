@@ -9,13 +9,13 @@ from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
 from startup_agent import Candidate
-from startup_agent.database import domain
+from startup_agent.database import ENGINE, domain, has_score, researched_at
 from startup_search import SearchError, SearchUnavailable, StartupMatch, StartupSearch, Subgraph
 
 from . import features_repo, repository, research
-from .db import connect, get_conn, init_db
+from .db import get_conn, init_db
 from .schemas import (
-    AgentEntryInfo,
+    AgentAssessment,
     AgentEntryMatch,
     AssessmentCreate,
     BlueInvestProfile,
@@ -32,7 +32,7 @@ from .schemas import (
     NaturalLanguageSearchResponse,
     Note,
     NoteCreate,
-    PatentWithClasses,
+    Patent,
     Peer,
     Person,
     PipelineUpdate,
@@ -56,11 +56,6 @@ async def lifespan(app: FastAPI):
     init_db()
     app.state.search = StartupSearch()  # LightRAG (Modules/Search); opens on the first search
     app.state.research = research.ResearchJobs()  # agent research jobs (Modules/Agent), one at a time
-    conn = connect()
-    try:
-        app.state.research.recover(conn)
-    finally:
-        conn.close()
     yield
     app.state.research.shutdown()
     await app.state.search.close()
@@ -200,24 +195,24 @@ def _graph_response(conn: sqlite3.Connection, graph: Subgraph, filters: SearchFi
 def start_research(body: ResearchRequest, request: Request, conn: sqlite3.Connection = Conn):
     """Queue the agent on a database startup (slug) or a new one (name + website). Poll GET /api/research/{id}.
 
-    Only startups without a usable score are researched: none yet, or one where the agent found no evidence for
-    TRL or BRL (researched again, ignoring the agent's cache). Any other assessment gets 409 (read its score from
-    GET /api/startups/{slug}). A name + website whose domain is a database startup counts as that startup.
+    Only startups without a usable score in the assessments table are researched: none yet, or one where the agent
+    found no evidence for TRL or BRL (researched again, ignoring the agent's cache). Any other score gets 409 (read it
+    from GET /api/startups/{slug}). A name + website whose domain is a database startup counts as that startup.
     A startup the agent researched in the last 30 days (the agent's max_age_days) also gets 409, whatever the result.
     """
     slug, name, website = body.slug, body.name, body.website
     if slug:
-        row = _found(conn.execute("SELECT id, name, website FROM startups WHERE slug = ?", (slug,)).fetchone(), slug)
+        row = _found(conn.execute("SELECT id, name, website FROM entities WHERE kind = 'startup' AND slug = ?", (slug,)).fetchone(), slug)
     else:
         own = domain(website)
-        row = next((r for r in conn.execute("SELECT id, slug, name, website FROM startups WHERE website IS NOT NULL")
+        row = next((r for r in conn.execute("SELECT id, slug, name, website FROM entities WHERE kind = 'startup' AND website IS NOT NULL")
                     if domain(r["website"]) == own), None)
         slug = row["slug"] if row else None
     startup_id = row["id"] if row else None
     if row and (recent := research.researched_recently(conn, startup_id)):
         ran, days = recent
         raise HTTPException(409, f"{slug} was researched by the agent at {ran} UTC: it is researched again {days} days after that")
-    refresh = bool(row and conn.execute("SELECT 1 FROM readiness_assessments WHERE startup_id = ?", (startup_id,)).fetchone())
+    refresh = bool(row and has_score(conn, startup_id))
     if refresh and not research.needs_research(conn, startup_id):
         raise HTTPException(409, f"{slug} already has a score: read it from GET /api/startups/{slug}")
     if row:
@@ -225,25 +220,28 @@ def start_research(body: ResearchRequest, request: Request, conn: sqlite3.Connec
         if not website:
             raise repository.InvalidInput(f"{slug} has no website: give one to research it")
     candidate = Candidate(name, website, slug=slug, business_id=body.business_id, extra_urls=tuple(body.urls))
-    return request.app.state.research.submit(conn, candidate, startup_id, refresh=refresh)
+    return request.app.state.research.submit(candidate, startup_id, refresh=refresh)
 
 
 @app.get("/api/research/{job_id}", response_model=ResearchJob)
-def research_job(job_id: int, conn: sqlite3.Connection = Conn):
-    job = research.get_job(conn, job_id)
+def research_job(job_id: int, request: Request):
+    job = request.app.state.research.get(job_id)
     if job is None:
         raise HTTPException(404, f"research job {job_id} not found")
     return job
 
 
 @app.get("/api/startups/{slug}/research", response_model=StartupResearch)
-def startup_research(slug: str, conn: sqlite3.Connection = Conn):
-    """Whether the agent has assessed the startup, and its latest research job."""
-    row = _found(conn.execute("SELECT id, agent_researched_at FROM startups WHERE slug = ?", (slug,)).fetchone(), slug)
-    entry = conn.execute("SELECT * FROM agent_entries WHERE startup_id = ?", (row["id"],)).fetchone()
-    agent = AgentEntryInfo(**{k: entry[k] for k in AgentEntryInfo.model_fields}) if entry else None
-    return StartupResearch(slug=slug, has_agent_assessment=agent is not None, agent=agent, researched_at=row["agent_researched_at"],
-                           job=research.latest_job(conn, row["id"]))
+def startup_research(slug: str, request: Request, conn: sqlite3.Connection = Conn):
+    """Whether the agent has scored the startup (its latest accepted assessment), when it last ran, and the latest job."""
+    row = _found(conn.execute("SELECT id FROM entities WHERE kind = 'startup' AND slug = ?", (slug,)).fetchone(), slug)
+    scored = conn.execute(
+        "SELECT * FROM assessments WHERE entity_id = ? AND engine = ? AND trl IS NOT NULL ORDER BY assessed_at DESC, id DESC LIMIT 1",
+        (row["id"], ENGINE),
+    ).fetchone()
+    agent = AgentAssessment(**{k: scored[k] for k in AgentAssessment.model_fields}) if scored else None
+    return StartupResearch(slug=slug, has_agent_assessment=agent is not None, agent=agent, researched_at=researched_at(conn, row["id"]),
+                           job=request.app.state.research.latest(row["id"]))
 
 
 @app.post("/api/startups", response_model=StartupDetail, status_code=201)
@@ -341,14 +339,14 @@ def startup_features(slug: str, as_of: str | None = None, conn: sqlite3.Connecti
 
 
 @app.get("/api/startups/{slug}/rounds", response_model=list[FundingEvent])
-def startup_rounds(slug: str, include_nominal: bool = False, conn: sqlite3.Connection = Conn):
-    """Unified funding timeline: announced rounds, UK SH01 priced allotments, SEC Form D, PDL aggregate."""
-    return _found(features_repo.funding_events(conn, slug, include_nominal), slug)
+def startup_rounds(slug: str, conn: sqlite3.Connection = Conn):
+    """Funding timeline from every source: announced rounds, UK SH01 priced rounds, SEC Form D, EU grants, PDL aggregate."""
+    return _found(features_repo.funding_events(conn, slug), slug)
 
 
 @app.get("/api/startups/{slug}/founders", response_model=list[Person])
 def startup_founders(slug: str, founders_only: bool = True, conn: sqlite3.Connection = Conn):
-    """Founders/officers with every other company they directed (serial-founder evidence)."""
+    """Founders (and current board members) with every other company they directed (serial-founder evidence)."""
     return _found(features_repo.people(conn, slug, founders_only), slug)
 
 
@@ -368,9 +366,9 @@ def startup_grants(slug: str, conn: sqlite3.Connection = Conn):
     return _found(features_repo.grants(conn, slug), slug)
 
 
-@app.get("/api/startups/{slug}/patents", response_model=list[PatentWithClasses])
+@app.get("/api/startups/{slug}/patents", response_model=list[Patent])
 def startup_patents(slug: str, conn: sqlite3.Connection = Conn):
-    """Patents with CPC classes, legal status and ocean-technology groups."""
+    """Patents with legal status and ocean-technology groups."""
     return _found(features_repo.patents(conn, slug), slug)
 
 

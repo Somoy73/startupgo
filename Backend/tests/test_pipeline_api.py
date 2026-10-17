@@ -1,7 +1,10 @@
 """The pipeline endpoints: search filters, matching graphs and agent research jobs."""
 
+import json
+import sqlite3
 import threading
 
+import pytest
 from startup_search import GraphEdge, GraphNode, SearchUnavailable, Subgraph
 
 from app.db import connect
@@ -71,10 +74,10 @@ def test_startup_and_thesis_graphs(client):
 
 
 def add_unscored(slug, website):
-    """A startup without an assessment (every seed startup has one)."""
+    """A startup without a score (no assessment with all six levels)."""
     conn = connect()
-    conn.execute("INSERT INTO startups (slug, name, tagline, description, sector, country, stage, website) "
-                 "VALUES (?, ?, '', '', 'Unknown', 'Unknown', 'unknown', ?)", (slug, slug.title(), website))
+    conn.execute("INSERT INTO entities (key, kind, slug, name, tagline, description, sector, country, stage, pipeline_stage, website) "
+                 "VALUES (?, 'startup', ?, ?, '', '', 'Unknown', 'Unknown', 'unknown', 'sourced', ?)", (f"startup:{slug}", slug, slug.title(), website))
     conn.commit()
     conn.close()
 
@@ -110,7 +113,8 @@ def test_research_job_runs_the_agent_and_links_the_startup(client):
     assert done["refresh"] is False  # never scored: the agent's cache is used
 
     status = client.get("/api/startups/bluetide/research").json()
-    assert status["job"]["id"] == done["id"] and status["has_agent_assessment"] is False  # the fake didn't write an entry
+    assert status["job"]["id"] == done["id"] and status["has_agent_assessment"] is False  # the fake didn't write an assessment
+    assert status["researched_at"] is None
 
     new = client.post("/api/research", json={"name": "Acme Ocean", "website": "https://acme.fi"}).json()
     assert wait_for(client, new["id"])["slug"] == "notpla"  # the startup the fake reported
@@ -128,12 +132,15 @@ def test_startups_with_a_score_are_not_researched(client):
 
 
 def add_agent_assessment(slug, trl, brl, missing):
-    """The agent's assessment, which stores dimensions without evidence as 1 and names them in the rationale."""
+    """The agent's accepted assessment 40 days ago: dimensions without evidence are stored as 1, with level null in levels_basis."""
     conn = connect()
-    startup_id = conn.execute("SELECT id FROM startups WHERE slug = ?", (slug,)).fetchone()["id"]
-    conn.execute("INSERT INTO readiness_assessments (startup_id, assessed_on, assessor, confidence, crl, trl, brl, iprl, tmrl, frl, rationale) "
-                 "VALUES (?, '2026-10-17', 'StartupGo agent', 'low', 1, ?, ?, 1, 1, 1, ?)",
-                 (startup_id, trl, brl, f"no evidence for {missing} (stored as 1); judge accepted_with_issues"))
+    startup_id = conn.execute("SELECT id FROM entities WHERE slug = ?", (slug,)).fetchone()["id"]
+    levels = {"crl": 1, "trl": trl, "brl": brl, "iprl": 1, "tmrl": 1, "frl": 1}
+    basis = {d: {"level": None if d.upper() in missing else level, "basis": []} for d, level in levels.items()}
+    conn.execute("INSERT INTO assessments (entity_id, assessed_at, engine, assessor, confidence, crl, trl, brl, iprl, tmrl, frl, oir, "
+                 "investment_score, overall_confidence, levels_basis, judge_status) "
+                 "VALUES (?, datetime('now', '-40 days'), 'agent', 'StartupGo agent', 'low', ?, ?, ?, ?, ?, ?, 2, 2.5, 0.4, ?, 'accepted_with_issues')",
+                 (startup_id, *levels.values(), json.dumps(basis)))
     conn.commit()
     conn.close()
 
@@ -155,11 +162,15 @@ def test_scores_without_trl_or_brl_evidence_are_researched_again_without_the_cac
     add_unscored("reefly", "https://reefly.example")
     add_agent_assessment("reefly", 6, 5, "IPRL, FRL")  # TRL and BRL have evidence: the score stands
     assert client.post("/api/research", json={"slug": "reefly"}).status_code == 409
+    status = client.get("/api/startups/reefly/research").json()
+    assert status["has_agent_assessment"] and (status["agent"]["trl"], status["agent"]["judge_status"]) == (6, "accepted_with_issues")
 
 
 def set_researched_at(slug, when):
+    """The agent's last run on the startup: its latest agent assessment."""
     conn = connect()
-    conn.execute("UPDATE startups SET agent_researched_at = datetime('now', ?) WHERE slug = ?", (when, slug))
+    conn.execute("UPDATE assessments SET assessed_at = datetime('now', ?) WHERE engine = 'agent' AND entity_id = "
+                 "(SELECT id FROM entities WHERE slug = ?)", (when, slug))
     conn.commit()
     conn.close()
 
@@ -182,30 +193,20 @@ def test_startups_researched_in_the_last_30_days_are_not_researched_again(client
     assert runs == ["bluetide"]
 
 
-def test_old_databases_get_the_research_column_from_their_agent_entries(tmp_path):
-    import sqlite3
-
+def test_databases_start_as_a_copy_of_the_unified_one_and_older_ones_are_refused(tmp_path):
     from app.db import init_db
 
-    path = tmp_path / "old.db"
-    conn = sqlite3.connect(path)
-    conn.executescript("""
-        CREATE TABLE startups (id INTEGER PRIMARY KEY, slug TEXT NOT NULL UNIQUE, name TEXT NOT NULL, tagline TEXT NOT NULL,
-            description TEXT NOT NULL, sector TEXT NOT NULL, country TEXT NOT NULL, city TEXT, founded_year INTEGER, website TEXT,
-            stage TEXT NOT NULL, pipeline_stage TEXT NOT NULL DEFAULT 'sourced', created_at TEXT, updated_at TEXT);
-        CREATE TABLE agent_entries (startup_id INTEGER PRIMARY KEY, entry_id TEXT NOT NULL, generated_at TEXT NOT NULL,
-            stored_at TEXT NOT NULL, assessment_id INTEGER, review_status TEXT, open_issues INTEGER NOT NULL DEFAULT 0,
-            investment_score REAL, overall_confidence REAL);
-        INSERT INTO startups (id, slug, name, tagline, description, sector, country, stage) VALUES
-            (1, 'a', 'A', '', '', 'x', 'FI', 'seed'), (2, 'b', 'B', '', '', 'x', 'FI', 'seed');
-        INSERT INTO agent_entries (startup_id, entry_id, generated_at, stored_at) VALUES (1, 'a-fi', '2026-10-01', '2026-10-01 10:00:00');
-    """)
+    fresh = init_db(tmp_path / "new" / "startupgo.db")
+    conn = sqlite3.connect(fresh)
+    assert conn.execute("SELECT COUNT(*) FROM startups").fetchone()[0] == 8
+    assert conn.execute("SELECT type FROM sqlite_master WHERE name = 'funding_rounds'").fetchone()[0] == "view"
     conn.close()
-    init_db(path)
-    conn = sqlite3.connect(path)
-    assert conn.execute("SELECT slug, agent_researched_at FROM startups ORDER BY id").fetchall() == [("a", "2026-10-01 10:00:00"), ("b", None)]
-    conn.close()
-    init_db(path)  # migrating again changes nothing
+    init_db(fresh)  # applying the schema again changes nothing
+
+    old = tmp_path / "old.db"
+    sqlite3.connect(old).execute("CREATE TABLE startups (id INTEGER PRIMARY KEY)").connection.close()
+    with pytest.raises(RuntimeError, match="unify.py --preview"):
+        init_db(old)
 
 
 def test_research_errors(client):
@@ -223,13 +224,3 @@ def test_research_errors(client):
     r = client.post("/api/research", json={"slug": "nosite"})
     assert r.status_code == 422 and "no website" in r.json()["detail"]
     assert client.get("/api/research/999").status_code == 404
-
-
-def test_jobs_left_open_by_a_restart_are_marked_as_errors(client):
-    conn = connect()
-    conn.execute("INSERT INTO agent_jobs (name, website, request, status) VALUES ('X', 'https://x.example', '{}', 'running')")
-    conn.commit()
-    ResearchJobs().recover(conn)
-    (status, error) = conn.execute("SELECT status, error FROM agent_jobs").fetchone()
-    conn.close()
-    assert status == "error" and "restarted" in error

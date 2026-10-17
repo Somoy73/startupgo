@@ -1,7 +1,13 @@
-"""Read access to the success-prediction tables built by Modules/DataAPIs/features.py."""
+"""Read access to features, funding, people, investors, grants, patents and BlueInvest leads in the unified database.
+
+Features and peers are in the latest assessment with features (Modules/DataAPIs/features.py, engine startupgo-pipeline);
+everything else is facts in the Agent's format (sections A-J, X) about startup, person, investor and candidate entities.
+"""
 
 import json
+import re
 import sqlite3
+from typing import Any
 
 from .schemas import (
     BlueInvestProfile,
@@ -11,20 +17,34 @@ from .schemas import (
     FeatureValue,
     FundingEvent,
     InvestorLink,
-    PatentWithClasses,
+    Patent,
     Peer,
     Person,
     StartupFeatures,
     Venture,
 )
 
+EVENT_TYPES = {"funding_rounds": "announced_round", "analyst": "announced_round", "agent": "announced_round", "uk_sh01": "priced_round",
+               "sec_form_d": "form_d", "cordis_projects": "eu_grant"}  # by source; other grants are "grant"
+DEV_STAGE_TRL = {"concept": 2, "lab_proof": 3, "prototype_lab": 4, "prototype_relevant_env": 6, "demo_operational_env": 7,
+                 "qualified_system": 8, "commercial_operation": 9}  # when the evidence doesn't give the TRL
+
 
 def _startup(conn: sqlite3.Connection, slug: str) -> sqlite3.Row | None:
-    return conn.execute("SELECT * FROM startups WHERE slug = ?", (slug,)).fetchone()
+    return conn.execute("SELECT * FROM entities WHERE kind = 'startup' AND slug = ?", (slug,)).fetchone()
 
 
-def _json(s: str | None):
+def _json(s: str | None) -> Any:
     return json.loads(s) if s else None
+
+
+def _facts(conn: sqlite3.Connection, entity_id: int, *fields: str, current: bool = True) -> list[sqlite3.Row]:
+    marks = ", ".join("?" * len(fields))
+    sql = f"SELECT * FROM facts WHERE entity_id = ? AND field IN ({marks})" + (" AND is_current = 1" if current else "")
+    return conn.execute(sql + " ORDER BY observed_on, id", (entity_id, *fields)).fetchall()
+
+
+# --- features ----------------------------------------------------------------------------------
 
 
 def catalog(conn: sqlite3.Connection) -> list[FeatureDefinition]:
@@ -33,7 +53,13 @@ def catalog(conn: sqlite3.Connection) -> list[FeatureDefinition]:
 
 
 def latest_as_of(conn: sqlite3.Connection) -> str | None:
-    return conn.execute("SELECT MAX(as_of) FROM startup_features").fetchone()[0]
+    return conn.execute("SELECT MAX(assessed_at) FROM assessments WHERE features IS NOT NULL").fetchone()[0]
+
+
+def _features(conn: sqlite3.Connection, entity_id: int, as_of: str | None) -> dict[str, dict]:
+    row = conn.execute("SELECT features FROM assessments WHERE entity_id = ? AND assessed_at = ? AND features IS NOT NULL ORDER BY id DESC LIMIT 1",
+                       (entity_id, as_of)).fetchone()
+    return (_json(row["features"]) or {}) if row else {}
 
 
 def startup_features(conn: sqlite3.Connection, slug: str, as_of: str | None = None) -> StartupFeatures | None:
@@ -41,23 +67,17 @@ def startup_features(conn: sqlite3.Connection, slug: str, as_of: str | None = No
     if st is None:
         return None
     as_of = as_of or latest_as_of(conn)
-    rows = conn.execute(
-        """SELECT d.name, d.feature_group, d.unit, d.importance, f.value_num, f.value_text, f.evidence
-           FROM feature_definitions d JOIN startup_features f ON f.feature = d.name
-           WHERE f.startup_id = ? AND f.as_of = ? ORDER BY d.feature_group, d.name""",
-        (st["id"], as_of),
-    ).fetchall()
-    have = {r["name"] for r in rows}
-    missing = [r[0] for r in conn.execute("SELECT name FROM feature_definitions ORDER BY name") if r[0] not in have]
+    feats = _features(conn, st["id"], as_of)
+    definitions = conn.execute("SELECT * FROM feature_definitions ORDER BY feature_group, name").fetchall()
     return StartupFeatures(
         slug=slug,
-        as_of=as_of,
+        as_of=as_of if feats else None,
         features=[
-            FeatureValue(name=r["name"], feature_group=r["feature_group"], value=r["value_num"], text=r["value_text"],
-                         unit=r["unit"], importance=r["importance"], evidence=_json(r["evidence"]))
-            for r in rows
+            FeatureValue(name=d["name"], feature_group=d["feature_group"], value=feats[d["name"]].get("value"), text=feats[d["name"]].get("text"),
+                         unit=d["unit"], importance=d["importance"], evidence=feats[d["name"]].get("evidence"))
+            for d in definitions if d["name"] in feats
         ],
-        missing=missing,
+        missing=sorted(d["name"] for d in definitions if d["name"] not in feats),
     )
 
 
@@ -66,44 +86,58 @@ def feature_matrix(conn: sqlite3.Connection, as_of: str | None = None) -> tuple[
     as_of = as_of or latest_as_of(conn)
     names = [r[0] for r in conn.execute("SELECT name FROM feature_definitions ORDER BY feature_group, name")]
     rows = []
-    for st in conn.execute("SELECT id, slug, name FROM startups ORDER BY id").fetchall():
-        vals = {r["feature"]: (r["value_num"] if r["value_num"] is not None else r["value_text"])
-                for r in conn.execute("SELECT feature, value_num, value_text FROM startup_features WHERE startup_id=? AND as_of=?", (st["id"], as_of))}
+    for st in conn.execute("SELECT id, slug, name FROM entities WHERE kind = 'startup' ORDER BY id").fetchall():
+        feats = _features(conn, st["id"], as_of)
+        vals = {n: (f.get("value") if f.get("value") is not None else f.get("text")) for n, f in feats.items()}
         rows.append({"slug": st["slug"], "name": st["name"], "as_of": as_of, **{n: vals.get(n) for n in names}})
     return names, rows
 
 
-def funding_events(conn: sqlite3.Connection, slug: str, include_nominal: bool = False) -> list[FundingEvent] | None:
+# --- funding, people, investors, peers -----------------------------------------------------------
+
+
+def funding_events(conn: sqlite3.Connection, slug: str) -> list[FundingEvent] | None:
     st = _startup(conn, slug)
     if st is None:
         return None
-    sql = "SELECT * FROM funding_events WHERE startup_id = ?"
-    if not include_nominal:
-        sql += " AND event_type NOT IN ('nominal_allotment', 'allotment_unparsed')"
-    rows = conn.execute(sql + " ORDER BY event_date, id", (st["id"],)).fetchall()
-    return [FundingEvent(**{k: r[k] for k in FundingEvent.model_fields if k != "details"}, details=_json(r["details"])) for r in rows]
+    out = []
+    for f in _facts(conn, st["id"], "equity_rounds", "grants", "total_raised"):
+        v = _json(f["value"])
+        if f["field"] == "total_raised":
+            event_type, v = "aggregate", {"amount": v, "currency": "USD"}
+        else:
+            event_type = EVENT_TYPES.get(f["source_name"], "grant" if f["field"] == "grants" else "round")
+            if f["field"] == "grants" and event_type == "announced_round":
+                event_type = "grant"
+        out.append(FundingEvent(event_date=f["observed_on"], source_name=f["source_name"], event_type=event_type,
+                                round_label=v.get("round_type") or v.get("programme") or (v.get("stage") if v.get("stage") != "other" else None),
+                                amount=v.get("amount"), currency=v.get("currency"), price_per_share=v.get("price_per_share"),
+                                investor_count=v.get("investor_count"), source_url=f["source_url"], status=f["status"],
+                                confidence=f["confidence"], details=v))
+    return sorted(out, key=lambda e: (e.event_date is None, e.event_date or ""))
 
 
 def people(conn: sqlite3.Connection, slug: str, founders_only: bool = False) -> list[Person] | None:
+    """Founders (and with ``founders_only=False`` board members), each with their other companies."""
     st = _startup(conn, slug)
     if st is None:
         return None
-    reg = conn.execute("SELECT details FROM startup_external_ids WHERE startup_id=? AND id_type='company_number'", (st["id"],)).fetchone()
-    created = (_json(reg["details"]) or {}).get("date_of_creation") if reg else None
-    sql = """SELECT sp.*, p.name, p.nationality, p.education FROM startup_people sp JOIN people p ON p.id = sp.person_id WHERE sp.startup_id = ?"""
-    if founders_only:
-        sql += " AND sp.is_founder = 1"
+    created = conn.execute("SELECT MIN(observed_on) FROM facts WHERE entity_id = ? AND field = 'founded_date' AND source_type = 'registry'",
+                           (st["id"],)).fetchone()[0]
     out = []
-    for r in conn.execute(sql + " ORDER BY sp.is_founder DESC, sp.appointed_on", (st["id"],)).fetchall():
+    for f in _facts(conn, st["id"], "founders", *(() if founders_only else ("advisors_board",))):
+        v = _json(f["value"])
+        person = f["related_entity_id"]
+        education = next((_json(e["value"]) for e in _facts(conn, person, "education")), None) if person else None
         ventures = [
-            Venture(company_name=v["company_name"], company_number=v["company_number"], company_status=v["company_status"], role=v["role"],
-                    appointed_on=v["appointed_on"], resigned_on=v["resigned_on"],
-                    before_startup=(v["appointed_on"] < created) if (created and v["appointed_on"]) else None)
-            for v in conn.execute("SELECT * FROM person_ventures WHERE person_id = ? ORDER BY appointed_on", (r["person_id"],))
+            Venture(company_name=w["company"], company_number=w.get("company_number"), company_status=w.get("status"), role=w.get("role"),
+                    appointed_on=w.get("from"), resigned_on=w.get("to"),
+                    before_startup=(w["from"] < created) if (created and w.get("from")) else None)
+            for w in (_json(r["value"]) for r in (_facts(conn, person, "venture") if person else []))
         ]
-        out.append(Person(name=r["name"], role=r["role"], is_founder=bool(r["is_founder"]), appointed_on=r["appointed_on"],
-                          resigned_on=r["resigned_on"], nationality=r["nationality"], source_name=r["source_name"],
-                          education=_json(r["education"]), ventures=ventures))
+        out.append(Person(name=v["name"], role=v.get("role") or v.get("background") or "", is_founder=f["field"] == "founders",
+                          appointed_on=f["observed_on"], active=v.get("active"), source_name=f["source_name"], education=education,
+                          ventures=ventures))
     return out
 
 
@@ -111,82 +145,111 @@ def investors(conn: sqlite3.Connection, slug: str) -> list[InvestorLink] | None:
     st = _startup(conn, slug)
     if st is None:
         return None
-    rows = conn.execute(
-        """SELECT i.name, i.kind, i.tier_score, si.role, si.rounds, si.first_seen FROM startup_investors si
-           JOIN investors i ON i.id = si.investor_id WHERE si.startup_id = ? ORDER BY si.role = 'lead' DESC, i.tier_score DESC""",
-        (st["id"],),
-    ).fetchall()
-    return [InvestorLink(**dict(r)) for r in rows]
+    out = []
+    for f in _facts(conn, st["id"], "investor"):
+        v = _json(f["value"])
+        profile: dict = next((_json(p["value"]) for p in _facts(conn, f["related_entity_id"], "investor_profile")), {}) if f["related_entity_id"] else {}
+        out.append(InvestorLink(name=v["name"], kind=profile.get("kind"), tier_score=profile.get("tier_score"), role=v["role"],
+                                rounds=v.get("rounds") or 0, first_seen=v.get("first_seen")))
+    return sorted(out, key=lambda i: (i.role != "lead", -(i.tier_score or 0)))
+
+
+def _peers(conn: sqlite3.Connection, entity_id: int, source: str) -> list[dict]:
+    row = conn.execute("SELECT peers FROM assessments WHERE entity_id = ? AND peers IS NOT NULL ORDER BY assessed_at DESC, id DESC LIMIT 1",
+                       (entity_id,)).fetchone()
+    peers = _json(row["peers"]) if row else []
+    return sorted((p for p in peers if p.get("source") == source), key=lambda p: -p["similarity"])
 
 
 def peers(conn: sqlite3.Connection, slug: str, limit: int = 5) -> list[Peer] | None:
     st = _startup(conn, slug)
     if st is None:
         return None
-    rows = conn.execute(
-        """SELECT s.slug, s.name, s.sector, p.similarity, p.shared_tags FROM startup_peers p JOIN startups s ON s.id = p.peer_id
-           WHERE p.startup_id = ? ORDER BY p.similarity DESC LIMIT ?""",
-        (st["id"], limit),
-    ).fetchall()
-    return [Peer(slug=r["slug"], name=r["name"], sector=r["sector"], similarity=r["similarity"], shared_tags=_json(r["shared_tags"]) or []) for r in rows]
+    out = []
+    for p in _peers(conn, st["id"], "startupgo")[:limit]:
+        other = conn.execute("SELECT slug, sector FROM entities WHERE kind = 'startup' AND name = ?", (p["name"],)).fetchone()
+        out.append(Peer(slug=other["slug"] if other else None, name=p["name"], sector=other["sector"] if other else None, similarity=p["similarity"]))
+    return out
+
+
+# --- EU grants and patents ---------------------------------------------------------------------
 
 
 def grants(conn: sqlite3.Connection, slug: str) -> list[EuGrant] | None:
+    """EU-funded projects (CORDIS) the startup takes part in, with its own EU contribution and role."""
     st = _startup(conn, slug)
     if st is None:
         return None
-    rows = conn.execute("SELECT * FROM eu_grants WHERE startup_id = ? ORDER BY start_date", (st["id"],)).fetchall()
     return [
-        EuGrant(project_id=r["project_id"], acronym=r["acronym"], title=r["title"], framework=r["framework"], role=r["role"],
-                ec_contribution=r["ec_contribution"], project_ec_max=r["project_ec_max"], sme=None if r["sme"] is None else bool(r["sme"]),
-                partners=r["partners"], start_date=r["start_date"], end_date=r["end_date"], status=r["status"], is_eic=bool(r["is_eic"]),
-                is_mission_ocean=bool(r["is_mission_ocean"]), topic_codes=_json(r["topic_codes"]) or [], categories=_json(r["categories"]) or [],
-                url=r["url"])
-        for r in rows
+        EuGrant(project_id=v["project_id"], programme=v.get("programme"), role=v.get("role"), ec_contribution=v.get("amount"),
+                currency=v.get("currency"), start_date=f["observed_on"], is_eic=bool(v.get("eic")), is_mission_ocean=bool(v.get("mission_ocean")),
+                url=f["source_url"])
+        for f in _facts(conn, st["id"], "grants")
+        if f["source_name"] == "cordis_projects" and (v := _json(f["value"])).get("project_id")
     ]
 
 
-def patents(conn: sqlite3.Connection, slug: str) -> list[PatentWithClasses] | None:
+def patents(conn: sqlite3.Connection, slug: str) -> list[Patent] | None:
     st = _startup(conn, slug)
     if st is None:
         return None
-    out = []
-    for s in conn.execute("SELECT title, url, observed_on, details FROM startup_signals WHERE startup_id=? AND signal_type='patent' ORDER BY observed_on",
-                          (st["id"],)).fetchall():
-        number = s["title"].split(":")[0].strip()
-        det = _json(s["details"]) or {}
-        codes = [r[0] for r in conn.execute("SELECT cpc_code FROM patent_classes WHERE startup_id=? AND publication_number=? ORDER BY cpc_code",
-                                            (st["id"], number))]
-        out.append(PatentWithClasses(publication_number=number, title=s["title"].split(":", 1)[-1].strip(), url=s["url"], priority_date=s["observed_on"],
-                                     legal_status=det.get("legal_status"), ocean_groups=det.get("ocean_groups") or [], cpc_codes=codes))
-    return out
+    return [
+        Patent(publication_number=v["number"], title=v.get("title") or "", url=f["source_url"], priority_date=f["observed_on"],
+               legal_status=v.get("legal_status"), granted=v.get("granted"), ocean_groups=v.get("ocean_groups") or [])
+        for f in _facts(conn, st["id"], "patents")
+        if (v := _json(f["value"])).get("number")
+    ]
+
+
+# --- BlueInvest pipeline -------------------------------------------------------------------------
+
+
+def _blueinvest_profile(conn: sqlite3.Connection, e: sqlite3.Row) -> BlueInvestProfile:
+    """A BlueInvest lead (candidate entity) or a startup matched to one: TRL from its self-reported dev stage."""
+    stage = next((f for f in _facts(conn, e["id"], "dev_stage") if f["source_name"] == "blueinvest_profile"), None)
+    trl = None
+    if stage:
+        said = re.search(r"TRL\s*(\d)", stage["evidence"] or "")
+        trl = int(said.group(1)) if said else DEV_STAGE_TRL.get(_json(stage["value"]))
+    raise_ = next((f for f in _facts(conn, e["id"], "current_raise") if f["source_name"] == "blueinvest_profile"), None)
+    summary = next((_json(f["value"]) for f in _facts(conn, e["id"], "blueinvest_summary")), None)
+    candidate = e["kind"] == "candidate"
+    source = stage or raise_
+    return BlueInvestProfile(
+        other_id=int(e["blueinvest_id"]), name=e["tagline"] if candidate and e["tagline"] else e["name"],
+        summary=e["description"] if candidate else summary, trl=trl, sector=e["sector"], company=e["name"], country=e["country"],
+        funding_sought_eur=(_json(raise_["value"]) or {}).get("amount") if raise_ else None, website=e["website"],
+        matched_slug=None if candidate else e["slug"],
+        url=source["source_url"] if source else None,
+    )
 
 
 def blueinvest(conn: sqlite3.Connection, q: str | None = None, sector: str | None = None, min_trl: int | None = None,
                matched_only: bool = False, limit: int = 50, offset: int = 0) -> list[BlueInvestProfile]:
-    sql = "SELECT b.*, s.slug FROM blueinvest_profiles b LEFT JOIN startups s ON s.id = b.startup_id WHERE 1=1"
+    sql = "SELECT * FROM entities WHERE blueinvest_id IS NOT NULL AND kind IN ('startup', 'candidate')"
     args: list = []
     if q:
-        sql += " AND (b.name LIKE ? OR b.summary LIKE ?)"
-        args += [f"%{q}%", f"%{q}%"]
+        sql += " AND (name LIKE ? OR tagline LIKE ? OR description LIKE ?)"
+        args += [f"%{q}%"] * 3
     if sector:
-        sql += " AND b.sector = ?"
+        sql += " AND sector = ?"
         args.append(sector)
-    if min_trl is not None:
-        sql += " AND b.trl >= ?"
-        args.append(min_trl)
     if matched_only:
-        sql += " AND b.startup_id IS NOT NULL"
-    rows = conn.execute(sql + " ORDER BY b.trl DESC, b.name LIMIT ? OFFSET ?", (*args, limit, offset)).fetchall()
-    return [BlueInvestProfile(other_id=r["other_id"], name=r["name"], summary=r["summary"], trl=r["trl"], sector=r["sector"], company=r["company"],
-                              country=r["country"], funding_sought_eur=r["funding_sought_eur"], website=r["website"], matched_slug=r["slug"], url=r["url"])
-            for r in rows]
+        sql += " AND kind = 'startup'"
+    found = [_blueinvest_profile(conn, e) for e in conn.execute(sql, args).fetchall()]
+    found = [p for p in found if min_trl is None or (p.trl is not None and p.trl >= min_trl)]
+    found.sort(key=lambda p: (-(p.trl or 0), p.name))
+    return found[offset:offset + limit]
 
 
 def external_peers(conn: sqlite3.Connection, slug: str, limit: int = 10) -> list[ExternalPeer] | None:
+    """Most similar BlueInvest projects; each is linked to its lead when the project name finds one."""
     st = _startup(conn, slug)
     if st is None:
         return None
-    rows = conn.execute("SELECT * FROM startup_external_peers WHERE startup_id = ? ORDER BY similarity DESC LIMIT ?", (st["id"], limit)).fetchall()
-    return [ExternalPeer(source=r["source"], external_id=r["external_id"], name=r["name"], similarity=r["similarity"],
-                         shared_tags=_json(r["shared_tags"]) or [], trl=r["trl"], sector=r["sector"], url=r["url"]) for r in rows]
+    out = []
+    for p in _peers(conn, st["id"], "blueinvest")[:limit]:
+        lead = conn.execute("SELECT blueinvest_id, website FROM entities WHERE kind = 'candidate' AND tagline = ?", (p["name"][:200],)).fetchone()
+        out.append(ExternalPeer(source="blueinvest", external_id=lead["blueinvest_id"] if lead else None, name=p["name"],
+                                similarity=p["similarity"], trl=p.get("trl"), sector=p.get("sector"), website=lead["website"] if lead else None))
+    return out
