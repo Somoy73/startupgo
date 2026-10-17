@@ -5,7 +5,7 @@
  * leaves open are skipped. The match score blends average fit with the startup's
  * Investment Potential, weighted by `qualityWeight`.
  */
-import type { StartupSummary } from "../api/types";
+import type { StartupSummary } from "@/api/types";
 import { stageLabel } from "./format";
 import { inRegion, regionLabel, regionOf, type Region } from "./regions";
 

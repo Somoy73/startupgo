@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { api } from "../api/client";
-import type { Scores, ScorePreviewInput } from "../api/types";
+import { api } from "@/api/client";
+import type { Scores, ScorePreviewInput } from "@/api/types";
 
 const DEBOUNCE_MS = 250;
 

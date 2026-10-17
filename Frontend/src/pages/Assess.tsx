@@ -1,13 +1,24 @@
 import { useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { api } from "../api/client";
-import type { Confidence, DimensionKey, StartupDetail } from "../api/types";
-import { CompanyFields } from "../components/assess/CompanyFields";
-import { ImpactFields } from "../components/assess/ImpactFields";
-import { ReadinessFields } from "../components/assess/ReadinessFields";
-import { ScorePreview } from "../components/assess/ScorePreview";
-import { TextField } from "../components/Controls";
-import { IconBack } from "../components/Icons";
+import { useNavigate, useParams } from "react-router-dom";
+import { api } from "@/api/client";
+import type { Confidence, DimensionKey, StartupDetail } from "@/api/types";
+import { CompanyFields } from "@/components/assess/CompanyFields";
+import { ImpactFields } from "@/components/assess/ImpactFields";
+import { ReadinessFields } from "@/components/assess/ReadinessFields";
+import { ScorePreview } from "@/components/assess/ScorePreview";
+import {
+  BackLink,
+  button,
+  control,
+  EmptyState,
+  fieldLabel,
+  formGrid,
+  PageHeader,
+  Section,
+  stack,
+  TextField,
+  toggle,
+} from "@/components/ui";
 import {
   assessmentFromStartup,
   emptyAssessment,
@@ -20,10 +31,10 @@ import {
   type AssessmentDraft,
   type CompanyDraft,
   type DraftErrors,
-} from "../lib/assessment";
-import { useAsync } from "../lib/useAsync";
-import { useScorePreview } from "../lib/useScorePreview";
-import { useAppData } from "../state/AppData";
+} from "@/lib/assessment";
+import { useAsync } from "@/lib/useAsync";
+import { useScorePreview } from "@/lib/useScorePreview";
+import { useAppData } from "@/state/AppData";
 
 const CONFIDENCE: Confidence[] = ["low", "medium", "high"];
 
@@ -32,8 +43,8 @@ export function Assess() {
   const { slug } = useParams();
   const existing = useAsync(() => (slug ? api.startup(slug) : Promise.resolve(null)), [slug]);
 
-  if (existing.error) return <p className="empty error">{existing.error}</p>;
-  if (existing.loading) return <p className="empty">Loading…</p>;
+  if (existing.error) return <EmptyState error>{existing.error}</EmptyState>;
+  if (existing.loading) return <EmptyState>Loading…</EmptyState>;
   // key resets the form when switching between startups
   return <AssessForm key={slug ?? "new"} startup={existing.data} />;
 }
@@ -88,76 +99,62 @@ function AssessForm({ startup }: { startup: StartupDetail | null }) {
     }
   };
 
-  if (!frameworks) return <p className="empty">Loading frameworks…</p>;
+  if (!frameworks) return <EmptyState>Loading frameworks…</EmptyState>;
 
   return (
     <>
-      {startup && (
-        <Link to={`/startups/${startup.slug}`} className="back">
-          <IconBack /> {startup.name}
-        </Link>
-      )}
-      <div className="page-head">
-        <div>
-          <h1>{isNew ? "Assess a new startup" : `Assess ${startup.name}`}</h1>
-          <p>
-            {isNew
-              ? "Add a company and score its readiness and ocean impact. It joins your deal flow as Sourced."
-              : `Pre-filled from the current assessment (${startup.readiness.assessor}, ${startup.readiness.assessed_on}). Saving adds a new dated snapshot.`}
-          </p>
-        </div>
-        <StartupSwitcher
-          current={startup?.slug ?? ""}
-          options={startups.map((s) => ({ slug: s.slug, name: s.name }))}
-        />
-      </div>
+      {startup && <BackLink to={`/startups/${startup.slug}`}>{startup.name}</BackLink>}
+      <PageHeader
+        title={isNew ? "Assess a new startup" : `Assess ${startup.name}`}
+        description={
+          isNew
+            ? "Add a company and score its readiness and ocean impact. It joins your deal flow as Sourced."
+            : `Pre-filled from the current assessment (${startup.readiness.assessor}, ${startup.readiness.assessed_on}). Saving adds a new dated snapshot.`
+        }
+        actions={
+          <StartupSwitcher
+            current={startup?.slug ?? ""}
+            options={startups.map((s) => ({ slug: s.slug, name: s.name }))}
+          />
+        }
+      />
 
-      <form className="assess-layout" onSubmit={submit} noValidate>
-        <div className="stack">
+      <form
+        className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_300px]"
+        onSubmit={submit}
+        noValidate
+      >
+        <div className={stack}>
           {isNew && (
-            <section className="card card-pad">
-              <div className="card-head">
-                <h2>1 · Company</h2>
-              </div>
+            <Section title="1 · Company">
               <CompanyFields
                 company={company}
                 errors={errors}
                 vocabulary={vocabulary}
                 onChange={(patch) => setCompany((c) => ({ ...c, ...patch }))}
               />
-            </section>
+            </Section>
           )}
 
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>{isNew ? "2" : "1"} · Readiness</h2>
-              <span className="small muted">KTH Innovation Readiness Level, 1–9</span>
-            </div>
+          <Section title={`${isNew ? "2" : "1"} · Readiness`} aside="KTH Innovation Readiness Level, 1–9">
             <ReadinessFields
               levels={draft.levels}
               dimensions={frameworks.readiness_dimensions}
               onChange={(key: DimensionKey, level) => update({ levels: { ...draft.levels, [key]: level } })}
             />
-          </section>
+          </Section>
 
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>{isNew ? "3" : "2"} · Ocean impact evidence</h2>
-              <span className="small muted">Ocean Impact Navigator</span>
-            </div>
+          <Section title={`${isNew ? "3" : "2"} · Ocean impact evidence`} aside="Ocean Impact Navigator">
             <ImpactFields
               kpis={draft.kpis}
               framework={frameworks}
               errors={errors}
               onChange={(code, kpi) => update({ kpis: { ...draft.kpis, [code]: kpi } })}
             />
-          </section>
+          </Section>
 
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>{isNew ? "4" : "3"} · Sign-off</h2>
-            </div>
-            <div className="form-grid">
+          <Section title={`${isNew ? "4" : "3"} · Sign-off`}>
+            <div className={formGrid}>
               <TextField
                 label="Assessor"
                 value={draft.assessor}
@@ -166,14 +163,14 @@ function AssessForm({ startup }: { startup: StartupDetail | null }) {
                 placeholder="Your name"
                 required
               />
-              <fieldset className="toggle-group">
-                <legend>Confidence</legend>
-                <div>
+              <fieldset className="m-0 min-w-0 border-0 p-0">
+                <legend className="mb-1.5 p-0 text-sm text-muted">Confidence</legend>
+                <div className="flex flex-wrap gap-1.5">
                   {CONFIDENCE.map((c) => (
                     <button
                       key={c}
                       type="button"
-                      className="toggle"
+                      className={toggle}
                       aria-pressed={draft.confidence === c}
                       onClick={() => update({ confidence: c })}
                     >
@@ -182,7 +179,7 @@ function AssessForm({ startup }: { startup: StartupDetail | null }) {
                   ))}
                 </div>
               </fieldset>
-              <div className="span-2">
+              <div className="col-span-full">
                 <TextField
                   label="Rationale"
                   value={draft.rationale}
@@ -192,22 +189,22 @@ function AssessForm({ startup }: { startup: StartupDetail | null }) {
                 />
               </div>
             </div>
-          </section>
+          </Section>
         </div>
 
-        <div className="assess-side">
+        <div className="flex flex-col gap-2.5 xl:sticky xl:top-5">
           <ScorePreview preview={preview.scores} current={startup?.scores ?? null} error={preview.error} />
           {errorCount > 0 && (
-            <p className="small error" role="alert">
+            <p className="text-small text-critical" role="alert">
               Fix {errorCount} field{errorCount > 1 ? "s" : ""} before saving.
             </p>
           )}
           {saveError && (
-            <p className="small error" role="alert">
+            <p className="text-small text-critical" role="alert">
               Couldn't save: {saveError}
             </p>
           )}
-          <button className="btn btn-primary btn-block" disabled={saving}>
+          <button className={button("primary", { block: true })} disabled={saving}>
             {saving ? "Saving…" : isNew ? "Add startup" : "Save assessment"}
           </button>
         </div>
@@ -219,11 +216,13 @@ function AssessForm({ startup }: { startup: StartupDetail | null }) {
 function StartupSwitcher({ current, options }: { current: string; options: { slug: string; name: string }[] }) {
   const navigate = useNavigate();
   return (
-    <div className="field">
-      <label htmlFor="assess-target">Startup</label>
+    <div className="flex flex-col gap-1">
+      <label htmlFor="assess-target" className={fieldLabel}>
+        Startup
+      </label>
       <select
         id="assess-target"
-        className="select"
+        className={control}
         value={current}
         onChange={(e) => navigate(e.target.value ? `/assess/${e.target.value}` : "/assess")}
       >

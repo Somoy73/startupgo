@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { api } from "../api/client";
-import type { Frameworks, StartupSummary } from "../api/types";
-import { vocabularyOf, type Vocabulary } from "../lib/search";
+import { api } from "@/api/client";
+import type { Frameworks, StartupSummary } from "@/api/types";
+import { vocabularyOf, type Vocabulary } from "@/lib/search";
 
 /**
  * App-wide data: the startup list (small enough to search and match client-side)

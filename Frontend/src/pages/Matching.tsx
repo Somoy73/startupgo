@@ -1,12 +1,13 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { api } from "../api/client";
-import { IconPlus } from "../components/Icons";
-import { MatchCard } from "../components/matching/MatchCard";
-import { ThesisEditor } from "../components/matching/ThesisEditor";
-import { matchBand, rankMatches, type Thesis } from "../lib/matching";
-import { isPreset, newThesis, useTheses } from "../lib/theses";
-import { useAppData } from "../state/AppData";
+import { LuPlus } from "react-icons/lu";
+import { api } from "@/api/client";
+import { button, card, cardPad, control, cx, PageHeader, row } from "@/components/ui";
+import { MatchCard } from "@/components/matching/MatchCard";
+import { ThesisEditor } from "@/components/matching/ThesisEditor";
+import { matchBand, rankMatches, type Thesis } from "@/lib/matching";
+import { isPreset, newThesis, useTheses } from "@/lib/theses";
+import { useAppData } from "@/state/AppData";
 
 export function Matching() {
   const { startups, vocabulary, frameworks, upsertStartup } = useAppData();
@@ -62,20 +63,23 @@ export function Matching() {
 
   return (
     <>
-      <div className="page-head">
-        <div>
-          <h1>Matching</h1>
-          <p>Describe your investment thesis; startups are ranked by fit and investment potential.</p>
-        </div>
-      </div>
+      <PageHeader
+        title="Matching"
+        description="Describe your investment thesis; startups are ranked by fit and investment potential."
+      />
 
-      <div className="matching-layout">
-        <section className="card card-pad thesis-panel">
-          <div className="row-gap" style={{ marginBottom: 14 }}>
-            <label className="visually-hidden" htmlFor="thesis">
+      <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[380px_minmax(0,1fr)]">
+        <section className={cx(card, cardPad, "xl:sticky xl:top-5")}>
+          <div className={cx(row, "mb-3.5")}>
+            <label className="sr-only" htmlFor="thesis">
               Thesis
             </label>
-            <select id="thesis" className="select grow" value={saved.id} onChange={(e) => select(e.target.value)}>
+            <select
+              id="thesis"
+              className={cx(control, "flex-auto")}
+              value={saved.id}
+              onChange={(e) => select(e.target.value)}
+            >
               <optgroup label="Presets">
                 {theses.filter(isPreset).map((t) => (
                   <option key={t.id} value={t.id}>
@@ -95,8 +99,13 @@ export function Matching() {
                 </optgroup>
               )}
             </select>
-            <button className="btn icon-btn" type="button" onClick={createNew} aria-label="New thesis">
-              <IconPlus />
+            <button
+              className={button("default", { icon: true })}
+              type="button"
+              onClick={createNew}
+              aria-label="New thesis"
+            >
+              <LuPlus size={16} />
             </button>
           </div>
 
@@ -110,44 +119,44 @@ export function Matching() {
             />
           )}
 
-          <div className="row-gap" style={{ marginTop: 18 }}>
+          <div className={cx(row, "mt-4.5")}>
             {dirty && (
               <>
-                <button className="btn btn-primary" type="button" onClick={saveChanges}>
+                <button className={button("primary")} type="button" onClick={saveChanges}>
                   {isPreset(saved) ? "Save as my thesis" : "Save changes"}
                 </button>
-                <button className="btn" type="button" onClick={discard}>
+                <button className={button()} type="button" onClick={discard}>
                   Reset
                 </button>
               </>
             )}
             {!isPreset(saved) && (
-              <button className="btn btn-danger" type="button" onClick={deleteThesis}>
+              <button className={button("danger")} type="button" onClick={deleteThesis}>
                 Delete
               </button>
             )}
           </div>
-          <p className="small muted" style={{ marginTop: 12 }}>
-            Custom theses are saved in this browser.
-          </p>
+          <p className="mt-3 text-small text-muted">Custom theses are saved in this browser.</p>
         </section>
 
         <section>
-          <div className="match-summary">
-            <span className="small secondary">
+          <div className="mb-2.5 flex flex-wrap items-center justify-between gap-3">
+            <span className="text-small text-fg-2">
               {counts["Strong fit"]} strong · {counts["Partial fit"]} partial · {counts["Weak fit"]} weak
             </span>
-            <label className="small row-gap">
+            <label className={cx(row, "text-small")}>
               <input type="checkbox" checked={hideWeak} onChange={(e) => setHideWeak(e.target.checked)} />
               Hide weak fits
             </label>
           </div>
-          {actionError && <p className="small error">{actionError}</p>}
-          <div className="stack" style={{ gap: 10 }}>
+          {actionError && <p className="text-small text-critical">{actionError}</p>}
+          <div className="flex flex-col gap-2.5">
             {visible.map((m, i) => (
               <MatchCard key={m.startup.slug} rank={i + 1} match={m} onShortlist={shortlist} />
             ))}
-            {visible.length === 0 && <p className="card empty">No startups fit this thesis yet.</p>}
+            {visible.length === 0 && (
+              <p className={cx(card, "p-10 text-center text-muted")}>No startups fit this thesis yet.</p>
+            )}
           </div>
         </section>
       </div>

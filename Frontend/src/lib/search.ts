@@ -13,7 +13,7 @@ import {
   type DimensionKey,
   type PipelineStage,
   type StartupSummary,
-} from "../api/types";
+} from "@/api/types";
 import { PIPELINE_LABELS, stageLabel } from "./format";
 import { REGIONS, regionLabel, type Region } from "./regions";
 

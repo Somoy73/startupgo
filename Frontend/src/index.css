@@ -1,0 +1,219 @@
+/*
+ * Stylesheet entry: Tailwind v4 plus the app's design tokens.
+ *
+ * Colours are CSS variables on :root with a dark set (OS preference, or an explicit
+ * data-theme on <html>). The @theme block exposes them as utilities: bg-surface,
+ * text-fg-2, border-line, … so everything follows light/dark automatically.
+ */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* ---------- Tokens (dataviz reference palette, light + dark) ---------- */
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --surface-2: #f3f2ee;
+  --text: #0b0b0b;
+  --text-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.1);
+  --accent: #2a78d6;
+  --accent-ink: #1c5cab;
+  --accent-wash: rgba(42, 120, 214, 0.1);
+  --track: #cde2fb;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --good: #0ca30c;
+  --good-ink: #006300;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(11, 11, 11, 0.04), 0 4px 16px rgba(11, 11, 11, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --surface-2: #222220;
+    --text: #f0efec;
+    --text-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.1);
+    --accent: #3987e5;
+    --accent-ink: #86b6ef;
+    --accent-wash: rgba(57, 135, 229, 0.14);
+    --track: #0d366b;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --good-ink: #0ca30c;
+    --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --surface-2: #222220;
+  --text: #f0efec;
+  --text-2: #c3c2b7;
+  --muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.1);
+  --accent: #3987e5;
+  --accent-ink: #86b6ef;
+  --accent-wash: rgba(57, 135, 229, 0.14);
+  --track: #0d366b;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --good-ink: #0ca30c;
+  --shadow: none;
+}
+
+/* Same rule as the app: an explicit data-theme wins, otherwise follow the OS. */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--text);
+  --color-fg-2: var(--text-2);
+  --color-muted: var(--muted);
+  --color-grid: var(--grid);
+  --color-axis: var(--axis);
+  --color-line: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-wash: var(--accent-wash);
+  --color-track: var(--track);
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+  --color-series-3: var(--series-3);
+  --color-good: var(--good);
+  --color-good-ink: var(--good-ink);
+  --color-warning: var(--warning);
+  --color-serious: var(--serious);
+  --color-critical: var(--critical);
+
+  --shadow-card: var(--shadow);
+  --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.2);
+  --shadow-dialog: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+  /* The root font size is 15px, so a rem-based unit wouldn't land on whole pixels. */
+  --spacing: 4px;
+
+  /* The app's type scale. No line-heights: text inherits the body's 1.5 unless set. */
+  --text-*: initial;
+  --text-2xs: 0.72rem;
+  --text-xs: 0.75rem;
+  --text-label: 0.78rem;
+  --text-sm: 0.8rem;
+  --text-ctl: 0.82rem;
+  --text-small: 0.85rem;
+  --text-note: 0.88rem;
+  --text-md: 0.9rem;
+  --text-base: 1rem;
+  --text-h2: 1.05rem;
+  --text-lg: 1.1rem;
+  --text-h1: 1.6rem;
+  --text-stat: 1.7rem;
+  --text-hero: 3.2rem;
+
+  --radius-*: initial;
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-card: var(--radius);
+  --radius-xl: 12px;
+  --radius-island: calc(var(--radius) + 4px);
+
+  /* Layout breakpoints (min-width). Use max-md: etc. for "below". */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 561px;
+  --breakpoint-md: 761px;
+  --breakpoint-lg: 861px;
+  --breakpoint-xl: 1001px;
+
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---------- Base elements ---------- */
+@layer base {
+  :root {
+    font-family:
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  body {
+    background: var(--page);
+    color: var(--text);
+  }
+  a {
+    color: var(--accent-ink);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  h1,
+  h2,
+  h3 {
+    line-height: 1.25;
+  }
+  h1 {
+    font-size: var(--text-h1);
+    font-weight: 650;
+  }
+  h2 {
+    font-size: var(--text-h2);
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  kbd {
+    font:
+      600 0.72rem ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      monospace;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    background: var(--surface-2);
+  }
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+}

@@ -33,6 +33,33 @@ Modules/    uv workspace (one uv.lock, one .venv) for the Python modules below
 
 Frontend layout: `src/lib/` holds pure, unit-tested logic (`search.ts`, `matching.ts`, `assessment.ts`); `src/state/AppData.tsx` loads the startup list and frameworks once for all pages; `src/components/` and `src/pages/` are presentation.
 
+### Frontend layout
+
+```
+Frontend/src/
+  pages/            one file per route (DealFlow, StartupPage, Compare, Assess, Matching, Pipeline, Methodology)
+  components/ui/    generic, reusable building blocks, one per file: import from "@/components/ui"
+                    (PageHeader, Section, StatCard, EmptyState, BackLink, Meter, BandBadge, FilterSelect, TextField, …)
+  components/       app-specific components shared by pages (SearchBar, StageSelect, assess/, matching/, …)
+  lib/              logic and hooks (search, sort, matching, assessment, format, useDealFlowSearch, …) + tests
+  api/              client.ts + types.ts (mirrors Backend/app/schemas.py)
+  state/            AppData: startups and frameworks, loaded once
+```
+
+Styling is Tailwind v4 only (`src/index.css`: design tokens, theme and base element styles).
+Colours, radii and shadows come from the design tokens (`bg-surface`, `text-fg-2`, `border-line`,
+`text-muted`, `rounded-card`, `shadow-card`, …), so light/dark switches automatically.
+- **Spacing:** the unit is 4px (`p-4` = 16px).
+- **Type scale:** `text-label`, `text-sm`, `text-small`, `text-h1`, …
+- **Breakpoints:** they match the old media queries (`max-md:` = below 761px).
+- **Shared patterns:** buttons, inputs, cards, tables, chips and toggles are class helpers in
+  `components/ui/styles.ts` (`button("primary")`, `control`, `card`, `th`/`td`, …). Use those
+  instead of repeating the utility lists.
+
+Use the `@/` import alias across folders and `./` within one. Build pages from `components/ui` and
+keep a page's single-use sub-components in the page file; move a piece into `components/` once a
+second page needs it.
+
 ## Run locally
 
 Backend (Python 3.11, managed with [uv](https://docs.astral.sh/uv/)). It creates `DB/startupgo.db` from the SQL files on first start:

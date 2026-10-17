@@ -1,14 +1,30 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { api } from "../api/client";
-import { PIPELINE_STAGES, type PipelineStage } from "../api/types";
-import { IconAlert, IconBack, IconExternal } from "../components/Icons";
-import { OceanImpact } from "../components/OceanImpact";
-import { ReadinessProfile } from "../components/ReadinessProfile";
-import { BandBadge, Meter } from "../components/Scores";
-import { compactMoney, partialDate, PIPELINE_LABELS, score, stageLabel } from "../lib/format";
-import { useAsync } from "../lib/useAsync";
-import { useAppData } from "../state/AppData";
+import { LuExternalLink, LuTriangleAlert } from "react-icons/lu";
+import { api } from "@/api/client";
+import type { PipelineStage } from "@/api/types";
+import { OceanImpact } from "@/components/OceanImpact";
+import { ReadinessProfile } from "@/components/ReadinessProfile";
+import { StageSelect } from "@/components/StageSelect";
+import {
+  BackLink,
+  BandBadge,
+  button,
+  cx,
+  EmptyState,
+  num,
+  PageHeader,
+  Section,
+  stack,
+  StatCard,
+  table,
+  td,
+  textarea,
+  th,
+} from "@/components/ui";
+import { compactMoney, partialDate, score, stageLabel } from "@/lib/format";
+import { useAsync } from "@/lib/useAsync";
+import { useAppData } from "@/state/AppData";
 
 export function StartupPage() {
   const { slug = "" } = useParams();
@@ -18,8 +34,8 @@ export function StartupPage() {
   const [saving, setSaving] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
 
-  if (error) return <p className="empty error">{error}</p>;
-  if (loading || !s) return <p className="empty">Loading…</p>;
+  if (error) return <EmptyState error>{error}</EmptyState>;
+  if (loading || !s) return <EmptyState>Loading…</EmptyState>;
 
   const changeStage = async (stage: PipelineStage) => {
     setActionError(null);
@@ -51,60 +67,40 @@ export function StartupPage() {
 
   return (
     <>
-      <Link to="/" className="back">
-        <IconBack /> Deal flow
-      </Link>
-      <div className="page-head">
-        <div>
-          <div className="row-gap" style={{ marginBottom: 6 }}>
-            <h1>{s.name}</h1>
-            <BandBadge band={scores.band} />
-          </div>
-          <p>{s.tagline}</p>
-          <p className="small muted" style={{ marginTop: 6 }}>
+      <BackLink to="/">Deal flow</BackLink>
+      <PageHeader
+        title={s.name}
+        badge={<BandBadge band={scores.band} />}
+        description={s.tagline}
+        meta={
+          <>
             {s.sector} · {[s.city, s.country].filter((x, i, a) => x && a.indexOf(x) === i).join(", ")}
             {s.founded_year && ` · Founded ${s.founded_year}`} · {stageLabel(s.stage)}
             {s.website && (
               <>
                 {" · "}
                 <a href={s.website} target="_blank" rel="noreferrer">
-                  Website <IconExternal />
+                  Website <LuExternalLink size={13} className="inline" />
                 </a>
               </>
             )}
-          </p>
-        </div>
-        <div className="row-gap" style={{ alignItems: "flex-end" }}>
-          <Link to={`/assess/${s.slug}`} className="btn">
-            Re-assess
-          </Link>
-          <div className="field">
-            <label htmlFor="stage">Pipeline stage</label>
-            <select
-              id="stage"
-              className="select"
-              value={s.pipeline_stage}
-              onChange={(e) => changeStage(e.target.value as PipelineStage)}
-            >
-              {PIPELINE_STAGES.map((p) => (
-                <option key={p} value={p}>
-                  {PIPELINE_LABELS[p]}
-                </option>
-              ))}
-            </select>
+          </>
+        }
+        actions={
+          <div className="flex flex-wrap items-end gap-2">
+            <Link to={`/assess/${s.slug}`} className={button()}>
+              Re-assess
+            </Link>
+            <StageSelect id="stage" label="Pipeline stage" value={s.pipeline_stage} onChange={changeStage} />
           </div>
-        </div>
-      </div>
+        }
+      />
 
-      {actionError && (
-        <p className="error small" style={{ marginBottom: 12 }}>
-          {actionError}
-        </p>
-      )}
+      {actionError && <p className="mb-3 text-small text-critical">{actionError}</p>}
 
       {readiness.confidence === "low" && (
-        <div className="notice">
-          <IconAlert />
+        <div className="mb-4 flex items-start gap-2.5 rounded-lg bg-surface-2 px-3.5 py-2.5 text-note text-fg-2">
+          <LuTriangleAlert className="mt-0.5 size-4.5 flex-none text-warning" />
           <span>
             Readiness and impact-evidence levels are a <strong>{readiness.assessor}</strong> (
             {partialDate(readiness.assessed_on)}, confidence: low) built from public sources. Validate with the founders
@@ -113,153 +109,123 @@ export function StartupPage() {
         </div>
       )}
 
-      <div className="grid grid-4" style={{ marginBottom: 16 }}>
-        <div className="card stat">
-          <span className="label">Investment potential</span>
-          <span className="hero-value">{score(scores.potential)}</span>
-          <span className="sub">
-            {scores.imbalance_penalty > 0 ? `Includes −${scores.imbalance_penalty} imbalance penalty` : "out of 100"}
-          </span>
-        </div>
-        <div className="card stat">
-          <span className="label">Readiness index (KTH IRL)</span>
-          <span className="value">{score(scores.readiness)}</span>
-          <Meter value={scores.readiness} label="Readiness index" showValue={false} />
-          <span className="sub">
-            TRL {readiness.trl} · BRL {readiness.brl} · spread {scores.readiness_spread}
-          </span>
-        </div>
-        <div className="card stat">
-          <span className="label">Ocean impact readiness</span>
-          <span className="value">{score(scores.ocean_impact)}</span>
-          <Meter value={scores.ocean_impact} label="Ocean impact" showValue={false} />
-          <span className="sub">
-            Best evidence: {scores.ocean_evidence_label} · areas {scores.ocean_areas_covered.join(", ") || "none"}
-          </span>
-        </div>
-        <div className="card stat">
-          <span className="label">Funding momentum</span>
-          <span className="value">{score(scores.momentum)}</span>
-          <Meter value={scores.momentum} label="Funding momentum" showValue={false} />
-          <span className="sub">Last round {partialDate(s.last_round_on)}</span>
-        </div>
+      <div className="mb-4 grid grid-cols-2 gap-4 xl:grid-cols-4">
+        <StatCard
+          label="Investment potential"
+          value={score(scores.potential)}
+          hero
+          sub={scores.imbalance_penalty > 0 ? `Includes −${scores.imbalance_penalty} imbalance penalty` : "out of 100"}
+        />
+        <StatCard
+          label="Readiness index (KTH IRL)"
+          value={score(scores.readiness)}
+          meter={{ value: scores.readiness, label: "Readiness index" }}
+          sub={`TRL ${readiness.trl} · BRL ${readiness.brl} · spread ${scores.readiness_spread}`}
+        />
+        <StatCard
+          label="Ocean impact readiness"
+          value={score(scores.ocean_impact)}
+          meter={{ value: scores.ocean_impact, label: "Ocean impact" }}
+          sub={`Best evidence: ${scores.ocean_evidence_label} · areas ${scores.ocean_areas_covered.join(", ") || "none"}`}
+        />
+        <StatCard
+          label="Funding momentum"
+          value={score(scores.momentum)}
+          meter={{ value: scores.momentum, label: "Funding momentum" }}
+          sub={`Last round ${partialDate(s.last_round_on)}`}
+        />
       </div>
 
-      <div className="grid grid-2" style={{ alignItems: "start" }}>
-        <div className="stack">
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>Readiness profile</h2>
-              <span className="small muted">KTH Innovation Readiness Level, 1–9</span>
-            </div>
+      <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-2">
+        <div className={stack}>
+          <Section title="Readiness profile" aside="KTH Innovation Readiness Level, 1–9">
             <ReadinessProfile levels={s.levels} lagging={scores.lagging_dimensions} />
-            {readiness.rationale && (
-              <p className="small secondary" style={{ marginTop: 14 }}>
-                {readiness.rationale}
-              </p>
-            )}
-          </section>
+            {readiness.rationale && <p className="mt-3.5 text-small text-fg-2">{readiness.rationale}</p>}
+          </Section>
 
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>About</h2>
-            </div>
-            <p className="secondary">{s.description}</p>
-          </section>
+          <Section title="About">
+            <p className="text-fg-2">{s.description}</p>
+          </Section>
 
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>Funding rounds</h2>
-              <span className="small muted">Total disclosed ≈ {compactMoney(s.total_disclosed_usd)}</span>
-            </div>
-            <div className="table-wrap">
-              <table className="data">
+          <Section title="Funding rounds" aside={`Total disclosed ≈ ${compactMoney(s.total_disclosed_usd)}`}>
+            <div className="overflow-x-auto">
+              <table className={table}>
                 <thead>
                   <tr>
-                    <th>Round</th>
-                    <th>Date</th>
-                    <th className="num">Amount</th>
-                    <th>Lead</th>
+                    <th className={th}>Round</th>
+                    <th className={th}>Date</th>
+                    <th className={cx(th, num)}>Amount</th>
+                    <th className={th}>Lead</th>
                   </tr>
                 </thead>
                 <tbody>
                   {s.funding_rounds.map((r, i) => (
                     <tr key={i}>
-                      <td>
+                      <td className={td}>
                         {stageLabel(r.round_type)}
                         {r.source_url && (
                           <>
                             {" "}
                             <a href={r.source_url} target="_blank" rel="noreferrer" aria-label="Source">
-                              <IconExternal />
+                              <LuExternalLink size={13} className="inline" />
                             </a>
                           </>
                         )}
                       </td>
-                      <td className="tabular">{partialDate(r.announced_on)}</td>
-                      <td className="num">
+                      <td className={cx(td, "tabular-nums")}>{partialDate(r.announced_on)}</td>
+                      <td className={cx(td, num)}>
                         {r.amount != null && r.currency ? compactMoney(r.amount, r.currency) : "Undisclosed"}
                       </td>
-                      <td className="small secondary">
+                      <td className={cx(td, "text-small text-fg-2")}>
                         {r.lead_investors}
-                        {r.notes && <div className="muted">{r.notes}</div>}
+                        {r.notes && <div className="text-muted">{r.notes}</div>}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-          </section>
+          </Section>
         </div>
 
-        <div className="stack">
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>Ocean impact</h2>
-              <span className="small muted">Ocean Impact Navigator · evidence 0–4</span>
-            </div>
+        <div className={stack}>
+          <Section title="Ocean impact" aside="Ocean Impact Navigator · evidence 0–4">
             <OceanImpact kpis={s.ocean_kpis} />
-          </section>
+          </Section>
 
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>Analyst notes</h2>
-            </div>
-            <form onSubmit={submitNote} className="stack" style={{ gap: 8, marginBottom: 14 }}>
-              <label className="visually-hidden" htmlFor="note">
+          <Section title="Analyst notes">
+            <form onSubmit={submitNote} className="mb-3.5 flex flex-col gap-2">
+              <label className="sr-only" htmlFor="note">
                 New note
               </label>
               <textarea
                 id="note"
-                className="textarea"
+                className={textarea}
                 placeholder="Add a diligence note…"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
               />
               <div>
-                <button className="btn btn-primary" disabled={saving || !note.trim()}>
+                <button className={button("primary")} disabled={saving || !note.trim()}>
                   {saving ? "Saving…" : "Add note"}
                 </button>
               </div>
             </form>
-            <div className="notes">
-              {s.notes.length === 0 && <p className="small muted">No notes yet.</p>}
+            <div className="flex flex-col gap-2.5">
+              {s.notes.length === 0 && <p className="text-small text-muted">No notes yet.</p>}
               {s.notes.map((n) => (
-                <div className="note" key={n.id}>
-                  <p>{n.body}</p>
-                  <span className="small muted">
+                <div className="border-l-3 border-accent py-1 pl-3" key={n.id}>
+                  <p className="whitespace-pre-wrap">{n.body}</p>
+                  <span className="text-small text-muted">
                     {n.author} · {new Date(n.created_at + "Z").toLocaleString()}
                   </span>
                 </div>
               ))}
             </div>
-          </section>
+          </Section>
 
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>Sources</h2>
-            </div>
-            <ul style={{ margin: 0, paddingLeft: 18 }}>
+          <Section title="Sources">
+            <ul className="m-0 list-disc pl-4.5">
               {s.sources.map((src) => (
                 <li key={src.url}>
                   <a href={src.url} target="_blank" rel="noreferrer">
@@ -268,7 +234,7 @@ export function StartupPage() {
                 </li>
               ))}
             </ul>
-          </section>
+          </Section>
         </div>
       </div>
     </>

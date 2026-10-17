@@ -1,4 +1,4 @@
-import type { Readiness, Scores, StartupSummary } from "../api/types";
+import type { Readiness, Scores, StartupSummary } from "@/api/types";
 
 type Overrides = Omit<Partial<StartupSummary>, "readiness" | "scores"> & {
   slug: string;

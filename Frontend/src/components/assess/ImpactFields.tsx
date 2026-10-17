@@ -1,6 +1,6 @@
-import type { Frameworks } from "../../api/types";
-import { EMPTY_KPI, type DraftErrors, type KpiDraft } from "../../lib/assessment";
-import { Segmented, TextField } from "../Controls";
+import type { Frameworks } from "@/api/types";
+import { EMPTY_KPI, type DraftErrors, type KpiDraft } from "@/lib/assessment";
+import { areaCode, disclosure, disclosureSummary, formGrid, Segmented, TextField } from "@/components/ui";
 
 const EVIDENCE = [0, 1, 2, 3, 4];
 
@@ -16,29 +16,31 @@ export function ImpactFields({ kpis, framework, errors, onChange }: Props) {
   const evidenceLabel = (n: number) => framework.evidence_scale.find((e) => e.level === n)?.label ?? String(n);
 
   return (
-    <div className="stack" style={{ gap: 8 }}>
-      <p className="small secondary">
+    <div className="flex flex-col gap-2">
+      <p className="text-small text-fg-2">
         Evidence: {framework.evidence_scale.map((e) => `${e.level} ${e.label}`).join(" · ")}. Only KPIs above 0 are
         saved.
       </p>
       {framework.ocean_impact_areas.map((area) => {
         const active = area.kpis.filter((k) => (kpis[k.code]?.level ?? 0) > 0).length;
         return (
-          <details className="fw" key={area.code} open={active > 0}>
-            <summary>
+          <details className={disclosure} key={area.code} open={active > 0}>
+            <summary className={disclosureSummary}>
               <span>
-                <span className="area-code">{area.code}</span>
+                <span className={areaCode}>{area.code}</span>
                 {area.name}
               </span>
-              <span className="small muted">{active ? `${active} selected` : `${area.kpis.length} KPIs`}</span>
+              <span className="text-small text-muted">
+                {active ? `${active} selected` : `${area.kpis.length} KPIs`}
+              </span>
             </summary>
             {area.kpis.map((k) => {
               const kpi = kpis[k.code] ?? EMPTY_KPI;
               const set = (patch: Partial<KpiDraft>) => onChange(k.code, { ...kpi, ...patch });
               return (
-                <div className="assess-kpi" key={k.code}>
-                  <div className="assess-kpi-head">
-                    <span className="small">
+                <div className="flex flex-col gap-2.5 border-t border-grid py-2.5 first-of-type:mt-2.5" key={k.code}>
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <span className="text-small">
                       <strong>{k.code}</strong> {k.name}
                     </span>
                     <Segmented
@@ -50,7 +52,7 @@ export function ImpactFields({ kpis, framework, errors, onChange }: Props) {
                     />
                   </div>
                   {kpi.level > 0 && (
-                    <div className="form-grid">
+                    <div className={formGrid}>
                       <TextField
                         label="Claim"
                         value={kpi.claim}

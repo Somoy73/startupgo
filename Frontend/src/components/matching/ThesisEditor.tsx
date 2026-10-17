@@ -1,9 +1,9 @@
 import { useId } from "react";
-import { FUNDING_STAGES, type Frameworks } from "../../api/types";
-import { stageLabel } from "../../lib/format";
-import type { Thesis } from "../../lib/matching";
-import { REGIONS } from "../../lib/regions";
-import { OptionalLevel, TextField, ToggleGroup } from "../Controls";
+import { FUNDING_STAGES, type Frameworks } from "@/api/types";
+import { stageLabel } from "@/lib/format";
+import type { Thesis } from "@/lib/matching";
+import { REGIONS } from "@/lib/regions";
+import { control, fieldLabel, OptionalLevel, TextField, ToggleGroup } from "@/components/ui";
 
 const OCEAN_THRESHOLDS = [20, 30, 40, 50, 60, 70];
 
@@ -22,7 +22,7 @@ export function ThesisEditor({ thesis, editableName, sectors, impactAreas, onCha
   const qualityPct = Math.round(thesis.qualityWeight * 100);
 
   return (
-    <div className="stack" style={{ gap: 14 }}>
+    <div className="flex flex-col gap-3.5">
       {editableName && <TextField label="Thesis name" value={thesis.name} onChange={(name) => set({ name })} />}
       <ToggleGroup
         label="Stages"
@@ -48,14 +48,16 @@ export function ThesisEditor({ thesis, editableName, sectors, impactAreas, onCha
         selected={thesis.impactAreas}
         onChange={(impactAreas) => set({ impactAreas })}
       />
-      <div className="form-grid three">
+      <div className="grid grid-cols-3 gap-x-3.5 gap-y-3 max-sm:grid-cols-1">
         <OptionalLevel label="Min TRL" value={thesis.minTrl} onChange={(minTrl) => set({ minTrl })} />
         <OptionalLevel label="Min BRL" value={thesis.minBrl} onChange={(minBrl) => set({ minBrl })} />
-        <div className="field">
-          <label htmlFor={oceanId}>Min ocean impact</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor={oceanId} className={fieldLabel}>
+            Min ocean impact
+          </label>
           <select
             id={oceanId}
-            className="select"
+            className={control}
             value={thesis.minOceanImpact ?? ""}
             onChange={(e) => set({ minOceanImpact: e.target.value ? Number(e.target.value) : null })}
           >
@@ -68,8 +70,8 @@ export function ThesisEditor({ thesis, editableName, sectors, impactAreas, onCha
           </select>
         </div>
       </div>
-      <div className="field">
-        <label htmlFor={weightId}>
+      <div className="flex flex-col gap-1">
+        <label htmlFor={weightId} className={fieldLabel}>
           Ranking: {100 - qualityPct}% thesis fit · {qualityPct}% investment potential
         </label>
         <input

@@ -11,7 +11,7 @@ import {
   type ScorePreviewInput,
   type StartupDetail,
   type StartupInput,
-} from "../api/types";
+} from "@/api/types";
 
 export interface KpiDraft {
   level: number;

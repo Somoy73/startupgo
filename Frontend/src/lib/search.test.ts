@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { ApiSearchFilters } from "../api/types";
+import type { ApiSearchFilters } from "@/api/types";
 import {
   emptyFilters,
   filterChips,
@@ -65,7 +65,12 @@ describe("formatSearch", () => {
   });
 
   it("decodes the URL form without the data vocabulary", () => {
-    const f = { ...emptyFilters(), sectors: ["Materials & packaging"], countries: ["United Kingdom"], stages: ["seed"] };
+    const f = {
+      ...emptyFilters(),
+      sectors: ["Materials & packaging"],
+      countries: ["United Kingdom"],
+      stages: ["seed"],
+    };
     const decoded = parseSearch(formatSearch(f), { sectors: [], countries: [] });
     // Casing is restored by the backend, which matches sectors and countries case-insensitively.
     expect(decoded).toEqual({ ...f, sectors: ["materials & packaging"], countries: ["united kingdom"] });

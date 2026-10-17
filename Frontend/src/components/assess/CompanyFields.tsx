@@ -1,9 +1,9 @@
 import { useId } from "react";
-import { FUNDING_STAGES, type FundingStage } from "../../api/types";
-import type { CompanyDraft, DraftErrors } from "../../lib/assessment";
-import { stageLabel } from "../../lib/format";
-import type { Vocabulary } from "../../lib/search";
-import { TextField } from "../Controls";
+import { FUNDING_STAGES, type FundingStage } from "@/api/types";
+import type { CompanyDraft, DraftErrors } from "@/lib/assessment";
+import { stageLabel } from "@/lib/format";
+import type { Vocabulary } from "@/lib/search";
+import { control, fieldLabel, formGrid, TextField } from "@/components/ui";
 
 interface Props {
   company: CompanyDraft;
@@ -25,16 +25,18 @@ export function CompanyFields({ company, errors, vocabulary, onChange }: Props) 
   );
 
   return (
-    <div className="form-grid">
+    <div className={formGrid}>
       {field("name", "Company name", { required: true })}
       {field("tagline", "One-line tagline", { required: true })}
-      <div className="span-2">{field("description", "What they do", { required: true, multiline: true })}</div>
+      <div className="col-span-full">{field("description", "What they do", { required: true, multiline: true })}</div>
       {field("sector", "Sector", { required: true, suggestions: vocabulary.sectors })}
-      <div className="field">
-        <label htmlFor={stageId}>Funding stage</label>
+      <div className="flex flex-col gap-1">
+        <label htmlFor={stageId} className={fieldLabel}>
+          Funding stage
+        </label>
         <select
           id={stageId}
-          className="select"
+          className={control}
           value={company.stage}
           onChange={(e) => onChange({ stage: e.target.value as FundingStage })}
         >
@@ -50,8 +52,8 @@ export function CompanyFields({ company, errors, vocabulary, onChange }: Props) 
       {field("foundedYear", "Founded (year)", { placeholder: "e.g. 2024" })}
       {field("website", "Website", { placeholder: "https://" })}
 
-      <h3 className="span-2" style={{ marginTop: 8 }}>
-        Latest funding round <span className="muted small">(optional)</span>
+      <h3 className="col-span-full mt-2">
+        Latest funding round <span className="text-small text-muted">(optional)</span>
       </h3>
       {field("roundAmount", "Amount", { placeholder: "e.g. 500000" })}
       {field("roundCurrency", "Currency", { placeholder: "e.g. EUR" })}
