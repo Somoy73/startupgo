@@ -67,7 +67,7 @@ export function StartupPage() {
         </div>
       )}
 
-      <div className="max-w-[1000px]">
+      
         {/* Changed from flex flex-wrap to 2-column grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: "start" }}>
           <section className="card card-pad md:col-span-2">
@@ -167,7 +167,7 @@ export function StartupPage() {
             </section>
           </div>
         </div>
-      </div>
+      
     </>
   );
 }
