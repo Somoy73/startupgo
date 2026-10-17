@@ -5,7 +5,6 @@ import { IconAlert, IconBack, IconExternal } from "../../components/Icons";
 import { OceanImpact } from "../../components/OceanImpact";
 import { ReadinessSection } from "../../components/ReadinessSection";
 import { ResearchPanel } from "../../components/ResearchPanel";
-import { ScoreRadar } from "../../components/ScoreRadar";
 import { PotentialMark } from "../../components/PotentialMark";
 import { BandBadge } from "../../components/Scores";
 import { compactMoney, partialDate, stageLabel } from "../../lib/format";
@@ -74,105 +73,109 @@ export function StartupPage() {
         </div>
       )}
 
-      <div className="grid grid-2" style={{ alignItems: "start", marginBottom: 16 }}>
-        <section className="card card-pad">
-          <div className="card-head">
-            <h2>About</h2>
+      
+        {/* Changed from flex flex-wrap to 2-column grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: "start" }}>
+          <section className="card card-pad md:col-span-2">
+            <div className="card-head">
+              <h2>About</h2>
+            </div>
+            <p className="secondary">{s.description}</p>
+          </section>
+
+          {/* Left Column Stack */}
+          <div className="stack">
+            {assessed && (
+              <ReadinessSection levels={s.levels} readiness={readiness} scores={scores} />
+            )}
           </div>
-          <p className="secondary">{s.description}</p>
-        </section>
-        {assessed && <ScoreRadar scores={scores} lastRound={partialDate(s.last_round_on)} />}
-      </div>
 
-      <div className="grid grid-2" style={{ alignItems: "start" }}>
-        <div className="stack">
-          {assessed && <ReadinessSection levels={s.levels} readiness={readiness} scores={scores} />}
-
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>Funding rounds</h2>
-              <span className="small muted">
-                Total disclosed ≈ {compactMoney(s.total_disclosed_usd)}
-              </span>
-            </div>
-            {s.funding_rounds.length === 0 && (
-              <p className="small muted">No funding rounds recorded.</p>
-            )}
-            {s.funding_rounds.length > 0 && (
-              <div className="table-wrap">
-                <table className="data">
-                  <thead>
-                    <tr>
-                      <th>Round</th>
-                      <th>Date</th>
-                      <th className="num">Amount</th>
-                      <th>Lead</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {s.funding_rounds.map((r, i) => (
-                      <tr key={i}>
-                        <td>
-                          {stageLabel(r.round_type)}
-                          {r.source_url && (
-                            <>
-                              {" "}
-                              <a
-                                href={r.source_url}
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label="Source"
-                              >
-                                <IconExternal />
-                              </a>
-                            </>
-                          )}
-                        </td>
-                        <td className="tabular">{partialDate(r.announced_on)}</td>
-                        <td className="num">
-                          {r.amount != null && r.currency
-                            ? compactMoney(r.amount, r.currency)
-                            : "Undisclosed"}
-                        </td>
-                        <td className="small secondary">
-                          {r.lead_investors}
-                          {r.notes && <div className="muted">{r.notes}</div>}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+          {/* Right Column Stack */}
+          <div className="stack">
+            <section className="card card-pad">
+              <div className="card-head">
+                <h2>Ocean impact</h2>
+                <span className="small muted">Ocean Impact Navigator · evidence 0–4</span>
               </div>
-            )}
-          </section>
-        </div>
+              <OceanImpact kpis={s.ocean_kpis} />
+            </section>
 
-        <div className="stack">
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>Ocean impact</h2>
-              <span className="small muted">Ocean Impact Navigator · evidence 0–4</span>
-            </div>
-            <OceanImpact kpis={s.ocean_kpis} />
-          </section>
+            <section className="card card-pad">
+              <div className="card-head">
+                <h2>Sources</h2>
+              </div>
+              {s.sources.length === 0 && <p className="small muted">No sources recorded.</p>}
+              <ul style={{ margin: 0, paddingLeft: 18, listStyle: "disc" }}>
+                {s.sources.map((src) => (
+                  <li key={src.url}>
+                    <a href={src.url} target="_blank" rel="noreferrer">
+                      {src.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>Sources</h2>
-            </div>
-            {s.sources.length === 0 && <p className="small muted">No sources recorded.</p>}
-            <ul style={{ margin: 0, paddingLeft: 18, listStyle: "disc" }}>
-              {s.sources.map((src) => (
-                <li key={src.url}>
-                  <a href={src.url} target="_blank" rel="noreferrer">
-                    {src.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
+            <section className="card card-pad">
+              <div className="card-head">
+                <h2>Funding rounds</h2>
+                <span className="small muted">
+                  Total disclosed ≈ {compactMoney(s.total_disclosed_usd)}
+                </span>
+              </div>
+              {s.funding_rounds.length === 0 && (
+                <p className="small muted">No funding rounds recorded.</p>
+              )}
+              {s.funding_rounds.length > 0 && (
+                <div className="table-wrap">
+                  <table className="data">
+                    <thead>
+                      <tr>
+                        <th>Round</th>
+                        <th>Date</th>
+                        <th className="num">Amount</th>
+                        <th>Lead</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {s.funding_rounds.map((r, i) => (
+                        <tr key={i}>
+                          <td>
+                            {stageLabel(r.round_type)}
+                            {r.source_url && (
+                              <>
+                                {" "}
+                                <a
+                                  href={r.source_url}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  aria-label="Source"
+                                >
+                                  <IconExternal />
+                                </a>
+                              </>
+                            )}
+                          </td>
+                          <td className="tabular">{partialDate(r.announced_on)}</td>
+                          <td className="num">
+                            {r.amount != null && r.currency
+                              ? compactMoney(r.amount, r.currency)
+                              : "Undisclosed"}
+                          </td>
+                          <td className="small secondary">
+                            {r.lead_investors}
+                            {r.notes && <div className="muted">{r.notes}</div>}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </section>
+          </div>
         </div>
-      </div>
+      
     </>
   );
 }
