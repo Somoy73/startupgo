@@ -57,6 +57,12 @@ Entries are saved to `output/startups/<id>.json` and listed in `output/index.jso
 printed one line per startup; add `--json` for the full workflow state. Leads without a website,
 search failures and other problems are reported but never stop the run.
 
+### Searching the entries
+
+The Backend's natural-language search is the `Search` module (`Modules/Search`, LightRAG). Its
+`process-storage` command reads these entries (`output/startups/*.json`) along with the database.
+Run it again after saving new entries.
+
 ### Web search
 
 The research agent runs the `[search] queries` in `config.toml` (e.g. `"{name}" startup funding

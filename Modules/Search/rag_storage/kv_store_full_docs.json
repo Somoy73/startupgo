@@ -1,0 +1,172 @@
+{
+  "startup:sofar-ocean": {
+    "content": "# Sofar Ocean\nReal-time ocean data from a global network of Spotter buoys\n\nBuilds solar-powered Spotter buoys that report wind, wave, temperature and current data, and sells marine weather intelligence. Formed from the merger of OpenROV and Spoondrift.\n\nSector: Ocean data\nLocation: San Francisco, United States\nStage: series-b\nFounded: 2019\nWebsite: https://www.sofarocean.com\n\n## Readiness (KTH Innovation Readiness Level 1-9, assessed 2026-10-16, low confidence)\n- Customer (CRL) 8: Market-ready product sold near target price; initial traction; sales process staffed.\n- Technology (TRL) 9: Scalable technology proven in operations by several users over time.\n- Business model (BRL) 7: First commercial revenue shows willingness to pay; key partner agreements in place.\n- IP (IPRL) 6: Complete IP strategy; positive response from authorities; freedom-to-operate assessed.\n- Team (TMRL) 8: Experienced leadership team; competent board; HR processes in place.\n- Funding (FRL) 8: Term-sheet-level discussions; due-diligence materials ready.\nThousands of buoys deployed across all major oceans; Series B-backed team.\n\n## Ocean impact\n- Towards 1.5C, GHG emissions reduced or avoided (D1): Weather routing can reduce ship fuel use (claimed). (claimed)\n- Climate-resilient coastal communities, Use of ocean information products/services in climate adaptation decisions (E2): Real-time wind, wave, temperature and current data used in marine decisions. (qualitative evidence)\n\n## Funding\n- series-b: 39,000,000 USD (2021-11), led by Union Square Ventures; Foundry Group. Aggregators list total raised between ~$47M and ~$73M; unverified.\n\n## Sources\n- TechCrunch: Sofar nets $39M Series B",
+    "file_path": "startup:sofar-ocean",
+    "parse_format": "raw",
+    "content_hash": "805c45316bc9bb24b95d636f346665bb",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1792196612,
+    "update_time": 1792196612,
+    "_id": "startup:sofar-ocean"
+  },
+  "startup:kelp-blue": {
+    "content": "# Kelp Blue\nGiant kelp forests for carbon, biodiversity and biostimulants\n\nDutch-headquartered company cultivating giant kelp forests off Lüderitz, Namibia. Received the Zayed Sustainability Prize (Climate Action) at COP28.\n\nSector: Aquaculture\nLocation: Lüderitz, Namibia\nStage: project-finance\nFounded: 2020\nWebsite: https://kelp.blue\n\n## Readiness (KTH Innovation Readiness Level 1-9, assessed 2026-10-16, low confidence)\n- Customer (CRL) 5: Customers confirm the product can solve their problem (problem-solution fit).\n- Technology (TRL) 6: Representative prototype demonstrated in a relevant environment.\n- Business model (BRL) 5: Revenue and cost sides validated with external feedback; P&L updated.\n- IP (IPRL) 3: Key IP described in detail; initial protectability evaluation.\n- Team (TMRL) 7: Well-functioning team with clear roles; board and advisors operational.\n- Funding (FRL) 6: Improved pitch tested; 3-5 year P&L and cash flow.\nLarge-scale pilot forest in Namibia; project finance committed in principle but not yet confirmed as drawn.\n\n## Ocean impact\n- Sustainably managed ocean resources, Volume of biomass preserved or restored (A1): Kelp forest habitat increases local biomass (claimed). (claimed)\n- Thriving and restored marine habitats, Area of kelp forest protected or restored (C5): Cultivates giant kelp forests off Lüderitz, Namibia. (qualitative evidence)\n- Towards 1.5C, Carbon sequestered (D3): Carbon capture from kelp forests (claimed). (claimed)\n- Positive socio-economic outcomes, Number of jobs created (F1): Creates local jobs in Lüderitz (claimed). (claimed)\n\n## Funding\n- project-finance: 60,000,000 USD (2023-12), led by Climate Fund Managers; Eos Capital. In-principle commitment, released in phases, pending investment and Namibian regulatory approvals. A separate ~$80M blue bond was planned on the NSX.\n\n## Sources\n- The Fish Site: Kelp Blue seeks $80M blue bond\n- The Brief: Kelp Blue blue bonds",
+    "file_path": "startup:kelp-blue",
+    "parse_format": "raw",
+    "content_hash": "73199d743ab8d100a62e64978363ca6c",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1792196612,
+    "update_time": 1792196612,
+    "_id": "startup:kelp-blue"
+  },
+  "startup:oceanium": {
+    "content": "# Oceanium\nSeaweed biorefinery for food, materials and biodegradable products\n\nProcesses farmed kelp into food ingredients, biodegradable materials and other products through its biorefinery technology.\n\nSector: Aquaculture\nLocation: Oban, United Kingdom\nStage: seed\nWebsite: https://www.oceanium.world\n\n## Readiness (KTH Innovation Readiness Level 1-9, assessed 2026-10-16, low confidence)\n- Customer (CRL) 5: Customers confirm the product can solve their problem (problem-solution fit).\n- Technology (TRL) 6: Representative prototype demonstrated in a relevant environment.\n- Business model (BRL) 5: Revenue and cost sides validated with external feedback; P&L updated.\n- IP (IPRL) 5: Draft IP strategy; first formal application of key IP filed.\n- Team (TMRL) 6: Complementary, diverse founding team with clear CEO; advisors being recruited.\n- Funding (FRL) 5: Investor pitch tested; 12-month budget; funding strategy decided.\nBiorefinery tech scaling ahead of a planned Series A for a commercial plant.\n\n## Ocean impact\n- Sustainably managed ocean resources, Tonnes of ocean-based seaweed and bivalves produced (A4): Creates demand for farmed kelp. (claimed)\n- A clean ocean, Volume of macro-plastic diverted from nature (or landfill) (B2): Biodegradable materials as plastic alternatives. (claimed)\n\n## Funding\n- seed: 2,600,000 USD (2023-09), led by Builders Vision. Pre-Series A raise to commercialise; WWF and Green Angel Ventures participated.\n- seed: 2,000,000 GBP, led by Green Angel Syndicate. Seed II first close; WWF anchor; Katapult Ocean, Sky Ocean Ventures, Scottish Enterprise previously invested.\n\n## Sources\n- FoodNavigator: Oceanium secures fresh funds\n- SeafoodSource: Oceanium £2M",
+    "file_path": "startup:oceanium",
+    "parse_format": "raw",
+    "content_hash": "bcbb791113c52b5dd9a4e5f138f6ffbe",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1792196612,
+    "update_time": 1792196612,
+    "_id": "startup:oceanium"
+  },
+  "startup:clearbot": {
+    "content": "# Clearbot\nAutonomous electric boats that collect floating waste\n\nSpun out of University of Hong Kong students; builds self-driving electric boats that each collect 250-300 kg of waste per trip. Reported deployments in Hong Kong, India and Panama.\n\nSector: Ocean cleanup\nLocation: Hong Kong\nStage: seed\n\n## Readiness (KTH Innovation Readiness Level 1-9, assessed 2026-10-16, low confidence)\n- Customer (CRL) 6: Customer testing confirms value; structured sales activities started.\n- Technology (TRL) 7: Near-complete prototype works in an operational environment.\n- Business model (BRL) 5: Revenue and cost sides validated with external feedback; P&L updated.\n- IP (IPRL) 4: Protectability confirmed by professional; priorities decided.\n- Team (TMRL) 5: Founding team with main competencies; shareholder agreement signed.\n- Funding (FRL) 5: Investor pitch tested; 12-month budget; funding strategy decided.\nRobots deployed in several countries; seed-stage company, round size undisclosed.\n\n## Ocean impact\n- A clean ocean, Volume of macro-plastic diverted from nature (or landfill) (B2): Each robot collects 250-300 kg of floating waste per trip. (qualitative evidence)\n- Positive socio-economic outcomes, Number of jobs created (F1): Deployments create local operator jobs (claimed). (claimed)\n\n## Funding\n- seed: undisclosed amount (2022-09), led by Alibaba Hong Kong Entrepreneurs Fund. Amount undisclosed. Co-investors: Earth Venture Capital, Asia Sustainability Angels, CarbonX Capital.\n\n## Sources\n- HiveLife: Clearbot",
+    "file_path": "startup:clearbot",
+    "parse_format": "raw",
+    "content_hash": "95ba0ba7a29ec92bdb435ee77b10b6e9",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1792196612,
+    "update_time": 1792196612,
+    "_id": "startup:clearbot"
+  },
+  "entry:reeldata-ai": {
+    "content": "# ReelData AI\nWebsite: http://www.reeldata.ai/\n\n## Identity and registry\nName: ReelData AI\nWebsite domain: reeldata.ai\nCountry: Canada\nCity: Dartmouth\n\n## Blue-economy profile\nBlue sector: aquaculture\nOcean problem: Aquaculture operations face high feed waste, elevated fish mortality, and environmental impacts from a lack of precise operational data.\nSolution summary: ReelData provides an AI and computer vision suite that delivers automated feeding, biomass monitoring, and health tracking for land-based fish farms.\nCustomer type: B2B\nTarget customers: fish farms\n\n## Technology\nTech description: ReelData uses AI and camera monitoring in land-based aquaculture to track fish behavior and biomass and autonomously adjust feeding based on real-time appetite.\nDev stage: commercial operation\n- Pilots: partner: Fifax\n\n## Business\nValue proposition: ReelData provides land-based aquaculture farms with data and automation to maximize growth, minimize costs, and reduce risk.\nCustomer validation: unpaid pilot\n\n## Ocean impact\nImpact claim: ReelData claims its AI suite enables aquaculture farms to operate with greater sustainability and minimize their environmental impact.\nImpact pathway: By automatically detecting real-time fish appetite and adjusting feed levels accordingly, the platform prevents overfeeding and limits aquaculture waste.\n\n## Funding and deal\n- Equity rounds: stage: series a; amount: 8,000,000; currency: USD\nTotal raised: 7,440,000\nStage: series a\n\n## Marketing and distribution\nSales channels: partners\nDistribution partners: Farm in a Box\n\n## Signals for monitoring\n- News: date: 2024-10-18; headline: Farm in a Box and ReelData AI announced strategic partnership; url: http://www.reeldata.ai/news/farm-in-a-box-and-reeldata-ai-announced-strategic-partnership; type: partnership\n- News: date: 2025-03-19; headline: Fifax to Trial ReelWeight, on Rainbow Trout; url: http://www.reeldata.ai/news/fifax-to-trial-reelweight-on-rainbow-trout; type: pilot\n\n## StartupGo agent assessment\nTRL 8 of 9; BRL 5 of 9; Ocean impact readiness 2 of 5; investment score 3.17 (confidence 0.28)",
+    "file_path": "entry:reeldata-ai",
+    "parse_format": "raw",
+    "content_hash": "f5d934f0abd9c6672979b2317fe49631",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1792196612,
+    "update_time": 1792196612,
+    "_id": "entry:reeldata-ai"
+  },
+  "startup:notpla": {
+    "content": "# Notpla\nSeaweed-based packaging that replaces single-use plastic\n\nDevelops packaging and coatings made from seaweed and plants as an alternative to single-use plastic.\n\nSector: Materials & packaging\nLocation: London, United Kingdom\nStage: series-a\nFounded: 2014\nWebsite: https://www.notpla.com\n\n## Readiness (KTH Innovation Readiness Level 1-9, assessed 2026-10-16, low confidence)\n- Customer (CRL) 8: Market-ready product sold near target price; initial traction; sales process staffed.\n- Technology (TRL) 8: Complete technology proven in actual operations by first users.\n- Business model (BRL) 7: First commercial revenue shows willingness to pay; key partner agreements in place.\n- IP (IPRL) 6: Complete IP strategy; positive response from authorities; freedom-to-operate assessed.\n- Team (TMRL) 7: Well-functioning team with clear roles; board and advisors operational.\n- Funding (FRL) 8: Term-sheet-level discussions; due-diligence materials ready.\nProducts on the market and a large Series A+ imply commercial traction; IP position not verified.\n\n## Ocean impact\n- A clean ocean, Volume of macro-plastic diverted from nature (or landfill) (B2): Seaweed-based packaging replaces single-use plastic items. (qualitative evidence)\n- Towards 1.5C, GHG emissions reduced or avoided (D1): Lower-carbon materials than fossil plastics (claimed). (claimed)\n\n## Funding\n- series-a: 20,000,000 GBP (2024-09), led by UB Forest Industry Green Growth Fund. Series A+ (~EUR 23M).\n\n## Sources\n- EU Maritime Forum: Notpla £20M Series A+",
+    "file_path": "startup:notpla",
+    "parse_format": "raw",
+    "content_hash": "35dd9343780cfaa16b6cfbd50af0d152",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1792196612,
+    "update_time": 1792196612,
+    "_id": "startup:notpla"
+  },
+  "entry:originbyocean-com": {
+    "content": "# Origin by Ocean\nWebsite: https://www.originbyocean.com/\n\n## Identity and registry\nName: Origin by Ocean Oy\nAliases: Nauvu, Ocean Orchard Oy\nWebsite domain: originbyocean.com\nBusiness id: 2982879-2\nCountry: Finland\nCity: Espoo\nLegal form: limited company\nFounded date: 2019-03-01\nStatus: active\nIndustry code: 20590\nRevenue last fy: 40,000\n\n## Blue-economy profile\nBlue sector: blue biotechnology\nOcean problem: The company addresses the environmental crisis caused by invasive algae blooms and ocean pollution by transforming these challenges into regenerative solutions.\nSolution summary: The company turns invasive Sargassum into functional, bio-based ingredients for industries like cosmetics, food, and textiles through a unique biorefining process.\nCustomer type: B2B\nTarget customers: consumer goods, food and feed industry, chemicals and materials\n\n## Technology\nTech description: Our biorefinery platform separates invasive algae into multiple valuable ingredients, each with its own function and commercial application.\nDev stage: commercial operation\n- Pilots: partner: Marimekko; outcome: A textile-printing pilot explored replacing a synthetic print-paste thickener with our Sargassum-derived alginate.\nResearch origin: Driven by a passion for ocean conservation and sustainable innovation, Mari Granström and her team began researching ways to harvest invasive algae...\n\n## Business\nValue proposition: We turn invasive Sargassum into functional ingredients that support the wellbeing of people and our oceans.\nBusiness model: product sale\nCustomer validation: paying customers\nPaying customers: names: Ole Hyvä Luonnontuote, Marimekko, sauna/ing, No Niin Cosmetics\nRevenue trend: first revenue\n\n## Ocean impact\nImpact claim: Invasive Sargassum blooms place pressure on coastal ecosystems and communities, and we use this biomass as a raw material for ingredients to restore marine ecosystems.\nImpact pathway: Invasive Sargassum blooms place pressure on coastal ecosystems; by removing harmful algae and using it in a circular biorefinery to produce bio-based ingredients, we restore marine ecosystems while building scalable value chains.\nSdg14 targets: 14.1\n\n## Team\n- Founders: name: Mari Granström; role: Chief Executive Activist, CEO; domain experience years: 7; technical: yes\nKey roles missing: commercial lead\n\n## Funding and deal\n- Grants: funder: Business Finland; amount: 800,000; currency: EUR; year: 2020\n- Equity rounds: date: 2020; stage: pre seed; amount: 2,000,000; currency: EUR\n- Equity rounds: date: 2023; stage: seed; amount: 3,000,000; currency: EUR\nTotal raised: 5,000,000\nStage: seed\nCurrent raise: amount: 65,000,000; currency: EUR; stage: other; open: yes\n\n## Market and competition\nTarget geographies: Finland, Caribbean region\n\n## Marketing and distribution\nSales channels: direct\n\n## Signals for monitoring\n- News: date: 2026-05-13; headline: EU Backing for First-of-a-kind Industrial-Scale Seaweed Biorefinery; url: https://www.originbyocean.com/blog/origin-by-ocean-secures-strong-eu-backing-for-first-of-a-kind-industrial-scale-seaweed-biorefinery; type: funding\n- News: date: 2026-10-01; headline: OCEANBOOST™ LF Named Sustainable Ingredient of the Year 2026; url: https://www.originbyocean.com/blog/oceanboost-lf-named-sustainable-ingredient-of-the-year-2026; type: award\n- News: date: 2026-03-30; headline: OceanBoost™ LF by Origin by Ocean Wins Sustainability Award at Cosmopack 2026; url: https://www.originbyocean.com/blog/oceanboost-by-origin-by-ocean-wins-sustainability-award-at-cosmopack-2026; type: award\n\n## StartupGo agent assessment\nTRL 9 of 9; BRL 6 of 9; Ocean impact readiness 2 of 5; investment score 3.11 (confidence 0.38)",
+    "file_path": "entry:originbyocean-com",
+    "parse_format": "raw",
+    "content_hash": "5796bb54a8f1cf8ba59ca551cca13e6c",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1792196612,
+    "update_time": 1792196612,
+    "_id": "entry:originbyocean-com"
+  },
+  "startup:seaforester": {
+    "content": "# SeaForester\nRestoring marine forests\n\nMarine restoration company focused on restoring kelp and other marine forests.\n\nSector: Habitat restoration\nLocation: Lisbon, Portugal\nStage: seed\n\n## Readiness (KTH Innovation Readiness Level 1-9, assessed 2026-10-16, low confidence)\n- Customer (CRL) 4: Problem confirmed by multiple customers; segments and buyer roles identified.\n- Technology (TRL) 5: Components validated in a relevant (simulated) environment.\n- Business model (BRL) 4: Simplified P&L indicates viability; initial sustainability assessment (own assumptions).\n- IP (IPRL) 3: Key IP described in detail; initial protectability evaluation.\n- Team (TMRL) 5: Founding team with main competencies; shareholder agreement signed.\n- Funding (FRL) 5: Investor pitch tested; 12-month budget; funding strategy decided.\nFresh seed round; restoration business model still being validated.\n\n## Ocean impact\n- Sustainably managed ocean resources, Volume of biomass preserved or restored (A1): Restored forests increase marine biomass (claimed). (claimed)\n- Thriving and restored marine habitats, Area of kelp forest protected or restored (C5): Restores kelp / marine forests. (qualitative evidence)\n- Towards 1.5C, Carbon sequestered (D3): Blue-carbon sequestration (claimed). (claimed)\n\n## Funding\n- seed: 1,900,000 USD (2025-10), led by WWF; Schmidt Marine Technology Partners. Co-led.\n\n## Sources\n- Seedtable: SeaForester seed 2025-10",
+    "file_path": "startup:seaforester",
+    "parse_format": "raw",
+    "content_hash": "7de62703e2fbf379ff1d2e49b881e2e4",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1792196612,
+    "update_time": 1792196612,
+    "_id": "startup:seaforester"
+  },
+  "startup:seabound": {
+    "content": "# Seabound\nOnboard carbon capture for ships\n\nBuilds carbon capture equipment that fits on ships to capture exhaust CO2 at the source. Y Combinator alumnus.\n\nSector: Shipping decarbonisation\nLocation: London, United Kingdom\nStage: seed\nFounded: 2021\nWebsite: https://www.seabound.co\n\n## Readiness (KTH Innovation Readiness Level 1-9, assessed 2026-10-16, low confidence)\n- Customer (CRL) 6: Customer testing confirms value; structured sales activities started.\n- Technology (TRL) 6: Representative prototype demonstrated in a relevant environment.\n- Business model (BRL) 5: Revenue and cost sides validated with external feedback; P&L updated.\n- IP (IPRL) 5: Draft IP strategy; first formal application of key IP filed.\n- Team (TMRL) 6: Complementary, diverse founding team with clear CEO; advisors being recruited.\n- Funding (FRL) 6: Improved pitch tested; 3-5 year P&L and cash flow.\nSeed-stage hardware moving through ship pilots, with government grant support.\n\n## Ocean impact\n- Towards 1.5C, GHG emissions reduced or avoided (D1): Captures CO2 from ship exhaust onboard. (qualitative evidence)\n- Towards 1.5C, SOx emissions mitigated (D5): Co-capture of sulphur emissions (claimed). (claimed)\n\n## Funding\n- grant: 1,100,000 GBP (2025), led by UK Clean Maritime Demonstration Competition (Round 6). Reported by aggregators; verify against the UK DfT announcement.\n- seed: 4,400,000 USD (2022-05), led by Lowercarbon Capital. With Eastern Pacific Shipping, Emles, Hawktail, Rebel Fund, Soma Capital, Y Combinator.\n\n## Sources\n- TechCrunch: Seabound carbon capture for container ships\n- TNW: UK startup Seabound",
+    "file_path": "startup:seabound",
+    "parse_format": "raw",
+    "content_hash": "6cde869421013c1880412e758e54ff2d",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1792196612,
+    "update_time": 1792196612,
+    "_id": "startup:seabound"
+  },
+  "startup:ocean-rainforest": {
+    "content": "# Ocean Rainforest\nOffshore seaweed cultivation at scale\n\nCultivates seaweed offshore in the Faroe Islands and develops seaweed products and markets.\n\nSector: Aquaculture\nLocation: Faroe Islands\nStage: series-a\nWebsite: https://www.oceanrainforest.com\n\n## Readiness (KTH Innovation Readiness Level 1-9, assessed 2026-10-16, low confidence)\n- Customer (CRL) 6: Customer testing confirms value; structured sales activities started.\n- Technology (TRL) 7: Near-complete prototype works in an operational environment.\n- Business model (BRL) 6: Complete sustainable business model tested in realistic scenarios (pilot, pre-order).\n- IP (IPRL) 4: Protectability confirmed by professional; priorities decided.\n- Team (TMRL) 7: Well-functioning team with clear roles; board and advisors operational.\n- Funding (FRL) 7: Discussions with investors around a defined offer; business plan in place.\nOperating offshore farms in the Faroes; Series A to scale production and markets.\n\n## Ocean impact\n- Sustainably managed ocean resources, Tonnes of ocean-based seaweed and bivalves produced (A4): Produces offshore-farmed seaweed in the Faroe Islands. (qualitative evidence)\n- Towards 1.5C, Carbon sequestered (D3): Seaweed cultivation as a carbon sink (claimed). (claimed)\n- Climate-resilient coastal communities, Enhanced food security (E4): Seaweed as a food and feed resource. (claimed)\n\n## Funding\n- series-a: 6,200,000 USD (2023-02), led by The Grantham Foundation. With Katapult Ocean (Deep Blue fund), Builders Vision, Ocean Born Foundation, WWF-US.\n\n## Sources\n- Undercurrent News: Ocean Rainforest $6.2M Series A",
+    "file_path": "startup:ocean-rainforest",
+    "parse_format": "raw",
+    "content_hash": "7a69d65a7a9231933a30bc7993b5a488",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1792196612,
+    "update_time": 1792196612,
+    "_id": "startup:ocean-rainforest"
+  }
+}

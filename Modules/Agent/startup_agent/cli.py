@@ -61,6 +61,7 @@ def parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
                        help="Entry to evaluate (mode evaluation); repeatable; default: all saved entries")
     graph.add_argument("--json", action="store_true", help="Print the final workflow state as JSON")
     graph.add_argument("--refresh", action="store_true")
+
     return parser.parse_args(argv)
 
 

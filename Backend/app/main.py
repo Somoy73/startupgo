@@ -8,19 +8,22 @@ from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from startup_search import SearchError, SearchUnavailable, StartupSearch
 
 from . import repository, search
 from .db import get_conn, init_db
 from .schemas import (
+    AgentEntryMatch,
     AssessmentCreate,
     FilterOptions,
+    NaturalLanguageSearchRequest,
+    NaturalLanguageSearchResponse,
     Note,
     NoteCreate,
     PipelineUpdate,
     ScorePreviewRequest,
     Scores,
-    SearchRequest,
-    SearchResponse,
+    SearchMatch,
     StartupCreate,
     StartupDetail,
     StartupSummary,
@@ -31,9 +34,11 @@ load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 
 @asynccontextmanager
-async def lifespan(_: FastAPI):
+async def lifespan(app: FastAPI):
     init_db()
+    app.state.search = StartupSearch()  # LightRAG (Modules/Search); opens on the first search
     yield
+    await app.state.search.close()
 
 
 app = FastAPI(title="Startup Go API", version="0.1.0", lifespan=lifespan)
@@ -85,6 +90,29 @@ def list_startups(
         min_potential=min_potential,
         sort=sort,
     )
+
+
+@app.post("/api/startups/search", response_model=NaturalLanguageSearchResponse)
+async def natural_language_search(body: NaturalLanguageSearchRequest, request: Request, conn: sqlite3.Connection = Conn):
+    """Search startups by what they do (LightRAG over the database and the agent's entries)."""
+    try:
+        matches = await request.app.state.search.search(body.query)
+    except SearchUnavailable as exc:
+        raise HTTPException(503, str(exc)) from exc
+    except SearchError as exc:
+        raise HTTPException(502, str(exc)) from exc
+
+    summaries = repository.summaries(conn, [m.slug for m in matches if m.slug])
+    results, entries = [], []
+    for match in matches:
+        found = {"relevance": match.relevance, "matched": list(match.matched)}
+        if match.slug:
+            if summary := summaries.get(match.slug):  # missing if deleted since it was processed
+                results.append(SearchMatch(**summary.model_dump(), **found, entry=match.entry))
+        elif match.entry:
+            scores = {k: match.info.get(k) for k in AgentEntryMatch.SCORES}
+            entries.append(AgentEntryMatch(entry=match.entry, name=match.name, website=match.website, **found, **scores))
+    return NaturalLanguageSearchResponse(query=body.query, results=results, entries=entries)
 
 
 @app.post("/api/startups", response_model=StartupDetail, status_code=201)
@@ -143,13 +171,3 @@ def filters(conn: sqlite3.Connection = Conn):
 @app.get("/api/frameworks")
 def frameworks(conn: sqlite3.Connection = Conn) -> dict:
     return repository.frameworks(conn)
-
-
-@app.post("/api/search", response_model=SearchResponse)
-def search_startups(body: SearchRequest, wrapper: search.SearchWrapper = Depends(search.get_search_wrapper)):
-    """Natural-language `query` or explicit `filters`, answered by the search wrapper (RAG / vector search)."""
-    try:
-        result = wrapper.search(query=body.query, filters=body.filters)
-    except NotImplementedError as exc:
-        raise HTTPException(501, f"Search isn't available yet: {exc}") from exc
-    return SearchResponse(query=body.query, filters=result.filters, notice=result.notice, startups=result.startups)

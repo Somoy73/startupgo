@@ -1,0 +1,51 @@
+# StartupGo search (LightRAG). Models and API keys go in .env (see .env.example).
+# Paths are relative to this file.
+
+# Which models and their keys are set in .env (see .env.example):
+#   CHAT_MODEL, CHAT_API_KEY, EMBEDDING_MODEL, EMBEDDING_API_KEY, EMBEDDING_DIM
+# This file says how they are called. Defaults: NVIDIA's hosted API (OpenAI-compatible).
+
+# Chat model: extracts entities and relations from every chunk (process-storage) and keywords from
+# each query (search). LightRAG's advice for both: a fast model with thinking off.
+[chat]
+endpoint = "https://integrate.api.nvidia.com/v1"
+reasoning = false              # Nemotron "thinking": ~27 s per call in our test, not needed here
+max_tokens = 4096              # extraction answers are long
+timeout = 120                  # seconds per call
+max_async = 2                  # parallel calls; the free tier is rate limited
+
+# Embedding model: chunks, entities and relations (process-storage) and each query (search).
+# Fixed once storage exists: a new EMBEDDING_MODEL or EMBEDDING_DIM means deleting [storage]
+# working_dir and running process-storage again.
+[embedding]
+endpoint = "https://integrate.api.nvidia.com/v1"
+max_token_size = 8192          # longest input; LightRAG's chunks are ~1200 tokens
+max_async = 2
+
+# LightRAG's four storages, written by process-storage and read by the search. For now they are
+# local JSON files in working_dir (no database server needed):
+#   kv          documents, chunks, entity/relation records, model-answer cache
+#   vector      embeddings of chunks, entities and relations (VectorDB: vdb_*.json)
+#   graph       the knowledge graph (GraphDB: graph_chunk_entity_relation.graphml)
+#   doc_status  processing state of each document
+# A graph or vector database can replace them later by changing the class names.
+[storage]
+working_dir = "rag_storage"
+workspace = ""                 # separates several indexes in one storage
+kv = "JsonKVStorage"
+vector = "NanoVectorDBStorage"
+graph = "NetworkXStorage"
+doc_status = "JsonDocStatusStorage"
+
+[query]
+mode = "mix"                   # mix (graph + vector chunks), local, global, hybrid or naive
+top_k = 40                     # entities / relations retrieved
+chunk_top_k = 20               # text chunks retrieved
+min_similarity = 0.2           # vector matches below this cosine similarity are ignored (LightRAG's default)
+max_results = 20               # startups returned
+
+# What process-storage processes: the StartupGo database (STARTUPGO_DB overrides it, as in the
+# Backend) and the agent's entries.
+[sources]
+database = "../../DB/startupgo.db"
+entries = "../Agent/output/startups"
