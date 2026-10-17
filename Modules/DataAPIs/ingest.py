@@ -8,8 +8,10 @@
   python3 ingest.py --gaps-only --uk   only the Companies House pull for UK startups + gaps
   python3 ingest.py --gdelt       also query GDELT per startup (slow: >= 6 s per call)
 
-Writes to DB/startupgo.db (or $STARTUPGO_DB). Creates it from DB/schema.sql + DB/seed.sql if missing,
-and re-applies schema.sql (all IF NOT EXISTS) so an existing DB gets the ingestion tables.
+Writes to the runtime DB, DB/runtime/startupgo.db (or $STARTUPGO_DB), never to the tracked snapshot
+DB/startupgo.db. A missing runtime DB is copied from the snapshot (or built from DB/schema.sql + DB/seed.sql),
+and schema.sql (all IF NOT EXISTS) is re-applied so an existing DB gets new tables. `refresh.py snapshot`
+copies the runtime DB back to the snapshot when you want to commit data.
 Curated startups.* columns are never overwritten: new values go to field_suggestions.
 """
 from __future__ import annotations
@@ -30,17 +32,46 @@ import common  # noqa: E402
 import s1_startups_registries, s2_funding_procurement_patents, s3_news_search_market, s4_eu, s5_people_jobs  # noqa: E402,F401
 from run import trim  # noqa: E402
 
-REPO = HERE.parent
-DB_PATH = Path(os.environ.get("STARTUPGO_DB", REPO / "DB" / "startupgo.db"))
+REPO = HERE.parents[1]                        # Modules/DataAPIs -> repository root
+SNAPSHOT_DB = REPO / "DB" / "startupgo.db"     # tracked in git; changed only by `refresh.py snapshot`
+RUNTIME_DIR = REPO / "DB" / "runtime"          # untracked: live DB, generated configs, search index, reports
 SRC = {s.name: s for s in common.REGISTRY}
+
+
+def db_path() -> Path:
+    """The DB every script writes to: $STARTUPGO_DB, else the runtime copy (read at call time, so tests can override it)."""
+    return Path(os.environ.get("STARTUPGO_DB") or RUNTIME_DIR / "startupgo.db")
+
+
+def snapshot_path() -> Path:
+    return Path(os.environ.get("STARTUPGO_SNAPSHOT_DB") or SNAPSHOT_DB)
+
+
+def ensure_db(path: Path) -> bool:
+    """Create ``path`` if missing: a consistent copy of the snapshot, else empty (caller seeds it). True if seeding is needed."""
+    if path.exists():
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    snap = snapshot_path()
+    if snap.exists() and snap.resolve() != path.resolve():
+        src, dst = sqlite3.connect(f"file:{snap}?mode=ro", uri=True), sqlite3.connect(path)
+        with dst:
+            src.backup(dst)  # page-level copy, safe even if the snapshot is open elsewhere
+        src.close()
+        dst.close()
+        return False
+    return True
 
 
 # ---------------------------------------------------------------------------
 # DB setup
 # ---------------------------------------------------------------------------
-def open_db() -> sqlite3.Connection:
-    fresh = not DB_PATH.exists()
-    conn = sqlite3.connect(DB_PATH)
+def open_db(path: Path | None = None) -> sqlite3.Connection:
+    path = path or db_path()
+    fresh = ensure_db(path)
+    conn = sqlite3.connect(path, timeout=30)  # the backend may hold the DB briefly while a refresh writes
+    if path.resolve() != snapshot_path().resolve():
+        conn.execute("PRAGMA journal_mode=WAL")  # readers (backend) are not blocked by a long refresh
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     migrate(conn)
@@ -160,7 +191,8 @@ def domain(url) -> str | None:
 # ---------------------------------------------------------------------------
 # Per-startup pulls
 # ---------------------------------------------------------------------------
-def ingest_startup(conn, st, yc_all, use_gdelt=False):
+def ingest_startup(conn, st, yc_all, use_gdelt=False, paid=True):
+    """All per-startup pulls. paid=False skips calls that spend credits (SerpApi, People Data Labs)."""
     sid, name, n = st["id"], st["name"], norm(st["name"])
     dom = domain(st["website"])
 
@@ -219,7 +251,7 @@ def ingest_startup(conn, st, yc_all, use_gdelt=False):
     # Patents: Google Patents filtered by assignee; SerpApi when the free endpoint is blocked (it 503s under load)
     d, f = fetch(conn, "google_patents_xhr", sid, q="", num=25, assignee=name)
     src, pats = "google_patents_xhr", (d or {}).get("patents", [])
-    if d is None and os.environ.get("SERPAPI_KEY"):
+    if d is None and paid and os.environ.get("SERPAPI_KEY"):
         d, f = fetch(conn, "serpapi_google_patents", sid, assignee=name, num=50)
         src, pats = "serpapi_google_patents", (d or {}).get("organic_results", [])
     for p in pats:
@@ -307,7 +339,8 @@ def ingest_startup(conn, st, yc_all, use_gdelt=False):
     if st["country"] == "United Kingdom":
         ingest_companies_house(conn, st)
     # Key-based sources: attempted so the gap report records why they are empty
-    ingest_pdl(conn, st)
+    if paid:
+        ingest_pdl(conn, st)
     fetch(conn, "opencorporates", sid, q=name)
     fetch(conn, "product_hunt", sid)
     conn.commit()
@@ -767,10 +800,16 @@ def build_gaps(conn):
     write_report(conn)
 
 
-def write_report(conn):
+def report_path() -> Path:
+    """GAPS.md next to the DB in use: the tracked copy only when writing to the snapshot itself."""
+    db = db_path()
+    return HERE / "GAPS.md" if db.resolve() == snapshot_path().resolve() else db.parent / "GAPS.md"
+
+
+def write_report(conn, path: Path | None = None, source: str | None = None):
     q = lambda sql, *a: conn.execute(sql, a).fetchall()  # noqa: E731
     L = ["# Data gaps: what the database holds vs the VC parameter list\n",
-         f"Generated by `DataAPIs/ingest.py` on {now()} UTC from `{DB_PATH.relative_to(REPO)}`. "
+         f"Generated by `Modules/DataAPIs/ingest.py` on {now()} UTC from `{source or _rel(db_path())}`. "
          "Parameters come from [parameters.txt](parameters.txt) sections A–U.\n",
          "- **auto**: filled from seed data or public APIs\n- **partial**: only an indirect proxy is available\n"
          "- **missing**: needs founder-submitted, VC-internal or paid data\n",
@@ -820,8 +859,17 @@ def write_report(conn):
     for tname in ("startups", "funding_rounds", "raw_fetches", "startup_external_ids", "startup_signals", "field_suggestions",
                   "funding_opportunities", "market_indicators", "assessment_parameters", "startup_parameter_status"):
         L.append(f"| {tname} | {q(f'SELECT COUNT(*) FROM {tname}')[0][0]} |")
-    (HERE / "GAPS.md").write_text("\n".join(L) + "\n")
-    print("wrote GAPS.md")
+    path = path or report_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(L) + "\n")
+    print(f"wrote {_rel(path)}")
+
+
+def _rel(p: Path) -> str:
+    try:
+        return str(p.resolve().relative_to(REPO))
+    except ValueError:  # outside the repository (e.g. a test DB)
+        return str(p)
 
 
 def main(argv):

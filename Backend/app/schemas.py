@@ -221,7 +221,7 @@ class ScorePreviewRequest(LevelsInput):
     last_round_on: str | None = Field(default=None, pattern=PARTIAL_DATE)
 
 
-# --- Success-prediction features (DataAPIs/features.py) ---
+# --- Success-prediction features (Modules/DataAPIs/features.py) ---
 
 
 class FeatureDefinition(BaseModel):
@@ -308,7 +308,7 @@ class Peer(BaseModel):
     shared_tags: list[str]
 
 
-# --- EU and ocean-specific sources (DataAPIs/ingest_eu.py) ---
+# --- EU and ocean-specific sources (Modules/DataAPIs/ingest_eu.py) ---
 
 
 class EuGrant(BaseModel):

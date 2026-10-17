@@ -5,6 +5,7 @@
 #   uv run --package scraper ...                # run within one member
 #   cd Agent && uv run startup-agent graph ...  # or from a member's directory
 #   cd Search && uv run startup-search index
+#   cd DataAPIs && uv run python refresh.py      # data refresh into DB/runtime/
 
 [tool.uv.workspace]
-members = ["Agent", "Scraper", "Search"]
+members = ["Agent", "DataAPIs", "Scraper", "Search"]

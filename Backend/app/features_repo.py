@@ -1,4 +1,4 @@
-"""Read access to the success-prediction tables built by DataAPIs/features.py."""
+"""Read access to the success-prediction tables built by Modules/DataAPIs/features.py."""
 
 import json
 import sqlite3

@@ -15,4 +15,8 @@ dist/
 
 
 # Downloaded filings cache
-DataAPIs/.cache/
+Modules/DataAPIs/.cache/
+
+# Runtime data written by the refresh pipeline (live DB, generated configs, search index, reports).
+# The tracked snapshot DB/startupgo.db changes only via `refresh.py snapshot`.
+DB/runtime/

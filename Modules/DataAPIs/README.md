@@ -1,9 +1,37 @@
-# DataAPIs: scrapers for data-apis.md
+# DataAPIs: scrapers, refresh pipeline and features
 
-One scraper per API listed in [../data-apis.md](../data-apis.md). Python 3 stdlib only; HTTP goes through `curl`, which uses the system trust store.
+One scraper per API listed in [../../data-apis.md](../../data-apis.md), the refresh pipeline that loads them into the
+database, and the success-prediction features. A member of the uv workspace in `Modules/` (package `startup-data`,
+scripts only). Python 3.11+, standard library plus `pypdf`; HTTP goes through `curl`, which uses the system trust store.
+
+## Refresh pipeline (start here)
 
 ```bash
-cd DataAPIs
+cd Modules && uv sync --all-packages && cd DataAPIs     # or: pip install -r requirements.txt
+uv run python refresh.py                  # daily tier: free sources only, into the runtime DB
+uv run python refresh.py run --tier full  # also SerpApi + People Data Labs (credits) + BlueInvest re-crawl
+uv run python refresh.py run --steps cordis,features,gaps   # selected steps (`refresh.py steps` lists them)
+uv run python refresh.py status           # recent runs: per-step status, duration, row changes, errors
+uv run python refresh.py snapshot         # copy the runtime DB to DB/startupgo.db + CSVs + GAPS.md, then commit
+```
+
+| Location | What | In git |
+|---|---|---|
+| `DB/runtime/startupgo.db` | Live DB every script writes to (override with `STARTUPGO_DB`); copied from the snapshot on first use | no |
+| `DB/runtime/config/{agent,search}/config.toml` | Generated from main's `Modules/Agent` and `Modules/Search` configs with only the paths changed (runtime DB, runtime index, runtime Agent output); `.env` is a symlink to main's | no |
+| `DB/runtime/rag_storage/`, `DB/runtime/agent_output/`, `DB/runtime/GAPS.md` | Runtime search index, Agent entries, gap report | no |
+| `DB/startupgo.db`, `csv/`, `GAPS.md` | Snapshot for commits; changed only by `refresh.py snapshot` | yes |
+
+Each run is logged in `refresh_runs` / `refresh_steps`; a run marked `running` is the lock (`--force` takes over a dead
+one). A failing source marks its step `error` and the run continues (`partial`); steps without their key or tool are
+`skipped`. Main's Agent, Search and Scraper code is not modified: the search step runs main's `process-storage`
+with the generated `--config`, and the Agent can be pointed at the runtime data the same way:
+`uv run startup-agent --config ../DB/runtime/config/agent/config.toml graph --mode evaluation` (from `Modules/`,
+after `refresh.py configs`).
+
+## Single scrapers
+
+```bash
 python3 run.py                    # all free (no-key) scrapers -> data/<name>.json (+ data/_summary.json)
 python3 run.py openalex           # one scraper
 python3 run.py openalex search="sea ice" per-page=10   # override any upstream param
@@ -30,9 +58,9 @@ python3 ingest.py --gdelt       # also query GDELT per startup (slow)
 python3 ingest.py --gaps-only --serpapi   # only SerpApi enrichment (2 searches/startup) + gaps
 ```
 
-Keys can go in `DataAPIs/.env` (gitignored, `KEY=value` per line); real environment variables take precedence.
+Keys can go in `Modules/DataAPIs/.env` (gitignored, `KEY=value` per line); real environment variables take precedence.
 
-Writes to `DB/startupgo.db` (creates it from `DB/schema.sql` + `DB/seed.sql` if missing). With `SERPAPI_KEY` set, patents still load when the free Google Patents endpoint is blocked, and each startup gets a Google search (website, knowledge panel: founded, HQ, employees, founders) and a Google Jobs search (hiring signals).
+Writes to the runtime DB (`DB/runtime/startupgo.db`, see above), never to the tracked snapshot. With `SERPAPI_KEY` set, patents still load when the free Google Patents endpoint is blocked, and each startup gets a Google search (website, knowledge panel: founded, HQ, employees, founders) and a Google Jobs search (hiring signals).
 
 | Table | Holds |
 |---|---|
@@ -46,12 +74,12 @@ Writes to `DB/startupgo.db` (creates it from `DB/schema.sql` + `DB/seed.sql` if 
 | `assessment_parameters` | The 455 items of `parameters.txt` (A–U) with coverage: auto / partial / missing |
 | `startup_parameter_status`, view `startup_gaps` | Per startup: filled / proxy / empty / not-collectable |
 
-[GAPS.md](GAPS.md) is the generated gap report.
+[GAPS.md](GAPS.md) is the gap report of the committed snapshot; refreshes write theirs to `DB/runtime/GAPS.md`.
 
 ## Success-prediction features
 
 ```bash
-pip install -r requirements.txt            # pypdf, for SH01 PDFs (or use Backend/.venv/bin/python)
+uv sync --all-packages (in Modules/)       # pypdf, for SH01 PDFs (or: pip install -r requirements.txt)
 python3 features.py                        # fetch UK SH01 + officer appointments, SEC Form D; compute features
 python3 features.py --offline              # recompute from the DB only
 ```

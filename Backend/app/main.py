@@ -180,7 +180,7 @@ def frameworks(conn: sqlite3.Connection = Conn) -> dict:
     return repository.frameworks(conn)
 
 
-# --- Success-prediction features (built by DataAPIs/features.py) ---
+# --- Success-prediction features (built by Modules/DataAPIs/features.py) ---
 
 
 def _found(value, slug: str):

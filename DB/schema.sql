@@ -120,7 +120,7 @@ CREATE INDEX IF NOT EXISTS idx_assessments_startup ON readiness_assessments(star
 CREATE INDEX IF NOT EXISTS idx_notes_startup       ON notes(startup_id);
 
 -- ---------------------------------------------------------------------------
--- Ingestion from public APIs (DataAPIs/ingest.py) with per-record provenance
+-- Ingestion from public APIs (Modules/DataAPIs/ingest.py) with per-record provenance
 -- ---------------------------------------------------------------------------
 
 -- One row per scraper in DataAPIs (mirrors its registry)
@@ -228,7 +228,7 @@ CREATE TABLE IF NOT EXISTS market_indicators (
     UNIQUE (source_name, indicator_code, geo, period)
 );
 
--- VC assessment data dictionary (DataAPIs/parameters.txt, sections A-U) and how each item can be filled
+-- VC assessment data dictionary (Modules/DataAPIs/parameters.txt, sections A-U) and how each item can be filled
 CREATE TABLE IF NOT EXISTS assessment_parameters (
     id           INTEGER PRIMARY KEY,
     section_code TEXT NOT NULL,
@@ -267,7 +267,7 @@ JOIN assessment_parameters p ON p.id = sps.parameter_id
 WHERE sps.status IN ('empty','not-collectable');
 
 -- ---------------------------------------------------------------------------
--- Success-prediction features (DataAPIs/features.py). Parameters follow Potanin et al. 2023
+-- Success-prediction features (Modules/DataAPIs/features.py). Parameters follow Potanin et al. 2023
 -- (arXiv:2309.15552: rounds, investors, founders, categories) plus ocean deep-tech additions.
 -- ---------------------------------------------------------------------------
 
@@ -333,7 +333,7 @@ CREATE TABLE IF NOT EXISTS investors (
     id         INTEGER PRIMARY KEY,
     name       TEXT NOT NULL UNIQUE,
     kind       TEXT,                    -- vc | climate-vc | ocean-vc | accelerator | corporate | angel-network | foundation | ngo | government | unknown
-    tier_score REAL,                    -- 0-1 from DataAPIs/investor_tiers.json (analyst-curated)
+    tier_score REAL,                    -- 0-1 from Modules/DataAPIs/investor_tiers.json (analyst-curated)
     notes      TEXT
 );
 
@@ -381,7 +381,7 @@ CREATE INDEX IF NOT EXISTS idx_events_startup   ON funding_events(startup_id, ev
 CREATE INDEX IF NOT EXISTS idx_features_startup ON startup_features(startup_id, as_of);
 
 -- ---------------------------------------------------------------------------
--- EU and ocean-specific sources (DataAPIs/ingest_eu.py)
+-- EU and ocean-specific sources (Modules/DataAPIs/ingest_eu.py)
 -- ---------------------------------------------------------------------------
 
 -- One row per startup participation in an EU-funded project (CORDIS)
@@ -454,4 +454,31 @@ CREATE TABLE IF NOT EXISTS startup_external_peers (
     sector      TEXT,
     url         TEXT,
     PRIMARY KEY (startup_id, source, external_id)
+);
+
+-- ---------------------------------------------------------------------------
+-- Refresh pipeline run log (Modules/DataAPIs/refresh.py). A run with status 'running' is the lock.
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS refresh_runs (
+    id          INTEGER PRIMARY KEY,
+    kind        TEXT NOT NULL DEFAULT 'refresh' CHECK (kind IN ('refresh','agent','snapshot')),
+    tier        TEXT,                   -- daily (free sources) | full (also spends SerpApi / PDL credits)
+    trigger     TEXT NOT NULL DEFAULT 'cli',  -- cli | api | timer
+    status      TEXT NOT NULL CHECK (status IN ('running','ok','partial','error')),
+    started_at  TEXT NOT NULL DEFAULT (datetime('now')),
+    finished_at TEXT,
+    summary     TEXT                    -- JSON: steps ok/error/skipped, row changes
+);
+
+CREATE TABLE IF NOT EXISTS refresh_steps (
+    run_id      INTEGER NOT NULL REFERENCES refresh_runs(id) ON DELETE CASCADE,
+    step        TEXT NOT NULL,
+    seq         INTEGER NOT NULL,
+    status      TEXT NOT NULL CHECK (status IN ('running','ok','error','skipped')),
+    started_at  TEXT NOT NULL DEFAULT (datetime('now')),
+    finished_at TEXT,
+    duration_s  REAL,
+    counts      TEXT,                   -- JSON: row changes per table during the step
+    detail      TEXT,                   -- error message or skip reason
+    PRIMARY KEY (run_id, step)
 );
