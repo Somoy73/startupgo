@@ -1,7 +1,7 @@
-import type { InvestorMatch } from "../../lib/investor";
+import type { RankedStartup } from "../../lib/readiness-ranking";
 
 type Props = {
-  matches: InvestorMatch[];
+  matches: RankedStartup[];
   hovered: string | null;
   selected: string | null;
   onHover: (slug: string | null) => void;
@@ -29,7 +29,7 @@ export function TopMatchList({ matches, hovered, selected, onHover, onSelect }: 
             <span className="tm-text">
               <strong>{m.startup.name}</strong>
               <small>
-                Fit {m.thesis} · Readiness {m.readiness} · Impact {m.impact}
+                Readiness {m.readiness} · Impact {m.impact} · Potential {m.potential}
               </small>
             </span>
             <span className="tm-score">{m.total}</span>

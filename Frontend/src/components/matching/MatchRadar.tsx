@@ -1,10 +1,10 @@
 import { layoutNodes } from "../../lib/match-graph";
-import type { InvestorMatch } from "../../lib/investor";
+import type { RankedStartup } from "../../lib/readiness-ranking";
 
 const SIZE = 360;
 
 type Props = {
-  matches: InvestorMatch[];
+  matches: RankedStartup[];
   hovered: string | null;
   selected: string | null;
   onHover: (slug: string | null) => void;
