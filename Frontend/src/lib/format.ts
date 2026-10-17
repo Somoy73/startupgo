@@ -25,3 +25,16 @@ export function toEur(amount: number | null, currency: string | null): number | 
 export const partialDate = (d: string | null) => d || "Undisclosed";
 export const stageLabel = (s: string) =>
   s.charAt(0).toUpperCase() + s.slice(1).replaceAll("-", " ");
+
+/**
+ * An assessor's rationale as tidy points: split on semicolons, snake_case words spaced out
+ * ("accepted_with_issues" → "accepted with issues"), each point capitalised and ending in a full stop.
+ */
+export function rationalePoints(text: string | null): string[] {
+  return (text ?? "")
+    .split(";")
+    .map((p) => p.trim().replace(/\b([a-z]+(?:_[a-z]+)+)\b/g, (w) => w.replaceAll("_", " ")))
+    .filter(Boolean)
+    .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+    .map((p) => (/[.!?]$/.test(p) ? p : `${p}.`));
+}

@@ -2,6 +2,8 @@ import { ArcElement, Chart as ChartJS, RadialLinearScale, Tooltip, type ChartOpt
 import { PolarArea } from "react-chartjs-2";
 import type { OceanImpactArea, OceanKpiEvidence } from "../api/backend-types";
 import { useChartPalette, withAlpha } from "../lib/chart-theme";
+import { cn } from "../lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 ChartJS.register(ArcElement, RadialLinearScale, Tooltip);
 
@@ -79,9 +81,53 @@ export function OceanAreaChart({ areas, kpis }: { areas: OceanImpactArea[]; kpis
           }}
         />
       </div>
-      <figcaption className="small muted mt-1 text-center">
+      <ul className="mt-2 flex flex-wrap justify-center gap-1.5" aria-label="Ocean impact areas">
+        {areas.map((a, i) => (
+          <li key={a.code}>
+            <AreaHint area={a} best={best[i] ?? 0} kpis={kpis.filter((k) => k.area_code === a.code && k.evidence_level > 0)} />
+          </li>
+        ))}
+      </ul>
+      <figcaption className="small muted mt-2 text-center">
         Strongest evidence per area: 1 claimed · 2 evidenced · 3 measured · 4 verified
       </figcaption>
     </figure>
+  );
+}
+
+/** One area's letter as a button; the hint names the area and lists the KPIs it has evidence for. */
+export function AreaHint({ area, best, kpis }: { area: OceanImpactArea; best: number; kpis: OceanKpiEvidence[] }) {
+  return (
+    <Popover>
+      <PopoverTrigger
+        aria-label={`${area.code}: ${area.name}, ${EVIDENCE[best]}`}
+        className={cn(
+          "inline-flex size-7 items-center justify-center rounded-full border text-xs font-bold focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+          best > 0
+            ? "border-success bg-success/15 text-success hover:bg-success/25"
+            : "border-border text-muted-foreground hover:text-foreground",
+        )}
+      >
+        {area.code}
+      </PopoverTrigger>
+      <PopoverContent align="center" className="w-72 text-sm">
+        <p className="font-bold">
+          {area.code} · {area.name}
+        </p>
+        <p className="mt-0.5 text-xs text-muted-foreground">Strongest evidence: {EVIDENCE[best]}</p>
+        {kpis.length > 0 ? (
+          <ul className="mt-2 space-y-1.5">
+            {kpis.map((k) => (
+              <li key={k.kpi_code}>
+                <strong>{k.kpi_code}</strong> {k.kpi_name}
+                <span className="text-muted-foreground"> · {k.evidence_label}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-2 text-muted-foreground">No evidence recorded for this area.</p>
+        )}
+      </PopoverContent>
+    </Popover>
   );
 }

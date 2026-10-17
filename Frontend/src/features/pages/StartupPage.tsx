@@ -1,17 +1,17 @@
 import { useCallback, useState } from "react";
 import { Link, useParams } from "../../lib/navigation";
 import { ApiError, backend } from "../../api/backend";
-import { FundingTimeline } from "../../components/FundingTimeline";
+import { FundingTable } from "../../components/FundingTable";
+import { FundingTimeline, FundingTotal } from "../../components/FundingTimeline";
 import { IconAlert, IconBack, IconExternal } from "../../components/Icons";
-import { OceanAreaChart } from "../../components/OceanAreaChart";
-import { OceanImpact } from "../../components/OceanImpact";
+import { OceanImpactSection } from "../../components/OceanImpactSection";
 import { ReadinessSection } from "../../components/ReadinessSection";
 import { ResearchPanel } from "../../components/ResearchPanel";
 import { PeerScatter } from "../../components/PeerScatter";
 import { PotentialBreakdown } from "../../components/PotentialBreakdown";
 import { PotentialMark } from "../../components/PotentialMark";
 import { BandBadge } from "../../components/Scores";
-import { compactMoney, partialDate, stageLabel, toEur } from "../../lib/format";
+import { partialDate, stageLabel } from "../../lib/format";
 import { useAsync } from "../../lib/useAsync";
 
 /** Loads the profile from the backend; a 404 means the slug isn't in the database. */
@@ -95,7 +95,7 @@ export function StartupPage() {
             {s.sources.length > 0 && (
               <div className="border-t border-border pt-3 md:border-t-0 md:border-l md:pt-0 md:pl-6">
                 <h3 className="mb-1.5 text-xs font-bold text-muted-foreground">Sources</h3>
-                <ul className="grid gap-1.5 text-sm">
+                <ul className="space-y-1.5 text-sm">
                   {s.sources.map((src) => (
                     <li key={src.url}>
                       <a href={src.url} target="_blank" rel="noreferrer">
@@ -124,74 +124,22 @@ export function StartupPage() {
 
         {/* Right Column Stack */}
         <div className="stack">
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>Ocean impact</h2>
-              <span className="small muted">Ocean Impact Navigator · evidence 0–4</span>
-            </div>
-            {frameworks && (
-              <OceanAreaChart areas={frameworks.ocean_impact_areas} kpis={s.ocean_kpis} />
-            )}
-            <OceanImpact kpis={s.ocean_kpis} />
-          </section>
+          <OceanImpactSection kpis={s.ocean_kpis} areas={frameworks?.ocean_impact_areas ?? null} />
 
           <section className="card card-pad">
             <div className="card-head">
-              <h2>Funding rounds</h2>
-              <span className="small muted">
-                Total disclosed ≈ {compactMoney(toEur(s.total_disclosed_usd, "USD"))}
-              </span>
+              <h2>Funding</h2>
+              <FundingTotal events={events} disclosedUsd={s.total_disclosed_usd} />
             </div>
-            {events && <FundingTimeline events={events} />}
-            {s.funding_rounds.length === 0 && (
-              <p className="small muted">No funding rounds recorded.</p>
-            )}
-            {s.funding_rounds.length > 0 && (
-              <div className="table-wrap">
-                <table className="data">
-                  <thead>
-                    <tr>
-                      <th>Round</th>
-                      <th>Date</th>
-                      <th className="num">Amount</th>
-                      <th>Lead</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {s.funding_rounds.map((r, i) => (
-                      <tr key={i}>
-                        <td>
-                          {r.source_url ? (
-                            <a
-                              href={r.source_url}
-                              target="_blank"
-                              rel="noreferrer"
-                              title="Open source"
-                              className="inline-flex items-center gap-1 whitespace-nowrap"
-                            >
-                              {stageLabel(r.round_type)}
-                              <IconExternal aria-hidden className="size-3" />
-                            </a>
-                          ) : (
-                            stageLabel(r.round_type)
-                          )}
-                        </td>
-                        <td className="tabular">{partialDate(r.announced_on)}</td>
-                        <td className="num">
-                          {compactMoney(toEur(r.amount, r.currency))}
-                          {r.amount != null && r.currency && r.currency.toUpperCase() !== "EUR" && (
-                            <div className="small muted">{compactMoney(r.amount, r.currency)}</div>
-                          )}
-                        </td>
-                        <td className="small secondary">
-                          {r.lead_investors}
-                          {r.notes && <div className="muted">{r.notes}</div>}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            {events === null ? (
+              <p className="small muted">Loading funding events…</p>
+            ) : events.length === 0 ? (
+              <p className="small muted">No funding events recorded.</p>
+            ) : (
+              <>
+                <FundingTimeline events={events} />
+                <FundingTable events={events} />
+              </>
             )}
           </section>
         </div>

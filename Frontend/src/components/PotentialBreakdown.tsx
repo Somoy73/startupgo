@@ -55,7 +55,7 @@ export function PotentialBreakdown({ scores, weights }: { scores: Scores; weight
         })}
       </div>
 
-      <dl className="mt-4 grid gap-2 text-sm">
+      <dl className="mt-4 space-y-2 text-sm">
         {parts.map((p) => (
           <div key={p.key} className="flex items-center gap-2">
             <span aria-hidden className={`size-2.5 shrink-0 rounded-full ${p.color}`} />
