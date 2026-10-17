@@ -6,30 +6,33 @@ import { emptyFilters } from "@/lib/discover-search";
 
 const base = { filters: emptyFilters(), busy: false, onSearch: () => {}, onFiltersChange: () => {}, onClear: () => {} };
 
-describe("Search screen EU Projects switch", () => {
-  it("starts off and asks for EU projects when pressed", () => {
-    const onTypeChange = vi.fn();
-    render(<DiscoverSearchBar query="" type="startups" {...base} onTypeChange={onTypeChange} />);
-    const toggle = screen.getByRole("button", { name: "EU Projects" });
-    expect(toggle).toHaveAttribute("aria-pressed", "false");
-    fireEvent.click(toggle);
-    expect(onTypeChange).toHaveBeenCalledWith("eu-projects");
+describe("Search bar", () => {
+  it("submits the trimmed query", () => {
+    const onSearch = vi.fn();
+    render(<DiscoverSearchBar query="" {...base} onSearch={onSearch} />);
+    fireEvent.change(screen.getByLabelText("Search text"), { target: { value: "  kelp  " } });
+    fireEvent.click(screen.getByRole("button", { name: "AI Search" }));
+    expect(onSearch).toHaveBeenCalledWith("kelp");
   });
 
-  it("reads as on, hides the startup filters, and turns back off when pressed", () => {
-    const onTypeChange = vi.fn();
-    render(<DiscoverSearchBar query="seaweed" type="eu-projects" {...base} onTypeChange={onTypeChange} />);
-    const toggle = screen.getByRole("button", { name: "EU Projects" });
-    expect(toggle).toHaveAttribute("aria-pressed", "true");
-    expect(screen.queryByRole("button", { name: "Filters" })).not.toBeInTheDocument();
-    expect(screen.queryByText("Matches for “seaweed”")).not.toBeInTheDocument();
-    fireEvent.click(toggle);
-    expect(onTypeChange).toHaveBeenCalledWith("startups");
+  it("offers example searches until there is a query", () => {
+    const onSearch = vi.fn();
+    const { rerender } = render(<DiscoverSearchBar query="" {...base} onSearch={onSearch} />);
+    fireEvent.click(screen.getByRole("button", { name: "seaweed packaging" }));
+    expect(onSearch).toHaveBeenCalledWith("seaweed packaging");
+    rerender(<DiscoverSearchBar query="kelp" {...base} onSearch={onSearch} />);
+    expect(screen.queryByRole("button", { name: "seaweed packaging" })).not.toBeInTheDocument();
   });
 
-  it("no longer offers the old startups / EU projects dropdown", () => {
-    render(<DiscoverSearchBar query="" type="startups" {...base} onTypeChange={vi.fn()} />);
-    expect(screen.queryByLabelText("What to search")).not.toBeInTheDocument();
-    expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
+  it("shows set filters as chips that remove themselves", () => {
+    const onFiltersChange = vi.fn();
+    render(<DiscoverSearchBar query="" {...base} filters={{ ...emptyFilters(), countries: ["Namibia"] }} onFiltersChange={onFiltersChange} />);
+    fireEvent.click(screen.getByRole("button", { name: "Remove filter Namibia" }));
+    expect(onFiltersChange).toHaveBeenCalledWith(emptyFilters());
+  });
+
+  it("no longer offers the EU Projects switch", () => {
+    render(<DiscoverSearchBar query="" {...base} />);
+    expect(screen.queryByRole("button", { name: "EU Projects" })).not.toBeInTheDocument();
   });
 });

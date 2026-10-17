@@ -1,7 +1,9 @@
 import type {
   Frameworks,
+  FundingEvent,
   InvestmentMemo,
   NaturalLanguageSearchResponse,
+  Peer,
   ResearchJob,
   StartupDetail,
   StartupSummary,
@@ -62,4 +64,7 @@ export const backend = {
     request<ResearchJob>("/research", { method: "POST", body: JSON.stringify({ slug }) }),
   researchJob: (id: number) => request<ResearchJob>(`/research/${id}`),
   frameworks: () => request<Frameworks>("/frameworks"),
+  /** Every funding event from every source, oldest first. */
+  rounds: (slug: string) => request<FundingEvent[]>(`${startupPath(slug)}/rounds`),
+  peers: (slug: string) => request<Peer[]>(`${startupPath(slug)}/peers`),
 };

@@ -36,13 +36,18 @@ export function Assess() {
 
   return (
     <>
-      <div className="page-head">
+      <div className="page-head ">
         <div>
           <h1>Information about our assess methods</h1>
           <p>
-            Placeholder: How our judge agent assess startups. Choose a startup from landing page or
+            How our judge agent assess startups. Choose a startup from landing page or
             search page to see its assessment
           </p>
+          <div style={{ marginTop: 24 }}>
+            <Link to="/search" className="btn btn-primary !px-10 !py-4 !text-lg border-white border-1">
+              Go assessing
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -146,12 +151,10 @@ export function Assess() {
           <div className="card-head">
             <h2>Funding momentum</h2>
             <span className="small muted">{pct(w.momentum)} of the score</span>
-          </div>
-          <p className="small secondary">
             Where a company is in its funding history and how recently it last raised. A round
             closed this quarter counts for more than one from four years ago, so momentum is a
             signal of traction rather than of size.
-          </p>
+          </div>
         </section>
 
         <section className="card card-pad">
