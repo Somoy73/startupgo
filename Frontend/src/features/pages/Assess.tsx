@@ -151,9 +151,29 @@ export function Assess() {
           <div className="card-head">
             <h2>Funding momentum</h2>
             <span className="small muted">{pct(w.momentum)} of the score</span>
+            Where a company is in its funding history and how recently it last raised. A round
+            closed this quarter counts for more than one from four years ago, so momentum is a
+            signal of traction rather than of size.
           </div>
-          <p className="small secondary">
-            Calculated from funding rounds, investor tier, monthly burn and current cash runway.
+        </section>
+
+        <section className="card card-pad">
+          <div className="card-head">
+            <h2>What the score tells you</h2>
+          </div>
+          <p className="small secondary" style={{ marginBottom: 10 }}>
+            Investment potential is a weighted blend of readiness ({pct(w.readiness)}), ocean impact
+            ({pct(w.ocean_impact)}) and funding momentum ({pct(w.momentum)}).
+          </p>
+          <div className="row-gap" style={{ flexWrap: "wrap" }}>
+            <span className="chip">Strong ≥ 70</span>
+            <span className="chip">Promising ≥ 55</span>
+            <span className="chip">Watch ≥ 40</span>
+            <span className="chip">Early &lt; 40</span>
+          </div>
+          <p className="small secondary" style={{ marginTop: 14 }}>
+            The exact formula and weights are all shown on this page. You can also see the method
+            applied side by side in <Link to="/matching">Matching</Link>.
           </p>
         </section>
       </div>

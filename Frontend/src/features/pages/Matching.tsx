@@ -43,6 +43,11 @@ export function Matching() {
   // Similar startups come from every ranked startup, not only the top 10.
   const similar = picked ? similarStartups(picked, ranked) : [];
 
+  const similar = useMemo(() => {
+      if (!picked || !startups) return [];
+      return similarStartups(picked, allMatches);
+    }, [picked, allMatches, startups]);
+
   return (
     <>
       <div className="page-head">
@@ -77,7 +82,7 @@ export function Matching() {
               </div>
 
               {/* List displays only the 5 for the current page */}
-              <div className="mg-list min-w-[400px]">
+              <div className="mg-list max-w-[400px]">
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
                   <h2 className="mg-eyebrow" style={{ margin: 0 }}>Top matches</h2>
                   <span className="small muted" style={{ fontWeight: 600 }}>
