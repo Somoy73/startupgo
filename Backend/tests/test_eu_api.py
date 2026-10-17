@@ -37,7 +37,7 @@ def seeded(client):
              'serpapi_google_patents', 'verified', 0.9, '2017-03-22'),
           (900, 'C', 'dev_stage', '"commercial_operation"', 'Self-reported TRL 9 - Actual system proven (BlueInvest)', 'https://example/807',
              'website', 'blueinvest_profile', 'claimed', 0.7, NULL),
-          (900, 'X', 'blueinvest_summary', '"Seaweed biorefinery"', 'Seaweed biorefinery', 'https://example/807', 'website', 'blueinvest_profile',
+          (900, 'Api', 'blueinvest_summary', '"Seaweed biorefinery"', 'Seaweed biorefinery', 'https://example/807', 'website', 'blueinvest_profile',
              'claimed', 0.7, NULL),
           (901, 'C', 'dev_stage', '"prototype_relevant_env"', 'TRL 5 - Technology validated', 'https://example/9001', 'website', 'blueinvest_profile',
              'claimed', 0.7, NULL),

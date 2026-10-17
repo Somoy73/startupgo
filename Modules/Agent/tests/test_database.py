@@ -32,9 +32,9 @@ INSERT INTO assessments (entity_id, assessed_at, engine, assessor, confidence, c
   (2, '2026-10-16', 'seed-estimate', 'Startup Go seed estimate', 'low', 4, 5, 4, 3, 5, 5);
 INSERT INTO assessments (entity_id, assessed_at, engine, features) VALUES (3, '2026-10-17', 'startupgo-pipeline', '{}');
 INSERT INTO facts (entity_id, section, field, value, evidence, source_url, source_type, source_name, status, confidence) VALUES
-  (1, 'X', 'navigator_kpi', '{"kpi": "B2", "level": 2, "claim": "Replaces plastic"}', 'Replaces plastic', NULL, 'manual', 'seed', 'claimed', 0.9),
-  (1, 'X', 'navigator_kpi', '{"kpi": "D1", "level": 1, "claim": "Lower CO2"}', 'Lower CO2', NULL, 'manual', 'seed', 'claimed', 0.9),
-  (3, 'X', 'reference', '{"title": "Healix raises"}', 'Healix raises', 'https://news.example/healix', 'manual', 'seed', 'claimed', 0.9),
+  (1, 'Api', 'navigator_kpi', '{"kpi": "B2", "level": 2, "claim": "Replaces plastic"}', 'Replaces plastic', NULL, 'manual', 'seed', 'claimed', 0.9),
+  (1, 'Api', 'navigator_kpi', '{"kpi": "D1", "level": 1, "claim": "Lower CO2"}', 'Lower CO2', NULL, 'manual', 'seed', 'claimed', 0.9),
+  (3, 'Api', 'reference', '{"title": "Healix raises"}', 'Healix raises', 'https://news.example/healix', 'manual', 'seed', 'claimed', 0.9),
   (3, 'A', 'business_id', '"1234567-8"', 'business id 1234567-8', NULL, 'registry', 'prh', 'verified', 0.95);
 """
 

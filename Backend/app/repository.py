@@ -301,7 +301,7 @@ def add_note(conn: sqlite3.Connection, slug: str, body: str, author: str) -> Not
     if startup_id is None:
         return None
     created_at = _now()
-    note_id = _fact(conn, startup_id, "X", "analyst_note", {"author": author, "body": body, "created_at": created_at}, body,
+    note_id = _fact(conn, startup_id, "Api", "analyst_note", {"author": author, "body": body, "created_at": created_at}, body,
                     observed_on=created_at)
     conn.commit()
     return Note(id=note_id, author=author, body=body, created_at=created_at)
@@ -413,7 +413,7 @@ def _insert_assessment(conn: sqlite3.Connection, startup_id: int, a: AssessmentC
     )
     conn.execute("UPDATE facts SET is_current = 0 WHERE entity_id = ? AND field = 'navigator_kpi'", (startup_id,))
     for k in kpis:
-        _fact(conn, startup_id, "X", "navigator_kpi", {"kpi": k.kpi_code, "level": k.evidence_level, "claim": k.claim.strip()},
+        _fact(conn, startup_id, "Api", "navigator_kpi", {"kpi": k.kpi_code, "level": k.evidence_level, "claim": k.claim.strip()},
               k.claim.strip(), source_url=k.source_url or None)
     conn.execute("UPDATE entities SET updated_at = datetime('now') WHERE id = ?", (startup_id,))
 

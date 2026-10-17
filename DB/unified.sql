@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS entities (
 CREATE TABLE IF NOT EXISTS facts (
     id                INTEGER PRIMARY KEY,
     entity_id         INTEGER NOT NULL REFERENCES entities(id) ON DELETE CASCADE,
-    section           TEXT NOT NULL,            -- Agent schema section A-J; X = StartupGo extension
+    section           TEXT NOT NULL,            -- Agent schema section A-J; Api = StartupGo extension (API sources, analyst entries)
     field             TEXT NOT NULL,            -- Agent field (dev_stage, founders, grants, ...) or extension field
     value             TEXT,                     -- JSON: scalar, list or object (e.g. a round or a pilot)
     related_entity_id INTEGER REFERENCES entities(id) ON DELETE SET NULL,  -- investor in a round, founder, ...

@@ -9,7 +9,7 @@
 
 Facts use the Agent's fact format (Modules/Agent/startup_agent/facts.py): section A-J and field names from its spec,
 values in its vocabulary, source_type / status / confidence by its rules (independent sources verify, the startup's
-own material claims). Fields the Agent has no slot for go to section X. Facts and assessments written by the Agent
+own material claims). Fields the Agent has no slot for go to section Api. Facts and assessments written by the Agent
 itself (source_name / engine 'agent') are kept across rebuilds; everything else is rebuilt from the source tables.
 """
 from __future__ import annotations
@@ -143,7 +143,7 @@ def _investors(b: Builder) -> dict[int, int]:
     for r in b.conn.execute("SELECT * FROM investors").fetchall():
         eid = b.entity(f"investor:{norm(r['name'])}", "investor", r["name"])
         out[r["id"]] = eid
-        b.fact(eid, "X", "investor_profile", {"kind": r["kind"], "tier_score": r["tier_score"]}, "investor_tiers",
+        b.fact(eid, "Api", "investor_profile", {"kind": r["kind"], "tier_score": r["tier_score"]}, "investor_tiers",
                evidence="Analyst-curated tier (investor_tiers.json)", status="claimed")
     return out
 
@@ -155,9 +155,9 @@ def _people(b: Builder) -> dict[int, int]:
         eid = b.entity(key, "person", p["name"], country=p["country_of_residence"])
         out[p["id"]] = eid
         if p["education"] and p["education"] != "[]":
-            b.fact(eid, "X", "education", _j(p["education"]), "people_data_labs", evidence="PDL education (degree level and school)")
+            b.fact(eid, "Api", "education", _j(p["education"]), "people_data_labs", evidence="PDL education (degree level and school)")
         for v in b.conn.execute("SELECT * FROM person_ventures WHERE person_id=?", (p["id"],)):
-            b.fact(eid, "X", "venture", {"company": v["company_name"], "company_number": v["company_number"], "status": v["company_status"],
+            b.fact(eid, "Api", "venture", {"company": v["company_name"], "company_number": v["company_number"], "status": v["company_status"],
                                          "role": v["role"], "from": v["appointed_on"], "to": v["resigned_on"]}, v["source_name"],
                    evidence=f"{v['role']} at {v['company_name']} from {v['appointed_on']}", observed=v["appointed_on"])
     return out
@@ -189,7 +189,7 @@ def _startup(b: Builder, st: sqlite3.Row, investors: dict[int, int], people: dic
         if field:
             f("A", field, r["value"], r["source_name"], evidence=r["evidence"], match=r["match_confidence"])
         elif r["field"] == "website":
-            f("X", "website_candidate", r["value"], r["source_name"], evidence=r["evidence"], match=r["match_confidence"])
+            f("Api", "website_candidate", r["value"], r["source_name"], evidence=r["evidence"], match=r["match_confidence"])
     for id_type, r in ext.items():
         d = _j(r["details"])
         if id_type in ("company_number", "siren", "no_orgnr", "lei"):
@@ -204,7 +204,7 @@ def _startup(b: Builder, st: sqlite3.Row, investors: dict[int, int], people: dic
                 if raw_status in COMPANY_STATUS:
                     f("A", "status", COMPANY_STATUS[raw_status], r["source_name"], url=r["url"], match=r["match_confidence"],
                       evidence=f"registry status: {d.get('status')}")
-                f("X", "registry_status", raw_status, r["source_name"], url=r["url"], match=r["match_confidence"],
+                f("Api", "registry_status", raw_status, r["source_name"], url=r["url"], match=r["match_confidence"],
                   evidence=f"registry status: {d.get('status')}")  # keeps values the Agent vocabulary lacks (administration)
             if d.get("type") in ("ltd", "private-limited-guarant-nsc", "private-unlimited"):
                 f("A", "legal_form", "limited_company", r["source_name"], url=r["url"], evidence=f"company type {d['type']}")
@@ -231,7 +231,7 @@ def _startup(b: Builder, st: sqlite3.Row, investors: dict[int, int], people: dic
       url=bi["url"] if bi else None, status="inferred" if not bi else None)
     f("B", "solution_summary", st["tagline"], "seed", evidence=st["tagline"])
     if bi and bi["summary"]:
-        f("X", "blueinvest_summary", bi["summary"], "blueinvest_profile", url=bi["url"])
+        f("Api", "blueinvest_summary", bi["summary"], "blueinvest_profile", url=bi["url"])
 
     # C. technology ---------------------------------------------------------------------------------------------
     for s in c.execute("SELECT * FROM startup_signals WHERE startup_id=? AND signal_type='patent'", (sid,)):
@@ -245,13 +245,13 @@ def _startup(b: Builder, st: sqlite3.Row, investors: dict[int, int], people: dic
         f("C", "dev_stage", TRL_TO_DEV_STAGE[trl], s["source_name"], url=s["url"], match=s["match_confidence"],
           evidence=f"Self-reported {_j(s['details']).get('trl_text') or f'TRL {trl}'} (BlueInvest)")
     for s in c.execute("SELECT * FROM startup_signals WHERE startup_id=? AND signal_type='paper'", (sid,)):
-        f("X", "research_paper", {"title": s["title"], "year": s["observed_on"], "citations": s["value"]}, s["source_name"],
+        f("Api", "research_paper", {"title": s["title"], "year": s["observed_on"], "citations": s["value"]}, s["source_name"],
           url=s["url"], match=s["match_confidence"], status="inferred")  # mentions, not authorship
 
     # E. ocean impact (Navigator KPI evidence -> Agent impact fields) -------------------------------------------------
     for k in c.execute("SELECT * FROM startup_ocean_kpis WHERE startup_id=?", (sid,)):
         src, kw = ("funding_rounds" if k["source_url"] else "seed"), {"url": k["source_url"], "evidence": k["claim"]}
-        f("X", "navigator_kpi", {"kpi": k["kpi_code"], "level": k["evidence_level"], "claim": k["claim"]}, src, status="claimed", **kw)
+        f("Api", "navigator_kpi", {"kpi": k["kpi_code"], "level": k["evidence_level"], "claim": k["claim"]}, src, status="claimed", **kw)
         level = k["evidence_level"]
         if level >= 1:
             f("E", "impact_claim", k["claim"], src, status="claimed", **kw)
@@ -323,7 +323,7 @@ def _startup(b: Builder, st: sqlite3.Row, investors: dict[int, int], people: dic
     if (st["stage"] or "unknown") != "unknown":
         f("G", "stage", ROUND_STAGE.get(st["stage"], "other"), "seed", evidence=f"Curated stage: {st['stage']}")
     for r in c.execute("""SELECT si.*, i.name FROM startup_investors si JOIN investors i ON i.id=si.investor_id WHERE si.startup_id=?""", (sid,)):
-        f("X", "investor", {"name": r["name"], "role": r["role"], "rounds": r["rounds"], "first_seen": r["first_seen"]}, "funding_rounds",
+        f("Api", "investor", {"name": r["name"], "role": r["role"], "rounds": r["rounds"], "first_seen": r["first_seen"]}, "funding_rounds",
           related=investors.get(r["investor_id"]), observed=r["first_seen"], evidence=f"{r['name']} ({r['role']})")
 
     # J. signals for monitoring ---------------------------------------------------------------------------------
@@ -336,12 +336,12 @@ def _startup(b: Builder, st: sqlite3.Row, investors: dict[int, int], people: dic
                           (signal_type IN ('job','repo','web_history','website') OR (signal_type='registry' AND unit IN ('insolvency','psc')))""", (sid,)):
         field = {"job": "open_role", "repo": "repo", "web_history": "web_history", "website": "website_text"}.get(s["signal_type"]) \
             or ("insolvency_case" if s["unit"] == "insolvency" else "beneficial_owner")
-        f("X", field, {"title": s["title"], "value": s["value"], "unit": s["unit"], **_j(s["details"])}, s["source_name"],
+        f("Api", field, {"title": s["title"], "value": s["value"], "unit": s["unit"], **_j(s["details"])}, s["source_name"],
           evidence=s["title"], url=s["url"], observed=s["observed_on"], match=s["match_confidence"])
     for r in c.execute("SELECT * FROM sources WHERE startup_id=?", (sid,)):
-        f("X", "reference", {"title": r["title"]}, "seed", url=r["url"], evidence=r["title"], status="claimed")
+        f("Api", "reference", {"title": r["title"]}, "seed", url=r["url"], evidence=r["title"], status="claimed")
     for n in c.execute("SELECT * FROM notes WHERE startup_id=?", (sid,)):
-        f("X", "analyst_note", {"author": n["author"], "body": n["body"], "created_at": n["created_at"]}, "analyst",
+        f("Api", "analyst_note", {"author": n["author"], "body": n["body"], "created_at": n["created_at"]}, "analyst",
           evidence=n["body"], observed=n["created_at"], status="claimed")
 
 
@@ -379,7 +379,7 @@ def _candidates(b: Builder) -> None:
 def _funding_calls(b: Builder) -> None:
     for o in b.conn.execute("SELECT * FROM funding_opportunities").fetchall():
         eid = b.entity(f"call:{o['source_name']}:{o['external_ref']}", "funding_call", o["title"][:300], website=o["url"])
-        b.fact(eid, "X", "call", {"kind": o["kind"], "status": o["status"], "opens_on": o["opens_on"], "deadline": o["deadline"],
+        b.fact(eid, "Api", "call", {"kind": o["kind"], "status": o["status"], "opens_on": o["opens_on"], "deadline": o["deadline"],
                                   "amount": o["amount"], "currency": o["currency"], "organisation": o["organisation"], "ref": o["external_ref"]},
                o["source_name"], url=o["url"], evidence=o["title"], observed=o["opens_on"])
 
