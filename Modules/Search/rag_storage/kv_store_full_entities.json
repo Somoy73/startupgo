@@ -1,0 +1,122 @@
+{
+  "startup:seabound": {
+    "entity_names": [
+      "1.5C",
+      "Business model (BRL)",
+      "CO2",
+      "Carbon capture",
+      "Customer (CRL)",
+      "Eastern Pacific Shipping",
+      "Emles",
+      "FREDRIKSSON, Alisha",
+      "Funding (FRL)",
+      "GHG emissions reduced or avoided",
+      "Hawktail",
+      "IP (IPRL)",
+      "KTH Innovation",
+      "Lowercarbon Capital",
+      "Rebel Fund",
+      "SOx emissions",
+      "SOx emissions mitigated",
+      "Seabound",
+      "Series A",
+      "Soma Capital",
+      "System and method for capturing and storing co2",
+      "Team (TMRL)",
+      "Technology (TRL)",
+      "UK Clean Maritime Demonstration Competition",
+      "UK DfT",
+      "WEN, Roujia",
+      "WO2025177240A1",
+      "Y Combinator",
+      "seed round",
+      "shipping and ports"
+    ],
+    "count": 30,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "startup:seabound"
+  },
+  "startup:kelp-blue": {
+    "entity_names": [
+      "50-249",
+      "7,000,000 EUR",
+      "COP28",
+      "Carbon",
+      "Daniel Hooft",
+      "Kat Bruce",
+      "Kelp Blue",
+      "Lüderitz",
+      "Namibia"
+    ],
+    "count": 9,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "startup:kelp-blue"
+  },
+  "startup:clearbot": {
+    "entity_names": [],
+    "count": 0,
+    "create_time": 1792249598,
+    "update_time": 1792249598,
+    "_id": "startup:clearbot"
+  },
+  "startup:hivelife": {
+    "entity_names": [
+      "5G Catalyst Technologies",
+      "Engine Biosciences",
+      "Hive Life Magazine",
+      "HiveLife",
+      "KTH Innovation",
+      "Precision Oncology Medicine",
+      "Readiness Level",
+      "Shannon Kalayanamitr",
+      "Vietnam's Beer Market"
+    ],
+    "count": 9,
+    "create_time": 1792249983,
+    "update_time": 1792249983,
+    "_id": "startup:hivelife"
+  },
+  "startup:swedish-algae-factory-ab": {
+    "entity_names": [
+      "Blue Biotechnology",
+      "Blue Economy Sector",
+      "European Commission",
+      "HORIZON DIASHUTTLE",
+      "HORIZON GREENS",
+      "HORIZON MULTIPLY",
+      "Horizon Diashuttle",
+      "Horizon Greens",
+      "Horizon Multiply",
+      "Swedish Algae Factory AB"
+    ],
+    "count": 10,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "startup:swedish-algae-factory-ab"
+  },
+  "startup:sundew": {
+    "entity_names": [
+      "BlueInvest Project Pipeline",
+      "Sundew"
+    ],
+    "count": 2,
+    "create_time": 1792251033,
+    "update_time": 1792251033,
+    "_id": "startup:sundew"
+  },
+  "startup:nauticspot": {
+    "entity_names": [
+      "BlueInvest Project Pipeline",
+      "France",
+      "NAUTICSPOT",
+      "Nauticspot",
+      "Shipping & ports"
+    ],
+    "count": 5,
+    "create_time": 1792251894,
+    "update_time": 1792251894,
+    "_id": "startup:nauticspot"
+  }
+}

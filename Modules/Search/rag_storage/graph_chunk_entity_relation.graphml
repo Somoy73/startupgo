@@ -1,0 +1,766 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d13" for="edge" attr.name="truncate" attr.type="string" />
+  <key id="d12" for="edge" attr.name="created_at" attr.type="long" />
+  <key id="d11" for="edge" attr.name="file_path" attr.type="string" />
+  <key id="d10" for="edge" attr.name="source_id" attr.type="string" />
+  <key id="d9" for="edge" attr.name="keywords" attr.type="string" />
+  <key id="d8" for="edge" attr.name="description" attr.type="string" />
+  <key id="d7" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d6" for="node" attr.name="truncate" attr.type="string" />
+  <key id="d5" for="node" attr.name="created_at" attr.type="long" />
+  <key id="d4" for="node" attr.name="file_path" attr.type="string" />
+  <key id="d3" for="node" attr.name="source_id" attr.type="string" />
+  <key id="d2" for="node" attr.name="description" attr.type="string" />
+  <key id="d1" for="node" attr.name="entity_type" attr.type="string" />
+  <key id="d0" for="node" attr.name="entity_id" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="Seabound">
+      <data key="d0">Seabound</data>
+      <data key="d1">organization</data>
+      <data key="d2">A company building carbon capture equipment for ships to capture exhaust CO2 at the source</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="WEN, Roujia">
+      <data key="d0">WEN, Roujia</data>
+      <data key="d1">person</data>
+      <data key="d2">director (former)</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="FREDRIKSSON, Alisha">
+      <data key="d0">FREDRIKSSON, Alisha</data>
+      <data key="d1">person</data>
+      <data key="d2">director</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="KTH Innovation">
+      <data key="d0">KTH Innovation</data>
+      <data key="d1">organization</data>
+      <data key="d2">Assesses readiness levels for Seabound&lt;SEP&gt;Readiness assessment body evaluating HiveLife with KTH Innovation Readiness Level 1-9.</data>
+      <data key="d3">startup:seabound-chunk-000&lt;SEP&gt;startup:hivelife-chunk-000</data>
+      <data key="d4">startup:seabound&lt;SEP&gt;startup:hivelife</data>
+      <data key="d5">1792249983</data>
+      <data key="d6" />
+    </node>
+    <node id="Lowercarbon Capital">
+      <data key="d0">Lowercarbon Capital</data>
+      <data key="d1">organization</data>
+      <data key="d2">Led seed funding round for Seabound&gt;</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Eastern Pacific Shipping">
+      <data key="d0">Eastern Pacific Shipping</data>
+      <data key="d1">organization</data>
+      <data key="d2">Investor in Seed round for Seabound</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Emles">
+      <data key="d0">Emles</data>
+      <data key="d1">organization</data>
+      <data key="d2">Investor in Seed round for Seabound</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Hawktail">
+      <data key="d0">Hawktail</data>
+      <data key="d1">organization</data>
+      <data key="d2">Investor in Seed round for Seabound</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Rebel Fund">
+      <data key="d0">Rebel Fund</data>
+      <data key="d1">organization</data>
+      <data key="d2">Investor in Seed round for Seabound</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Soma Capital">
+      <data key="d0">Soma Capital</data>
+      <data key="d1">organization</data>
+      <data key="d2">Investor in Seed round for Seabound</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Y Combinator">
+      <data key="d0">Y Combinator</data>
+      <data key="d1">organization</data>
+      <data key="d2">Accelerator participant and investor in Seed round for Seabound</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="UK Clean Maritime Demonstration Competition">
+      <data key="d0">UK Clean Maritime Demonstration Competition</data>
+      <data key="d1">organization</data>
+      <data key="d2">Provided grant for Seabound</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="WO2025177240A1">
+      <data key="d0">WO2025177240A1</data>
+      <data key="d1">artifact</data>
+      <data key="d2">Patent for system and method for capturing and storing CO2&lt;SEP&gt;Patent application WO2025177240A1 from 2024 pending</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="shipping and ports">
+      <data key="d0">shipping and ports</data>
+      <data key="d1">concept</data>
+      <data key="d2">Blue economy sector for Seabound</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Carbon capture">
+      <data key="d0">Carbon capture</data>
+      <data key="d1">method</data>
+      <data key="d2">Technology for capturing CO2 from ship exhaust</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="CO2">
+      <data key="d0">CO2</data>
+      <data key="d1">data</data>
+      <data key="d2">Exhaust emissions captured onboard ships</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="SOx emissions">
+      <data key="d0">SOx emissions</data>
+      <data key="d1">data</data>
+      <data key="d2">Sulphur emissions mitigated (claimed)</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="1.5C">
+      <data key="d0">1.5C</data>
+      <data key="d1">concept</data>
+      <data key="d2">Climate target for emissions mitigation</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Technology (TRL)">
+      <data key="d0">Technology (TRL)</data>
+      <data key="d1">concept</data>
+      <data key="d2">Technology readiness level assessment</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Customer (CRL)">
+      <data key="d0">Customer (CRL)</data>
+      <data key="d1">concept</data>
+      <data key="d2">Customer testing confirming value</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Business model (BRL)">
+      <data key="d0">Business model (BRL)</data>
+      <data key="d1">concept</data>
+      <data key="d2">Revenue and cost sides validated</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="IP (IPRL)">
+      <data key="d0">IP (IPRL)</data>
+      <data key="d1">concept</data>
+      <data key="d2">IP strategy and formal application</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Team (TMRL)">
+      <data key="d0">Team (TMRL)</data>
+      <data key="d1">concept</data>
+      <data key="d2">Complementary, diverse founding team</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Funding (FRL)">
+      <data key="d0">Funding (FRL)</data>
+      <data key="d1">concept</data>
+      <data key="d2">Pitch tested and P&amp;L/cash flow</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="SOx emissions mitigated">
+      <data key="d0">SOx emissions mitigated</data>
+      <data key="d1">event</data>
+      <data key="d2">Mitigation of sulphur emissions claimed</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="GHG emissions reduced or avoided">
+      <data key="d0">GHG emissions reduced or avoided</data>
+      <data key="d1">event</data>
+      <data key="d2">CO2 from ship exhaust captured onboard</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="seed round">
+      <data key="d0">seed round</data>
+      <data key="d1">event</data>
+      <data key="d2">Funding round type</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Series A">
+      <data key="d0">Series A</data>
+      <data key="d1">event</data>
+      <data key="d2">Funding round type for scaling</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="UK DfT">
+      <data key="d0">UK DfT</data>
+      <data key="d1">organization</data>
+      <data key="d2">UK Department for Transport (referenced for grant verification)</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="System and method for capturing and storing co2">
+      <data key="d0">System and method for capturing and storing co2</data>
+      <data key="d3">startup:seabound-chunk-000</data>
+      <data key="d2">Patent WO2025177240A1, 2024, pending</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">startup:seabound</data>
+      <data key="d5">1792245596</data>
+      <data key="d6" />
+    </node>
+    <node id="Kelp Blue">
+      <data key="d0">Kelp Blue</data>
+      <data key="d1">organization</data>
+      <data key="d2">Dutch-headquartered company cultivating giant kelp forests off Lüderitz, Namibia. Received the Zayed Sustainability Prize (Climate Action) at COP28.</data>
+      <data key="d3">startup:kelp-blue-chunk-000</data>
+      <data key="d4">startup:kelp-blue</data>
+      <data key="d5">1792247970</data>
+      <data key="d6" />
+    </node>
+    <node id="Lüderitz">
+      <data key="d0">Lüderitz</data>
+      <data key="d1">location</data>
+      <data key="d2">Location in Namibia where kelp forests are cultivated.</data>
+      <data key="d3">startup:kelp-blue-chunk-000</data>
+      <data key="d4">startup:kelp-blue</data>
+      <data key="d5">1792247970</data>
+      <data key="d6" />
+    </node>
+    <node id="Namibia">
+      <data key="d0">Namibia</data>
+      <data key="d1">location</data>
+      <data key="d2">Country where kelp forests are cultivated.</data>
+      <data key="d3">startup:kelp-blue-chunk-000</data>
+      <data key="d4">startup:kelp-blue</data>
+      <data key="d5">1792247970</data>
+      <data key="d6" />
+    </node>
+    <node id="Carbon">
+      <data key="d0">Carbon</data>
+      <data key="d1">concept</data>
+      <data key="d2">Carbon capture from kelp forests.</data>
+      <data key="d3">startup:kelp-blue-chunk-000</data>
+      <data key="d4">startup:kelp-blue</data>
+      <data key="d5">1792247970</data>
+      <data key="d6" />
+    </node>
+    <node id="Daniel Hooft">
+      <data key="d0">Daniel Hooft</data>
+      <data key="d1">person</data>
+      <data key="d2">Chief executive officer of Kelp Blue.</data>
+      <data key="d3">startup:kelp-blue-chunk-000</data>
+      <data key="d4">startup:kelp-blue</data>
+      <data key="d5">1792247970</data>
+      <data key="d6" />
+    </node>
+    <node id="Kat Bruce">
+      <data key="d0">Kat Bruce</data>
+      <data key="d1">person</data>
+      <data key="d2">Board member of Kelp Blue.</data>
+      <data key="d3">startup:kelp-blue-chunk-000</data>
+      <data key="d4">startup:kelp-blue</data>
+      <data key="d5">1792247970</data>
+      <data key="d6" />
+    </node>
+    <node id="50-249">
+      <data key="d0">50-249</data>
+      <data key="d1">data</data>
+      <data key="d2">Employee count range of Kelp Blue.</data>
+      <data key="d3">startup:kelp-blue-chunk-000</data>
+      <data key="d4">startup:kelp-blue</data>
+      <data key="d5">1792247970</data>
+      <data key="d6" />
+    </node>
+    <node id="7,000,000 EUR">
+      <data key="d0">7,000,000 EUR</data>
+      <data key="d1">data</data>
+      <data key="d2">Amount currently being raised.</data>
+      <data key="d3">startup:kelp-blue-chunk-000</data>
+      <data key="d4">startup:kelp-blue</data>
+      <data key="d5">1792247970</data>
+      <data key="d6" />
+    </node>
+    <node id="COP28">
+      <data key="d0">COP28</data>
+      <data key="d1">event</data>
+      <data key="d2">Conference of the Parties climate summit where the Zayed Sustainability Prize was received.</data>
+      <data key="d3">startup:kelp-blue-chunk-000</data>
+      <data key="d4">startup:kelp-blue</data>
+      <data key="d5">1792247970</data>
+      <data key="d6" />
+    </node>
+    <node id="HiveLife">
+      <data key="d0">HiveLife</data>
+      <data key="d1">organization</data>
+      <data key="d2">Organization founded in 2016, located in Hong Kong, operating in the unknown sector.</data>
+      <data key="d3">startup:hivelife-chunk-000</data>
+      <data key="d4">startup:hivelife</data>
+      <data key="d5">1792249983</data>
+      <data key="d6" />
+    </node>
+    <node id="Engine Biosciences">
+      <data key="d0">Engine Biosciences</data>
+      <data key="d1">organization</data>
+      <data key="d2">Biotechnology company raising US$27 million to advance precision oncology medicine.</data>
+      <data key="d3">startup:hivelife-chunk-000</data>
+      <data key="d4">startup:hivelife</data>
+      <data key="d5">1792249983</data>
+      <data key="d6" />
+    </node>
+    <node id="Vietnam's Beer Market">
+      <data key="d0">Vietnam's Beer Market</data>
+      <data key="d1">concept</data>
+      <data key="d2">Beer market in Vietnam adapting amid economic headwinds.</data>
+      <data key="d3">startup:hivelife-chunk-000</data>
+      <data key="d4">startup:hivelife</data>
+      <data key="d5">1792249983</data>
+      <data key="d6" />
+    </node>
+    <node id="Shannon Kalayanamitr">
+      <data key="d0">Shannon Kalayanamitr</data>
+      <data key="d1">person</data>
+      <data key="d2">Serial entrepreneur featured in Hive Life Making Thailand's cities smarter at 5G Catalyst Technologies.</data>
+      <data key="d3">startup:hivelife-chunk-000</data>
+      <data key="d4">startup:hivelife</data>
+      <data key="d5">1792249983</data>
+      <data key="d6" />
+    </node>
+    <node id="5G Catalyst Technologies">
+      <data key="d0">5G Catalyst Technologies</data>
+      <data key="d1">organization</data>
+      <data key="d2">Technology company where Shannon Kalayanamitr was featured for making Thailand's cities smarter.</data>
+      <data key="d3">startup:hivelife-chunk-000</data>
+      <data key="d4">startup:hivelife</data>
+      <data key="d5">1792249983</data>
+      <data key="d6" />
+    </node>
+    <node id="Readiness Level">
+      <data key="d0">Readiness Level</data>
+      <data key="d1">concept</data>
+      <data key="d2">Framework assessing technology, business model, customer, IP, team, and funding readiness from level 1 to 9.</data>
+      <data key="d3">startup:hivelife-chunk-000</data>
+      <data key="d4">startup:hivelife</data>
+      <data key="d5">1792249983</data>
+      <data key="d6" />
+    </node>
+    <node id="Precision Oncology Medicine">
+      <data key="d0">Precision Oncology Medicine</data>
+      <data key="d1">concept</data>
+      <data key="d2">Medicine approach tailoring treatment based on individual genetic profiles.</data>
+      <data key="d3">startup:hivelife-chunk-000</data>
+      <data key="d4">startup:hivelife</data>
+      <data key="d5">1792249983</data>
+      <data key="d6" />
+    </node>
+    <node id="Hive Life Magazine">
+      <data key="d0">Hive Life Magazine</data>
+      <data key="d1">organization</data>
+      <data key="d2">Online magazine publishing articles on biotechnology, technology, and business featured in the sources list.</data>
+      <data key="d3">startup:hivelife-chunk-000</data>
+      <data key="d4">startup:hivelife</data>
+      <data key="d5">1792249983</data>
+      <data key="d6" />
+    </node>
+    <node id="Swedish Algae Factory AB">
+      <data key="d0">Swedish Algae Factory AB</data>
+      <data key="d1">organization</data>
+      <data key="d2">A company engaged in cultivation and extraction of material from algae, operating in the blue biotechnology sector in Sweden with a commercial operation stage.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab</data>
+      <data key="d5">1792250370</data>
+      <data key="d6" />
+    </node>
+    <node id="Blue Biotechnology">
+      <data key="d0">Blue Biotechnology</data>
+      <data key="d1">concept</data>
+      <data key="d2">An economic sector focused on the use of biological materials from marine and aquatic sources for industrial and commercial applications.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab</data>
+      <data key="d5">1792250370</data>
+      <data key="d6" />
+    </node>
+    <node id="HORIZON MULTIPLY">
+      <data key="d0">HORIZON MULTIPLY</data>
+      <data key="d1">event</data>
+      <data key="d2">A grant program from the European Commission providing 346,860 EUR in 2025, with Swedish Algae Factory AB as a participant.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab</data>
+      <data key="d5">1792250370</data>
+      <data key="d6" />
+    </node>
+    <node id="HORIZON GREENS">
+      <data key="d0">HORIZON GREENS</data>
+      <data key="d1">event</data>
+      <data key="d2">A grant program from the European Commission providing 293,710 EUR in 2025, with Swedish Algae Factory AB as a participant.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab</data>
+      <data key="d5">1792250370</data>
+      <data key="d6" />
+    </node>
+    <node id="HORIZON DIASHUTTLE">
+      <data key="d0">HORIZON DIASHUTTLE</data>
+      <data key="d1">event</data>
+      <data key="d2">A grant program from the European Commission (2023), with Swedish Algae Factory AB as an associated partner.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab</data>
+      <data key="d5">1792250370</data>
+      <data key="d6" />
+    </node>
+    <node id="Blue Economy Sector">
+      <data key="d0">Blue Economy Sector</data>
+      <data key="d1">concept</data>
+      <data key="d2">An economic sector focused on the sustainable use of ocean and marine resources for commercial purposes.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab</data>
+      <data key="d5">1792250370</data>
+      <data key="d6" />
+    </node>
+    <node id="European Commission">
+      <data key="d0">European Commission</data>
+      <data key="d1">organization</data>
+      <data key="d2">The executive body of the European Union responsible for granting funding and overseeing research programs.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab</data>
+      <data key="d5">1792250370</data>
+      <data key="d6" />
+    </node>
+    <node id="Horizon Multiply">
+      <data key="d0">Horizon Multiply</data>
+      <data key="d1">event</data>
+      <data key="d2">A grant program from the European Commission providing 346,860 EUR in 2025, with Swedish Algae Factory AB as a participant.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab</data>
+      <data key="d5">1792250370</data>
+      <data key="d6" />
+    </node>
+    <node id="Horizon Greens">
+      <data key="d0">Horizon Greens</data>
+      <data key="d1">event</data>
+      <data key="d2">A grant program from the European Commission providing 293,710 EUR in 2025, with Swedish Algae Factory AB as a participant.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab</data>
+      <data key="d5">1792250370</data>
+      <data key="d6" />
+    </node>
+    <node id="Horizon Diashuttle">
+      <data key="d0">Horizon Diashuttle</data>
+      <data key="d1">event</data>
+      <data key="d2">A grant program from the European Commission (2023), with Swedish Algae Factory AB as an associated partner.</data>
+      <data key="d3">startup:swedish-algae-factory-ab-chunk-000</data>
+      <data key="d4">startup:swedish-algae-factory-ab</data>
+      <data key="d5">1792250370</data>
+      <data key="d6" />
+    </node>
+    <node id="Sundew">
+      <data key="d0">Sundew</data>
+      <data key="d1">organization</data>
+      <data key="d2">Blue biotechnology company combatting aquatic pests, diseases, and invasive species, based in Denmark, currently in commercial operation stage</data>
+      <data key="d3">startup:sundew-chunk-000</data>
+      <data key="d4">startup:sundew</data>
+      <data key="d5">1792251033</data>
+      <data key="d6" />
+    </node>
+    <node id="BlueInvest Project Pipeline">
+      <data key="d0">BlueInvest Project Pipeline</data>
+      <data key="d1">organization</data>
+      <data key="d2">Registry source listing Sundew's project pipeline&lt;SEP&gt;Source of information for NAUTICSPOT</data>
+      <data key="d3">startup:sundew-chunk-000&lt;SEP&gt;startup:nauticspot-chunk-000</data>
+      <data key="d4">startup:sundew&lt;SEP&gt;startup:nauticspot</data>
+      <data key="d5">1792251894</data>
+      <data key="d6" />
+    </node>
+    <node id="Nauticspot">
+      <data key="d0">Nauticspot</data>
+      <data key="d1">organization</data>
+      <data key="d2">Smart mooring buoy to preserve seabed &amp; posidonia, operating in the shipping and ports sector in France</data>
+      <data key="d3">startup:nauticspot-chunk-000</data>
+      <data key="d4">startup:nauticspot</data>
+      <data key="d5">1792251894</data>
+      <data key="d6" />
+    </node>
+    <node id="Shipping &amp; ports">
+      <data key="d0">Shipping &amp; ports</data>
+      <data key="d1">sector</data>
+      <data key="d2">Sector category for NAUTICSPOT</data>
+      <data key="d3">startup:nauticspot-chunk-000</data>
+      <data key="d4">startup:nauticspot</data>
+      <data key="d5">1792251894</data>
+      <data key="d6" />
+    </node>
+    <node id="France">
+      <data key="d0">France</data>
+      <data key="d1">location</data>
+      <data key="d2">Location of NAUTICSPOT operations</data>
+      <data key="d3">startup:nauticspot-chunk-000</data>
+      <data key="d4">startup:nauticspot</data>
+      <data key="d5">1792251894</data>
+      <data key="d6" />
+    </node>
+    <node id="NAUTICSPOT">
+      <data key="d0">NAUTICSPOT</data>
+      <data key="d1">organization</data>
+      <data key="d2">Smart mooring buoy to preserve seabed &amp; posidonia, operating in the shipping and ports sector in France</data>
+      <data key="d3">startup:nauticspot-chunk-000</data>
+      <data key="d4">startup:nauticspot</data>
+      <data key="d5">1792251894</data>
+      <data key="d6" />
+    </node>
+    <edge source="Seabound" target="Lowercarbon Capital">
+      <data key="d7">1.0</data>
+      <data key="d8">Lowercarbon Capital led the seed funding round for Seabound</data>
+      <data key="d9">investment,seed funding</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Seabound" target="Y Combinator">
+      <data key="d7">1.0</data>
+      <data key="d8">Y Combinator Winter 2022 participant and investor</data>
+      <data key="d9">accelerator,investment</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Seabound" target="Eastern Pacific Shipping">
+      <data key="d7">1.0</data>
+      <data key="d8">Investor in seed round</data>
+      <data key="d9">investment</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Seabound" target="Emles">
+      <data key="d7">1.0</data>
+      <data key="d8">Investor in seed round</data>
+      <data key="d9">investment</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Seabound" target="Hawktail">
+      <data key="d7">1.0</data>
+      <data key="d8">Investor in seed round</data>
+      <data key="d9">investment</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Seabound" target="Rebel Fund">
+      <data key="d7">1.0</data>
+      <data key="d8">Investor in seed round</data>
+      <data key="d9">investment</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Seabound" target="Soma Capital">
+      <data key="d7">1.0</data>
+      <data key="d8">Investor in seed round</data>
+      <data key="d9">investment</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Seabound" target="UK Clean Maritime Demonstration Competition">
+      <data key="d7">1.0</data>
+      <data key="d8">Provided grant from Round 6</data>
+      <data key="d9">grant</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Seabound" target="shipping and ports">
+      <data key="d7">1.0</data>
+      <data key="d8">Operates in blue economy sector shipping and ports</data>
+      <data key="d9">blue economy sector</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Seabound" target="Carbon capture">
+      <data key="d7">1.0</data>
+      <data key="d8">Technology for capturing CO2 from ship exhaust</data>
+      <data key="d9">method</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Seabound" target="CO2">
+      <data key="d7">1.0</data>
+      <data key="d8">Captures CO2 from ship exhaust</data>
+      <data key="d9">data</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="KTH Innovation" target="HiveLife">
+      <data key="d7">1.0</data>
+      <data key="d8">HiveLife assessed with KTH Innovation Readiness Level 1-9 on 2026-10-17.</data>
+      <data key="d9">Organization,Readiness</data>
+      <data key="d10">startup:hivelife-chunk-000</data>
+      <data key="d11">startup:hivelife</data>
+      <data key="d12">1792249983</data>
+      <data key="d13" />
+    </edge>
+    <edge source="UK Clean Maritime Demonstration Competition" target="UK DfT">
+      <data key="d7">1.0</data>
+      <data key="d8">Grant reported by aggregators; verify against the UK DfT announcement</data>
+      <data key="d9">grant source,verification</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="WO2025177240A1" target="System and method for capturing and storing co2">
+      <data key="d7">1.0</data>
+      <data key="d8">Patent WO2025177240A1, 2024, pending</data>
+      <data key="d9">patent details</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Business model (BRL)" target="IP (IPRL)">
+      <data key="d7">1.0</data>
+      <data key="d8">Business model and IP readiness levels assessed</data>
+      <data key="d9">readiness components</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Team (TMRL)" target="Funding (FRL)">
+      <data key="d7">1.0</data>
+      <data key="d8">Team and funding readiness levels assessed</data>
+      <data key="d9">readiness components</data>
+      <data key="d10">startup:seabound-chunk-000</data>
+      <data key="d11">startup:seabound</data>
+      <data key="d12">1792245596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Engine Biosciences" target="Hive Life Magazine">
+      <data key="d7">1.0</data>
+      <data key="d8">Engine Biosciences raises US$27 million to advance precision oncology medicine, featured in Hive Life Magazine.</data>
+      <data key="d9">Business,Technology</data>
+      <data key="d10">startup:hivelife-chunk-000</data>
+      <data key="d11">startup:hivelife</data>
+      <data key="d12">1792249983</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Vietnam's Beer Market" target="Hive Life Magazine">
+      <data key="d7">1.0</data>
+      <data key="d8">Vietnam's beer market adapts amid economic headwinds, featured in Hive Life Magazine.</data>
+      <data key="d9">Economics</data>
+      <data key="d10">startup:hivelife-chunk-000</data>
+      <data key="d11">startup:hivelife</data>
+      <data key="d12">1792249983</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Shannon Kalayanamitr" target="5G Catalyst Technologies">
+      <data key="d7">1.0</data>
+      <data key="d8">Shannon Kalayanamitr featured in Hive Life for making Thailand's cities smarter at 5G Catalyst Technologies.</data>
+      <data key="d9">Entrepreneur,Technology</data>
+      <data key="d10">startup:hivelife-chunk-000</data>
+      <data key="d11">startup:hivelife</data>
+      <data key="d12">1792249983</data>
+      <data key="d13" />
+    </edge>
+    <edge source="Sundew" target="BlueInvest Project Pipeline">
+      <data key="d7">1.0</data>
+      <data key="d8">Lists Sundew in project pipeline</data>
+      <data key="d9">source</data>
+      <data key="d10">startup:sundew-chunk-000</data>
+      <data key="d11">startup:sundew</data>
+      <data key="d12">1792251033</data>
+      <data key="d13" />
+    </edge>
+  </graph>
+</graphml>
