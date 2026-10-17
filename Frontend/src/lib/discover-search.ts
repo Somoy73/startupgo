@@ -34,6 +34,9 @@ export function parseFilters(value: unknown): SearchFilters {
   } catch { /* Invalid old links use default filters. */ }
   return empty;
 }
+/** How many filter values are set, for the Filters button's badge. */
+export const activeFilterCount = (f: SearchFilters) =>
+  f.stages.length + f.countries.length + f.sectors.length + f.impactAreas.length + f.pipeline.length + Object.keys(f.minLevels).length;
 export function filterStartups<T extends StartupSummary>(items: T[], filters: SearchFilters): T[] {
   return items.filter((s) =>
     (!filters.stages.length || filters.stages.includes(s.stage)) &&

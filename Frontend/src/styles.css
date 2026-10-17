@@ -167,6 +167,11 @@ progress::-moz-progress-bar { background: var(--ocean); }
 input[type=checkbox], input[type=range] { accent-color: var(--ocean); }
 .btn { border-radius: 24px; border: 1px solid var(--input); background: var(--card); color: var(--foreground); min-height: 38px; padding: 8px 18px; font-weight: 700; }
 .btn-primary { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+/* Buttons joined into one pill: inner corners squared, a thin divider between solid halves. */
+.btn-group { display: inline-flex; }
+.btn-group > .btn:not(:last-child) { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.btn-group > .btn:not(:first-child) { border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: -1px; padding-left: 12px; padding-right: 14px; }
+.btn-group > .btn-primary + .btn-primary { border-left-color: color-mix(in oklch, var(--primary-foreground) 40%, var(--primary)); }
 .page-head .btn-primary { background: var(--ocean); border-color: var(--ocean); }
 .btn-danger { color: var(--destructive); }
 .btn-block { width: 100%; }

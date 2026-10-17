@@ -19,7 +19,7 @@ export function SearchFilterPanel({ filters, onChange }: Props) {
   const set = (patch: Partial<SearchFilters>) => onChange({ ...filters, ...patch });
 
   return (
-    <div className="mt-4 grid gap-5 border-t border-border pt-4 md:grid-cols-2">
+    <div className="grid gap-5 md:grid-cols-2">
       <Facet
         label="Stage"
         options={uniqueSorted(startups.map((s) => s.stage)).map((s) => ({ value: s, label: stageLabel(s) }))}
