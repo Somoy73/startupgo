@@ -29,6 +29,11 @@ with the generated `--config`, and the Agent can be pointed at the runtime data 
 `uv run startup-agent --config ../DB/runtime/config/agent/config.toml graph --mode evaluation` (from `Modules/`,
 after `refresh.py configs`).
 
+## Assessment parameters
+
+[ASSESSMENT_PARAMETERS.md](ASSESSMENT_PARAMETERS.md) lists the parameters used to assess a startup, grouped by
+dimension, with their database fields.
+
 ## Single scrapers
 
 ```bash
