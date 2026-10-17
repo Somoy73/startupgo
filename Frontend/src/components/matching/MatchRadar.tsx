@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { layoutNodes } from "../../lib/match-graph";
 import type { InvestorMatch } from "../../lib/investor";
 
@@ -7,14 +6,12 @@ const SIZE = 360;
 type Props = {
   matches: InvestorMatch[];
   hovered: string | null;
+  selected: string | null;
   onHover: (slug: string | null) => void;
-};
+  onSelect: (slug: string) => void };
 
-export function MatchRadar({ matches, hovered, onHover }: Props) {
-  const nodes = layoutNodes(
-    matches.map((m) => ({ slug: m.startup.slug, score: m.total })),
-    SIZE,
-  );
+export function MatchRadar({ matches, hovered, selected, onHover, onSelect }: Props) {
+  const nodes = layoutNodes(matches.map((m) => ({ slug: m.startup.slug, score: m.total })), SIZE);
   const c = SIZE / 2;
   // Reveal order: weaker matches first, top matches last.
   const order = (i: number) => nodes.length - 1 - i;
@@ -54,10 +51,13 @@ export function MatchRadar({ matches, hovered, onHover }: Props) {
       {nodes.map((n, i) => {
         const m = matches[i]!;
         return (
-          <Link
+          <g
             key={n.slug}
-            to="/startups/$slug"
-            params={{ slug: n.slug }}
+            role="button"
+            tabIndex={0}
+            aria-pressed={selected === n.slug}
+            onClick={() => onSelect(n.slug)}
+            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(n.slug); } }}
             aria-label={`${m.startup.name}, score ${m.total}`}
             onMouseEnter={() => onHover(n.slug)}
             onMouseLeave={() => onHover(null)}
@@ -65,7 +65,7 @@ export function MatchRadar({ matches, hovered, onHover }: Props) {
             onBlur={() => onHover(null)}
           >
             <g
-              className={`mr-node${n.highlighted ? " is-top" : ""}${hovered === n.slug ? " is-hover" : ""}`}
+              className={`mr-node${n.highlighted ? " is-top" : ""}${hovered === n.slug || selected === n.slug ? " is-hover" : ""}`}
               style={{ ["--i" as string]: order(i), transformOrigin: `${n.x}px ${n.y}px` }}
             >
               <circle className="mr-halo" cx={n.x} cy={n.y} r={14} />
@@ -76,7 +76,7 @@ export function MatchRadar({ matches, hovered, onHover }: Props) {
                 </text>
               )}
             </g>
-          </Link>
+          </g>
         );
       })}
     </svg>

@@ -4,6 +4,7 @@ export const PIPELINE_LABELS = {
   diligence: "Diligence",
   "term-sheet": "Term sheet",
   invested: "Invested",
+  portfolio: "Portfolio",
   passed: "Passed",
 };
 export const score = (n: number) => Math.round(n);

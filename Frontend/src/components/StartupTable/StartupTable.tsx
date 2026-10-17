@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 import { Button } from "../ui/button";
-import type { StartupSummary } from "../../api/types";
+import type { StartupSummary } from "../../api/backend-types";
 import type { SearchSort, SearchSortKey } from "../../lib/discover-search";
 import { COLUMNS } from "./columns";
 
