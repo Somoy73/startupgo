@@ -71,8 +71,7 @@ export function previewScores(draft: AssessmentDraft) {
   const spread = Math.max(...values) - Math.min(...values);
   const kpis = Object.values(draft.kpis).filter((k) => k.level > 0);
   const ocean = kpis.length ? Math.max(...kpis.map((k) => k.level)) * 25 : 0;
-  const penalty = 3 * Math.max(0, spread - 3);
-  const potential = Math.max(0, Math.round(0.45 * readiness + 0.35 * ocean + 0.2 * 50 - penalty));
+  const potential = Math.max(0, Math.round(0.45 * readiness + 0.35 * ocean + 0.2 * 50));
   return {
     potential,
     readiness: Math.round(readiness),
@@ -86,7 +85,6 @@ export function previewScores(draft: AssessmentDraft) {
           : potential >= 40
             ? "Watch"
             : "Early",
-    imbalance_penalty: penalty,
     readiness_spread: spread,
     lagging_dimensions: DIMENSIONS.filter((d) => draft.levels[d.key] === Math.min(...values)).map(
       (d) => d.key,

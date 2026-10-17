@@ -310,8 +310,6 @@ def frameworks(conn: sqlite3.Connection) -> dict:
         "evidence_scale": [{"level": k, "label": v} for k, v in scoring.EVIDENCE_LABELS.items()],
         "potential_weights": scoring.POTENTIAL_WEIGHTS,
         "investment_weights": scoring.investment_weights(),
-        "max_healthy_spread": scoring.MAX_HEALTHY_SPREAD,
-        "penalty_per_extra_level": scoring.PENALTY_PER_EXTRA_LEVEL,
     }
 
 

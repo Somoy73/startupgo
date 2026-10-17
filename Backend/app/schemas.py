@@ -14,7 +14,6 @@ class Scores(BaseModel):
     readiness: float
     ocean_impact: float
     momentum: float
-    imbalance_penalty: float
     potential: float
     band: str
     readiness_spread: int

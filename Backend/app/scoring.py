@@ -9,7 +9,7 @@ Outputs (all 0-100):
   * readiness       - weighted KTH IRL index
   * ocean_impact    - depth/breadth of evidenced ocean impact
   * momentum        - funding stage and recency
-  * potential       - blended Investment Potential, minus an imbalance penalty
+  * potential       - blended Investment Potential
 
 See RESEARCH.md for the rationale behind each component.
 
@@ -37,8 +37,6 @@ READINESS_WEIGHTS = {"crl": 0.20, "trl": 0.20, "brl": 0.20, "tmrl": 0.15, "frl":
 POTENTIAL_WEIGHTS = {"readiness": 0.45, "ocean_impact": 0.30, "momentum": 0.25}
 
 # KTH guide: gaps of more than 2-3 levels between dimensions hinder development.
-MAX_HEALTHY_SPREAD = 3
-PENALTY_PER_EXTRA_LEVEL = 5.0
 LAGGING_THRESHOLD = 3  # levels below the median that flag a dimension as lagging
 
 STAGE_RANK = {
@@ -99,7 +97,6 @@ class ScoreBreakdown:
     readiness: float
     ocean_impact: float
     momentum: float
-    imbalance_penalty: float
     potential: float
     band: str
     readiness_spread: int
@@ -113,13 +110,12 @@ def readiness_index(levels: dict[str, int]) -> float:
     return round(sum(READINESS_WEIGHTS[d] * (levels[d] - 1) / 8 for d in DIMENSIONS) * 100, 1)
 
 
-def imbalance(levels: dict[str, int]) -> tuple[int, list[str], float]:
+def imbalance(levels: dict[str, int]) -> tuple[int, list[str]]:
     values = [levels[d] for d in DIMENSIONS]
     spread = max(values) - min(values)
     mid = median(values)
     lagging = [d.upper() for d in DIMENSIONS if mid - levels[d] >= LAGGING_THRESHOLD]
-    penalty = max(0, spread - MAX_HEALTHY_SPREAD) * PENALTY_PER_EXTRA_LEVEL
-    return spread, lagging, penalty
+    return spread, lagging
 
 
 def ocean_impact_score(kpis: list[tuple[str, int]]) -> tuple[float, str, list[str]]:
@@ -184,18 +180,17 @@ def score_startup(
     readiness = readiness_index(levels)
     ocean, evidence_label, areas = ocean_impact_score(kpis)
     momentum = momentum_score(stage, last_round, today)
-    spread, lagging, penalty = imbalance(levels)
+    spread, lagging = imbalance(levels)
     blended = (
         POTENTIAL_WEIGHTS["readiness"] * readiness
         + POTENTIAL_WEIGHTS["ocean_impact"] * ocean
         + POTENTIAL_WEIGHTS["momentum"] * momentum
     )
-    potential = round(min(100.0, max(0.0, blended - penalty)), 1)
+    potential = round(min(100.0, max(0.0, blended)), 1)
     return ScoreBreakdown(
         readiness=readiness,
         ocean_impact=ocean,
         momentum=momentum,
-        imbalance_penalty=penalty,
         potential=potential,
         band=band_for(potential),
         readiness_spread=spread,

@@ -1,8 +1,6 @@
 import { DIMENSIONS, type StartupDetail, type Framework } from "./types";
 export const frameworks: Framework = {
   potential_weights: { readiness: 0.45, ocean_impact: 0.35, momentum: 0.2 },
-  penalty_per_extra_level: 3,
-  max_healthy_spread: 3,
   readiness_dimensions: DIMENSIONS.map((d) => ({
     ...d,
     weight: 1 / 6,
@@ -175,7 +173,6 @@ export const seed: StartupDetail[] = rows.map(
         ocean_impact: impact,
         momentum: 50,
         band: potential >= 70 ? "Strong" : "Promising",
-        imbalance_penalty: 0,
         readiness_spread: trl - brl + 1,
         lagging_dimensions: ["crl"],
         ocean_areas_covered: [sector === "Clean ocean" ? "POL" : "BIO"],
