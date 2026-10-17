@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from startup_search import SearchError, SearchUnavailable, StartupSearch
 
-from . import repository, search
+from . import repository
 from .db import get_conn, init_db
 from .schemas import (
     AgentEntryMatch,

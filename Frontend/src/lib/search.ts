@@ -1,21 +1,14 @@
 /**
- * Search filters on the client: chips, and the URL encoding of edited filters.
+ * Discover filters on the client: chips, the URL encoding of edited filters, and matching.
  *
- * Interpretation and filtering happen on the backend (POST /api/search). The URL holds
- * either `q` (what the user typed) or, once they edit a chip or a
- * dropdown, `f`: the filters as a canonical string such as
- *   stage:seed region:nordics trl>=6 any:kelp
- * written by `formatSearch` and read back by `parseSearch`.
+ * What the user types goes to the backend search (POST /api/startups/search). Filters
+ * (`f` in the URL, e.g. `stage:seed region:nordics trl>=6 any:kelp`, written by
+ * `formatSearch` and read back by `parseSearch`) refine whatever is listed, here in the
+ * browser with `matchesFilters`.
  */
-import {
-  DIMENSIONS,
-  type ApiSearchFilters,
-  type DimensionKey,
-  type PipelineStage,
-  type StartupSummary,
-} from "@/api/types";
+import { DIMENSIONS, type DimensionKey, type PipelineStage, type StartupSummary } from "@/api/types";
 import { PIPELINE_LABELS, stageLabel } from "./format";
-import { REGIONS, regionLabel, type Region } from "./regions";
+import { inRegion, REGIONS, regionLabel, type Region } from "./regions";
 
 export interface SearchFilters {
   /** Every term must appear. */
@@ -259,47 +252,28 @@ export function filterChips(f: SearchFilters): FilterChip[] {
 }
 
 // ---------------------------------------------------------------------------
-// Wire format (POST /api/search)
+// Matching
 // ---------------------------------------------------------------------------
 
-const REGION_IDS = new Set<string>(REGIONS.map((r) => r.id));
-const PIPELINE_IDS = new Set<string>(PIPELINE_PHRASES.map(([id]) => id));
+const same = (a: string, b: string) => a.toLowerCase() === b.toLowerCase();
 
-export function toApiFilters(f: SearchFilters): ApiSearchFilters {
-  const min_levels = Object.fromEntries(DIMENSIONS.map(({ key }) => [key, f.minLevels[key] ?? 0])) as Record<
-    DimensionKey,
-    number
-  >;
-  return {
-    stages: f.stages,
-    sectors: f.sectors,
-    countries: f.countries,
-    regions: f.regions,
-    impact_areas: f.impactAreas,
-    pipeline: f.pipeline,
-    min_levels,
-    keywords: f.text,
-    any_keywords: f.anyText,
-  };
-}
+/**
+ * Facets AND together, values within a facet OR. Sectors and countries compare
+ * case-insensitively, since filters decoded from the URL may be lowercase.
+ */
+export function matchesFilters(s: StartupSummary, f: SearchFilters): boolean {
+  const haystack = [s.name, s.tagline, s.description, s.sector, s.country, s.city ?? ""].join(" ").toLowerCase();
+  const anyOf = <T>(wanted: T[], test: (w: T) => boolean) => wanted.length === 0 || wanted.some(test);
 
-/** The backend's filters as UI filters, dropping anything the UI doesn't know. */
-export function fromApiFilters(api: ApiSearchFilters): SearchFilters {
-  const unique = <T>(values: T[]) => [...new Set(values)];
-  const minLevels: SearchFilters["minLevels"] = {};
-  for (const { key } of DIMENSIONS) {
-    const level = Math.round(api.min_levels[key] ?? 0);
-    if (level >= 1 && level <= 9) minLevels[key] = level;
-  }
-  return {
-    text: unique(api.keywords.map((t) => t.toLowerCase().trim()).filter(Boolean)),
-    anyText: unique(api.any_keywords.map((t) => t.toLowerCase().trim()).filter(Boolean)),
-    stages: unique(api.stages),
-    sectors: unique(api.sectors),
-    countries: unique(api.countries),
-    regions: unique(api.regions.filter((r): r is Region => REGION_IDS.has(r))),
-    impactAreas: unique(api.impact_areas.map((a) => a.toUpperCase()).filter((a) => /^[A-F]$/.test(a))),
-    pipeline: unique(api.pipeline.filter((p): p is PipelineStage => PIPELINE_IDS.has(p))),
-    minLevels,
-  };
+  return (
+    f.text.every((t) => haystack.includes(t)) &&
+    anyOf(f.anyText, (t) => haystack.includes(t)) &&
+    anyOf(f.stages, (v) => v === s.stage) &&
+    anyOf(f.sectors, (v) => same(v, s.sector)) &&
+    anyOf(f.countries, (v) => same(v, s.country)) &&
+    anyOf(f.regions, (r) => inRegion(s.country, r)) &&
+    anyOf(f.pipeline, (p) => p === s.pipeline_stage) &&
+    anyOf(f.impactAreas, (a) => s.scores.ocean_areas_covered.includes(a)) &&
+    DIMENSIONS.every((d) => s.readiness[d.key] >= (f.minLevels[d.key] ?? 0))
+  );
 }

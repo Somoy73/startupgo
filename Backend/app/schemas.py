@@ -2,7 +2,7 @@
 
 from typing import Annotated, ClassVar, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
+from pydantic import BaseModel, Field, StringConstraints, model_validator
 
 PipelineStage = Literal["sourced", "screening", "diligence", "term-sheet", "portfolio", "passed"]
 FundingStage = Literal["pre-seed", "seed", "series-a", "series-b", "series-c+", "growth", "project-finance"]
@@ -219,63 +219,3 @@ class ScorePreviewRequest(LevelsInput):
     ocean_kpis: list[KpiLevel] = Field(default_factory=list)
     stage: str
     last_round_on: str | None = Field(default=None, pattern=PARTIAL_DATE)
-
-
-# ---------------------------------------------------------------------------
-# Search
-# ---------------------------------------------------------------------------
-
-Region = Literal["europe", "north-america", "latin-america", "asia", "africa", "oceania", "nordics", "baltics"]
-ImpactArea = Literal["A", "B", "C", "D", "E", "F"]
-
-
-class MinLevels(BaseModel):
-    """Minimum KTH readiness level per dimension, 1-9; 0 means no minimum."""
-
-    model_config = ConfigDict(extra="forbid")
-
-    crl: int = Field(ge=0, le=9)
-    trl: int = Field(ge=0, le=9)
-    brl: int = Field(ge=0, le=9)
-    iprl: int = Field(ge=0, le=9)
-    tmrl: int = Field(ge=0, le=9)
-    frl: int = Field(ge=0, le=9)
-
-
-class SearchFilters(BaseModel):
-    """Structured filters. Empty lists and 0 levels mean no constraint; lists OR within, AND across."""
-
-    model_config = ConfigDict(extra="forbid")
-
-    stages: list[FundingStage]
-    sectors: list[str]
-    countries: list[str]
-    regions: list[Region]
-    impact_areas: list[ImpactArea]
-    pipeline: list[PipelineStage]
-    min_levels: MinLevels
-    keywords: list[str] = Field(description="All must appear in the startup's text")
-    any_keywords: list[str] = Field(description="At least one must appear in the startup's text")
-
-
-class SearchRequest(BaseModel):
-    """Either a natural-language `query` or explicit `filters` (edited chips and dropdowns)."""
-
-    model_config = ConfigDict(extra="forbid")
-
-    query: str | None = Field(default=None, min_length=1, max_length=300)
-    filters: SearchFilters | None = None
-
-    @model_validator(mode="after")
-    def exactly_one_input(self) -> "SearchRequest":
-        if (self.query is None) == (self.filters is None):
-            raise ValueError("send exactly one of 'query' or 'filters'")
-        return self
-
-
-class SearchResponse(BaseModel):
-    query: str | None
-    # The filters the search applied, shown as chips; None if it didn't produce any.
-    filters: SearchFilters | None
-    notice: str | None
-    startups: list[StartupSummary]

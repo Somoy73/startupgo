@@ -139,33 +139,37 @@ export interface Frameworks {
   penalty_per_extra_level: number;
 }
 
-// ---------- Search ----------
+// ---------- Search (POST /api/startups/search, LightRAG) ----------
 
-/** Wire format of the search filters (SearchFilters in schemas.py). */
-export interface ApiSearchFilters {
-  stages: string[];
-  sectors: string[];
-  countries: string[];
-  regions: string[];
-  impact_areas: string[];
-  pipeline: string[];
-  /** 0 means no minimum. */
-  min_levels: Record<DimensionKey, number>;
-  /** All must appear. */
-  keywords: string[];
-  /** At least one must appear. */
-  any_keywords: string[];
+/** A startup in the database that the search found. */
+export interface SearchMatch extends StartupSummary {
+  /** 0-1, relative to the best match. */
+  relevance: number;
+  /** Knowledge-graph entities that led to it. */
+  matched: string[];
+  /** The agent's entry about it, if any. */
+  entry: string | null;
 }
 
-/** POST /api/search: a natural-language `query` or explicit `filters` (edited chips and dropdowns). */
-export type SearchRequest = { query: string } | { filters: ApiSearchFilters };
+/** A startup found only in the agent's entries (not in the database yet), with the agent's scores. */
+export interface AgentEntryMatch {
+  entry: string;
+  name: string;
+  website: string | null;
+  relevance: number;
+  matched: string[];
+  trl: number | null;
+  brl: number | null;
+  ocean_impact_readiness: number | null;
+  investment_score: number | null;
+  overall_confidence: number | null;
+}
 
-export interface SearchResponse {
-  query: string | null;
-  /** Filters the search applied (shown as chips), or null if it produced none. */
-  filters: ApiSearchFilters | null;
-  notice: string | null;
-  startups: StartupSummary[];
+export interface NaturalLanguageSearchResponse {
+  query: string;
+  /** Most relevant first. */
+  results: SearchMatch[];
+  entries: AgentEntryMatch[];
 }
 
 // ---------- Write models ----------

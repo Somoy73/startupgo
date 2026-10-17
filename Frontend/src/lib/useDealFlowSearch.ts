@@ -1,59 +1,53 @@
 import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { api } from "@/api/client";
-import type { SearchRequest, SearchResponse } from "@/api/types";
+import type { AgentEntryMatch, StartupSummary } from "@/api/types";
+import { useAppData } from "@/state/AppData";
 import { useAsync } from "./useAsync";
-import {
-  emptyFilters,
-  formatSearch,
-  fromApiFilters,
-  isEmpty,
-  parseSearch,
-  toApiFilters,
-  type SearchFilters,
-  type Vocabulary,
-} from "./search";
+import { formatSearch, isEmpty, matchesFilters, parseSearch, type SearchFilters } from "./search";
 import { formatSort, isDefaultSort, parseSort, sortStartups, type Sort } from "./sort";
 
-// The `f` parameter is written by formatSearch in key:value form, so it decodes without the data vocabulary.
-const NO_VOCABULARY: Vocabulary = { sectors: [], countries: [] };
+interface Listing {
+  startups: StartupSummary[];
+  /** Search matches the agent found that aren't in the database yet. */
+  entries: AgentEntryMatch[];
+}
 
 /**
- * Deal-flow search state, kept in the URL so searches are shareable:
- *   q    what the user typed               → POST /api/search { query }
- *   f    filters after editing chips/menus → POST /api/search { filters }
- *   sort column and direction, e.g. -potential (applied here, so changing it never re-runs the search)
- * With neither q nor f, everything is listed via GET /api/startups.
+ * Discover state, kept in the URL so searches are shareable:
+ *   q    what the user typed → POST /api/startups/search (LightRAG), most relevant first
+ *   f    filters (chips, Filters panel), applied here to whatever is listed
+ *   sort column and direction, e.g. -potential; also applied here
+ * Without q, everything is listed via GET /api/startups. Editing filters or the sort never
+ * re-runs the search.
  */
 export function useDealFlowSearch() {
+  const { vocabulary } = useAppData();
   const [params, setParams] = useSearchParams();
   const query = params.get("q") ?? "";
-  const editedFilters = params.get("f");
+  const encodedFilters = params.get("f") ?? "";
+  const searching = query !== "";
 
-  const sentFilters = useMemo(
-    () => (editedFilters !== null ? parseSearch(editedFilters, NO_VOCABULARY) : null),
-    [editedFilters],
-  );
-  const request: SearchRequest | null = useMemo(() => {
-    if (sentFilters) return { filters: toApiFilters(sentFilters) };
-    if (query) return { query };
-    return null;
-  }, [query, sentFilters]);
+  const filters = useMemo(() => parseSearch(encodedFilters, vocabulary), [encodedFilters, vocabulary]);
 
-  const search = useAsync<SearchResponse>(
+  const listing = useAsync<Listing>(
     () =>
-      request
-        ? api.search(request)
-        : api.startups().then((startups) => ({ query: null, filters: null, notice: null, startups })),
-    [request],
+      searching
+        ? api.searchStartups(query).then((r) => ({ startups: r.results, entries: r.entries }))
+        : api.startups().then((startups) => ({ startups, entries: [] })),
+    [query],
   );
-  const response = search.data;
+  const data = listing.data;
 
-  const searching = request !== null;
   const sort = parseSort(params.get("sort"), searching);
-  const results = useMemo(() => sortStartups(response?.startups ?? [], sort), [response, sort]);
-  // Chips: what the search says it applied, else what we sent.
-  const filters = response?.filters ? fromApiFilters(response.filters) : sentFilters;
+  const results = useMemo(
+    () =>
+      sortStartups(
+        (data?.startups ?? []).filter((s) => matchesFilters(s, filters)),
+        sort,
+      ),
+    [data, filters, sort],
+  );
 
   const updateParams = (changes: Record<string, string | null>) => {
     const next = new URLSearchParams(params);
@@ -64,27 +58,26 @@ export function useDealFlowSearch() {
     setParams(next, { replace: true });
   };
 
+  const entries = data?.entries.length ?? 0;
+
   return {
     query,
     results,
     filters,
-    /** `filters`, or empty ones: what the dropdowns show and edit. */
-    current: filters ?? emptyFilters(),
     sort,
     searching,
-    error: search.error,
-    hasResponse: response !== null,
-    loading: search.loading && response === null,
-    /** Waiting on a typed query (not a filter edit). */
-    interpreting: search.loading && request !== null && "query" in request,
-    /** The chips are the search's reading of `query`, not edited filters. */
-    interpreted: editedFilters === null && Boolean(response?.filters),
-    notice: editedFilters === null ? (response?.notice ?? null) : null,
+    error: listing.error,
+    hasResponse: data !== null,
+    loading: listing.loading && data === null,
+    /** Waiting on the backend search for a typed query. */
+    interpreting: listing.loading && searching,
+    notice:
+      entries > 0
+        ? `${entries} more match${entries === 1 ? "" : "es"} from the discovery agent ${entries === 1 ? "isn't" : "aren't"} in your database yet.`
+        : null,
 
-    submitQuery: (q: string) => updateParams({ q, f: null }),
-    // Edited filters keep `q` for context but take precedence over it.
-    setFilters: (f: SearchFilters) =>
-      isEmpty(f) ? updateParams({ q: null, f: null }) : updateParams({ f: formatSearch(f) }),
+    submitQuery: (q: string) => updateParams({ q }),
+    setFilters: (f: SearchFilters) => updateParams({ f: isEmpty(f) ? null : formatSearch(f) }),
     clear: () => updateParams({ q: null, f: null }),
     setSort: (next: Sort) => updateParams({ sort: isDefaultSort(next, searching) ? null : formatSort(next) }),
   };

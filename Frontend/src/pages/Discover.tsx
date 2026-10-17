@@ -35,12 +35,11 @@ export function Discover() {
         description="Find startups before they reach your inbox: new registrations, grants, research spin-outs and news, classified against your thesis."
       />
 
-      {/* <Stats startups={results} filtered={!isEmpty(search.current)} /> */}
+      {/* <Stats startups={results} filtered={!isEmpty(search.filters)} /> */}
 
       <SearchBar
         query={search.query}
         filters={search.filters}
-        interpreted={search.interpreted}
         interpreting={search.interpreting}
         notice={search.notice}
         onSearch={search.submitQuery}

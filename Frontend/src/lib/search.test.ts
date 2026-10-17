@@ -1,14 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { ApiSearchFilters } from "@/api/types";
-import {
-  emptyFilters,
-  filterChips,
-  formatSearch,
-  fromApiFilters,
-  parseSearch,
-  toApiFilters,
-  type Vocabulary,
-} from "./search";
+import { makeStartup } from "./fixtures";
+import { emptyFilters, filterChips, formatSearch, matchesFilters, parseSearch, type Vocabulary } from "./search";
 
 const vocab: Vocabulary = {
   sectors: ["Aquaculture", "Habitat restoration", "Materials & packaging"],
@@ -86,37 +78,40 @@ describe("filterChips", () => {
   });
 });
 
-describe("wire format", () => {
-  const api: ApiSearchFilters = {
-    stages: ["seed", "seed"],
-    sectors: ["Aquaculture"],
-    countries: [],
-    regions: ["nordics", "atlantis"],
-    impact_areas: ["c", "Z"],
-    pipeline: ["diligence", "bogus"],
-    min_levels: { crl: 0, trl: 7, brl: 12, iprl: 0, tmrl: 0, frl: 0 },
-    keywords: [" Kelp "],
-    any_keywords: ["Seaweed", "algae", ""],
-  };
+describe("matchesFilters", () => {
+  const kelp = makeStartup({
+    slug: "kelp",
+    tagline: "Giant kelp forests",
+    country: "Faroe Islands",
+    sector: "Aquaculture",
+  });
+  const bot = makeStartup({
+    slug: "bot",
+    tagline: "Cleanup robots",
+    country: "Hong Kong",
+    sector: "Ocean cleanup",
+    readiness: { trl: 7 },
+    scores: { ocean_areas_covered: ["B"] },
+  });
+  const match = (q: string) => [kelp, bot].filter((s) => matchesFilters(s, parseSearch(q, vocab))).map((s) => s.slug);
 
-  it("maps backend filters to UI filters, dropping unknown values", () => {
-    expect(fromApiFilters(api)).toEqual({
-      ...emptyFilters(),
-      stages: ["seed"],
-      sectors: ["Aquaculture"],
-      regions: ["nordics"],
-      impactAreas: ["C"],
-      pipeline: ["diligence"],
-      minLevels: { trl: 7 },
-      text: ["kelp"],
-      anyText: ["seaweed", "algae"],
-    });
+  it("ANDs facets and ORs values within a facet", () => {
+    expect(match("region:europe region:asia")).toEqual(["kelp", "bot"]);
+    expect(match("region:asia trl>=7 area:b")).toEqual(["bot"]);
+    expect(match("region:nordics")).toEqual(["kelp"]);
   });
 
-  it("round-trips UI filters through the wire format", () => {
-    const f = parseSearch("seed nordics area:b pipeline:diligence trl>=6 brl>=4 any:kelp buoys", vocab);
-    const wire = toApiFilters(f);
-    expect(wire.min_levels).toEqual({ crl: 0, trl: 6, brl: 4, iprl: 0, tmrl: 0, frl: 0 });
-    expect(fromApiFilters(wire)).toEqual(f);
+  it("matches sectors and countries case-insensitively, as decoded from the URL", () => {
+    expect(match('sector:aquaculture country:"faroe islands"')).toEqual(["kelp"]);
+  });
+
+  it("matches all text terms and at least one any: term", () => {
+    expect(match("giant kelp")).toEqual(["kelp"]);
+    expect(match("any:robots any:seagrass")).toEqual(["bot"]);
+    expect(match("robots any:kelp")).toEqual([]);
+  });
+
+  it("lets everything through with no filters", () => {
+    expect(match("")).toEqual(["kelp", "bot"]);
   });
 });

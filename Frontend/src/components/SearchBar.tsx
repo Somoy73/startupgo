@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { LuSearch, LuSlidersHorizontal, LuX } from "react-icons/lu";
-import { emptyFilters, filterChips, type SearchFilters } from "@/lib/search";
+import { filterChips, type SearchFilters } from "@/lib/search";
 import { SearchFilterPanel } from "./SearchFilterPanel";
 
 const EXAMPLES = [
@@ -21,9 +21,8 @@ interface Props {
   /** What the user last searched for (the `q` URL parameter). */
   query: string;
   /** Filters the backend applied, or null before the first response. */
-  filters: SearchFilters | null;
-  /** True when `filters` are what the search derived from `query` (not edited chips). */
-  interpreted: boolean;
+  /** Active filters, shown as chips and edited in the Filters panel. */
+  filters: SearchFilters;
   interpreting: boolean;
   /** Shown next to the chips, e.g. when the search fell back to keyword matching. */
   notice: string | null;
@@ -33,25 +32,15 @@ interface Props {
 }
 
 /**
- * Natural-language search on one island: the input, the filters the search applied (as
- * removable chips) and a Filters panel to edit them directly. Editing filters re-runs the
- * search with the edited filters.
+ * Natural-language search on one island: the input, the active filters as removable chips,
+ * and a Filters panel to edit them. Filters refine the results without re-running the search.
  */
-export function SearchBar({
-  query,
-  filters,
-  interpreted,
-  interpreting,
-  notice,
-  onSearch,
-  onFiltersChange,
-  onClear,
-}: Props) {
+export function SearchBar({ query, filters, interpreting, notice, onSearch, onFiltersChange, onClear }: Props) {
   const [draft, setDraft] = useState(query);
   const [showFilters, setShowFilters] = useState(false);
   useEffect(() => setDraft(query), [query]);
 
-  const chips = filters ? filterChips(filters) : [];
+  const chips = filterChips(filters);
   const activeFilters = chips.filter((c) => isStructured(c.id)).length;
   const search = (text: string) => {
     setDraft(text);
@@ -101,17 +90,9 @@ export function SearchBar({
       <div className="mt-2.5 flex min-h-7 flex-wrap items-center gap-1.5" aria-live="polite">
         {interpreting ? (
           <span className={NOTE}>Searching…</span>
-        ) : chips.length > 0 && filters ? (
+        ) : chips.length > 0 ? (
           <>
-            <span className={NOTE}>
-              {interpreted && query ? (
-                <>
-                  Interpreted <q>{query}</q> as:
-                </>
-              ) : (
-                "Filters:"
-              )}
-            </span>
+            <span className={NOTE}>Filters:</span>
             {chips.map((chip) => (
               <button
                 key={chip.id}
@@ -126,6 +107,10 @@ export function SearchBar({
             ))}
             {notice && <span className={NOTE}>{notice}</span>}
           </>
+        ) : query ? (
+          <span className={NOTE}>
+            Matches for <q>{query}</q>, most relevant first.{notice && ` ${notice}`}
+          </span>
         ) : (
           <>
             <span className={NOTE}>Examples:</span>
@@ -155,7 +140,7 @@ export function SearchBar({
 
       {showFilters && (
         <div id="search-filters">
-          <SearchFilterPanel filters={filters ?? emptyFilters()} onChange={onFiltersChange} />
+          <SearchFilterPanel filters={filters} onChange={onFiltersChange} />
         </div>
       )}
     </div>
