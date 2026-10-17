@@ -1,4 +1,4 @@
-@import "tailwindcss" source(none);
+@import "tailwindcss";
 @source "../src";
 @import "tw-animate-css";
 
@@ -311,6 +311,7 @@ section.card { color: var(--foreground); --muted-foreground: var(--content-muted
   --match-node: oklch(0.78 0.09 245);
   --match-ring: oklch(0.97 0.02 240 / 0.22);
 }
+
 /* The match panel sits inside the rounded box with light padding all around. */
 section.mg-card { padding: 28px; overflow: visible; }
 .mg-head { display: flex; align-items: center; gap: 10px; padding: 0 2px 16px; border-bottom: 1px solid var(--border); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }

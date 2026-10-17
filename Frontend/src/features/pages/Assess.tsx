@@ -36,13 +36,18 @@ export function Assess() {
 
   return (
     <>
-      <div className="page-head">
+      <div className="page-head ">
         <div>
           <h1>Information about our assess methods</h1>
           <p>
-            Placeholder: How our judge agent assess startups. Choose a startup from landing page or
+            How our judge agent assess startups. Choose a startup from landing page or
             search page to see its assessment
           </p>
+          <div style={{ marginTop: 24 }}>
+            <Link to="/search" className="btn btn-primary !px-10 !py-4 !text-lg border-white border-1">
+              Go assessing
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -148,29 +153,7 @@ export function Assess() {
             <span className="small muted">{pct(w.momentum)} of the score</span>
           </div>
           <p className="small secondary">
-            Where a company is in its funding history and how recently it last raised. A round
-            closed this quarter counts for more than one from four years ago, so momentum is a
-            signal of traction rather than of size.
-          </p>
-        </section>
-
-        <section className="card card-pad">
-          <div className="card-head">
-            <h2>What the score tells you</h2>
-          </div>
-          <p className="small secondary" style={{ marginBottom: 10 }}>
-            Investment potential is a weighted blend of readiness ({pct(w.readiness)}), ocean impact
-            ({pct(w.ocean_impact)}) and funding momentum ({pct(w.momentum)}).
-          </p>
-          <div className="row-gap" style={{ flexWrap: "wrap" }}>
-            <span className="chip">Strong ≥ 70</span>
-            <span className="chip">Promising ≥ 55</span>
-            <span className="chip">Watch ≥ 40</span>
-            <span className="chip">Early &lt; 40</span>
-          </div>
-          <p className="small secondary" style={{ marginTop: 14 }}>
-            The exact formula and weights are all shown on this page. You can also see the method
-            applied side by side in <Link to="/matching">Matching</Link>.
+            Calculated from funding rounds, investor tier, monthly burn and current cash runway.
           </p>
         </section>
       </div>
