@@ -2,43 +2,35 @@ import type { Scores } from "../api/backend-types";
 import { score } from "../lib/format";
 import { cn } from "../lib/utils";
 
-// Ring and number colour by band, like a grade circled in coloured pen.
-const BAND_INK: Record<string, string> = {
-  Strong: "border-success text-success",
-  Promising: "border-ocean text-ocean",
-  Watch: "border-amber-600 text-amber-600",
-  Early: "border-destructive text-destructive",
-};
+function getScoreStyle(val: number) {
+  if (val < 30) return "bg-red-500/20 text-red-400 border-red-500/50";
+  if (val < 50) return "bg-orange-500/20 text-orange-300 border-orange-500/50";
+  if (val < 70) return "bg-yellow-500/20 text-yellow-300 border-yellow-500/50";
+  if (val >= 70) return "bg-emerald-500/20 text-emerald-300 border-emerald-500/50";
+  // Fallback for null
+  return "bg-sky-500/20 text-sky-300 border-sky-500/50";
+}
 
-/** Investment potential (0-100) as a circled grade, coloured by its band. */
+/** Investment potential (0–100) badge with color-coded score */
 export function PotentialMark({ scores }: { scores: Scores }) {
   const value = score(scores.potential);
-  const penalty =
-    scores.imbalance_penalty > 0
-      ? ` · includes −${scores.imbalance_penalty} imbalance penalty`
-      : "";
 
-  return (
+return (
     <div className="flex flex-col items-center gap-2 text-center">
       <div
-        role="img"
-        aria-label={`Investment potential ${value} out of 100, ${scores.band}${penalty}`}
         className={cn(
-          "flex size-40 items-center justify-center rounded-full border-[6px] bg-white shadow-card",
-          BAND_INK[scores.band] ?? "border-ocean text-ocean",
+          // grid place-items-center + leading-none gives true vertical & horizontal centering
+          "grid size-32 place-items-center rounded-full border-2 text-center shadow-lg backdrop-blur-sm",
+          getScoreStyle(value),
         )}
       >
-        <span className="flex items-baseline">
-          <span className="font-display text-6xl leading-none font-bold tabular-nums">{value}</span>
-          <span className="ml-0.5 text-base font-semibold opacity-70">/100</span>
+        <span className="font-display text-5xl font-bold leading-none tabular-nums select-none">
+          {value}
         </span>
       </div>
-      <span className="text-xs font-bold tracking-wide uppercase">Investment potential</span>
-      {scores.imbalance_penalty > 0 && (
-        <span className="text-xs opacity-80">
-          Includes −{scores.imbalance_penalty} imbalance penalty
-        </span>
-      )}
+      <span className="text-xs font-semibold tracking-wider uppercase opacity-80">
+        Investment potential
+      </span>
     </div>
   );
 }
