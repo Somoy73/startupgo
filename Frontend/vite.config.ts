@@ -12,4 +12,14 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    server: {
+      // Devcontainer on WSL: listen on all interfaces, and poll for file changes
+      // (filesystem events don't reach the container reliably).
+      // host: "0.0.0.0",
+      // watch: { usePolling: true, interval: 100 },
+      // The FastAPI backend (Backend/): `uv run uvicorn app.main:app --port 8000`.
+      proxy: { "/api": "http://127.0.0.1:8000" },
+    },
+  },
 });
