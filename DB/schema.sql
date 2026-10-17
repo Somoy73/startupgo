@@ -513,3 +513,87 @@ CREATE TABLE IF NOT EXISTS agent_jobs (
     error       TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_agent_jobs_startup ON agent_jobs(startup_id, created_at);
+
+-- ---------------------------------------------------------------------------
+-- Unified model: 3 tables (Modules/DataAPIs/unify.py). Entities, facts about them in the Agent's fact
+-- format, and assessments computed from those facts. Built from the tables above after each refresh;
+-- once main reads these (or the compatibility views from unify.py), the older tables can be dropped.
+-- ---------------------------------------------------------------------------
+
+-- One row per real-world thing. Startup entities keep the startup's id; others get ids from 100000.
+CREATE TABLE IF NOT EXISTS entities (
+    id             INTEGER PRIMARY KEY,
+    key            TEXT NOT NULL UNIQUE,        -- stable identity, e.g. startup:notpla, investor:lowercarbon-capital
+    kind           TEXT NOT NULL CHECK (kind IN ('startup','candidate','investor','person','organisation','funding_call')),
+    slug           TEXT,
+    name           TEXT NOT NULL,
+    website        TEXT,
+    domain         TEXT,                        -- dedupe key (the Agent's website_domain)
+    country        TEXT,
+    city           TEXT,
+    sector         TEXT,                        -- startups: curated sector; candidates: BlueInvest sector
+    blue_sector    TEXT,                        -- Agent vocabulary (vocab.BLUE_SECTORS)
+    tagline        TEXT,
+    description    TEXT,
+    founded_year   INTEGER,
+    stage          TEXT,
+    pipeline_stage TEXT,
+    company_number TEXT,                        -- UK Companies House
+    lei            TEXT,
+    vat            TEXT,
+    cordis_id      TEXT,
+    blueinvest_id  TEXT,
+    pdl_id         TEXT,
+    sec_cik        TEXT,
+    created_at     TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at     TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- One row per piece of evidence, in the Agent's fact format (startup_agent/facts.py) plus provenance.
+CREATE TABLE IF NOT EXISTS facts (
+    id                INTEGER PRIMARY KEY,
+    entity_id         INTEGER NOT NULL REFERENCES entities(id) ON DELETE CASCADE,
+    section           TEXT NOT NULL,            -- Agent schema section A-J; X = StartupGo extension
+    field             TEXT NOT NULL,            -- Agent field (dev_stage, founders, grants, ...) or extension field
+    value             TEXT,                     -- JSON: scalar, list or object (e.g. a round or a pilot)
+    related_entity_id INTEGER REFERENCES entities(id) ON DELETE SET NULL,  -- investor in a round, founder, ...
+    evidence          TEXT,                     -- verbatim quote or filing/registry text
+    source_url        TEXT,
+    source_type       TEXT NOT NULL,            -- registry | grant_db | eu_projects | patent | news | website | pitch_deck | manual
+    source_name       TEXT NOT NULL,            -- which API, table or the Agent produced it
+    status            TEXT NOT NULL CHECK (status IN ('verified','claimed','inferred')),
+    confidence        REAL NOT NULL,
+    retrieved_at      TEXT,
+    observed_on       TEXT,                     -- when the fact was true
+    is_current        INTEGER NOT NULL DEFAULT 1
+);
+
+-- One row per scoring run per entity (Stage 2 output), kept over time.
+CREATE TABLE IF NOT EXISTS assessments (
+    id                 INTEGER PRIMARY KEY,
+    entity_id          INTEGER NOT NULL REFERENCES entities(id) ON DELETE CASCADE,
+    assessed_at        TEXT NOT NULL,
+    engine             TEXT NOT NULL,           -- seed-estimate | analyst | startupgo-pipeline | agent
+    assessor           TEXT,
+    confidence         TEXT,                    -- low | medium | high (analyst assessments)
+    trl INTEGER, brl INTEGER, crl INTEGER, iprl INTEGER, tmrl INTEGER, frl INTEGER,  -- 1-9
+    oir INTEGER,                                -- Ocean Impact Readiness 1-5
+    levels_basis       TEXT,                    -- JSON: facts and rules behind each level
+    navigator_kpis     TEXT,                    -- JSON: {"B2": {"level": 2, "claim": "...", "source_url": "..."}}
+    criteria           TEXT,                    -- JSON: 10 investment criteria, score 1-5 + confidence
+    investment_score   REAL,
+    overall_confidence REAL,
+    red_flags          TEXT,                    -- JSON list
+    data_gaps          TEXT,                    -- JSON list
+    next_steps         TEXT,                    -- JSON list
+    peers              TEXT,                    -- JSON list
+    features           TEXT,                    -- JSON: StartupGo features {name: {value, text, evidence}}
+    rationale          TEXT,
+    judge_status       TEXT,
+    UNIQUE (entity_id, engine, assessed_at)
+);
+
+CREATE INDEX IF NOT EXISTS idx_entities_kind ON entities(kind);
+CREATE INDEX IF NOT EXISTS idx_entities_domain ON entities(domain);
+CREATE INDEX IF NOT EXISTS idx_facts_entity ON facts(entity_id, section, field);
+CREATE INDEX IF NOT EXISTS idx_assessments_entity ON assessments(entity_id, engine, assessed_at);
