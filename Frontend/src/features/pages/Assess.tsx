@@ -96,8 +96,8 @@ export function Assess() {
               <span className="small muted">{pct(w.readiness)} of the score</span>
             </div>
             <p className="small secondary" style={{ marginBottom: 8 }}>
-              KTH Innovation Readiness Level. Six dimensions, weighted below, rescaled so that L1 = 0
-              and L9 = 100.
+              KTH Innovation Readiness Level. Six dimensions, weighted below, rescaled so that L1 =
+              0 and L9 = 100.
             </p>
             <div className="rank-list">
               {fw.readiness_dimensions.map((d) => (
@@ -160,8 +160,8 @@ export function Assess() {
           </div>
           <p className="small secondary" style={{ marginBottom: 10 }}>
             Investment potential is a weighted blend of readiness ({pct(w.readiness)}), ocean impact
-            ({pct(w.ocean_impact)}) and funding momentum ({pct(w.momentum)}), with a penalty when the
-            readiness dimensions are far apart — a company that is strong on technology but
+            ({pct(w.ocean_impact)}) and funding momentum ({pct(w.momentum)}), with a penalty when
+            the readiness dimensions are far apart — a company that is strong on technology but
             undeveloped everywhere else is riskier than the average suggests.
           </p>
           <div className="row-gap" style={{ flexWrap: "wrap" }}>

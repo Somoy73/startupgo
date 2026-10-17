@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS entities (
 CREATE TABLE IF NOT EXISTS facts (
     id                INTEGER PRIMARY KEY,
     entity_id         INTEGER NOT NULL REFERENCES entities(id) ON DELETE CASCADE,
-    section           TEXT NOT NULL,            -- Agent schema section A-J; X = StartupGo extension
+    section           TEXT NOT NULL,            -- Agent schema section A-J; Api = StartupGo extension (API sources, analyst entries)
     field             TEXT NOT NULL,            -- Agent field (dev_stage, founders, grants, ...) or extension field
     value             TEXT,                     -- JSON: scalar, list or object (e.g. a round or a pilot)
     related_entity_id INTEGER REFERENCES entities(id) ON DELETE SET NULL,  -- investor in a round, founder, ...
@@ -114,6 +114,12 @@ CREATE TABLE IF NOT EXISTS agent_retrievals (
 CREATE INDEX IF NOT EXISTS idx_agent_runs_entity ON agent_runs(entity_id, started_at);
 CREATE INDEX IF NOT EXISTS idx_agent_retr_run    ON agent_retrievals(run_id, seq);
 CREATE INDEX IF NOT EXISTS idx_agent_retr_url    ON agent_retrievals(url);
+
+-- Every startup entity, scored or not: the Backend lists these; `startups` below keeps only fully assessed ones.
+DROP VIEW IF EXISTS all_startups;
+CREATE VIEW all_startups AS SELECT e.id, e.slug, e.name, e.tagline, e.description, e.sector, e.country, e.city, e.founded_year, e.website,
+                           e.stage, e.pipeline_stage, e.created_at, e.updated_at
+                    FROM entities e WHERE e.kind='startup';
 
 DROP VIEW IF EXISTS startups;
 CREATE VIEW startups AS SELECT e.id, e.slug, e.name, e.tagline, e.description, e.sector, e.country, e.city, e.founded_year, e.website,

@@ -19,13 +19,16 @@ export type Column = {
   cell: (s: StartupSummary) => ReactNode;
 };
 
+/** Placeholder for a startup the research agent hasn't scored yet. */
+const PENDING = <span className="muted" title="Not assessed yet: open it to run research">—</span>;
+
 const levelColumns: Column[] = KTH_DIMENSIONS.map((d) => ({
   id: d.key,
   header: d.code,
   sortKey: d.key,
   numeric: true,
   defaultVisible: d.key === "trl" || d.key === "brl",
-  cell: (s) => <LevelPill level={s.readiness[d.key]} label={d.code} />,
+  cell: (s) => !s.assessed ? PENDING : <LevelPill level={s.readiness[d.key]} label={d.code} />,
 }));
 
 export const COLUMNS: Column[] = [
@@ -52,35 +55,41 @@ export const COLUMNS: Column[] = [
     cellClassName: "secondary small",
     cell: (s) => `${s.sector} · ${s.country}`,
   },
-  { id: "stage", header: "Stage", sortKey: "stage", defaultVisible: false, cell: (s) => stageLabel(s.stage) },
+  {
+    id: "stage",
+    header: "Stage",
+    sortKey: "stage",
+    defaultVisible: false,
+    cell: (s) => stageLabel(s.stage),
+  },
   ...levelColumns,
   {
     id: "readiness",
     header: "Readiness",
     sortKey: "readiness",
     defaultVisible: false,
-    cell: (s) => <Meter value={s.scores.readiness} label="Readiness index" />,
+    cell: (s) => !s.assessed ? PENDING : <Meter value={s.scores.readiness} label="Readiness index" />,
   },
   {
     id: "ocean",
     header: "Ocean impact",
     sortKey: "ocean",
     defaultVisible: true,
-    cell: (s) => <Meter value={s.scores.ocean_impact} label="Ocean impact" />,
+    cell: (s) => !s.assessed ? PENDING : <Meter value={s.scores.ocean_impact} label="Ocean impact" />,
   },
   {
     id: "momentum",
     header: "Momentum",
     sortKey: "momentum",
     defaultVisible: false,
-    cell: (s) => <Meter value={s.scores.momentum} label="Funding momentum" />,
+    cell: (s) => !s.assessed ? PENDING : <Meter value={s.scores.momentum} label="Funding momentum" />,
   },
   {
     id: "potential",
     header: "Investment potential",
     sortKey: "potential",
     defaultVisible: true,
-    cell: (s) => (
+    cell: (s) => !s.assessed ? PENDING : (
       <div className="row-gap">
         <Meter value={s.scores.potential} label="Investment potential" />
         <BandBadge band={s.scores.band} />

@@ -3,9 +3,17 @@ from startup_search import SearchError, SearchUnavailable, StartupMatch
 
 def test_list_sorted_by_potential(client):
     data = client.get("/api/startups").json()
-    assert len(data) == 8
     potentials = [s["scores"]["potential"] for s in data]
     assert potentials == sorted(potentials, reverse=True)
+
+
+def test_unassessed_startups_are_listed_last_and_open(client):
+    data = client.get("/api/startups").json()
+    pending = [s for s in data if not s["assessed"]]
+    assert pending and len(pending) < len(data)
+    assert all(s["assessed"] for s in data[: len(data) - len(pending)])
+    detail = client.get(f"/api/startups/{pending[0]['slug']}").json()
+    assert detail["assessed"] is False and detail["levels"] == [] and detail["scores"]["potential"] == 0
 
 
 def test_filters(client):
@@ -133,7 +141,7 @@ def test_create_startup(client):
     assert d["slug"] == "notpla-2"
     assert d["pipeline_stage"] == "sourced"
     assert d["total_disclosed_usd"] == 500000 * 1.08
-    assert len(client.get("/api/startups").json()) == 9
+    assert any(s["slug"] == "notpla-2" and s["assessed"] for s in client.get("/api/startups").json())
 
 
 def test_score_preview_matches_stored_scores(client):

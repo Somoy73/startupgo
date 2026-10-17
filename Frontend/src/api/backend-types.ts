@@ -79,6 +79,8 @@ export type StartupSummary = {
   city: string | null;
   stage: string;
   pipeline_stage: BackendPipelineStage;
+  /** False for a sourced startup the research agent hasn't scored yet: its levels and scores are zero. */
+  assessed: boolean;
   readiness: Readiness;
   scores: Scores;
   total_disclosed_usd: number | null;
@@ -175,3 +177,11 @@ export type FundingEvent = {
 
 /** A similar startup (weighted tag overlap); slug is null when it isn't in the database. */
 export type Peer = { slug: string | null; name: string; sector: string | null; similarity: number };
+
+export type ResearchJob = {
+  id: number;
+  status: "queued" | "running" | "done" | "error";
+  slug: string | null;
+  error: string | null;
+  result: Record<string, unknown> | null;
+};

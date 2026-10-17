@@ -72,8 +72,39 @@ def _kpi_pairs(conn: sqlite3.Connection, startup_id: int) -> list[tuple[str, int
     return [(r["kpi_code"], r["evidence_level"]) for r in rows]
 
 
+def _unassessed_summary(conn: sqlite3.Connection, row: sqlite3.Row) -> StartupSummary:
+    """A sourced startup the agent hasn't scored yet: zero levels and scores, assessed=False (research runs when it is opened)."""
+    rounds = _rounds(conn, row["id"])
+    dated = [r.announced_on for r in rounds if r.announced_on]
+    disclosed = [r.amount_usd for r in rounds if r.amount_usd is not None]
+    return StartupSummary(
+        slug=row["slug"],
+        name=row["name"],
+        tagline=row["tagline"],
+        description=row["description"],
+        sector=row["sector"],
+        country=row["country"],
+        city=row["city"],
+        stage=row["stage"],
+        pipeline_stage=row["pipeline_stage"],
+        assessed=False,
+        readiness=Readiness(
+            assessed_on="", assessor="none", confidence="low", crl=0, trl=0, brl=0, iprl=0, tmrl=0, frl=0
+        ),
+        scores=Scores(
+            readiness=0, ocean_impact=0, momentum=0, imbalance_penalty=0, potential=0, band="Not assessed",
+            readiness_spread=0, lagging_dimensions=[], ocean_evidence_label="No evidence", ocean_areas_covered=[],
+        ),
+        investment=InvestmentScores(**scores_of(conn, row["id"], scoring.investment_weights())),
+        total_disclosed_usd=sum(disclosed) if disclosed else None,
+        last_round_on=max(dated) if dated else None,
+    )
+
+
 def _summary(conn: sqlite3.Connection, row: sqlite3.Row) -> StartupSummary:
     assessment = conn.execute(LATEST_ASSESSMENT_SQL, (row["id"],)).fetchone()
+    if assessment is None:
+        return _unassessed_summary(conn, row)
     readiness = Readiness(**{k: assessment[k] for k in Readiness.model_fields})
     levels = {d: assessment[d] for d in scoring.DIMENSIONS}
 
@@ -111,7 +142,7 @@ def summaries(conn: sqlite3.Connection, slugs: list[str]) -> dict[str, StartupSu
     if not slugs:
         return {}
     marks = ", ".join("?" * len(slugs))
-    rows = conn.execute(f"SELECT * FROM startups WHERE slug IN ({marks})", slugs).fetchall()
+    rows = conn.execute(f"SELECT * FROM all_startups WHERE slug IN ({marks})", slugs).fetchall()
     return {r["slug"]: _summary(conn, r) for r in rows}
 
 
@@ -181,7 +212,7 @@ def list_startups(
         params.append(impact_area)
 
     where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
-    rows = conn.execute(f"SELECT * FROM startups {where}", params).fetchall()
+    rows = conn.execute(f"SELECT * FROM all_startups {where}", params).fetchall()
     results = [_summary(conn, r) for r in rows]
 
     if min_trl is not None:
@@ -196,7 +227,7 @@ def list_startups(
 
 
 def get_startup(conn: sqlite3.Connection, slug: str) -> StartupDetail | None:
-    row = conn.execute("SELECT * FROM startups WHERE slug = ?", (slug,)).fetchone()
+    row = conn.execute("SELECT * FROM all_startups WHERE slug = ?", (slug,)).fetchone()
     if row is None:
         return None
     summary = _summary(conn, row)
@@ -207,7 +238,7 @@ def get_startup(conn: sqlite3.Connection, slug: str) -> StartupDetail | None:
     level_text = {(r["dimension_code"], r["level"]): r["summary"] for r in level_rows}
     dims = conn.execute("SELECT code, name FROM readiness_dimensions ORDER BY sort_order").fetchall()
     levels = []
-    for d in dims:
+    for d in dims if summary.assessed else []:
         current = getattr(summary.readiness, d["code"].lower())
         levels.append(
             LevelDetail(
@@ -258,7 +289,7 @@ def get_startup(conn: sqlite3.Connection, slug: str) -> StartupDetail | None:
 def set_pipeline_stage(conn: sqlite3.Connection, slug: str, stage: str) -> bool:
     """Move a listed startup (one with a score) to another pipeline stage."""
     cur = conn.execute(
-        "UPDATE entities SET pipeline_stage = ?, updated_at = datetime('now') WHERE id IN (SELECT id FROM startups WHERE slug = ?)",
+        "UPDATE entities SET pipeline_stage = ?, updated_at = datetime('now') WHERE id IN (SELECT id FROM all_startups WHERE slug = ?)",
         (stage, slug),
     )
     conn.commit()
@@ -270,7 +301,7 @@ def add_note(conn: sqlite3.Connection, slug: str, body: str, author: str) -> Not
     if startup_id is None:
         return None
     created_at = _now()
-    note_id = _fact(conn, startup_id, "X", "analyst_note", {"author": author, "body": body, "created_at": created_at}, body,
+    note_id = _fact(conn, startup_id, "Api", "analyst_note", {"author": author, "body": body, "created_at": created_at}, body,
                     observed_on=created_at)
     conn.commit()
     return Note(id=note_id, author=author, body=body, created_at=created_at)
@@ -278,7 +309,7 @@ def add_note(conn: sqlite3.Connection, slug: str, body: str, author: str) -> Not
 
 def filter_options(conn: sqlite3.Connection) -> dict:
     def distinct(column: str) -> list[str]:
-        return [r[0] for r in conn.execute(f"SELECT DISTINCT {column} FROM startups ORDER BY {column}")]
+        return [r[0] for r in conn.execute(f"SELECT DISTINCT {column} FROM all_startups ORDER BY {column}")]
 
     return {
         "sectors": distinct("sector"),
@@ -382,7 +413,7 @@ def _insert_assessment(conn: sqlite3.Connection, startup_id: int, a: AssessmentC
     )
     conn.execute("UPDATE facts SET is_current = 0 WHERE entity_id = ? AND field = 'navigator_kpi'", (startup_id,))
     for k in kpis:
-        _fact(conn, startup_id, "X", "navigator_kpi", {"kpi": k.kpi_code, "level": k.evidence_level, "claim": k.claim.strip()},
+        _fact(conn, startup_id, "Api", "navigator_kpi", {"kpi": k.kpi_code, "level": k.evidence_level, "claim": k.claim.strip()},
               k.claim.strip(), source_url=k.source_url or None)
     conn.execute("UPDATE entities SET updated_at = datetime('now') WHERE id = ?", (startup_id,))
 

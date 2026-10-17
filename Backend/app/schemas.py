@@ -71,6 +71,7 @@ class StartupSummary(BaseModel):
     city: str | None
     stage: str
     pipeline_stage: PipelineStage
+    assessed: bool = True  # False for a sourced startup the agent hasn't scored: its levels and scores are zero
     readiness: Readiness
     scores: Scores
     investment: InvestmentScores  # the agent's rubric: same numbers as the agent's entries

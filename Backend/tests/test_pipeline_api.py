@@ -198,7 +198,7 @@ def test_databases_start_as_a_copy_of_the_unified_one_and_older_ones_are_refused
 
     fresh = init_db(tmp_path / "new" / "startupgo.db")
     conn = sqlite3.connect(fresh)
-    assert conn.execute("SELECT COUNT(*) FROM startups").fetchone()[0] == 8
+    assert conn.execute("SELECT COUNT(*) FROM startups").fetchone()[0] == 9
     assert conn.execute("SELECT type FROM sqlite_master WHERE name = 'funding_rounds'").fetchone()[0] == "view"
     conn.close()
     init_db(fresh)  # applying the schema again changes nothing

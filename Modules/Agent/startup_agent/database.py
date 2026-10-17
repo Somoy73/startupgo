@@ -362,7 +362,7 @@ class StartupDatabase:
                 continue
             conn.execute("UPDATE facts SET is_current = 0 WHERE entity_id = ? AND field = 'navigator_kpi' AND json_extract(value, '$.kpi') = ?",
                          (entity_id, kpi.code))
-            _insert_fact(conn, entity_id, "X", {
+            _insert_fact(conn, entity_id, "Api", {
                 "field": "navigator_kpi", "value": {"kpi": kpi.code, "level": kpi.level, "claim": kpi.claim}, "evidence": kpi.claim,
                 "source_url": kpi.source_url, "source_type": "manual", "retrieved_at": assessed_at[:10], "status": "inferred",
                 "confidence": INFERRED_CONFIDENCE,
@@ -375,7 +375,7 @@ class StartupDatabase:
             if (url := source.get("url")) and url not in stored:
                 stored.add(url)
                 title = source.get("title") or url
-                _insert_fact(conn, entity_id, "X", {
+                _insert_fact(conn, entity_id, "Api", {
                     "field": "reference", "value": {"title": title}, "evidence": title, "source_url": url, "source_type": "website",
                     "retrieved_at": source.get("retrieved_at"), "status": "claimed", "confidence": INFERRED_CONFIDENCE,
                 })

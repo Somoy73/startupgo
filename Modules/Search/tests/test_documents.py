@@ -54,19 +54,19 @@ def database(tmp_path):
         "INSERT INTO facts (entity_id, section, field, value, related_entity_id, source_type, source_name, status, confidence, is_current) "
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
-            fact(1, "X", "navigator_kpi", {"kpi": "B2", "level": 2, "claim": "Replaces single-use plastic items."}, status="claimed"),
+            fact(1, "Api", "navigator_kpi", {"kpi": "B2", "level": 2, "claim": "Replaces single-use plastic items."}, status="claimed"),
             fact(1, "G", "equity_rounds", {"round_type": "series-a", "amount": 20000000.0, "currency": "GBP", "announced_on": "2024-09",
                                            "lead_investors": "UB Forest Industry Green Growth Fund"}),
             fact(1, "G", "equity_rounds", {"date": "2021-09-24", "stage": "other", "amount": 10000001.62, "currency": "GBP"}, source="uk_sh01"),
             fact(1, "G", "grants", {"funder": "European Commission", "programme": "HORIZON NO-PLASTI-CUPS", "amount": 708878.45, "currency": "EUR",
                                     "year": 2025, "role": "coordinator", "eic": False}, source="cordis_projects"),
             fact(1, "C", "patents", {"number": "EP3601061B1", "title": "Method of encapsulating liquid products", "year": 2017, "granted": "2023-03-08"}),
-            fact(1, "X", "investor", {"name": "UB Forest Industry Green Growth Fund", "role": "lead"}, related=100),
-            fact(1, "X", "reference", {"title": "EU Maritime Forum: Notpla Series A+"}, status="claimed", source="manual"),
+            fact(1, "Api", "investor", {"name": "UB Forest Industry Green Growth Fund", "role": "lead"}, related=100),
+            fact(1, "Api", "reference", {"title": "EU Maritime Forum: Notpla Series A+"}, status="claimed", source="manual"),
             fact(1, "A", "team_size", 78, status="claimed", source="people_data_labs"),
             fact(1, "A", "team_size", 12, status="claimed", source="old_source", current=0),  # not current
             fact(1, "J", "news", {"headline": "Notpla wins a prize"}, source="google_news_rss"),  # found by name: left out
-            fact(1, "X", "research_paper", {"title": "Notpla, n."}, status="inferred", source="openalex"),
+            fact(1, "Api", "research_paper", {"title": "Notpla, n."}, status="inferred", source="openalex"),
             fact(3, "B", "solution_summary", "Smart marina services for yachters.", status="claimed", source="blueinvest_profile"),
             fact(3, "C", "dev_stage", "commercial_operation", status="claimed", source="blueinvest_profile"),
             fact(3, "B", "blue_sector", "other", status="inferred", source="seed"),

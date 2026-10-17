@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import { Link, useParams } from "../../lib/navigation";
 import { ApiError, backend } from "../../api/backend";
 import { FundingTimeline } from "../../components/FundingTimeline";
@@ -5,6 +6,7 @@ import { IconAlert, IconBack, IconExternal } from "../../components/Icons";
 import { OceanAreaChart } from "../../components/OceanAreaChart";
 import { OceanImpact } from "../../components/OceanImpact";
 import { ReadinessSection } from "../../components/ReadinessSection";
+import { ResearchPanel } from "../../components/ResearchPanel";
 import { PeerScatter } from "../../components/PeerScatter";
 import { PotentialBreakdown } from "../../components/PotentialBreakdown";
 import { PotentialMark } from "../../components/PotentialMark";
@@ -24,17 +26,19 @@ const loadStartup = (slug: string) =>
 
 export function StartupPage() {
   const { slug = "" } = useParams();
-  const { data: s, error, loading } = useAsync(() => loadStartup(slug), [slug]);
+  const [reloads, setReloads] = useState(0);
+  const reload = useCallback(() => setReloads((n) => n + 1), []);
+  const { data: s, error, loading } = useAsync(() => loadStartup(slug), [slug, reloads]);
   // For the charts. Each loads on its own; one failing only hides its chart.
   const { data: frameworks } = useAsync(() => backend.frameworks(), []);
-  const { data: startups } = useAsync(() => backend.startups(), []);
+  const { data: startups } = useAsync(() => backend.startups(), [reloads]);
   const { data: peers } = useAsync(() => backend.peers(slug), [slug]);
   const { data: events } = useAsync(() => backend.rounds(slug), [slug]);
 
   if (error) return <p className="empty error">{error}</p>;
   if (loading || !s) return <p className="empty">Loading…</p>;
 
-  const { scores, readiness } = s;
+  const { scores, readiness, assessed } = s;
 
   return (
     <>
@@ -45,7 +49,7 @@ export function StartupPage() {
         <div>
           <div className="row-gap" style={{ marginBottom: 6 }}>
             <h1>{s.name}</h1>
-            <BandBadge band={scores.band} />
+            {assessed && <BandBadge band={scores.band} />}
           </div>
           <p>{s.tagline}</p>
           <p className="small muted" style={{ marginTop: 6 }}>
@@ -62,10 +66,12 @@ export function StartupPage() {
             )}
           </p>
         </div>
-        <PotentialMark scores={scores} />
+        {assessed && <PotentialMark scores={scores} />}
       </div>
 
-      {readiness.confidence === "low" && (
+      {!assessed && <ResearchPanel slug={s.slug} onDone={reload} />}
+
+      {assessed && readiness.confidence === "low" && (
         <div className="notice">
           <IconAlert />
           <span>
@@ -103,13 +109,17 @@ export function StartupPage() {
           </div>
         </section>
 
-        {/* Left Column Stack */}
+        {/* Left Column Stack: the scores, once the startup is assessed */}
         <div className="stack">
-          <ReadinessSection levels={s.levels} readiness={readiness} scores={scores} />
-          {frameworks && (
-            <PotentialBreakdown scores={scores} weights={frameworks.potential_weights} />
+          {assessed && (
+            <>
+              <ReadinessSection levels={s.levels} readiness={readiness} scores={scores} />
+              {frameworks && (
+                <PotentialBreakdown scores={scores} weights={frameworks.potential_weights} />
+              )}
+              {startups && <PeerScatter slug={s.slug} startups={startups} peers={peers ?? []} />}
+            </>
           )}
-          {startups && <PeerScatter slug={s.slug} startups={startups} peers={peers ?? []} />}
         </div>
 
         {/* Right Column Stack */}

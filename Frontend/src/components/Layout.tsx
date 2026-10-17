@@ -12,7 +12,7 @@ export function Layout() {
       </div>
       <div className="app-shell">
         <AppHeader />
-        <main className="app-main">
+        <main className="app-main px-[18px] pb-16 min-[801px]:px-10 min-[1100px]:px-14">
           <Outlet />
         </main>
         <footer className="app-footer">© MeatProxies 2026</footer>

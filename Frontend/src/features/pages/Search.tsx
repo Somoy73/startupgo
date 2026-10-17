@@ -7,9 +7,25 @@ import type { StartupSummary } from "../../api/backend-types";
 import { FilterToggle } from "../../components/FilterToggle";
 import { SearchFilterPanel } from "../../components/SearchFilterPanel";
 import { SearchProgress } from "../../components/SearchProgress";
-import { ColumnPicker, COLUMNS, DEFAULT_COLUMNS, StartupTable, TableSkeleton } from "../../components/StartupTable";
+import {
+  ColumnPicker,
+  COLUMNS,
+  DEFAULT_COLUMNS,
+  StartupTable,
+  TableSkeleton,
+} from "../../components/StartupTable";
 import { Button } from "../../components/ui/button";
-import { activeFilterCount, filterStartups, frameworksOptions, parseFilters, parseSearchSort, sortSearchResults, startupListOptions, type SearchFilters, type SearchSortKey } from "../../lib/discover-search";
+import {
+  activeFilterCount,
+  filterStartups,
+  frameworksOptions,
+  parseFilters,
+  parseSearchSort,
+  sortSearchResults,
+  startupListOptions,
+  type SearchFilters,
+  type SearchSortKey,
+} from "../../lib/discover-search";
 const searchRoute = getRouteApi("/search");
 
 export function Search() {
@@ -19,10 +35,19 @@ export function Search() {
   const type = params.type;
   const euProjects = type === "eu-projects";
   const filters = parseFilters(params.filters);
-  const list = useQuery(startupListOptions);
-  useQuery(frameworksOptions); // for the filter panel's impact areas
-  // LightRAG is slow and costs a model call: keep results for the session, and don't retry failures.
-  const response = useQuery({ queryKey: ["discover", "search", query], queryFn: () => backend.search(query), enabled: !!query && !euProjects, staleTime: Infinity, retry: false });
+const list = useQuery(startupListOptions);
+
+// For the filter panel's impact areas
+useQuery(frameworksOptions);
+
+// LightRAG is slow and costs a model call: keep results for the session, and don't retry failures.
+const response = useQuery({
+  queryKey: ["discover", "search", query],
+  queryFn: () => backend.search(query),
+  enabled: !!query && !euProjects,
+  staleTime: Infinity,
+  retry: false,
+});
   const sort = parseSearchSort(params.sort, query);
   const [columns, setColumns] = useState(DEFAULT_COLUMNS);
   const [showFilters, setShowFilters] = useState(false);
@@ -31,12 +56,25 @@ export function Search() {
   useEffect(() => {
     try {
       const stored: unknown = JSON.parse(localStorage.getItem("discover.columns") ?? "null");
-      if (Array.isArray(stored)) setColumns(stored.filter((id): id is string => typeof id === "string" && COLUMNS.some((c) => c.id === id)));
-    } catch { /* Storage can be unavailable in private browsers. */ }
+      if (Array.isArray(stored))
+        setColumns(
+          stored.filter(
+            (id): id is string => typeof id === "string" && COLUMNS.some((c) => c.id === id),
+          ),
+        );
+    } catch {
+      /* Storage can be unavailable in private browsers. */
+    }
     setStorageReady(true);
   }, []);
   useEffect(() => {
-    if (storageReady) { try { localStorage.setItem("discover.columns", JSON.stringify(columns)); } catch { /* Keep session choices. */ } }
+    if (storageReady) {
+      try {
+        localStorage.setItem("discover.columns", JSON.stringify(columns));
+      } catch {
+        /* Keep session choices. */
+      }
+    }
   }, [columns, storageReady]);
   const update = (patch: Partial<typeof params>) => navigate({ to: "/search", search: (previous) => ({
     q: patch.q ?? previous["q"] ?? "",

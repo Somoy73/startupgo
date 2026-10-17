@@ -49,13 +49,13 @@ def seeded(client):
              901, 'director', NULL, 'registry', 'uk_companies_house_company', 'verified', 0.95, '2014-07-25'),
           (900, 'F', 'advisors_board', '{"name": "Board Member", "background": "non-executive director"}', NULL, 'board', NULL, 'registry',
              'uk_companies_house_company', 'verified', 0.95, '2020-01-01'),
-          (901, 'X', 'venture', '{"company": "GRAVITY SKETCH LIMITED", "company_number": "09215060", "status": "active", "role": "director",
+          (901, 'Api', 'venture', '{"company": "GRAVITY SKETCH LIMITED", "company_number": "09215060", "status": "active", "role": "director",
              "from": "2014-09-22", "to": "2016-04-08"}', NULL, 'officer', NULL, 'registry', 'uk_companies_house_officer', 'verified', 0.95, '2014-09-22'),
-          (901, 'X', 'education', '[{"school": "TU Delft", "degrees": ["master of science"]}]', NULL, 'PDL', NULL, 'manual', 'people_data_labs',
+          (901, 'Api', 'education', '[{"school": "TU Delft", "degrees": ["master of science"]}]', NULL, 'PDL', NULL, 'manual', 'people_data_labs',
              'claimed', 0.9, NULL),
-          (900, 'X', 'investor', '{"name": "UB Forest Industry Green Growth Fund", "role": "lead", "rounds": 1, "first_seen": "2024-09"}', 902,
+          (900, 'Api', 'investor', '{"name": "UB Forest Industry Green Growth Fund", "role": "lead", "rounds": 1, "first_seen": "2024-09"}', 902,
              'lead', NULL, 'news', 'funding_rounds', 'verified', 0.8, '2024-09'),
-          (902, 'X', 'investor_profile', '{"kind": "climate-vc", "tier_score": 0.85}', NULL, 'tier', NULL, 'manual', 'investor_tiers', 'claimed',
+          (902, 'Api', 'investor_profile', '{"kind": "climate-vc", "tier_score": 0.85}', NULL, 'tier', NULL, 'manual', 'investor_tiers', 'claimed',
              0.9, NULL);
     """)
     conn.commit()

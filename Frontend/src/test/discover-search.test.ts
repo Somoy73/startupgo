@@ -6,7 +6,7 @@ import { emptyFilters, filterStartups, parseFilters, sortSearchResults } from ".
 function startup(slug: string, o: { stage?: string; country?: string; sector?: string; pipeline?: StartupSummary["pipeline_stage"]; trl?: number; ocean?: number; areas?: string[]; funding?: number | null } = {}): StartupSummary {
   return {
     slug, name: slug, tagline: "", description: "", sector: o.sector ?? "Seaweed", country: o.country ?? "Denmark", city: null,
-    stage: o.stage ?? "seed", pipeline_stage: o.pipeline ?? "sourced",
+    stage: o.stage ?? "seed", pipeline_stage: o.pipeline ?? "sourced", assessed: true,
     readiness: { assessed_on: "2026-10-16", assessor: "test", confidence: "low", crl: 4, trl: o.trl ?? 4, brl: 4, iprl: 4, tmrl: 4, frl: 4, rationale: null },
     scores: { readiness: 50, ocean_impact: o.ocean ?? 50, momentum: 50, imbalance_penalty: 0, potential: 50, band: "Watch", readiness_spread: 0, lagging_dimensions: [], ocean_evidence_label: "", ocean_areas_covered: o.areas ?? [] },
     total_disclosed_usd: o.funding === undefined ? 1e6 : o.funding, last_round_on: null,

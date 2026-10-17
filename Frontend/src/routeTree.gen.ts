@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EuProjectsRouteImport } from './routes/eu-projects'
 import { Route as MatchingRouteImport } from './routes/matching'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as AssessIndexRouteImport } from './routes/assess.index'
@@ -19,6 +20,11 @@ import { Route as StartupsSlugRouteImport } from './routes/startups.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EuProjectsRoute = EuProjectsRouteImport.update({
+  id: '/eu-projects',
+  path: '/eu-projects',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MatchingRoute = MatchingRouteImport.update({
@@ -49,6 +55,7 @@ const StartupsSlugRoute = StartupsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/eu-projects': typeof EuProjectsRoute
   '/matching': typeof MatchingRoute
   '/search': typeof SearchRoute
   '/assess/$slug': typeof AssessSlugRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/eu-projects': typeof EuProjectsRoute
   '/matching': typeof MatchingRoute
   '/search': typeof SearchRoute
   '/assess/$slug': typeof AssessSlugRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/eu-projects': typeof EuProjectsRoute
   '/matching': typeof MatchingRoute
   '/search': typeof SearchRoute
   '/assess/$slug': typeof AssessSlugRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/eu-projects'
     | '/matching'
     | '/search'
     | '/assess/$slug'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/eu-projects'
     | '/matching'
     | '/search'
     | '/assess/$slug'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/eu-projects'
     | '/matching'
     | '/search'
     | '/assess/$slug'
@@ -101,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EuProjectsRoute: typeof EuProjectsRoute
   MatchingRoute: typeof MatchingRoute
   SearchRoute: typeof SearchRoute
   AssessSlugRoute: typeof AssessSlugRoute
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eu-projects': {
+      id: '/eu-projects'
+      path: '/eu-projects'
+      fullPath: '/eu-projects'
+      preLoaderRoute: typeof EuProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/matching': {
@@ -157,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EuProjectsRoute: EuProjectsRoute,
   MatchingRoute: MatchingRoute,
   SearchRoute: SearchRoute,
   AssessSlugRoute: AssessSlugRoute,

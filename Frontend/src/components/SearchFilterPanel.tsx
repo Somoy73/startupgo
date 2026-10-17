@@ -51,7 +51,9 @@ export function SearchFilterPanel({ filters, onChange }: Props) {
         onChange={(pipeline) => set({ pipeline: pipeline as BackendPipelineStage[] })}
       />
       <fieldset className="min-w-0">
-        <legend className="mb-2 text-xs font-bold text-muted-foreground">Minimum readiness (KTH IRL)</legend>
+        <legend className="mb-2 text-xs font-bold text-muted-foreground">
+          Minimum readiness (KTH IRL)
+        </legend>
         <div className="grid grid-cols-3 gap-2">
           {KTH_DIMENSIONS.map((d) => (
             <label key={d.key} className="field">

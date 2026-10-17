@@ -1,7 +1,7 @@
 """Read access to features, funding, people, investors, grants, patents and BlueInvest leads in the unified database.
 
 Features and peers are in the latest assessment with features (Modules/DataAPIs/features.py, engine startupgo-pipeline);
-everything else is facts in the Agent's format (sections A-J, X) about startup, person, investor and candidate entities.
+everything else is facts in the Agent's format (sections A-J, Api) about startup, person, investor and candidate entities.
 """
 
 import json

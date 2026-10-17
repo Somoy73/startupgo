@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "documents": {
+    "startup:clearbot": {
+      "digest": "79068d350818c68266bdad8abda72f287f5a723fd347bc2372d55c54db17e78d",
+      "key": "startup:clearbot",
+      "kind": "startup",
+      "name": "Clearbot",
+      "website": null,
+      "startup": "clearbot",
+      "entry": null,
+      "info": {
+        "tagline": "Autonomous electric boats that collect floating waste",
+        "sector": "Ocean cleanup",
+        "country": "Hong Kong",
+        "city": "Hong Kong",
+        "stage": "seed"
+      }
+    },
+    "startup:hivelife": {
+      "digest": "4b1ed473aa0c800e42751e06b2451d0ff3380bb3afae552eea6d65ce13827539",
+      "key": "startup:hivelife",
+      "kind": "startup",
+      "name": "HiveLife",
+      "website": "https://hivelife.com/",
+      "startup": "hivelife",
+      "entry": null,
+      "info": {
+        "tagline": "HiveLife",
+        "sector": "Unknown",
+        "country": "Hong Kong",
+        "city": "Hong Kong",
+        "stage": "unknown"
+      }
+    },
+    "startup:kelp-blue": {
+      "digest": "3ab6dd4c7aba2f03c466e1e8b65c6686fd980357d0ae98bd1e6a506bab051d5e",
+      "key": "startup:kelp-blue",
+      "kind": "startup",
+      "name": "Kelp Blue",
+      "website": "https://kelp.blue",
+      "startup": "kelp-blue",
+      "entry": null,
+      "info": {
+        "tagline": "Giant kelp forests for carbon, biodiversity and biostimulants",
+        "sector": "Aquaculture",
+        "country": "Namibia",
+        "city": "Lüderitz",
+        "stage": "project-finance"
+      }
+    },
+    "startup:nauticspot": {
+      "digest": "b3ace488795fcbeab950ac11ffa3e810e3d1f1b41b654d8543cf03cb31298934",
+      "key": "startup:nauticspot",
+      "kind": "startup",
+      "name": "NAUTICSPOT",
+      "website": "https://nauticspot.com",
+      "startup": "nauticspot",
+      "entry": null,
+      "info": {
+        "tagline": "Smart mooring buoy to preserve seabed & posidonia",
+        "sector": "Shipping & ports",
+        "country": "France",
+        "city": null,
+        "stage": "unknown"
+      }
+    },
+    "startup:seabound": {
+      "digest": "d4fcef99909e0f7583f4c6c8e8a5b065102d78e4482b7b480bf371df61161364",
+      "key": "startup:seabound",
+      "kind": "startup",
+      "name": "Seabound",
+      "website": "https://www.seabound.co",
+      "startup": "seabound",
+      "entry": null,
+      "info": {
+        "tagline": "Onboard carbon capture for ships",
+        "sector": "Shipping decarbonisation",
+        "country": "United Kingdom",
+        "city": "London",
+        "stage": "seed"
+      }
+    },
+    "startup:sundew": {
+      "digest": "96a63d4688e28569cd35d6eb805d4740e1bdf29c490a4546b5a7696c84842c17",
+      "key": "startup:sundew",
+      "kind": "startup",
+      "name": "Sundew",
+      "website": "https://sundew.bio",
+      "startup": "sundew",
+      "entry": null,
+      "info": {
+        "tagline": "Combatting aquatic pests, diseases & invasive spp.",
+        "sector": "Blue biotechnology",
+        "country": "Denmark",
+        "city": null,
+        "stage": "unknown"
+      }
+    },
+    "startup:swedish-algae-factory-ab": {
+      "digest": "b4864a413b4a9850582805112ab201dd5d3613481bcc1012a8a0f571eb6f60a0",
+      "key": "startup:swedish-algae-factory-ab",
+      "kind": "startup",
+      "name": "Swedish Algae Factory AB",
+      "website": "https://swedishalgaefactory.com",
+      "startup": "swedish-algae-factory-ab",
+      "entry": null,
+      "info": {
+        "tagline": "Swedish Algae Factory",
+        "sector": "Blue biotechnology",
+        "country": "Sweden",
+        "city": null,
+        "stage": "unknown"
+      }
+    }
+  }
+}
