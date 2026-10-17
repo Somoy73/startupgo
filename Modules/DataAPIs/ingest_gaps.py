@@ -136,7 +136,11 @@ def ingest_jobs(conn, st):
                 for slug in re.findall(rx, page):
                     if slug not in ("embed", "www", "api", "js"):
                         found.append((ats, slug.lower()))
-    candidates = list(dict.fromkeys(found + [(ats, s) for s in slugs for ats in ATS_LINKS]))
+    n = norm(st["name"])
+    # A guessed board must look like the company name: "ww" (from a ww. typo) or "pointr" (a product domain) matched other companies.
+    guessed = [(ats, s_) for s_ in slugs for ats in ATS_LINKS
+               if s_ not in ("www", "ww", "app", "jobs") and len(norm(s_)) >= 4 and (n.startswith(norm(s_)) or norm(s_).startswith(n))]
+    candidates = list(dict.fromkeys(found + guessed))
     for ats, slug in candidates:
         try:  # unlogged probe: most guesses 404
             jobs = ingest.SRC["job_boards"].fn(ats=ats, slug=slug)

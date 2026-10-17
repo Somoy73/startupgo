@@ -277,7 +277,8 @@ def match_blueinvest(conn, st):
             signal(conn, sid, "blueinvest_profile", "profile", f"BlueInvest funding sought: EUR {row['funding_sought_eur']:,.0f}", row["url"], None,
                    row["funding_sought_eur"], "eur_sought", {"text": (row["financial_needs"] or "")[:600]}, "medium", f)
         if not st["website"] and row["website"]:
-            suggest(conn, st, "website", row["website"], "blueinvest_profile", "BlueInvest profile website", conf, f)
+            site = re.sub(r"//ww\.", "//www.", row["website"], count=1)  # "ww." typo seen in BlueInvest profiles
+            suggest(conn, st, "website", site, "blueinvest_profile", "BlueInvest profile website", conf, f)
     conn.commit()
 
 
