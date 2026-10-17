@@ -38,3 +38,32 @@ funding_total_spread,integrity,Max/min ratio between independent total-raised fi
 founded_year_conflicts,integrity,"Distinct founded-year values across sources, including the curated one.",values,low,recommended,field_suggestions
 down_round_flag,rounds,1 if any priced round was below the previous round's price (UK SH01).,flag,high,recommended,uk_sh01
 founder_other_ventures,founders,"All other companies the founders direct or directed, any date (side projects, spin-outs, next venture).",companies,low,recommended,uk_companies_house_officer
+eu_grants_total_eur,grants,"EU research/innovation funding received (sum of the company's own EU contribution, CORDIS).",EUR,high,recommended,cordis_projects
+eu_projects_count,grants,EU-funded projects the company takes part in (any role).,projects,medium,recommended,cordis_projects
+eu_projects_funded,grants,"Of those, projects where the company itself receives EU money.",projects,medium,recommended,cordis_projects
+eu_coordinator_count,grants,EU projects the company coordinates (leadership signal).,projects,high,recommended,cordis_projects
+eu_first_grant_year,grants,Start year of the company's first EU project.,year,low,recommended,cordis_projects
+eu_active_projects,grants,"EU projects currently running (signed, end date in the future).",projects,medium,recommended,cordis_projects
+eic_or_sme_instrument,grants,1 if funded by the EIC or the H2020 SME Instrument: highly selective startup programmes.,flag,high,recommended,cordis_projects
+mission_ocean_grant,grants,1 if part of the EU Mission 'Restore our Ocean and Waters'.,flag,medium,recommended,cordis_projects
+eu_consortium_links,grants,Total consortium partners across the company's EU projects (network reach; partners in several projects count each time).,links,medium,recommended,cordis_projects
+cordis_sme_confirmed,grants,1 if CORDIS records the company as an SME.,flag,low,recommended,cordis_projects
+grant_to_equity_ratio,grants,"EU grants / total raised: grant dependency, typical for ocean deep tech.",ratio,medium,recommended,derived
+ocean_patent_count,ocean,"Patents with at least one ocean-technology CPC class (aquaculture, seaweed, algae products, ocean energy, vessels, ship emissions, cleanup, ocean sensing).",patents,medium,recommended,google_patents_page
+ocean_patent_share,ocean,Ocean-class patents / patents with known classes. Misses marine-use patents filed in generic classes.,0-1,low,recommended,google_patents_page
+ocean_tech_groups,ocean,Ocean technology groups found in the company's patent classes.,JSON,low,recommended,google_patents_page
+blueinvest_listed,ocean,1 if the company is in the EU BlueInvest Project Pipeline (investor-facing showcase); 0 if not found.,flag,medium,recommended,blueinvest_pipeline
+blueinvest_trl,ocean,Self-reported TRL on the BlueInvest profile.,1-9,high,recommended,blueinvest_profile
+blueinvest_funding_sought_eur,ocean,Funding sought according to the BlueInvest profile (largest EUR amount in its financial needs text).,EUR,medium,recommended,blueinvest_profile
+blueinvest_sector,ocean,BlueInvest blue-economy sector.,,medium,recommended,blueinvest_profile
+trl_gap,integrity,Self-reported TRL (BlueInvest) minus the seed TRL estimate; large gaps need checking.,levels,medium,recommended,"blueinvest_profile, readiness_assessments"
+board_size,founders,"Current directors / board members (Companies House directors, SEC Form D directors, PDL board titles).",people,medium,recommended,"uk_companies_house, sec_form_d_document, pdl_person_search"
+technical_open_roles,momentum,Open engineering / science / R&D roles.,jobs,medium,recommended,"job_boards, serpapi_google_jobs"
+commercial_open_roles,momentum,Open sales / business development / marketing / customer roles.,jobs,medium,recommended,"job_boards, serpapi_google_jobs"
+blueinvest_peer_count,category,Similar companies in the EU BlueInvest pipeline (similarity >= 0.1): competitor density.,companies,medium,recommended,blueinvest_pipeline
+peer_median_trl,category,Median TRL of the 10 most similar BlueInvest companies.,1-9,medium,recommended,blueinvest_pipeline
+trl_vs_peers,category,"Own TRL (BlueInvest if listed, else seed estimate) minus the peer median TRL.",levels,medium,recommended,"blueinvest_pipeline, readiness_assessments"
+first_patent_granted,momentum,"Was the company's first utility patent application granted? 1 granted, 0 abandoned/refused; 'pending' while undecided; 'unknown' for international (WO) filings, which never grant themselves (needs family data). Patent 'lottery' paper: first-patent approval predicts later funding and growth.",flag,medium,user-list,google patents
+first_patent_months_to_grant,momentum,"Months from filing to grant for the first utility patent. Mostly reflects the patent office (EPO ~5 years, USPTO less): compare within one office.",months,low,user-list,google patents
+patents_pending,momentum,Patent applications still pending.,patents,low,recommended,google patents
+patents_abandoned,momentum,"Applications abandoned, withdrawn, refused or lapsed for non-payment (WO 'ceased' excluded: it only ends the international phase).",patents,medium,recommended,google patents

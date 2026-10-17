@@ -287,6 +287,7 @@ class Person(BaseModel):
     resigned_on: str | None
     nationality: str | None
     source_name: str
+    education: list[dict] | None = None  # degree level and school, from PDL; never scored for prestige
     ventures: list[Venture]
 
 
@@ -305,3 +306,61 @@ class Peer(BaseModel):
     sector: str
     similarity: float
     shared_tags: list[str]
+
+
+# --- EU and ocean-specific sources (DataAPIs/ingest_eu.py) ---
+
+
+class EuGrant(BaseModel):
+    project_id: str
+    acronym: str | None
+    title: str | None
+    framework: str | None
+    role: str
+    ec_contribution: float | None
+    project_ec_max: float | None
+    sme: bool | None
+    partners: int | None
+    start_date: str | None
+    end_date: str | None
+    status: str | None
+    is_eic: bool
+    is_mission_ocean: bool
+    topic_codes: list[str]
+    categories: list[str]
+    url: str | None
+
+
+class PatentWithClasses(BaseModel):
+    publication_number: str
+    title: str
+    url: str | None
+    priority_date: str | None
+    legal_status: str | None
+    ocean_groups: list[str]
+    cpc_codes: list[str]
+
+
+class BlueInvestProfile(BaseModel):
+    other_id: int
+    name: str
+    summary: str | None
+    trl: int | None
+    sector: str | None
+    company: str | None
+    country: str | None
+    funding_sought_eur: float | None
+    website: str | None
+    matched_slug: str | None
+    url: str
+
+
+class ExternalPeer(BaseModel):
+    source: str
+    external_id: str
+    name: str
+    similarity: float
+    shared_tags: list[str]
+    trl: int | None
+    sector: str | None
+    url: str | None

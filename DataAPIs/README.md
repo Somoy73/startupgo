@@ -70,3 +70,42 @@ Investor tiers are analyst judgments in [investor_tiers.json](investor_tiers.jso
 
 API (FastAPI, see `/docs`): `/api/features/catalog`, `/api/features?format=json|csv`, and per startup
 `/api/startups/{slug}/features|rounds|founders|investors|peers`.
+
+## EU and ocean-specific sources
+
+```bash
+python3 ingest_eu.py                          # CORDIS grants, patent CPC classes, BlueInvest pipeline, FR/NO registers
+python3 ingest_eu.py --only=cordis,patents    # selected steps: cordis, patents, retag, blueinvest, registers
+python3 ingest_eu.py --blueinvest-refresh     # re-crawl the 36-page BlueInvest pipeline list
+python3 features.py --offline                 # then recompute features
+```
+
+All keyless. Left out on purpose because of coverage limits: the EU Blue Economy Observatory (data to 2023, EU-27 only,
+established sectors only), EMFAF beneficiary lists (per-country formats), startup directories and port maps.
+
+| Table | Holds |
+|---|---|
+| `eu_grants` | CORDIS projects per startup: role, own EU contribution, SME flag, EIC/SME Instrument and Mission Ocean flags, topics |
+| `patent_classes` | CPC codes of each patent with ocean-technology group (aquaculture, seaweed, marine-bio, ocean-energy, vessels, ship-emissions, marine-cleanup, ocean-sensing) |
+| `blueinvest_profiles` | The EU BlueInvest Project Pipeline (~718 blue-economy SMEs, TRL, sector); detail fields for profiles matched to our startups |
+
+French (`fr_recherche_entreprises`) and Norwegian (`no_brreg`) registers run only for startups in those countries.
+API: `/api/startups/{slug}/grants`, `/api/startups/{slug}/patents`, `/api/discovery/blueinvest?q=&sector=&min_trl=&matched_only=`.
+
+## Founders, hiring and competitors (closing public-data gaps)
+
+```bash
+python3 ingest_gaps.py                  # non-UK founders/boards (PDL person search), job boards, BlueInvest peer universe
+python3 ingest_gaps.py --only=jobs      # steps: founders, jobs, peers
+python3 ingest_gaps.py --founders-all   # also PDL lookups for UK startups (more credits)
+python3 features.py --offline && python3 ingest.py --gaps-only
+```
+
+- Founders: UK from Companies House; elsewhere PDL person search (two queries per startup, at most 6 credits).
+  Only name, role, dates, founder/owner/CEO/MD prior roles and degrees are stored; emails, phones, sex and profile URLs are dropped.
+- Boards: Companies House directors (UK), SEC Form D directors and executive officers (US), PDL board titles.
+- Hiring: the company's own job board (Ashby, Greenhouse, Lever, Workable, Recruitee, Personio), found from its careers page or name.
+- Competitors: TF-IDF similarity against the 718 BlueInvest profiles (`startup_external_peers`).
+- Gap statuses now include `not-applicable` (e.g. GitHub activity for hardware/biotech startups); missing still means unknown, never zero.
+
+API: `/api/startups/{slug}/founders?founders_only=false` (with education and ventures), `/api/startups/{slug}/peers/blueinvest`.

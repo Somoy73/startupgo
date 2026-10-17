@@ -19,15 +19,15 @@
 18,A,Company Identity And Profile,18,Mission and value proposition,what the business promises to deliver,P0,auto,col:tagline,seed
 19,A,Company Identity And Profile,19,Primary problem solved,customer problem being addressed,P0,partial,col:description|signal:website,seed description; jina_reader website text
 20,A,Company Identity And Profile,20,Product category,product or service classification,P0,partial,col:sector,seed
-21,B,Founding Team And Leadership,1,Number of founders,,P0,partial,unit:founders|signal:website,serpapi_google knowledge panel; jina_reader team page
-22,B,Founding Team And Leadership,2,Founder roles,"CEO, CTO, commercial lead, etc.",P0,partial,unit:founders|unit:officers,uk_companies_house officer roles; serpapi_google knowledge panel
+21,B,Founding Team And Leadership,1,Number of founders,,P0,auto,founders|unit:founders,uk_companies_house founding directors; pdl_person_search founder titles
+22,B,Founding Team And Leadership,2,Founder roles,"CEO, CTO, commercial lead, etc.",P0,partial,founders|unit:officers,uk_companies_house officer roles; pdl_person_search titles
 23,B,Founding Team And Leadership,3,Relevant industry experience,,P0,missing,,
 24,B,Founding Team And Leadership,4,Relevant technical experience,,P0,missing,,
-25,B,Founding Team And Leadership,5,Previous startup experience,,P0,missing,,
+25,B,Founding Team And Leadership,5,Previous startup experience,,P0,partial,ventures,uk_companies_house_officer appointments; pdl_person_search venture-like roles (founder/owner/CEO/MD)
 26,B,Founding Team And Leadership,6,Previous exits,acquisitions or IPOs involving prior companies,P0,missing,,
 27,B,Founding Team And Leadership,7,Previous startup outcomes,"successes, failures and lessons",P0,missing,,
 28,B,Founding Team And Leadership,8,Domain expertise,,P0,missing,,
-29,B,Founding Team And Leadership,9,Education and qualifications,,P0,missing,,
+29,B,Founding Team And Leadership,9,Education and qualifications,,P0,partial,education,pdl_person_search education (degree level only; school prestige deliberately not scored)
 30,B,Founding Team And Leadership,10,Technical capability,,P0,missing,,
 31,B,Founding Team And Leadership,11,Commercial capability,,P0,missing,,
 32,B,Founding Team And Leadership,12,Leadership experience,,P0,missing,,
@@ -37,10 +37,10 @@
 36,B,Founding Team And Leadership,16,Vesting arrangements,,P0,missing,,
 37,B,Founding Team And Leadership,17,Team complementarity,"coverage of technical, product and sales skills",P0,missing,,
 38,B,Founding Team And Leadership,18,Key-person dependency,,P0,missing,,
-39,B,Founding Team And Leadership,19,Hiring capability,,P0,partial,signal:job,serpapi_google_jobs open roles
+39,B,Founding Team And Leadership,19,Hiring capability,,P0,partial,feature:open_roles,"job_boards, serpapi_google_jobs open roles (0 = checked, none open)"
 40,B,Founding Team And Leadership,20,Employee turnover,,P0,missing,,
 41,B,Founding Team And Leadership,21,Advisor network and actual contributions,,P0,missing,,
-42,B,Founding Team And Leadership,22,Board composition and governance experience,,P0,partial,unit:officers,uk_companies_house directors (board composition)
+42,B,Founding Team And Leadership,22,Board composition and governance experience,,P0,partial,board|unit:officers,"uk_companies_house directors, sec_form_d_document directors, pdl_person_search board titles"
 43,B,Founding Team And Leadership,23,References,verified references and feedback,P0,missing,,
 44,C,Problem Severity And Customer Need,1,Problem description,,P0,missing,,
 45,C,Problem Severity And Customer Need,2,Target user,,P0,missing,,
@@ -89,7 +89,7 @@
 88,E,Product And Technology,8,Technical performance,"latency, accuracy, throughput, etc.",P1,missing,,
 89,E,Product And Technology,9,Customer outcomes,measurable benefit delivered,P1,missing,,
 90,E,Product And Technology,10,Product roadmap,,P1,missing,,
-91,E,Product And Technology,11,Development velocity,meaningful improvements shipped,P1,partial,signal:repo,github_search_repos
+91,E,Product And Technology,11,Development velocity,meaningful improvements shipped,P1,partial,na_unless_software|signal:repo,github_search_repos (not meaningful for hardware/biotech)
 92,E,Product And Technology,12,Technical debt,,P1,missing,,
 93,E,Product And Technology,13,Architecture quality,"scalability, maintainability, resilience",P1,missing,,
 94,E,Product And Technology,14,Integration capability,,P1,missing,,
@@ -98,7 +98,7 @@
 97,E,Product And Technology,17,Intellectual property,"patents, trade secrets, relevant rights",P1,auto,signal:patent,"google_patents_xhr; serpapi_google_patents*, epo_ops*, patentsview*, lens_org*"
 98,E,Product And Technology,18,Patent quality,"relevance, enforceability and coverage",P1,partial,signal:patent,"google_patents_xhr (grant status, family)"
 99,E,Product And Technology,19,Research validation,,P1,partial,signal:paper,"openalex, crossref, semantic_scholar*"
-100,E,Product And Technology,20,Technology readiness in intended setting,,P1,auto,assess,readiness_assessments.trl (seed estimate)
+100,E,Product And Technology,20,Technology readiness in intended setting,,P1,auto,unit:trl|assess,blueinvest_profile self-reported TRL; readiness_assessments.trl (seed estimate)
 101,E,Product And Technology,21,Technical feasibility,,P1,missing,,
 102,E,Product And Technology,22,Vendor dependency,"external models, APIs or infrastructure",P1,missing,,
 103,E,Product And Technology,23,Cybersecurity posture,,P1,missing,,
@@ -210,9 +210,9 @@
 209,I,Sales And Go-To-Market Strategy,19,Customer onboarding time,,P2,missing,,
 210,I,Sales And Go-To-Market Strategy,20,Implementation cost,,P2,missing,,
 211,I,Sales And Go-To-Market Strategy,21,Sales forecast accuracy,,P2,missing,,
-212,J,Competition And Defensibility,1,Direct competitors,,P1,partial,peers,same-sector startups in DB; yc_oss
+212,J,Competition And Defensibility,1,Direct competitors,,P1,partial,xpeers|peers,BlueInvest pipeline peer universe; similar startups in DB
 213,J,Competition And Defensibility,2,Indirect competitors and alternative solutions,,P1,missing,,
-214,J,Competition And Defensibility,3,Competitor funding,,P1,partial,peers,funding_rounds of same-sector startups
+214,J,Competition And Defensibility,3,Competitor funding,,P1,partial,peerfunding,funding data of similar startups in DB
 215,J,Competition And Defensibility,4,Competitor revenue,public or verified estimates,P1,missing,,
 216,J,Competition And Defensibility,5,Competitor pricing,,P1,missing,,
 217,J,Competition And Defensibility,6,Competitor growth,,P1,missing,,
@@ -245,7 +245,7 @@
 244,K,Funding History And Capitalization Table (Cap Table),11,Investor concentration,,P1,missing,,
 245,K,Funding History And Capitalization Table (Cap Table),12,Founder ownership,,P1,missing,,
 246,K,Funding History And Capitalization Table (Cap Table),13,Employee option pool,,P1,missing,,
-247,K,Funding History And Capitalization Table (Cap Table),14,Fully diluted share count,,P1,partial,signal:filing,uk_companies_house statements of capital (SH01)
+247,K,Funding History And Capitalization Table (Cap Table),14,Fully diluted share count,,P1,partial,events:total_shares,uk_sh01 statement of capital (total shares after each allotment)
 248,K,Funding History And Capitalization Table (Cap Table),15,Convertible notes,,P1,missing,,
 249,K,Funding History And Capitalization Table (Cap Table),16,SAFEs,Simple Agreements for Future Equity,P1,missing,,
 250,K,Funding History And Capitalization Table (Cap Table),17,Liquidation preferences,,P1,missing,,
@@ -318,7 +318,7 @@
 317,N,"Legal, Regulatory And Compliance Risks",20,Outstanding guarantees and contingent liabilities,,P1,partial,unit:insolvency|ext:company_number,uk_companies_house insolvency + charges flags
 318,O,Risk And Resilience,1,Market risk,,P1,missing,,
 319,O,Risk And Resilience,2,Product risk,,P1,missing,,
-320,O,Risk And Resilience,3,Financial risk,,P1,partial,unit:insolvency,uk_companies_house insolvency cases
+320,O,Risk And Resilience,3,Financial risk,,P1,partial,feature:distress_flag|feature:no_round_24m|unit:insolvency,"distress flag, 730-day funding rule, insolvency cases"
 321,O,Risk And Resilience,4,Execution risk,,P1,missing,,
 322,O,Risk And Resilience,5,Customer concentration risk,,P1,missing,,
 323,O,Risk And Resilience,6,Supplier dependency risk,,P1,missing,,
@@ -358,12 +358,12 @@
 357,Q,External Signals And Startup Momentum,1,Website traffic and growth,,P2,missing,,
 358,Q,External Signals And Startup Momentum,2,Search interest and trends,,P2,missing,,
 359,Q,External Signals And Startup Momentum,3,Social engagement trends,,P2,missing,,
-360,Q,External Signals And Startup Momentum,4,GitHub activity,"public repository activity, contributors and releases",P2,auto,signal:repo,github_search_repos
+360,Q,External Signals And Startup Momentum,4,GitHub activity,"public repository activity, contributors and releases",P2,auto,na_unless_software|signal:repo,github_search_repos (not meaningful for hardware/biotech)
 361,Q,External Signals And Startup Momentum,5,Open-source adoption,"relevant downloads, users or project adoption",P2,missing,,
-362,Q,External Signals And Startup Momentum,6,Technical hiring signals,,P2,partial,signal:job|ext:yc_slug,serpapi_google_jobs; yc_oss isHiring
-363,Q,External Signals And Startup Momentum,7,Commercial hiring signals,,P2,partial,signal:job,serpapi_google_jobs
-364,Q,External Signals And Startup Momentum,8,Job posting growth,,P2,partial,signal:job,serpapi_google_jobs (repeat runs give growth)
-365,Q,External Signals And Startup Momentum,9,Product launch frequency,,P2,partial,signal:launch,hn_algolia; product_hunt*
+362,Q,External Signals And Startup Momentum,6,Technical hiring signals,,P2,partial,feature:technical_open_roles,"job_boards, serpapi_google_jobs (engineering / science / R&D roles)"
+363,Q,External Signals And Startup Momentum,7,Commercial hiring signals,,P2,partial,feature:commercial_open_roles,"job_boards, serpapi_google_jobs (sales / BD / marketing / customer roles)"
+364,Q,External Signals And Startup Momentum,8,Job posting growth,,P2,partial,jobsnapshots,job_boards / serpapi_google_jobs: needs postings from at least two dates
+365,Q,External Signals And Startup Momentum,9,Product launch frequency,,P2,partial,na_unless_software|signal:launch,hn_algolia; product_hunt* (not meaningful for hardware/biotech)
 366,Q,External Signals And Startup Momentum,10,Verified customer announcements,,P2,partial,signal:news,"google_news_rss, gdelt_doc"
 367,Q,External Signals And Startup Momentum,11,Partnerships,,P2,partial,signal:news,"google_news_rss, gdelt_doc"
 368,Q,External Signals And Startup Momentum,12,Press mentions from credible outlets,,P2,auto,signal:news,"google_news_rss, gdelt_doc; newsapi*"

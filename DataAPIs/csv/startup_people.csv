@@ -9,15 +9,18 @@
 1,8,director,0,2023-02-07,2023-09-20,uk_companies_house_company
 1,9,director,0,2019-12-24,2022-09-09,uk_companies_house_company
 1,10,director,0,2023-09-20,2024-01-17,uk_companies_house_company
-2,11,form_d_related_person,0,,,sec_form_d_document
-2,12,form_d_related_person,0,,,sec_form_d_document
-2,13,form_d_related_person,0,,,sec_form_d_document
-2,14,form_d_related_person,0,,,sec_form_d_document
-2,15,form_d_related_person,0,,,sec_form_d_document
-2,16,form_d_related_person,0,,,sec_form_d_document
-2,17,form_d_related_person,0,,,sec_form_d_document
-2,18,form_d_related_person,0,,,sec_form_d_document
-2,19,form_d_related_person,0,,,sec_form_d_document
+2,11,director,0,2016-10-21,,sec_form_d_document
+2,11,executive officer,0,2016-10-21,,sec_form_d_document
+2,11,promoter,0,2016-10-21,,sec_form_d_document
+2,12,director,0,2019-02-20,,sec_form_d_document
+2,13,director,0,2023-10-02,,sec_form_d_document
+2,14,director,0,2021-10-29,,sec_form_d_document
+2,14,executive officer,0,2021-10-29,,sec_form_d_document
+2,15,director,0,2019-02-20,,sec_form_d_document
+2,16,director,0,2021-10-29,2022-08-10,sec_form_d_document
+2,17,director,0,2019-02-20,2019-04-03,sec_form_d_document
+2,18,director,0,2016-10-21,2016-10-21,sec_form_d_document
+2,19,director,0,2016-10-21,2016-10-21,sec_form_d_document
 4,20,secretary,0,2022-06-14,,uk_companies_house_company
 4,21,director,1,2022-06-14,,uk_companies_house_company
 4,22,director,1,2022-06-14,2025-04-17,uk_companies_house_company
@@ -29,3 +32,24 @@
 5,28,director,0,2021-04-29,2023-10-31,uk_companies_house_company
 5,29,director,0,2024-05-01,2026-02-28,uk_companies_house_company
 5,30,director,1,2018-06-20,2026-05-14,uk_companies_house_company
+2,44,co-founder / chief executive officer,1,2016-03,,people_data_labs
+2,45,chief technology officer,0,2019-02,,people_data_labs
+3,31,co-founder,1,2014-05,,people_data_labs
+3,33,"chief research officer (cro) , pacific",0,2023-03,,people_data_labs
+3,46,chief technology officer,0,2023-04,,people_data_labs
+3,47,chief research officer,0,2019-05,,people_data_labs
+3,32,board member,0,2014-11,2021-12,people_data_labs
+3,32,chairman of the board,0,2011-11,2014-12,people_data_labs
+3,32,co-founder and board member,1,2008-08,2011-11,people_data_labs
+6,36,chief executive officer & founder,1,2017-11,,people_data_labs
+6,34,chairman,0,2024-10,,people_data_labs
+7,48,chief executive officer,1,2020-01,,people_data_labs
+7,49,group chief financial officer,0,2024-03,,people_data_labs
+7,49,acting chief financial officer,0,2023-05,2024-03,people_data_labs
+7,37,board member,0,2025-10,,people_data_labs
+7,38,kelp blue biotech chief financial officer,0,2024-03,2025-01,people_data_labs
+7,38,interim chief financial officer,0,2023-05,2024-03,people_data_labs
+8,40,fractional chief financial officer (cfo),0,2025-07,,people_data_labs
+8,42,"co-founder, chief technology officer",1,2019-09,,people_data_labs
+8,50,founder,1,2020-09,,people_data_labs
+8,41,board member & investor,0,2021-02,,people_data_labs

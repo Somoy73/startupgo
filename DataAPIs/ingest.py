@@ -27,7 +27,7 @@ from urllib.parse import urlparse
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE))
 import common  # noqa: E402
-import s1_startups_registries, s2_funding_procurement_patents, s3_news_search_market  # noqa: E402,F401
+import s1_startups_registries, s2_funding_procurement_patents, s3_news_search_market, s4_eu, s5_people_jobs  # noqa: E402,F401
 from run import trim  # noqa: E402
 
 REPO = HERE.parent
@@ -43,6 +43,7 @@ def open_db() -> sqlite3.Connection:
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
+    migrate(conn)
     conn.executescript((REPO / "DB" / "schema.sql").read_text())
     if fresh:
         conn.executescript((REPO / "DB" / "seed.sql").read_text())
@@ -62,8 +63,39 @@ def open_db() -> sqlite3.Connection:
     return conn
 
 
+def migrate(conn: sqlite3.Connection) -> None:
+    """Bring an existing DB up to schema.sql before it is re-applied (CREATE IF NOT EXISTS cannot alter tables)."""
+    tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    if "people" in tables:
+        cols = {r[1] for r in conn.execute("PRAGMA table_info(people)")}
+        for col in ("pdl_id", "education"):
+            if col not in cols:
+                conn.execute(f"ALTER TABLE people ADD COLUMN {col} TEXT")
+    if "startup_parameter_status" in tables:
+        sql = conn.execute("SELECT sql FROM sqlite_master WHERE name='startup_parameter_status'").fetchone()[0]
+        if "not-applicable" not in sql:  # derived table (rebuilt by build_gaps): safe to drop and recreate
+            conn.execute("DROP VIEW IF EXISTS startup_gaps")
+            conn.execute("DROP TABLE startup_parameter_status")
+    conn.commit()
+
+
 def now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+
+# Personal data never written to raw_fetches (PDL person records carry contact details we do not need)
+REDACT_KEYS = {"emails", "personal_emails", "work_email", "recommended_personal_email", "mobile_phone", "phone_numbers", "phones",
+               "sex", "gender", "birth_year", "birth_date", "street_addresses", "location_street_address", "location_postal_code",
+               "linkedin_url", "linkedin_username", "linkedin_id", "facebook_url", "facebook_username", "facebook_id",
+               "twitter_url", "twitter_username", "github_url", "github_username", "profiles", "possible_emails", "possible_phones"}
+
+
+def redact(o):
+    if isinstance(o, dict):
+        return {k: redact(v) for k, v in o.items() if k not in REDACT_KEYS}
+    if isinstance(o, list):
+        return [redact(x) for x in o]
+    return o
 
 
 def fetch(conn, source: str, startup_id: int | None = None, **params):
@@ -76,7 +108,8 @@ def fetch(conn, source: str, startup_id: int | None = None, **params):
         data, status, err = None, "skipped", str(e)
     except Exception as e:  # noqa: BLE001
         data, status, err = None, "error", str(e)[:500]
-    payload = json.dumps(trim(data), ensure_ascii=False, default=str) if data is not None else None
+    stored = redact(data) if source == "pdl_person_search" else data
+    payload = json.dumps(trim(stored), ensure_ascii=False, default=str) if data is not None else None
     cur = conn.execute("INSERT INTO raw_fetches (source_name, startup_id, params, status, error, size_bytes, payload) VALUES (?,?,?,?,?,?,?)",
                        (source, startup_id, json.dumps(params, ensure_ascii=False, default=str), status, err,
                         len(json.dumps(data, default=str)) if data is not None else None, payload))
@@ -551,23 +584,25 @@ COVER = {
     ("A", 18): ("auto", "col:tagline", "seed"),
     ("A", 19): ("partial", "col:description|signal:website", "seed description; jina_reader website text"),
     ("A", 20): ("partial", "col:sector", "seed"),
-    ("B", 1): ("partial", "unit:founders|signal:website", "serpapi_google knowledge panel; jina_reader team page"),
-    ("B", 2): ("partial", "unit:founders|unit:officers", "uk_companies_house officer roles; serpapi_google knowledge panel"),
-    ("B", 22): ("partial", "unit:officers", "uk_companies_house directors (board composition)"),
-    ("B", 19): ("partial", "signal:job", "serpapi_google_jobs open roles"),
+    ("B", 1): ("auto", "founders|unit:founders", "uk_companies_house founding directors; pdl_person_search founder titles"),
+    ("B", 2): ("partial", "founders|unit:officers", "uk_companies_house officer roles; pdl_person_search titles"),
+    ("B", 5): ("partial", "ventures", "uk_companies_house_officer appointments; pdl_person_search venture-like roles (founder/owner/CEO/MD)"),
+    ("B", 9): ("partial", "education", "pdl_person_search education (degree level only; school prestige deliberately not scored)"),
+    ("B", 22): ("partial", "board|unit:officers", "uk_companies_house directors, sec_form_d_document directors, pdl_person_search board titles"),
+    ("B", 19): ("partial", "feature:open_roles", "job_boards, serpapi_google_jobs open roles (0 = checked, none open)"),
     ("D", 4): ("partial", "market", "world_bank, eurostat, oecd_sdmx"),
     ("D", 8): ("partial", "market", "world_bank, eurostat"),
     ("D", 18): ("partial", "market", "world_bank, eurostat, oecd_sdmx"),
     ("E", 1): ("partial", "col:description|signal:website", "seed; jina_reader"),
-    ("E", 11): ("partial", "signal:repo", "github_search_repos"),
+    ("E", 11): ("partial", "na_unless_software|signal:repo", "github_search_repos (not meaningful for hardware/biotech)"),
     ("E", 17): ("auto", "signal:patent", "google_patents_xhr; serpapi_google_patents*, epo_ops*, patentsview*, lens_org*"),
     ("E", 18): ("partial", "signal:patent", "google_patents_xhr (grant status, family)"),
     ("E", 19): ("partial", "signal:paper", "openalex, crossref, semantic_scholar*"),
-    ("E", 20): ("auto", "assess", "readiness_assessments.trl (seed estimate)"),
+    ("E", 20): ("auto", "unit:trl|assess", "blueinvest_profile self-reported TRL; readiness_assessments.trl (seed estimate)"),
     ("F", 20): ("partial", "signal:news", "news mentions of pilots"),
     ("F", 23): ("partial", "signal:news", "news mentions of customers"),
-    ("J", 1): ("partial", "peers", "same-sector startups in DB; yc_oss"),
-    ("J", 3): ("partial", "peers", "funding_rounds of same-sector startups"),
+    ("J", 1): ("partial", "xpeers|peers", "BlueInvest pipeline peer universe; similar startups in DB"),
+    ("J", 3): ("partial", "peerfunding", "funding data of similar startups in DB"),
     ("J", 13): ("auto", "signal:patent", "google_patents_xhr"),
     ("K", 1): ("auto", "unit:usd_raised|rounds", "people_data_labs total raised; funding_rounds; sec_edgar Form D"),
     ("K", 2): ("auto", "unit:usd_raised|rounds", "people_data_labs round count; funding_rounds"),
@@ -581,12 +616,12 @@ COVER = {
     ("N", 1): ("auto", "ext:company_number|ext:lei", "uk_companies_house, gleif_lei"),
     ("N", 2): ("partial", "unit:psc|ext:lei", "uk_companies_house PSC register, gleif_lei parents"),
     ("N", 20): ("partial", "unit:insolvency|ext:company_number", "uk_companies_house insolvency + charges flags"),
-    ("O", 3): ("partial", "unit:insolvency", "uk_companies_house insolvency cases"),
-    ("Q", 4): ("auto", "signal:repo", "github_search_repos"),
-    ("Q", 6): ("partial", "signal:job|ext:yc_slug", "serpapi_google_jobs; yc_oss isHiring"),
-    ("Q", 7): ("partial", "signal:job", "serpapi_google_jobs"),
-    ("Q", 8): ("partial", "signal:job", "serpapi_google_jobs (repeat runs give growth)"),
-    ("Q", 9): ("partial", "signal:launch", "hn_algolia; product_hunt*"),
+    ("O", 3): ("partial", "feature:distress_flag|feature:no_round_24m|unit:insolvency", "distress flag, 730-day funding rule, insolvency cases"),
+    ("Q", 4): ("auto", "na_unless_software|signal:repo", "github_search_repos (not meaningful for hardware/biotech)"),
+    ("Q", 6): ("partial", "feature:technical_open_roles", "job_boards, serpapi_google_jobs (engineering / science / R&D roles)"),
+    ("Q", 7): ("partial", "feature:commercial_open_roles", "job_boards, serpapi_google_jobs (sales / BD / marketing / customer roles)"),
+    ("Q", 8): ("partial", "jobsnapshots", "job_boards / serpapi_google_jobs: needs postings from at least two dates"),
+    ("Q", 9): ("partial", "na_unless_software|signal:launch", "hn_algolia; product_hunt* (not meaningful for hardware/biotech)"),
     ("Q", 10): ("partial", "signal:news", "google_news_rss, gdelt_doc"),
     ("Q", 11): ("partial", "signal:news", "google_news_rss, gdelt_doc"),
     ("Q", 12): ("auto", "signal:news", "google_news_rss, gdelt_doc; newsapi*"),
@@ -594,7 +629,7 @@ COVER = {
     ("Q", 15): ("auto", "signal:patent", "google_patents_xhr"),
     ("Q", 19): ("partial", "signal:web_history", "wayback_cdx, common_crawl_index"),
     ("Q", 20): ("auto", "rounds|signal:filing", "funding_rounds, sec_edgar Form D, uk_companies_house SH01 allotments"),
-    ("K", 14): ("partial", "signal:filing", "uk_companies_house statements of capital (SH01)"),
+    ("K", 14): ("partial", "events:total_shares", "uk_sh01 statement of capital (total shares after each allotment)"),
     ("S", 3): ("partial", "kpi:D", "startup_ocean_kpis area D (climate)"),
     ("S", 4): ("partial", "kpi:E", "startup_ocean_kpis"),
     ("S", 5): ("partial", "kpi:B", "startup_ocean_kpis area B (pollution)"),
@@ -644,6 +679,12 @@ def evaluate(conn, rule, st):
         n = 0
         if kind == "always":
             return ("filled", 1, "system field")
+        if kind == "na_unless_software":
+            ind = " ".join(str(json.loads(r[0] or "{}").get("industry_v2") or "") for r in conn.execute(
+                "SELECT details FROM startup_external_ids WHERE startup_id=? AND id_type='pdl_id'", (sid,)))
+            if not re.search(r"software|saas|internet|data|analytics|platform", f"{st['sector']} {ind}", re.I):
+                return ("not-applicable", 0, "not meaningful for hardware/biotech startups")
+            continue
         if kind == "col":
             n = int(st[arg] not in (None, ""))
         elif kind == "suggest":
@@ -653,6 +694,34 @@ def evaluate(conn, rule, st):
                 continue
         elif kind == "signal":
             n = conn.execute("SELECT COUNT(*) FROM startup_signals WHERE startup_id=? AND signal_type=?", (sid, arg)).fetchone()[0]
+        elif kind == "founders":
+            n = conn.execute("SELECT COUNT(DISTINCT person_id) FROM startup_people WHERE startup_id=? AND is_founder=1", (sid,)).fetchone()[0]
+        elif kind == "board":
+            n = conn.execute("""SELECT COUNT(DISTINCT person_id) FROM startup_people WHERE startup_id=? AND resigned_on IS NULL AND
+                                (role='director' OR role LIKE '%board%' OR role LIKE '%chair%')""", (sid,)).fetchone()[0]
+        elif kind == "ventures":
+            n = conn.execute("""SELECT COUNT(*) FROM person_ventures v JOIN startup_people sp ON sp.person_id=v.person_id
+                                WHERE sp.startup_id=? AND sp.is_founder=1""", (sid,)).fetchone()[0]
+            if not n and conn.execute("SELECT 1 FROM startup_people WHERE startup_id=? AND is_founder=1", (sid,)).fetchone():
+                return ("filled", 0, "founders known; no other ventures found")  # a checked zero is an answer
+        elif kind == "education":
+            n = conn.execute("""SELECT COUNT(*) FROM people p JOIN startup_people sp ON sp.person_id=p.id
+                                WHERE sp.startup_id=? AND sp.is_founder=1 AND p.education IS NOT NULL AND p.education!='[]'""", (sid,)).fetchone()[0]
+        elif kind == "xpeers":
+            n = conn.execute("SELECT COUNT(*) FROM startup_external_peers WHERE startup_id=?", (sid,)).fetchone()[0]
+        elif kind == "peers":
+            n = conn.execute("SELECT COUNT(*) FROM startup_peers WHERE startup_id=? AND similarity>=0.1", (sid,)).fetchone()[0]
+        elif kind == "peerfunding":
+            n = conn.execute("""SELECT COUNT(*) FROM startup_peers p JOIN startup_features f ON f.startup_id=p.peer_id AND f.feature='total_raised_usd'
+                                WHERE p.startup_id=? AND p.similarity>=0.1""", (sid,)).fetchone()[0]
+        elif kind == "events":
+            n = conn.execute("SELECT COUNT(*) FROM funding_events WHERE startup_id=? AND total_shares_after IS NOT NULL", (sid,)).fetchone()[0]
+        elif kind == "feature":
+            n = conn.execute("SELECT COUNT(*) FROM startup_features WHERE startup_id=? AND feature=? AND value_num IS NOT NULL", (sid, arg)).fetchone()[0]
+        elif kind == "jobsnapshots":
+            n = conn.execute("""SELECT COUNT(DISTINCT COALESCE(json_extract(details,'$.snapshot'), substr(fetched_at,1,10)))
+                                FROM startup_signals WHERE startup_id=? AND signal_type='job'""", (sid,)).fetchone()[0]
+            n = n if n >= 2 else 0
         elif kind == "unit":
             n = conn.execute("SELECT COUNT(*) FROM startup_signals WHERE startup_id=? AND unit=?", (sid, arg)).fetchone()[0]
         elif kind == "ext":
@@ -666,8 +735,6 @@ def evaluate(conn, rule, st):
             n = conn.execute(sql, (sid, f"{arg}%") if arg else (sid,)).fetchone()[0]
         elif kind == "market":
             n = conn.execute("SELECT COUNT(*) FROM market_indicators WHERE geo IN (SELECT ?)", (WB_COUNTRIES.get(st["country"], "?"),)).fetchone()[0]
-        elif kind == "peers":
-            n = conn.execute("SELECT COUNT(*) FROM startups WHERE sector=? AND id!=?", (st["sector"], sid)).fetchone()[0]
         if n:
             return ("filled", n, part)
     return best
@@ -716,15 +783,15 @@ def write_report(conn):
 
     L += ["## 2. Per startup: collectable parameters actually filled\n",
           "Counts only the parameters public data can fill (auto + partial). `empty` = collectable but nothing found yet.\n",
-          "| Startup | filled | proxy | empty | fill rate | patents | papers | news | launches | repos | web history | suggestions |",
-          "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+          "| Startup | filled | proxy | empty | n/a | fill rate | patents | papers | news | launches | repos | web history | suggestions |",
+          "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for r in q("""SELECT s.id, s.name,
-                    SUM(sps.status='filled') f, SUM(sps.status='proxy') p, SUM(sps.status='empty') e
+                    SUM(sps.status='filled') f, SUM(sps.status='proxy') p, SUM(sps.status='empty') e, SUM(sps.status='not-applicable') na
                   FROM startups s JOIN startup_parameter_status sps ON sps.startup_id=s.id GROUP BY s.id ORDER BY s.id"""):
         cnt = {k: v for k, v in q("SELECT signal_type, COUNT(*) FROM startup_signals WHERE startup_id=? GROUP BY signal_type", r["id"])}
         sug = q("SELECT COUNT(*) FROM field_suggestions WHERE startup_id=?", r["id"])[0][0]
         tot = r["f"] + r["p"] + r["e"]
-        L.append(f"| {r['name']} | {r['f']} | {r['p']} | {r['e']} | {100 * (r['f'] + r['p']) // tot}% | {cnt.get('patent', 0)} | {cnt.get('paper', 0)} | "
+        L.append(f"| {r['name']} | {r['f']} | {r['p']} | {r['e']} | {r['na']} | {100 * (r['f'] + r['p']) // tot}% | {cnt.get('patent', 0)} | {cnt.get('paper', 0)} | "
                  f"{cnt.get('news', 0)} | {cnt.get('launch', 0)} | {cnt.get('repo', 0)} | {cnt.get('web_history', 0)} | {sug} |")
 
     L += ["\n## 3. Collectable but empty (by startup)\n"]

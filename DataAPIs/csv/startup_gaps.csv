@@ -5,11 +5,10 @@ notpla,A,12,Target geography,P0,missing,not-collectable,
 notpla,A,15,Employee growth,P0,missing,not-collectable,
 notpla,B,3,Relevant industry experience,P0,missing,not-collectable,
 notpla,B,4,Relevant technical experience,P0,missing,not-collectable,
-notpla,B,5,Previous startup experience,P0,missing,not-collectable,
 notpla,B,6,Previous exits,P0,missing,not-collectable,
 notpla,B,7,Previous startup outcomes,P0,missing,not-collectable,
 notpla,B,8,Domain expertise,P0,missing,not-collectable,
-notpla,B,9,Education and qualifications,P0,missing,not-collectable,
+notpla,B,9,Education and qualifications,P0,partial,empty,pdl_person_search education (degree level only; school prestige deliberately not scored)
 notpla,B,10,Technical capability,P0,missing,not-collectable,
 notpla,B,11,Commercial capability,P0,missing,not-collectable,
 notpla,B,12,Leadership experience,P0,missing,not-collectable,
@@ -19,7 +18,6 @@ notpla,B,15,Founder equity ownership,P0,missing,not-collectable,
 notpla,B,16,Vesting arrangements,P0,missing,not-collectable,
 notpla,B,17,Team complementarity,P0,missing,not-collectable,
 notpla,B,18,Key-person dependency,P0,missing,not-collectable,
-notpla,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 notpla,B,20,Employee turnover,P0,missing,not-collectable,
 notpla,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
 notpla,B,23,References,P0,missing,not-collectable,
@@ -66,7 +64,6 @@ notpla,E,7,Product reliability,P1,missing,not-collectable,
 notpla,E,8,Technical performance,P1,missing,not-collectable,
 notpla,E,9,Customer outcomes,P1,missing,not-collectable,
 notpla,E,10,Product roadmap,P1,missing,not-collectable,
-notpla,E,11,Development velocity,P1,partial,empty,github_search_repos
 notpla,E,12,Technical debt,P1,missing,not-collectable,
 notpla,E,13,Architecture quality,P1,missing,not-collectable,
 notpla,E,14,Integration capability,P1,missing,not-collectable,
@@ -181,9 +178,8 @@ notpla,I,18,International expansion cost,P2,missing,not-collectable,
 notpla,I,19,Customer onboarding time,P2,missing,not-collectable,
 notpla,I,20,Implementation cost,P2,missing,not-collectable,
 notpla,I,21,Sales forecast accuracy,P2,missing,not-collectable,
-notpla,J,1,Direct competitors,P1,partial,empty,same-sector startups in DB; yc_oss
 notpla,J,2,Indirect competitors and alternative solutions,P1,missing,not-collectable,
-notpla,J,3,Competitor funding,P1,partial,empty,funding_rounds of same-sector startups
+notpla,J,3,Competitor funding,P1,partial,empty,funding data of similar startups in DB
 notpla,J,4,Competitor revenue,P1,missing,not-collectable,
 notpla,J,5,Competitor pricing,P1,missing,not-collectable,
 notpla,J,6,Competitor growth,P1,missing,not-collectable,
@@ -275,7 +271,6 @@ notpla,N,18,Related-party transactions,P1,missing,not-collectable,
 notpla,N,19,Change-of-control restrictions,P1,missing,not-collectable,
 notpla,O,1,Market risk,P1,missing,not-collectable,
 notpla,O,2,Product risk,P1,missing,not-collectable,
-notpla,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 notpla,O,4,Execution risk,P1,missing,not-collectable,
 notpla,O,5,Customer concentration risk,P1,missing,not-collectable,
 notpla,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -315,11 +310,8 @@ notpla,P,19,Return relative to alternatives,P2,missing,not-collectable,
 notpla,Q,1,Website traffic and growth,P2,missing,not-collectable,
 notpla,Q,2,Search interest and trends,P2,missing,not-collectable,
 notpla,Q,3,Social engagement trends,P2,missing,not-collectable,
-notpla,Q,4,GitHub activity,P2,auto,empty,github_search_repos
 notpla,Q,5,Open-source adoption,P2,missing,not-collectable,
-notpla,Q,6,Technical hiring signals,P2,partial,empty,serpapi_google_jobs; yc_oss isHiring
-notpla,Q,7,Commercial hiring signals,P2,partial,empty,serpapi_google_jobs
-notpla,Q,8,Job posting growth,P2,partial,empty,serpapi_google_jobs (repeat runs give growth)
+notpla,Q,8,Job posting growth,P2,partial,empty,job_boards / serpapi_google_jobs: needs postings from at least two dates
 notpla,Q,13,Relevant conference participation and demonstrations,P2,missing,not-collectable,
 notpla,Q,16,"Developer adoption, where measurable",P2,missing,not-collectable,
 notpla,Q,17,App downloads,P2,missing,not-collectable,
@@ -393,14 +385,11 @@ sofar-ocean,A,12,Target geography,P0,missing,not-collectable,
 sofar-ocean,A,13,Operating status,P0,auto,empty,"uk_companies_house status, gleif_lei, yc_oss"
 sofar-ocean,A,15,Employee growth,P0,missing,not-collectable,
 sofar-ocean,A,17,Legal structure,P0,auto,empty,"uk_companies_house type, gleif_lei legal form"
-sofar-ocean,B,2,Founder roles,P0,partial,empty,uk_companies_house officer roles; serpapi_google knowledge panel
 sofar-ocean,B,3,Relevant industry experience,P0,missing,not-collectable,
 sofar-ocean,B,4,Relevant technical experience,P0,missing,not-collectable,
-sofar-ocean,B,5,Previous startup experience,P0,missing,not-collectable,
 sofar-ocean,B,6,Previous exits,P0,missing,not-collectable,
 sofar-ocean,B,7,Previous startup outcomes,P0,missing,not-collectable,
 sofar-ocean,B,8,Domain expertise,P0,missing,not-collectable,
-sofar-ocean,B,9,Education and qualifications,P0,missing,not-collectable,
 sofar-ocean,B,10,Technical capability,P0,missing,not-collectable,
 sofar-ocean,B,11,Commercial capability,P0,missing,not-collectable,
 sofar-ocean,B,12,Leadership experience,P0,missing,not-collectable,
@@ -412,7 +401,6 @@ sofar-ocean,B,17,Team complementarity,P0,missing,not-collectable,
 sofar-ocean,B,18,Key-person dependency,P0,missing,not-collectable,
 sofar-ocean,B,20,Employee turnover,P0,missing,not-collectable,
 sofar-ocean,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-sofar-ocean,B,22,Board composition and governance experience,P0,partial,empty,uk_companies_house directors (board composition)
 sofar-ocean,B,23,References,P0,missing,not-collectable,
 sofar-ocean,C,1,Problem description,P0,missing,not-collectable,
 sofar-ocean,C,2,Target user,P0,missing,not-collectable,
@@ -457,7 +445,7 @@ sofar-ocean,E,7,Product reliability,P1,missing,not-collectable,
 sofar-ocean,E,8,Technical performance,P1,missing,not-collectable,
 sofar-ocean,E,9,Customer outcomes,P1,missing,not-collectable,
 sofar-ocean,E,10,Product roadmap,P1,missing,not-collectable,
-sofar-ocean,E,11,Development velocity,P1,partial,empty,github_search_repos
+sofar-ocean,E,11,Development velocity,P1,partial,empty,github_search_repos (not meaningful for hardware/biotech)
 sofar-ocean,E,12,Technical debt,P1,missing,not-collectable,
 sofar-ocean,E,13,Architecture quality,P1,missing,not-collectable,
 sofar-ocean,E,14,Integration capability,P1,missing,not-collectable,
@@ -572,9 +560,8 @@ sofar-ocean,I,18,International expansion cost,P2,missing,not-collectable,
 sofar-ocean,I,19,Customer onboarding time,P2,missing,not-collectable,
 sofar-ocean,I,20,Implementation cost,P2,missing,not-collectable,
 sofar-ocean,I,21,Sales forecast accuracy,P2,missing,not-collectable,
-sofar-ocean,J,1,Direct competitors,P1,partial,empty,same-sector startups in DB; yc_oss
 sofar-ocean,J,2,Indirect competitors and alternative solutions,P1,missing,not-collectable,
-sofar-ocean,J,3,Competitor funding,P1,partial,empty,funding_rounds of same-sector startups
+sofar-ocean,J,3,Competitor funding,P1,partial,empty,funding data of similar startups in DB
 sofar-ocean,J,4,Competitor revenue,P1,missing,not-collectable,
 sofar-ocean,J,5,Competitor pricing,P1,missing,not-collectable,
 sofar-ocean,J,6,Competitor growth,P1,missing,not-collectable,
@@ -599,6 +586,7 @@ sofar-ocean,K,8,Valuation growth between comparable rounds,P0,missing,not-collec
 sofar-ocean,K,11,Investor concentration,P1,missing,not-collectable,
 sofar-ocean,K,12,Founder ownership,P1,missing,not-collectable,
 sofar-ocean,K,13,Employee option pool,P1,missing,not-collectable,
+sofar-ocean,K,14,Fully diluted share count,P1,partial,empty,uk_sh01 statement of capital (total shares after each allotment)
 sofar-ocean,K,15,Convertible notes,P1,missing,not-collectable,
 sofar-ocean,K,16,SAFEs,P1,missing,not-collectable,
 sofar-ocean,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -669,7 +657,6 @@ sofar-ocean,N,19,Change-of-control restrictions,P1,missing,not-collectable,
 sofar-ocean,N,20,Outstanding guarantees and contingent liabilities,P1,partial,empty,uk_companies_house insolvency + charges flags
 sofar-ocean,O,1,Market risk,P1,missing,not-collectable,
 sofar-ocean,O,2,Product risk,P1,missing,not-collectable,
-sofar-ocean,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 sofar-ocean,O,4,Execution risk,P1,missing,not-collectable,
 sofar-ocean,O,5,Customer concentration risk,P1,missing,not-collectable,
 sofar-ocean,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -709,9 +696,9 @@ sofar-ocean,P,19,Return relative to alternatives,P2,missing,not-collectable,
 sofar-ocean,Q,1,Website traffic and growth,P2,missing,not-collectable,
 sofar-ocean,Q,2,Search interest and trends,P2,missing,not-collectable,
 sofar-ocean,Q,3,Social engagement trends,P2,missing,not-collectable,
-sofar-ocean,Q,4,GitHub activity,P2,auto,empty,github_search_repos
+sofar-ocean,Q,4,GitHub activity,P2,auto,empty,github_search_repos (not meaningful for hardware/biotech)
 sofar-ocean,Q,5,Open-source adoption,P2,missing,not-collectable,
-sofar-ocean,Q,9,Product launch frequency,P2,partial,empty,hn_algolia; product_hunt*
+sofar-ocean,Q,9,Product launch frequency,P2,partial,empty,hn_algolia; product_hunt* (not meaningful for hardware/biotech)
 sofar-ocean,Q,13,Relevant conference participation and demonstrations,P2,missing,not-collectable,
 sofar-ocean,Q,16,"Developer adoption, where measurable",P2,missing,not-collectable,
 sofar-ocean,Q,17,App downloads,P2,missing,not-collectable,
@@ -782,14 +769,11 @@ ocean-rainforest,A,10,Business model,P0,missing,not-collectable,
 ocean-rainforest,A,11,Customer segment,P0,missing,not-collectable,
 ocean-rainforest,A,12,Target geography,P0,missing,not-collectable,
 ocean-rainforest,A,15,Employee growth,P0,missing,not-collectable,
-ocean-rainforest,B,2,Founder roles,P0,partial,empty,uk_companies_house officer roles; serpapi_google knowledge panel
 ocean-rainforest,B,3,Relevant industry experience,P0,missing,not-collectable,
 ocean-rainforest,B,4,Relevant technical experience,P0,missing,not-collectable,
-ocean-rainforest,B,5,Previous startup experience,P0,missing,not-collectable,
 ocean-rainforest,B,6,Previous exits,P0,missing,not-collectable,
 ocean-rainforest,B,7,Previous startup outcomes,P0,missing,not-collectable,
 ocean-rainforest,B,8,Domain expertise,P0,missing,not-collectable,
-ocean-rainforest,B,9,Education and qualifications,P0,missing,not-collectable,
 ocean-rainforest,B,10,Technical capability,P0,missing,not-collectable,
 ocean-rainforest,B,11,Commercial capability,P0,missing,not-collectable,
 ocean-rainforest,B,12,Leadership experience,P0,missing,not-collectable,
@@ -799,10 +783,9 @@ ocean-rainforest,B,15,Founder equity ownership,P0,missing,not-collectable,
 ocean-rainforest,B,16,Vesting arrangements,P0,missing,not-collectable,
 ocean-rainforest,B,17,Team complementarity,P0,missing,not-collectable,
 ocean-rainforest,B,18,Key-person dependency,P0,missing,not-collectable,
-ocean-rainforest,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 ocean-rainforest,B,20,Employee turnover,P0,missing,not-collectable,
 ocean-rainforest,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-ocean-rainforest,B,22,Board composition and governance experience,P0,partial,empty,uk_companies_house directors (board composition)
+ocean-rainforest,B,22,Board composition and governance experience,P0,partial,empty,"uk_companies_house directors, sec_form_d_document directors, pdl_person_search board titles"
 ocean-rainforest,B,23,References,P0,missing,not-collectable,
 ocean-rainforest,C,1,Problem description,P0,missing,not-collectable,
 ocean-rainforest,C,2,Target user,P0,missing,not-collectable,
@@ -847,7 +830,6 @@ ocean-rainforest,E,7,Product reliability,P1,missing,not-collectable,
 ocean-rainforest,E,8,Technical performance,P1,missing,not-collectable,
 ocean-rainforest,E,9,Customer outcomes,P1,missing,not-collectable,
 ocean-rainforest,E,10,Product roadmap,P1,missing,not-collectable,
-ocean-rainforest,E,11,Development velocity,P1,partial,empty,github_search_repos
 ocean-rainforest,E,12,Technical debt,P1,missing,not-collectable,
 ocean-rainforest,E,13,Architecture quality,P1,missing,not-collectable,
 ocean-rainforest,E,14,Integration capability,P1,missing,not-collectable,
@@ -990,7 +972,7 @@ ocean-rainforest,K,8,Valuation growth between comparable rounds,P0,missing,not-c
 ocean-rainforest,K,11,Investor concentration,P1,missing,not-collectable,
 ocean-rainforest,K,12,Founder ownership,P1,missing,not-collectable,
 ocean-rainforest,K,13,Employee option pool,P1,missing,not-collectable,
-ocean-rainforest,K,14,Fully diluted share count,P1,partial,empty,uk_companies_house statements of capital (SH01)
+ocean-rainforest,K,14,Fully diluted share count,P1,partial,empty,uk_sh01 statement of capital (total shares after each allotment)
 ocean-rainforest,K,15,Convertible notes,P1,missing,not-collectable,
 ocean-rainforest,K,16,SAFEs,P1,missing,not-collectable,
 ocean-rainforest,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -1059,7 +1041,6 @@ ocean-rainforest,N,19,Change-of-control restrictions,P1,missing,not-collectable,
 ocean-rainforest,N,20,Outstanding guarantees and contingent liabilities,P1,partial,empty,uk_companies_house insolvency + charges flags
 ocean-rainforest,O,1,Market risk,P1,missing,not-collectable,
 ocean-rainforest,O,2,Product risk,P1,missing,not-collectable,
-ocean-rainforest,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 ocean-rainforest,O,4,Execution risk,P1,missing,not-collectable,
 ocean-rainforest,O,5,Customer concentration risk,P1,missing,not-collectable,
 ocean-rainforest,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -1099,12 +1080,8 @@ ocean-rainforest,P,19,Return relative to alternatives,P2,missing,not-collectable
 ocean-rainforest,Q,1,Website traffic and growth,P2,missing,not-collectable,
 ocean-rainforest,Q,2,Search interest and trends,P2,missing,not-collectable,
 ocean-rainforest,Q,3,Social engagement trends,P2,missing,not-collectable,
-ocean-rainforest,Q,4,GitHub activity,P2,auto,empty,github_search_repos
 ocean-rainforest,Q,5,Open-source adoption,P2,missing,not-collectable,
-ocean-rainforest,Q,6,Technical hiring signals,P2,partial,empty,serpapi_google_jobs; yc_oss isHiring
-ocean-rainforest,Q,7,Commercial hiring signals,P2,partial,empty,serpapi_google_jobs
-ocean-rainforest,Q,8,Job posting growth,P2,partial,empty,serpapi_google_jobs (repeat runs give growth)
-ocean-rainforest,Q,9,Product launch frequency,P2,partial,empty,hn_algolia; product_hunt*
+ocean-rainforest,Q,8,Job posting growth,P2,partial,empty,job_boards / serpapi_google_jobs: needs postings from at least two dates
 ocean-rainforest,Q,13,Relevant conference participation and demonstrations,P2,missing,not-collectable,
 ocean-rainforest,Q,15,Patent filings,P2,auto,empty,google_patents_xhr
 ocean-rainforest,Q,16,"Developer adoption, where measurable",P2,missing,not-collectable,
@@ -1178,11 +1155,10 @@ seabound,A,12,Target geography,P0,missing,not-collectable,
 seabound,A,15,Employee growth,P0,missing,not-collectable,
 seabound,B,3,Relevant industry experience,P0,missing,not-collectable,
 seabound,B,4,Relevant technical experience,P0,missing,not-collectable,
-seabound,B,5,Previous startup experience,P0,missing,not-collectable,
 seabound,B,6,Previous exits,P0,missing,not-collectable,
 seabound,B,7,Previous startup outcomes,P0,missing,not-collectable,
 seabound,B,8,Domain expertise,P0,missing,not-collectable,
-seabound,B,9,Education and qualifications,P0,missing,not-collectable,
+seabound,B,9,Education and qualifications,P0,partial,empty,pdl_person_search education (degree level only; school prestige deliberately not scored)
 seabound,B,10,Technical capability,P0,missing,not-collectable,
 seabound,B,11,Commercial capability,P0,missing,not-collectable,
 seabound,B,12,Leadership experience,P0,missing,not-collectable,
@@ -1192,7 +1168,6 @@ seabound,B,15,Founder equity ownership,P0,missing,not-collectable,
 seabound,B,16,Vesting arrangements,P0,missing,not-collectable,
 seabound,B,17,Team complementarity,P0,missing,not-collectable,
 seabound,B,18,Key-person dependency,P0,missing,not-collectable,
-seabound,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 seabound,B,20,Employee turnover,P0,missing,not-collectable,
 seabound,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
 seabound,B,23,References,P0,missing,not-collectable,
@@ -1239,7 +1214,6 @@ seabound,E,7,Product reliability,P1,missing,not-collectable,
 seabound,E,8,Technical performance,P1,missing,not-collectable,
 seabound,E,9,Customer outcomes,P1,missing,not-collectable,
 seabound,E,10,Product roadmap,P1,missing,not-collectable,
-seabound,E,11,Development velocity,P1,partial,empty,github_search_repos
 seabound,E,12,Technical debt,P1,missing,not-collectable,
 seabound,E,13,Architecture quality,P1,missing,not-collectable,
 seabound,E,14,Integration capability,P1,missing,not-collectable,
@@ -1354,9 +1328,8 @@ seabound,I,18,International expansion cost,P2,missing,not-collectable,
 seabound,I,19,Customer onboarding time,P2,missing,not-collectable,
 seabound,I,20,Implementation cost,P2,missing,not-collectable,
 seabound,I,21,Sales forecast accuracy,P2,missing,not-collectable,
-seabound,J,1,Direct competitors,P1,partial,empty,same-sector startups in DB; yc_oss
 seabound,J,2,Indirect competitors and alternative solutions,P1,missing,not-collectable,
-seabound,J,3,Competitor funding,P1,partial,empty,funding_rounds of same-sector startups
+seabound,J,3,Competitor funding,P1,partial,empty,funding data of similar startups in DB
 seabound,J,4,Competitor revenue,P1,missing,not-collectable,
 seabound,J,5,Competitor pricing,P1,missing,not-collectable,
 seabound,J,6,Competitor growth,P1,missing,not-collectable,
@@ -1448,7 +1421,6 @@ seabound,N,18,Related-party transactions,P1,missing,not-collectable,
 seabound,N,19,Change-of-control restrictions,P1,missing,not-collectable,
 seabound,O,1,Market risk,P1,missing,not-collectable,
 seabound,O,2,Product risk,P1,missing,not-collectable,
-seabound,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 seabound,O,4,Execution risk,P1,missing,not-collectable,
 seabound,O,5,Customer concentration risk,P1,missing,not-collectable,
 seabound,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -1488,11 +1460,8 @@ seabound,P,19,Return relative to alternatives,P2,missing,not-collectable,
 seabound,Q,1,Website traffic and growth,P2,missing,not-collectable,
 seabound,Q,2,Search interest and trends,P2,missing,not-collectable,
 seabound,Q,3,Social engagement trends,P2,missing,not-collectable,
-seabound,Q,4,GitHub activity,P2,auto,empty,github_search_repos
 seabound,Q,5,Open-source adoption,P2,missing,not-collectable,
-seabound,Q,7,Commercial hiring signals,P2,partial,empty,serpapi_google_jobs
-seabound,Q,8,Job posting growth,P2,partial,empty,serpapi_google_jobs (repeat runs give growth)
-seabound,Q,9,Product launch frequency,P2,partial,empty,hn_algolia; product_hunt*
+seabound,Q,8,Job posting growth,P2,partial,empty,job_boards / serpapi_google_jobs: needs postings from at least two dates
 seabound,Q,13,Relevant conference participation and demonstrations,P2,missing,not-collectable,
 seabound,Q,16,"Developer adoption, where measurable",P2,missing,not-collectable,
 seabound,Q,17,App downloads,P2,missing,not-collectable,
@@ -1566,11 +1535,10 @@ oceanium,A,12,Target geography,P0,missing,not-collectable,
 oceanium,A,15,Employee growth,P0,missing,not-collectable,
 oceanium,B,3,Relevant industry experience,P0,missing,not-collectable,
 oceanium,B,4,Relevant technical experience,P0,missing,not-collectable,
-oceanium,B,5,Previous startup experience,P0,missing,not-collectable,
 oceanium,B,6,Previous exits,P0,missing,not-collectable,
 oceanium,B,7,Previous startup outcomes,P0,missing,not-collectable,
 oceanium,B,8,Domain expertise,P0,missing,not-collectable,
-oceanium,B,9,Education and qualifications,P0,missing,not-collectable,
+oceanium,B,9,Education and qualifications,P0,partial,empty,pdl_person_search education (degree level only; school prestige deliberately not scored)
 oceanium,B,10,Technical capability,P0,missing,not-collectable,
 oceanium,B,11,Commercial capability,P0,missing,not-collectable,
 oceanium,B,12,Leadership experience,P0,missing,not-collectable,
@@ -1580,7 +1548,6 @@ oceanium,B,15,Founder equity ownership,P0,missing,not-collectable,
 oceanium,B,16,Vesting arrangements,P0,missing,not-collectable,
 oceanium,B,17,Team complementarity,P0,missing,not-collectable,
 oceanium,B,18,Key-person dependency,P0,missing,not-collectable,
-oceanium,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 oceanium,B,20,Employee turnover,P0,missing,not-collectable,
 oceanium,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
 oceanium,B,23,References,P0,missing,not-collectable,
@@ -1627,7 +1594,6 @@ oceanium,E,7,Product reliability,P1,missing,not-collectable,
 oceanium,E,8,Technical performance,P1,missing,not-collectable,
 oceanium,E,9,Customer outcomes,P1,missing,not-collectable,
 oceanium,E,10,Product roadmap,P1,missing,not-collectable,
-oceanium,E,11,Development velocity,P1,partial,empty,github_search_repos
 oceanium,E,12,Technical debt,P1,missing,not-collectable,
 oceanium,E,13,Architecture quality,P1,missing,not-collectable,
 oceanium,E,14,Integration capability,P1,missing,not-collectable,
@@ -1873,12 +1839,8 @@ oceanium,P,19,Return relative to alternatives,P2,missing,not-collectable,
 oceanium,Q,1,Website traffic and growth,P2,missing,not-collectable,
 oceanium,Q,2,Search interest and trends,P2,missing,not-collectable,
 oceanium,Q,3,Social engagement trends,P2,missing,not-collectable,
-oceanium,Q,4,GitHub activity,P2,auto,empty,github_search_repos
 oceanium,Q,5,Open-source adoption,P2,missing,not-collectable,
-oceanium,Q,6,Technical hiring signals,P2,partial,empty,serpapi_google_jobs; yc_oss isHiring
-oceanium,Q,7,Commercial hiring signals,P2,partial,empty,serpapi_google_jobs
-oceanium,Q,8,Job posting growth,P2,partial,empty,serpapi_google_jobs (repeat runs give growth)
-oceanium,Q,9,Product launch frequency,P2,partial,empty,hn_algolia; product_hunt*
+oceanium,Q,8,Job posting growth,P2,partial,empty,job_boards / serpapi_google_jobs: needs postings from at least two dates
 oceanium,Q,13,Relevant conference participation and demonstrations,P2,missing,not-collectable,
 oceanium,Q,16,"Developer adoption, where measurable",P2,missing,not-collectable,
 oceanium,Q,17,App downloads,P2,missing,not-collectable,
@@ -1950,15 +1912,11 @@ seaforester,A,10,Business model,P0,missing,not-collectable,
 seaforester,A,11,Customer segment,P0,missing,not-collectable,
 seaforester,A,12,Target geography,P0,missing,not-collectable,
 seaforester,A,15,Employee growth,P0,missing,not-collectable,
-seaforester,B,1,Number of founders,P0,partial,empty,serpapi_google knowledge panel; jina_reader team page
-seaforester,B,2,Founder roles,P0,partial,empty,uk_companies_house officer roles; serpapi_google knowledge panel
 seaforester,B,3,Relevant industry experience,P0,missing,not-collectable,
 seaforester,B,4,Relevant technical experience,P0,missing,not-collectable,
-seaforester,B,5,Previous startup experience,P0,missing,not-collectable,
 seaforester,B,6,Previous exits,P0,missing,not-collectable,
 seaforester,B,7,Previous startup outcomes,P0,missing,not-collectable,
 seaforester,B,8,Domain expertise,P0,missing,not-collectable,
-seaforester,B,9,Education and qualifications,P0,missing,not-collectable,
 seaforester,B,10,Technical capability,P0,missing,not-collectable,
 seaforester,B,11,Commercial capability,P0,missing,not-collectable,
 seaforester,B,12,Leadership experience,P0,missing,not-collectable,
@@ -1968,10 +1926,8 @@ seaforester,B,15,Founder equity ownership,P0,missing,not-collectable,
 seaforester,B,16,Vesting arrangements,P0,missing,not-collectable,
 seaforester,B,17,Team complementarity,P0,missing,not-collectable,
 seaforester,B,18,Key-person dependency,P0,missing,not-collectable,
-seaforester,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 seaforester,B,20,Employee turnover,P0,missing,not-collectable,
 seaforester,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-seaforester,B,22,Board composition and governance experience,P0,partial,empty,uk_companies_house directors (board composition)
 seaforester,B,23,References,P0,missing,not-collectable,
 seaforester,C,1,Problem description,P0,missing,not-collectable,
 seaforester,C,2,Target user,P0,missing,not-collectable,
@@ -2016,7 +1972,6 @@ seaforester,E,7,Product reliability,P1,missing,not-collectable,
 seaforester,E,8,Technical performance,P1,missing,not-collectable,
 seaforester,E,9,Customer outcomes,P1,missing,not-collectable,
 seaforester,E,10,Product roadmap,P1,missing,not-collectable,
-seaforester,E,11,Development velocity,P1,partial,empty,github_search_repos
 seaforester,E,12,Technical debt,P1,missing,not-collectable,
 seaforester,E,13,Architecture quality,P1,missing,not-collectable,
 seaforester,E,14,Integration capability,P1,missing,not-collectable,
@@ -2131,9 +2086,7 @@ seaforester,I,18,International expansion cost,P2,missing,not-collectable,
 seaforester,I,19,Customer onboarding time,P2,missing,not-collectable,
 seaforester,I,20,Implementation cost,P2,missing,not-collectable,
 seaforester,I,21,Sales forecast accuracy,P2,missing,not-collectable,
-seaforester,J,1,Direct competitors,P1,partial,empty,same-sector startups in DB; yc_oss
 seaforester,J,2,Indirect competitors and alternative solutions,P1,missing,not-collectable,
-seaforester,J,3,Competitor funding,P1,partial,empty,funding_rounds of same-sector startups
 seaforester,J,4,Competitor revenue,P1,missing,not-collectable,
 seaforester,J,5,Competitor pricing,P1,missing,not-collectable,
 seaforester,J,6,Competitor growth,P1,missing,not-collectable,
@@ -2158,7 +2111,7 @@ seaforester,K,8,Valuation growth between comparable rounds,P0,missing,not-collec
 seaforester,K,11,Investor concentration,P1,missing,not-collectable,
 seaforester,K,12,Founder ownership,P1,missing,not-collectable,
 seaforester,K,13,Employee option pool,P1,missing,not-collectable,
-seaforester,K,14,Fully diluted share count,P1,partial,empty,uk_companies_house statements of capital (SH01)
+seaforester,K,14,Fully diluted share count,P1,partial,empty,uk_sh01 statement of capital (total shares after each allotment)
 seaforester,K,15,Convertible notes,P1,missing,not-collectable,
 seaforester,K,16,SAFEs,P1,missing,not-collectable,
 seaforester,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -2227,7 +2180,6 @@ seaforester,N,19,Change-of-control restrictions,P1,missing,not-collectable,
 seaforester,N,20,Outstanding guarantees and contingent liabilities,P1,partial,empty,uk_companies_house insolvency + charges flags
 seaforester,O,1,Market risk,P1,missing,not-collectable,
 seaforester,O,2,Product risk,P1,missing,not-collectable,
-seaforester,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 seaforester,O,4,Execution risk,P1,missing,not-collectable,
 seaforester,O,5,Customer concentration risk,P1,missing,not-collectable,
 seaforester,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -2267,12 +2219,8 @@ seaforester,P,19,Return relative to alternatives,P2,missing,not-collectable,
 seaforester,Q,1,Website traffic and growth,P2,missing,not-collectable,
 seaforester,Q,2,Search interest and trends,P2,missing,not-collectable,
 seaforester,Q,3,Social engagement trends,P2,missing,not-collectable,
-seaforester,Q,4,GitHub activity,P2,auto,empty,github_search_repos
 seaforester,Q,5,Open-source adoption,P2,missing,not-collectable,
-seaforester,Q,6,Technical hiring signals,P2,partial,empty,serpapi_google_jobs; yc_oss isHiring
-seaforester,Q,7,Commercial hiring signals,P2,partial,empty,serpapi_google_jobs
-seaforester,Q,8,Job posting growth,P2,partial,empty,serpapi_google_jobs (repeat runs give growth)
-seaforester,Q,9,Product launch frequency,P2,partial,empty,hn_algolia; product_hunt*
+seaforester,Q,8,Job posting growth,P2,partial,empty,job_boards / serpapi_google_jobs: needs postings from at least two dates
 seaforester,Q,13,Relevant conference participation and demonstrations,P2,missing,not-collectable,
 seaforester,Q,16,"Developer adoption, where measurable",P2,missing,not-collectable,
 seaforester,Q,17,App downloads,P2,missing,not-collectable,
@@ -2348,14 +2296,11 @@ kelp-blue,A,12,Target geography,P0,missing,not-collectable,
 kelp-blue,A,13,Operating status,P0,auto,empty,"uk_companies_house status, gleif_lei, yc_oss"
 kelp-blue,A,15,Employee growth,P0,missing,not-collectable,
 kelp-blue,A,17,Legal structure,P0,auto,empty,"uk_companies_house type, gleif_lei legal form"
-kelp-blue,B,2,Founder roles,P0,partial,empty,uk_companies_house officer roles; serpapi_google knowledge panel
 kelp-blue,B,3,Relevant industry experience,P0,missing,not-collectable,
 kelp-blue,B,4,Relevant technical experience,P0,missing,not-collectable,
-kelp-blue,B,5,Previous startup experience,P0,missing,not-collectable,
 kelp-blue,B,6,Previous exits,P0,missing,not-collectable,
 kelp-blue,B,7,Previous startup outcomes,P0,missing,not-collectable,
 kelp-blue,B,8,Domain expertise,P0,missing,not-collectable,
-kelp-blue,B,9,Education and qualifications,P0,missing,not-collectable,
 kelp-blue,B,10,Technical capability,P0,missing,not-collectable,
 kelp-blue,B,11,Commercial capability,P0,missing,not-collectable,
 kelp-blue,B,12,Leadership experience,P0,missing,not-collectable,
@@ -2365,10 +2310,8 @@ kelp-blue,B,15,Founder equity ownership,P0,missing,not-collectable,
 kelp-blue,B,16,Vesting arrangements,P0,missing,not-collectable,
 kelp-blue,B,17,Team complementarity,P0,missing,not-collectable,
 kelp-blue,B,18,Key-person dependency,P0,missing,not-collectable,
-kelp-blue,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 kelp-blue,B,20,Employee turnover,P0,missing,not-collectable,
 kelp-blue,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-kelp-blue,B,22,Board composition and governance experience,P0,partial,empty,uk_companies_house directors (board composition)
 kelp-blue,B,23,References,P0,missing,not-collectable,
 kelp-blue,C,1,Problem description,P0,missing,not-collectable,
 kelp-blue,C,2,Target user,P0,missing,not-collectable,
@@ -2552,7 +2495,7 @@ kelp-blue,K,8,Valuation growth between comparable rounds,P0,missing,not-collecta
 kelp-blue,K,11,Investor concentration,P1,missing,not-collectable,
 kelp-blue,K,12,Founder ownership,P1,missing,not-collectable,
 kelp-blue,K,13,Employee option pool,P1,missing,not-collectable,
-kelp-blue,K,14,Fully diluted share count,P1,partial,empty,uk_companies_house statements of capital (SH01)
+kelp-blue,K,14,Fully diluted share count,P1,partial,empty,uk_sh01 statement of capital (total shares after each allotment)
 kelp-blue,K,15,Convertible notes,P1,missing,not-collectable,
 kelp-blue,K,16,SAFEs,P1,missing,not-collectable,
 kelp-blue,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -2623,7 +2566,6 @@ kelp-blue,N,19,Change-of-control restrictions,P1,missing,not-collectable,
 kelp-blue,N,20,Outstanding guarantees and contingent liabilities,P1,partial,empty,uk_companies_house insolvency + charges flags
 kelp-blue,O,1,Market risk,P1,missing,not-collectable,
 kelp-blue,O,2,Product risk,P1,missing,not-collectable,
-kelp-blue,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 kelp-blue,O,4,Execution risk,P1,missing,not-collectable,
 kelp-blue,O,5,Customer concentration risk,P1,missing,not-collectable,
 kelp-blue,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -2664,10 +2606,7 @@ kelp-blue,Q,1,Website traffic and growth,P2,missing,not-collectable,
 kelp-blue,Q,2,Search interest and trends,P2,missing,not-collectable,
 kelp-blue,Q,3,Social engagement trends,P2,missing,not-collectable,
 kelp-blue,Q,5,Open-source adoption,P2,missing,not-collectable,
-kelp-blue,Q,6,Technical hiring signals,P2,partial,empty,serpapi_google_jobs; yc_oss isHiring
-kelp-blue,Q,7,Commercial hiring signals,P2,partial,empty,serpapi_google_jobs
-kelp-blue,Q,8,Job posting growth,P2,partial,empty,serpapi_google_jobs (repeat runs give growth)
-kelp-blue,Q,9,Product launch frequency,P2,partial,empty,hn_algolia; product_hunt*
+kelp-blue,Q,8,Job posting growth,P2,partial,empty,job_boards / serpapi_google_jobs: needs postings from at least two dates
 kelp-blue,Q,13,Relevant conference participation and demonstrations,P2,missing,not-collectable,
 kelp-blue,Q,16,"Developer adoption, where measurable",P2,missing,not-collectable,
 kelp-blue,Q,17,App downloads,P2,missing,not-collectable,
@@ -2740,15 +2679,11 @@ clearbot,A,12,Target geography,P0,missing,not-collectable,
 clearbot,A,13,Operating status,P0,auto,empty,"uk_companies_house status, gleif_lei, yc_oss"
 clearbot,A,15,Employee growth,P0,missing,not-collectable,
 clearbot,A,17,Legal structure,P0,auto,empty,"uk_companies_house type, gleif_lei legal form"
-clearbot,B,1,Number of founders,P0,partial,empty,serpapi_google knowledge panel; jina_reader team page
-clearbot,B,2,Founder roles,P0,partial,empty,uk_companies_house officer roles; serpapi_google knowledge panel
 clearbot,B,3,Relevant industry experience,P0,missing,not-collectable,
 clearbot,B,4,Relevant technical experience,P0,missing,not-collectable,
-clearbot,B,5,Previous startup experience,P0,missing,not-collectable,
 clearbot,B,6,Previous exits,P0,missing,not-collectable,
 clearbot,B,7,Previous startup outcomes,P0,missing,not-collectable,
 clearbot,B,8,Domain expertise,P0,missing,not-collectable,
-clearbot,B,9,Education and qualifications,P0,missing,not-collectable,
 clearbot,B,10,Technical capability,P0,missing,not-collectable,
 clearbot,B,11,Commercial capability,P0,missing,not-collectable,
 clearbot,B,12,Leadership experience,P0,missing,not-collectable,
@@ -2758,10 +2693,8 @@ clearbot,B,15,Founder equity ownership,P0,missing,not-collectable,
 clearbot,B,16,Vesting arrangements,P0,missing,not-collectable,
 clearbot,B,17,Team complementarity,P0,missing,not-collectable,
 clearbot,B,18,Key-person dependency,P0,missing,not-collectable,
-clearbot,B,19,Hiring capability,P0,partial,empty,serpapi_google_jobs open roles
 clearbot,B,20,Employee turnover,P0,missing,not-collectable,
 clearbot,B,21,Advisor network and actual contributions,P0,missing,not-collectable,
-clearbot,B,22,Board composition and governance experience,P0,partial,empty,uk_companies_house directors (board composition)
 clearbot,B,23,References,P0,missing,not-collectable,
 clearbot,C,1,Problem description,P0,missing,not-collectable,
 clearbot,C,2,Target user,P0,missing,not-collectable,
@@ -2922,9 +2855,8 @@ clearbot,I,18,International expansion cost,P2,missing,not-collectable,
 clearbot,I,19,Customer onboarding time,P2,missing,not-collectable,
 clearbot,I,20,Implementation cost,P2,missing,not-collectable,
 clearbot,I,21,Sales forecast accuracy,P2,missing,not-collectable,
-clearbot,J,1,Direct competitors,P1,partial,empty,same-sector startups in DB; yc_oss
 clearbot,J,2,Indirect competitors and alternative solutions,P1,missing,not-collectable,
-clearbot,J,3,Competitor funding,P1,partial,empty,funding_rounds of same-sector startups
+clearbot,J,3,Competitor funding,P1,partial,empty,funding data of similar startups in DB
 clearbot,J,4,Competitor revenue,P1,missing,not-collectable,
 clearbot,J,5,Competitor pricing,P1,missing,not-collectable,
 clearbot,J,6,Competitor growth,P1,missing,not-collectable,
@@ -2950,7 +2882,7 @@ clearbot,K,8,Valuation growth between comparable rounds,P0,missing,not-collectab
 clearbot,K,11,Investor concentration,P1,missing,not-collectable,
 clearbot,K,12,Founder ownership,P1,missing,not-collectable,
 clearbot,K,13,Employee option pool,P1,missing,not-collectable,
-clearbot,K,14,Fully diluted share count,P1,partial,empty,uk_companies_house statements of capital (SH01)
+clearbot,K,14,Fully diluted share count,P1,partial,empty,uk_sh01 statement of capital (total shares after each allotment)
 clearbot,K,15,Convertible notes,P1,missing,not-collectable,
 clearbot,K,16,SAFEs,P1,missing,not-collectable,
 clearbot,K,17,Liquidation preferences,P1,missing,not-collectable,
@@ -3021,7 +2953,6 @@ clearbot,N,19,Change-of-control restrictions,P1,missing,not-collectable,
 clearbot,N,20,Outstanding guarantees and contingent liabilities,P1,partial,empty,uk_companies_house insolvency + charges flags
 clearbot,O,1,Market risk,P1,missing,not-collectable,
 clearbot,O,2,Product risk,P1,missing,not-collectable,
-clearbot,O,3,Financial risk,P1,partial,empty,uk_companies_house insolvency cases
 clearbot,O,4,Execution risk,P1,missing,not-collectable,
 clearbot,O,5,Customer concentration risk,P1,missing,not-collectable,
 clearbot,O,6,Supplier dependency risk,P1,missing,not-collectable,
@@ -3062,10 +2993,8 @@ clearbot,Q,1,Website traffic and growth,P2,missing,not-collectable,
 clearbot,Q,2,Search interest and trends,P2,missing,not-collectable,
 clearbot,Q,3,Social engagement trends,P2,missing,not-collectable,
 clearbot,Q,5,Open-source adoption,P2,missing,not-collectable,
-clearbot,Q,6,Technical hiring signals,P2,partial,empty,serpapi_google_jobs; yc_oss isHiring
-clearbot,Q,7,Commercial hiring signals,P2,partial,empty,serpapi_google_jobs
-clearbot,Q,8,Job posting growth,P2,partial,empty,serpapi_google_jobs (repeat runs give growth)
-clearbot,Q,9,Product launch frequency,P2,partial,empty,hn_algolia; product_hunt*
+clearbot,Q,8,Job posting growth,P2,partial,empty,job_boards / serpapi_google_jobs: needs postings from at least two dates
+clearbot,Q,9,Product launch frequency,P2,partial,empty,hn_algolia; product_hunt* (not meaningful for hardware/biotech)
 clearbot,Q,13,Relevant conference participation and demonstrations,P2,missing,not-collectable,
 clearbot,Q,15,Patent filings,P2,auto,empty,google_patents_xhr
 clearbot,Q,16,"Developer adoption, where measurable",P2,missing,not-collectable,

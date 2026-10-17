@@ -213,3 +213,160 @@
 209,uk_companies_house_officer,5,"{""officer_id"": ""tMYaOoTT4akcMQaXxBQcnOcJkvg"", ""items_per_page"": 50}",ok,,1200,2026-10-17 00:02:14
 210,uk_companies_house_officer,5,"{""officer_id"": ""wO5oIQ1WyQMQFOp4JaQlSxKTq7w"", ""items_per_page"": 50}",ok,,1912,2026-10-17 00:02:15
 211,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,11216,2026-10-17 00:02:15
+212,blueinvest_pipeline,,"{""page"": 1}",ok,,75514,2026-10-17 01:32:15
+213,blueinvest_pipeline,,"{""page"": 2}",ok,,70315,2026-10-17 01:32:19
+214,blueinvest_pipeline,,"{""page"": 3}",ok,,70356,2026-10-17 01:32:23
+215,blueinvest_pipeline,,"{""page"": 4}",ok,,68980,2026-10-17 01:32:27
+216,blueinvest_pipeline,,"{""page"": 5}",ok,,71744,2026-10-17 01:32:31
+217,blueinvest_pipeline,,"{""page"": 6}",ok,,73840,2026-10-17 01:32:35
+218,blueinvest_pipeline,,"{""page"": 7}",ok,,72969,2026-10-17 01:32:39
+219,blueinvest_pipeline,,"{""page"": 8}",ok,,74303,2026-10-17 01:32:43
+220,blueinvest_pipeline,,"{""page"": 9}",ok,,72100,2026-10-17 01:32:47
+221,blueinvest_pipeline,,"{""page"": 10}",ok,,72930,2026-10-17 01:32:50
+222,blueinvest_pipeline,,"{""page"": 11}",ok,,77694,2026-10-17 01:32:54
+223,blueinvest_pipeline,,"{""page"": 12}",ok,,69983,2026-10-17 01:32:57
+224,blueinvest_pipeline,,"{""page"": 13}",ok,,73874,2026-10-17 01:33:01
+225,blueinvest_pipeline,,"{""page"": 14}",ok,,74311,2026-10-17 01:33:04
+226,blueinvest_pipeline,,"{""page"": 15}",ok,,70371,2026-10-17 01:33:08
+227,blueinvest_pipeline,,"{""page"": 16}",ok,,68719,2026-10-17 01:33:11
+228,blueinvest_pipeline,,"{""page"": 17}",ok,,70413,2026-10-17 01:33:16
+229,blueinvest_pipeline,,"{""page"": 18}",ok,,68478,2026-10-17 01:33:19
+230,blueinvest_pipeline,,"{""page"": 19}",ok,,73777,2026-10-17 01:33:23
+231,blueinvest_pipeline,,"{""page"": 20}",ok,,71384,2026-10-17 01:33:27
+232,blueinvest_pipeline,,"{""page"": 21}",ok,,70494,2026-10-17 01:33:31
+233,blueinvest_pipeline,,"{""page"": 22}",ok,,78174,2026-10-17 01:33:35
+234,blueinvest_pipeline,,"{""page"": 23}",ok,,72084,2026-10-17 01:33:39
+235,blueinvest_pipeline,,"{""page"": 24}",ok,,71157,2026-10-17 01:33:42
+236,blueinvest_pipeline,,"{""page"": 25}",ok,,76163,2026-10-17 01:33:46
+237,blueinvest_pipeline,,"{""page"": 26}",ok,,74094,2026-10-17 01:33:50
+238,blueinvest_pipeline,,"{""page"": 27}",ok,,73098,2026-10-17 01:33:53
+239,blueinvest_pipeline,,"{""page"": 28}",ok,,72521,2026-10-17 01:33:58
+240,blueinvest_pipeline,,"{""page"": 29}",ok,,70162,2026-10-17 01:34:01
+241,blueinvest_pipeline,,"{""page"": 30}",ok,,69074,2026-10-17 01:34:04
+242,blueinvest_pipeline,,"{""page"": 31}",ok,,69218,2026-10-17 01:34:08
+243,blueinvest_pipeline,,"{""page"": 32}",ok,,78362,2026-10-17 01:34:12
+244,blueinvest_pipeline,,"{""page"": 33}",ok,,72415,2026-10-17 01:34:15
+245,blueinvest_pipeline,,"{""page"": 34}",ok,,69173,2026-10-17 01:34:18
+246,blueinvest_pipeline,,"{""page"": 35}",ok,,69206,2026-10-17 01:34:22
+247,blueinvest_pipeline,,"{""page"": 36}",ok,,68328,2026-10-17 01:34:25
+248,cordis_projects,1,"{""query"": ""contenttype='project' AND 'Notpla'"", ""num"": 50, ""p"": 1}",ok,,128821,2026-10-17 01:34:27
+249,google_patents_page,1,"{""number"": ""EP3601061B1""}",ok,,255410,2026-10-17 01:34:27
+250,google_patents_page,1,"{""number"": ""US20260110140A1""}",ok,,170814,2026-10-17 01:34:29
+251,google_patents_page,1,"{""number"": ""US20250144864A1""}",ok,,357130,2026-10-17 01:34:30
+252,google_patents_page,1,"{""number"": ""GB2612816B""}",ok,,126536,2026-10-17 01:34:31
+253,google_patents_page,1,"{""number"": ""US20250042633A1""}",ok,,297338,2026-10-17 01:34:33
+254,google_patents_page,1,"{""number"": ""AU2024215069A1""}",ok,,195269,2026-10-17 01:34:34
+255,cordis_projects,2,"{""query"": ""contenttype='project' AND 'Sofar Ocean'"", ""num"": 50, ""p"": 1}",ok,,843,2026-10-17 01:34:35
+256,google_patents_page,2,"{""number"": ""US10488554B2""}",ok,,583710,2026-10-17 01:34:36
+257,google_patents_page,2,"{""number"": ""US12078775B2""}",ok,,462722,2026-10-17 01:34:37
+258,google_patents_page,2,"{""number"": ""USD859197S1""}",ok,,76911,2026-10-17 01:34:38
+259,google_patents_page,2,"{""number"": ""WO2020123636A1""}",ok,,179682,2026-10-17 01:34:39
+260,cordis_projects,3,"{""query"": ""contenttype='project' AND 'Ocean Rainforest'"", ""num"": 50, ""p"": 1}",ok,,717808,2026-10-17 01:34:42
+261,cordis_projects,4,"{""query"": ""contenttype='project' AND 'Seabound'"", ""num"": 50, ""p"": 1}",ok,,851,2026-10-17 01:34:42
+262,google_patents_page,4,"{""number"": ""WO2025177240A1""}",ok,,257884,2026-10-17 01:34:42
+263,blueinvest_profile,4,"{""other_id"": 1730}",ok,,32729,2026-10-17 01:34:44
+264,cordis_projects,5,"{""query"": ""contenttype='project' AND 'Oceanium'"", ""num"": 50, ""p"": 1}",ok,,98747,2026-10-17 01:34:44
+265,google_patents_page,5,"{""number"": ""WO2024057012A1""}",ok,,303725,2026-10-17 01:34:45
+266,google_patents_page,5,"{""number"": ""GB202510593D0""}",ok,,32420,2026-10-17 01:34:46
+267,google_patents_page,5,"{""number"": ""GB202504692D0""}",ok,,31263,2026-10-17 01:34:47
+268,google_patents_page,5,"{""number"": ""GB202503392D0""}",ok,,47692,2026-10-17 01:34:49
+269,blueinvest_profile,5,"{""other_id"": 359}",ok,,33124,2026-10-17 01:34:50
+270,blueinvest_profile,5,"{""other_id"": 807}",ok,,33156,2026-10-17 01:34:51
+271,cordis_projects,6,"{""query"": ""contenttype='project' AND 'SeaForester'"", ""num"": 50, ""p"": 1}",ok,,857,2026-10-17 01:34:51
+272,google_patents_page,6,"{""number"": ""GB202507521D0""}",ok,,32005,2026-10-17 01:34:52
+273,blueinvest_profile,6,"{""other_id"": 1655}",ok,,32294,2026-10-17 01:34:53
+274,cordis_projects,7,"{""query"": ""contenttype='project' AND 'Kelp Blue'"", ""num"": 50, ""p"": 1}",ok,,839,2026-10-17 01:34:53
+275,google_patents_page,7,"{""number"": ""EP4561967A1""}",ok,,206141,2026-10-17 01:34:54
+276,blueinvest_profile,7,"{""other_id"": 984}",ok,,34376,2026-10-17 01:34:55
+277,cordis_projects,8,"{""query"": ""contenttype='project' AND 'Clearbot'"", ""num"": 50, ""p"": 1}",ok,,851,2026-10-17 01:34:56
+278,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,8309,2026-10-17 02:18:33
+279,uk_companies_house_officer,1,"{""officer_id"": ""koQha9l4F3jOTvSbVg15Diod-98"", ""items_per_page"": 50}",ok,,1901,2026-10-17 02:18:33
+280,uk_companies_house_officer,1,"{""officer_id"": ""G-y_4p5F3_XLW4ZTvTX6Kx7RQ6k"", ""items_per_page"": 50}",ok,,1134,2026-10-17 02:18:34
+281,uk_companies_house_officer,1,"{""officer_id"": ""wYEuDIKHp8QGzBTayr1OT1JGGF4"", ""items_per_page"": 50}",ok,,1130,2026-10-17 02:18:34
+282,uk_companies_house_officer,1,"{""officer_id"": ""2T7PZ-bNaM98To9Yb1oZymmLKno"", ""items_per_page"": 50}",ok,,1746,2026-10-17 02:18:35
+283,uk_companies_house_officer,1,"{""officer_id"": ""M8EJl0s_Jz0QW_Jm71QXUd_dFrI"", ""items_per_page"": 50}",ok,,1139,2026-10-17 02:18:35
+284,uk_companies_house_officer,1,"{""officer_id"": ""WMKVZXcWbAla6-twCPkgT99HRQw"", ""items_per_page"": 50}",ok,,981,2026-10-17 02:18:35
+285,uk_companies_house_officer,1,"{""officer_id"": ""Cuw3w3okIWffcEOrkGj59mWyoJ4"", ""items_per_page"": 50}",ok,,1601,2026-10-17 02:18:36
+286,uk_companies_house_officer,1,"{""officer_id"": ""WioMWVyLQa4Ps8pBZd23KgVp1p8"", ""items_per_page"": 50}",ok,,1770,2026-10-17 02:18:36
+287,uk_companies_house_officer,1,"{""officer_id"": ""WioMWVyLQa4Ps8pBZd23KgVp1p8"", ""items_per_page"": 50}",ok,,1770,2026-10-17 02:18:37
+288,uk_companies_house_officer,1,"{""officer_id"": ""DXKxAfmYJowUNrrqLZ4wnzKoTEM"", ""items_per_page"": 50}",ok,,986,2026-10-17 02:18:37
+289,uk_companies_house_officer,1,"{""officer_id"": ""tXB08gYZ6e9IF6MEqUdfDvs-RkI"", ""items_per_page"": 50}",ok,,974,2026-10-17 02:18:37
+290,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,33258,2026-10-17 02:18:38
+291,sec_edgar_submissions,2,"{""cik"": ""1687943""}",ok,,2840,2026-10-17 02:18:40
+292,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794325000001""}",ok,,8011,2026-10-17 02:18:40
+293,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794324000002""}",ok,,7862,2026-10-17 02:18:41
+294,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794323000001""}",ok,,7978,2026-10-17 02:18:41
+295,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794322000001""}",ok,,8156,2026-10-17 02:18:42
+296,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794321000002""}",ok,,8062,2026-10-17 02:18:42
+297,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794319000004""}",ok,,7901,2026-10-17 02:18:42
+298,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794319000001""}",ok,,7701,2026-10-17 02:18:43
+299,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794316000001""}",ok,,6576,2026-10-17 02:18:44
+300,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,2178,2026-10-17 02:18:44
+301,uk_companies_house_officer,4,"{""officer_id"": ""TAmtV2qbcvBgAgYRVyZ_knbknSE"", ""items_per_page"": 50}",ok,,860,2026-10-17 02:18:44
+302,uk_companies_house_officer,4,"{""officer_id"": ""2d1uoKALVhPKSpxiVkXmvkGa2c0"", ""items_per_page"": 50}",ok,,1100,2026-10-17 02:18:45
+303,uk_companies_house_officer,4,"{""officer_id"": ""_LHgNnheSQL52HQwFzOKxxiFw5s"", ""items_per_page"": 50}",ok,,970,2026-10-17 02:18:45
+304,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,1719,2026-10-17 02:18:46
+305,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,6539,2026-10-17 02:18:46
+306,uk_companies_house_officer,5,"{""officer_id"": ""OsvASqtdUfoy9h4bNdsluPePi8k"", ""items_per_page"": 50}",ok,,31492,2026-10-17 02:18:46
+307,uk_companies_house_officer,5,"{""officer_id"": ""RvlXnoTlRZ3dPpi38VKjxyU24Mk"", ""items_per_page"": 50}",ok,,1050,2026-10-17 02:18:47
+308,uk_companies_house_officer,5,"{""officer_id"": ""5xa8Yh84DYlO4J2FYfT-BO9MagM"", ""items_per_page"": 50}",ok,,1125,2026-10-17 02:18:47
+309,uk_companies_house_officer,5,"{""officer_id"": ""hhzK62YYDhjpo30VUhZXAWXsSN4"", ""items_per_page"": 50}",ok,,1047,2026-10-17 02:18:48
+310,uk_companies_house_officer,5,"{""officer_id"": ""2QkG126EE2Rd9HM-ZcXbVZ8A9aY"", ""items_per_page"": 50}",ok,,6320,2026-10-17 02:18:48
+311,uk_companies_house_officer,5,"{""officer_id"": ""HuvRHn9soD1wg2_BTAhDySNMSAY"", ""items_per_page"": 50}",ok,,1067,2026-10-17 02:18:48
+312,uk_companies_house_officer,5,"{""officer_id"": ""tMYaOoTT4akcMQaXxBQcnOcJkvg"", ""items_per_page"": 50}",ok,,1200,2026-10-17 02:18:49
+313,uk_companies_house_officer,5,"{""officer_id"": ""wO5oIQ1WyQMQFOp4JaQlSxKTq7w"", ""items_per_page"": 50}",ok,,1912,2026-10-17 02:18:49
+314,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,11216,2026-10-17 02:18:49
+315,job_boards,1,"{""ats"": ""personio"", ""slug"": ""notpla""}",ok,,738,2026-10-17 02:18:52
+316,pdl_person_search,2,"{""sql"": ""SELECT * FROM person WHERE (job_company_website='sofarocean.com' OR experience.company.website='sofarocean.com') AND (job_title_levels='owner' OR job_title_levels='cxo' OR job_title LIKE '%founder%' OR experience.title.levels='owner' OR experience.title.levels='cxo' OR experience.title.name LIKE '%founder%')"", ""size"": 5}",ok,,90188,2026-10-17 02:18:56
+317,job_boards,2,"{""ats"": ""ashby"", ""slug"": ""sofarocean""}",ok,,1824,2026-10-17 02:19:04
+318,pdl_person_search,3,"{""sql"": ""SELECT * FROM person WHERE (job_company_website='oceanrainforest.com' OR experience.company.website='oceanrainforest.com') AND (job_title_levels='owner' OR job_title_levels='cxo' OR job_title LIKE '%founder%' OR experience.title.levels='owner' OR experience.title.levels='cxo' OR experience.title.name LIKE '%founder%')"", ""size"": 5}",ok,,77147,2026-10-17 02:19:07
+319,pdl_person_search,6,"{""sql"": ""SELECT * FROM person WHERE (job_company_website='seaforester.org' OR experience.company.website='seaforester.org') AND (job_title_levels='owner' OR job_title_levels='cxo' OR job_title LIKE '%founder%' OR experience.title.levels='owner' OR experience.title.levels='cxo' OR experience.title.name LIKE '%founder%')"", ""size"": 5}",ok,,72353,2026-10-17 02:19:28
+320,pdl_person_search,7,"{""sql"": ""SELECT * FROM person WHERE (job_company_website='kelp.blue' OR experience.company.website='kelp.blue') AND (job_title_levels='owner' OR job_title_levels='cxo' OR job_title LIKE '%founder%' OR experience.title.levels='owner' OR experience.title.levels='cxo' OR experience.title.name LIKE '%founder%')"", ""size"": 5}",ok,,93023,2026-10-17 02:19:37
+321,pdl_person_search,8,"{""sql"": ""SELECT * FROM person WHERE (job_company_website='clearbot.org' OR experience.company.website='clearbot.org') AND (job_title_levels='owner' OR job_title_levels='cxo' OR job_title LIKE '%founder%' OR experience.title.levels='owner' OR experience.title.levels='cxo' OR experience.title.name LIKE '%founder%')"", ""size"": 5}",ok,,69664,2026-10-17 02:19:55
+322,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,8309,2026-10-17 02:20:14
+323,uk_companies_house_officer,1,"{""officer_id"": ""koQha9l4F3jOTvSbVg15Diod-98"", ""items_per_page"": 50}",ok,,1901,2026-10-17 02:20:15
+324,uk_companies_house_officer,1,"{""officer_id"": ""G-y_4p5F3_XLW4ZTvTX6Kx7RQ6k"", ""items_per_page"": 50}",ok,,1134,2026-10-17 02:20:15
+325,uk_companies_house_officer,1,"{""officer_id"": ""wYEuDIKHp8QGzBTayr1OT1JGGF4"", ""items_per_page"": 50}",ok,,1130,2026-10-17 02:20:16
+326,uk_companies_house_officer,1,"{""officer_id"": ""2T7PZ-bNaM98To9Yb1oZymmLKno"", ""items_per_page"": 50}",ok,,1746,2026-10-17 02:20:16
+327,uk_companies_house_officer,1,"{""officer_id"": ""M8EJl0s_Jz0QW_Jm71QXUd_dFrI"", ""items_per_page"": 50}",ok,,1139,2026-10-17 02:20:17
+328,uk_companies_house_officer,1,"{""officer_id"": ""WMKVZXcWbAla6-twCPkgT99HRQw"", ""items_per_page"": 50}",ok,,981,2026-10-17 02:20:17
+329,uk_companies_house_officer,1,"{""officer_id"": ""Cuw3w3okIWffcEOrkGj59mWyoJ4"", ""items_per_page"": 50}",ok,,1601,2026-10-17 02:20:18
+330,uk_companies_house_officer,1,"{""officer_id"": ""WioMWVyLQa4Ps8pBZd23KgVp1p8"", ""items_per_page"": 50}",ok,,1770,2026-10-17 02:20:18
+331,uk_companies_house_officer,1,"{""officer_id"": ""WioMWVyLQa4Ps8pBZd23KgVp1p8"", ""items_per_page"": 50}",ok,,1770,2026-10-17 02:20:18
+332,uk_companies_house_officer,1,"{""officer_id"": ""DXKxAfmYJowUNrrqLZ4wnzKoTEM"", ""items_per_page"": 50}",ok,,986,2026-10-17 02:20:19
+333,uk_companies_house_officer,1,"{""officer_id"": ""tXB08gYZ6e9IF6MEqUdfDvs-RkI"", ""items_per_page"": 50}",ok,,974,2026-10-17 02:20:19
+334,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,33258,2026-10-17 02:20:19
+335,sec_edgar_submissions,2,"{""cik"": ""1687943""}",ok,,2840,2026-10-17 02:20:20
+336,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794325000001""}",ok,,8011,2026-10-17 02:20:21
+337,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794324000002""}",ok,,7862,2026-10-17 02:20:21
+338,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794323000001""}",ok,,7978,2026-10-17 02:20:21
+339,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794322000001""}",ok,,8156,2026-10-17 02:20:22
+340,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794321000002""}",ok,,8062,2026-10-17 02:20:22
+341,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794319000004""}",ok,,7901,2026-10-17 02:20:23
+342,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794319000001""}",ok,,7701,2026-10-17 02:20:23
+343,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794316000001""}",ok,,6576,2026-10-17 02:20:23
+344,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,2178,2026-10-17 02:20:24
+345,uk_companies_house_officer,4,"{""officer_id"": ""TAmtV2qbcvBgAgYRVyZ_knbknSE"", ""items_per_page"": 50}",ok,,860,2026-10-17 02:20:24
+346,uk_companies_house_officer,4,"{""officer_id"": ""2d1uoKALVhPKSpxiVkXmvkGa2c0"", ""items_per_page"": 50}",ok,,1100,2026-10-17 02:20:25
+347,uk_companies_house_officer,4,"{""officer_id"": ""_LHgNnheSQL52HQwFzOKxxiFw5s"", ""items_per_page"": 50}",ok,,970,2026-10-17 02:20:25
+348,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,1719,2026-10-17 02:20:25
+349,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,6539,2026-10-17 02:20:26
+350,uk_companies_house_officer,5,"{""officer_id"": ""OsvASqtdUfoy9h4bNdsluPePi8k"", ""items_per_page"": 50}",ok,,31492,2026-10-17 02:20:26
+351,uk_companies_house_officer,5,"{""officer_id"": ""RvlXnoTlRZ3dPpi38VKjxyU24Mk"", ""items_per_page"": 50}",ok,,1050,2026-10-17 02:20:26
+352,uk_companies_house_officer,5,"{""officer_id"": ""5xa8Yh84DYlO4J2FYfT-BO9MagM"", ""items_per_page"": 50}",ok,,1125,2026-10-17 02:20:27
+353,uk_companies_house_officer,5,"{""officer_id"": ""hhzK62YYDhjpo30VUhZXAWXsSN4"", ""items_per_page"": 50}",ok,,1047,2026-10-17 02:20:27
+354,uk_companies_house_officer,5,"{""officer_id"": ""2QkG126EE2Rd9HM-ZcXbVZ8A9aY"", ""items_per_page"": 50}",ok,,6320,2026-10-17 02:20:27
+355,uk_companies_house_officer,5,"{""officer_id"": ""HuvRHn9soD1wg2_BTAhDySNMSAY"", ""items_per_page"": 50}",ok,,1067,2026-10-17 02:20:28
+356,uk_companies_house_officer,5,"{""officer_id"": ""tMYaOoTT4akcMQaXxBQcnOcJkvg"", ""items_per_page"": 50}",ok,,1200,2026-10-17 02:20:28
+357,uk_companies_house_officer,5,"{""officer_id"": ""wO5oIQ1WyQMQFOp4JaQlSxKTq7w"", ""items_per_page"": 50}",ok,,1912,2026-10-17 02:20:28
+358,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,11216,2026-10-17 02:20:29
+359,pdl_person_search,2,"{""sql"": ""SELECT * FROM person WHERE job_company_website='sofarocean.com' AND (job_title_levels='cxo' OR job_title_levels='owner' OR job_title LIKE '%founder%')"", ""size"": 4}",ok,,20656,2026-10-17 02:21:13
+360,pdl_person_search,2,"{""sql"": ""SELECT * FROM person WHERE experience.company.website='sofarocean.com' AND experience.title.name LIKE '%founder%'"", ""size"": 2}",ok,,42026,2026-10-17 02:21:16
+361,pdl_person_search,3,"{""sql"": ""SELECT * FROM person WHERE job_company_website='oceanrainforest.com' AND (job_title_levels='cxo' OR job_title_levels='owner' OR job_title LIKE '%founder%')"", ""size"": 4}",ok,,58009,2026-10-17 02:21:18
+362,pdl_person_search,3,"{""sql"": ""SELECT * FROM person WHERE experience.company.website='oceanrainforest.com' AND experience.title.name LIKE '%founder%'"", ""size"": 2}",ok,,40607,2026-10-17 02:21:20
+363,pdl_person_search,6,"{""sql"": ""SELECT * FROM person WHERE job_company_website='seaforester.org' AND (job_title_levels='cxo' OR job_title_levels='owner' OR job_title LIKE '%founder%')"", ""size"": 4}",ok,,9648,2026-10-17 02:21:21
+364,pdl_person_search,6,"{""sql"": ""SELECT * FROM person WHERE experience.company.website='seaforester.org' AND experience.title.name LIKE '%founder%'"", ""size"": 2}",ok,,28394,2026-10-17 02:21:23
+365,pdl_person_search,7,"{""sql"": ""SELECT * FROM person WHERE job_company_website='kelp.blue' AND (job_title_levels='cxo' OR job_title_levels='owner' OR job_title LIKE '%founder%')"", ""size"": 4}",ok,,30140,2026-10-17 02:21:25
+366,pdl_person_search,7,"{""sql"": ""SELECT * FROM person WHERE experience.company.website='kelp.blue' AND experience.title.name LIKE '%founder%'"", ""size"": 2}",ok,,30317,2026-10-17 02:21:27
+367,pdl_person_search,8,"{""sql"": ""SELECT * FROM person WHERE job_company_website='clearbot.org' AND (job_title_levels='cxo' OR job_title_levels='owner' OR job_title LIKE '%founder%')"", ""size"": 4}",ok,,44451,2026-10-17 02:21:29
+368,pdl_person_search,8,"{""sql"": ""SELECT * FROM person WHERE experience.company.website='clearbot.org' AND experience.title.name LIKE '%founder%'"", ""size"": 2}",ok,,29591,2026-10-17 02:21:31

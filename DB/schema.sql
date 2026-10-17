@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS assessment_parameters (
 CREATE TABLE IF NOT EXISTS startup_parameter_status (
     startup_id   INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
     parameter_id INTEGER NOT NULL REFERENCES assessment_parameters(id) ON DELETE CASCADE,
-    status       TEXT NOT NULL CHECK (status IN ('filled','proxy','empty','not-collectable')),
+    status       TEXT NOT NULL CHECK (status IN ('filled','proxy','empty','not-collectable','not-applicable')),
     evidence_count INTEGER NOT NULL DEFAULT 0,
     detail       TEXT,
     PRIMARY KEY (startup_id, parameter_id)
@@ -299,8 +299,11 @@ CREATE TABLE IF NOT EXISTS people (
     name          TEXT NOT NULL,
     ch_officer_id TEXT UNIQUE,          -- Companies House officer id (appointments link)
     nationality   TEXT,
-    country_of_residence TEXT
+    country_of_residence TEXT,
+    pdl_id        TEXT,                 -- People Data Labs person id (contact details are never stored)
+    education     TEXT                  -- JSON: [{"school", "degrees"}] from PDL
 );
+CREATE UNIQUE INDEX IF NOT EXISTS idx_people_pdl ON people(pdl_id);
 
 CREATE TABLE IF NOT EXISTS startup_people (
     startup_id   INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
@@ -376,3 +379,79 @@ CREATE TABLE IF NOT EXISTS startup_peers (
 
 CREATE INDEX IF NOT EXISTS idx_events_startup   ON funding_events(startup_id, event_date);
 CREATE INDEX IF NOT EXISTS idx_features_startup ON startup_features(startup_id, as_of);
+
+-- ---------------------------------------------------------------------------
+-- EU and ocean-specific sources (DataAPIs/ingest_eu.py)
+-- ---------------------------------------------------------------------------
+
+-- One row per startup participation in an EU-funded project (CORDIS)
+CREATE TABLE IF NOT EXISTS eu_grants (
+    startup_id        INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    project_id        TEXT NOT NULL,      -- CORDIS project id (grant agreement number)
+    acronym           TEXT,
+    title             TEXT,
+    framework         TEXT,               -- FP7 | H2020 | HORIZON
+    topic_codes       TEXT,               -- JSON list, e.g. ["SMEInst-11-2016-2017"]
+    legal_basis       TEXT,               -- JSON list, e.g. ["H2020-EU.2.3.1."]
+    role              TEXT NOT NULL,      -- coordinator | participant | associatedPartner | thirdParty
+    ec_contribution   REAL,               -- EUR to this organisation (NULL for unfunded roles)
+    total_cost        REAL,               -- this organisation's eligible cost
+    project_ec_max    REAL,               -- EU contribution to the whole project
+    sme               INTEGER,            -- CORDIS SME flag for the organisation
+    org_legal_name    TEXT,
+    org_vat           TEXT,
+    org_country       TEXT,
+    partners          INTEGER,            -- other organisations in the consortium
+    start_date        TEXT,
+    end_date          TEXT,
+    status            TEXT,               -- SIGNED | CLOSED | TERMINATED
+    is_eic            INTEGER NOT NULL DEFAULT 0,  -- EIC / SME Instrument
+    is_mission_ocean  INTEGER NOT NULL DEFAULT 0,  -- Mission "Restore our Ocean and Waters"
+    categories        TEXT,               -- JSON list of euroSciVoc fields
+    url               TEXT,
+    PRIMARY KEY (startup_id, project_id, role)
+);
+
+-- CPC classification codes of each patent we hold, with ocean-technology tagging
+CREATE TABLE IF NOT EXISTS patent_classes (
+    startup_id         INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    publication_number TEXT NOT NULL,
+    cpc_code           TEXT NOT NULL,
+    ocean_group        TEXT,             -- aquaculture | seaweed | ocean-energy | vessels | ship-emissions | marine-cleanup | ocean-sensing | marine-bio | NULL
+    PRIMARY KEY (startup_id, publication_number, cpc_code)
+);
+
+-- EU BlueInvest Project Pipeline (public showcase of blue-economy SMEs); doubles as a discovery list
+CREATE TABLE IF NOT EXISTS blueinvest_profiles (
+    other_id         INTEGER PRIMARY KEY, -- BlueInvest profile id
+    name             TEXT NOT NULL,
+    summary          TEXT,
+    trl              INTEGER,
+    trl_text         TEXT,
+    sector           TEXT,
+    company          TEXT,                -- detail page only
+    country          TEXT,                -- detail page only
+    financial_needs  TEXT,                -- detail page only (free text)
+    funding_sought_eur REAL,              -- largest EUR amount in financial_needs (parsed; medium confidence)
+    website          TEXT,                -- detail page only
+    startup_id       INTEGER REFERENCES startups(id) ON DELETE SET NULL,  -- matched startup in our DB
+    url              TEXT NOT NULL,
+    fetched_at       TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_grants_startup ON eu_grants(startup_id);
+CREATE INDEX IF NOT EXISTS idx_blueinvest_startup ON blueinvest_profiles(startup_id);
+
+-- Peers outside our DB: similar companies from the EU BlueInvest pipeline (competitor / comparison universe)
+CREATE TABLE IF NOT EXISTS startup_external_peers (
+    startup_id  INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    source      TEXT NOT NULL,          -- blueinvest
+    external_id TEXT NOT NULL,
+    name        TEXT NOT NULL,
+    similarity  REAL NOT NULL,
+    shared_tags TEXT,                   -- JSON list
+    trl         INTEGER,
+    sector      TEXT,
+    url         TEXT,
+    PRIMARY KEY (startup_id, source, external_id)
+);

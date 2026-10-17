@@ -15,6 +15,9 @@ from .db import get_conn, init_db
 from .schemas import (
     AgentEntryMatch,
     AssessmentCreate,
+    BlueInvestProfile,
+    EuGrant,
+    ExternalPeer,
     FeatureDefinition,
     FilterOptions,
     FundingEvent,
@@ -23,6 +26,7 @@ from .schemas import (
     NaturalLanguageSearchResponse,
     Note,
     NoteCreate,
+    PatentWithClasses,
     Peer,
     Person,
     PipelineUpdate,
@@ -232,3 +236,35 @@ def startup_investors(slug: str, conn: sqlite3.Connection = Conn):
 @app.get("/api/startups/{slug}/peers", response_model=list[Peer])
 def startup_peers(slug: str, limit: int = Query(5, ge=1, le=50), conn: sqlite3.Connection = Conn):
     return _found(features_repo.peers(conn, slug, limit), slug)
+
+
+@app.get("/api/startups/{slug}/grants", response_model=list[EuGrant])
+def startup_grants(slug: str, conn: sqlite3.Connection = Conn):
+    """EU-funded projects the startup takes part in (CORDIS), with its own EU contribution and role."""
+    return _found(features_repo.grants(conn, slug), slug)
+
+
+@app.get("/api/startups/{slug}/patents", response_model=list[PatentWithClasses])
+def startup_patents(slug: str, conn: sqlite3.Connection = Conn):
+    """Patents with CPC classes, legal status and ocean-technology groups."""
+    return _found(features_repo.patents(conn, slug), slug)
+
+
+@app.get("/api/discovery/blueinvest", response_model=list[BlueInvestProfile])
+def discovery_blueinvest(
+    conn: sqlite3.Connection = Conn,
+    q: str | None = None,
+    sector: str | None = None,
+    min_trl: int | None = Query(None, ge=1, le=9),
+    matched_only: bool = False,
+    limit: int = Query(50, ge=1, le=500),
+    offset: int = Query(0, ge=0),
+):
+    """EU BlueInvest Project Pipeline (~700 blue-economy SMEs): candidates to source, with TRL and sector."""
+    return features_repo.blueinvest(conn, q, sector, min_trl, matched_only, limit, offset)
+
+
+@app.get("/api/startups/{slug}/peers/blueinvest", response_model=list[ExternalPeer])
+def startup_blueinvest_peers(slug: str, limit: int = Query(10, ge=1, le=50), conn: sqlite3.Connection = Conn):
+    """Most similar companies in the EU BlueInvest pipeline: the competitor / comparison universe."""
+    return _found(features_repo.external_peers(conn, slug, limit), slug)

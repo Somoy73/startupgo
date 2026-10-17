@@ -953,3 +953,140 @@ _env SERPAPI_KEY; 1 search per call_
 | `next_page_token` |  |
 
 Default: `{"q": "Notpla"}`
+
+
+## 3 Funding & grants
+
+### cordis_projects  ·  free
+
+`https://cordis.europa.eu/search`  
+EU research and innovation projects (FP7, H2020, Horizon Europe) with every participant's EU contribution, SME flag, role and VAT number
+
+| Parameter | Meaning |
+|---|---|
+| `q` | CORDIS query language, e.g. contenttype='project' AND 'Notpla'  (also: AND programme/code='HORIZON.3.1', AND status='SIGNED') |
+| `num` | results per page (<=100) |
+| `p` | page (1-based) |
+| `srt` | Relevance:decreasing | /project/startDate:decreasing |
+| `format` | json |
+
+Default: `{"query": "contenttype='project' AND 'seaweed'", "num": 5}`
+
+
+## 1 Startup & investor
+
+### blueinvest_pipeline  ·  free
+
+`https://blueinvest-community.converve.io/pipeline_front.html`  
+EU BlueInvest Project Pipeline: public showcase of ~700 blue-economy SMEs and projects with TRL and sector  
+_HTML; parsed in ingest_eu.py. Be polite: about 1 request per second._
+
+| Parameter | Meaning |
+|---|---|
+| `params[page]` | 1..N (20 per page) |
+| `params[q]` | free-text search |
+| `params[event_id]` | 1 |
+
+Default: `{"page": 1}`
+
+### blueinvest_profile  ·  free
+
+`https://blueinvest-community.converve.io/pipeline_front.html?action=detail`  
+One BlueInvest profile: company, country, sector, TRL, financial needs, funding allocation, website
+
+| Parameter | Meaning |
+|---|---|
+| `params[other_id]` | profile id from the pipeline list |
+
+Default: `{"other_id": 1047}`
+
+
+## 5 Patents & research
+
+### google_patents_page  ·  free
+
+`https://patents.google.com/patent/{number}/en`  
+Patent page: all CPC classification codes, legal status, family countries  
+_Unofficial; same blocking risk as google_patents_xhr_
+
+| Parameter | Meaning |
+|---|---|
+| `number` | publication number, e.g. EP3601061B1 |
+
+Default: `{"number": "EP3601061B1"}`
+
+
+## 2 Registries
+
+### fr_recherche_entreprises  ·  free
+
+`https://recherche-entreprises.api.gouv.fr/search`  
+French companies: SIREN, founding date, legal form, NAF code, headcount band, directors, financials, status
+
+| Parameter | Meaning |
+|---|---|
+| `q` | name or SIREN |
+| `per_page` | <=25 |
+| `page` |  |
+| `activite_principale` | NAF code filter |
+| `code_postal` |  |
+| `departement` |  |
+| `etat_administratif` | A (active) | C (closed) |
+| `tranche_effectif_salarie` | band code |
+| `nom_personne` | director surname |
+| `prenoms_personne` | director first names |
+| `est_entrepreneur_individuel` | bool |
+
+Default: `{"q": "Algolesko", "per_page": 3}`
+
+### no_brreg  ·  free
+
+`https://data.brreg.no/enhetsregisteret/api/enheter`  
+Norwegian companies: org number, founding date, legal form, employees, industry, bankruptcy and liquidation flags
+
+| Parameter | Meaning |
+|---|---|
+| `navn` | name |
+| `organisasjonsnummer` |  |
+| `naeringskode` | NACE |
+| `fraAntallAnsatte` |  |
+| `tilAntallAnsatte` |  |
+| `konkurs` | bool |
+| `size` | <=100 |
+| `page` | 0-based |
+| `(roles)` | /enheter/{orgnr}/roller |
+
+Default: `{"navn": "Ocean Sun", "size": 3}`
+
+
+## 1 Startup & investor
+
+### pdl_person_search  ·  key
+
+`https://api.peopledatalabs.com/v5/person/search`  
+People at a company (founders, executives, board) with career history and education; 1 credit per person returned  
+_env PDL_API_KEY. Results include contact data; ingest_gaps.py never stores emails, phones or sex._
+
+| Parameter | Meaning |
+|---|---|
+| `sql` | PDL SQL over the person index, e.g. WHERE job_company_website='kelp.blue' AND job_title_levels='cxo' |
+| `size` | persons to return (credits) |
+| `scroll_token` | paging |
+| `dataset` | all | resume | email ... |
+| `titlecase` | bool |
+| `data_include` | comma list of fields to return |
+
+
+## 6 News & traction
+
+### job_boards  ·  free
+
+`Public job-board APIs: Ashby, Greenhouse, Lever, Workable, Recruitee, Personio`  
+Open roles straight from a company's applicant-tracking system (no key)
+
+| Parameter | Meaning |
+|---|---|
+| `ats` | ashby | greenhouse | lever | workable | recruitee | personio |
+| `slug` | the company's board name, e.g. sofarocean |
+
+Default: `{"ats": "ashby", "slug": "sofarocean"}`

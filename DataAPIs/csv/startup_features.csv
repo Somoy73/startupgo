@@ -19,25 +19,54 @@
 1,follow_on_investors,2026-10-17,0.0,,[]
 1,lead_investors,2026-10-17,,UB Forest Industry Green Growth Fund,
 1,investor_count,2026-10-17,1.0,,"{""known_investors"": 1}"
-1,founder_count,2026-10-17,3.0,,"[""GARCIA GONZALEZ, Rodrigo"", ""PASLIER, Pierre-Yves"", ""COUCHE, Guillaume""]"
-1,serial_founder_count,2026-10-17,0.0,,"{""GARCIA GONZALEZ, Rodrigo"": [], ""PASLIER, Pierre-Yves"": [], ""COUCHE, Guillaume"": []}"
+1,founder_count,2026-10-17,3.0,,"{""source"": ""uk_companies_house_company"", ""founders"": [""GARCIA GONZALEZ, Rodrigo"", ""PASLIER, Pierre-Yves"", ""COUCHE, Guillaume""]}"
+1,serial_founder_count,2026-10-17,0.0,,"{""source"": ""uk_companies_house_company"", ""prior_ventures"": {""GARCIA GONZALEZ, Rodrigo"": [], ""PASLIER, Pierre-Yves"": [], ""COUCHE, Guillaume"": []}}"
 1,prior_ventures_total,2026-10-17,0.0,,"{""GARCIA GONZALEZ, Rodrigo"": [], ""PASLIER, Pierre-Yves"": [], ""COUCHE, Guillaume"": []}"
 1,prior_ventures_failed,2026-10-17,0.0,,
 1,founder_other_ventures,2026-10-17,2.0,,"{""GARCIA GONZALEZ, Rodrigo"": [], ""PASLIER, Pierre-Yves"": [""GRAVITY SKETCH LIMITED (active, from 2014-09-22)""], ""COUCHE, Guillaume"": [""GRAVITY SKETCH LIMITED (active, from 2014-09-22)""]}"
-1,founder_retention,2026-10-17,0.667,,
+1,founder_retention,2026-10-17,0.667,,"{""active"": [""GARCIA GONZALEZ, Rodrigo"", ""PASLIER, Pierre-Yves""], ""left"": [""COUCHE, Guillaume""]}"
 1,officer_churn,2026-10-17,0.5,,
+1,board_size,2026-10-17,5.0,,"[""BENEDETTI DEL RIO, Roberta"", ""GARCIA GONZALEZ, Rodrigo"", ""NG, Wang Yu Gary"", ""PASLIER, Pierre-Yves"", ""WALKER, David Peter""]"
 1,headcount,2026-10-17,78.0,,"{""source"": ""people_data_labs"", ""observed_on"": ""2026-10-16""}"
-1,open_roles,2026-10-17,0.0,,
+1,open_roles,2026-10-17,4.0,,"{""source"": ""job_boards""}"
+1,technical_open_roles,2026-10-17,2.0,,
+1,commercial_open_roles,2026-10-17,1.0,,
 1,news_mentions_12m,2026-10-17,10.0,,
 1,patent_count,2026-10-17,6.0,,
 1,patents_granted,2026-10-17,2.0,,
+1,patents_pending,2026-10-17,3.0,,
+1,patents_abandoned,2026-10-17,1.0,,"[""US20250042633A1""]"
+1,first_patent_granted,2026-10-17,1.0,granted,"{""patent"": ""EP3601061B1"", ""office"": ""EP"", ""filed"": ""2018-03-22"", ""granted"": ""2023-03-08"", ""status"": ""active""}"
+1,first_patent_months_to_grant,2026-10-17,59.5,,"{""patent"": ""EP3601061B1"", ""office"": ""EP"", ""filed"": ""2018-03-22"", ""granted"": ""2023-03-08"", ""status"": ""active""}"
 1,company_age_years,2026-10-17,12.5,,"{""founded_year"": 2014, ""source"": ""startups.founded_year""}"
 1,funding_velocity_usd_per_year,2026-10-17,3857537.0,,
 1,registry_status,2026-10-17,,active,
 1,distress_flag,2026-10-17,0.0,,"{""insolvency_cases"": 0, ""status"": ""active"", ""no_active_officers"": false}"
 1,founded_year_conflicts,2026-10-17,1.0,,"[""2014""]"
-1,category_tags,2026-10-17,,"[""impact:B"", ""impact:D"", ""industry:packagingandcontainersmanufacturing"", ""kw:alternative"", ""kw:coating"", ""kw:packaging"", ""kw:plant"", ""kw:plastic"", ""kw:replace"", ""kw:seaweed"", ""kw:single"", ""sector:materialspackaging"", ""sic:74""]",
-1,top_peer,2026-10-17,0.088,ocean-rainforest,"[""impact:D"", ""kw:seaweed""]"
+1,eu_grants_total_eur,2026-10-17,1123763.2,,"{""UCUP"": [""coordinator"", 50000.0], ""GreenX3"": [""associatedPartner"", null], ""NO-PLASTI-CUPS"": [""coordinator"", 708878.45], ""BIG-ALGAE"": [""participant"", 364884.75]}"
+1,eu_projects_count,2026-10-17,4.0,,
+1,eu_projects_funded,2026-10-17,3.0,,
+1,eu_coordinator_count,2026-10-17,2.0,,"[""UCUP"", ""NO-PLASTI-CUPS""]"
+1,eic_or_sme_instrument,2026-10-17,1.0,,"[""UCUP""]"
+1,mission_ocean_grant,2026-10-17,0.0,,[]
+1,eu_active_projects,2026-10-17,3.0,,
+1,eu_consortium_links,2026-10-17,47.0,,
+1,eu_first_grant_year,2026-10-17,2017.0,,
+1,cordis_sme_confirmed,2026-10-17,1.0,,
+1,grant_to_equity_ratio,2026-10-17,0.025,,"{""eu_grants_usd"": 1213664, ""total_raised_usd"": 48219216}"
+1,ocean_patent_count,2026-10-17,3.0,,"{""GB2612816B"": ""marine-bio"", ""US20250042633A1"": ""marine-bio"", ""US20250144864A1"": ""marine-bio""}"
+1,ocean_patent_share,2026-10-17,0.5,,
+1,ocean_tech_groups,2026-10-17,,"[""marine-bio""]",
+1,blueinvest_listed,2026-10-17,0.0,,
+1,blueinvest_trl,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+1,blueinvest_funding_sought_eur,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+1,blueinvest_sector,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+1,trl_gap,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+1,blueinvest_peer_count,2026-10-17,10.0,,"[[""noriware AG"", 0.22], [""Replacing PFAS with seaweed textile coating"", 0.2138], [""B'ZEOS: Creating the Future of Packaging with Seaweed"", 0.2069], [""Clean Ocean Coatings"", 0.1783], [""Nomet Seaweed Food"", 0.1729]]"
+1,peer_median_trl,2026-10-17,6.5,,"{""peer_trls"": [6, 6, 7, 6, 7, 9, 9, 6, 4, 7]}"
+1,trl_vs_peers,2026-10-17,1.5,,"{""own_trl"": 8, ""peer_median"": 6.5}"
+1,category_tags,2026-10-17,,"[""cpc:A23F"", ""cpc:A23L"", ""cpc:A23P"", ""cpc:A61J"", ""cpc:A61K"", ""cpc:A61Q"", ""cpc:B01J"", ""cpc:B29B"", ""cpc:B29C"", ""cpc:B29K"", ""cpc:B32B"", ""cpc:B65B"", ""cpc:B65D"", ""cpc:C08J"", ""cpc:C08K"", ""cpc:C08L"", ""cpc:C09D"", ""cpc:D21H"", ""cpc:Y02W"", ""field:bioplastics"", ""field:businessmodels"", ""field:carbohydrates"", ""field:coatingandfilms"", ""field:foodpackaging"", ""field:industrialcrops"", ""field:naturebasedsolutions"", ""field:polymersciences"", ""field:recycling"", ""field:sustainableeconomy"", ""field:textiles"", ""impact:B"", ""impact:D"", ""industry:packagingandcontainersmanufacturing"", ""kw:alternative"", ""kw:coating"", ""kw:packaging"", ""kw:plant"", ""kw:plastic"", ""kw:replace"", ""kw:seaweed"", ""kw:single"", ""sector:materialspackaging"", ""sic:74""]",
+1,top_peer,2026-10-17,0.09,oceanium,"[""cpc:A61K"", ""cpc:C08L"", ""cpc:C09D"", ""cpc:D21H"", ""impact:B"", ""kw:seaweed""]"
 2,total_raised_usd,2026-10-17,78492221.0,,"{""announced_rounds"": 39000000, ""sec_form_d"": 78492221, ""people_data_labs"": 73949997}"
 2,funding_total_spread,2026-10-17,2.01,,"{""announced_rounds"": 39000000, ""sec_form_d"": 78492221, ""people_data_labs"": 73949997}"
 2,round_count,2026-10-17,5.0,,"{""announced_rounds"": 1, ""sec_form_d_offerings"": 5, ""people_data_labs"": 5}"
@@ -53,16 +82,51 @@
 2,follow_on_investors,2026-10-17,0.0,,[]
 2,lead_investors,2026-10-17,,Foundry Group; Union Square Ventures,
 2,investor_count,2026-10-17,11.0,,"{""sec_form_d_latest_offering"": 11, ""known_investors"": 2}"
+2,founder_count,2026-10-17,1.0,,"{""source"": ""people_data_labs"", ""founders"": [""Tim Janssen""]}"
+2,serial_founder_count,2026-10-17,0.0,,"{""source"": ""people_data_labs"", ""prior_ventures"": {""Tim Janssen"": []}}"
+2,prior_ventures_total,2026-10-17,0.0,,"{""Tim Janssen"": []}"
+2,prior_ventures_failed,2026-10-17,0.0,,
+2,founder_other_ventures,2026-10-17,0.0,,"{""Tim Janssen"": []}"
+2,founder_retention,2026-10-17,1.0,,"{""active"": [""Tim Janssen""], ""left"": []}"
+2,board_size,2026-10-17,5.0,,"[""Evan Shapiro"", ""Jon Callaghan"", ""Peter Rive"", ""Ryan McIntyre"", ""Tim Janssen""]"
 2,headcount,2026-10-17,98.0,,"{""source"": ""people_data_labs"", ""observed_on"": ""2026-10-16""}"
-2,open_roles,2026-10-17,10.0,,
+2,open_roles,2026-10-17,9.0,,"{""source"": ""job_boards""}"
+2,technical_open_roles,2026-10-17,3.0,,
+2,commercial_open_roles,2026-10-17,4.0,,
 2,news_mentions_12m,2026-10-17,14.0,,
 2,patent_count,2026-10-17,4.0,,
 2,patents_granted,2026-10-17,3.0,,
+2,patents_pending,2026-10-17,0.0,,
+2,patents_abandoned,2026-10-17,0.0,,[]
+2,first_patent_granted,2026-10-17,1.0,granted,"{""patent"": ""US10488554B2"", ""office"": ""US"", ""filed"": ""2018-03-21"", ""granted"": ""2019-11-26"", ""status"": ""active""}"
+2,first_patent_months_to_grant,2026-10-17,20.2,,"{""patent"": ""US10488554B2"", ""office"": ""US"", ""filed"": ""2018-03-21"", ""granted"": ""2019-11-26"", ""status"": ""active""}"
 2,company_age_years,2026-10-17,7.5,,"{""founded_year"": 2019, ""source"": ""startups.founded_year""}"
 2,funding_velocity_usd_per_year,2026-10-17,10465629.0,,
 2,founded_year_conflicts,2026-10-17,2.0,,"[""2016"", ""2019""]"
-2,category_tags,2026-10-17,,"[""impact:D"", ""impact:E"", ""industry:technologyinformationandinternet"", ""kw:buoy"", ""kw:current"", ""kw:formed"", ""kw:global"", ""kw:intelligence"", ""kw:marine"", ""kw:merger"", ""kw:network"", ""kw:ocean"", ""kw:openrov"", ""kw:powered"", ""kw:report"", ""kw:sell"", ""kw:solar"", ""kw:spoondrift"", ""kw:spotter"", ""kw:temperature"", ""kw:wave"", ""kw:weather"", ""kw:wind"", ""sector:oceandata""]",
-2,top_peer,2026-10-17,0.078,ocean-rainforest,"[""impact:D"", ""impact:E""]"
+2,eu_grants_total_eur,2026-10-17,0.0,,{}
+2,eu_projects_count,2026-10-17,0.0,,
+2,eu_projects_funded,2026-10-17,0.0,,
+2,eu_coordinator_count,2026-10-17,0.0,,[]
+2,eic_or_sme_instrument,2026-10-17,0.0,,[]
+2,mission_ocean_grant,2026-10-17,0.0,,[]
+2,eu_active_projects,2026-10-17,0.0,,
+2,eu_consortium_links,2026-10-17,0.0,,
+2,eu_first_grant_year,2026-10-17,,not-applicable,"{""reason"": ""no EU-funded projects found in CORDIS""}"
+2,cordis_sme_confirmed,2026-10-17,,not-applicable,"{""reason"": ""not a CORDIS participant""}"
+2,grant_to_equity_ratio,2026-10-17,0.0,,"{""eu_grants_usd"": 0, ""total_raised_usd"": 78492221}"
+2,ocean_patent_count,2026-10-17,1.0,,"{""US10488554B2"": ""ocean-sensing""}"
+2,ocean_patent_share,2026-10-17,0.333,,
+2,ocean_tech_groups,2026-10-17,,"[""ocean-sensing""]",
+2,blueinvest_listed,2026-10-17,0.0,,
+2,blueinvest_trl,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+2,blueinvest_funding_sought_eur,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+2,blueinvest_sector,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+2,trl_gap,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+2,blueinvest_peer_count,2026-10-17,5.0,,"[[""Pure Marine"", 0.1718], [""Oceanium"", 0.1155], [""Blue Tern"", 0.1139], [""Arrecife"", 0.1115], [""BioBright"", 0.1097]]"
+2,peer_median_trl,2026-10-17,6.0,,"{""peer_trls"": [6, 9, 3, 6, 4, 8, 6, 7, 6, 8]}"
+2,trl_vs_peers,2026-10-17,3.0,,"{""own_trl"": 9, ""peer_median"": 6.0}"
+2,category_tags,2026-10-17,,"[""cpc:G01C"", ""cpc:G01N"", ""cpc:G01S"", ""cpc:G01W"", ""cpc:G06F"", ""cpc:G06N"", ""cpc:H01R"", ""cpc:H04R"", ""cpc:Y02A"", ""impact:D"", ""impact:E"", ""industry:technologyinformationandinternet"", ""kw:buoy"", ""kw:current"", ""kw:formed"", ""kw:global"", ""kw:intelligence"", ""kw:marine"", ""kw:merger"", ""kw:network"", ""kw:ocean"", ""kw:openrov"", ""kw:powered"", ""kw:report"", ""kw:sell"", ""kw:solar"", ""kw:spoondrift"", ""kw:spotter"", ""kw:temperature"", ""kw:wave"", ""kw:weather"", ""kw:wind"", ""sector:oceandata""]",
+2,top_peer,2026-10-17,0.05,seaforester,"[""impact:D"", ""kw:marine""]"
 3,total_raised_usd,2026-10-17,12200000.0,,"{""announced_rounds"": 6200000, ""people_data_labs"": 12200000}"
 3,funding_total_spread,2026-10-17,1.97,,"{""announced_rounds"": 6200000, ""people_data_labs"": 12200000}"
 3,round_count,2026-10-17,3.0,,"{""announced_rounds"": 1, ""people_data_labs"": 3}"
@@ -78,18 +142,49 @@
 3,follow_on_investors,2026-10-17,0.0,,[]
 3,lead_investors,2026-10-17,,The Grantham Foundation,
 3,investor_count,2026-10-17,5.0,,"{""known_investors"": 5}"
+3,founder_count,2026-10-17,2.0,,"{""source"": ""people_data_labs"", ""founders"": [""Magni Arge"", ""Olavur Ellefsen""]}"
+3,serial_founder_count,2026-10-17,1.0,,"{""source"": ""people_data_labs"", ""prior_ventures"": {""Magni Arge"": [], ""Olavur Ellefsen"": [""Tokni (founder, from 2000-08)""]}}"
+3,prior_ventures_total,2026-10-17,1.0,,"{""Magni Arge"": [], ""Olavur Ellefsen"": [""Tokni (founder, from 2000-08)""]}"
+3,founder_other_ventures,2026-10-17,9.0,,"{""Magni Arge"": [""Atlantic Airways (chief executive officer, from 1995-06)"", ""T-Mac (chief executive officer, from 1990)""], ""Olavur Ellefsen"": [""Globe Tracker (chief executive officer, from 2021-03)"", ""Usable (chief executive officer and co-founder, from 2023-01)"", ""Tokni (chief executive officer, from 2000-08)"", ""Tokni (founder, from 2000-08)"", ""Flowcore (chief executive officer and co-founder, from 2023-01)"", ""Klintra (co-founder, from 2016-03)"", ""Nemlia F\u00f8royar (chief executive officer, from 2020-06)""]}"
+3,founder_retention,2026-10-17,0.5,,"{""active"": [""Magni Arge""], ""left"": [""Olavur Ellefsen""]}"
+3,board_size,2026-10-17,0.0,,[]
 3,headcount,2026-10-17,26.0,,"{""source"": ""people_data_labs"", ""observed_on"": ""2026-10-16""}"
-3,open_roles,2026-10-17,0.0,,
+3,open_roles,2026-10-17,0.0,,"{""source"": ""serpapi_google_jobs""}"
+3,technical_open_roles,2026-10-17,0.0,,
+3,commercial_open_roles,2026-10-17,0.0,,
 3,news_mentions_12m,2026-10-17,2.0,,
 3,patent_count,2026-10-17,0.0,,
 3,patents_granted,2026-10-17,0.0,,
+3,patents_pending,2026-10-17,0.0,,
+3,patents_abandoned,2026-10-17,0.0,,[]
+3,first_patent_granted,2026-10-17,,not-applicable,"{""reason"": ""no patents found""}"
+3,first_patent_months_to_grant,2026-10-17,,not-applicable,"{""reason"": ""no patents found""}"
 3,company_age_years,2026-10-17,5.5,,"{""founded_year"": 2021, ""source"": ""registry""}"
 3,funding_velocity_usd_per_year,2026-10-17,2218182.0,,
 3,registry_status,2026-10-17,,active,
 3,distress_flag,2026-10-17,0.0,,"{""insolvency_cases"": 0, ""status"": ""ACTIVE"", ""no_active_officers"": false}"
 3,founded_year_conflicts,2026-10-17,3.0,,"[""2007"", ""2008"", ""2021""]"
-3,category_tags,2026-10-17,,"[""impact:A"", ""impact:D"", ""impact:E"", ""industry:foodandbeverageservices"", ""kw:cultivate"", ""kw:cultivation"", ""kw:faroe"", ""kw:island"", ""kw:market"", ""kw:seaweed"", ""sector:aquaculture""]",
-3,top_peer,2026-10-17,0.153,oceanium,"[""impact:A"", ""kw:seaweed"", ""sector:aquaculture""]"
+3,eu_grants_total_eur,2026-10-17,2187776.25,,"{""TexMaTer"": [""participant"", 353780.0], ""MACRO CASCADE"": [""participant"", 544388.75], ""SeaMark"": [""coordinator"", 1044031.5], ""ENSYSTRA"": [""partner"", null], ""ULTFARMS"": [""participant"", 65625.0], ""AquaVitae"": [""participant"", 179951.0]}"
+3,eu_projects_count,2026-10-17,6.0,,
+3,eu_projects_funded,2026-10-17,5.0,,
+3,eu_coordinator_count,2026-10-17,1.0,,"[""SeaMark""]"
+3,eic_or_sme_instrument,2026-10-17,0.0,,[]
+3,mission_ocean_grant,2026-10-17,1.0,,"[""ULTFARMS""]"
+3,eu_active_projects,2026-10-17,2.0,,
+3,eu_consortium_links,2026-10-17,141.0,,
+3,eu_first_grant_year,2026-10-17,2016.0,,
+3,cordis_sme_confirmed,2026-10-17,1.0,,
+3,grant_to_equity_ratio,2026-10-17,0.194,,"{""eu_grants_usd"": 2362798, ""total_raised_usd"": 12200000}"
+3,blueinvest_listed,2026-10-17,0.0,,
+3,blueinvest_trl,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+3,blueinvest_funding_sought_eur,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+3,blueinvest_sector,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+3,trl_gap,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+3,blueinvest_peer_count,2026-10-17,8.0,,"[[""SeatechEnergy"", 0.2384], [""Seaweedland"", 0.2022], [""Pure Algae Denmark ApS"", 0.1613], [""A scalable seaweed-for-food cultivation & processing blueprint"", 0.1526], [""Cerberus Seaweed Systems"", 0.1468]]"
+3,peer_median_trl,2026-10-17,6.5,,"{""peer_trls"": [9, 4, 5, 7, 4, 9, 6, 7, 8, 6]}"
+3,trl_vs_peers,2026-10-17,0.5,,"{""own_trl"": 7, ""peer_median"": 6.5}"
+3,category_tags,2026-10-17,,"[""field:behaviouralpsychology"", ""field:bioeconomy"", ""field:biomass"", ""field:bioplastics"", ""field:biosensors"", ""field:businessmodels"", ""field:climaticchanges"", ""field:databases"", ""field:fermentation"", ""field:fisheries"", ""field:foreignpolicy"", ""field:geneticselection"", ""field:governance"", ""field:internetofthings"", ""field:microeconomics"", ""field:nongovernmentalorganizations"", ""field:organicacids"", ""field:planets"", ""field:silviculture"", ""field:sustainableeconomy"", ""field:syntheticdyes"", ""field:wastewatertreatmentprocesses"", ""field:windenergy"", ""impact:A"", ""impact:D"", ""impact:E"", ""industry:foodandbeverageservices"", ""kw:cultivate"", ""kw:cultivation"", ""kw:faroe"", ""kw:island"", ""kw:market"", ""kw:seaweed"", ""sector:aquaculture""]",
+3,top_peer,2026-10-17,0.157,oceanium,"[""field:bioeconomy"", ""field:climaticchanges"", ""field:fermentation"", ""field:geneticselection"", ""field:planets"", ""impact:A"", ""kw:seaweed"", ""sector:aquaculture""]"
 4,total_raised_usd,2026-10-17,6974660.0,,"{""announced_rounds"": 5797000, ""people_data_labs"": 6974660}"
 4,funding_total_spread,2026-10-17,1.2,,"{""announced_rounds"": 5797000, ""people_data_labs"": 6974660}"
 4,round_count,2026-10-17,6.0,,"{""announced_rounds"": 2, ""people_data_labs"": 6}"
@@ -106,25 +201,53 @@
 4,follow_on_investors,2026-10-17,0.0,,[]
 4,lead_investors,2026-10-17,,Lowercarbon Capital; UK Clean Maritime Demonstration Competition (Round 6),
 4,investor_count,2026-10-17,8.0,,"{""known_investors"": 8}"
-4,founder_count,2026-10-17,2.0,,"[""FREDRIKSSON, Alisha"", ""WEN, Roujia""]"
-4,serial_founder_count,2026-10-17,0.0,,"{""FREDRIKSSON, Alisha"": [], ""WEN, Roujia"": []}"
+4,founder_count,2026-10-17,2.0,,"{""source"": ""uk_companies_house_company"", ""founders"": [""FREDRIKSSON, Alisha"", ""WEN, Roujia""]}"
+4,serial_founder_count,2026-10-17,0.0,,"{""source"": ""uk_companies_house_company"", ""prior_ventures"": {""FREDRIKSSON, Alisha"": [], ""WEN, Roujia"": []}}"
 4,prior_ventures_total,2026-10-17,0.0,,"{""FREDRIKSSON, Alisha"": [], ""WEN, Roujia"": []}"
 4,prior_ventures_failed,2026-10-17,0.0,,
 4,founder_other_ventures,2026-10-17,0.0,,"{""FREDRIKSSON, Alisha"": [], ""WEN, Roujia"": []}"
-4,founder_retention,2026-10-17,0.5,,
+4,founder_retention,2026-10-17,0.5,,"{""active"": [""FREDRIKSSON, Alisha""], ""left"": [""WEN, Roujia""]}"
 4,officer_churn,2026-10-17,0.333,,
+4,board_size,2026-10-17,1.0,,"[""FREDRIKSSON, Alisha""]"
 4,headcount,2026-10-17,23.0,,"{""source"": ""people_data_labs"", ""observed_on"": ""2026-10-16""}"
-4,open_roles,2026-10-17,0.0,,
+4,open_roles,2026-10-17,0.0,,"{""source"": ""serpapi_google_jobs""}"
+4,technical_open_roles,2026-10-17,0.0,,
+4,commercial_open_roles,2026-10-17,0.0,,
 4,news_mentions_12m,2026-10-17,5.0,,
 4,patent_count,2026-10-17,1.0,,
 4,patents_granted,2026-10-17,0.0,,
+4,patents_pending,2026-10-17,1.0,,
+4,patents_abandoned,2026-10-17,0.0,,[]
+4,first_patent_granted,2026-10-17,,pending,"{""patent"": ""WO2025177240A1"", ""office"": ""WO"", ""filed"": ""2025-02-21"", ""granted"": null, ""status"": ""pending""}"
 4,company_age_years,2026-10-17,5.5,,"{""founded_year"": 2021, ""source"": ""startups.founded_year""}"
 4,funding_velocity_usd_per_year,2026-10-17,1268120.0,,
 4,registry_status,2026-10-17,,active,
 4,distress_flag,2026-10-17,0.0,,"{""insolvency_cases"": 0, ""status"": ""active"", ""no_active_officers"": false}"
 4,founded_year_conflicts,2026-10-17,2.0,,"[""2021"", ""2022""]"
-4,category_tags,2026-10-17,,"[""impact:D"", ""industry:maritimetransportation"", ""kw:alumnu"", ""kw:capture"", ""kw:carbon"", ""kw:combinator"", ""kw:equipment"", ""kw:exhaust"", ""kw:fit"", ""kw:onboard"", ""kw:ship"", ""kw:source"", ""sector:shippingdecarbonisation"", ""sic:72"", ""sic:74"", ""yc:climate"", ""yc:hardtech"", ""yc:transportation""]",
-4,top_peer,2026-10-17,0.082,notpla,"[""impact:D"", ""sic:74""]"
+4,eu_grants_total_eur,2026-10-17,0.0,,{}
+4,eu_projects_count,2026-10-17,0.0,,
+4,eu_projects_funded,2026-10-17,0.0,,
+4,eu_coordinator_count,2026-10-17,0.0,,[]
+4,eic_or_sme_instrument,2026-10-17,0.0,,[]
+4,mission_ocean_grant,2026-10-17,0.0,,[]
+4,eu_active_projects,2026-10-17,0.0,,
+4,eu_consortium_links,2026-10-17,0.0,,
+4,eu_first_grant_year,2026-10-17,,not-applicable,"{""reason"": ""no EU-funded projects found in CORDIS""}"
+4,cordis_sme_confirmed,2026-10-17,,not-applicable,"{""reason"": ""not a CORDIS participant""}"
+4,grant_to_equity_ratio,2026-10-17,0.0,,"{""eu_grants_usd"": 0, ""total_raised_usd"": 6974660}"
+4,ocean_patent_count,2026-10-17,0.0,,{}
+4,ocean_patent_share,2026-10-17,0.0,,
+4,ocean_tech_groups,2026-10-17,,[],
+4,blueinvest_listed,2026-10-17,1.0,,"{""profile"": ""https://blueinvest-community.converve.io/pipeline_front.html?action=detail&params%5Bevent_id%5D=1&params%5Bshow%5D=comp&params%5Bother_id%5D=1730""}"
+4,blueinvest_trl,2026-10-17,7.0,,"{""trl_text"": ""TRL 7 - System prototype demonstration in a relevant environment""}"
+4,blueinvest_funding_sought_eur,2026-10-17,13000000.0,,"{""text"": ""We're raising 13M EUR to expand our shipping business, launch a new data center one, and build a commercial and GTM engine. https://seabound.co Back to Pipeline What is the BlueInvest Project Pipeline? The BlueInvest Project Pipeline is a database and showcase of projects, scale-ups and SMEs who are driving innovation and sustainability in the Blue Economy.""}"
+4,blueinvest_sector,2026-10-17,,Shipping & ports,
+4,trl_gap,2026-10-17,1.0,,"{""blueinvest_trl"": 7, ""seed_estimate_trl"": 6}"
+4,blueinvest_peer_count,2026-10-17,8.0,,"[[""WindREAL"", 0.2427], [""Toqua"", 0.1636], [""Ionada"", 0.1359], [""New Energy Shipping"", 0.1119], [""zero44 GmbH"", 0.1118]]"
+4,peer_median_trl,2026-10-17,7.5,,"{""peer_trls"": [9, 8, 6, 7, 9, 6, 7, 8, 7, 8]}"
+4,trl_vs_peers,2026-10-17,-0.5,,"{""own_trl"": 7, ""peer_median"": 7.5}"
+4,category_tags,2026-10-17,,"[""bisector:shippingports"", ""cpc:B01D"", ""cpc:Y02C"", ""impact:D"", ""industry:maritimetransportation"", ""kw:alumnu"", ""kw:capture"", ""kw:carbon"", ""kw:combinator"", ""kw:equipment"", ""kw:exhaust"", ""kw:fit"", ""kw:onboard"", ""kw:ship"", ""kw:source"", ""sector:shippingdecarbonisation"", ""sic:72"", ""sic:74"", ""yc:climate"", ""yc:hardtech"", ""yc:transportation""]",
+4,top_peer,2026-10-17,0.062,kelp-blue,"[""cpc:B01D"", ""impact:D"", ""kw:carbon""]"
 5,total_raised_usd,2026-10-17,22335700.0,,"{""announced_rounds"": 2600000, ""uk_sh01_priced"": 7398829, ""people_data_labs"": 22335700}"
 5,funding_total_spread,2026-10-17,8.59,,"{""announced_rounds"": 2600000, ""uk_sh01_priced"": 7398829, ""people_data_labs"": 22335700}"
 5,round_count,2026-10-17,9.0,,"{""announced_rounds"": 1, ""uk_sh01_priced_rounds"": 4, ""people_data_labs"": 9}"
@@ -145,25 +268,52 @@
 5,follow_on_investors,2026-10-17,1.0,,"[""WWF""]"
 5,lead_investors,2026-10-17,,Builders Vision; Green Angel Syndicate,
 5,investor_count,2026-10-17,6.0,,"{""known_investors"": 6}"
-5,founder_count,2026-10-17,2.0,,"[""BAVINGTON, Charles, Dr."", ""SEAL, Karen Elizabeth Scofield, Ms.""]"
-5,serial_founder_count,2026-10-17,0.0,,"{""BAVINGTON, Charles, Dr."": [], ""SEAL, Karen Elizabeth Scofield, Ms."": []}"
+5,founder_count,2026-10-17,2.0,,"{""source"": ""uk_companies_house_company"", ""founders"": [""BAVINGTON, Charles, Dr."", ""SEAL, Karen Elizabeth Scofield, Ms.""]}"
+5,serial_founder_count,2026-10-17,0.0,,"{""source"": ""uk_companies_house_company"", ""prior_ventures"": {""BAVINGTON, Charles, Dr."": [], ""SEAL, Karen Elizabeth Scofield, Ms."": []}}"
 5,prior_ventures_total,2026-10-17,0.0,,"{""BAVINGTON, Charles, Dr."": [], ""SEAL, Karen Elizabeth Scofield, Ms."": []}"
 5,prior_ventures_failed,2026-10-17,0.0,,
 5,founder_other_ventures,2026-10-17,1.0,,"{""BAVINGTON, Charles, Dr."": [], ""SEAL, Karen Elizabeth Scofield, Ms."": [""JUNO MARA LTD (active, from 2026-04-17)""]}"
-5,founder_retention,2026-10-17,0.0,,
+5,founder_retention,2026-10-17,0.0,,"{""active"": [], ""left"": [""BAVINGTON, Charles, Dr."", ""SEAL, Karen Elizabeth Scofield, Ms.""]}"
 5,officer_churn,2026-10-17,1.0,,
+5,board_size,2026-10-17,0.0,,[]
 5,headcount,2026-10-17,17.0,,"{""source"": ""people_data_labs"", ""observed_on"": ""2026-10-16""}"
-5,open_roles,2026-10-17,0.0,,
+5,open_roles,2026-10-17,0.0,,"{""source"": ""serpapi_google_jobs""}"
+5,technical_open_roles,2026-10-17,0.0,,
+5,commercial_open_roles,2026-10-17,0.0,,
 5,news_mentions_12m,2026-10-17,4.0,,
 5,patent_count,2026-10-17,4.0,,
 5,patents_granted,2026-10-17,0.0,,
+5,patents_pending,2026-10-17,3.0,,
+5,patents_abandoned,2026-10-17,0.0,,[]
+5,first_patent_granted,2026-10-17,,unknown,"{""patent"": ""WO2024057012A1"", ""office"": ""WO"", ""filed"": ""2023-09-12"", ""granted"": null, ""status"": ""ceased"", ""why"": ""WO international phase ended; whether national filings were granted needs family data""}"
 5,company_age_years,2026-10-17,8.5,,"{""founded_year"": 2018, ""source"": ""registry""}"
 5,funding_velocity_usd_per_year,2026-10-17,2627729.0,,
 5,registry_status,2026-10-17,,administration,
 5,distress_flag,2026-10-17,1.0,,"{""insolvency_cases"": 1, ""status"": ""administration"", ""no_active_officers"": true}"
 5,founded_year_conflicts,2026-10-17,2.0,,"[""2018"", ""2021""]"
-5,category_tags,2026-10-17,,"[""impact:A"", ""impact:B"", ""industry:foodandbeveragemanufacturing"", ""kw:biodegradable"", ""kw:biorefinery"", ""kw:farmed"", ""kw:food"", ""kw:ingredient"", ""kw:kelp"", ""kw:material"", ""kw:processe"", ""kw:seaweed"", ""kw:technology"", ""kw:through"", ""sector:aquaculture"", ""sic:10""]",
-5,top_peer,2026-10-17,0.153,ocean-rainforest,"[""impact:A"", ""kw:seaweed"", ""sector:aquaculture""]"
+5,eu_grants_total_eur,2026-10-17,0.0,,"{""SeaMark"": [""associatedPartner"", null]}"
+5,eu_projects_count,2026-10-17,1.0,,
+5,eu_projects_funded,2026-10-17,0.0,,
+5,eu_coordinator_count,2026-10-17,0.0,,[]
+5,eic_or_sme_instrument,2026-10-17,0.0,,[]
+5,mission_ocean_grant,2026-10-17,0.0,,[]
+5,eu_active_projects,2026-10-17,0.0,,
+5,eu_consortium_links,2026-10-17,24.0,,
+5,eu_first_grant_year,2026-10-17,2022.0,,
+5,cordis_sme_confirmed,2026-10-17,1.0,,
+5,grant_to_equity_ratio,2026-10-17,0.0,,"{""eu_grants_usd"": 0, ""total_raised_usd"": 22335700}"
+5,ocean_patent_count,2026-10-17,2.0,,"{""GB202503392D0"": ""marine-bio"", ""WO2024057012A1"": ""marine-bio""}"
+5,ocean_patent_share,2026-10-17,1.0,,
+5,ocean_tech_groups,2026-10-17,,"[""marine-bio""]",
+5,blueinvest_listed,2026-10-17,1.0,,"{""profile"": ""https://blueinvest-community.converve.io/pipeline_front.html?action=detail&params%5Bevent_id%5D=1&params%5Bshow%5D=comp&params%5Bother_id%5D=807""}"
+5,blueinvest_trl,2026-10-17,9.0,,"{""trl_text"": ""TRL 9 - Actual system proven through successful mission operations""}"
+5,blueinvest_sector,2026-10-17,,Blue biotechnology,
+5,trl_gap,2026-10-17,3.0,,"{""blueinvest_trl"": 9, ""seed_estimate_trl"": 6}"
+5,blueinvest_peer_count,2026-10-17,10.0,,"[[""algaeforfood.com"", 0.1988], [""Bio-marine Ingredients Ireland"", 0.1898], [""Nomet Seaweed Food"", 0.1803], [""Poseidona"", 0.1727], [""BioFeyn"", 0.1649]]"
+5,peer_median_trl,2026-10-17,6.5,,"{""peer_trls"": [6, 9, 7, 4, 6, 5, 9, 7, 6, 9]}"
+5,trl_vs_peers,2026-10-17,2.5,,"{""own_trl"": 9, ""peer_median"": 6.5}"
+5,category_tags,2026-10-17,,"[""bisector:bluebiotechnology"", ""cpc:A61K"", ""cpc:C08B"", ""cpc:C08L"", ""cpc:C09D"", ""cpc:C12P"", ""cpc:D21H"", ""field:bioeconomy"", ""field:climaticchanges"", ""field:fermentation"", ""field:geneticselection"", ""field:planets"", ""impact:A"", ""impact:B"", ""industry:foodandbeveragemanufacturing"", ""kw:biodegradable"", ""kw:biorefinery"", ""kw:farmed"", ""kw:food"", ""kw:ingredient"", ""kw:kelp"", ""kw:material"", ""kw:processe"", ""kw:seaweed"", ""kw:technology"", ""kw:through"", ""sector:aquaculture"", ""sic:10""]",
+5,top_peer,2026-10-17,0.157,ocean-rainforest,"[""field:bioeconomy"", ""field:climaticchanges"", ""field:fermentation"", ""field:geneticselection"", ""field:planets"", ""impact:A"", ""kw:seaweed"", ""sector:aquaculture""]"
 6,total_raised_usd,2026-10-17,1900000.0,,"{""announced_rounds"": 1900000, ""people_data_labs"": 1900000}"
 6,funding_total_spread,2026-10-17,1.0,,"{""announced_rounds"": 1900000, ""people_data_labs"": 1900000}"
 6,round_count,2026-10-17,1.0,,"{""announced_rounds"": 1, ""people_data_labs"": 1}"
@@ -178,18 +328,47 @@
 6,follow_on_investors,2026-10-17,0.0,,[]
 6,lead_investors,2026-10-17,,Schmidt Marine Technology Partners; WWF,
 6,investor_count,2026-10-17,2.0,,"{""known_investors"": 2}"
+6,founder_count,2026-10-17,1.0,,"{""source"": ""people_data_labs"", ""founders"": [""P\u00e5l Bakken""]}"
+6,serial_founder_count,2026-10-17,1.0,,"{""source"": ""people_data_labs"", ""prior_ventures"": {""P\u00e5l Bakken"": [""Seaweed Solutions (chief executive officer & founder, from 2009-01)"", ""Casulo (founder, from 2016-04)"", ""Cocoon (chief executive officer & founder, from 1989-01)"", ""Seaweed Solutions As (founder / director, from 2009-01)""]}}"
+6,prior_ventures_total,2026-10-17,4.0,,"{""P\u00e5l Bakken"": [""Seaweed Solutions (chief executive officer & founder, from 2009-01)"", ""Casulo (founder, from 2016-04)"", ""Cocoon (chief executive officer & founder, from 1989-01)"", ""Seaweed Solutions As (founder / director, from 2009-01)""]}"
+6,founder_other_ventures,2026-10-17,4.0,,"{""P\u00e5l Bakken"": [""Seaweed Solutions (chief executive officer & founder, from 2009-01)"", ""Casulo (founder, from 2016-04)"", ""Cocoon (chief executive officer & founder, from 1989-01)"", ""Seaweed Solutions As (founder / director, from 2009-01)""]}"
+6,founder_retention,2026-10-17,1.0,,"{""active"": [""P\u00e5l Bakken""], ""left"": []}"
+6,board_size,2026-10-17,1.0,,"[""Michael Malling""]"
 6,headcount,2026-10-17,9.0,,"{""source"": ""people_data_labs"", ""observed_on"": ""2026-10-16""}"
-6,open_roles,2026-10-17,0.0,,
+6,open_roles,2026-10-17,0.0,,"{""source"": ""serpapi_google_jobs""}"
+6,technical_open_roles,2026-10-17,0.0,,
+6,commercial_open_roles,2026-10-17,0.0,,
 6,news_mentions_12m,2026-10-17,4.0,,
 6,patent_count,2026-10-17,1.0,,
 6,patents_granted,2026-10-17,0.0,,
+6,patents_pending,2026-10-17,1.0,,
+6,patents_abandoned,2026-10-17,0.0,,[]
+6,first_patent_granted,2026-10-17,,pending,"{""patent"": ""GB202507521D0"", ""office"": ""GB"", ""filed"": ""2025-05-15"", ""granted"": null, ""status"": ""pending""}"
 6,company_age_years,2026-10-17,4.5,,"{""founded_year"": 2022, ""source"": ""registry""}"
 6,funding_velocity_usd_per_year,2026-10-17,422222.0,,
 6,registry_status,2026-10-17,,active,
 6,distress_flag,2026-10-17,0.0,,"{""insolvency_cases"": 0, ""status"": ""ACTIVE"", ""no_active_officers"": false}"
 6,founded_year_conflicts,2026-10-17,2.0,,"[""2016"", ""2022""]"
-6,category_tags,2026-10-17,,"[""impact:A"", ""impact:C"", ""impact:D"", ""industry:environmentalservices"", ""kw:focused"", ""kw:forest"", ""kw:kelp"", ""kw:marine"", ""kw:restoration"", ""kw:restoring"", ""sector:habitatrestoration""]",
-6,top_peer,2026-10-17,0.258,kelp-blue,"[""impact:A"", ""impact:C"", ""impact:D"", ""industry:environmentalservices"", ""kw:forest"", ""kw:kelp""]"
+6,eu_grants_total_eur,2026-10-17,0.0,,{}
+6,eu_projects_count,2026-10-17,0.0,,
+6,eu_projects_funded,2026-10-17,0.0,,
+6,eu_coordinator_count,2026-10-17,0.0,,[]
+6,eic_or_sme_instrument,2026-10-17,0.0,,[]
+6,mission_ocean_grant,2026-10-17,0.0,,[]
+6,eu_active_projects,2026-10-17,0.0,,
+6,eu_consortium_links,2026-10-17,0.0,,
+6,eu_first_grant_year,2026-10-17,,not-applicable,"{""reason"": ""no EU-funded projects found in CORDIS""}"
+6,cordis_sme_confirmed,2026-10-17,,not-applicable,"{""reason"": ""not a CORDIS participant""}"
+6,grant_to_equity_ratio,2026-10-17,0.0,,"{""eu_grants_usd"": 0, ""total_raised_usd"": 1900000}"
+6,blueinvest_listed,2026-10-17,1.0,,"{""profile"": ""https://blueinvest-community.converve.io/pipeline_front.html?action=detail&params%5Bevent_id%5D=1&params%5Bshow%5D=comp&params%5Bother_id%5D=1655""}"
+6,blueinvest_trl,2026-10-17,8.0,,"{""trl_text"": ""TRL 8 - Actual system completed through test and demonstration""}"
+6,blueinvest_sector,2026-10-17,,Coastal and environmental protection and regeneration,
+6,trl_gap,2026-10-17,3.0,,"{""blueinvest_trl"": 8, ""seed_estimate_trl"": 5}"
+6,blueinvest_peer_count,2026-10-17,8.0,,"[[""Reefy"", 0.2262], [""Precision Kelp Rewilding (PKR): Scaling Kelp Forest Restoration with MAD Gametophytes"", 0.2242], [""SeaGrass Blue"", 0.1813], [""Kelp Blu Biotech"", 0.1188], [""Kelp Cover"", 0.1051]]"
+6,peer_median_trl,2026-10-17,6.5,,"{""peer_trls"": [8, 7, 7, 4, 3, 6, 5, 3, 9, 7]}"
+6,trl_vs_peers,2026-10-17,1.5,,"{""own_trl"": 8, ""peer_median"": 6.5}"
+6,category_tags,2026-10-17,,"[""bisector:coastalandenvironmentalprotectionandregeneration"", ""impact:A"", ""impact:C"", ""impact:D"", ""industry:environmentalservices"", ""kw:focused"", ""kw:forest"", ""kw:kelp"", ""kw:marine"", ""kw:restoration"", ""kw:restoring"", ""sector:habitatrestoration""]",
+6,top_peer,2026-10-17,0.269,kelp-blue,"[""bisector:coastalandenvironmentalprotectionandregeneration"", ""impact:A"", ""impact:C"", ""impact:D"", ""industry:environmentalservices"", ""kw:forest"", ""kw:kelp""]"
 7,total_raised_usd,2026-10-17,60000000.0,,"{""announced_rounds"": 60000000}"
 7,round_count,2026-10-17,1.0,,"{""announced_rounds"": 1}"
 7,last_round_date,2026-10-17,,2023-12-01,"{""dates"": [""2023-12-01""]}"
@@ -203,16 +382,50 @@
 7,follow_on_investors,2026-10-17,0.0,,[]
 7,lead_investors,2026-10-17,,Climate Fund Managers; Eos Capital,
 7,investor_count,2026-10-17,2.0,,"{""known_investors"": 2}"
+7,founder_count,2026-10-17,1.0,,"{""source"": ""people_data_labs"", ""founders"": [""Daniel Hooft""]}"
+7,serial_founder_count,2026-10-17,0.0,,"{""source"": ""people_data_labs"", ""prior_ventures"": {""Daniel Hooft"": []}}"
+7,prior_ventures_total,2026-10-17,0.0,,"{""Daniel Hooft"": []}"
+7,prior_ventures_failed,2026-10-17,0.0,,
+7,founder_other_ventures,2026-10-17,1.0,,"{""Daniel Hooft"": [""Stimblue+ (chief executive officer, from 2020-01)""]}"
+7,founder_retention,2026-10-17,1.0,,"{""active"": [""Daniel Hooft""], ""left"": []}"
+7,board_size,2026-10-17,1.0,,"[""Kat Bruce""]"
 7,headcount,2026-10-17,62.0,,"{""source"": ""people_data_labs"", ""observed_on"": ""2026-10-16""}"
-7,open_roles,2026-10-17,0.0,,
+7,open_roles,2026-10-17,0.0,,"{""source"": ""serpapi_google_jobs""}"
+7,technical_open_roles,2026-10-17,0.0,,
+7,commercial_open_roles,2026-10-17,0.0,,
 7,news_mentions_12m,2026-10-17,5.0,,
 7,patent_count,2026-10-17,1.0,,
 7,patents_granted,2026-10-17,0.0,,
+7,patents_pending,2026-10-17,1.0,,
+7,patents_abandoned,2026-10-17,0.0,,[]
+7,first_patent_granted,2026-10-17,,pending,"{""patent"": ""EP4561967A1"", ""office"": ""EP"", ""filed"": ""2023-07-26"", ""granted"": null, ""status"": ""pending""}"
 7,company_age_years,2026-10-17,6.5,,"{""founded_year"": 2020, ""source"": ""startups.founded_year""}"
 7,funding_velocity_usd_per_year,2026-10-17,9230769.0,,
 7,founded_year_conflicts,2026-10-17,1.0,,"[""2020""]"
-7,category_tags,2026-10-17,,"[""impact:A"", ""impact:C"", ""impact:D"", ""impact:F"", ""industry:environmentalservices"", ""kw:action"", ""kw:biodiversity"", ""kw:biostimulant"", ""kw:carbon"", ""kw:climate"", ""kw:cultivating"", ""kw:deritz"", ""kw:dutch"", ""kw:forest"", ""kw:giant"", ""kw:headquartered"", ""kw:kelp"", ""kw:namibia"", ""kw:prize"", ""kw:received"", ""kw:sustainability"", ""kw:zayed"", ""sector:aquaculture""]",
-7,top_peer,2026-10-17,0.258,seaforester,"[""impact:A"", ""impact:C"", ""impact:D"", ""industry:environmentalservices"", ""kw:forest"", ""kw:kelp""]"
+7,eu_grants_total_eur,2026-10-17,0.0,,{}
+7,eu_projects_count,2026-10-17,0.0,,
+7,eu_projects_funded,2026-10-17,0.0,,
+7,eu_coordinator_count,2026-10-17,0.0,,[]
+7,eic_or_sme_instrument,2026-10-17,0.0,,[]
+7,mission_ocean_grant,2026-10-17,0.0,,[]
+7,eu_active_projects,2026-10-17,0.0,,
+7,eu_consortium_links,2026-10-17,0.0,,
+7,eu_first_grant_year,2026-10-17,,not-applicable,"{""reason"": ""no EU-funded projects found in CORDIS""}"
+7,cordis_sme_confirmed,2026-10-17,,not-applicable,"{""reason"": ""not a CORDIS participant""}"
+7,grant_to_equity_ratio,2026-10-17,0.0,,"{""eu_grants_usd"": 0, ""total_raised_usd"": 60000000}"
+7,ocean_patent_count,2026-10-17,1.0,,"{""EP4561967A1"": ""marine-bio""}"
+7,ocean_patent_share,2026-10-17,1.0,,
+7,ocean_tech_groups,2026-10-17,,"[""marine-bio""]",
+7,blueinvest_listed,2026-10-17,1.0,,"{""profile"": ""https://blueinvest-community.converve.io/pipeline_front.html?action=detail&params%5Bevent_id%5D=1&params%5Bshow%5D=comp&params%5Bother_id%5D=984""}"
+7,blueinvest_trl,2026-10-17,4.0,,"{""trl_text"": ""TRL 4 - Component validation in laboratory environment""}"
+7,blueinvest_funding_sought_eur,2026-10-17,7000000.0,,"{""text"": ""Between EUR 7m-15m""}"
+7,blueinvest_sector,2026-10-17,,Coastal and environmental protection and regeneration,
+7,trl_gap,2026-10-17,-2.0,,"{""blueinvest_trl"": 4, ""seed_estimate_trl"": 6}"
+7,blueinvest_peer_count,2026-10-17,2.0,,"[[""Precision Kelp Rewilding (PKR): Scaling Kelp Forest Restoration with MAD Gametophytes"", 0.1259], [""Kelp Cover"", 0.1116], [""Dutch Wave Power"", 0.0869], [""Seaweed biostomulant - TopHealth Plants"", 0.0789], [""Anemo Robotics - Reach MVP"", 0.0778]]"
+7,peer_median_trl,2026-10-17,7.5,,"{""peer_trls"": [7, 3, 5, 9, 6, 8, 9, 9, 9, 7]}"
+7,trl_vs_peers,2026-10-17,-3.5,,"{""own_trl"": 4, ""peer_median"": 7.5}"
+7,category_tags,2026-10-17,,"[""bisector:coastalandenvironmentalprotectionandregeneration"", ""cpc:A01N"", ""cpc:A01P"", ""cpc:B01D"", ""cpc:C05F"", ""impact:A"", ""impact:C"", ""impact:D"", ""impact:F"", ""industry:environmentalservices"", ""kw:action"", ""kw:biodiversity"", ""kw:biostimulant"", ""kw:carbon"", ""kw:climate"", ""kw:cultivating"", ""kw:deritz"", ""kw:dutch"", ""kw:forest"", ""kw:giant"", ""kw:headquartered"", ""kw:kelp"", ""kw:namibia"", ""kw:prize"", ""kw:received"", ""kw:sustainability"", ""kw:zayed"", ""sector:aquaculture""]",
+7,top_peer,2026-10-17,0.269,seaforester,"[""bisector:coastalandenvironmentalprotectionandregeneration"", ""impact:A"", ""impact:C"", ""impact:D"", ""industry:environmentalservices"", ""kw:forest"", ""kw:kelp""]"
 8,total_raised_usd,2026-10-17,1750000.0,,"{""people_data_labs"": 1750000}"
 8,round_count,2026-10-17,4.0,,"{""announced_rounds"": 1, ""people_data_labs"": 4}"
 8,last_round_date,2026-10-17,,2026-06-08,"{""dates"": [""2022-09-01"", ""2026-06-08""]}"
@@ -226,11 +439,42 @@
 8,follow_on_investors,2026-10-17,0.0,,[]
 8,lead_investors,2026-10-17,,Alibaba Hong Kong Entrepreneurs Fund,
 8,investor_count,2026-10-17,4.0,,"{""known_investors"": 4}"
+8,founder_count,2026-10-17,2.0,,"{""source"": ""people_data_labs"", ""founders"": [""Utkarsh Goel"", ""Sidhant Gupta""]}"
+8,serial_founder_count,2026-10-17,1.0,,"{""source"": ""people_data_labs"", ""prior_ventures"": {""Utkarsh Goel"": [], ""Sidhant Gupta"": [""The Vayu Project (founder, from 2015-04)"", ""Osrei.Org (founder, from 2017-09)""]}}"
+8,prior_ventures_total,2026-10-17,2.0,,"{""Utkarsh Goel"": [], ""Sidhant Gupta"": [""The Vayu Project (founder, from 2015-04)"", ""Osrei.Org (founder, from 2017-09)""]}"
+8,founder_other_ventures,2026-10-17,4.0,,"{""Utkarsh Goel"": [""Deploifai (co-founder, from 2021-06)""], ""Sidhant Gupta"": [""The Vayu Project (founder, from 2015-04)"", ""Osrei.Org (founder, from 2017-09)"", ""Open Ocean Camera (founder, chief executive officer, from 2020-01)""]}"
+8,founder_retention,2026-10-17,1.0,,"{""active"": [""Utkarsh Goel"", ""Sidhant Gupta""], ""left"": []}"
+8,board_size,2026-10-17,1.0,,"[""Lavine Hemlani""]"
 8,headcount,2026-10-17,21.0,,"{""source"": ""people_data_labs"", ""observed_on"": ""2026-10-16""}"
-8,open_roles,2026-10-17,0.0,,
+8,open_roles,2026-10-17,0.0,,"{""source"": ""serpapi_google_jobs""}"
+8,technical_open_roles,2026-10-17,0.0,,
+8,commercial_open_roles,2026-10-17,0.0,,
 8,news_mentions_12m,2026-10-17,2.0,,
 8,patent_count,2026-10-17,0.0,,
 8,patents_granted,2026-10-17,0.0,,
+8,patents_pending,2026-10-17,0.0,,
+8,patents_abandoned,2026-10-17,0.0,,[]
+8,first_patent_granted,2026-10-17,,not-applicable,"{""reason"": ""no patents found""}"
+8,first_patent_months_to_grant,2026-10-17,,not-applicable,"{""reason"": ""no patents found""}"
 8,founded_year_conflicts,2026-10-17,1.0,,"[""2019""]"
+8,eu_grants_total_eur,2026-10-17,0.0,,{}
+8,eu_projects_count,2026-10-17,0.0,,
+8,eu_projects_funded,2026-10-17,0.0,,
+8,eu_coordinator_count,2026-10-17,0.0,,[]
+8,eic_or_sme_instrument,2026-10-17,0.0,,[]
+8,mission_ocean_grant,2026-10-17,0.0,,[]
+8,eu_active_projects,2026-10-17,0.0,,
+8,eu_consortium_links,2026-10-17,0.0,,
+8,eu_first_grant_year,2026-10-17,,not-applicable,"{""reason"": ""no EU-funded projects found in CORDIS""}"
+8,cordis_sme_confirmed,2026-10-17,,not-applicable,"{""reason"": ""not a CORDIS participant""}"
+8,grant_to_equity_ratio,2026-10-17,0.0,,"{""eu_grants_usd"": 0, ""total_raised_usd"": 1750000}"
+8,blueinvest_listed,2026-10-17,0.0,,
+8,blueinvest_trl,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+8,blueinvest_funding_sought_eur,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+8,blueinvest_sector,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+8,trl_gap,2026-10-17,,not-applicable,"{""reason"": ""not in the BlueInvest pipeline""}"
+8,blueinvest_peer_count,2026-10-17,0.0,,"[[""KELPEAT"", 0.0875], [""DotOcean N.V."", 0.0802], [""Building the future of food"", 0.0786], [""Inobiostar"", 0.0694], [""mOcean"", 0.0692]]"
+8,peer_median_trl,2026-10-17,6.5,,"{""peer_trls"": [9, 9, 6, 5, 4, 6, 8, 7, 4, 7]}"
+8,trl_vs_peers,2026-10-17,0.5,,"{""own_trl"": 7, ""peer_median"": 6.5}"
 8,category_tags,2026-10-17,,"[""impact:B"", ""impact:F"", ""industry:technologyinformationandinternet"", ""kw:autonomou"", ""kw:boat"", ""kw:collect"", ""kw:deployment"", ""kw:driving"", ""kw:electric"", ""kw:floating"", ""kw:hong"", ""kw:india"", ""kw:kong"", ""kw:panama"", ""kw:reported"", ""kw:self"", ""kw:spun"", ""kw:student"", ""kw:university"", ""kw:waste"", ""sector:oceancleanup""]",
-8,top_peer,2026-10-17,0.041,sofar-ocean,"[""industry:technologyinformationandinternet""]"
+8,top_peer,2026-10-17,0.034,sofar-ocean,"[""industry:technologyinformationandinternet""]"

@@ -19,15 +19,15 @@
 1,18,filled,1,col:tagline
 1,19,proxy,1,col:description
 1,20,proxy,1,col:sector
-1,21,proxy,1,unit:founders
-1,22,proxy,1,unit:founders
+1,21,filled,3,founders
+1,22,proxy,3,founders
 1,23,not-collectable,0,"needs founder, VC or paid data"
 1,24,not-collectable,0,"needs founder, VC or paid data"
-1,25,not-collectable,0,"needs founder, VC or paid data"
+1,25,proxy,2,ventures
 1,26,not-collectable,0,"needs founder, VC or paid data"
 1,27,not-collectable,0,"needs founder, VC or paid data"
 1,28,not-collectable,0,"needs founder, VC or paid data"
-1,29,not-collectable,0,"needs founder, VC or paid data"
+1,29,empty,0,
 1,30,not-collectable,0,"needs founder, VC or paid data"
 1,31,not-collectable,0,"needs founder, VC or paid data"
 1,32,not-collectable,0,"needs founder, VC or paid data"
@@ -37,10 +37,10 @@
 1,36,not-collectable,0,"needs founder, VC or paid data"
 1,37,not-collectable,0,"needs founder, VC or paid data"
 1,38,not-collectable,0,"needs founder, VC or paid data"
-1,39,empty,0,
+1,39,proxy,1,feature:open_roles
 1,40,not-collectable,0,"needs founder, VC or paid data"
 1,41,not-collectable,0,"needs founder, VC or paid data"
-1,42,proxy,1,unit:officers
+1,42,proxy,5,board
 1,43,not-collectable,0,"needs founder, VC or paid data"
 1,44,not-collectable,0,"needs founder, VC or paid data"
 1,45,not-collectable,0,"needs founder, VC or paid data"
@@ -89,7 +89,7 @@
 1,88,not-collectable,0,"needs founder, VC or paid data"
 1,89,not-collectable,0,"needs founder, VC or paid data"
 1,90,not-collectable,0,"needs founder, VC or paid data"
-1,91,empty,0,
+1,91,not-applicable,0,not meaningful for hardware/biotech startups
 1,92,not-collectable,0,"needs founder, VC or paid data"
 1,93,not-collectable,0,"needs founder, VC or paid data"
 1,94,not-collectable,0,"needs founder, VC or paid data"
@@ -210,7 +210,7 @@
 1,209,not-collectable,0,"needs founder, VC or paid data"
 1,210,not-collectable,0,"needs founder, VC or paid data"
 1,211,not-collectable,0,"needs founder, VC or paid data"
-1,212,empty,0,
+1,212,proxy,10,xpeers
 1,213,not-collectable,0,"needs founder, VC or paid data"
 1,214,empty,0,
 1,215,not-collectable,0,"needs founder, VC or paid data"
@@ -245,7 +245,7 @@
 1,244,not-collectable,0,"needs founder, VC or paid data"
 1,245,not-collectable,0,"needs founder, VC or paid data"
 1,246,not-collectable,0,"needs founder, VC or paid data"
-1,247,proxy,58,signal:filing
+1,247,proxy,28,events:total_shares
 1,248,not-collectable,0,"needs founder, VC or paid data"
 1,249,not-collectable,0,"needs founder, VC or paid data"
 1,250,not-collectable,0,"needs founder, VC or paid data"
@@ -318,7 +318,7 @@
 1,317,proxy,1,ext:company_number
 1,318,not-collectable,0,"needs founder, VC or paid data"
 1,319,not-collectable,0,"needs founder, VC or paid data"
-1,320,empty,0,
+1,320,proxy,1,feature:distress_flag
 1,321,not-collectable,0,"needs founder, VC or paid data"
 1,322,not-collectable,0,"needs founder, VC or paid data"
 1,323,not-collectable,0,"needs founder, VC or paid data"
@@ -358,12 +358,12 @@
 1,357,not-collectable,0,"needs founder, VC or paid data"
 1,358,not-collectable,0,"needs founder, VC or paid data"
 1,359,not-collectable,0,"needs founder, VC or paid data"
-1,360,empty,0,
+1,360,not-applicable,0,not meaningful for hardware/biotech startups
 1,361,not-collectable,0,"needs founder, VC or paid data"
-1,362,empty,0,
-1,363,empty,0,
+1,362,proxy,1,feature:technical_open_roles
+1,363,proxy,1,feature:commercial_open_roles
 1,364,empty,0,
-1,365,proxy,1,signal:launch
+1,365,not-applicable,0,not meaningful for hardware/biotech startups
 1,366,proxy,19,signal:news
 1,367,proxy,19,signal:news
 1,368,filled,19,signal:news
@@ -474,15 +474,15 @@
 2,18,filled,1,col:tagline
 2,19,proxy,1,col:description
 2,20,proxy,1,col:sector
-2,21,proxy,1,signal:website
-2,22,empty,0,
+2,21,filled,1,founders
+2,22,proxy,1,founders
 2,23,not-collectable,0,"needs founder, VC or paid data"
 2,24,not-collectable,0,"needs founder, VC or paid data"
-2,25,not-collectable,0,"needs founder, VC or paid data"
+2,25,proxy,0,founders known; no other ventures found
 2,26,not-collectable,0,"needs founder, VC or paid data"
 2,27,not-collectable,0,"needs founder, VC or paid data"
 2,28,not-collectable,0,"needs founder, VC or paid data"
-2,29,not-collectable,0,"needs founder, VC or paid data"
+2,29,proxy,1,education
 2,30,not-collectable,0,"needs founder, VC or paid data"
 2,31,not-collectable,0,"needs founder, VC or paid data"
 2,32,not-collectable,0,"needs founder, VC or paid data"
@@ -492,10 +492,10 @@
 2,36,not-collectable,0,"needs founder, VC or paid data"
 2,37,not-collectable,0,"needs founder, VC or paid data"
 2,38,not-collectable,0,"needs founder, VC or paid data"
-2,39,proxy,10,signal:job
+2,39,proxy,1,feature:open_roles
 2,40,not-collectable,0,"needs founder, VC or paid data"
 2,41,not-collectable,0,"needs founder, VC or paid data"
-2,42,empty,0,
+2,42,proxy,5,board
 2,43,not-collectable,0,"needs founder, VC or paid data"
 2,44,not-collectable,0,"needs founder, VC or paid data"
 2,45,not-collectable,0,"needs founder, VC or paid data"
@@ -665,7 +665,7 @@
 2,209,not-collectable,0,"needs founder, VC or paid data"
 2,210,not-collectable,0,"needs founder, VC or paid data"
 2,211,not-collectable,0,"needs founder, VC or paid data"
-2,212,empty,0,
+2,212,proxy,10,xpeers
 2,213,not-collectable,0,"needs founder, VC or paid data"
 2,214,empty,0,
 2,215,not-collectable,0,"needs founder, VC or paid data"
@@ -700,7 +700,7 @@
 2,244,not-collectable,0,"needs founder, VC or paid data"
 2,245,not-collectable,0,"needs founder, VC or paid data"
 2,246,not-collectable,0,"needs founder, VC or paid data"
-2,247,proxy,2,signal:filing
+2,247,empty,0,
 2,248,not-collectable,0,"needs founder, VC or paid data"
 2,249,not-collectable,0,"needs founder, VC or paid data"
 2,250,not-collectable,0,"needs founder, VC or paid data"
@@ -773,7 +773,7 @@
 2,317,empty,0,
 2,318,not-collectable,0,"needs founder, VC or paid data"
 2,319,not-collectable,0,"needs founder, VC or paid data"
-2,320,empty,0,
+2,320,proxy,1,feature:no_round_24m
 2,321,not-collectable,0,"needs founder, VC or paid data"
 2,322,not-collectable,0,"needs founder, VC or paid data"
 2,323,not-collectable,0,"needs founder, VC or paid data"
@@ -815,9 +815,9 @@
 2,359,not-collectable,0,"needs founder, VC or paid data"
 2,360,empty,0,
 2,361,not-collectable,0,"needs founder, VC or paid data"
-2,362,proxy,10,signal:job
-2,363,proxy,10,signal:job
-2,364,proxy,10,signal:job
+2,362,proxy,1,feature:technical_open_roles
+2,363,proxy,1,feature:commercial_open_roles
+2,364,proxy,2,jobsnapshots
 2,365,empty,0,
 2,366,proxy,15,signal:news
 2,367,proxy,15,signal:news
@@ -929,15 +929,15 @@
 3,18,filled,1,col:tagline
 3,19,proxy,1,col:description
 3,20,proxy,1,col:sector
-3,21,proxy,1,signal:website
-3,22,empty,0,
+3,21,filled,2,founders
+3,22,proxy,2,founders
 3,23,not-collectable,0,"needs founder, VC or paid data"
 3,24,not-collectable,0,"needs founder, VC or paid data"
-3,25,not-collectable,0,"needs founder, VC or paid data"
+3,25,proxy,9,ventures
 3,26,not-collectable,0,"needs founder, VC or paid data"
 3,27,not-collectable,0,"needs founder, VC or paid data"
 3,28,not-collectable,0,"needs founder, VC or paid data"
-3,29,not-collectable,0,"needs founder, VC or paid data"
+3,29,proxy,2,education
 3,30,not-collectable,0,"needs founder, VC or paid data"
 3,31,not-collectable,0,"needs founder, VC or paid data"
 3,32,not-collectable,0,"needs founder, VC or paid data"
@@ -947,7 +947,7 @@
 3,36,not-collectable,0,"needs founder, VC or paid data"
 3,37,not-collectable,0,"needs founder, VC or paid data"
 3,38,not-collectable,0,"needs founder, VC or paid data"
-3,39,empty,0,
+3,39,proxy,1,feature:open_roles
 3,40,not-collectable,0,"needs founder, VC or paid data"
 3,41,not-collectable,0,"needs founder, VC or paid data"
 3,42,empty,0,
@@ -999,7 +999,7 @@
 3,88,not-collectable,0,"needs founder, VC or paid data"
 3,89,not-collectable,0,"needs founder, VC or paid data"
 3,90,not-collectable,0,"needs founder, VC or paid data"
-3,91,empty,0,
+3,91,not-applicable,0,not meaningful for hardware/biotech startups
 3,92,not-collectable,0,"needs founder, VC or paid data"
 3,93,not-collectable,0,"needs founder, VC or paid data"
 3,94,not-collectable,0,"needs founder, VC or paid data"
@@ -1120,9 +1120,9 @@
 3,209,not-collectable,0,"needs founder, VC or paid data"
 3,210,not-collectable,0,"needs founder, VC or paid data"
 3,211,not-collectable,0,"needs founder, VC or paid data"
-3,212,proxy,2,peers
+3,212,proxy,10,xpeers
 3,213,not-collectable,0,"needs founder, VC or paid data"
-3,214,proxy,2,peers
+3,214,proxy,1,peerfunding
 3,215,not-collectable,0,"needs founder, VC or paid data"
 3,216,not-collectable,0,"needs founder, VC or paid data"
 3,217,not-collectable,0,"needs founder, VC or paid data"
@@ -1228,7 +1228,7 @@
 3,317,empty,0,
 3,318,not-collectable,0,"needs founder, VC or paid data"
 3,319,not-collectable,0,"needs founder, VC or paid data"
-3,320,empty,0,
+3,320,proxy,1,feature:distress_flag
 3,321,not-collectable,0,"needs founder, VC or paid data"
 3,322,not-collectable,0,"needs founder, VC or paid data"
 3,323,not-collectable,0,"needs founder, VC or paid data"
@@ -1268,12 +1268,12 @@
 3,357,not-collectable,0,"needs founder, VC or paid data"
 3,358,not-collectable,0,"needs founder, VC or paid data"
 3,359,not-collectable,0,"needs founder, VC or paid data"
-3,360,empty,0,
+3,360,not-applicable,0,not meaningful for hardware/biotech startups
 3,361,not-collectable,0,"needs founder, VC or paid data"
-3,362,empty,0,
-3,363,empty,0,
+3,362,proxy,1,feature:technical_open_roles
+3,363,proxy,1,feature:commercial_open_roles
 3,364,empty,0,
-3,365,empty,0,
+3,365,not-applicable,0,not meaningful for hardware/biotech startups
 3,366,proxy,12,signal:news
 3,367,proxy,12,signal:news
 3,368,filled,12,signal:news
@@ -1384,15 +1384,15 @@
 4,18,filled,1,col:tagline
 4,19,proxy,1,col:description
 4,20,proxy,1,col:sector
-4,21,proxy,1,unit:founders
-4,22,proxy,1,unit:founders
+4,21,filled,2,founders
+4,22,proxy,2,founders
 4,23,not-collectable,0,"needs founder, VC or paid data"
 4,24,not-collectable,0,"needs founder, VC or paid data"
-4,25,not-collectable,0,"needs founder, VC or paid data"
+4,25,proxy,0,founders known; no other ventures found
 4,26,not-collectable,0,"needs founder, VC or paid data"
 4,27,not-collectable,0,"needs founder, VC or paid data"
 4,28,not-collectable,0,"needs founder, VC or paid data"
-4,29,not-collectable,0,"needs founder, VC or paid data"
+4,29,empty,0,
 4,30,not-collectable,0,"needs founder, VC or paid data"
 4,31,not-collectable,0,"needs founder, VC or paid data"
 4,32,not-collectable,0,"needs founder, VC or paid data"
@@ -1402,10 +1402,10 @@
 4,36,not-collectable,0,"needs founder, VC or paid data"
 4,37,not-collectable,0,"needs founder, VC or paid data"
 4,38,not-collectable,0,"needs founder, VC or paid data"
-4,39,empty,0,
+4,39,proxy,1,feature:open_roles
 4,40,not-collectable,0,"needs founder, VC or paid data"
 4,41,not-collectable,0,"needs founder, VC or paid data"
-4,42,proxy,1,unit:officers
+4,42,proxy,1,board
 4,43,not-collectable,0,"needs founder, VC or paid data"
 4,44,not-collectable,0,"needs founder, VC or paid data"
 4,45,not-collectable,0,"needs founder, VC or paid data"
@@ -1454,7 +1454,7 @@
 4,88,not-collectable,0,"needs founder, VC or paid data"
 4,89,not-collectable,0,"needs founder, VC or paid data"
 4,90,not-collectable,0,"needs founder, VC or paid data"
-4,91,empty,0,
+4,91,not-applicable,0,not meaningful for hardware/biotech startups
 4,92,not-collectable,0,"needs founder, VC or paid data"
 4,93,not-collectable,0,"needs founder, VC or paid data"
 4,94,not-collectable,0,"needs founder, VC or paid data"
@@ -1463,7 +1463,7 @@
 4,97,filled,1,signal:patent
 4,98,proxy,1,signal:patent
 4,99,proxy,10,signal:paper
-4,100,filled,1,assess
+4,100,filled,1,unit:trl
 4,101,not-collectable,0,"needs founder, VC or paid data"
 4,102,not-collectable,0,"needs founder, VC or paid data"
 4,103,not-collectable,0,"needs founder, VC or paid data"
@@ -1575,7 +1575,7 @@
 4,209,not-collectable,0,"needs founder, VC or paid data"
 4,210,not-collectable,0,"needs founder, VC or paid data"
 4,211,not-collectable,0,"needs founder, VC or paid data"
-4,212,empty,0,
+4,212,proxy,10,xpeers
 4,213,not-collectable,0,"needs founder, VC or paid data"
 4,214,empty,0,
 4,215,not-collectable,0,"needs founder, VC or paid data"
@@ -1610,7 +1610,7 @@
 4,244,not-collectable,0,"needs founder, VC or paid data"
 4,245,not-collectable,0,"needs founder, VC or paid data"
 4,246,not-collectable,0,"needs founder, VC or paid data"
-4,247,proxy,3,signal:filing
+4,247,proxy,3,events:total_shares
 4,248,not-collectable,0,"needs founder, VC or paid data"
 4,249,not-collectable,0,"needs founder, VC or paid data"
 4,250,not-collectable,0,"needs founder, VC or paid data"
@@ -1683,7 +1683,7 @@
 4,317,proxy,1,ext:company_number
 4,318,not-collectable,0,"needs founder, VC or paid data"
 4,319,not-collectable,0,"needs founder, VC or paid data"
-4,320,empty,0,
+4,320,proxy,1,feature:distress_flag
 4,321,not-collectable,0,"needs founder, VC or paid data"
 4,322,not-collectable,0,"needs founder, VC or paid data"
 4,323,not-collectable,0,"needs founder, VC or paid data"
@@ -1723,12 +1723,12 @@
 4,357,not-collectable,0,"needs founder, VC or paid data"
 4,358,not-collectable,0,"needs founder, VC or paid data"
 4,359,not-collectable,0,"needs founder, VC or paid data"
-4,360,empty,0,
+4,360,not-applicable,0,not meaningful for hardware/biotech startups
 4,361,not-collectable,0,"needs founder, VC or paid data"
-4,362,proxy,1,ext:yc_slug
-4,363,empty,0,
+4,362,proxy,1,feature:technical_open_roles
+4,363,proxy,1,feature:commercial_open_roles
 4,364,empty,0,
-4,365,empty,0,
+4,365,not-applicable,0,not meaningful for hardware/biotech startups
 4,366,proxy,16,signal:news
 4,367,proxy,16,signal:news
 4,368,filled,16,signal:news
@@ -1839,15 +1839,15 @@
 5,18,filled,1,col:tagline
 5,19,proxy,1,col:description
 5,20,proxy,1,col:sector
-5,21,proxy,1,unit:founders
-5,22,proxy,1,unit:founders
+5,21,filled,2,founders
+5,22,proxy,2,founders
 5,23,not-collectable,0,"needs founder, VC or paid data"
 5,24,not-collectable,0,"needs founder, VC or paid data"
-5,25,not-collectable,0,"needs founder, VC or paid data"
+5,25,proxy,1,ventures
 5,26,not-collectable,0,"needs founder, VC or paid data"
 5,27,not-collectable,0,"needs founder, VC or paid data"
 5,28,not-collectable,0,"needs founder, VC or paid data"
-5,29,not-collectable,0,"needs founder, VC or paid data"
+5,29,empty,0,
 5,30,not-collectable,0,"needs founder, VC or paid data"
 5,31,not-collectable,0,"needs founder, VC or paid data"
 5,32,not-collectable,0,"needs founder, VC or paid data"
@@ -1857,7 +1857,7 @@
 5,36,not-collectable,0,"needs founder, VC or paid data"
 5,37,not-collectable,0,"needs founder, VC or paid data"
 5,38,not-collectable,0,"needs founder, VC or paid data"
-5,39,empty,0,
+5,39,proxy,1,feature:open_roles
 5,40,not-collectable,0,"needs founder, VC or paid data"
 5,41,not-collectable,0,"needs founder, VC or paid data"
 5,42,proxy,1,unit:officers
@@ -1909,7 +1909,7 @@
 5,88,not-collectable,0,"needs founder, VC or paid data"
 5,89,not-collectable,0,"needs founder, VC or paid data"
 5,90,not-collectable,0,"needs founder, VC or paid data"
-5,91,empty,0,
+5,91,not-applicable,0,not meaningful for hardware/biotech startups
 5,92,not-collectable,0,"needs founder, VC or paid data"
 5,93,not-collectable,0,"needs founder, VC or paid data"
 5,94,not-collectable,0,"needs founder, VC or paid data"
@@ -1918,7 +1918,7 @@
 5,97,filled,4,signal:patent
 5,98,proxy,4,signal:patent
 5,99,proxy,10,signal:paper
-5,100,filled,1,assess
+5,100,filled,1,unit:trl
 5,101,not-collectable,0,"needs founder, VC or paid data"
 5,102,not-collectable,0,"needs founder, VC or paid data"
 5,103,not-collectable,0,"needs founder, VC or paid data"
@@ -2030,9 +2030,9 @@
 5,209,not-collectable,0,"needs founder, VC or paid data"
 5,210,not-collectable,0,"needs founder, VC or paid data"
 5,211,not-collectable,0,"needs founder, VC or paid data"
-5,212,proxy,2,peers
+5,212,proxy,10,xpeers
 5,213,not-collectable,0,"needs founder, VC or paid data"
-5,214,proxy,2,peers
+5,214,proxy,1,peerfunding
 5,215,not-collectable,0,"needs founder, VC or paid data"
 5,216,not-collectable,0,"needs founder, VC or paid data"
 5,217,not-collectable,0,"needs founder, VC or paid data"
@@ -2065,7 +2065,7 @@
 5,244,not-collectable,0,"needs founder, VC or paid data"
 5,245,not-collectable,0,"needs founder, VC or paid data"
 5,246,not-collectable,0,"needs founder, VC or paid data"
-5,247,proxy,21,signal:filing
+5,247,proxy,20,events:total_shares
 5,248,not-collectable,0,"needs founder, VC or paid data"
 5,249,not-collectable,0,"needs founder, VC or paid data"
 5,250,not-collectable,0,"needs founder, VC or paid data"
@@ -2138,7 +2138,7 @@
 5,317,proxy,1,unit:insolvency
 5,318,not-collectable,0,"needs founder, VC or paid data"
 5,319,not-collectable,0,"needs founder, VC or paid data"
-5,320,proxy,1,unit:insolvency
+5,320,proxy,1,feature:distress_flag
 5,321,not-collectable,0,"needs founder, VC or paid data"
 5,322,not-collectable,0,"needs founder, VC or paid data"
 5,323,not-collectable,0,"needs founder, VC or paid data"
@@ -2178,12 +2178,12 @@
 5,357,not-collectable,0,"needs founder, VC or paid data"
 5,358,not-collectable,0,"needs founder, VC or paid data"
 5,359,not-collectable,0,"needs founder, VC or paid data"
-5,360,empty,0,
+5,360,not-applicable,0,not meaningful for hardware/biotech startups
 5,361,not-collectable,0,"needs founder, VC or paid data"
-5,362,empty,0,
-5,363,empty,0,
+5,362,proxy,1,feature:technical_open_roles
+5,363,proxy,1,feature:commercial_open_roles
 5,364,empty,0,
-5,365,empty,0,
+5,365,not-applicable,0,not meaningful for hardware/biotech startups
 5,366,proxy,9,signal:news
 5,367,proxy,9,signal:news
 5,368,filled,9,signal:news
@@ -2276,7 +2276,7 @@
 5,455,not-collectable,0,"needs founder, VC or paid data"
 6,1,filled,1,col:id
 6,2,filled,1,col:name
-6,3,proxy,2,2 suggestion(s) for website
+6,3,proxy,3,3 suggestion(s) for website
 6,4,filled,1,ext:lei
 6,5,filled,1,col:city
 6,6,proxy,2,2 suggestion(s) for founded_year
@@ -2294,15 +2294,15 @@
 6,18,filled,1,col:tagline
 6,19,proxy,1,col:description
 6,20,proxy,1,col:sector
-6,21,empty,0,
-6,22,empty,0,
+6,21,filled,1,founders
+6,22,proxy,1,founders
 6,23,not-collectable,0,"needs founder, VC or paid data"
 6,24,not-collectable,0,"needs founder, VC or paid data"
-6,25,not-collectable,0,"needs founder, VC or paid data"
+6,25,proxy,4,ventures
 6,26,not-collectable,0,"needs founder, VC or paid data"
 6,27,not-collectable,0,"needs founder, VC or paid data"
 6,28,not-collectable,0,"needs founder, VC or paid data"
-6,29,not-collectable,0,"needs founder, VC or paid data"
+6,29,proxy,1,education
 6,30,not-collectable,0,"needs founder, VC or paid data"
 6,31,not-collectable,0,"needs founder, VC or paid data"
 6,32,not-collectable,0,"needs founder, VC or paid data"
@@ -2312,10 +2312,10 @@
 6,36,not-collectable,0,"needs founder, VC or paid data"
 6,37,not-collectable,0,"needs founder, VC or paid data"
 6,38,not-collectable,0,"needs founder, VC or paid data"
-6,39,empty,0,
+6,39,proxy,1,feature:open_roles
 6,40,not-collectable,0,"needs founder, VC or paid data"
 6,41,not-collectable,0,"needs founder, VC or paid data"
-6,42,empty,0,
+6,42,proxy,1,board
 6,43,not-collectable,0,"needs founder, VC or paid data"
 6,44,not-collectable,0,"needs founder, VC or paid data"
 6,45,not-collectable,0,"needs founder, VC or paid data"
@@ -2364,7 +2364,7 @@
 6,88,not-collectable,0,"needs founder, VC or paid data"
 6,89,not-collectable,0,"needs founder, VC or paid data"
 6,90,not-collectable,0,"needs founder, VC or paid data"
-6,91,empty,0,
+6,91,not-applicable,0,not meaningful for hardware/biotech startups
 6,92,not-collectable,0,"needs founder, VC or paid data"
 6,93,not-collectable,0,"needs founder, VC or paid data"
 6,94,not-collectable,0,"needs founder, VC or paid data"
@@ -2373,7 +2373,7 @@
 6,97,filled,1,signal:patent
 6,98,proxy,1,signal:patent
 6,99,proxy,8,signal:paper
-6,100,filled,1,assess
+6,100,filled,1,unit:trl
 6,101,not-collectable,0,"needs founder, VC or paid data"
 6,102,not-collectable,0,"needs founder, VC or paid data"
 6,103,not-collectable,0,"needs founder, VC or paid data"
@@ -2485,9 +2485,9 @@
 6,209,not-collectable,0,"needs founder, VC or paid data"
 6,210,not-collectable,0,"needs founder, VC or paid data"
 6,211,not-collectable,0,"needs founder, VC or paid data"
-6,212,empty,0,
+6,212,proxy,10,xpeers
 6,213,not-collectable,0,"needs founder, VC or paid data"
-6,214,empty,0,
+6,214,proxy,1,peerfunding
 6,215,not-collectable,0,"needs founder, VC or paid data"
 6,216,not-collectable,0,"needs founder, VC or paid data"
 6,217,not-collectable,0,"needs founder, VC or paid data"
@@ -2593,7 +2593,7 @@
 6,317,empty,0,
 6,318,not-collectable,0,"needs founder, VC or paid data"
 6,319,not-collectable,0,"needs founder, VC or paid data"
-6,320,empty,0,
+6,320,proxy,1,feature:distress_flag
 6,321,not-collectable,0,"needs founder, VC or paid data"
 6,322,not-collectable,0,"needs founder, VC or paid data"
 6,323,not-collectable,0,"needs founder, VC or paid data"
@@ -2633,12 +2633,12 @@
 6,357,not-collectable,0,"needs founder, VC or paid data"
 6,358,not-collectable,0,"needs founder, VC or paid data"
 6,359,not-collectable,0,"needs founder, VC or paid data"
-6,360,empty,0,
+6,360,not-applicable,0,not meaningful for hardware/biotech startups
 6,361,not-collectable,0,"needs founder, VC or paid data"
-6,362,empty,0,
-6,363,empty,0,
+6,362,proxy,1,feature:technical_open_roles
+6,363,proxy,1,feature:commercial_open_roles
 6,364,empty,0,
-6,365,empty,0,
+6,365,not-applicable,0,not meaningful for hardware/biotech startups
 6,366,proxy,5,signal:news
 6,367,proxy,5,signal:news
 6,368,filled,5,signal:news
@@ -2749,15 +2749,15 @@
 7,18,filled,1,col:tagline
 7,19,proxy,1,col:description
 7,20,proxy,1,col:sector
-7,21,proxy,1,signal:website
-7,22,empty,0,
+7,21,filled,1,founders
+7,22,proxy,1,founders
 7,23,not-collectable,0,"needs founder, VC or paid data"
 7,24,not-collectable,0,"needs founder, VC or paid data"
-7,25,not-collectable,0,"needs founder, VC or paid data"
+7,25,proxy,1,ventures
 7,26,not-collectable,0,"needs founder, VC or paid data"
 7,27,not-collectable,0,"needs founder, VC or paid data"
 7,28,not-collectable,0,"needs founder, VC or paid data"
-7,29,not-collectable,0,"needs founder, VC or paid data"
+7,29,proxy,1,education
 7,30,not-collectable,0,"needs founder, VC or paid data"
 7,31,not-collectable,0,"needs founder, VC or paid data"
 7,32,not-collectable,0,"needs founder, VC or paid data"
@@ -2767,10 +2767,10 @@
 7,36,not-collectable,0,"needs founder, VC or paid data"
 7,37,not-collectable,0,"needs founder, VC or paid data"
 7,38,not-collectable,0,"needs founder, VC or paid data"
-7,39,empty,0,
+7,39,proxy,1,feature:open_roles
 7,40,not-collectable,0,"needs founder, VC or paid data"
 7,41,not-collectable,0,"needs founder, VC or paid data"
-7,42,empty,0,
+7,42,proxy,1,board
 7,43,not-collectable,0,"needs founder, VC or paid data"
 7,44,not-collectable,0,"needs founder, VC or paid data"
 7,45,not-collectable,0,"needs founder, VC or paid data"
@@ -2819,7 +2819,7 @@
 7,88,not-collectable,0,"needs founder, VC or paid data"
 7,89,not-collectable,0,"needs founder, VC or paid data"
 7,90,not-collectable,0,"needs founder, VC or paid data"
-7,91,proxy,2,signal:repo
+7,91,not-applicable,0,not meaningful for hardware/biotech startups
 7,92,not-collectable,0,"needs founder, VC or paid data"
 7,93,not-collectable,0,"needs founder, VC or paid data"
 7,94,not-collectable,0,"needs founder, VC or paid data"
@@ -2828,7 +2828,7 @@
 7,97,filled,1,signal:patent
 7,98,proxy,1,signal:patent
 7,99,proxy,10,signal:paper
-7,100,filled,1,assess
+7,100,filled,1,unit:trl
 7,101,not-collectable,0,"needs founder, VC or paid data"
 7,102,not-collectable,0,"needs founder, VC or paid data"
 7,103,not-collectable,0,"needs founder, VC or paid data"
@@ -2940,9 +2940,9 @@
 7,209,not-collectable,0,"needs founder, VC or paid data"
 7,210,not-collectable,0,"needs founder, VC or paid data"
 7,211,not-collectable,0,"needs founder, VC or paid data"
-7,212,proxy,2,peers
+7,212,proxy,10,xpeers
 7,213,not-collectable,0,"needs founder, VC or paid data"
-7,214,proxy,2,peers
+7,214,proxy,1,peerfunding
 7,215,not-collectable,0,"needs founder, VC or paid data"
 7,216,not-collectable,0,"needs founder, VC or paid data"
 7,217,not-collectable,0,"needs founder, VC or paid data"
@@ -3048,7 +3048,7 @@
 7,317,empty,0,
 7,318,not-collectable,0,"needs founder, VC or paid data"
 7,319,not-collectable,0,"needs founder, VC or paid data"
-7,320,empty,0,
+7,320,proxy,1,feature:no_round_24m
 7,321,not-collectable,0,"needs founder, VC or paid data"
 7,322,not-collectable,0,"needs founder, VC or paid data"
 7,323,not-collectable,0,"needs founder, VC or paid data"
@@ -3088,12 +3088,12 @@
 7,357,not-collectable,0,"needs founder, VC or paid data"
 7,358,not-collectable,0,"needs founder, VC or paid data"
 7,359,not-collectable,0,"needs founder, VC or paid data"
-7,360,filled,2,signal:repo
+7,360,not-applicable,0,not meaningful for hardware/biotech startups
 7,361,not-collectable,0,"needs founder, VC or paid data"
-7,362,empty,0,
-7,363,empty,0,
+7,362,proxy,1,feature:technical_open_roles
+7,363,proxy,1,feature:commercial_open_roles
 7,364,empty,0,
-7,365,empty,0,
+7,365,not-applicable,0,not meaningful for hardware/biotech startups
 7,366,proxy,12,signal:news
 7,367,proxy,12,signal:news
 7,368,filled,12,signal:news
@@ -3204,15 +3204,15 @@
 8,18,filled,1,col:tagline
 8,19,proxy,1,col:description
 8,20,proxy,1,col:sector
-8,21,empty,0,
-8,22,empty,0,
+8,21,filled,2,founders
+8,22,proxy,2,founders
 8,23,not-collectable,0,"needs founder, VC or paid data"
 8,24,not-collectable,0,"needs founder, VC or paid data"
-8,25,not-collectable,0,"needs founder, VC or paid data"
+8,25,proxy,4,ventures
 8,26,not-collectable,0,"needs founder, VC or paid data"
 8,27,not-collectable,0,"needs founder, VC or paid data"
 8,28,not-collectable,0,"needs founder, VC or paid data"
-8,29,not-collectable,0,"needs founder, VC or paid data"
+8,29,proxy,2,education
 8,30,not-collectable,0,"needs founder, VC or paid data"
 8,31,not-collectable,0,"needs founder, VC or paid data"
 8,32,not-collectable,0,"needs founder, VC or paid data"
@@ -3222,10 +3222,10 @@
 8,36,not-collectable,0,"needs founder, VC or paid data"
 8,37,not-collectable,0,"needs founder, VC or paid data"
 8,38,not-collectable,0,"needs founder, VC or paid data"
-8,39,empty,0,
+8,39,proxy,1,feature:open_roles
 8,40,not-collectable,0,"needs founder, VC or paid data"
 8,41,not-collectable,0,"needs founder, VC or paid data"
-8,42,empty,0,
+8,42,proxy,1,board
 8,43,not-collectable,0,"needs founder, VC or paid data"
 8,44,not-collectable,0,"needs founder, VC or paid data"
 8,45,not-collectable,0,"needs founder, VC or paid data"
@@ -3395,7 +3395,7 @@
 8,209,not-collectable,0,"needs founder, VC or paid data"
 8,210,not-collectable,0,"needs founder, VC or paid data"
 8,211,not-collectable,0,"needs founder, VC or paid data"
-8,212,empty,0,
+8,212,proxy,10,xpeers
 8,213,not-collectable,0,"needs founder, VC or paid data"
 8,214,empty,0,
 8,215,not-collectable,0,"needs founder, VC or paid data"
@@ -3503,7 +3503,7 @@
 8,317,empty,0,
 8,318,not-collectable,0,"needs founder, VC or paid data"
 8,319,not-collectable,0,"needs founder, VC or paid data"
-8,320,empty,0,
+8,320,proxy,1,feature:no_round_24m
 8,321,not-collectable,0,"needs founder, VC or paid data"
 8,322,not-collectable,0,"needs founder, VC or paid data"
 8,323,not-collectable,0,"needs founder, VC or paid data"
@@ -3545,8 +3545,8 @@
 8,359,not-collectable,0,"needs founder, VC or paid data"
 8,360,filled,1,signal:repo
 8,361,not-collectable,0,"needs founder, VC or paid data"
-8,362,empty,0,
-8,363,empty,0,
+8,362,proxy,1,feature:technical_open_roles
+8,363,proxy,1,feature:commercial_open_roles
 8,364,empty,0,
 8,365,empty,0,
 8,366,proxy,13,signal:news

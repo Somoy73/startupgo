@@ -17,7 +17,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import common  # noqa: E402
-import s1_startups_registries, s2_funding_procurement_patents, s3_news_search_market  # noqa: E402,F401
+import s1_startups_registries, s2_funding_procurement_patents, s3_news_search_market, s4_eu, s5_people_jobs  # noqa: E402,F401
 
 OUT = Path(__file__).parent / "data"
 MAX_LIST, MAX_STR = 10, 600

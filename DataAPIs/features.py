@@ -75,6 +75,35 @@ FEATURES = [
     ("valuation_step_up", "rounds", "Latest priced share price / previous priced round's price.", "x", "high", "recommended", "uk_sh01"),
     ("down_round_flag", "rounds", "1 if any priced round was below the previous round's price (UK SH01).", "flag", "high", "recommended", "uk_sh01"),
     ("founder_other_ventures", "founders", "All other companies the founders direct or directed, any date (side projects, spin-outs, next venture).", "companies", "low", "recommended", "uk_companies_house_officer"),
+    ("eu_grants_total_eur", "grants", "EU research/innovation funding received (sum of the company's own EU contribution, CORDIS).", "EUR", "high", "recommended", "cordis_projects"),
+    ("eu_projects_count", "grants", "EU-funded projects the company takes part in (any role).", "projects", "medium", "recommended", "cordis_projects"),
+    ("eu_projects_funded", "grants", "Of those, projects where the company itself receives EU money.", "projects", "medium", "recommended", "cordis_projects"),
+    ("eu_coordinator_count", "grants", "EU projects the company coordinates (leadership signal).", "projects", "high", "recommended", "cordis_projects"),
+    ("eu_first_grant_year", "grants", "Start year of the company's first EU project.", "year", "low", "recommended", "cordis_projects"),
+    ("eu_active_projects", "grants", "EU projects currently running (signed, end date in the future).", "projects", "medium", "recommended", "cordis_projects"),
+    ("eic_or_sme_instrument", "grants", "1 if funded by the EIC or the H2020 SME Instrument: highly selective startup programmes.", "flag", "high", "recommended", "cordis_projects"),
+    ("mission_ocean_grant", "grants", "1 if part of the EU Mission 'Restore our Ocean and Waters'.", "flag", "medium", "recommended", "cordis_projects"),
+    ("eu_consortium_links", "grants", "Total consortium partners across the company's EU projects (network reach; partners in several projects count each time).", "links", "medium", "recommended", "cordis_projects"),
+    ("cordis_sme_confirmed", "grants", "1 if CORDIS records the company as an SME.", "flag", "low", "recommended", "cordis_projects"),
+    ("grant_to_equity_ratio", "grants", "EU grants / total raised: grant dependency, typical for ocean deep tech.", "ratio", "medium", "recommended", "derived"),
+    ("ocean_patent_count", "ocean", "Patents with at least one ocean-technology CPC class (aquaculture, seaweed, algae products, ocean energy, vessels, ship emissions, cleanup, ocean sensing).", "patents", "medium", "recommended", "google_patents_page"),
+    ("ocean_patent_share", "ocean", "Ocean-class patents / patents with known classes. Misses marine-use patents filed in generic classes.", "0-1", "low", "recommended", "google_patents_page"),
+    ("ocean_tech_groups", "ocean", "Ocean technology groups found in the company's patent classes.", "JSON", "low", "recommended", "google_patents_page"),
+    ("blueinvest_listed", "ocean", "1 if the company is in the EU BlueInvest Project Pipeline (investor-facing showcase); 0 if not found.", "flag", "medium", "recommended", "blueinvest_pipeline"),
+    ("blueinvest_trl", "ocean", "Self-reported TRL on the BlueInvest profile.", "1-9", "high", "recommended", "blueinvest_profile"),
+    ("blueinvest_funding_sought_eur", "ocean", "Funding sought according to the BlueInvest profile (largest EUR amount in its financial needs text).", "EUR", "medium", "recommended", "blueinvest_profile"),
+    ("blueinvest_sector", "ocean", "BlueInvest blue-economy sector.", None, "medium", "recommended", "blueinvest_profile"),
+    ("trl_gap", "integrity", "Self-reported TRL (BlueInvest) minus the seed TRL estimate; large gaps need checking.", "levels", "medium", "recommended", "blueinvest_profile, readiness_assessments"),
+    ("board_size", "founders", "Current directors / board members (Companies House directors, SEC Form D directors, PDL board titles).", "people", "medium", "recommended", "uk_companies_house, sec_form_d_document, pdl_person_search"),
+    ("technical_open_roles", "momentum", "Open engineering / science / R&D roles.", "jobs", "medium", "recommended", "job_boards, serpapi_google_jobs"),
+    ("commercial_open_roles", "momentum", "Open sales / business development / marketing / customer roles.", "jobs", "medium", "recommended", "job_boards, serpapi_google_jobs"),
+    ("blueinvest_peer_count", "category", "Similar companies in the EU BlueInvest pipeline (similarity >= 0.1): competitor density.", "companies", "medium", "recommended", "blueinvest_pipeline"),
+    ("peer_median_trl", "category", "Median TRL of the 10 most similar BlueInvest companies.", "1-9", "medium", "recommended", "blueinvest_pipeline"),
+    ("trl_vs_peers", "category", "Own TRL (BlueInvest if listed, else seed estimate) minus the peer median TRL.", "levels", "medium", "recommended", "blueinvest_pipeline, readiness_assessments"),
+    ("first_patent_granted", "momentum", "Was the company's first utility patent application granted? 1 granted, 0 abandoned/refused; 'pending' while undecided; 'unknown' for international (WO) filings, which never grant themselves (needs family data). Patent 'lottery' paper: first-patent approval predicts later funding and growth.", "flag", "medium", "user-list", "google patents"),
+    ("first_patent_months_to_grant", "momentum", "Months from filing to grant for the first utility patent. Mostly reflects the patent office (EPO ~5 years, USPTO less): compare within one office.", "months", "low", "user-list", "google patents"),
+    ("patents_pending", "momentum", "Patent applications still pending.", "patents", "low", "recommended", "google patents"),
+    ("patents_abandoned", "momentum", "Applications abandoned, withdrawn, refused or lapsed for non-payment (WO 'ceased' excluded: it only ends the international phase).", "patents", "medium", "recommended", "google patents"),
     ("investor_count", "investors", "Number of investors: Form D count if filed, else distinct investors known.", "investors", "medium", "paper", "sec_form_d, funding_rounds"),
     ("lead_investors", "investors", "Lead investors across rounds.", None, "high", "user-list", "funding_rounds"),
     ("investor_quality_max", "investors", "Best investor tier score (analyst-curated, investor_tiers.json).", "0-1", "high", "paper", "investor_tiers.json"),
@@ -187,7 +216,8 @@ def fetch_uk(conn, st):
                                 VALUES (?,?,?,?,?,?,?, 'uk_companies_house_officer')""",
                              (pid, to.get("company_number"), to.get("company_name"), to.get("company_status"), ap.get("officer_role"), ap.get("appointed_on"), ap.get("resigned_on")))
 
-    # SH01 allotments -> funding_events
+    # SH01 allotments -> funding_events (rebuilt each run: rows without a share class would not dedupe on the UNIQUE key)
+    conn.execute("DELETE FROM funding_events WHERE startup_id=? AND source_name='uk_sh01'", (sid,))
     d, f = fetch(conn, "uk_companies_house_company", sid, number=num, path="filing-history", category="capital", items_per_page=100)
     for it in (d or {}).get("items", []):
         if it.get("type") != "SH01":  # RP04SH01 second filings duplicate the original
@@ -227,6 +257,9 @@ def fetch_form_d(conn, st):
     if not row:
         return
     cik, sid = row[0], st["id"]
+    conn.execute("DELETE FROM funding_events WHERE startup_id=? AND source_name='sec_form_d'", (sid,))  # rebuilt each run
+    seen_people: dict[str, dict] = {}  # name -> {"roles": set, "first": date, "last": date}
+    filing_dates: list[str] = []
     sub, _ = fetch(conn, "sec_edgar_submissions", sid, cik=cik)
     recent = ((sub or {}).get("filings") or {}).get("recent") or {}
     for form, acc, filed in zip(recent.get("form", []), recent.get("accessionNumber", []), recent.get("filingDate", [])):
@@ -237,7 +270,16 @@ def fetch_form_d(conn, st):
             continue
         g = {t: (re.findall(f"<{t}>(.*?)</{t}>", xml, re.S) or [None])[0] for t in FORM_D_TAGS}
         first_sale = re.search(r"<dateOfFirstSale>\s*<value>(.*?)</value>", xml, re.S)
-        persons = [f"{a} {b}" for a, b in re.findall(r"<relatedPersonName>.*?<firstName>(.*?)</firstName>.*?<lastName>(.*?)</lastName>", xml, re.S)]
+        persons = []
+        for blk in re.findall(r"<relatedPersonInfo>(.*?)</relatedPersonInfo>", xml, re.S):
+            first = (re.findall(r"<firstName>(.*?)</firstName>", blk) or [""])[0]
+            last = (re.findall(r"<lastName>(.*?)</lastName>", blk) or [""])[0]
+            name = f"{first} {last}".strip()
+            persons.append(name)
+            p = seen_people.setdefault(name, {"roles": set(), "first": filed, "last": filed})
+            p["roles"] |= {r.strip().lower() for r in re.findall(r"<relationship>(.*?)</relationship>", blk)}
+            p["first"], p["last"] = min(p["first"], filed), max(p["last"], filed)
+        filing_dates.append(filed)
         amt = lambda k: float(g[k]) if g[k] and g[k].replace(".", "").isdigit() else None  # noqa: E731  ("Indefinite" -> None)
         conn.execute("""INSERT OR REPLACE INTO funding_events (startup_id, event_date, source_name, event_type, amount, currency, investor_count, details, source_url)
                         VALUES (?,?, 'sec_form_d', 'form_d', ?, 'USD', ?, ?, ?)""",
@@ -246,10 +288,16 @@ def fetch_form_d(conn, st):
                       json.dumps({"form": form, "filed_on": filed, "accession": acc, "offering": amt("totalOfferingAmount"),
                                   "is_amendment": g["isAmendment"], "industry": g["industryGroupType"], "related_persons": persons}),
                       f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace('-', '')}/"))
-        for name in persons:
-            conn.execute("INSERT INTO people (name) SELECT ? WHERE NOT EXISTS (SELECT 1 FROM people WHERE name=? AND ch_officer_id IS NULL)", (name, name))
-            pid = conn.execute("SELECT id FROM people WHERE name=? AND ch_officer_id IS NULL", (name,)).fetchone()[0]
-            conn.execute("INSERT OR IGNORE INTO startup_people (startup_id, person_id, role, source_name) VALUES (?,?, 'form_d_related_person', 'sec_form_d_document')", (sid, pid))
+    # Roles from Form D: directors and executive officers per filing. Absent from the latest filing = left (proxy).
+    conn.execute("DELETE FROM startup_people WHERE startup_id=? AND source_name='sec_form_d_document'", (sid,))
+    latest = max(filing_dates) if filing_dates else None
+    for name, p in seen_people.items():
+        conn.execute("INSERT INTO people (name) SELECT ? WHERE NOT EXISTS (SELECT 1 FROM people WHERE name=? AND ch_officer_id IS NULL)", (name, name))
+        pid = conn.execute("SELECT id FROM people WHERE name=? AND ch_officer_id IS NULL", (name,)).fetchone()[0]
+        for role in sorted(p["roles"]) or ["related person"]:
+            conn.execute("""INSERT OR REPLACE INTO startup_people (startup_id, person_id, role, is_founder, appointed_on, resigned_on, source_name)
+                            VALUES (?,?,?,0,?,?, 'sec_form_d_document')""",
+                         (sid, pid, role, p["first"], None if p["last"] == latest else p["last"]))
     conn.commit()
 
 
@@ -309,7 +357,7 @@ def build_local(conn):
 # ---------------------------------------------------------------------------
 STOP = set("the and for with from that this into their our are its has have been which made make based using offshore company companies "
            "builds develops products product other scale data real time each trip".split())
-ITEM_W = {"sector": 2.0, "industry": 2.0, "yc": 1.5, "sic": 1.5, "impact": 1.5, "kw": 1.0}
+ITEM_W = {"sector": 2.0, "industry": 2.0, "bisector": 2.0, "yc": 1.5, "sic": 1.5, "impact": 1.5, "cpc": 1.0, "field": 1.0, "kw": 1.0}
 
 
 def tags_for(conn, st) -> dict[str, float]:
@@ -324,6 +372,13 @@ def tags_for(conn, st) -> dict[str, float]:
             t[f"sic:{code[:2]}"] = ITEM_W["sic"]  # 2-digit SIC division
     for (code,) in conn.execute("SELECT DISTINCT substr(kpi_code,1,1) FROM startup_ocean_kpis WHERE startup_id=? AND evidence_level>0", (st["id"],)):
         t[f"impact:{code}"] = ITEM_W["impact"]
+    for (cls,) in conn.execute("SELECT DISTINCT substr(cpc_code,1,4) FROM patent_classes WHERE startup_id=? AND cpc_code NOT LIKE 'Y10%'", (st["id"],)):
+        t[f"cpc:{cls}"] = ITEM_W["cpc"]  # CPC subclass, e.g. A61K
+    for (cats,) in conn.execute("SELECT categories FROM eu_grants WHERE startup_id=?", (st["id"],)):
+        for c in json.loads(cats or "[]"):
+            t[f"field:{norm(c)}"] = ITEM_W["field"]  # CORDIS euroSciVoc field
+    for (sec,) in conn.execute("SELECT sector FROM blueinvest_profiles WHERE startup_id=? AND sector IS NOT NULL", (st["id"],)):
+        t[f"bisector:{norm(sec)}"] = ITEM_W["bisector"]
     words = re.findall(r"[a-z]{4,}", f"{st['tagline']} {st['description']}".lower())
     for w in words:
         if w not in STOP:
@@ -366,6 +421,9 @@ def compute(conn):
             if num is None and text is None:
                 return  # missing stays missing
             out[name] = (num, text, json.dumps(evidence, default=str) if evidence is not None else None)
+
+        def put_na(name, reason):
+            out[name] = (None, "not-applicable", json.dumps({"reason": reason}))  # known not to apply, unlike missing
 
         ev = conn.execute("SELECT * FROM funding_events WHERE startup_id=? ORDER BY event_date", (sid,)).fetchall()
         announced = [e for e in ev if e["event_type"] == "announced_round"]
@@ -433,6 +491,9 @@ def compute(conn):
             put("latest_price_per_share", latest["price_per_share"], evidence={"date": latest["event_date"], "class": latest["share_class"], "currency": latest["currency"]})
             put("implied_post_money", latest["implied_post_money"], evidence={"date": latest["event_date"], "price": latest["price_per_share"],
                                                                             "total_shares": latest["total_shares_after"], "currency": latest["currency"]})
+            if len(priced_rounds) == 1:
+                put_na("valuation_step_up", "only one priced round on file")
+                put_na("down_round_flag", "only one priced round on file")
             if len(priced_rounds) > 1:
                 prev, cur = priced_rounds[-2]["price"], priced_rounds[-1]["price"]
                 put("valuation_step_up", round(cur / prev, 4), evidence={"previous": [priced_rounds[-2]["start"], prev], "latest": [priced_rounds[-1]["start"], cur]})
@@ -470,50 +531,103 @@ def compute(conn):
         if ic:
             put("investor_count", ic.get("sec_form_d_latest_offering", ic.get("known_investors")), evidence=ic)
 
-        # founders
-        people = conn.execute("""SELECT sp.*, p.name FROM startup_people sp JOIN people p ON p.id=sp.person_id
-                                 WHERE sp.startup_id=? AND sp.source_name='uk_companies_house_company'""", (sid,)).fetchall()
-        if people:
-            reg = conn.execute("SELECT details FROM startup_external_ids WHERE startup_id=? AND id_type='company_number'", (sid,)).fetchone()
-            created = parse_date(json.loads(reg["details"] or "{}").get("date_of_creation")) if reg else None
-            founders = [p for p in people if p["is_founder"]]
-            put("founder_count", len(founders), evidence=[p["name"] for p in founders])
-            serial, prior_total, prior_failed, detail = 0, 0, 0, {}
-            for p in founders:
-                prior = [v for v in conn.execute("SELECT * FROM person_ventures WHERE person_id=?", (p["person_id"],))
-                         if created and parse_date(v["appointed_on"]) and parse_date(v["appointed_on"]) < created]
-                if prior:
-                    serial += 1
+        # founders (UK officers if present, else PDL; Form D adds US boards)
+        allp = conn.execute("SELECT sp.*, p.name, p.education FROM startup_people sp JOIN people p ON p.id=sp.person_id WHERE sp.startup_id=?", (sid,)).fetchall()
+        src = next((s_ for s_ in ("uk_companies_house_company", "people_data_labs")
+                    if any(p["is_founder"] and p["source_name"] == s_ for p in allp)), None)
+        reg = conn.execute("SELECT details FROM startup_external_ids WHERE startup_id=? AND id_type='company_number'", (sid,)).fetchone()
+        created = parse_date(json.loads(reg["details"] or "{}").get("date_of_creation")) if reg else None
+        if not created and st["founded_year"]:
+            created = date(st["founded_year"], 1, 1)
+        if src:
+            rows = [p for p in allp if p["source_name"] == src]
+            founders = {}
+            for p in rows:
+                if p["is_founder"]:
+                    founders.setdefault(p["person_id"], p)
+            if not created:
+                created = min(filter(None, (parse_date(p["appointed_on"]) for p in founders.values())), default=None)
+            put("founder_count", len(founders), evidence={"source": src, "founders": [p["name"] for p in founders.values()]})
+            serial, prior_total, prior_failed, known_status, detail, other = 0, 0, 0, False, {}, {}
+            for pid, p in founders.items():
+                ventures = conn.execute("SELECT * FROM person_ventures WHERE person_id=?", (pid,)).fetchall()
+                prior = [v for v in ventures if created and parse_date(v["appointed_on"]) and parse_date(v["appointed_on"]) < created
+                         and (v["source_name"] != "people_data_labs" or re.search(r"founder|owner", v["role"] or "", re.I))
+                         and not re.search(r"entrepreneurs first|y combinator|antler|techstars", v["company_name"] or "", re.I)]
+                # UK: any earlier directorship counts. PDL: only founder/owner roles (an earlier CEO job at an airline is not a venture).
+                serial += bool(prior)
                 prior_total += len(prior)
-                failed = [v for v in prior if (v["company_status"] or "") in ("dissolved", "liquidation", "administration", "receivership", "insolvency-proceedings")]
-                prior_failed += len(failed)
-                detail[p["name"]] = [f"{v['company_name']} ({v['company_status']}, from {v['appointed_on']})" for v in prior]
-            put("serial_founder_count", serial, evidence=detail)
+                known_status |= any(v["company_status"] for v in prior)
+                prior_failed += sum(1 for v in prior if (v["company_status"] or "") in ("dissolved", "liquidation", "administration", "receivership", "insolvency-proceedings"))
+                detail[p["name"]] = [f"{v['company_name']} ({v['role']}, from {v['appointed_on']})" for v in prior]
+                other[p["name"]] = [f"{v['company_name']} ({v['company_status'] or v['role']}, from {v['appointed_on']})" for v in ventures]
+            put("serial_founder_count", serial, evidence={"source": src, "prior_ventures": detail})
             put("prior_ventures_total", prior_total, evidence=detail)
-            put("prior_ventures_failed", prior_failed)
-            other = {p["name"]: [f"{v['company_name']} ({v['company_status']}, from {v['appointed_on']})"
-                                 for v in conn.execute("SELECT * FROM person_ventures WHERE person_id=?", (p["person_id"],))] for p in founders}
+            if known_status or not prior_total:
+                put("prior_ventures_failed", prior_failed)  # PDL has no company status: unknown, not zero
             put("founder_other_ventures", sum(len(v) for v in other.values()), evidence=other)
             if founders:
-                put("founder_retention", round(sum(1 for p in founders if not p["resigned_on"]) / len(founders), 3))
-            put("officer_churn", round(sum(1 for p in people if p["resigned_on"]) / len(people), 3))
+                active = [pid for pid in founders if any(r["person_id"] == pid and not r["resigned_on"] for r in rows)]
+                put("founder_retention", round(len(active) / len(founders), 3),
+                    evidence={"active": [founders[p]["name"] for p in active], "left": [founders[p]["name"] for p in founders if p not in active]})
+        uk = [p for p in allp if p["source_name"] == "uk_companies_house_company"]
+        if uk:
+            put("officer_churn", round(sum(1 for p in uk if p["resigned_on"]) / len(uk), 3))
+        board = {p["name"] for p in allp if not p["resigned_on"] and (
+            (p["source_name"] in ("uk_companies_house_company", "sec_form_d_document") and p["role"] == "director")
+            or (p["source_name"] == "people_data_labs" and re.search(r"chair|board", p["role"] or "", re.I)))}
+        if any(p["source_name"] in ("uk_companies_house_company", "sec_form_d_document", "people_data_labs") for p in allp):
+            put("board_size", len(board), evidence=sorted(board))
+        people = uk  # used by the distress check below
 
         # momentum
         hc = conn.execute("SELECT value, source_name, observed_on FROM startup_signals WHERE startup_id=? AND unit='employees' ORDER BY observed_on DESC, source_name='people_data_labs' DESC LIMIT 1", (sid,)).fetchone()
         if hc:
             put("headcount", hc["value"], evidence={"source": hc["source_name"], "observed_on": hc["observed_on"]})
-        jobs = conn.execute("SELECT COUNT(*) FROM startup_signals WHERE startup_id=? AND signal_type='job'", (sid,)).fetchone()[0]
-        if conn.execute("SELECT 1 FROM raw_fetches WHERE startup_id=? AND source_name='serpapi_google_jobs' AND status='ok'", (sid,)).fetchone():
-            put("open_roles", jobs)
+        job_rows = conn.execute("SELECT source_name, details FROM startup_signals WHERE startup_id=? AND signal_type='job'", (sid,)).fetchall()
+        if conn.execute("SELECT 1 FROM raw_fetches WHERE startup_id=? AND source_name IN ('serpapi_google_jobs','job_boards') AND status='ok'", (sid,)).fetchone():
+            board_jobs = [r for r in job_rows if r["source_name"] == "job_boards"]
+            use = board_jobs or job_rows  # the ATS board is the company's own list; Google Jobs duplicates it
+            cats = [json.loads(r["details"] or "{}").get("category") for r in use]
+            put("open_roles", len(use), evidence={"source": "job_boards" if board_jobs else "serpapi_google_jobs"})
+            put("technical_open_roles", cats.count("technical"))
+            put("commercial_open_roles", cats.count("commercial"))
         news = conn.execute("SELECT COUNT(*) FROM startup_signals WHERE startup_id=? AND signal_type='news' AND observed_on>=?", (sid, cutoff.isoformat())).fetchone()[0]
         put("news_mentions_12m", news)
         pat = conn.execute("SELECT COUNT(*), SUM(json_extract(details,'$.grant_date') IS NOT NULL) FROM startup_signals WHERE startup_id=? AND signal_type='patent'", (sid,)).fetchone()
         if conn.execute("SELECT 1 FROM raw_fetches WHERE startup_id=? AND source_name LIKE '%patents%' AND status='ok'", (sid,)).fetchone():
             put("patent_count", pat[0])
             put("patents_granted", pat[1] or 0)
+            pats = []
+            for r in conn.execute("SELECT title, details FROM startup_signals WHERE startup_id=? AND signal_type='patent'", (sid,)):
+                d = json.loads(r["details"] or "{}")
+                pats.append({"number": r["title"].split(":")[0].strip(), "filed": d.get("filing_date"), "granted": d.get("grant_date"),
+                             "status": (d.get("legal_status") or "").strip().lower()})
+            is_wo = lambda p: p["number"].startswith("WO")  # noqa: E731
+            dropped = lambda p: p["status"] in ("abandoned", "withdrawn", "refused", "rejected", "expired - fee related") or (p["status"] == "ceased" and not is_wo(p))  # noqa: E731
+            put("patents_pending", sum(1 for p in pats if p["status"] == "pending"))
+            put("patents_abandoned", sum(1 for p in pats if dropped(p)), evidence=[p["number"] for p in pats if dropped(p)])
+            utility = sorted((p for p in pats if p["filed"] and not re.match(r"US-?D\d", p["number"])), key=lambda p: p["filed"])  # design patents (USD...) excluded
+            if not pats:
+                put_na("first_patent_granted", "no patents found")
+                put_na("first_patent_months_to_grant", "no patents found")
+            elif utility:
+                first = utility[0]
+                ev = {"patent": first["number"], "office": first["number"][:2], "filed": first["filed"], "granted": first["granted"], "status": first["status"]}
+                if first["granted"]:
+                    put("first_patent_granted", 1.0, "granted", evidence=ev)
+                    put("first_patent_months_to_grant", round(months_between(parse_date(first["filed"]), parse_date(first["granted"])), 1), evidence=ev)
+                elif dropped(first):
+                    put("first_patent_granted", 0.0, "abandoned", evidence=ev)
+                    put_na("first_patent_months_to_grant", "first patent was not granted")
+                elif is_wo(first) and first["status"] == "ceased":
+                    put("first_patent_granted", None, "unknown", evidence={**ev, "why": "WO international phase ended; whether national filings were granted needs family data"})
+                else:
+                    put("first_patent_granted", None, "pending", evidence=ev)  # undecided: neither 1 nor 0
 
         # age, risk, integrity
-        reg = conn.execute("SELECT details FROM startup_external_ids WHERE startup_id=? AND id_type IN ('company_number','lei') ORDER BY id_type='company_number' DESC LIMIT 1", (sid,)).fetchone()
+        reg = conn.execute("""SELECT details FROM startup_external_ids WHERE startup_id=? AND id_type IN ('company_number','siren','no_orgnr','lei')
+                              ORDER BY CASE id_type WHEN 'company_number' THEN 0 WHEN 'siren' THEN 1 WHEN 'no_orgnr' THEN 2 ELSE 3 END LIMIT 1""", (sid,)).fetchone()
         regd = json.loads(reg["details"] or "{}") if reg else {}
         year = st["founded_year"] or (int(regd.get("date_of_creation", regd.get("registered_on", ""))[:4]) if (regd.get("date_of_creation") or regd.get("registered_on")) else None)
         if year:
@@ -527,12 +641,77 @@ def compute(conn):
         insolv = conn.execute("SELECT COUNT(*) FROM startup_signals WHERE startup_id=? AND unit='insolvency'", (sid,)).fetchone()[0]
         if people or status:
             no_officers = bool(people) and all(p["resigned_on"] for p in people)
-            distress = int(insolv > 0 or (status or "").lower() in ("administration", "liquidation", "receivership", "insolvency-proceedings", "dissolved") or no_officers)
+            distress = int(insolv > 0 or no_officers or (status or "").lower() in
+                           ("administration", "liquidation", "receivership", "insolvency-proceedings", "dissolved", "closed", "bankrupt"))
             put("distress_flag", distress, evidence={"insolvency_cases": insolv, "status": status, "no_active_officers": no_officers})
         years = {str(st["founded_year"])} if st["founded_year"] else set()
         years |= {r[0] for r in conn.execute("SELECT value FROM field_suggestions WHERE startup_id=? AND field='founded_year' AND status!='rejected'", (sid,))}
         if years:
             put("founded_year_conflicts", len(years), evidence=sorted(years))
+
+        # EU grants (CORDIS)
+        grants = conn.execute("SELECT * FROM eu_grants WHERE startup_id=?", (sid,)).fetchall()
+        if conn.execute("SELECT 1 FROM raw_fetches WHERE startup_id=? AND source_name='cordis_projects' AND status='ok'", (sid,)).fetchone():
+            total_eu = sum(g["ec_contribution"] or 0 for g in grants)
+            put("eu_grants_total_eur", round(total_eu, 2), evidence={g["acronym"]: [g["role"], g["ec_contribution"]] for g in grants})
+            put("eu_projects_count", len({g["project_id"] for g in grants}))
+            put("eu_projects_funded", len({g["project_id"] for g in grants if (g["ec_contribution"] or 0) > 0}))
+            put("eu_coordinator_count", sum(1 for g in grants if g["role"] == "coordinator"), evidence=[g["acronym"] for g in grants if g["role"] == "coordinator"])
+            put("eic_or_sme_instrument", float(any(g["is_eic"] for g in grants)), evidence=[g["acronym"] for g in grants if g["is_eic"]])
+            put("mission_ocean_grant", float(any(g["is_mission_ocean"] for g in grants)), evidence=[g["acronym"] for g in grants if g["is_mission_ocean"]])
+            put("eu_active_projects", sum(1 for g in grants if g["status"] == "SIGNED" and (g["end_date"] or "") >= AS_OF))
+            put("eu_consortium_links", sum(g["partners"] or 0 for g in grants))
+            if grants:
+                put("eu_first_grant_year", min(int(g["start_date"][:4]) for g in grants if g["start_date"]))
+                put("cordis_sme_confirmed", float(any(g["sme"] for g in grants)))
+            else:
+                put_na("eu_first_grant_year", "no EU-funded projects found in CORDIS")
+                put_na("cordis_sme_confirmed", "not a CORDIS participant")
+            if out.get("total_raised_usd") and not total_eu:
+                put("grant_to_equity_ratio", 0.0, evidence={"eu_grants_usd": 0, "total_raised_usd": out["total_raised_usd"][0]})
+            if out.get("total_raised_usd") and total_eu:
+                put("grant_to_equity_ratio", round(usd(total_eu, "EUR") / out["total_raised_usd"][0], 3),
+                    evidence={"eu_grants_usd": round(usd(total_eu, "EUR")), "total_raised_usd": out["total_raised_usd"][0]})
+
+        # ocean patent classes
+        pc = conn.execute("""SELECT publication_number, MAX(ocean_group IS NOT NULL) ocean, GROUP_CONCAT(DISTINCT ocean_group) groups
+                             FROM patent_classes WHERE startup_id=? GROUP BY publication_number""", (sid,)).fetchall()
+        if pc:
+            n_ocean = sum(r["ocean"] for r in pc)
+            put("ocean_patent_count", n_ocean, evidence={r["publication_number"]: r["groups"] for r in pc if r["ocean"]})
+            put("ocean_patent_share", round(n_ocean / len(pc), 3))
+            groups = sorted({g for r in pc if r["groups"] for g in r["groups"].split(",")})
+            put("ocean_tech_groups", text=json.dumps(groups))
+
+        # BlueInvest pipeline
+        if conn.execute("SELECT 1 FROM blueinvest_profiles LIMIT 1").fetchone():
+            bi = conn.execute("SELECT * FROM blueinvest_profiles WHERE startup_id=? ORDER BY trl DESC LIMIT 1", (sid,)).fetchone()
+            put("blueinvest_listed", 1.0 if bi else 0.0, evidence={"profile": bi["url"]} if bi else None)
+            if not bi:
+                for nm in ("blueinvest_trl", "blueinvest_funding_sought_eur", "blueinvest_sector", "trl_gap"):
+                    put_na(nm, "not in the BlueInvest pipeline")
+            if bi:
+                put("blueinvest_trl", bi["trl"], evidence={"trl_text": bi["trl_text"]})
+                put("blueinvest_funding_sought_eur", bi["funding_sought_eur"], evidence={"text": (bi["financial_needs"] or "")[:400]})
+                put("blueinvest_sector", text=bi["sector"])
+                est = conn.execute("SELECT trl FROM readiness_assessments WHERE startup_id=? ORDER BY assessed_on DESC, id DESC LIMIT 1", (sid,)).fetchone()
+                if bi["trl"] and est:
+                    put("trl_gap", bi["trl"] - est["trl"], evidence={"blueinvest_trl": bi["trl"], "seed_estimate_trl": est["trl"]})
+
+        # competitor universe (BlueInvest)
+        xp = conn.execute("SELECT name, similarity, trl FROM startup_external_peers WHERE startup_id=? ORDER BY similarity DESC", (sid,)).fetchall()
+        if conn.execute("SELECT 1 FROM blueinvest_profiles LIMIT 1").fetchone():
+            put("blueinvest_peer_count", sum(1 for r in xp if r["similarity"] >= 0.1), evidence=[[r["name"], r["similarity"]] for r in xp[:5]])
+            trls = [r["trl"] for r in xp if r["trl"]]
+            if trls:
+                med = statistics.median(trls)
+                put("peer_median_trl", med, evidence={"peer_trls": trls})
+                own = out.get("blueinvest_trl", (None,))[0]
+                if own is None:
+                    est = conn.execute("SELECT trl FROM readiness_assessments WHERE startup_id=? ORDER BY assessed_on DESC, id DESC LIMIT 1", (sid,)).fetchone()
+                    own = est["trl"] if est else None
+                if own is not None:
+                    put("trl_vs_peers", own - med, evidence={"own_trl": own, "peer_median": med})
 
         # category + peers
         put("category_tags", text=json.dumps(sorted(tagsets[sid])))
