@@ -1,21 +1,23 @@
-import { Link } from "@tanstack/react-router";
 import type { InvestorMatch } from "../../lib/investor";
 
 type Props = {
   matches: InvestorMatch[];
   hovered: string | null;
+  selected: string | null;
   onHover: (slug: string | null) => void;
+  onSelect: (slug: string) => void
 };
 
-export function TopMatchList({ matches, hovered, onHover }: Props) {
+export function TopMatchList({ matches, hovered, selected, onHover, onSelect }: Props) {
   return (
     <ol className="tm-list">
       {matches.map((m, i) => (
         <li key={m.startup.slug} style={{ ["--i" as string]: i }}>
-          <Link
-            to="/startups/$slug"
-            params={{ slug: m.startup.slug }}
-            className={`tm-row${i < 3 ? " is-top" : ""}${hovered === m.startup.slug ? " is-hover" : ""}`}
+          <button
+            type="button"
+            aria-pressed={selected === m.startup.slug}
+            onClick={() => onSelect(m.startup.slug)}
+            className={`tm-row${i < 3 ? " is-top" : ""}${hovered === m.startup.slug || selected === m.startup.slug ? " is-hover" : ""}`}
             onMouseEnter={() => onHover(m.startup.slug)}
             onMouseLeave={() => onHover(null)}
             onFocus={() => onHover(m.startup.slug)}
@@ -31,7 +33,7 @@ export function TopMatchList({ matches, hovered, onHover }: Props) {
               </small>
             </span>
             <span className="tm-score">{m.total}</span>
-          </Link>
+          </button>
         </li>
       ))}
     </ol>

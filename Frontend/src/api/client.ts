@@ -1,26 +1,11 @@
 import { seed, frameworks } from "./mock-data";
-import type { NaturalLanguageSearchResponse, PipelineStage, StartupDetail } from "./types";
+import type { PipelineStage, StartupDetail } from "./types";
 import { previewScores, type AssessmentDraft, type CompanyDraft } from "../lib/assessment";
 // Mock transport retains the original API method boundaries. Replace these handlers with your real client.
 let startups: StartupDetail[] = structuredClone(seed);
 export const api = {
   async listStartups() {
     return structuredClone(startups);
-  },
-  // Matches the supplied POST /api/startups/search response contract; preview-only transport.
-  async searchStartups(query: string): Promise<NaturalLanguageSearchResponse> {
-    const stopWords = new Set("and are for from that the with startups startup companies company show find".split(" "));
-    const terms = [...new Set(query.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter((term) => term.length > 2 && !stopWords.has(term)))];
-    const scored = startups.map((startup) => {
-      const text = `${startup.name} ${startup.tagline} ${startup.description} ${startup.sector} ${startup.country} ${startup.region}`.toLowerCase();
-      return { startup, matched: terms.filter((term) => text.includes(term)) };
-    }).filter((match) => match.matched.length > 0).sort((a, b) => b.matched.length - a.matched.length);
-    const top = scored[0]?.matched.length ?? 1;
-    return {
-      query,
-      results: scored.map(({ startup, matched }) => ({ ...structuredClone(startup), relevance: matched.length / top, matched, entry: null })),
-      entries: [],
-    };
   },
   async frameworks() {
     return frameworks;

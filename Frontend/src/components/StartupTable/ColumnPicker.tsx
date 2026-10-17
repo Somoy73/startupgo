@@ -47,7 +47,7 @@ export function ColumnPicker({ columns, onChange }: Props) {
         </fieldset>
         <Button
           type="button"
-          className="mt-1 w-full cursor-pointer rounded-md px-2 py-1.5 text-left text-sm text-primary hover:bg-wash"
+          className="mt-1 h-auto w-full cursor-pointer rounded-md px-2 py-1.5 text-sm"
           onClick={() => onChange(DEFAULT_COLUMNS)}
         >
           Reset to default

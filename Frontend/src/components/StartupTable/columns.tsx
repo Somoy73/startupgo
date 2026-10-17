@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { DIMENSIONS, type StartupSummary } from "../../api/types";
+import { KTH_DIMENSIONS, type StartupSummary } from "../../api/backend-types";
 import { compactMoney, partialDate, PIPELINE_LABELS, stageLabel } from "../../lib/format";
 import { Link } from "@tanstack/react-router";
 import type { SearchSortKey } from "../../lib/discover-search";
@@ -19,7 +19,7 @@ export type Column = {
   cell: (s: StartupSummary) => ReactNode;
 };
 
-const levelColumns: Column[] = DIMENSIONS.map((d) => ({
+const levelColumns: Column[] = KTH_DIMENSIONS.map((d) => ({
   id: d.key,
   header: d.code,
   sortKey: d.key,
