@@ -1,0 +1,14 @@
+# Heroku container deploy: Heroku builds the image from the Dockerfile on every `git push heroku main`.
+# One-time setup: `heroku stack:set container -a <app>`.
+#
+# The image runs both servers (start.sh): FastAPI on 127.0.0.1:8000 and the Bun frontend on $PORT,
+# which forwards /api to FastAPI.
+#
+# The data is the SQLite database in the image, so no database add-on (see the Dockerfile).
+
+build:
+  docker:
+    web: Dockerfile
+
+run:
+  web: ./start.sh
