@@ -32,8 +32,8 @@ export function StartupPage() {
   // For the charts. Each loads on its own; one failing only hides its chart.
   const { data: frameworks } = useAsync(() => backend.frameworks(), []);
   const { data: startups } = useAsync(() => backend.startups(), [reloads]);
-  const { data: peers } = useAsync(() => backend.peers(slug), [slug]);
-  const { data: events } = useAsync(() => backend.rounds(slug), [slug]);
+  const { data: peers } = useAsync(() => backend.peers(slug), [slug, reloads]);
+  const { data: events } = useAsync(() => backend.rounds(slug), [slug, reloads]);
 
   if (error) return <p className="empty error">{error}</p>;
   if (loading || !s) return <p className="empty">Loading…</p>;
@@ -122,26 +122,33 @@ export function StartupPage() {
           )}
         </div>
 
-        {/* Right Column Stack */}
+        {/* Right Column Stack: the evidence, once the startup is assessed */}
         <div className="stack">
-          <OceanImpactSection kpis={s.ocean_kpis} areas={frameworks?.ocean_impact_areas ?? null} />
+          {assessed && (
+            <>
+              <OceanImpactSection
+                kpis={s.ocean_kpis}
+                areas={frameworks?.ocean_impact_areas ?? null}
+              />
 
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>Funding</h2>
-              <FundingTotal events={events} disclosedUsd={s.total_disclosed_usd} />
-            </div>
-            {events === null ? (
-              <p className="small muted">Loading funding events…</p>
-            ) : events.length === 0 ? (
-              <p className="small muted">No funding events recorded.</p>
-            ) : (
-              <>
-                <FundingTimeline events={events} />
-                <FundingTable events={events} />
-              </>
-            )}
-          </section>
+              <section className="card card-pad">
+                <div className="card-head">
+                  <h2>Funding</h2>
+                  <FundingTotal events={events} disclosedUsd={s.total_disclosed_usd} />
+                </div>
+                {events === null ? (
+                  <p className="small muted">Loading funding events…</p>
+                ) : events.length === 0 ? (
+                  <p className="small muted">No funding events recorded.</p>
+                ) : (
+                  <>
+                    <FundingTimeline events={events} />
+                    <FundingTable events={events} />
+                  </>
+                )}
+              </section>
+            </>
+          )}
         </div>
       </div>
     </>

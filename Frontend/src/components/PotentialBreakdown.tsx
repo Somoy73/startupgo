@@ -12,17 +12,12 @@ const PARTS = [
 const points = (n: number) => n.toFixed(1);
 
 /**
- * How the investment potential is built: each score times its weight, stacked on a 0-100 bar,
- * minus the imbalance penalty (struck through at the end of the stack).
+ * How the investment potential is built: each score times its weight, stacked on a 0-100 bar.
  */
 export function PotentialBreakdown({ scores, weights }: { scores: Scores; weights: Weights }) {
   const parts = PARTS.map((p) => ({ ...p, value: scores[p.key], weight: weights[p.key] })).map(
     (p) => ({ ...p, points: p.value * p.weight }),
   );
-  const penalty = scores.imbalance_penalty;
-  const blended = parts.reduce((sum, p) => sum + p.points, 0);
-  // The penalty eats into the end of the stack, so the solid part ends at the potential.
-  let left = Math.max(0, blended - penalty);
 
   return (
     <section className="card card-pad">
@@ -35,24 +30,12 @@ export function PotentialBreakdown({ scores, weights }: { scores: Scores; weight
         role="img"
         aria-label={`Investment potential ${score(scores.potential)}: ${parts
           .map((p) => `${p.label} ${points(p.points)}`)
-          .join(", ")}${penalty > 0 ? `, minus imbalance penalty ${points(penalty)}` : ""}`}
+          .join(", ")}`}
         className="relative flex h-6 w-full overflow-hidden rounded-full bg-wash"
       >
-        {parts.map((p) => {
-          const solid = Math.min(p.points, left);
-          left -= solid;
-          const struck = p.points - solid;
-          return [
-            <span key={p.key} className={p.color} style={{ width: `${solid}%` }} />,
-            struck > 0 && (
-              <span
-                key={`${p.key}-penalty`}
-                className="penalty-stripes"
-                style={{ width: `${struck}%` }}
-              />
-            ),
-          ];
-        })}
+        {parts.map((p) => (
+          <span key={p.key} className={p.color} style={{ width: `${p.points}%` }} />
+        ))}
       </div>
 
       <dl className="mt-4 space-y-2 text-sm">
@@ -66,18 +49,6 @@ export function PotentialBreakdown({ scores, weights }: { scores: Scores; weight
             </dd>
           </div>
         ))}
-        {penalty > 0 && (
-          <div className="flex items-center gap-2">
-            <span aria-hidden className="penalty-stripes size-2.5 shrink-0 rounded-full" />
-            <dt className="flex-1">
-              Imbalance penalty
-              <span className="small muted"> (readiness spread {scores.readiness_spread})</span>
-            </dt>
-            <dd className="small tabular text-destructive">
-              <strong>−{points(penalty)}</strong>
-            </dd>
-          </div>
-        )}
       </dl>
     </section>
   );

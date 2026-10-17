@@ -101,8 +101,6 @@ export type StartupDetail = {
 export type StartupSummary = StartupDetail;
 export type Framework = {
   potential_weights: { readiness: number; ocean_impact: number; momentum: number };
-  penalty_per_extra_level: number;
-  max_healthy_spread: number;
   readiness_dimensions: {
     key: DimensionKey;
     code: string;
