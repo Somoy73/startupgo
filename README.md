@@ -1,6 +1,6 @@
 # Startup Go
 
-<img width="1743" height="910" alt="Start_View" src="https://github.com/user-attachments/assets/400f0ff0-2913-4467-92fc-84991f329974" />
+<img width="1448" height="905" alt="Start_View" src="https://github.com/user-attachments/assets/89242d64-1130-4779-a6ef-dc9b017ef881" />
 
 Deal intelligence for VCs investing in ocean and deep-tech startups. Startups are ranked on:
 
