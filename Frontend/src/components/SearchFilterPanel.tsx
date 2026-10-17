@@ -25,7 +25,9 @@ export function SearchFilterPanel({ filters, onChange }: Props) {
       />
       <Facet
         label="Region"
-        options={[...new Set(startups.map((s) => s.region))].sort().map((r) => ({ value: r, label: r }))}
+        options={[...new Set(startups.map((s) => s.region))]
+          .sort()
+          .map((r) => ({ value: r, label: r }))}
         selected={filters.regions}
         onChange={(regions) => set({ regions })}
       />
@@ -37,7 +39,10 @@ export function SearchFilterPanel({ filters, onChange }: Props) {
       />
       <Facet
         label="Ocean impact area"
-        options={frameworks.ocean_impact_areas.map((a) => ({ value: a.code, label: `${a.code} · ${a.name}` }))}
+        options={frameworks.ocean_impact_areas.map((a) => ({
+          value: a.code,
+          label: `${a.code} · ${a.name}`,
+        }))}
         selected={filters.impactAreas}
         onChange={(impactAreas) => set({ impactAreas })}
       />
@@ -48,7 +53,9 @@ export function SearchFilterPanel({ filters, onChange }: Props) {
         onChange={(pipeline) => set({ pipeline: pipeline as PipelineStage[] })}
       />
       <fieldset className="min-w-0">
-        <legend className="mb-2 text-xs font-bold text-muted-foreground">Minimum readiness (KTH IRL)</legend>
+        <legend className="mb-2 text-xs font-bold text-muted-foreground">
+          Minimum readiness (KTH IRL)
+        </legend>
         <div className="grid grid-cols-3 gap-2">
           {DIMENSIONS.map((d) => (
             <label key={d.key} className="field">

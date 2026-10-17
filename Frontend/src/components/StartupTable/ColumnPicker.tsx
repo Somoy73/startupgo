@@ -12,7 +12,8 @@ type Props = {
 export function ColumnPicker({ columns, onChange }: Props) {
   const optional = COLUMNS.filter((c) => !c.locked);
   const shown = optional.filter((c) => columns.includes(c.id)).length;
-  const toggle = (id: string) => onChange(columns.includes(id) ? columns.filter((c) => c !== id) : [...columns, id]);
+  const toggle = (id: string) =>
+    onChange(columns.includes(id) ? columns.filter((c) => c !== id) : [...columns, id]);
 
   return (
     <Popover>
@@ -27,13 +28,19 @@ export function ColumnPicker({ columns, onChange }: Props) {
       </PopoverTrigger>
       <PopoverContent align="end" className="w-60 p-2">
         <fieldset>
-          <legend className="px-2 pt-1 pb-1.5 text-xs font-semibold text-muted-foreground">Show columns</legend>
+          <legend className="px-2 pt-1 pb-1.5 text-xs font-semibold text-muted-foreground">
+            Show columns
+          </legend>
           {optional.map((c) => (
             <label
               key={c.id}
               className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-wash"
             >
-              <input type="checkbox" checked={columns.includes(c.id)} onChange={() => toggle(c.id)} />
+              <input
+                type="checkbox"
+                checked={columns.includes(c.id)}
+                onChange={() => toggle(c.id)}
+              />
               {c.header}
             </label>
           ))}

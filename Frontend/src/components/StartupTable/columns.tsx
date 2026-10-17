@@ -52,7 +52,13 @@ export const COLUMNS: Column[] = [
     cellClassName: "secondary small",
     cell: (s) => `${s.sector} · ${s.country}`,
   },
-  { id: "stage", header: "Stage", sortKey: "stage", defaultVisible: false, cell: (s) => stageLabel(s.stage) },
+  {
+    id: "stage",
+    header: "Stage",
+    sortKey: "stage",
+    defaultVisible: false,
+    cell: (s) => stageLabel(s.stage),
+  },
   ...levelColumns,
   {
     id: "readiness",
