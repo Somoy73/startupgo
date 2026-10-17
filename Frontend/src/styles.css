@@ -322,7 +322,7 @@ section.card { color: var(--foreground); --muted-foreground: var(--content-muted
 section.mg-card { padding: 28px; overflow: visible; }
 .mg-head { display: flex; align-items: center; gap: 10px; padding: 0 2px 16px; border-bottom: 1px solid var(--border); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
 .mg-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--match-glow); box-shadow: 0 0 10px var(--match-glow); }
-.mg-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 20px; }
+.mg-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 24px; align-items: start; margin-top: 20px; }
 .mg-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0fr); gap: 0; align-items: stretch; transition: grid-template-columns 0.55s cubic-bezier(.2,.8,.2,1), gap 0.55s; }
 .mg-layout.is-open { grid-template-columns: minmax(0, 1fr) minmax(340px, 460px); gap: 24px; }
 .mg-body .mg-graph { width: 100%; max-width: 480px; justify-self: center; }
@@ -507,3 +507,13 @@ section.mg-card { padding: 28px; overflow: visible; }
   .memo-sources { columns: 2; }
 }
 .memo-note { margin: 10px 0 0; }
+/* Agent scraper */
+.scrape-list { display: flex; flex-direction: column; gap: 6px; padding-left: 20px; list-style: disc; font-size: 13px; }
+.scrape-list.plain { padding-left: 0; list-style: none; }
+.scrape-list a { overflow-wrap: anywhere; }
+/* Header: the Agent Scraper button, right-most at the top of every page */
+.header-scraper { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; padding: 9px 15px; border-radius: 24px; white-space: nowrap; color: var(--navy-foreground); background: var(--ocean); border: 1px solid color-mix(in oklch, var(--navy-foreground) 46%, transparent); }
+.header-scraper:hover, .header-scraper.active { background: color-mix(in oklch, var(--ocean) 82%, white); }
+@media(max-width:800px) { .header-scraper { padding: 8px 12px; } }
+.scrape-source { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--border); border-radius: 8px; padding: 14px; min-width: 0; }
+.scrape-source .row-gap { font-size: 13px; }

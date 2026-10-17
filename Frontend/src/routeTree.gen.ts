@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgentScraperRouteImport } from './routes/agent-scraper'
 import { Route as EuProjectsRouteImport } from './routes/eu-projects'
 import { Route as MatchingRouteImport } from './routes/matching'
 import { Route as SearchRouteImport } from './routes/search'
@@ -21,6 +22,11 @@ import { Route as StartupsSlugRouteImport } from './routes/startups.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentScraperRoute = AgentScraperRouteImport.update({
+  id: '/agent-scraper',
+  path: '/agent-scraper',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EuProjectsRoute = EuProjectsRouteImport.update({
@@ -61,6 +67,7 @@ const StartupsSlugRoute = StartupsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agent-scraper': typeof AgentScraperRoute
   '/eu-projects': typeof EuProjectsRoute
   '/matching': typeof MatchingRoute
   '/search': typeof SearchRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agent-scraper': typeof AgentScraperRoute
   '/eu-projects': typeof EuProjectsRoute
   '/matching': typeof MatchingRoute
   '/search': typeof SearchRoute
@@ -82,6 +90,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agent-scraper': typeof AgentScraperRoute
   '/eu-projects': typeof EuProjectsRoute
   '/matching': typeof MatchingRoute
   '/search': typeof SearchRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/agent-scraper'
     | '/eu-projects'
     | '/matching'
     | '/search'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/agent-scraper'
     | '/eu-projects'
     | '/matching'
     | '/search'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/agent-scraper'
     | '/eu-projects'
     | '/matching'
     | '/search'
@@ -125,6 +137,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgentScraperRoute: typeof AgentScraperRoute
   EuProjectsRoute: typeof EuProjectsRoute
   MatchingRoute: typeof MatchingRoute
   SearchRoute: typeof SearchRoute
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agent-scraper': {
+      id: '/agent-scraper'
+      path: '/agent-scraper'
+      fullPath: '/agent-scraper'
+      preLoaderRoute: typeof AgentScraperRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/eu-projects': {
@@ -197,6 +217,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgentScraperRoute: AgentScraperRoute,
   EuProjectsRoute: EuProjectsRoute,
   MatchingRoute: MatchingRoute,
   SearchRoute: SearchRoute,

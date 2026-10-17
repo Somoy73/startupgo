@@ -8,7 +8,7 @@ from scraper.fetchers import PublicPageFetcher
 
 from .agent import StartupAgent
 from .cache import JsonCache
-from .config import AgentSettings
+from .config import AgentSettings, LLMSettings
 from .crawler import PageLoader, fetch_robots_txt
 from .documents import RobotsPolicy
 from .errors import AgentError
@@ -30,39 +30,58 @@ from .retrievals import RetrievalLog
 from .search import BraveSearch, CachedSearch, GeminiGoogleSearch, WebSearch, resolve_redirect
 
 
-def build_gemini_session(settings: AgentSettings, stats: UsageStats) -> GeminiSession:
+def build_gemini_session(llm: LLMSettings, stats: UsageStats) -> GeminiSession:
     """One paced Gemini client for extraction, judge and search (the key is read on first use)."""
-    rpm = settings.llm.requests_per_minute
+    rpm = llm.requests_per_minute
     return GeminiSession(
-        lambda: gemini_client(settings.llm.api_key()),
+        lambda: gemini_client(llm.api_key()),
         stats=stats,
         limiter=RateLimiter(rpm) if rpm > 0 else None,
-        thinking=settings.llm.thinking,
+        thinking=llm.thinking,
     )
 
 
-def build_llm(settings: AgentSettings, session: GeminiSession | None) -> LLMClient:
+def build_llm(settings: AgentSettings, session: GeminiSession | None, stats: UsageStats | None = None) -> LLMClient:
     llm = settings.llm
     if llm.provider == "gemini" and session:
         return GeminiClient(session, model=llm.model, temperature=llm.temperature)
     if llm.provider in ("openai", "openai-compatible"):
+        # Nemotron models think before answering unless told not to; other endpoints never see the key.
+        extra_body = {"chat_template_kwargs": {"enable_thinking": llm.reasoning}} if llm.reasoning is not None else {}
+        rpm = llm.requests_per_minute
         return LazyLLM(
-            lambda: OpenAICompatibleClient(endpoint=llm.endpoint, api_key=llm.api_key(), model=llm.model, temperature=llm.temperature),
+            lambda: OpenAICompatibleClient(
+                endpoint=llm.endpoint,
+                api_key=llm.api_key(),
+                model=llm.model,
+                temperature=llm.temperature,
+                timeout=llm.timeout,
+                max_tokens=llm.max_tokens,
+                extra_body=extra_body,
+                multimodal=llm.multimodal,
+                limiter=RateLimiter(rpm) if rpm > 0 else None,
+                stats=stats,
+            ),
             model=llm.model,
         )
     raise AgentError(f"unsupported [llm] provider: {llm.provider}")
 
 
-def build_search(settings: AgentSettings, session: GeminiSession | None, *, user_agent: str) -> WebSearch | None:
+def build_search(settings: AgentSettings, session: GeminiSession | None, *, user_agent: str, stats: UsageStats | None = None) -> WebSearch | None:
+    """The [search] provider. Gemini's Google Search also works next to another model (NVIDIA): it then uses the
+    [llm.gemini] profile's key and model, in a session of its own."""
     search = settings.search
     if search.provider == "none":
         return None
     if search.provider == "gemini":
-        if session is None:
-            raise AgentError('[search] provider "gemini" needs [llm] provider "gemini" (it uses the same key)')
+        gemini = settings.gemini_llm()
+        if gemini is None:
+            raise AgentError('[search] provider "gemini" needs a Gemini model profile ([llm.gemini] in config.toml) for its key')
+        if session is None or settings.llm.provider != "gemini":
+            session = build_gemini_session(gemini, stats or UsageStats())
         return GeminiGoogleSearch(
             session,
-            model=settings.llm.model,
+            model=gemini.model,
             resolve=lambda url: resolve_redirect(url, user_agent=user_agent),
         )
     if search.provider == "brave":
@@ -102,12 +121,12 @@ def build_agent(settings: AgentSettings, *, refresh: bool = False) -> tuple[Star
     )
     stats = UsageStats()
     log = RetrievalLog()
-    session = build_gemini_session(settings, stats) if settings.llm.provider == "gemini" else None
-    searcher = build_search(settings, session, user_agent=fetcher.user_agent)
+    session = build_gemini_session(settings.llm, stats) if settings.llm.provider == "gemini" else None
+    searcher = build_search(settings, session, user_agent=fetcher.user_agent, stats=stats)
     agent = StartupAgent(
         fetcher=fetcher,
         extractor=SectionExtractor(
-            CachedLLM(build_llm(settings, session), cache, stats=stats),
+            CachedLLM(build_llm(settings, session, stats), cache, stats=stats),
             PromptTemplates.load(settings.system_prompt, settings.section_prompt),
         ),
         loader=PageLoader(fetcher.fetch_text, cache=cache, robots=robots, today=today, page_chars=settings.crawl.page_chars, log=log),

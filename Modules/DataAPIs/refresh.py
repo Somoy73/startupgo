@@ -209,11 +209,11 @@ def step_agent(ctx: Context):
         **os.environ,
         "STARTUPGO_DB": str(ingest.db_path()),
     }
-    key = (
-        tomllib.loads(cfg.read_text(encoding="utf-8"))
-        .get("llm", {})
-        .get("api_key_env", "GEMINI_API_KEY")
-    )
+    llm = tomllib.loads(cfg.read_text(encoding="utf-8")).get("llm", {})
+    # [llm.<name>] model profiles: the default one's key (a flat [llm] table is the one profile).
+    profiles = {k: v for k, v in llm.items() if isinstance(v, dict)}
+    default = profiles.get(llm.get("default") or next(iter(profiles), ""), {})
+    key = default.get("api_key_env") or llm.get("api_key_env", "GEMINI_API_KEY")
     if not env.get(key):
         raise Skip(f"Agent key missing: {key} in Modules/Agent/.env")
     if shutil.which("uv"):

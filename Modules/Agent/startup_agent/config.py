@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 import tomllib
-from dataclasses import dataclass
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -19,14 +19,27 @@ DEFAULT_SECTION_GROUPS = (("A", "B", "H", "I"), ("C", "D", "E"), ("F", "G", "J")
 
 @dataclass(frozen=True, slots=True)
 class LLMSettings:
+    """One model the agent can use: a [llm.<name>] profile in config.toml (or [llm] itself, without profiles)."""
+
     provider: str
     model: str
     api_key_env: str
     endpoint: str
     temperature: float
     requests_per_minute: float  # shared by extraction, judge and search; 0 = no pacing
-    thinking: str  # "minimal" | "low" | "medium" | "high" | "" (model default)
+    thinking: str  # Gemini: "minimal" | "low" | "medium" | "high" | "" (model default)
     section_groups: tuple[tuple[str, ...], ...]  # sections extracted together in one call
+    # openai-compatible providers (NVIDIA, ...):
+    max_tokens: int | None = None  # answer budget per call; None = the endpoint's default
+    timeout: float = 120.0  # seconds per call
+    reasoning: bool | None = None  # Nemotron "thinking" (chat_template_kwargs.enable_thinking); None = not sent
+    multimodal: bool = False  # the model also reads images (image_url content); Gemini always does
+    name: str = ""  # the profile's name, e.g. "nvidia" or "gemini"
+
+    @property
+    def reads_images(self) -> bool:
+        """Whether the scrape agent can hand images (and scanned pages) to the model."""
+        return self.provider == "gemini" or self.multimodal
 
     def api_key(self) -> str:
         key = os.getenv(self.api_key_env, "").strip()
@@ -94,6 +107,21 @@ class AgentSettings:
     system_prompt: Path
     section_prompt: Path
     judge_prompt: Path
+    llms: dict[str, LLMSettings] = field(default_factory=dict)  # every [llm.<name>] profile; ``llm`` is the one in use
+
+    def with_llm(self, name: str | None) -> AgentSettings:
+        """These settings with the named model profile in use; None or "" keeps the default."""
+        if not name or name == self.llm.name:
+            return self
+        if name not in self.llms:
+            raise AgentError(f"unknown model {name!r}: config.toml has {', '.join(self.llms) or 'no [llm.<name>] profiles'}")
+        return replace(self, llm=self.llms[name])
+
+    def gemini_llm(self) -> LLMSettings | None:
+        """The Gemini profile (the one in use first), for Google Search grounding next to another model."""
+        if self.llm.provider == "gemini":
+            return self.llm
+        return next((p for p in self.llms.values() if p.provider == "gemini"), None)
 
     @classmethod
     def load(cls, path: Path | None = None) -> AgentSettings:
@@ -114,22 +142,15 @@ class AgentSettings:
         paths: dict[str, Any] = data.get("paths", {})
         database: dict[str, Any] = data.get("database", {})
         pipeline: dict[str, Any] = data.get("pipeline", {})
+        llms, default = _llm_profiles(llm)
         weights = {**DEFAULT_WEIGHTS, **{k: float(v) for k, v in data.get("weights", {}).items()}}
         if unknown := set(weights) - set(DEFAULT_WEIGHTS):
             raise AgentError(f"unknown [weights] criteria: {', '.join(sorted(unknown))}")
 
         return cls(
             root=root,
-            llm=LLMSettings(
-                provider=str(llm.get("provider", "gemini")).casefold(),
-                model=str(llm.get("model", "gemini-3.8-flash")),
-                api_key_env=str(llm.get("api_key_env", "GEMINI_API_KEY")),
-                endpoint=str(llm.get("endpoint", "")),
-                temperature=float(llm.get("temperature", 0.0)),
-                requests_per_minute=float(llm.get("requests_per_minute", 10)),
-                thinking=str(llm.get("thinking", "minimal")).casefold(),
-                section_groups=_section_groups(llm.get("section_groups", DEFAULT_SECTION_GROUPS)),
-            ),
+            llm=llms[default],
+            llms=llms,
             crawl=CrawlSettings(
                 max_pages=int(crawl.get("max_pages", 12)),
                 page_chars=int(crawl.get("page_chars", 15000)),
@@ -170,6 +191,43 @@ class AgentSettings:
             section_prompt=root / paths.get("section_prompt", "prompts/section.md"),
             judge_prompt=root / paths.get("judge_prompt", "prompts/judge.md"),
         )
+
+
+def _llm_profiles(llm: dict[str, Any]) -> tuple[dict[str, LLMSettings], str]:
+    """Model profiles and the default's name. Keys on [llm] are shared; each [llm.<name>] table adds or overrides keys.
+
+    Without profile tables, [llm] itself is the one profile, named after its provider.
+    """
+    shared = {k: v for k, v in llm.items() if not isinstance(v, dict)}
+    tables = {k: v for k, v in llm.items() if isinstance(v, dict)} or {_provider_name(shared): {}}
+    profiles = {name: _llm_settings(name, {**shared, **table}) for name, table in tables.items()}
+    default = str(shared.get("default") or next(iter(profiles)))
+    if default not in profiles:
+        raise AgentError(f"[llm] default = {default!r} is not a profile: config.toml has {', '.join(profiles)}")
+    return profiles, default
+
+
+def _provider_name(llm: dict[str, Any]) -> str:
+    provider = str(llm.get("provider", "gemini")).casefold()
+    return "gemini" if provider == "gemini" else "nvidia" if "nvidia" in str(llm.get("endpoint", "")) else provider
+
+
+def _llm_settings(name: str, llm: dict[str, Any]) -> LLMSettings:
+    return LLMSettings(
+        provider=str(llm.get("provider", "gemini")).casefold(),
+        model=str(llm.get("model", "gemini-3.8-flash")),
+        api_key_env=str(llm.get("api_key_env", "GEMINI_API_KEY")),
+        endpoint=str(llm.get("endpoint", "")),
+        temperature=float(llm.get("temperature", 0.0)),
+        requests_per_minute=float(llm.get("requests_per_minute", 10)),
+        thinking=str(llm.get("thinking", "minimal")).casefold(),
+        section_groups=_section_groups(llm.get("section_groups", DEFAULT_SECTION_GROUPS)),
+        max_tokens=int(llm["max_tokens"]) if llm.get("max_tokens") else None,
+        timeout=float(llm.get("timeout", 120)),
+        reasoning=bool(llm["reasoning"]) if "reasoning" in llm else None,
+        multimodal=bool(llm.get("multimodal", False)),
+        name=name,
+    )
 
 
 def _discover_source(source: Any) -> dict[str, Any]:

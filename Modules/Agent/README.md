@@ -17,12 +17,36 @@ lockfile and environment (`Modules/.venv`):
 ```bash
 cd Modules
 uv sync --all-packages        # one environment for Agent + Scraper (+ pytest)
-cp Agent/.env.example Agent/.env   # add GEMINI_API_KEY (or the key named in config.toml)
+cp Agent/.env.example Agent/.env   # add NVIDIA_API_KEY (or the key named in config.toml)
 cd Agent                      # commands below run from here (or: uv run --package startup-agent ... from Modules/)
 ```
 
 Install or update packages with `uv sync --all-packages` from `Modules/`. A plain `uv sync` inside
 `Scraper/` would remove the Agent's packages from the shared environment. `uv run` is safe anywhere.
+
+### LLM provider: NVIDIA and Gemini
+
+`config.toml` has two model profiles, and everything can use either: `[llm.nvidia]` (NVIDIA's hosted API, key
+`NVIDIA_API_KEY`) and `[llm.gemini]` (key `GEMINI_API_KEY`). `[llm] default = "nvidia"` is used unless another is chosen:
+
+```bash
+uv run startup-agent --llm gemini graph --name "Origin by Ocean" --website https://www.originbyocean.com
+```
+
+The `/agent-scraper` page has a Model menu, and `POST /api/agent-scrape` takes `"llm": "gemini"`. Keys on `[llm]` are
+shared; each profile adds or overrides keys. A config with one flat `[llm]` table still works (one profile).
+
+| | NVIDIA (`nvidia/nemotron-3.5-super-vl-120b-a12b`) | Gemini (`gemini-3.5-flash-lite`) |
+|---|---|---|
+| Quota | free tier ~40 requests/min | free tier ~10 requests/min, small daily quota |
+| Speed | 3-5 s per call in our tests with `reasoning = false` (Nemotron's "thinking" took ~80 s); some free-tier calls took over a minute | fast |
+| Images | yes (`multimodal = true`) | yes |
+| Scanned PDFs (no text layer) | no: export the pages as images | yes |
+| Web search | through Gemini or Brave (below) | Google Search grounding |
+
+PDFs with a text layer are read by code (pypdf) whichever model runs. `[search] provider = "gemini"` uses the
+`[llm.gemini]` key and model in a session of its own, so NVIDIA extraction with Gemini search works too. On a free
+NVIDIA key many models on the endpoint answer 404 "not found for account"; the two above work.
 
 ## Multi-agent workflow (LangGraph)
 
@@ -100,7 +124,8 @@ Run it again after saving new entries.
 The research agent runs the `[search] queries` in `config.toml` (e.g. `"{name}" startup funding
 investment`) through an official search API, never by scraping a search engine:
 
-- `provider = "gemini"` (default): Google Search through Gemini grounding, using the same key as the LLM.
+- `provider = "gemini"` (default): Google Search through Gemini grounding, with the `[llm.gemini]` key, whichever
+  model extracts.
   The Gemini API free tier may not include grounding; if every search returns 429, enable billing or
   switch provider.
 - `provider = "brave"`: Brave Search API; put the key in `.env` as `BRAVE_API_KEY`.

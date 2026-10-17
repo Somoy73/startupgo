@@ -129,6 +129,12 @@ class BrowserSession:
             )
         return html
 
+    def user_agent(self) -> str:
+        """The browser's user agent as the pages see it (stealth: without "HeadlessChrome"), for downloads made beside it."""
+        driver = self._ensure_driver()
+        agent = (driver.execute_cdp_cmd("Browser.getVersion", {}) or {}).get("userAgent") or driver.execute_script("return navigator.userAgent")
+        return agent.replace("HeadlessChrome", "Chrome") if self.settings.stealth else agent
+
     def close(self) -> None:
         if self._driver is not None:
             try:

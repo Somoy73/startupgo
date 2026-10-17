@@ -193,6 +193,119 @@ export type ResearchJob = {
   result: Record<string, unknown> | null;
 };
 
+/** A source's focus prompt (Modules/Agent/prompts/scrape/<mode>.md). */
+export type ScrapeMode =
+  | "general"
+  | "startups"
+  | "funding_calls"
+  | "projects"
+  | "funding_rounds"
+  | "company"
+  | "document";
+
+/** One source of a scrape job: what to get, where (no URLs: the agent searches the web), and its focus. */
+export type ScrapeTarget = {
+  goal: string;
+  urls: string[];
+  follow_links: boolean;
+  max_pages: number;
+  mode: ScrapeMode;
+  label: string;
+};
+
+export type ScrapeRequest = {
+  sources: ScrapeTarget[];
+  stealth: boolean;
+  /** Model profile from GET /agent-scrape/info; omitted = the default. */
+  llm?: string;
+};
+
+/** How well a record's quote was checked: found on the page, found in the model's text of a PDF/image, or not found. */
+export type ScrapeEvidence = "page" | "transcript" | "unverified";
+
+export type ScrapeRecordKind =
+  | "startup"
+  | "company"
+  | "funding_call"
+  | "project"
+  | "funding_round"
+  | "investor"
+  | "figure"
+  | "other";
+
+export type ScrapeRecord = {
+  kind: ScrapeRecordKind;
+  title: string;
+  details: string;
+  /** The record's own website, "" when the source doesn't give it. */
+  website: string;
+  attributes: { name: string; value: string }[];
+  source_url: string;
+  quote: string;
+  evidence: ScrapeEvidence;
+  /** Read on the record's own website: the company's claim, not independent evidence. */
+  self_reported: boolean;
+  /** The source (job source label) the record came from. */
+  group: string;
+  /** Other sources of this job that describe the same thing. */
+  also_in: string[];
+};
+
+export type ScrapeSource = {
+  url: string;
+  kind: "page" | "pdf" | "image";
+  status: "read" | "empty" | "skipped" | "error";
+  detail: string;
+  group: string;
+};
+
+export type ScrapeGroup = {
+  label: string;
+  goal: string;
+  mode: ScrapeMode;
+  summary: string;
+  records: number;
+  /** Why this source gave nothing, when it failed while the others went on. */
+  error: string | null;
+};
+
+export type ScrapeResult = {
+  goal: string;
+  summary: string;
+  groups: ScrapeGroup[];
+  records: ScrapeRecord[];
+  gaps: string[];
+  sources: ScrapeSource[];
+  notices: string[];
+  model: string;
+  usage: string;
+};
+
+export type ScrapeJob = {
+  id: number;
+  status: "queued" | "running" | "done" | "error";
+  sources: ScrapeTarget[];
+  created_at: string;
+  progress: string[];
+  result: ScrapeResult | null;
+  error: string | null;
+};
+
+/** A scraped startup in the database: created, promoted from a BlueInvest lead, or already there (evidence added). */
+export type ScrapedStartupAdded = { slug: string; name: string; status: "created" | "promoted" | "exists" };
+
+/** A model the scraper can use: multimodal models read images (Gemini also scanned PDFs). */
+export type ScrapeModel = {
+  name: string;
+  provider: string;
+  model: string;
+  multimodal: boolean;
+  /** Its API key is in Modules/Agent/.env. */
+  key_set: boolean;
+};
+
+export type ScrapeAgentInfo = { default: string; models: ScrapeModel[]; web_search: boolean };
+
 export type InvestmentCriterion = {
   name: string;
   /** 1-5; null without facts. */

@@ -39,6 +39,24 @@ class FakeSession(BrowserSession):
         return self.fake
 
 
+class UserAgentTest(unittest.TestCase):
+    def session(self, cdp_result: Any, stealth: bool) -> FakeSession:
+        session = FakeSession("")
+        session.settings = BrowserSettings(stealth=stealth, settle_seconds=0)
+        session.fake.execute_cdp_cmd = lambda command, params: cdp_result  # type: ignore[attr-defined]
+        session.fake.execute_script = lambda script: "Mozilla/5.0 HeadlessChrome/155"  # type: ignore[method-assign]
+        session._apply_stealth = lambda driver: None  # type: ignore[method-assign]
+        return session
+
+    def test_stealth_hides_headless_in_the_user_agent(self):
+        session = self.session({"userAgent": "Mozilla/5.0 HeadlessChrome/155"}, stealth=True)
+        self.assertEqual(session.user_agent(), "Mozilla/5.0 Chrome/155")
+        self.assertEqual(self.session({"userAgent": "Mozilla/5.0 HeadlessChrome/155"}, stealth=False).user_agent(), "Mozilla/5.0 HeadlessChrome/155")
+
+    def test_falls_back_to_the_page_when_the_browser_gives_no_version(self):
+        self.assertEqual(self.session(None, stealth=True).user_agent(), "Mozilla/5.0 Chrome/155")
+
+
 class BrowserSettingsTest(unittest.TestCase):
     def test_defaults_use_undetected_driver_with_stealth(self):
         s = BrowserSettings.from_mapping({})

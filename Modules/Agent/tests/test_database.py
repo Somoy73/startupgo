@@ -321,3 +321,51 @@ def test_startups_the_agent_has_not_scored_get_the_rubric_on_their_facts(tmp_pat
     expected = score_all(facts, {"Tech": 2.0})
     assert scores["source"] == "facts" and scores["trl"] == expected.trl.level is not None
     assert (scores["investment_score"], scores["criteria"][7]["score"]) == (expected.investment_score, expected.criteria[7].score)
+
+
+# --- Startups from the scrape agent ---------------------------------------------------------
+
+SCRAPED = {"kind": "startup", "title": "Blue Kelp", "details": "Grows kelp for feed.", "website": "https://www.bluekelp.example/",
+           "attributes": [{"name": "country", "value": "Norway"}, {"name": "what_it_does", "value": "Kelp farming for animal feed"}],
+           "source_url": "https://pipeline.example/list", "quote": "Blue Kelp grows kelp for feed", "evidence": "page",
+           "self_reported": False, "group": "BlueInvest pipeline"}
+
+
+def test_a_scraped_startup_is_added_as_a_sourced_startup_with_its_evidence(tmp_path):
+    db = make_db(tmp_path / "db.sqlite")
+    assert db.add_scraped(SCRAPED) == {"slug": "blue-kelp", "name": "Blue Kelp", "status": "created"}
+
+    entity = rows(db.path, "SELECT * FROM entities WHERE slug = 'blue-kelp'")[0]
+    assert (entity["kind"], entity["pipeline_stage"], entity["domain"], entity["country"], entity["sector"]) == (
+        "startup", "sourced", "bluekelp.example", "Norway", "Unknown")
+    assert entity["tagline"] == "Kelp farming for animal feed"
+    fact = rows(db.path, "SELECT * FROM facts WHERE entity_id = ?", entity["id"])[0]
+    assert (fact["field"], fact["source_name"], fact["status"], fact["source_type"], fact["evidence"]) == (
+        "scraped_record", "scraper", "verified", "news", "Blue Kelp grows kelp for feed")
+    assert json.loads(fact["value"])["attributes"] == {"country": "Norway", "what_it_does": "Kelp farming for animal feed"}
+    assert rows(db.path, "SELECT COUNT(*) n FROM assessments WHERE entity_id = ?", entity["id"])[0]["n"] == 0  # no score: research does that
+
+    assert db.add_scraped(SCRAPED)["status"] == "exists"  # the same record again: no second startup, no second fact
+    assert rows(db.path, "SELECT COUNT(*) n FROM facts WHERE entity_id = ?", entity["id"])[0]["n"] == 1
+
+
+def test_a_scraped_record_of_a_known_startup_or_candidate_joins_it(tmp_path):
+    db = make_db(tmp_path / "db.sqlite")
+    conn = sqlite3.connect(db.path)
+    conn.execute("INSERT INTO entities (key, kind, name, website) VALUES ('candidate:bi-1', 'candidate', 'Wave Co', 'https://waveco.example')")
+    conn.commit()
+    conn.close()
+
+    own_site = {**SCRAPED, "title": "Notpla Ltd", "website": "", "source_url": "https://www.notpla.com/about", "self_reported": True}
+    assert db.add_scraped(own_site, website="notpla.com") == {"slug": "notpla", "name": "Notpla", "status": "exists"}
+    fact = rows(db.path, "SELECT status, source_type FROM facts WHERE entity_id = 1 AND source_name = 'scraper'")[0]
+    assert (fact["status"], fact["source_type"]) == ("claimed", "website")  # the company's own page: a claim
+
+    promoted = db.add_scraped({**SCRAPED, "title": "WaveCo", "website": "https://www.waveco.example", "evidence": "unverified"})
+    assert promoted == {"slug": "wave-co", "name": "Wave Co", "status": "promoted"}
+    row = rows(db.path, "SELECT kind, key, pipeline_stage FROM entities WHERE slug = 'wave-co'")[0]
+    assert tuple(row) == ("startup", "candidate:bi-1", "sourced")
+    assert rows(db.path, "SELECT status FROM facts WHERE entity_id = (SELECT id FROM entities WHERE slug = 'wave-co')")[0]["status"] == "inferred"
+
+    with pytest.raises(AgentError, match="needs a name and a website"):
+        db.add_scraped({**SCRAPED, "website": ""})

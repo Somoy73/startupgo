@@ -97,7 +97,7 @@ Agent, Scraper and Search (Python 3.11, [uv](https://docs.astral.sh/uv/)). One s
 ```bash
 cd Modules
 uv sync --all-packages
-cp Agent/.env.example Agent/.env     # add GEMINI_API_KEY
+cp Agent/.env.example Agent/.env     # add NVIDIA_API_KEY and/or GEMINI_API_KEY: both models are in Agent/config.toml
 uv run --package startup-agent startup-agent graph --name "Origin by Ocean" --website https://www.originbyocean.com
 cp Search/.env.example Search/.env   # add CHAT_API_KEY, EMBEDDING_API_KEY
 cd Search && uv run process-storage  # DB + agent entries -> LightRAG storage, for POST /api/startups/search

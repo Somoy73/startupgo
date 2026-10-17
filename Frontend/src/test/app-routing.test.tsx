@@ -16,6 +16,7 @@ describe("App routing", () => {
   });
   it.each([
     "/search",
+    "/agent-scraper",
     "/matching",
     "/assess",
     "/assess/origin-by-ocean",

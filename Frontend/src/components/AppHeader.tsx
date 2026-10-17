@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, Waves, X } from "lucide-react";
+import { Bot, Menu, Waves, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { navItems } from "../lib/nav-items";
 
@@ -37,6 +37,15 @@ export function AppHeader() {
             ))}
           </nav>
         )}
+        {/* On every page, the home page included: right-most at the top. */}
+        <Link
+          to="/agent-scraper"
+          className={`header-scraper${location.pathname === "/agent-scraper" ? " active" : ""}`}
+          onClick={() => setOpen(false)}
+        >
+          <Bot size={16} aria-hidden="true" />
+          Agent Scraper
+        </Link>
         {!heroButtons && (
           <Button
             variant="ghost"

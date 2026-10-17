@@ -444,6 +444,105 @@ class ResearchJob(BaseModel):
     error: str | None
 
 
+ScrapeUrl = Annotated[str, StringConstraints(pattern=r"^https?://\S+$", max_length=1000)]
+ScrapeMode = Literal["general", "startups", "funding_calls", "projects", "funding_rounds", "company", "document"]
+
+
+class ScrapeSource(BaseModel):
+    """One source for the scrape agent: what to get, where (no urls: it searches the web), and its focus prompt."""
+
+    goal: str = Field(min_length=3, max_length=1500)
+    urls: list[ScrapeUrl] = Field(default_factory=list, max_length=10)
+    follow_links: bool = False  # also read the links on those pages that match the goal
+    max_pages: int = Field(default=8, ge=1, le=20)
+    mode: ScrapeMode = "general"  # Modules/Agent/prompts/scrape/<mode>.md
+    label: str = Field(default="", max_length=80)  # the source's name in the merged result
+
+
+class ScrapeRequest(BaseModel):
+    """Several sources in ``sources`` (read in turn, merged into one result), or one given by goal and urls."""
+
+    sources: list[ScrapeSource] = Field(default_factory=list, max_length=8)
+    goal: str | None = Field(default=None, min_length=3, max_length=1500)
+    urls: list[ScrapeUrl] = Field(default_factory=list, max_length=10)
+    follow_links: bool = False
+    max_pages: int = Field(default=8, ge=1, le=20)
+    mode: ScrapeMode = "general"
+    stealth: bool = True  # render pages in the stealth Chrome; False = plain HTTP
+    llm: str | None = Field(default=None, max_length=40)  # model profile, e.g. "nvidia" or "gemini"; None = the default
+
+    @model_validator(mode="after")
+    def _one_source_at_least(self) -> "ScrapeRequest":
+        if not self.sources:
+            if not self.goal:
+                raise ValueError("give sources, or a goal")
+            self.sources = [ScrapeSource(goal=self.goal, urls=self.urls, follow_links=self.follow_links, max_pages=self.max_pages, mode=self.mode)]
+        return self
+
+
+class ScrapeJob(BaseModel):
+    id: int
+    status: JobStatus
+    sources: list[ScrapeSource]
+    stealth: bool
+    llm: str | None
+    created_at: str
+    started_at: str | None
+    finished_at: str | None
+    progress: list[str]  # what the agent did so far, in order
+    result: dict | None  # summary, groups, records (each with its quote check and source), gaps, sources, notices, model, usage
+    error: str | None
+
+
+class ScrapedAttribute(BaseModel):
+    name: str = Field(max_length=200)
+    value: str = Field(max_length=2000)
+
+
+class ScrapedRecord(BaseModel):
+    """A record from a scrape result, as the agent returned it."""
+
+    kind: str = Field(default="startup", max_length=40)
+    title: str = Field(min_length=1, max_length=200)
+    details: str = Field(default="", max_length=4000)
+    website: str = Field(default="", max_length=300)
+    attributes: list[ScrapedAttribute] = Field(default_factory=list, max_length=60)
+    source_url: str = Field(default="", max_length=1000)
+    quote: str = Field(default="", max_length=2000)
+    evidence: Literal["page", "transcript", "unverified"] = "unverified"
+    self_reported: bool = False
+    group: str = Field(default="", max_length=80)
+
+
+class ScrapedStartup(BaseModel):
+    """Add a scraped startup to the database; ``website`` when the record has none (or to correct it)."""
+
+    record: ScrapedRecord
+    website: str | None = Field(default=None, pattern=r"^(https?://)?[^\s/]+\.[^\s]+$", max_length=300)
+
+
+class ScrapedStartupAdded(BaseModel):
+    slug: str
+    name: str
+    status: Literal["created", "promoted", "exists"]  # promoted: a BlueInvest candidate became a startup
+
+
+class ScrapeModel(BaseModel):
+    name: str  # the [llm.<name>] profile
+    provider: str
+    model: str
+    multimodal: bool  # reads images (and, for Gemini, scanned PDFs)
+    key_set: bool  # its API key is in Modules/Agent/.env
+
+
+class ScrapeAgentInfo(BaseModel):
+    """The models the scraper can use (Modules/Agent/config.toml), the default one, and whether it searches the web."""
+
+    default: str
+    models: list[ScrapeModel]
+    web_search: bool  # finds pages itself when no URL is given
+
+
 class AgentAssessment(BaseModel):
     """The agent's latest judge-approved assessment of a startup (assessments row, engine 'agent')."""
 

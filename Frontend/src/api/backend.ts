@@ -5,6 +5,11 @@ import type {
   NaturalLanguageSearchResponse,
   Peer,
   ResearchJob,
+  ScrapeAgentInfo,
+  ScrapedStartupAdded,
+  ScrapeJob,
+  ScrapeRecord,
+  ScrapeRequest,
   StartupDetail,
   StartupSummary,
 } from "./backend-types";
@@ -50,7 +55,9 @@ function errorMessage(detail: unknown): string | null {
 const startupPath = (slug: string) => `/startups/${encodeURIComponent(slug)}`;
 
 export const backend = {
-  startups: () => request<StartupSummary[]>("/startups"),
+  /** sort: potential (default), readiness, ocean, momentum, investment, trl, brl or name; ranked by the backend. */
+  startups: (sort?: string) =>
+    request<StartupSummary[]>(sort ? `/startups?sort=${encodeURIComponent(sort)}` : "/startups"),
   startup: (slug: string) => request<StartupDetail>(startupPath(slug)),
   memo: (slug: string) => request<InvestmentMemo>(`${startupPath(slug)}/memo`),
   /** Natural-language search (LightRAG). 503 when search isn't configured, 502 when it failed. */
@@ -63,6 +70,18 @@ export const backend = {
   startResearch: (slug: string) =>
     request<ResearchJob>("/research", { method: "POST", body: JSON.stringify({ slug }) }),
   researchJob: (id: number) => request<ResearchJob>(`/research/${id}`),
+  /** The scrape agent's model, and whether it reads PDFs and images and searches the web. */
+  scrapeInfo: () => request<ScrapeAgentInfo>("/agent-scrape/info"),
+  /** Queue the scrape agent on up to 8 sources, read in turn and merged into one result. Poll scrapeJob. */
+  startScrape: (body: ScrapeRequest) =>
+    request<ScrapeJob>("/agent-scrape", { method: "POST", body: JSON.stringify(body) }),
+  scrapeJob: (id: number) => request<ScrapeJob>(`/agent-scrape/${id}`),
+  /** Add a scraped startup to the database (a sourced startup without a score). 422 without a website. */
+  addScrapedStartup: (record: ScrapeRecord, website?: string) =>
+    request<ScrapedStartupAdded>("/agent-scrape/startups", {
+      method: "POST",
+      body: JSON.stringify(website ? { record, website } : { record }),
+    }),
   frameworks: () => request<Frameworks>("/frameworks"),
   /** Every funding event from every source, oldest first. */
   rounds: (slug: string) => request<FundingEvent[]>(`${startupPath(slug)}/rounds`),

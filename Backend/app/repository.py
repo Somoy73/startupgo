@@ -174,7 +174,8 @@ def entry_passes(trl: int | None, brl: int | None, f: SearchFilters) -> bool:
 SORT_KEYS = {
     "potential": lambda s: -s.scores.potential,
     "readiness": lambda s: -s.scores.readiness,
-    "ocean": lambda s: -s.scores.ocean_impact,
+    # Ties (the OIR cap often puts several startups on the same score) go to wider impact, then higher potential.
+    "ocean": lambda s: (-s.scores.ocean_impact, -len(s.scores.ocean_areas_covered), -s.scores.potential),
     "momentum": lambda s: -s.scores.momentum,
     "investment": lambda s: (s.investment.investment_score is None, -(s.investment.investment_score or 0)),
     "trl": lambda s: -s.readiness.trl,

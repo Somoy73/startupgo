@@ -8,11 +8,11 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
-from startup_agent import Candidate
+from startup_agent import AgentError, Candidate
 from startup_agent.database import ENGINE, domain, has_score, researched_at
 from startup_search import SearchError, SearchUnavailable, StartupMatch, StartupSearch, Subgraph
 
-from . import features_repo, memo, repository, research
+from . import features_repo, memo, repository, research, scrape
 from .db import get_conn, init_db
 from .schemas import (
     AgentAssessment,
@@ -40,6 +40,11 @@ from .schemas import (
     ResearchJob,
     ResearchRequest,
     ScorePreviewRequest,
+    ScrapeAgentInfo,
+    ScrapedStartup,
+    ScrapedStartupAdded,
+    ScrapeJob,
+    ScrapeRequest,
     Scores,
     SearchFilters,
     SearchMatch,
@@ -57,8 +62,10 @@ async def lifespan(app: FastAPI):
     init_db()
     app.state.search = StartupSearch()  # LightRAG (Modules/Search); opens on the first search
     app.state.research = research.ResearchJobs()  # agent research jobs (Modules/Agent), one at a time
+    app.state.scrape = scrape.ScrapeJobs()  # scrape agent jobs (Modules/Agent), one at a time
     yield
     app.state.research.shutdown()
+    app.state.scrape.shutdown()
     await app.state.search.close()
 
 
@@ -229,6 +236,45 @@ def research_job(job_id: int, request: Request):
     job = request.app.state.research.get(job_id)
     if job is None:
         raise HTTPException(404, f"research job {job_id} not found")
+    return job
+
+
+# --- Scrape agent: read any public pages, PDFs and images for a goal ----------------------------------
+
+
+@app.get("/api/agent-scrape/info", response_model=ScrapeAgentInfo)
+def scrape_info():
+    return scrape.agent_info()
+
+
+@app.post("/api/agent-scrape", response_model=ScrapeJob, status_code=202)
+def start_scrape(body: ScrapeRequest, request: Request):
+    """Queue the scrape agent on up to 8 sources (each a goal, URLs (none: it searches the web) and a focus mode), read in turn
+    and merged, with a model from GET /api/agent-scrape/info (none: the default). Poll GET /api/agent-scrape/{id}."""
+    if body.llm and body.llm not in {m.name for m in scrape.agent_info().models}:
+        raise HTTPException(422, f"unknown model {body.llm!r}: see GET /api/agent-scrape/info")
+    return request.app.state.scrape.submit(body)
+
+
+@app.post("/api/agent-scrape/startups", response_model=ScrapedStartupAdded, status_code=201)
+def add_scraped_startup(body: ScrapedStartup, response: Response):
+    """Add a startup from a scrape result to the database: a sourced startup without a score (opening it queues the research
+    agent), found by website domain first. 201 when created or promoted from a BlueInvest candidate, 200 when it existed;
+    either way the record is stored as its evidence. 422 without a website."""
+    try:
+        added = scrape.add_startup(body)
+    except AgentError as exc:
+        raise repository.InvalidInput(str(exc)) from exc
+    if added.status == "exists":
+        response.status_code = 200
+    return added
+
+
+@app.get("/api/agent-scrape/{job_id}", response_model=ScrapeJob)
+def scrape_job(job_id: int, request: Request):
+    job = request.app.state.scrape.get(job_id)
+    if job is None:
+        raise HTTPException(404, f"scrape job {job_id} not found")
     return job
 
 

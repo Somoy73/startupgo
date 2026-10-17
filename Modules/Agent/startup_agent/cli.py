@@ -22,6 +22,7 @@ from .store import RecordStore
 def parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(prog="startup-agent", description=__doc__)
     parser.add_argument("--config", type=Path, help="Settings file (default: Agent/config.toml)")
+    parser.add_argument("--llm", help="Model profile from config.toml, e.g. nvidia or gemini (default: [llm] default)")
     commands = parser.add_subparsers(dest="command", required=True)
 
     profile = commands.add_parser("profile", help="Build a schema entry from a startup's name and website")
@@ -83,7 +84,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _write_json(record_json_schema(), args.output)
 
     try:
-        settings = AgentSettings.load(args.config)
+        settings = AgentSettings.load(args.config).with_llm(args.llm)
         store = RecordStore(settings.output_dir)
         if args.command == "rescore":
             _report(*store.save(store.load(args.entry), weights=settings.weights))

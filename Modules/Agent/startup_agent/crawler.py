@@ -54,7 +54,9 @@ class PageLoader:
         self._page_chars = page_chars
         self.log = log
 
-    def load(self, url: str, *, source_type: SourceType, is_homepage: bool = False) -> tuple[SourceDocument, list[str]]:
+    def load(
+        self, url: str, *, source_type: SourceType, is_homepage: bool = False, readable: bool = False
+    ) -> tuple[SourceDocument, list[str]]:
         cached = self._cache.get("pages", url)
         try:
             if cached:
@@ -69,7 +71,8 @@ class PageLoader:
             raise
         self._record(url, source_type, "cached" if cached else "ok")
         return html_to_document(
-            url, html, source_type=source_type, retrieved_at=retrieved_at, max_chars=self._page_chars, is_homepage=is_homepage
+            url, html, source_type=source_type, retrieved_at=retrieved_at, max_chars=self._page_chars, is_homepage=is_homepage,
+            readable=readable,
         )
 
     def _record(self, url: str, source_type: str, status: Status, detail: str | None = None) -> None:

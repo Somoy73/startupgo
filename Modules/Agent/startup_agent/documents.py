@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from urllib.parse import urldefrag, urljoin, urlsplit
 from urllib.robotparser import RobotFileParser
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 from .spec import SECTIONS
 from .vocab import SourceType
@@ -16,6 +16,7 @@ from .vocab import SourceType
 _SKIP_EXTENSIONS = re.compile(r"\.(pdf|jpe?g|png|gif|svg|webp|zip|mp4|mov|docx?|pptx?|xlsx?|csv|xml|json)$", re.IGNORECASE)
 _STRIP_TAGS = ["script", "style", "noscript", "svg", "template", "iframe"]
 # Pages with no facts worth an LLM call.
+_CONSENT_ELEMENT = re.compile(r"cookie|consent|gdpr", re.IGNORECASE)
 _SKIP_PATHS = re.compile(r"newsletter|subscribe|sign-?up|sign-?in|log-?in|register|cart|checkout|cookie|privacy|terms|gdpr", re.IGNORECASE)
 
 # Domains whose pages count as independent sources of a given type.
@@ -65,15 +66,39 @@ def html_to_document(
     retrieved_at: str,
     max_chars: int,
     is_homepage: bool = False,
+    readable: bool = False,
 ) -> tuple[SourceDocument, list[str]]:
-    """Readable text plus the outgoing links of a page."""
+    """Readable text plus the outgoing links of a page.
+
+    ``readable`` keeps only the page's main content when it has one, else everything except cookie-consent
+    dialogs: those come first in the markup and can fill ``max_chars`` before the content starts. Off by
+    default because navigation and footers carry facts the startup research quotes (addresses, company names).
+    """
     soup = BeautifulSoup(html, "html.parser")
     title = " ".join(soup.title.get_text(" ", strip=True).split()) if soup.title else ""
     links = [urldefrag(urljoin(url, a["href"]))[0] for a in soup.select("a[href]")]
     for tag in soup(_STRIP_TAGS):
         tag.decompose()
-    text = " ".join(soup.get_text(" ", strip=True).split())[:max_chars]
+    root = (_main_content(soup) or _without_consent(soup)) if readable else soup
+    text = " ".join(root.get_text(" ", strip=True).split())[:max_chars]
     return SourceDocument(url, title, text, source_type, retrieved_at, is_homepage), links
+
+
+def _main_content(soup: BeautifulSoup) -> Tag | None:
+    main = soup.find("main") or soup.find(attrs={"role": "main"})
+    return main if isinstance(main, Tag) and len(main.get_text(strip=True)) >= 200 else None
+
+
+def _without_consent(soup: BeautifulSoup) -> BeautifulSoup:
+    """The page without cookie-consent dialogs (elements named cookie/consent/gdpr that aren't most of the page)."""
+    total = len(soup.get_text(strip=True))
+    for tag in soup.find_all(True):
+        if tag.decomposed or tag.name in ("html", "body"):
+            continue
+        name = f"{tag.get('id') or ''} {' '.join(tag.get('class') or [])}"
+        if _CONSENT_ELEMENT.search(name) and len(tag.get_text(strip=True)) < total * 0.6:
+            tag.decompose()
+    return soup
 
 
 def section_tags(url: str, title: str = "") -> set[str]:

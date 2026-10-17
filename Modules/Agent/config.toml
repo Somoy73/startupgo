@@ -1,17 +1,36 @@
 # StartupGo agent configuration. Secrets go in .env (see .env.example).
 
 [llm]
-provider = "gemini"            # "gemini" or "openai-compatible"
-model = "gemini-3.5-flash-lite"
-api_key_env = "GEMINI_API_KEY"
-endpoint = ""                  # base URL for openai-compatible providers
+# Two models; every command and the scrape page can use either. `default` is used when none is chosen:
+#   startup-agent --llm gemini graph ...      the /agent-scraper page has a Model menu
+# Keys here are shared; each [llm.<name>] table adds or overrides keys.
+default = "nvidia"
 temperature = 0.0
-# Speed and rate limits. All Gemini calls (extraction, judge, search) share one pacer.
-requests_per_minute = 10       # your plan's limit: free tier ~10, paid tiers far higher; 0 = no pacing
-thinking = "minimal"           # extraction needs no reasoning; "minimal" is fastest and cheapest ("" = model default)
 # Sections extracted together in one LLM call: 3 calls per startup instead of 10.
 # For one call per section (slower, slightly sharper quotes) use [["A"], ["B"], ..., ["J"]].
 section_groups = [["A", "B", "H", "I"], ["C", "D", "E"], ["F", "G", "J"]]
+
+# NVIDIA's hosted API (free keys at build.nvidia.com; the Search module uses the same endpoint). Nemotron 3.5 Super VL
+# answered in 3-5 s with thinking off in our tests, follows JSON schemas and reads images (screenshots, scanned pages,
+# charts). Free-tier latency varies: some calls took over a minute.
+[llm.nvidia]
+provider = "openai-compatible"
+model = "nvidia/nemotron-3.5-super-vl-120b-a12b"
+api_key_env = "NVIDIA_API_KEY"
+endpoint = "https://integrate.api.nvidia.com/v1"
+requests_per_minute = 30       # NVIDIA free tier ~40; 0 = no pacing. All calls (extraction, judge) share one pacer
+reasoning = false              # Nemotron "thinking" before the answer (~80 s per call in our test); extraction needs none
+multimodal = true              # the model reads images (image_url)
+max_tokens = 16384             # answer budget per call; long listings give long answers (a cut-off answer is retried on halves)
+timeout = 300                  # seconds per call; free-tier calls sometimes took over 2 min (a timeout is retried, then split)
+
+# Google Gemini. Also reads PDFs the agent can't read itself (scanned, without a text layer). Small free tier.
+[llm.gemini]
+provider = "gemini"
+model = "gemini-3.5-flash-lite"
+api_key_env = "GEMINI_API_KEY"
+requests_per_minute = 10       # your plan's limit: free tier ~10, paid tiers far higher; 0 = no pacing
+thinking = "minimal"           # extraction needs no reasoning; "minimal" is fastest and cheapest ("" = model default)
 
 [crawl]
 max_pages = 12                 # pages per startup website, homepage included
@@ -25,7 +44,10 @@ respect_robots = true
 # Web search for independent pages about each startup (news, partners, programmes).
 # Results are fetched through the scraper and go through the same quote-verified extraction.
 [search]
-provider = "gemini"            # "gemini" (Google Search via Gemini grounding, uses the [llm] key), "brave", or "none"
+# "gemini": Google Search via Gemini grounding, with the [llm.gemini] key, whichever model extracts (so NVIDIA + Gemini
+# search works). The free tier may not include grounding (HTTP 429): enable billing or switch. "brave": Brave Search API
+# (key in .env as BRAVE_API_KEY). "none": the startup's website, discovery data and given URLs only.
+provider = "gemini"
 api_key_env = "BRAVE_API_KEY"  # only for provider = "brave"
 results_per_query = 5
 max_pages = 6                  # search-result pages fetched per startup

@@ -8,6 +8,7 @@ dependencies = [
     "beautifulsoup4>=4.15.0",
     "google-genai>=2.31.0",
     "langgraph>=0.6.0",
+    "pypdf>=6.0",
     "scraper",
 ]
 

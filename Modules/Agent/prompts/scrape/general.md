@@ -1,0 +1,1 @@
+Focus: whatever the request asks for. Choose the `kind` per record from the list above. When the documents describe startups or companies, use the fields of a startup: country, city, sector, what_it_does, stage, founded, team_size, funding_raised, investors, customers_or_pilots.

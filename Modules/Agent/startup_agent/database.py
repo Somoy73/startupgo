@@ -19,6 +19,11 @@ An evaluated, judge-reviewed entry becomes:
 
 A new startup whose entry the judge didn't accept isn't stored. Saving the same entry again changes nothing.
 
+add_scraped stores a startup the scrape agent found (scrape.py) when a user asks for it: a sourced startup without a
+score, found by website domain first (a BlueInvest candidate becomes a startup, a known startup only gets the evidence),
+plus the record as one facts row (source_name 'scraper', section 'Api'). Opening the startup then queues the research
+agent, which scores it.
+
 scores_of gives any startup's Investment Score Matrix by the agent's rubric (scoring.py), for the Backend: the agent's
 latest accepted assessment, else the rubric applied to the startup's facts (facts_of), read the way the agent reads them.
 """
@@ -46,6 +51,7 @@ from .scoring import confidence_label, investment_percent, score_all
 from .spec import FIELDS_BY_NAME
 
 ENGINE = "agent"  # assessments.engine and facts.source_name of everything the agent writes
+SCRAPER = "scraper"  # facts.source_name of the records the scrape agent stores
 ASSESSOR = "StartupGo agent"
 ACCEPTED = ("accepted", "accepted_with_issues")
 UNKNOWN = "Unknown"
@@ -271,6 +277,59 @@ class StartupDatabase:
                         " (SELECT source_url FROM facts WHERE entity_id = ? AND is_current = 1 AND source_url IS NOT NULL)",
                         (run_id, row["id"]))
             return run_id
+        finally:
+            conn.close()
+
+    def add_scraped(self, record: dict[str, Any], *, website: str | None = None) -> dict[str, Any]:
+        """A startup record from the scrape agent as a sourced startup (no score yet), plus the record as evidence.
+
+        ``website`` overrides the record's. Returns slug, name and status: "created", "promoted" (a BlueInvest candidate
+        became a startup) or "exists" (the record is added to that startup's evidence). Adding the same record twice adds
+        its evidence once.
+        """
+        site = (website or record.get("website") or "").strip()
+        name = (record.get("title") or "").strip()
+        if not name or not domain(site):
+            raise AgentError("a startup needs a name and a website")
+        site = site if "//" in site else f"https://{site}"
+        fields = {a["name"]: a["value"] for a in record.get("attributes") or [] if a.get("name") and a.get("value")}
+        conn = self.connect()
+        try:
+            row = self._find(conn, site, None)
+            if row is not None and row["kind"] == "startup":
+                entity_id, slug, status = row["id"], row["slug"], "exists"
+            elif row is not None:
+                slug = row["slug"] or _unique_slug(conn, row["name"])
+                conn.execute("UPDATE entities SET kind = 'startup', slug = ?, pipeline_stage = 'sourced', updated_at = datetime('now') "
+                             "WHERE id = ?", (slug, row["id"]))
+                entity_id, status = row["id"], "promoted"
+            else:
+                slug = _unique_slug(conn, name)
+                details = (record.get("details") or "").strip()
+                cols = {
+                    "key": f"startup:{slug}", "kind": "startup", "slug": slug, "pipeline_stage": "sourced", "name": name,
+                    "website": site, "domain": domain(site), "tagline": (fields.get("what_it_does") or details or name)[:200],
+                    "description": details or name, "sector": fields.get("sector") or UNKNOWN, "country": fields.get("country") or UNKNOWN,
+                    "city": fields.get("city"), "stage": "unknown",
+                }
+                cur = conn.execute(f"INSERT INTO entities ({', '.join(cols)}) VALUES ({', '.join('?' * len(cols))})", tuple(cols.values()))
+                entity_id, status = cur.lastrowid, "created"
+            value = {k: record.get(k) for k in ("kind", "title", "details", "group", "self_reported")} | {"attributes": fields}
+            evidence, source_url = (record.get("quote") or "")[:2000], record.get("source_url") or None
+            seen = conn.execute("SELECT 1 FROM facts WHERE entity_id = ? AND source_name = ? AND field = 'scraped_record' AND evidence = ? "
+                                "AND source_url IS ?", (entity_id, SCRAPER, evidence, source_url)).fetchone()
+            if not seen:
+                verified = record.get("evidence") == "page"
+                independent = verified and not record.get("self_reported") and domain(source_url) != domain(site)
+                conn.execute(
+                    """INSERT INTO facts (entity_id, section, field, value, evidence, source_url, source_type, source_name, status,
+                                          confidence, retrieved_at)
+                       VALUES (?, 'Api', 'scraped_record', ?, ?, ?, ?, ?, ?, ?, date('now'))""",
+                    (entity_id, _json(value), evidence, source_url, "website" if domain(source_url) == domain(site) else "news", SCRAPER,
+                     "verified" if independent else "claimed" if verified else "inferred", 0.7 if independent else 0.5 if verified else 0.3),
+                )
+            conn.commit()
+            return {"slug": slug, "name": row["name"] if row is not None else name, "status": status}
         finally:
             conn.close()
 

@@ -42,6 +42,20 @@ class TestHtml:
         assert document.text == "Acme | Team Hello world About"
         assert links == ["https://acme.fi/about"]
 
+    def test_readable_keeps_the_main_content_or_drops_cookie_dialogs(self):
+        consent = '<div id="CookieDialog"><p>This website uses cookies to ensure a good experience.</p></div>'
+        content = "<p>" + "Business Finland funds growth companies. " * 8 + "</p>"
+        kwargs = dict(source_type="website", retrieved_at="d", max_chars=10_000)
+
+        document, _ = html_to_document("https://a.fi/", f"<body>{consent}<nav>Menu</nav><main>{content}</main></body>", readable=True, **kwargs)
+        assert document.text.startswith("Business Finland funds") and "cookies" not in document.text and "Menu" not in document.text
+
+        document, _ = html_to_document("https://a.fi/", f"<body class='cookie-open'>{consent}<nav>Menu</nav>{content}</body>", readable=True, **kwargs)
+        assert document.text.startswith("Menu Business Finland") and "cookies" not in document.text  # no <main>: only the dialog goes
+
+        document, _ = html_to_document("https://a.fi/", f"<body>{consent}<main>{content}</main></body>", **kwargs)
+        assert document.text.startswith("This website uses cookies")  # the research agent still reads the whole page
+
 
 class TestRouting:
     def test_section_tags_from_url_and_title(self):

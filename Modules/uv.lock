@@ -2688,6 +2688,7 @@ dependencies = [
     { name = "beautifulsoup4" },
     { name = "google-genai" },
     { name = "langgraph" },
+    { name = "pypdf" },
     { name = "scraper" },
 ]
 
@@ -2701,6 +2702,7 @@ requires-dist = [
     { name = "beautifulsoup4", specifier = ">=4.15.0" },
     { name = "google-genai", specifier = ">=2.31.0" },
     { name = "langgraph", specifier = ">=0.6.0" },
+    { name = "pypdf", specifier = ">=6.0" },
     { name = "scraper", editable = "Scraper" },
 ]
 

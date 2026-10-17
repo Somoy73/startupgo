@@ -9,23 +9,29 @@ import { Link } from "../../lib/navigation";
 import { navItems } from "../../lib/nav-items";
 import { useAsync } from "../../lib/useAsync";
 
-/** The dashboards, from the startups in the database (GET /api/startups). */
+/** The dashboards, from the startups in the database ranked by ocean impact (GET /api/startups?sort=ocean). */
 const dashboards = (startups: StartupSummary[]) => {
   const assessed = startups.filter((s) => s.assessed);
   return {
     // Most recently found first; startups found in the same batch, youngest company first.
     newest: [...startups]
-      .sort((a, b) => (b.created_at ?? "").localeCompare(a.created_at ?? "") || (b.founded_year ?? 0) - (a.founded_year ?? 0))
+      .sort(
+        (a, b) =>
+          (b.created_at ?? "").localeCompare(a.created_at ?? "") ||
+          (b.founded_year ?? 0) - (a.founded_year ?? 0),
+      )
       .slice(0, 5),
     trending: [...assessed].sort((a, b) => b.scores.momentum - a.scores.momentum).slice(0, 5),
-    topImpact: [...assessed].sort((a, b) => b.scores.ocean_impact - a.scores.ocean_impact).slice(0, 3),
+    // Already in the backend's ocean order; only startups with KPI evidence on record (a 0 there means unknown).
+    topImpact: assessed.filter((s) => s.scores.ocean_areas_covered.length > 0).slice(0, 5),
   };
 };
 
-const foundOn = (createdAt: string | null | undefined) => (createdAt ? createdAt.slice(0, 10) : "—");
+const foundOn = (createdAt: string | null | undefined) =>
+  createdAt ? createdAt.slice(0, 10) : "—";
 
 export function Landing() {
-  const { data, loading, error } = useAsync(() => backend.startups().then(dashboards), []);
+  const { data, loading, error } = useAsync(() => backend.startups("ocean").then(dashboards), []);
 
   return (
     <div className="landing">
@@ -50,7 +56,7 @@ export function Landing() {
         <div className="dash-grid">
           <section className="dash-card" aria-labelledby="newest-heading">
             <div className="dash-card-head">
-              <h2 id="newest-heading">Newest startups</h2>
+              <h2 id="newest-heading">Newest Startups</h2>
               <Link to="/search" className="dash-more">
                 View all <ArrowRight />
               </Link>
@@ -68,7 +74,7 @@ export function Landing() {
 
           <section className="dash-card" aria-labelledby="cordis-heading">
             <div className="dash-card-head">
-              <h2 id="cordis-heading">EU ocean projects</h2>
+              <h2 id="cordis-heading">EU Ocean Projects</h2>
               <Link to="/eu-projects" className="dash-more">
                 More <ArrowRight />
               </Link>
@@ -94,8 +100,8 @@ export function Landing() {
 
           <section className="dash-card" aria-labelledby="impact-heading">
             <div className="dash-card-head">
-              <h2 id="impact-heading">Top ocean impact</h2>
-              <span className="small muted">Score out of 100</span>
+              <h2 id="impact-heading">Top Ocean Impact</h2>
+              <span className="small muted">Evidenced impact, out of 100</span>
             </div>
             <div className="rank-list">
               {data.topImpact.map((s, i) => (
@@ -103,6 +109,9 @@ export function Landing() {
                   <Meter value={s.scores.ocean_impact} label="Ocean impact" />
                 </RankRow>
               ))}
+              {data.topImpact.length === 0 && (
+                <p className="small muted">No ocean impact evidence yet.</p>
+              )}
             </div>
           </section>
         </div>

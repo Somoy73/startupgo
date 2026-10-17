@@ -1,7 +1,8 @@
-"""LLM clients that return JSON constrained by a JSON Schema."""
+"""LLM clients that return JSON constrained by a JSON Schema, and read images for the scrape agent."""
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import time
@@ -20,8 +21,13 @@ class LLMClient(Protocol):
 
     def complete_json(self, *, system: str, user: str, schema: dict[str, Any]) -> dict[str, Any]: ...
 
+    def transcribe(self, prompt: str, *, data: bytes, mime: str) -> str:
+        """What the model reads in a file (an image; a PDF too for models that take one). AgentError when it can't."""
+        ...
+
 
 RETRYABLE_STATUS = {429, 500, 503}
+HTTP_RETRYABLE_STATUS = {429, 500, 502, 503, 504}  # openai-compatible endpoints (NVIDIA answers 502 when a model is busy)
 BACKOFF_SECONDS = (5, 20, 60)
 MAX_RETRY_DELAY = 60.0
 THINKING_LEVELS = ("minimal", "low", "medium", "high")
@@ -29,6 +35,17 @@ THINKING_LEVELS = ("minimal", "low", "medium", "high")
 
 class QuotaExhausted(AgentError):
     """A quota is used up (429 without a retry delay); further calls of that kind are skipped this run."""
+
+
+class AnswerCutOff(AgentError):
+    """The model stopped at its token budget (max_tokens) before the JSON answer was complete."""
+
+
+class LLMTimeout(AgentError):
+    """The model didn't answer within [llm] timeout, also when asked again (free tiers can be slow)."""
+
+
+TIMEOUT_RETRIES = 1  # a call that timed out is sent once more before LLMTimeout
 
 
 @dataclass(slots=True)
@@ -128,7 +145,7 @@ class GeminiSession:
     def available(self, kind: str) -> bool:
         return kind not in self._exhausted
 
-    def generate(self, *, model: str, contents: str, kind: str, **config: Any) -> Any:
+    def generate(self, *, model: str, contents: str | list[Any], kind: str, **config: Any) -> Any:
         from google.genai import errors, types
 
         if kind in self._exhausted:
@@ -200,9 +217,32 @@ class GeminiClient:
         )
         return _parse(response.text)
 
+    def transcribe(self, prompt: str, *, data: bytes, mime: str) -> str:
+        from google.genai import types
+
+        response = self.session.generate(
+            model=self.model, contents=[types.Part.from_bytes(data=data, mime_type=mime), prompt], kind="llm", temperature=0
+        )
+        return (response.text or "").strip()
+
+
+def _http_retry_delay(exc: HTTPError, attempt: int) -> float | None:
+    """Seconds before retrying an openai-compatible call: Retry-After when given, else backoff; None = fail now."""
+    if attempt >= len(BACKOFF_SECONDS) or exc.code not in HTTP_RETRYABLE_STATUS:
+        return None
+    retry_after = exc.headers.get("Retry-After") if exc.headers else None
+    try:
+        return min(float(retry_after), MAX_RETRY_DELAY) if retry_after else BACKOFF_SECONDS[attempt]
+    except ValueError:
+        return BACKOFF_SECONDS[attempt]
+
 
 class OpenAICompatibleClient:
-    """Any /chat/completions endpoint that supports response_format json_schema."""
+    """Any /chat/completions endpoint that supports response_format json_schema (NVIDIA, OpenAI, vLLM, ...).
+
+    Images go as image_url content parts when ``multimodal`` is set. These endpoints don't take PDFs, so the scrape
+    agent reads PDF text itself. Rate-limit and server errors are retried with backoff (Retry-After is honoured).
+    """
 
     def __init__(
         self,
@@ -214,6 +254,10 @@ class OpenAICompatibleClient:
         timeout: float = 120,
         max_tokens: int | None = None,
         extra_body: dict[str, Any] | None = None,  # provider-specific fields, e.g. NVIDIA's chat_template_kwargs
+        multimodal: bool = False,  # the model reads images
+        limiter: RateLimiter | None = None,
+        stats: UsageStats | None = None,
+        sleep: Callable[[float], None] = time.sleep,
     ):
         if not endpoint:
             raise AgentError("[llm] endpoint is required for the openai-compatible provider")
@@ -224,15 +268,34 @@ class OpenAICompatibleClient:
         self.timeout = timeout
         self.max_tokens = max_tokens
         self.extra_body = extra_body or {}
+        self.multimodal = multimodal
+        self.stats = stats
+        self._limiter = limiter
+        self._sleep = sleep
 
     def complete_json(self, *, system: str, user: str, schema: dict[str, Any]) -> dict[str, Any]:
+        body = self._post({
+            "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+            "response_format": {"type": "json_schema", "json_schema": {"name": "result", "schema": schema, "strict": True}},
+        })
+        return _parse(self._content(body))
+
+    def transcribe(self, prompt: str, *, data: bytes, mime: str) -> str:
+        if not mime.startswith("image/"):
+            raise AgentError(f"{self.model} takes images, not {mime}")
+        if not self.multimodal:
+            raise AgentError(f"{self.model} is not set up to read images ([llm] multimodal = true says the model does)")
+        image = {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{base64.b64encode(data).decode('ascii')}"}}
+        body = self._post({"messages": [{"role": "user", "content": [{"type": "text", "text": prompt}, image]}]})
+        return self._content(body).strip()
+
+    def _post(self, payload: dict[str, Any]) -> dict[str, Any]:
         payload = {
             "model": self.model,
             "temperature": self.temperature,
-            "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-            "response_format": {"type": "json_schema", "json_schema": {"name": "result", "schema": schema, "strict": True}},
             **({"max_tokens": self.max_tokens} if self.max_tokens else {}),
             **self.extra_body,
+            **payload,
         }
         request = Request(
             f"{self.endpoint}/chat/completions",
@@ -240,23 +303,61 @@ class OpenAICompatibleClient:
             headers={"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json", "Accept": "application/json"},
             method="POST",
         )
-        try:
-            with urlopen(request, timeout=self.timeout) as response:
-                body = json.loads(response.read().decode("utf-8"))
-        except HTTPError as exc:
-            detail = exc.read().decode("utf-8", errors="replace")[:300]
-            raise AgentError(f"LLM request failed ({exc.code}): {detail}") from exc
-        except (URLError, TimeoutError, json.JSONDecodeError) as exc:
-            raise AgentError(f"LLM request failed: {exc}") from exc
+        attempt = timeouts = 0
+        while True:
+            if self._limiter:
+                waited = self._limiter.wait()
+                if self.stats:
+                    self.stats.waited_seconds += waited
+            if self.stats:
+                self.stats.llm_requests += 1
+            try:
+                with urlopen(request, timeout=self.timeout) as response:
+                    body = json.loads(response.read().decode("utf-8"))
+            except HTTPError as exc:
+                detail = exc.read().decode("utf-8", errors="replace")[:300]
+                delay = _http_retry_delay(exc, attempt)
+                if delay is None:
+                    raise AgentError(f"LLM request failed ({exc.code}): {detail}") from exc
+                if self.stats:
+                    self.stats.retries += 1
+                    self.stats.waited_seconds += delay
+                self._sleep(delay)
+                attempt += 1
+                continue
+            except (URLError, TimeoutError, json.JSONDecodeError) as exc:
+                timed_out = isinstance(exc, TimeoutError) or isinstance(getattr(exc, "reason", None), TimeoutError)
+                if not timed_out:
+                    raise AgentError(f"LLM request failed: {exc}") from exc
+                if timeouts >= TIMEOUT_RETRIES:
+                    raise LLMTimeout(f"{self.model} didn't answer within {self.timeout:.0f} s, twice ([llm] timeout in Modules/Agent/config.toml)") from exc
+                timeouts += 1
+                if self.stats:
+                    self.stats.retries += 1
+                continue
+            self._record_usage(body)
+            return body
+
+    @staticmethod
+    def _content(body: dict[str, Any]) -> str:
         try:
             choice = body["choices"][0]
             content = choice["message"].get("content")
         except (KeyError, IndexError, TypeError) as exc:
             raise AgentError("LLM response has no choices") from exc
+        if choice.get("finish_reason") == "length":
+            # Reasoning models can spend the whole token budget thinking; long answers can outgrow it.
+            raise AnswerCutOff("LLM answer was cut off at its token budget ([llm] max_tokens)")
         if not content:
-            # Reasoning models can spend the whole token budget thinking and return no answer.
             raise AgentError(f"LLM returned no content (finish_reason {choice.get('finish_reason')!r})")
-        return _parse(content)
+        return str(content)
+
+    def _record_usage(self, body: dict[str, Any]) -> None:
+        usage = body.get("usage") or {}
+        if self.stats and isinstance(usage, dict):
+            self.stats.prompt_tokens += int(usage.get("prompt_tokens") or 0)
+            self.stats.output_tokens += int(usage.get("completion_tokens") or 0)
+            self.stats.thinking_tokens += int((usage.get("completion_tokens_details") or {}).get("reasoning_tokens") or 0)
 
 
 class LazyLLM:
@@ -268,13 +369,19 @@ class LazyLLM:
         self.model = model
 
     def complete_json(self, *, system: str, user: str, schema: dict[str, Any]) -> dict[str, Any]:
+        return self._real().complete_json(system=system, user=user, schema=schema)
+
+    def transcribe(self, prompt: str, *, data: bytes, mime: str) -> str:
+        return self._real().transcribe(prompt, data=data, mime=mime)
+
+    def _real(self) -> LLMClient:
         if self._client is None:
             self._client = self._factory()
-        return self._client.complete_json(system=system, user=user, schema=schema)
+        return self._client
 
 
 class CachedLLM:
-    """Caches responses by (model, prompts, schema) so reruns cost nothing."""
+    """Caches responses by (model, prompts, schema), and transcripts by (model, prompt, file), so reruns cost nothing."""
 
     def __init__(self, inner: LLMClient, cache: JsonCache, *, stats: UsageStats | None = None):
         self.inner = inner
@@ -291,6 +398,16 @@ class CachedLLM:
         response = self.inner.complete_json(system=system, user=user, schema=schema)
         self.cache.put("llm", key, {"model": self.model, "response": response})
         return response
+
+    def transcribe(self, prompt: str, *, data: bytes, mime: str) -> str:
+        key = hashlib.sha256(json.dumps([self.model, prompt, mime, hashlib.sha256(data).hexdigest()]).encode()).hexdigest()
+        if (cached := self.cache.get("transcripts", key)) is not None:
+            if self.stats:
+                self.stats.llm_cached += 1
+            return cached["text"]
+        text = self.inner.transcribe(prompt, data=data, mime=mime)
+        self.cache.put("transcripts", key, {"model": self.model, "text": text})
+        return text
 
 
 def _parse(text: str | None) -> dict[str, Any]:

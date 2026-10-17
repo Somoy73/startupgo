@@ -36,21 +36,20 @@ export function DiscoverSearchBar({
   }, [query]);
 
   // Build active filter chips
-  const chips = (
-    ["stages", "countries", "sectors", "impactAreas", "pipeline"] as const
-  ).flatMap((key) =>
-    filters[key].map((value) => ({
-      id: `${key}:${value}`,
-      label:
-        key === "pipeline"
-          ? PIPELINE_LABELS[value as keyof typeof PIPELINE_LABELS] ?? value
-          : value,
-      remove: () =>
-        onFiltersChange({
-          ...filters,
-          [key]: filters[key].filter((v) => v !== value),
-        }),
-    }))
+  const chips = (["stages", "countries", "sectors", "impactAreas", "pipeline"] as const).flatMap(
+    (key) =>
+      filters[key].map((value) => ({
+        id: `${key}:${value}`,
+        label:
+          key === "pipeline"
+            ? (PIPELINE_LABELS[value as keyof typeof PIPELINE_LABELS] ?? value)
+            : value,
+        remove: () =>
+          onFiltersChange({
+            ...filters,
+            [key]: filters[key].filter((v) => v !== value),
+          }),
+      })),
   );
 
   for (const d of KTH_DIMENSIONS) {
@@ -147,9 +146,7 @@ export function DiscoverSearchBar({
             </Button>
           ))}
 
-        {query && !busy && (
-          <span className="small">Matches for “{query}”</span>
-        )}
+        {query && !busy && <span className="small">Matches for “{query}”</span>}
       </div>
     </div>
   );

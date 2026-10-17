@@ -10,6 +10,7 @@ from .judge import Judge, JudgeSettings
 from .pipeline import ResearchPipeline
 from .record import StartupRecord, record_json_schema
 from .scoring import score_all
+from .scrape import ScrapeAgent, ScrapeTask
 
 __all__ = [
     "AgentError",
@@ -19,6 +20,8 @@ __all__ = [
     "Judge",
     "JudgeSettings",
     "ResearchPipeline",
+    "ScrapeAgent",
+    "ScrapeTask",
     "StartupDatabase",
     "StartupAgent",
     "StartupRecord",
