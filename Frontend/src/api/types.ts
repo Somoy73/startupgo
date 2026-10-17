@@ -1,4 +1,11 @@
-export const PIPELINE_STAGES = ["sourced", "screening", "diligence", "term-sheet", "invested", "passed"] as const;
+export const PIPELINE_STAGES = [
+  "sourced",
+  "screening",
+  "diligence",
+  "term-sheet",
+  "invested",
+  "passed",
+] as const;
 export type PipelineStage = (typeof PIPELINE_STAGES)[number];
 export type Confidence = "low" | "medium" | "high";
 export const DIMENSIONS = [
@@ -29,6 +36,8 @@ export type StartupDetail = {
   city: string;
   founded_year: number | null;
   website: string;
+  created_at: string | null;
+  growth_speed: number | null;
   description: string;
   stage: string;
   last_round_on: string | null;
@@ -67,6 +76,28 @@ export type StartupDetail = {
   sources: { url: string; title: string }[];
 };
 export type StartupSummary = StartupDetail;
+export type SearchMatch = StartupSummary & {
+  relevance: number;
+  matched: string[];
+  entry: string | null;
+};
+export type AgentEntryMatch = {
+  entry: string;
+  name: string;
+  website: string | null;
+  relevance: number;
+  matched: string[];
+  trl: number | null;
+  brl: number | null;
+  ocean_impact_readiness: number | null;
+  investment_score: number | null;
+  overall_confidence: number | null;
+};
+export type NaturalLanguageSearchResponse = {
+  query: string;
+  results: SearchMatch[];
+  entries: AgentEntryMatch[];
+};
 export type Framework = {
   potential_weights: { readiness: number; ocean_impact: number; momentum: number };
   penalty_per_extra_level: number;
@@ -86,38 +117,4 @@ export type Framework = {
     orientation: string;
     kpis: { code: string; name: string; qualitative_only: boolean }[];
   }[];
-};
-
-// Search: same shape as the backend's POST /api/startups/search (LightRAG), so the mock
-// client can be swapped for the real one without touching the pages.
-
-/** A startup in the database that the search found. */
-export type SearchMatch = StartupSummary & {
-  /** 0-1, relative to the best match. */
-  relevance: number;
-  /** What led to it: knowledge-graph entities (backend) or query terms (mock). */
-  matched: string[];
-  /** The discovery agent's entry about it, if any. */
-  entry: string | null;
-};
-
-/** A startup only the discovery agent knows about (not in the database yet). */
-export type AgentEntryMatch = {
-  entry: string;
-  name: string;
-  website: string | null;
-  relevance: number;
-  matched: string[];
-  trl: number | null;
-  brl: number | null;
-  ocean_impact_readiness: number | null;
-  investment_score: number | null;
-  overall_confidence: number | null;
-};
-
-export type NaturalLanguageSearchResponse = {
-  query: string;
-  /** Most relevant first. */
-  results: SearchMatch[];
-  entries: AgentEntryMatch[];
 };

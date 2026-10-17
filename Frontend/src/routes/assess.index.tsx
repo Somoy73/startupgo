@@ -8,10 +8,18 @@ export const Route = createFileRoute("/assess/")({
     >,
   head: () => ({
     meta: [
-      { title: "Assess — Startup Go" },
-      { name: "description", content: "Assess for ocean & deep-tech startup intelligence." },
-      { property: "og:title", content: "Assess — Startup Go" },
-      { property: "og:description", content: "Assess for ocean & deep-tech startup intelligence." },
+      { title: "How we assess — Startup Go" },
+      {
+        name: "description",
+        content:
+          "The Startup Go assessment method: KTH Innovation Readiness Level, Ocean Impact Navigator evidence levels and funding momentum, combined into one comparable score.",
+      },
+      { property: "og:title", content: "How we assess — Startup Go" },
+      {
+        property: "og:description",
+        content:
+          "How Startup Go scores readiness, ocean-impact evidence and funding momentum into one comparable investment-potential score.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

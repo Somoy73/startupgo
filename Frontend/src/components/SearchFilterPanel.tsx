@@ -1,7 +1,6 @@
 import { DIMENSIONS, PIPELINE_STAGES, type PipelineStage } from "../api/types";
 import { PIPELINE_LABELS, stageLabel } from "../lib/format";
-import { REGIONS } from "../lib/regions";
-import type { SearchFilters } from "../lib/search";
+import type { SearchFilters } from "../lib/discover-search";
 import { useAppData } from "../state/AppData";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
@@ -26,7 +25,7 @@ export function SearchFilterPanel({ filters, onChange }: Props) {
       />
       <Facet
         label="Region"
-        options={REGIONS.map((r) => ({ value: r.id, label: r.label }))}
+        options={[...new Set(startups.map((s) => s.region))].sort().map((r) => ({ value: r, label: r }))}
         selected={filters.regions}
         onChange={(regions) => set({ regions })}
       />

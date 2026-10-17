@@ -1,3 +1,4 @@
+import { Button } from "../ui/button";
 import { Columns3 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { COLUMNS, DEFAULT_COLUMNS } from "./columns";
@@ -16,13 +17,13 @@ export function ColumnPicker({ columns, onChange }: Props) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button type="button" className="btn inline-flex items-center gap-2">
+        <Button type="button" className="btn inline-flex items-center gap-2">
           <Columns3 aria-hidden className="size-4" />
           Columns
           <span className="small muted tabular">
             {shown}/{optional.length}
           </span>
-        </button>
+        </Button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-60 p-2">
         <fieldset>
@@ -37,13 +38,13 @@ export function ColumnPicker({ columns, onChange }: Props) {
             </label>
           ))}
         </fieldset>
-        <button
+        <Button
           type="button"
           className="mt-1 w-full cursor-pointer rounded-md px-2 py-1.5 text-left text-sm text-primary hover:bg-wash"
           onClick={() => onChange(DEFAULT_COLUMNS)}
         >
           Reset to default
-        </button>
+        </Button>
       </PopoverContent>
     </Popover>
   );

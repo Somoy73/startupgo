@@ -1,15 +1,15 @@
 import type { ReactNode } from "react";
 import { DIMENSIONS, type StartupSummary } from "../../api/types";
 import { compactMoney, partialDate, PIPELINE_LABELS, stageLabel } from "../../lib/format";
-import { Link } from "../../lib/navigation";
-import type { SortKey } from "../../lib/sort";
+import { Link } from "@tanstack/react-router";
+import type { SearchSortKey } from "../../lib/discover-search";
 import { BandBadge, LevelPill, Meter } from "../Scores";
 
 export type Column = {
   id: string;
   header: string;
   /** Clicking the header sorts by this; no key, no sorting. */
-  sortKey?: SortKey;
+  sortKey?: SearchSortKey;
   /** Centred, tabular numbers. */
   numeric?: boolean;
   /** Always shown; not offered in the column picker. */
@@ -38,7 +38,7 @@ export const COLUMNS: Column[] = [
     cellClassName: "name-cell",
     cell: (s) => (
       <>
-        <Link to={`/startups/${s.slug}`} onClick={(e) => e.stopPropagation()}>
+        <Link to="/startups/$slug" params={{ slug: s.slug }} onClick={(e) => e.stopPropagation()}>
           <strong>{s.name}</strong>
         </Link>
         <span>{s.tagline}</span>

@@ -3,12 +3,24 @@ import type { NaturalLanguageSearchResponse, PipelineStage, StartupDetail } from
 import { previewScores, type AssessmentDraft, type CompanyDraft } from "../lib/assessment";
 // Mock transport retains the original API method boundaries. Replace these handlers with your real client.
 let startups: StartupDetail[] = structuredClone(seed);
-const SEARCH_STOP_WORDS = new Set(
-  "and are for from that the with startups startup companies company show find".split(" "),
-);
 export const api = {
   async listStartups() {
     return structuredClone(startups);
+  },
+  // Matches the supplied POST /api/startups/search response contract; preview-only transport.
+  async searchStartups(query: string): Promise<NaturalLanguageSearchResponse> {
+    const stopWords = new Set("and are for from that the with startups startup companies company show find".split(" "));
+    const terms = [...new Set(query.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter((term) => term.length > 2 && !stopWords.has(term)))];
+    const scored = startups.map((startup) => {
+      const text = `${startup.name} ${startup.tagline} ${startup.description} ${startup.sector} ${startup.country} ${startup.region}`.toLowerCase();
+      return { startup, matched: terms.filter((term) => text.includes(term)) };
+    }).filter((match) => match.matched.length > 0).sort((a, b) => b.matched.length - a.matched.length);
+    const top = scored[0]?.matched.length ?? 1;
+    return {
+      query,
+      results: scored.map(({ startup, matched }) => ({ ...structuredClone(startup), relevance: matched.length / top, matched, entry: null })),
+      entries: [],
+    };
   },
   async frameworks() {
     return frameworks;
@@ -17,38 +29,6 @@ export const api = {
     const s = startups.find((s) => s.slug === slug);
     if (!s) throw new Error("Startup not found");
     return structuredClone(s);
-  },
-  /**
-   * Mock of POST /api/startups/search (LightRAG on the backend): ranks startups by how many
-   * query terms their text contains. Same response shape as the real endpoint.
-   */
-  async searchStartups(query: string): Promise<NaturalLanguageSearchResponse> {
-    const terms = [
-      ...new Set(
-        query
-          .toLowerCase()
-          .split(/[^\p{L}\p{N}]+/u)
-          .filter((t) => t.length > 2 && !SEARCH_STOP_WORDS.has(t)),
-      ),
-    ];
-    const scored = startups
-      .map((s) => {
-        const text = `${s.name} ${s.tagline} ${s.description} ${s.sector} ${s.country} ${s.region}`.toLowerCase();
-        return { s, matched: terms.filter((t) => text.includes(t)) };
-      })
-      .filter((m) => m.matched.length > 0)
-      .sort((a, b) => b.matched.length - a.matched.length);
-    const top = scored[0]?.matched.length ?? 1;
-    return {
-      query,
-      results: scored.map(({ s, matched }) => ({
-        ...structuredClone(s),
-        relevance: matched.length / top,
-        matched,
-        entry: null,
-      })),
-      entries: [],
-    };
   },
   async compare(slugs: string[]) {
     return Promise.all([...new Set(slugs)].slice(0, 3).map((slug) => api.startup(slug)));
@@ -115,5 +95,19 @@ export const api = {
   },
   async scorePreview(input: { draft: AssessmentDraft }) {
     return previewScores(input.draft);
+  },
+  // Landing dashboards. Mock of the backend endpoint — swap for the real fetch
+  // once the backend exposes newest / trending / top ocean-impact data.
+  async landingDashboard() {
+    const byNewest = [...startups].sort((a, b) =>
+      (b.created_at ?? "").localeCompare(a.created_at ?? ""),
+    );
+    const byGrowth = [...startups].sort((a, b) => (b.growth_speed ?? 0) - (a.growth_speed ?? 0));
+    const byImpact = [...startups].sort((a, b) => b.scores.ocean_impact - a.scores.ocean_impact);
+    return structuredClone({
+      newest: byNewest.slice(0, 5),
+      trending: byGrowth.slice(0, 5),
+      topImpact: byImpact.slice(0, 3),
+    });
   },
 };

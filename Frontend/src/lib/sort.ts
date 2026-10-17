@@ -1,95 +1,21 @@
-import { PIPELINE_STAGES, type StartupSummary } from "../api/types";
-
-export type SortDir = "asc" | "desc";
-type Value = number | string | null;
-
-type SortDef = {
-  label: string;
-  /** null: keep the order the search returned. */
-  value: ((s: StartupSummary) => Value) | null;
-  /** Direction on the first click: scores high-to-low, names A-Z. */
-  defaultDir: SortDir;
-};
-
-const FUNDING_STAGES = ["pre-seed", "seed", "series-a", "series-b", "series-c+", "growth", "project-finance"];
-
-function ordinal(order: readonly string[], value: string): number | null {
-  const i = order.indexOf(value);
-  return i < 0 ? null : i;
-}
-
-/**
- * Discover sort options. Sorting happens in the browser, so changing the order never
- * re-runs a search.
- */
+import type { StartupSummary } from "../api/types";
 export const SORTS = {
-  relevance: { label: "Relevance", value: null, defaultDir: "desc" },
-  potential: { label: "Investment potential", value: (s) => s.scores.potential, defaultDir: "desc" },
-  readiness: { label: "Readiness", value: (s) => s.scores.readiness, defaultDir: "desc" },
-  ocean: { label: "Ocean impact", value: (s) => s.scores.ocean_impact, defaultDir: "desc" },
-  momentum: { label: "Momentum", value: (s) => s.scores.momentum, defaultDir: "desc" },
-  trl: { label: "TRL", value: (s) => s.readiness.trl, defaultDir: "desc" },
-  brl: { label: "BRL", value: (s) => s.readiness.brl, defaultDir: "desc" },
-  crl: { label: "CRL", value: (s) => s.readiness.crl, defaultDir: "desc" },
-  frl: { label: "FRL", value: (s) => s.readiness.frl, defaultDir: "desc" },
-  ipr: { label: "IPRL", value: (s) => s.readiness.ipr, defaultDir: "desc" },
-  team: { label: "TMRL", value: (s) => s.readiness.team, defaultDir: "desc" },
-  stage: { label: "Stage", value: (s) => ordinal(FUNDING_STAGES, s.stage), defaultDir: "desc" },
-  // 0 means nothing disclosed: sort it with the missing values.
-  funding: { label: "Disclosed funding", value: (s) => s.total_disclosed_usd || null, defaultDir: "desc" },
-  lastRound: { label: "Last round", value: (s) => s.last_round_on, defaultDir: "desc" },
-  pipeline: { label: "Pipeline", value: (s) => ordinal(PIPELINE_STAGES, s.pipeline_stage), defaultDir: "desc" },
-  name: { label: "Name", value: (s) => s.name, defaultDir: "asc" },
-} satisfies Record<string, SortDef>;
-
-export type SortKey = keyof typeof SORTS;
-
-export type Sort = { key: SortKey; dir: SortDir };
-
-export const isSortKey = (v: string | null): v is SortKey => v !== null && v in SORTS;
-
-/** Relevance while searching; potential when browsing everything (relevance means nothing there). */
-export const defaultSort = (searching: boolean): Sort =>
-  searching ? { key: "relevance", dir: "desc" } : { key: "potential", dir: "desc" };
-
-export const isDefaultSort = (sort: Sort, searching: boolean) => {
-  const d = defaultSort(searching);
-  return sort.key === d.key && sort.dir === d.dir;
+  potential: { label: "Investment potential" },
+  impact: { label: "Ocean impact" },
+  trl: { label: "TRL" },
+  funding: { label: "Disclosed funding" },
 };
-
-/** URL form: "potential" is ascending, "-potential" descending. */
-export const formatSort = (sort: Sort) =>
-  sort.key === "relevance" ? "relevance" : `${sort.dir === "desc" ? "-" : ""}${sort.key}`;
-
-export function parseSort(param: string | null, searching: boolean): Sort {
-  if (param) {
-    const descending = param.startsWith("-");
-    const key = descending ? param.slice(1) : param;
-    if (isSortKey(key) && (key !== "relevance" || searching)) {
-      return { key, dir: key === "relevance" || descending ? "desc" : "asc" };
-    }
-  }
-  return defaultSort(searching);
-}
-
-/** Header click: the column's natural direction, then reversed, then back to the default order. */
-export function nextSort(current: Sort, key: SortKey, searching: boolean): Sort {
-  const natural = SORTS[key].defaultDir;
-  if (current.key !== key) return { key, dir: natural };
-  if (current.dir === natural) return { key, dir: natural === "asc" ? "desc" : "asc" };
-  return defaultSort(searching);
-}
-
-/** Stable sort; missing values always go last, whichever the direction. */
-export function sortStartups<T extends StartupSummary>(list: T[], sort: Sort): T[] {
-  const value: SortDef["value"] = SORTS[sort.key].value;
-  if (!value) return [...list];
-  const sign = sort.dir === "asc" ? 1 : -1;
-  return [...list].sort((a, b) => {
-    const x = value(a);
-    const y = value(b);
-    if (x === null || y === null) return x === y ? 0 : x === null ? 1 : -1;
-    const order = typeof x === "number" && typeof y === "number" ? x - y : String(x).localeCompare(String(y));
-    return sign * order;
+export type SortKey = keyof typeof SORTS;
+export const isSortKey = (v: string | null): v is SortKey => v !== null && v in SORTS;
+export const sortStartups = (s: StartupSummary[], k: SortKey) =>
+  [...s].sort((a, b) => {
+    const value = (s: StartupSummary) =>
+      k === "potential"
+        ? s.scores.potential
+        : k === "impact"
+          ? s.scores.ocean_impact
+          : k === "trl"
+            ? s.readiness.trl
+            : s.total_disclosed_usd;
+    return value(b) - value(a);
   });
-}

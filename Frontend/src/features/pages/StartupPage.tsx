@@ -53,7 +53,7 @@ export function StartupPage() {
   return (
     <>
       <Link to="/" className="back">
-        <IconBack /> Discover
+        <IconBack /> Back
       </Link>
       <div className="page-head">
         <div>
