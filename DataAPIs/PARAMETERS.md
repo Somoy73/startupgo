@@ -235,6 +235,47 @@ _env COMPANIES_HOUSE_KEY (HTTP Basic user)_
 
 Default: `{"number": "09147492"}`
 
+### uk_companies_house_officer  ·  key
+
+`https://api.company-information.service.gov.uk/officers/{officer_id}/appointments`  
+Every company a person has been appointed to (serial founders, prior outcomes)  
+_env COMPANIES_HOUSE_KEY_
+
+| Parameter | Meaning |
+|---|---|
+| `officer_id` | from /company/{n}/officers links.officer.appointments |
+| `items_per_page` | <=50 |
+| `start_index` | offset |
+
+Default: `{"officer_id": "2T7PZ-bNaM98To9Yb1oZymmLKno"}`
+
+### uk_companies_house_document  ·  key
+
+`https://document-api.company-information.service.gov.uk/document/{id}/content`  
+Filed documents as PDF, e.g. SH01 return of allotment (shares, price paid, statement of capital)  
+_env COMPANIES_HOUSE_KEY; binary download handled in features.py (cached in DataAPIs/.cache)_
+
+| Parameter | Meaning |
+|---|---|
+| `document_id` | from filing-history links.document_metadata |
+| `Accept header` | application/pdf |
+
+
+## 1 Startup & investor
+
+### sec_form_d_document  ·  free
+
+`https://www.sec.gov/Archives/edgar/data/{cik}/{accession}/primary_doc.xml`  
+Form D details: total offering, amount sold, number of investors, first sale date, related persons  
+_User-Agent with contact required_
+
+| Parameter | Meaning |
+|---|---|
+| `cik` | filer CIK (no padding) |
+| `accession` | accession number without dashes |
+
+Default: `{"cik": "1687943", "accession": "000168794325000001"}`
+
 
 ## 3 Funding & grants
 

@@ -1,0 +1,57 @@
+﻿person_id,company_number,company_name,company_status,role,appointed_on,resigned_on,source_name
+1,10566685,REFORESTATION LIMITED,active,director,2020-12-18,,uk_companies_house_officer
+4,09228527,GRAVITY SKETCH LIMITED,active,director,2014-09-22,2016-04-08,uk_companies_house_officer
+7,09228527,GRAVITY SKETCH LIMITED,active,director,2014-09-22,2016-01-27,uk_companies_house_officer
+23,10704665,GREEN ANGEL VENTURES LIMITED,active,director,2017-04-03,,uk_companies_house_officer
+23,08313356,POWERVAULT LTD,administration,director,2014-10-23,,uk_companies_house_officer
+23,08018252,WESTCO MEDICAL HOLDINGS LIMITED,dissolved,director,2013-03-26,,uk_companies_house_officer
+23,07778062,TP12(I) VCT PLC,dissolved,director,2011-12-05,,uk_companies_house_officer
+23,07791461,THE ENVIRONMENT INDUSTRIES GROUP LIMITED,dissolved,director,2011-09-30,,uk_companies_house_officer
+23,07039066,TP70 2010 VCT PLC,dissolved,director,2010-01-04,,uk_companies_house_officer
+23,06713009,TP70 2009 VCT PLC,dissolved,director,2008-12-09,,uk_companies_house_officer
+23,07964746,SATELLITE APPLICATIONS CATAPULT LIMITED,active,director,2015-12-18,2024-12-18,uk_companies_house_officer
+23,06421083,TRIPLE POINT INCOME VCT PLC,dissolved,director,2009-03-12,2023-09-01,uk_companies_house_officer
+23,09243907,NATURE METRICS LTD,active,director,2016-03-23,2022-05-18,uk_companies_house_officer
+23,03166339,PLANTLIFE INTERNATIONAL - THE WILD PLANT CONSERVATION CHARITY,active,director,2010-12-14,2020-06-30,uk_companies_house_officer
+23,08924732,TIGMUS LTD,dissolved,director,2015-04-01,2017-11-15,uk_companies_house_officer
+23,00448274,CHECKIT PLC,active,director,2010-11-15,2013-10-09,uk_companies_house_officer
+23,04430287,BOND FABRICATIONS LIMITED,active,director,2007-02-12,2012-05-02,uk_companies_house_officer
+23,04723807,YOUNG ENTERPRISE LONDON LTD.,dissolved,director,2010-06-02,2011-03-01,uk_companies_house_officer
+23,06660089,PLAXICA LIMITED,dissolved,director,2009-10-07,2010-08-13,uk_companies_house_officer
+23,03262010,CELONA TECHNOLOGIES LIMITED,dissolved,director,2004-07-16,2009-12-11,uk_companies_house_officer
+23,03559880,WORKSHARE LIMITED,active,director,2002-07-26,2008-10-28,uk_companies_house_officer
+23,04101137,NEXAGENT LIMITED,dissolved,director,2005-08-02,2007-07-30,uk_companies_house_officer
+23,02323420,SPARK IMPACT LIMITED,active,director,,2007-05-29,uk_companies_house_officer
+23,02454345,SPARK VENTURE MANAGEMENT LIMITED,active,director,,2007-05-29,uk_companies_house_officer
+23,SC220736,QUESTER VENTURE GP LIMITED,dissolved,director,2001-07-11,2007-05-11,uk_companies_house_officer
+23,02944008,QUERIST LIMITED,active,director,2001-08-01,2007-05-11,uk_companies_house_officer
+23,04395109,QUESTER ACADEMIC GP LIMITED,dissolved,director,2002-06-14,2007-05-11,uk_companies_house_officer
+23,02294905,QUESTER NOMINEES LIMITED,dissolved,director,1991-09-18,2007-05-11,uk_companies_house_officer
+23,01911795,QUESTER SERVICES LIMITED,dissolved,director,1991-09-18,2007-05-11,uk_companies_house_officer
+23,01815321,QUESTER LIMITED,dissolved,director,1991-09-18,2007-05-11,uk_companies_house_officer
+23,02127064,UK BUSINESS ANGELS ASSOCIATION,active,director,2006-03-15,2007-04-25,uk_companies_house_officer
+23,03338819,SIBELIUS SOFTWARE LIMITED,dissolved,director,1999-11-11,2006-07-28,uk_companies_house_officer
+23,03467925,ELATERAL HOLDINGS LIMITED,active,director,1998-05-20,2005-10-19,uk_companies_house_officer
+23,03863686,ELATERAL TRUSTEES LIMITED,active,director,2000-01-10,2005-10-19,uk_companies_house_officer
+23,02659326,METAVANTE TECHNOLOGIES LIMITED,active,director,2000-03-14,2005-04-27,uk_companies_house_officer
+23,03313467,ATEGO SYSTEMS LIMITED,dissolved,director,1998-03-20,2005-01-25,uk_companies_house_officer
+23,01566321,SURFCONTROL LIMITED,liquidation,director,1993-05-28,2003-11-01,uk_companies_house_officer
+23,03036315,ELATERAL LIMITED,active,director,1999-08-27,2001-02-15,uk_companies_house_officer
+23,03593238,ADTRAN NETWORKS (UK) LIMITED,active,director,1998-10-26,2000-07-13,uk_companies_house_officer
+23,02683202,ROVI SOLUTIONS LIMITED,dissolved,director,1996-10-02,1999-06-18,uk_companies_house_officer
+23,02858626,BIOTRACE INTERNATIONAL LIMITED,dissolved,director,1993-11-15,1999-04-27,uk_companies_house_officer
+23,03169368,COMINO GROUP LIMITED,dissolved,director,1996-03-20,1999-01-19,uk_companies_house_officer
+23,02693122,MAVENIR SYSTEMS LIMITED,active,director,1996-03-13,1998-12-23,uk_companies_house_officer
+23,03271531,AETHOS TRUSTEES LIMITED,dissolved,director,1996-12-24,1998-12-23,uk_companies_house_officer
+23,02215690,DRAGONS HEALTH CLUBS LIMITED,dissolved,director,,1998-12-09,uk_companies_house_officer
+23,02371375,LEARNING TECHNOLOGIES GROUP (UK) LIMITED,active,director,1994-04-29,1998-11-11,uk_companies_house_officer
+23,03175632,LEARNING TECHNOLOGIES GROUP HOLDINGS (UK) LIMITED,active,director,1996-04-18,1998-11-11,uk_companies_house_officer
+23,02658043,BCS COMPUTING LIMITED,dissolved,director,1992-02-06,1996-05-21,uk_companies_house_officer
+23,02261333,BIOTRACE LIMITED,dissolved,director,,1993-11-12,uk_companies_house_officer
+27,02603245,SHOREHAM PORT DEVELOPMENTS AND INVESTMENTS LIMITED,active,director,2025-01-30,,uk_companies_house_officer
+27,12427387,SHOREHAM PORT SOLUTIONS LIMITED,active,director,2025-01-30,,uk_companies_house_officer
+27,15752488,THE CLEAR DECISIONS COMPANY LTD,active,director,2024-05-31,,uk_companies_house_officer
+27,14469456,PH3 CAPITAL VENTURES LTD,dissolved,director,2022-11-08,,uk_companies_house_officer
+27,02621885,SUSSEX PORT FORWARDING LIMITED,active,director,2022-01-20,,uk_companies_house_officer
+27,13133250,MYKOR LTD,active,director,2024-04-03,2026-04-23,uk_companies_house_officer
+30,17164217,JUNO MARA LTD,active,director,2026-04-17,,uk_companies_house_officer

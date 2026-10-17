@@ -3,12 +3,29 @@
 import sqlite3
 from contextlib import asynccontextmanager
 
+import csv
+import io
+
 from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi.responses import Response
 from fastapi.middleware.cors import CORSMiddleware
 
-from . import repository
+from . import features_repo, repository
 from .db import get_conn, init_db
-from .schemas import FilterOptions, Note, NoteCreate, PipelineUpdate, StartupDetail, StartupSummary
+from .schemas import (
+    FeatureDefinition,
+    FilterOptions,
+    FundingEvent,
+    InvestorLink,
+    Note,
+    NoteCreate,
+    Peer,
+    Person,
+    PipelineUpdate,
+    StartupDetail,
+    StartupFeatures,
+    StartupSummary,
+)
 
 
 @asynccontextmanager
@@ -101,3 +118,61 @@ def filters(conn: sqlite3.Connection = Conn):
 @app.get("/api/frameworks")
 def frameworks(conn: sqlite3.Connection = Conn) -> dict:
     return repository.frameworks(conn)
+
+
+# --- Success-prediction features (built by DataAPIs/features.py) ---
+
+
+def _found(value, slug: str):
+    if value is None:
+        raise HTTPException(404, f"Startup '{slug}' not found")
+    return value
+
+
+@app.get("/api/features/catalog", response_model=list[FeatureDefinition])
+def feature_catalog(conn: sqlite3.Connection = Conn):
+    return features_repo.catalog(conn)
+
+
+@app.get("/api/features")
+def feature_matrix(
+    conn: sqlite3.Connection = Conn,
+    as_of: str | None = None,
+    format: str = Query("json", pattern="^(json|csv)$"),
+):
+    """All startups x all features: the model-ready table. Missing values are null (unknown), never 0."""
+    names, rows = features_repo.feature_matrix(conn, as_of)
+    if format == "csv":
+        buf = io.StringIO()
+        w = csv.DictWriter(buf, fieldnames=["slug", "name", "as_of", *names])
+        w.writeheader()
+        w.writerows(rows)
+        return Response(buf.getvalue(), media_type="text/csv", headers={"Content-Disposition": "attachment; filename=features.csv"})
+    return {"features": names, "rows": rows}
+
+
+@app.get("/api/startups/{slug}/features", response_model=StartupFeatures)
+def startup_features(slug: str, as_of: str | None = None, conn: sqlite3.Connection = Conn):
+    return _found(features_repo.startup_features(conn, slug, as_of), slug)
+
+
+@app.get("/api/startups/{slug}/rounds", response_model=list[FundingEvent])
+def startup_rounds(slug: str, include_nominal: bool = False, conn: sqlite3.Connection = Conn):
+    """Unified funding timeline: announced rounds, UK SH01 priced allotments, SEC Form D, PDL aggregate."""
+    return _found(features_repo.funding_events(conn, slug, include_nominal), slug)
+
+
+@app.get("/api/startups/{slug}/founders", response_model=list[Person])
+def startup_founders(slug: str, founders_only: bool = True, conn: sqlite3.Connection = Conn):
+    """Founders/officers with every other company they directed (serial-founder evidence)."""
+    return _found(features_repo.people(conn, slug, founders_only), slug)
+
+
+@app.get("/api/startups/{slug}/investors", response_model=list[InvestorLink])
+def startup_investors(slug: str, conn: sqlite3.Connection = Conn):
+    return _found(features_repo.investors(conn, slug), slug)
+
+
+@app.get("/api/startups/{slug}/peers", response_model=list[Peer])
+def startup_peers(slug: str, limit: int = Query(5, ge=1, le=50), conn: sqlite3.Connection = Conn):
+    return _found(features_repo.peers(conn, slug, limit), slug)

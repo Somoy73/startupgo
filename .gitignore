@@ -13,3 +13,6 @@ dist/
 
 # Local API keys
 .env
+
+# Downloaded filings cache
+DataAPIs/.cache/

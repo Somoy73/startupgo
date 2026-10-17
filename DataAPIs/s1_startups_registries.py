@@ -161,3 +161,31 @@ def orbis(**p):
 def companies_house_company(number="09147492", path="", **p):
     url = f"https://api.company-information.service.gov.uk/company/{number}" + (f"/{path}" if path else "")
     return http(url, p, auth=(need("COMPANIES_HOUSE_KEY"), ""))
+
+
+@source(name="uk_companies_house_officer", section="2 Registries", access="key",
+        endpoint="https://api.company-information.service.gov.uk/officers/{officer_id}/appointments",
+        use="Every company a person has been appointed to (serial founders, prior outcomes)",
+        params={"officer_id": "from /company/{n}/officers links.officer.appointments", "items_per_page": "<=50", "start_index": "offset"},
+        defaults={"officer_id": "2T7PZ-bNaM98To9Yb1oZymmLKno"}, notes="env COMPANIES_HOUSE_KEY")
+def companies_house_officer(officer_id="2T7PZ-bNaM98To9Yb1oZymmLKno", **p):
+    return http(f"https://api.company-information.service.gov.uk/officers/{officer_id}/appointments", p,
+                auth=(need("COMPANIES_HOUSE_KEY"), ""))
+
+
+@source(name="uk_companies_house_document", section="2 Registries", access="key",
+        endpoint="https://document-api.company-information.service.gov.uk/document/{id}/content",
+        use="Filed documents as PDF, e.g. SH01 return of allotment (shares, price paid, statement of capital)",
+        params={"document_id": "from filing-history links.document_metadata", "Accept header": "application/pdf"},
+        defaults={}, notes="env COMPANIES_HOUSE_KEY; binary download handled in features.py (cached in DataAPIs/.cache)")
+def companies_house_document(document_id=None):
+    return http(f"https://document-api.company-information.service.gov.uk/document/{document_id}", auth=(need("COMPANIES_HOUSE_KEY"), ""))
+
+
+@source(name="sec_form_d_document", section="1 Startup & investor", access="free",
+        endpoint="https://www.sec.gov/Archives/edgar/data/{cik}/{accession}/primary_doc.xml",
+        use="Form D details: total offering, amount sold, number of investors, first sale date, related persons",
+        params={"cik": "filer CIK (no padding)", "accession": "accession number without dashes"},
+        defaults={"cik": "1687943", "accession": "000168794325000001"}, notes="User-Agent with contact required")
+def sec_form_d_document(cik="1687943", accession="000168794325000001"):
+    return http(f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession}/primary_doc.xml", headers={"User-Agent": SEC_UA}, raw=True)

@@ -116,3 +116,89 @@ class FilterOptions(BaseModel):
     stages: list[str]
     pipeline_stages: list[str]
     impact_areas: list[dict]
+
+
+# --- Success-prediction features (DataAPIs/features.py) ---
+
+
+class FeatureDefinition(BaseModel):
+    name: str
+    feature_group: str
+    description: str
+    unit: str | None
+    importance: Literal["high", "medium", "low"] | None
+    origin: str
+    sources: str | None
+
+
+class FeatureValue(BaseModel):
+    name: str
+    feature_group: str
+    value: float | None
+    text: str | None
+    unit: str | None
+    importance: str | None
+    evidence: dict | list | None
+
+
+class StartupFeatures(BaseModel):
+    slug: str
+    as_of: str | None
+    features: list[FeatureValue]
+    missing: list[str] = Field(description="Catalogue features with no value: unknown, not zero")
+
+
+class FundingEvent(BaseModel):
+    event_date: str
+    source_name: str
+    event_type: str
+    round_label: str | None
+    amount: float | None
+    currency: str | None
+    share_class: str | None
+    shares_allotted: int | None
+    price_per_share: float | None
+    total_shares_after: int | None
+    implied_post_money: float | None
+    investor_count: int | None
+    source_url: str | None
+    match_confidence: str
+    details: dict | None
+
+
+class Venture(BaseModel):
+    company_name: str
+    company_number: str
+    company_status: str | None
+    role: str | None
+    appointed_on: str | None
+    resigned_on: str | None
+    before_startup: bool | None
+
+
+class Person(BaseModel):
+    name: str
+    role: str
+    is_founder: bool
+    appointed_on: str | None
+    resigned_on: str | None
+    nationality: str | None
+    source_name: str
+    ventures: list[Venture]
+
+
+class InvestorLink(BaseModel):
+    name: str
+    kind: str | None
+    tier_score: float | None
+    role: str
+    rounds: int
+    first_seen: str | None
+
+
+class Peer(BaseModel):
+    slug: str
+    name: str
+    sector: str
+    similarity: float
+    shared_tags: list[str]

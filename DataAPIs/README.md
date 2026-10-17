@@ -47,3 +47,26 @@ Writes to `DB/startupgo.db` (creates it from `DB/schema.sql` + `DB/seed.sql` if 
 | `startup_parameter_status`, view `startup_gaps` | Per startup: filled / proxy / empty / not-collectable |
 
 [GAPS.md](GAPS.md) is the generated gap report.
+
+## Success-prediction features
+
+```bash
+pip install -r requirements.txt            # pypdf, for SH01 PDFs (or use Backend/.venv/bin/python)
+python3 features.py                        # fetch UK SH01 + officer appointments, SEC Form D; compute features
+python3 features.py --offline              # recompute from the DB only
+```
+
+Parameters follow Potanin et al. 2023 ([arXiv:2309.15552](https://arxiv.org/abs/2309.15552)): rounds, investors, founders, categories.
+They are extended with the team's ranked parameter list and ocean deep-tech additions (distress, down rounds, founder retention, evidence conflicts).
+Investor tiers are analyst judgments in [investor_tiers.json](investor_tiers.json); edit them freely.
+
+| Table | Holds |
+|---|---|
+| `funding_events` | One timeline from announced rounds, UK SH01 allotments (shares, price paid, total shares, implied post-money), SEC Form D (amount sold, investor count), PDL aggregate |
+| `people`, `startup_people`, `person_ventures` | Officers and founders, and every other company each has directed (serial-founder evidence) |
+| `investors`, `startup_investors` | Investors per startup with kind, tier score and follow-on count |
+| `feature_definitions`, `startup_features` | Feature catalogue and point-in-time values with evidence; missing = no row, never 0 |
+| `startup_peers` | Weighted tag similarity between startups |
+
+API (FastAPI, see `/docs`): `/api/features/catalog`, `/api/features?format=json|csv`, and per startup
+`/api/startups/{slug}/features|rounds|founders|investors|peers`.

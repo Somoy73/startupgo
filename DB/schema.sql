@@ -265,3 +265,114 @@ FROM startup_parameter_status sps
 JOIN startups s ON s.id = sps.startup_id
 JOIN assessment_parameters p ON p.id = sps.parameter_id
 WHERE sps.status IN ('empty','not-collectable');
+
+-- ---------------------------------------------------------------------------
+-- Success-prediction features (DataAPIs/features.py). Parameters follow Potanin et al. 2023
+-- (arXiv:2309.15552: rounds, investors, founders, categories) plus ocean deep-tech additions.
+-- ---------------------------------------------------------------------------
+
+-- Unified funding timeline from every source: announced rounds, UK SH01 allotments, SEC Form D, PDL, grants
+CREATE TABLE IF NOT EXISTS funding_events (
+    id                 INTEGER PRIMARY KEY,
+    startup_id         INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    event_date         TEXT NOT NULL,
+    source_name        TEXT NOT NULL,   -- funding_rounds | uk_sh01 | sec_form_d | people_data_labs
+    event_type         TEXT NOT NULL
+        CHECK (event_type IN ('announced_round','priced_allotment','nominal_allotment','allotment_unparsed','form_d','aggregate')),
+    round_label        TEXT,            -- seed | series-a | grant | ... (announced, or inferred)
+    amount             REAL,
+    currency           TEXT,
+    share_class        TEXT,
+    shares_allotted    INTEGER,
+    price_per_share    REAL,            -- amount paid per share incl. premium
+    total_shares_after INTEGER,         -- from the statement of capital
+    implied_post_money REAL,            -- price_per_share x total_shares_after
+    investor_count     INTEGER,
+    details            TEXT,            -- JSON
+    source_url         TEXT,
+    match_confidence   TEXT NOT NULL DEFAULT 'high' CHECK (match_confidence IN ('low','medium','high')),
+    UNIQUE (startup_id, source_name, event_date, share_class, amount)
+);
+
+CREATE TABLE IF NOT EXISTS people (
+    id            INTEGER PRIMARY KEY,
+    name          TEXT NOT NULL,
+    ch_officer_id TEXT UNIQUE,          -- Companies House officer id (appointments link)
+    nationality   TEXT,
+    country_of_residence TEXT
+);
+
+CREATE TABLE IF NOT EXISTS startup_people (
+    startup_id   INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    person_id    INTEGER NOT NULL REFERENCES people(id) ON DELETE CASCADE,
+    role         TEXT NOT NULL,         -- director | secretary | psc | form_d_related_person
+    is_founder   INTEGER NOT NULL DEFAULT 0,
+    appointed_on TEXT,
+    resigned_on  TEXT,
+    source_name  TEXT NOT NULL,
+    PRIMARY KEY (startup_id, person_id, role)
+);
+
+-- Every other company a person has directed: the serial-founder signal and its outcomes
+CREATE TABLE IF NOT EXISTS person_ventures (
+    person_id      INTEGER NOT NULL REFERENCES people(id) ON DELETE CASCADE,
+    company_number TEXT NOT NULL,
+    company_name   TEXT NOT NULL,
+    company_status TEXT,                -- active | dissolved | liquidation | administration | ...
+    role           TEXT,
+    appointed_on   TEXT,
+    resigned_on    TEXT,
+    source_name    TEXT NOT NULL,
+    PRIMARY KEY (person_id, company_number, role)
+);
+
+CREATE TABLE IF NOT EXISTS investors (
+    id         INTEGER PRIMARY KEY,
+    name       TEXT NOT NULL UNIQUE,
+    kind       TEXT,                    -- vc | climate-vc | ocean-vc | accelerator | corporate | angel-network | foundation | ngo | government | unknown
+    tier_score REAL,                    -- 0-1 from DataAPIs/investor_tiers.json (analyst-curated)
+    notes      TEXT
+);
+
+CREATE TABLE IF NOT EXISTS startup_investors (
+    startup_id  INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    investor_id INTEGER NOT NULL REFERENCES investors(id) ON DELETE CASCADE,
+    role        TEXT NOT NULL,          -- lead | participant | shareholder_psc
+    first_seen  TEXT,
+    rounds      INTEGER NOT NULL DEFAULT 1,  -- rounds this investor appears in (follow-on signal)
+    source_name TEXT NOT NULL,
+    PRIMARY KEY (startup_id, investor_id, role)
+);
+
+-- What each feature means (catalogue served by /api/features/catalog)
+CREATE TABLE IF NOT EXISTS feature_definitions (
+    name        TEXT PRIMARY KEY,
+    feature_group TEXT NOT NULL,        -- rounds | investors | founders | category | momentum | risk | integrity | ocean
+    description TEXT NOT NULL,
+    unit        TEXT,
+    importance  TEXT CHECK (importance IN ('high','medium','low')),
+    origin      TEXT NOT NULL,          -- paper | user-list | recommended
+    sources     TEXT
+);
+
+-- Point-in-time feature store: one value per startup, feature and as-of date
+CREATE TABLE IF NOT EXISTS startup_features (
+    startup_id INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    feature    TEXT NOT NULL REFERENCES feature_definitions(name),
+    as_of      TEXT NOT NULL,
+    value_num  REAL,
+    value_text TEXT,
+    evidence   TEXT,                    -- JSON: what it was computed from
+    PRIMARY KEY (startup_id, feature, as_of)
+);
+
+CREATE TABLE IF NOT EXISTS startup_peers (
+    startup_id  INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    peer_id     INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+    similarity  REAL NOT NULL,
+    shared_tags TEXT,                   -- JSON list
+    PRIMARY KEY (startup_id, peer_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_events_startup   ON funding_events(startup_id, event_date);
+CREATE INDEX IF NOT EXISTS idx_features_startup ON startup_features(startup_id, as_of);

@@ -1,0 +1,40 @@
+﻿name,feature_group,description,unit,importance,origin,sources
+total_raised_usd,rounds,"Total capital raised; largest of announced rounds, filings (Form D, priced SH01) and the PDL aggregate. All candidates kept in evidence.",USD,high,paper,"funding_rounds, sec_form_d, uk_sh01, people_data_labs"
+round_count,rounds,Number of distinct funding rounds (allotments within 90 days merged).,rounds,high,paper,"funding_rounds, uk_sh01, sec_form_d, people_data_labs"
+last_round_date,rounds,Date of the most recent round from any source.,date,high,user-list,all funding sources
+last_round_type,rounds,Stage of the most recent announced round.,,high,paper,"funding_rounds, people_data_labs"
+months_since_last_round,rounds,Months from the last round to the as-of date.,months,high,user-list,derived
+no_round_24m,rounds,1 if no round in the last 730 days: the paper's 'longtime' failure rule.,flag,high,paper,derived
+median_months_between_rounds,rounds,Median gap between consecutive rounds (funding speed).,months,high,user-list,derived
+funding_velocity_usd_per_year,rounds,Total raised divided by company age.,USD/yr,medium,recommended,derived
+latest_price_per_share,rounds,Price paid per share in the latest priced allotment (UK SH01).,currency/share,medium,user-list,uk_sh01
+implied_post_money,rounds,Latest priced allotment price x total shares after it (UK SH01).,currency,high,user-list,uk_sh01
+valuation_step_up,rounds,Latest priced share price / previous priced round's price.,x,high,recommended,uk_sh01
+investor_count,investors,"Number of investors: Form D count if filed, else distinct investors known.",investors,medium,paper,"sec_form_d, funding_rounds"
+lead_investors,investors,Lead investors across rounds.,,high,user-list,funding_rounds
+investor_quality_max,investors,"Best investor tier score (analyst-curated, investor_tiers.json).",0-1,high,paper,investor_tiers.json
+investor_quality_mean,investors,Mean tier score across all known investors.,0-1,medium,paper,investor_tiers.json
+specialist_investor_share,investors,Share of investors that are ocean or climate specialists.,0-1,medium,recommended,investor_tiers.json
+follow_on_investors,investors,Investors appearing in more than one round of this startup.,investors,medium,recommended,funding_rounds
+founder_count,founders,"Founders: directors appointed within 30 days of incorporation (UK), else beneficial owners.",people,medium,paper,uk_companies_house
+serial_founder_count,founders,Founders who directed another company before this one was incorporated.,people,medium,paper,uk_companies_house_officer
+prior_ventures_total,founders,Companies the founders directed before this one.,companies,medium,paper,uk_companies_house_officer
+prior_ventures_failed,founders,"Of those, how many are dissolved, liquidated or in administration.",companies,medium,recommended,uk_companies_house_officer
+founder_retention,founders,Share of founders still serving as directors.,0-1,high,recommended,uk_companies_house
+officer_churn,founders,Resigned officers / all officers ever appointed.,0-1,medium,recommended,uk_companies_house
+category_tags,category,"Tags used for peer similarity: sector, industry, YC tags, SIC codes, ocean impact areas, keywords.",JSON,medium,paper,"seed, people_data_labs, yc_oss, uk_companies_house, startup_ocean_kpis"
+top_peer,category,Most similar startup in the DB by weighted tag overlap.,,medium,user-list,derived
+headcount,momentum,Latest employee count.,employees,high,user-list,"people_data_labs, yc_oss"
+open_roles,momentum,Open job postings matched to the company.,jobs,medium,recommended,serpapi_google_jobs
+news_mentions_12m,momentum,News items naming the company in the last 12 months.,items,low,recommended,"google_news_rss, gdelt_doc"
+allotments_last_12m,momentum,UK share allotments in the last 12 months (raise cadence; often precedes announcements).,filings,medium,recommended,uk_sh01
+patent_count,momentum,Patents assigned to the company.,patents,medium,user-list,google patents / serpapi
+patents_granted,momentum,"Of those, how many are granted.",patents,medium,recommended,google patents / serpapi
+grant_share,rounds,Share of announced funding that is non-dilutive (grants).,0-1,medium,recommended,funding_rounds
+company_age_years,category,"Years since founding (curated year, else earliest registry date).",years,low,user-list,"startups, uk_companies_house"
+distress_flag,risk,"1 if insolvency case, administration/liquidation status, or no active officers.",flag,high,recommended,uk_companies_house
+registry_status,risk,Registered company status.,,high,recommended,"uk_companies_house, gleif_lei"
+funding_total_spread,integrity,Max/min ratio between independent total-raised figures (1 = sources agree).,x,medium,recommended,derived
+founded_year_conflicts,integrity,"Distinct founded-year values across sources, including the curated one.",values,low,recommended,field_suggestions
+down_round_flag,rounds,1 if any priced round was below the previous round's price (UK SH01).,flag,high,recommended,uk_sh01
+founder_other_ventures,founders,"All other companies the founders direct or directed, any date (side projects, spin-outs, next venture).",companies,low,recommended,uk_companies_house_officer
