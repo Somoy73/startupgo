@@ -247,9 +247,12 @@ def match_blueinvest(conn, st):
     sites = {domain(st["website"])} | {domain(r[0]) for r in conn.execute(
         "SELECT value FROM field_suggestions WHERE startup_id=? AND field='website' AND status!='rejected'", (sid,))}
     sites.discard(None)
+    known = {int(r[0]) for r in conn.execute(  # the profile a startup was imported from (discover.py) is always a candidate:
+        "SELECT external_id FROM startup_external_ids WHERE startup_id=? AND id_type='blueinvest_profile'", (sid,))}  # profiles are often named after a product
     conn.execute("UPDATE blueinvest_profiles SET startup_id=NULL WHERE startup_id=?", (sid,))
     cands = [r for r in conn.execute("SELECT other_id, name FROM blueinvest_profiles").fetchall()
-             if norm(r["name"])[:6] == n[:6] or n in norm(r["name"])]
+             if r["other_id"] in known or norm(r["name"])[:6] == n[:6] or n in norm(r["name"])]
+    cands.sort(key=lambda r: r["other_id"] not in known)  # known profile first, so the 6-candidate cap never drops it
     for c in cands[:6]:
         page, f = fetch(conn, "blueinvest_profile", sid, other_id=c["other_id"])
         if not isinstance(page, str):

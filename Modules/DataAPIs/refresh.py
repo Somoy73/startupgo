@@ -38,11 +38,12 @@ import features  # noqa: E402
 import ingest  # noqa: E402  (registers every scraper, loads .env)
 import ingest_eu  # noqa: E402
 import ingest_gaps  # noqa: E402
+import unify  # noqa: E402
 
 MODULES = HERE.parent
 AGENT_DIR, SEARCH_DIR = MODULES / "Agent", MODULES / "Search"
 STALE_LOCK = timedelta(hours=6)
-WATCH = ("startup_signals", "funding_events", "eu_grants", "startup_people", "person_ventures", "startup_external_ids",
+WATCH = ("entities", "facts", "assessments", "startup_signals", "funding_events", "eu_grants", "startup_people", "person_ventures", "startup_external_ids",
          "field_suggestions", "funding_opportunities", "market_indicators", "blueinvest_profiles", "patent_classes",
          "startup_external_peers", "startup_features", "startup_parameter_status", "raw_fetches")
 
@@ -164,6 +165,11 @@ def step_gaps(ctx: Context):
     ingest.build_gaps(ctx.conn)
 
 
+def step_unify(ctx: Context):
+    counts = unify.build(ctx.conn)
+    return ", ".join(f"{k} {v}" for k, v in counts.items())
+
+
 def step_search_index(ctx: Context):
     cfg = write_configs()["search"]
     env = {**_dotenv(SEARCH_DIR / ".env"), **os.environ, "STARTUPGO_DB": str(ingest.db_path())}
@@ -197,6 +203,7 @@ STEPS = [
     Step("peers", ("daily", "full"), step_peers, "competitor universe from the BlueInvest pipeline"),
     Step("features", ("daily", "full"), step_features, "funding timeline, investors, founders, grants, patents, risk features"),
     Step("gaps", ("daily", "full"), step_gaps, "parameter coverage per startup + GAPS.md (runtime copy)"),
+    Step("unify", ("daily", "full"), step_unify, "rebuild the 3-table model: entities, facts (Agent format), assessments"),
     Step("search_index", ("daily", "full"), step_search_index, "rebuild the runtime LightRAG index with main's process-storage"),
 ]
 
