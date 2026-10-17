@@ -1,0 +1,452 @@
+{
+  "params": {
+    "kind": "tags",
+    "name": "climatetech"
+  },
+  "full_size_bytes": 49404,
+  "sample": [
+    {
+      "id": 956,
+      "name": "Nebia",
+      "slug": "nebia",
+      "former_names": [],
+      "small_logo_thumb_url": "https://bookface-images.s3.amazonaws.com/small_logos/d77a36ef4956c90a726be2bf0a2c37b7a3a1cff0.png",
+      "website": "http://nebia.com",
+      "all_locations": "San Francisco, CA, USA",
+      "long_description": "(acquired by Brondell in 2022)\r\nAt Nebia we build innovative and impactful products that improve how people use water in their daily lives. Through thoughtful reinvention of everyday interactions, we empower people everywhere to collectively make a greater impact with their most basic daily rituals. \r\n\r\nWe started with the shower. \r\n\r\nThe Nebia shower embodies the highest standards of experience, design, engineering and water and energy use. With water savings up to 70% compared to traditional showers, Nebia was designed to make a meaningful impact without compromising on experience.\r\n\r\nAt the... [1276 chars]",
+      "one_liner": "Nebia is a breakthrough shower system, based on a premium experience,…",
+      "team_size": 16,
+      "industry": "Consumer",
+      "subindustry": "Consumer -> Home and Personal",
+      "launched_at": 1431020118,
+      "tags": [
+        "Hardware",
+        "Sustainability",
+        "Climate",
+        "ClimateTech"
+      ],
+      "tags_highlighted": [],
+      "top_company": false,
+      "isHiring": false,
+      "nonprofit": false,
+      "batch": "Summer 2015",
+      "status": "Acquired",
+      "industries": [
+        "Consumer",
+        "Home and Personal"
+      ],
+      "regions": [
+        "United States of America",
+        "America / Canada"
+      ],
+      "stage": "Growth",
+      "app_video_public": true,
+      "demo_day_video_public": true,
+      "app_answers": null,
+      "question_answers": false,
+      "url": "https://www.ycombinator.com/companies/nebia",
+      "api": "https://yc-oss.github.io/api/batches/summer-2015/nebia.json"
+    },
+    {
+      "id": 1275,
+      "name": "Validere",
+      "slug": "validere",
+      "former_names": [],
+      "small_logo_thumb_url": "https://bookface-images.s3.amazonaws.com/small_logos/95373ab4e095e01315210960a86d3d588ac47f83.png",
+      "website": "http://validere.com",
+      "all_locations": "Toronto, ON, Canada",
+      "long_description": "Validere is a measurement, reporting, and verification (MRV) SaaS company that helps energy organizations transform disconnected, incomplete data into clear and immediately actionable pathways to financial and environmental value. Over 50 of North America's leading energy companies rely on Validere's technology and multidisciplinary experts to understand their physical and environmental commodities and navigate an increasingly complex environment with clarity and ease. Validere is on a mission to better human prosperity by making the energy supply chain efficient and sustainable. The company h... [644 chars]",
+      "one_liner": "A carbon MRV solution for energy and hard-to-abate sectors",
+      "team_size": 110,
+      "industry": "Industrials",
+      "subindustry": "Industrials -> Energy",
+      "launched_at": 1461732016,
+      "tags": [
+        "IoT",
+        "Climate",
+        "Energy",
+        "ClimateTech"
+      ],
+      "tags_highlighted": [],
+      "top_company": false,
+      "isHiring": false,
+      "nonprofit": false,
+      "batch": "Summer 2016",
+      "status": "Active",
+      "industries": [
+        "Industrials",
+        "Energy"
+      ],
+      "regions": [
+        "Canada",
+        "America / Canada",
+        "Remote",
+        "Partly Remote"
+      ],
+      "stage": "Growth",
+      "app_video_public": false,
+      "demo_day_video_public": false,
+      "app_answers": null,
+      "question_answers": false,
+      "url": "https://www.ycombinator.com/companies/validere",
+      "api": "https://yc-oss.github.io/api/batches/summer-2016/validere.json"
+    },
+    {
+      "id": 1513,
+      "name": "Solugen",
+      "slug": "solugen",
+      "former_names": [
+        "Solugen",
+        "Bioperoxide"
+      ],
+      "small_logo_thumb_url": "https://bookface-images.s3.amazonaws.com/small_logos/8d4235cadbab6a51a7bfa10e7b2877bdb12a26fe.png",
+      "website": "https://solugen.com/",
+      "all_locations": "Houston, TX, USA",
+      "long_description": "Solugen is decarbonizing the chemistry of everyday life with enzymes and innovative metal catalysts. Our new to the world Bioforge platform technology can produce high value chemical goods that are biobased and carbon negative, at cost on par with current technologies. We are making sustainable chemistry accessible to all living things, to ensure a prosperous world exists for generations.\r\n",
+      "one_liner": "Decarbonizing the chemicals industry.",
+      "team_size": 200,
+      "industry": "Healthcare",
+      "subindustry": "Healthcare -> Industrial Bio",
+      "launched_at": 1478579436,
+      "tags": [
+        "Manufacturing",
+        "Climate",
+        "ClimateTech",
+        "Biotechnology",
+        "Industrial"
+      ],
+      "tags_highlighted": [],
+      "top_company": false,
+      "isHiring": false,
+      "nonprofit": false,
+      "batch": "Winter 2017",
+      "status": "Active",
+      "industries": [
+        "Healthcare",
+        "Industrial Bio"
+      ],
+      "regions": [
+        "United States of America",
+        "America / Canada",
+        "Remote",
+        "Partly Remote"
+      ],
+      "stage": "Growth",
+      "app_video_public": false,
+      "demo_day_video_public": false,
+      "app_answers": null,
+      "question_answers": true,
+      "url": "https://www.ycombinator.com/companies/solugen",
+      "api": "https://yc-oss.github.io/api/batches/winter-2017/solugen.json"
+    },
+    {
+      "id": 1586,
+      "name": "Nobell Foods",
+      "slug": "nobell-foods",
+      "former_names": [
+        "Alpine Roads"
+      ],
+      "small_logo_thumb_url": "https://bookface-images.s3.amazonaws.com/small_logos/72e723ce1aab712607581b6fc0d418d1d4b869bf.png",
+      "website": "http://www.nobellfoods.com",
+      "all_locations": "San Francisco, CA, USA",
+      "long_description": "Nobell Foods is creating cheese and other dairy products from plant-derived dairy proteins for the 99% of people who are unwilling to compromise on taste and price.",
+      "one_liner": "Cheese and dairy products from plant-derived dairy proteins",
+      "team_size": 58,
+      "industry": "Consumer",
+      "subindustry": "Consumer -> Food and Beverage",
+      "launched_at": 1596063268,
+      "tags": [
+        "Sustainability",
+        "Climate",
+        "Food Tech",
+        "ClimateTech"
+      ],
+      "tags_highlighted": [],
+      "top_company": false,
+      "isHiring": false,
+      "nonprofit": false,
+      "batch": "Summer 2017",
+      "status": "Active",
+      "industries": [
+        "Consumer",
+        "Food and Beverage"
+      ],
+      "regions": [
+        "United States of America",
+        "America / Canada"
+      ],
+      "stage": "Growth",
+      "app_video_public": false,
+      "demo_day_video_public": false,
+      "app_answers": null,
+      "question_answers": false,
+      "url": "https://www.ycombinator.com/companies/nobell-foods",
+      "api": "https://yc-oss.github.io/api/batches/summer-2017/nobell-foods.json"
+    },
+    {
+      "id": 1735,
+      "name": "Ovipost",
+      "slug": "ovipost",
+      "former_names": [
+        "Eclosion Technologies",
+        "Eclosion"
+      ],
+      "small_logo_thumb_url": "https://bookface-images.s3.amazonaws.com/small_logos/e02035f8a52b75f92fad791bafe6e88fb705655d.png",
+      "website": "https://ovipost.com",
+      "all_locations": "LaBelle, FL, USA",
+      "long_description": "Ovipost builds automated insect farms. Insects are the most efficient way to convert abundant, cheap byproducts into nutritionally dense protein. Today live insects are a $175m industry in the US, but the future of the industry is leveraging their excellent amino acid profiles and superior digestibility to replace fishmeal ($9.5B industry) and other expensive proteins in animal feeds. Led by co-founders Trina Chiasson (sold Infoactive to Tableau) and Teq Sassmannshaus (biotech hardware engineer), the Ovipost team has deep experience in hardware, software, and biology. ",
+      "one_liner": "Automated insect farming",
+      "team_size": 20,
+      "industry": "Industrials",
+      "subindustry": "Industrials -> Agriculture",
+      "launched_at": 1509562874,
+      "tags": [
+        "Biotech",
+        "Climate",
+        "Food Tech",
+        "Agriculture",
+        "ClimateTech"
+      ],
+      "tags_highlighted": [],
+      "top_company": false,
+      "isHiring": false,
+      "nonprofit": false,
+      "batch": "Winter 2018",
+      "status": "Inactive",
+      "industries": [
+        "Industrials",
+        "Agriculture"
+      ],
+      "regions": [
+        "United States of America",
+        "America / Canada"
+      ],
+      "stage": "Early",
+      "app_video_public": false,
+      "demo_day_video_public": false,
+      "app_answers": null,
+      "question_answers": false,
+      "url": "https://www.ycombinator.com/companies/ovipost",
+      "api": "https://yc-oss.github.io/api/batches/winter-2018/ovipost.json"
+    },
+    {
+      "id": 2030,
+      "name": "Culdesac",
+      "slug": "culdesac",
+      "former_names": [],
+      "small_logo_thumb_url": "https://bookface-images.s3.amazonaws.com/small_logos/496d0ff1f20ae199837eebe1bfef35fa059329d0.png",
+      "website": "http://culdesac.com",
+      "all_locations": "San Francisco, CA, USA; Tempe, AZ, USA",
+      "long_description": "Culdesac designs, builds, and manages walkable communities. \r\n\r\nCuldesac is a real estate developer and property manager. We build neighborhoods that embrace community, open space, and mobility. We offer residential units at a variety of price points integrated with local retail, commercial uses, and open space for nature and public plazas.\r\n\r\nOur communities prioritize biking, walking, and transit over cars and parking. We partner with leading mobility companies to deliver convenient and affordable transportation services. This creates a vibrant urban lifestyle without the need for a private ... [690 chars]",
+      "one_liner": "We build cities for people, not cars. ",
+      "team_size": 100,
+      "industry": "Real Estate and Construction",
+      "subindustry": "Real Estate and Construction -> Housing and Real Estate",
+      "launched_at": 1575871649,
+      "tags": [
+        "Real Estate",
+        "Housing",
+        "Proptech",
+        "ClimateTech"
+      ],
+      "tags_highlighted": [],
+      "top_company": false,
+      "isHiring": false,
+      "nonprofit": false,
+      "batch": "Summer 2018",
+      "status": "Active",
+      "industries": [
+        "Real Estate and Construction",
+        "Housing and Real Estate"
+      ],
+      "regions": [
+        "United States of America",
+        "America / Canada",
+        "Remote",
+        "Partly Remote"
+      ],
+      "stage": "Growth",
+      "app_video_public": false,
+      "demo_day_video_public": false,
+      "app_answers": null,
+      "question_answers": false,
+      "url": "https://www.ycombinator.com/companies/culdesac",
+      "api": "https://yc-oss.github.io/api/batches/summer-2018/culdesac.json"
+    },
+    {
+      "id": 12083,
+      "name": "Valo",
+      "slug": "valo",
+      "former_names": [
+        "Boundary Layer Technologies"
+      ],
+      "small_logo_thumb_url": "https://bookface-images.s3.amazonaws.com/small_logos/ca66c2f9239b9eadea72810d134da45f3cb38285.png",
+      "website": "https://boundarylayer.tech",
+      "all_locations": "San Francisco, CA, USA",
+      "long_description": "Valo build modular integrated hydrofoil systems for the worlds boatbuilders, allowing them to create fast, clean and quiet flying vessels that consume 15x less energy. ",
+      "one_liner": "Cutting edge hydrofoil systems for boatbuilders",
+      "team_size": 3,
+      "industry": "Industrials",
+      "subindustry": "Industrials -> Climate",
+      "launched_at": 1541655237,
+      "tags": [
+        "Transportation",
+        "ClimateTech"
+      ],
+      "tags_highlighted": [],
+      "top_company": false,
+      "isHiring": false,
+      "nonprofit": false,
+      "batch": "Winter 2019",
+      "status": "Active",
+      "industries": [
+        "Industrials",
+        "Climate"
+      ],
+      "regions": [
+        "United States of America",
+        "America / Canada"
+      ],
+      "stage": "Early",
+      "app_video_public": false,
+      "demo_day_video_public": false,
+      "app_answers": null,
+      "question_answers": false,
+      "url": "https://www.ycombinator.com/companies/valo",
+      "api": "https://yc-oss.github.io/api/batches/winter-2019/valo.json"
+    },
+    {
+      "id": 12581,
+      "name": "Genecis Bio",
+      "slug": "genecis-bio",
+      "former_names": [
+        "Genecis Bioindustries Inc.",
+        "Genecis Bioindustries"
+      ],
+      "small_logo_thumb_url": "/company/thumb/missing.png",
+      "website": "https://www.genecis.co/",
+      "all_locations": "Toronto, ON, Canada",
+      "long_description": "",
+      "one_liner": "Makes guilt-free plastics from food waste",
+      "team_size": 30,
+      "industry": "Industrials",
+      "subindustry": "Industrials -> Manufacturing and Robotics",
+      "launched_at": 1645575346,
+      "tags": [
+        "Bioplastic",
+        "Synthetic Biology",
+        "Climate",
+        "ClimateTech"
+      ],
+      "tags_highlighted": [],
+      "top_company": false,
+      "isHiring": false,
+      "nonprofit": false,
+      "batch": "Winter 2020",
+      "status": "Active",
+      "industries": [
+        "Industrials",
+        "Manufacturing and Robotics"
+      ],
+      "regions": [
+        "Canada",
+        "America / Canada",
+        "Remote",
+        "Partly Remote"
+      ],
+      "stage": "Early",
+      "app_video_public": false,
+      "demo_day_video_public": false,
+      "app_answers": null,
+      "question_answers": false,
+      "url": "https://www.ycombinator.com/companies/genecis-bio",
+      "api": "https://yc-oss.github.io/api/batches/winter-2020/genecis-bio.json"
+    },
+    {
+      "id": 12705,
+      "name": "Gaiascope",
+      "slug": "gaiascope",
+      "former_names": [],
+      "small_logo_thumb_url": "https://bookface-images.s3.amazonaws.com/small_logos/e1224624438a17a663ce6ddbc15c637432ec3a75.png",
+      "website": "http://gaia-scope.com",
+      "all_locations": "Boston, MA, USA; Remote",
+      "long_description": "Software that simplifies electric grid forecasting and operations. Clients--hard assets like wind, solar and energy storage--get timely, unbiased information to improve revenues, reduce risk, and maximize the profitability of every megawatt.\r\n\r\nGaiascope also manages a quant fund trading electricity; with this fund, the company builds additional credibility with clients and accelerates the continuous improvement of its software.",
+      "one_liner": "SaaS that helps renewables & energy storage operate more profitably",
+      "team_size": 9,
+      "industry": "B2B",
+      "subindustry": "B2B",
+      "launched_at": 1557273094,
+      "tags": [
+        "Climate",
+        "Energy",
+        "ClimateTech"
+      ],
+      "tags_highlighted": [],
+      "top_company": false,
+      "isHiring": false,
+      "nonprofit": false,
+      "batch": "Summer 2019",
+      "status": "Acquired",
+      "industries": [
+        "B2B"
+      ],
+      "regions": [
+        "United States of America",
+        "America / Canada",
+        "Remote",
+        "Fully Remote"
+      ],
+      "stage": "Early",
+      "app_video_public": false,
+      "demo_day_video_public": false,
+      "app_answers": null,
+      "question_answers": false,
+      "url": "https://www.ycombinator.com/companies/gaiascope",
+      "api": "https://yc-oss.github.io/api/batches/summer-2019/gaiascope.json"
+    },
+    {
+      "id": 22905,
+      "name": "Remora",
+      "slug": "remora",
+      "former_names": [],
+      "small_logo_thumb_url": "https://bookface-images.s3.amazonaws.com/small_logos/22b6829346a08e83b56852b94f5e8748a17be818.png",
+      "website": "https://www.remoracarbon.com",
+      "all_locations": "Detroit, MI, USA",
+      "long_description": "We’re building modular carbon capture systems, turning exhaust into beverage-grade CO₂ sold to breweries and greenhouses. We deploy in regions facing severe CO₂ shortages, where prices are highest, allowing us to generate high margins without relying on tax credits or carbon credits.\r\n\r\nWe’ve raised over $115 million in funding from top investors including Lowercarbon Capital, Union Square Ventures, First Round Capital, Y Combinator, and Valor Equity Partners.",
+      "one_liner": "Modular carbon capture",
+      "team_size": 45,
+      "industry": "Industrials",
+      "subindustry": "Industrials -> Climate",
+      "launched_at": 1614308544,
+      "tags": [
+        "Hard Tech",
+        "Climate",
+        "ClimateTech"
+      ],
+      "tags_highlighted": [],
+      "top_company": false,
+      "isHiring": false,
+      "nonprofit": false,
+      "batch": "Winter 2021",
+      "status": "Active",
+      "industries": [
+        "Industrials",
+        "Climate"
+      ],
+      "regions": [
+        "United States of America",
+        "America / Canada",
+        "Remote",
+        "Partly Remote"
+      ],
+      "stage": "Early",
+      "app_video_public": false,
+      "demo_day_video_public": false,
+      "app_answers": null,
+      "question_answers": false,
+      "url": "https://www.ycombinator.com/companies/remora",
+      "api": "https://yc-oss.github.io/api/batches/winter-2021/remora.json"
+    },
+    "... +22 more"
+  ]
+}

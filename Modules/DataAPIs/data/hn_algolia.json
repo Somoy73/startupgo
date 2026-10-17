@@ -1,0 +1,287 @@
+{
+  "params": {
+    "query": "ocean",
+    "tags": "show_hn",
+    "numericFilters": "points>5",
+    "hitsPerPage": 5
+  },
+  "full_size_bytes": 5085,
+  "sample": {
+    "exhaustive": {
+      "nbHits": false,
+      "typo": false
+    },
+    "exhaustiveNbHits": false,
+    "exhaustiveTypo": false,
+    "hits": [
+      {
+        "_highlightResult": {
+          "author": {
+            "matchLevel": "none",
+            "matchedWords": [],
+            "value": "Nowaker"
+          },
+          "title": {
+            "fullyHighlighted": false,
+            "matchLevel": "full",
+            "matchedWords": [
+              "ocean"
+            ],
+            "value": "Show HN: VirtKick – Self-hosted Digital <em>Ocean</em>"
+          },
+          "url": {
+            "matchLevel": "none",
+            "matchedWords": [],
+            "value": "https://www.virtkick.io/"
+          }
+        },
+        "_tags": [
+          "story",
+          "author_Nowaker",
+          "story_8527185",
+          "show_hn"
+        ],
+        "author": "Nowaker",
+        "children": [
+          8527328,
+          8527332,
+          8527383,
+          8527422,
+          8527457,
+          8527490,
+          8527511,
+          8527522,
+          8527533,
+          8527799,
+          "... +11 more"
+        ],
+        "created_at": "2014-10-29T14:05:51Z",
+        "created_at_i": 1414591551,
+        "num_comments": 92,
+        "objectID": "8527185",
+        "points": 216,
+        "story_id": 8527185,
+        "title": "Show HN: VirtKick – Self-hosted Digital Ocean",
+        "updated_at": "2023-09-06T22:42:42Z",
+        "url": "https://www.virtkick.io/"
+      },
+      {
+        "_highlightResult": {
+          "author": {
+            "matchLevel": "none",
+            "matchedWords": [],
+            "value": "robbintt"
+          },
+          "title": {
+            "fullyHighlighted": false,
+            "matchLevel": "full",
+            "matchedWords": [
+              "ocean"
+            ],
+            "value": "Show HN: Use Ansible to Run a “friends and Family” OpenVPN Server on Digital <em>Ocean</em>"
+          },
+          "url": {
+            "matchLevel": "none",
+            "matchedWords": [],
+            "value": "https://github.com/robbintt/popup-openvpn"
+          }
+        },
+        "_tags": [
+          "story",
+          "author_robbintt",
+          "story_13351973",
+          "show_hn"
+        ],
+        "author": "robbintt",
+        "children": [
+          13352361,
+          13352392,
+          13352492,
+          13352641,
+          13352646,
+          13352871,
+          13353121,
+          13353205,
+          13353489,
+          13354055,
+          "... +2 more"
+        ],
+        "created_at": "2017-01-08T20:58:28Z",
+        "created_at_i": 1483909108,
+        "num_comments": 51,
+        "objectID": "13351973",
+        "points": 206,
+        "story_id": 13351973,
+        "title": "Show HN: Use Ansible to Run a “friends and Family” OpenVPN Server on Digital Ocean",
+        "updated_at": "2024-09-20T00:13:54Z",
+        "url": "https://github.com/robbintt/popup-openvpn"
+      },
+      {
+        "_highlightResult": {
+          "author": {
+            "matchLevel": "none",
+            "matchedWords": [],
+            "value": "ls65536"
+          },
+          "title": {
+            "fullyHighlighted": false,
+            "matchLevel": "full",
+            "matchedWords": [
+              "ocean"
+            ],
+            "value": "Show HN: Global sailing navigation simulator using real weather/<em>ocean</em> data"
+          },
+          "url": {
+            "matchLevel": "none",
+            "matchedWords": [],
+            "value": "https://8bitbyte.ca/sailnavsim/"
+          }
+        },
+        "_tags": [
+          "story",
+          "author_ls65536",
+          "story_23661326",
+          "show_hn"
+        ],
+        "author": "ls65536",
+        "children": [
+          23661455,
+          23661666,
+          23661827,
+          23661861,
+          23662018,
+          23662044,
+          23662223,
+          23662342,
+          23662360,
+          23662606,
+          "... +10 more"
+        ],
+        "created_at": "2020-06-27T12:17:06Z",
+        "created_at_i": 1593260226,
+        "num_comments": 47,
+        "objectID": "23661326",
+        "points": 131,
+        "story_id": 23661326,
+        "title": "Show HN: Global sailing navigation simulator using real weather/ocean data",
+        "updated_at": "2025-04-24T02:51:26Z",
+        "url": "https://8bitbyte.ca/sailnavsim/"
+      },
+      {
+        "_highlightResult": {
+          "author": {
+            "matchLevel": "none",
+            "matchedWords": [],
+            "value": "LukeFitzpatrick"
+          },
+          "title": {
+            "fullyHighlighted": false,
+            "matchLevel": "full",
+            "matchedWords": [
+              "ocean"
+            ],
+            "value": "Show HN: A Bot to Deploy to AWS, Digital <em>Ocean</em> Etc."
+          },
+          "url": {
+            "matchLevel": "none",
+            "matchedWords": [],
+            "value": "https://deploybot.com/"
+          }
+        },
+        "_tags": [
+          "story",
+          "author_LukeFitzpatrick",
+          "story_12376559",
+          "show_hn"
+        ],
+        "author": "LukeFitzpatrick",
+        "children": [
+          12377763,
+          12377914,
+          12378110,
+          12378487,
+          12378589,
+          12378664,
+          12378843,
+          12379198,
+          12379424,
+          12379461,
+          "... +2 more"
+        ],
+        "created_at": "2016-08-28T14:08:41Z",
+        "created_at_i": 1472393321,
+        "num_comments": 39,
+        "objectID": "12376559",
+        "points": 129,
+        "story_id": 12376559,
+        "title": "Show HN: A Bot to Deploy to AWS, Digital Ocean Etc.",
+        "updated_at": "2024-09-19T23:39:42Z",
+        "url": "https://deploybot.com/"
+      },
+      {
+        "_highlightResult": {
+          "author": {
+            "matchLevel": "none",
+            "matchedWords": [],
+            "value": "andrewstuart"
+          },
+          "title": {
+            "fullyHighlighted": false,
+            "matchLevel": "full",
+            "matchedWords": [
+              "ocean"
+            ],
+            "value": "Show HN: Bootrino.com – Netboot Run-From-RAM OS's on AWS, Google and Digital <em>Ocean</em>"
+          },
+          "url": {
+            "matchLevel": "none",
+            "matchedWords": [],
+            "value": "https://www.bootrino.com"
+          }
+        },
+        "_tags": [
+          "story",
+          "author_andrewstuart",
+          "story_16186756",
+          "show_hn"
+        ],
+        "author": "andrewstuart",
+        "children": [
+          16186761,
+          16189352,
+          16190720,
+          16191552,
+          16191738
+        ],
+        "created_at": "2018-01-19T15:13:35Z",
+        "created_at_i": 1516374815,
+        "num_comments": 20,
+        "objectID": "16186756",
+        "points": 109,
+        "story_id": 16186756,
+        "title": "Show HN: Bootrino.com – Netboot Run-From-RAM OS's on AWS, Google and Digital Ocean",
+        "updated_at": "2024-09-20T01:57:14Z",
+        "url": "https://www.bootrino.com"
+      }
+    ],
+    "hitsPerPage": 5,
+    "nbHits": 48,
+    "nbPages": 10,
+    "page": 0,
+    "params": "query=ocean&tags=show_hn&numericFilters=points%3E5&hitsPerPage=5&advancedSyntax=true&analyticsTags=backend",
+    "processingTimeMS": 4,
+    "processingTimingsMS": {
+      "_request": {
+        "queue": 64,
+        "roundTrip": 21
+      },
+      "fetch": {
+        "query": 2,
+        "total": 3
+      },
+      "total": 4
+    },
+    "query": "ocean",
+    "serverTimeMS": 69
+  }
+}

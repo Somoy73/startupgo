@@ -1,0 +1,189 @@
+{
+  "params": {
+    "search": "ocean"
+  },
+  "full_size_bytes": 3010,
+  "sample": {
+    "head": {
+      "vars": [
+        "item",
+        "itemLabel",
+        "itemDescription",
+        "inception",
+        "website"
+      ]
+    },
+    "results": {
+      "bindings": [
+        {
+          "item": {
+            "type": "uri",
+            "value": "http://www.wikidata.org/entity/Q97"
+          },
+          "itemLabel": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "Atlantic Ocean"
+          },
+          "itemDescription": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "ocean between Europe, Africa and the Americas"
+          }
+        },
+        {
+          "item": {
+            "type": "uri",
+            "value": "http://www.wikidata.org/entity/Q535"
+          },
+          "itemLabel": {
+            "type": "literal",
+            "value": "Q535"
+          },
+          "itemDescription": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "French novelist, poet, dramatist and politician (1802–1885)"
+          }
+        },
+        {
+          "item": {
+            "type": "uri",
+            "value": "http://www.wikidata.org/entity/Q538"
+          },
+          "itemLabel": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "Insular Oceania"
+          },
+          "itemDescription": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "geographic region comprising Melanesia, Micronesia and Polynesia"
+          }
+        },
+        {
+          "item": {
+            "type": "uri",
+            "value": "http://www.wikidata.org/entity/Q788"
+          },
+          "itemLabel": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "Arctic Ocean"
+          },
+          "itemDescription": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "smallest, shallowest, coldest, and northernmost of the world's major oceans"
+          }
+        },
+        {
+          "item": {
+            "type": "uri",
+            "value": "http://www.wikidata.org/entity/Q1387"
+          },
+          "itemLabel": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "Rhode Island"
+          },
+          "itemDescription": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "state of the United States of America"
+          },
+          "inception": {
+            "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+            "type": "literal",
+            "value": "1790-05-29T00:00:00Z"
+          },
+          "website": {
+            "type": "uri",
+            "value": "https://www.ri.gov/"
+          }
+        },
+        {
+          "item": {
+            "type": "uri",
+            "value": "http://www.wikidata.org/entity/Q9430"
+          },
+          "itemLabel": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "ocean"
+          },
+          "itemDescription": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "very large body of saline water"
+          }
+        },
+        {
+          "item": {
+            "type": "uri",
+            "value": "http://www.wikidata.org/entity/Q43518"
+          },
+          "itemLabel": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "oceanography"
+          },
+          "itemDescription": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "branch of Earth science that studies the ocean"
+          }
+        },
+        {
+          "item": {
+            "type": "uri",
+            "value": "http://www.wikidata.org/entity/Q46831"
+          },
+          "itemLabel": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "mountain range"
+          },
+          "itemDescription": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "geographic area containing several geologically related mountains"
+          }
+        },
+        {
+          "item": {
+            "type": "uri",
+            "value": "http://www.wikidata.org/entity/Q161419"
+          },
+          "itemLabel": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "Oceanus"
+          },
+          "itemDescription": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "ancient Greek god of the earth-encircling river, Oceanos"
+          }
+        },
+        {
+          "item": {
+            "type": "uri",
+            "value": "http://www.wikidata.org/entity/Q184395"
+          },
+          "itemLabel": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "sea water"
+          },
+          "itemDescription": {
+            "xml:lang": "en",
+            "type": "literal",
+            "value": "water from a sea or ocean"
+          }
+        }
+      ]
+    }
+  }
+}

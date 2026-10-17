@@ -1,0 +1,48 @@
+﻿id,name,ch_officer_id,nationality,country_of_residence,pdl_id,education
+1,"BENEDETTI DEL RIO, Roberta",koQha9l4F3jOTvSbVg15Diod-98,"Italian,British",Italy,,
+2,"GARCIA GONZALEZ, Rodrigo",G-y_4p5F3_XLW4ZTvTX6Kx7RQ6k,Spanish,United Kingdom,,
+3,"NG, Wang Yu Gary",wYEuDIKHp8QGzBTayr1OT1JGGF4,Hong Konger,Hong Kong,,
+4,"PASLIER, Pierre-Yves",2T7PZ-bNaM98To9Yb1oZymmLKno,French,United Kingdom,,
+5,"WALKER, David Peter",M8EJl0s_Jz0QW_Jm71QXUd_dFrI,New Zealander,Finland,,
+6,"CHENG, Ka Wing",WMKVZXcWbAla6-twCPkgT99HRQw,Hong Konger,Hong Kong,,
+7,"COUCHE, Guillaume",Cuw3w3okIWffcEOrkGj59mWyoJ4,French,United Kingdom,,
+8,"DE PANAFIEU, Laetitia May Juliette Sybille",WioMWVyLQa4Ps8pBZd23KgVp1p8,French,France,,
+9,"MICHEL, Frederic",DXKxAfmYJowUNrrqLZ4wnzKoTEM,French,United States,,
+10,"SHAH, Kanira",tXB08gYZ6e9IF6MEqUdfDvs-RkI,Belgian,Belgium,,
+11,Tim Janssen,,,,,
+12,Peter Rive,,,,,
+13,Ryan McIntyre,,,,,
+14,Evan Shapiro,,,,,
+15,Jon Callaghan,,,,,
+16,Lindel Eakman,,,,,
+17,Eric Stackpole,,,,,
+18,Willilam Locke,,,,,
+19,Anke Pierik,,,,,
+20,"FREDRIKSSON, Alisha",TAmtV2qbcvBgAgYRVyZ_knbknSE,,,,
+21,"FREDRIKSSON, Alisha",2d1uoKALVhPKSpxiVkXmvkGa2c0,Swedish,England,,
+22,"WEN, Roujia",_LHgNnheSQL52HQwFzOKxxiFw5s,Chinese,England,,
+23,"ACLAND, Simon Hugh Verdon",OsvASqtdUfoy9h4bNdsluPePi8k,British,England,,
+24,"BAVINGTON, Charles, Dr.",RvlXnoTlRZ3dPpi38VKjxyU24Mk,British,Scotland,,
+25,"BUCHWALD-WERNER, Sybille, Dr",5xa8Yh84DYlO4J2FYfT-BO9MagM,German,Germany,,
+26,"CATLING, Stephen John",hhzK62YYDhjpo30VUhZXAWXsSN4,British,England,,
+27,"CILENTI, Louisa Jane",2QkG126EE2Rd9HM-ZcXbVZ8A9aY,British,England,,
+28,"DAVISON, Jeffrey James",HuvRHn9soD1wg2_BTAhDySNMSAY,British,England,,
+29,"ROSS, Andrew George",tMYaOoTT4akcMQaXxBQcnOcJkvg,American,United States,,
+30,"SEAL, Karen Elizabeth Scofield, Ms.",wO5oIQ1WyQMQFOp4JaQlSxKTq7w,British,England,,
+31,Magni Arge,,,,G8wRgGfRY1rxscA0ePlcXw_0000,"[{""school"": ""the university of the faroe islands"", ""degrees"": [""master of laws"", ""masters""]}, {""school"": ""fr\u00f3\u00f0skaparsetur f\u00f8roya"", ""degrees"": []}, {""school"": ""imd"", ""degrees"": []}, {""school"": ""danmarks medie - og journalisth\u00f8jskole"", ""degrees"": []}, {""school"": ""fr\u00f3\u00f0skaparsetur f\u00f8roya"", ""degrees"": []}, {""school"": ""the university of the faroe islands"", ""degrees"": []}, {""school"": ""aarhus university"", ""degrees"": [""bachelors""]}]"
+32,Olavur Ellefsen,,,,1CobTxbNVft37tSM-BZtFQ_0000,"[{""school"": ""copenhagen business school"", ""degrees"": [""masters""]}, {""school"": ""copenhagen business school"", ""degrees"": [""bachelor of science"", ""bachelors""]}, {""school"": ""f\u00f8roya studentask\u00fali og hf - skei\u00f0"", ""degrees"": []}, {""school"": ""kommunusk\u00falin"", ""degrees"": []}, {""school"": ""sankta frans sk\u00fali"", ""degrees"": []}]"
+33,Javier Infante,,,,yteHNatV1r12aAvu5xaUeA_0000,"[{""school"": ""universidad san sebasti\u00e1n"", ""degrees"": [""master of business administration"", ""masters""]}, {""school"": ""pontificia universidad cat\u00f3lica de chile"", ""degrees"": []}, {""school"": ""universidad de antofagasta"", ""degrees"": []}, {""school"": ""instituto profesional zipter"", ""degrees"": []}, {""school"": ""colegio padre hurtado y juanita de los andes"", ""degrees"": []}]"
+34,Michael Malling,,,,zTkAVBNKHJlDz5Ekz-jFdQ_0000,"[{""school"": ""school of economics and business sarajevo"", ""degrees"": [""master of business administration"", ""masters""]}, {""school"": ""norwegian school of economics (nhh)"", ""degrees"": [""master of business administration"", ""masters""]}, {""school"": ""norwegian coast artillery"", ""degrees"": []}, {""school"": ""nhh - norwegian school of economics"", ""degrees"": []}, {""school"": ""oslo private gymnasium"", ""degrees"": []}]"
+36,Pål Bakken,,,,Ir2V8XFo0xn7XKbBFQMy2A_0000,"[{""school"": ""university of oregon"", ""degrees"": [""bachelor of science"", ""bachelors""]}, {""school"": ""bi norwegian business school"", ""degrees"": []}, {""school"": ""befalskolen for kystartilleriet (norwegian officer school)"", ""degrees"": []}, {""school"": ""befalskolen for kystartilleriet"", ""degrees"": []}]"
+37,Kat Bruce,,,,lAdGBuw4f3esfUuFZQKo3g_0000,"[{""school"": ""university of east anglia"", ""degrees"": [""doctorates"", ""doctor of philosophy""]}, {""school"": ""university of east anglia"", ""degrees"": [""doctor of philosophy"", ""doctorates""]}, {""school"": ""imperial college london"", ""degrees"": [""masters""]}, {""school"": ""anglia ruskin university"", ""degrees"": [""bachelors""]}, {""school"": ""b.e. academy for girls"", ""degrees"": []}]"
+38,Elianne Oei,,,,N0oabPieThBGNIux9uwwjg_0000,"[{""school"": ""avpn"", ""degrees"": []}, {""school"": ""griffith university"", ""degrees"": [""master of science"", ""masters""]}, {""school"": ""radboud university"", ""degrees"": []}]"
+40,Sanjeev Jain,,,,litTCEU9FjerhPANuBewEA_0000,"[{""school"": ""the institute of chartered accountants of india"", ""degrees"": []}, {""school"": ""the institute of chartered accountants of india"", ""degrees"": []}, {""school"": ""the institute of company secretaries of india"", ""degrees"": []}, {""school"": ""the institute of cost accountants of india"", ""degrees"": []}, {""school"": ""st. xavier's college"", ""degrees"": [""bachelor of commerce"", ""bachelors""]}]"
+41,Lavine Hemlani,,,,ESPBthSiqjJ4AkxTAfpX4Q_0000,"[{""school"": ""university of chicago"", ""degrees"": []}, {""school"": ""esf west island school"", ""degrees"": []}]"
+42,Utkarsh Goel,,,,MSbM-UR0e7WiWoUlmdAEYQ_0000,"[{""school"": ""the university of hong kong"", ""degrees"": [""bachelors""]}, {""school"": ""delhi public school, kalyanpur"", ""degrees"": []}, {""school"": ""sherwood college"", ""degrees"": []}]"
+44,Tim Janssen,,,,4MUIByhsBGTK37b-6JrDaA_0000,"[{""school"": ""naval postgraduate school"", ""degrees"": []}, {""school"": ""delft university of technology"", ""degrees"": [""doctor of philosophy"", ""doctorates""]}, {""school"": ""woods hole oceanographic institution"", ""degrees"": []}, {""school"": ""queen's university"", ""degrees"": []}, {""school"": ""queen's university"", ""degrees"": []}, {""school"": ""delft university of technology"", ""degrees"": [""bachelor of science"", ""bachelors"", ""master of science"", ""masters""]}]"
+45,Evan Shapiro,,,,Q6ZDQvJbsz93AZPFs4hizQ_0000,"[{""school"": ""brown university"", ""degrees"": [""bachelors""]}, {""school"": ""catlin gabel school"", ""degrees"": []}, {""school"": ""catlin gabel school"", ""degrees"": []}, {""school"": ""copenhagen institute of interaction design"", ""degrees"": []}]"
+46,Runi Joensen,,,,U3Kg89kloIqIPWzsAz3tLQ_0000,"[{""school"": ""robert gordon university"", ""degrees"": [""master of business administration"", ""masters""]}, {""school"": ""university of aberdeen"", ""degrees"": [""master of engineering"", ""masters""]}, {""school"": ""studentaskulin i hoydolum"", ""degrees"": []}]"
+47,Urd Bak,,,,OZQCwohsjbrwPqfbNrzoKw_0000,"[{""school"": ""dtu - technical university of denmark"", ""degrees"": [""doctor of philosophy"", ""doctorates""]}, {""school"": ""roskilde university"", ""degrees"": []}, {""school"": ""roskilde university"", ""degrees"": []}, {""school"": ""roskilde university"", ""degrees"": [""bachelor of applied science"", ""bachelors""]}, {""school"": ""rysensteen gymnasium"", ""degrees"": []}]"
+48,Daniel Hooft,,,,GO7o-JQjOV7oGxBP9fFYxQ_0005,"[{""school"": ""university of cambridge"", ""degrees"": [""masters""]}, {""school"": ""delft university of technology"", ""degrees"": [""master of science"", ""masters""]}, {""school"": ""lomonosov moscow state university (msu)"", ""degrees"": []}, {""school"": ""lomonosov moscow state university (msu)"", ""degrees"": []}, {""school"": ""sevenoaks school"", ""degrees"": []}, {""school"": ""aiglon college"", ""degrees"": []}, {""school"": ""toronto french academy (tfa)"", ""degrees"": []}, {""school"": ""university of cambridge"", ""degrees"": []}]"
+49,Cayne Moffat,,,,ozOB283pSyxsYla2y9GhoA_0000,"[{""school"": ""harvard business school executive education"", ""degrees"": []}, {""school"": ""harvard business school executive education"", ""degrees"": []}, {""school"": ""the university of edinburgh"", ""degrees"": [""bachelor of science"", ""bachelors""]}, {""school"": ""the open university"", ""degrees"": []}, {""school"": ""ross high school"", ""degrees"": []}]"
+50,Sidhant Gupta,,,,Z2PKufibwAooO9OZxm8UkQ_0000,"[{""school"": ""the university of edinburgh"", ""degrees"": []}, {""school"": ""peking university"", ""degrees"": []}, {""school"": ""utrecht university"", ""degrees"": []}, {""school"": ""the university of hong kong"", ""degrees"": [""bachelor of engineering"", ""bachelors""]}, {""school"": ""bishop cotton boys' school"", ""degrees"": []}]"

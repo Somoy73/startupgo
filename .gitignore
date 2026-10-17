@@ -11,6 +11,12 @@ node_modules/
 dist/
 *.local
 
-# Local SQLite database (rebuilt from DB/schema.sql + DB/seed.sql)
-
 .DS_Store
+
+
+# Downloaded filings cache
+Modules/DataAPIs/.cache/
+
+# Runtime data written by the refresh pipeline (live DB, generated configs, search index, reports).
+# The tracked snapshot DB/startupgo.db changes only via `refresh.py snapshot`.
+DB/runtime/

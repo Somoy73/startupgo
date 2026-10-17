@@ -1,0 +1,41 @@
+{
+  "params": {
+    "url": "oceana.org/about",
+    "limit": 3
+  },
+  "full_size_bytes": 1002,
+  "sample": {
+    "collection": "CC-MAIN-2026-39",
+    "records": [
+      {
+        "urlkey": "org,oceana)/about",
+        "timestamp": "20260908032839",
+        "url": "https://oceana.org/about",
+        "mime": "text/html",
+        "mime-detected": "text/html",
+        "status": "301",
+        "digest": "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "length": "878",
+        "offset": "12090245",
+        "filename": "crawl-data/CC-MAIN-2026-39/segments/1788492699777.19/crawldiagnostics/CC-MAIN-20260908023422-20260908053422-00223.warc.gz",
+        "redirect": "https://oceana.org/about/",
+        "recordid": "01a07f0f-88e2-79df-b515-012d4e27178e"
+      },
+      {
+        "urlkey": "org,oceana)/about",
+        "timestamp": "20260908032839",
+        "url": "https://oceana.org/about/",
+        "mime": "text/html",
+        "mime-detected": "text/html",
+        "status": "200",
+        "digest": "74RO3LRQ755FQ64UUWU3TFWK6AFTNUTU",
+        "length": "88099",
+        "offset": "349434453",
+        "filename": "crawl-data/CC-MAIN-2026-39/segments/1788492699777.19/warc/CC-MAIN-20260908023422-20260908053422-00352.warc.gz",
+        "languages": "eng",
+        "recordid": "01a07f0f-88f3-7112-a68b-06836243ddb1",
+        "encoding": "UTF-8"
+      }
+    ]
+  }
+}

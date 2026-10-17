@@ -1,0 +1,51 @@
+{
+  "_about": "Analyst-curated investor classification used for investor_quality features. Edit freely: scores are judgments, not data. Potanin et al. 2023 (sec. 5.1) likewise seed investor ranking with an expert-chosen top group. kind_scores is the default per kind; an investor's own score overrides it.",
+  "kind_scores": {
+    "vc": 0.7,
+    "top-vc": 1.0,
+    "ocean-vc": 0.85,
+    "climate-vc": 0.85,
+    "accelerator": 0.75,
+    "corporate": 0.6,
+    "angel-network": 0.5,
+    "foundation": 0.55,
+    "ngo": 0.55,
+    "government": 0.5,
+    "infrastructure-fund": 0.65,
+    "unknown": 0.3
+  },
+  "investors": {
+    "Union Square Ventures": {"kind": "top-vc"},
+    "Foundry Group": {"kind": "top-vc"},
+    "Lowercarbon Capital": {"kind": "climate-vc", "score": 0.95},
+    "Y Combinator": {"kind": "accelerator", "score": 0.9},
+    "Builders Vision": {"kind": "climate-vc"},
+    "Katapult Ocean": {"kind": "ocean-vc"},
+    "Sky Ocean Ventures": {"kind": "ocean-vc"},
+    "Schmidt Marine Technology Partners": {"kind": "ocean-vc"},
+    "Hawktail": {"kind": "vc"},
+    "Soma Capital": {"kind": "vc"},
+    "Rebel Fund": {"kind": "vc"},
+    "Emles": {"kind": "vc"},
+    "Earth Venture Capital": {"kind": "climate-vc"},
+    "CarbonX Capital": {"kind": "climate-vc"},
+    "Eos Capital": {"kind": "vc"},
+    "UB Forest Industry Green Growth Fund": {"kind": "climate-vc"},
+    "Climate Fund Managers": {"kind": "infrastructure-fund"},
+    "Eastern Pacific Shipping": {"kind": "corporate"},
+    "Alibaba Hong Kong Entrepreneurs Fund": {"kind": "corporate"},
+    "The Grantham Foundation": {"kind": "foundation"},
+    "Ocean Born Foundation": {"kind": "foundation"},
+    "WWF": {"kind": "ngo"},
+    "WWF-US": {"kind": "ngo"},
+    "Green Angel Syndicate": {"kind": "angel-network"},
+    "Green Angel Ventures": {"kind": "angel-network"},
+    "Asia Sustainability Angels": {"kind": "angel-network"},
+    "Scottish Enterprise": {"kind": "government"},
+    "UK Clean Maritime Demonstration Competition (Round 6)": {"kind": "government"}
+  },
+  "aliases": {
+    "Katapult Ocean (Deep Blue fund)": "Katapult Ocean",
+    "Green Angel Ventures": "Green Angel Syndicate"
+  }
+}

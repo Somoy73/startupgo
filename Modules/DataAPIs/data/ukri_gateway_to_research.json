@@ -1,0 +1,1272 @@
+{
+  "params": {
+    "q": "ocean",
+    "s": 10
+  },
+  "full_size_bytes": 78725,
+  "sample": {
+    "links": null,
+    "ext": null,
+    "page": 1,
+    "size": 10,
+    "totalPages": 444,
+    "totalSize": 4439,
+    "project": [
+      {
+        "links": {
+          "link": [
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/505F9553-B779-413F-9497-8C2AD526C454",
+              "rel": "LEAD_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/505F9553-B779-413F-9497-8C2AD526C454",
+              "rel": "PARTICIPANT_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/funds/56071943-4038-415C-9ADA-7CD67FA4F862",
+              "rel": "FUND",
+              "start": 1312153200000,
+              "end": 1406761200000,
+              "otherAttributes": {}
+            }
+          ]
+        },
+        "ext": null,
+        "id": "EB50DFFB-0A5A-4503-896B-2BAAB247E058",
+        "outcomeid": null,
+        "href": "http://gtr.ukri.org/gtr/api/projects/EB50DFFB-0A5A-4503-896B-2BAAB247E058",
+        "created": 1788431759000,
+        "updated": null,
+        "identifiers": {
+          "identifier": [
+            {
+              "value": "620031",
+              "type": "RCUK"
+            }
+          ]
+        },
+        "title": "OCEAN",
+        "status": "Closed",
+        "grantCategory": "EU-Funded",
+        "leadFunder": "EU",
+        "leadOrganisationDepartment": null,
+        "abstractText": "Awaiting Public Project Summary",
+        "techAbstractText": null,
+        "potentialImpact": null,
+        "healthCategories": {
+          "healthCategory": []
+        },
+        "researchActivities": {
+          "researchActivity": []
+        },
+        "researchSubjects": {
+          "researchSubject": []
+        },
+        "researchTopics": {
+          "researchTopic": [
+            {
+              "id": "6CFA1E1F-F25C-4C23-8FE1-C47AE53E333E",
+              "text": "Unclassified",
+              "percentage": null
+            }
+          ]
+        },
+        "rcukProgrammes": {
+          "rcukProgramme": []
+        },
+        "start": null,
+        "end": null,
+        "participantValues": {
+          "participant": [
+            {
+              "organisationId": "505F9553-B779-413F-9497-8C2AD526C454",
+              "organisationName": "FUJITSU SEMICONDUCTOR EUROPE GMBH",
+              "role": "LEAD_PARTICIPANT",
+              "projectCost": 1646897.0,
+              "grantOffer": 540000.0
+            }
+          ]
+        }
+      },
+      {
+        "links": {
+          "link": [
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/C9918555-5ACA-4A98-AEBB-31DC434F3402",
+              "rel": "LEAD_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/C9918555-5ACA-4A98-AEBB-31DC434F3402",
+              "rel": "PARTICIPANT_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/funds/38745FF4-2244-4FB1-A081-2E58EE705CFE",
+              "rel": "FUND",
+              "start": 1396306800000,
+              "end": 1398812400000,
+              "otherAttributes": {}
+            }
+          ]
+        },
+        "ext": null,
+        "id": "2FF572C0-4319-4AC3-AAA1-BD3A12675ACB",
+        "outcomeid": null,
+        "href": "http://gtr.ukri.org/gtr/api/projects/2FF572C0-4319-4AC3-AAA1-BD3A12675ACB",
+        "created": 1788431759000,
+        "updated": null,
+        "identifiers": {
+          "identifier": [
+            {
+              "value": "620030",
+              "type": "RCUK"
+            }
+          ]
+        },
+        "title": "OCEAN",
+        "status": "Closed",
+        "grantCategory": "EU-Funded",
+        "leadFunder": "EU",
+        "leadOrganisationDepartment": null,
+        "abstractText": "Awaiting Public Project Summary",
+        "techAbstractText": null,
+        "potentialImpact": null,
+        "healthCategories": {
+          "healthCategory": []
+        },
+        "researchActivities": {
+          "researchActivity": []
+        },
+        "researchSubjects": {
+          "researchSubject": []
+        },
+        "researchTopics": {
+          "researchTopic": [
+            {
+              "id": "6CFA1E1F-F25C-4C23-8FE1-C47AE53E333E",
+              "text": "Unclassified",
+              "percentage": null
+            }
+          ]
+        },
+        "rcukProgrammes": {
+          "rcukProgramme": []
+        },
+        "start": null,
+        "end": null,
+        "participantValues": {
+          "participant": [
+            {
+              "organisationId": "C9918555-5ACA-4A98-AEBB-31DC434F3402",
+              "organisationName": "BT LIMITED",
+              "role": "LEAD_PARTICIPANT",
+              "projectCost": 0.0,
+              "grantOffer": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "links": {
+          "link": [
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/2E44F3CA-5225-48A3-9B77-F71AF31273D9",
+              "rel": "PI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/7621BFDF-9A4A-4E83-A0F9-0509A2268D6F",
+              "rel": "PI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/00488E81-55FB-4368-95C5-5EF90B364D78",
+              "rel": "COI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/4585890C-9333-4573-BFC8-88D18BFD000D",
+              "rel": "COI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/6B57D64D-182B-4847-8A8F-366E0669D013",
+              "rel": "LEAD_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/A4DF7705-7ACB-4071-9C5B-0E270149F409",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/01A75363-98F2-4FF6-86CC-792F5A34E424",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/87D96004-8264-49AC-8E81-DFA0D251A85E",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/C0240E07-81FA-4B12-83FC-22EC574BAD55",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/funds/C7DC092E-1AF1-4942-ACB5-A04545E2516A",
+              "rel": "FUND",
+              "start": 1646092800000,
+              "end": 1819666800000,
+              "otherAttributes": {}
+            },
+            "... +36 more"
+          ]
+        },
+        "ext": null,
+        "id": "BD498F72-EC9C-4879-A87E-1217E8664403",
+        "outcomeid": null,
+        "href": "http://gtr.ukri.org/gtr/api/projects/BD498F72-EC9C-4879-A87E-1217E8664403",
+        "created": 1788431759000,
+        "updated": null,
+        "identifiers": {
+          "identifier": [
+            {
+              "value": "EP/W005131/1",
+              "type": "RCUK"
+            }
+          ]
+        },
+        "title": "Ocean-REFuel - Ocean Renewable Energy Fuels",
+        "status": "Active",
+        "grantCategory": "Research Grant",
+        "leadFunder": "EPSRC",
+        "leadOrganisationDepartment": "Faculty of Engineering",
+        "abstractText": "Abstracts are not currently available in GtR for all funded research. This is normally because the abstract was not required at the time of proposal submission, but may be because it included sensitive information such as personal details.",
+        "techAbstractText": null,
+        "potentialImpact": null,
+        "healthCategories": {
+          "healthCategory": []
+        },
+        "researchActivities": {
+          "researchActivity": []
+        },
+        "researchSubjects": {
+          "researchSubject": [
+            {
+              "id": "B8818167-2E8B-4949-A5A9-5E6B1AAB0825",
+              "text": "Energy",
+              "percentage": 100
+            }
+          ]
+        },
+        "researchTopics": {
+          "researchTopic": [
+            {
+              "id": "B29164FB-8505-487A-AD77-DBB287592C6E",
+              "text": "Sustainable Energy Networks",
+              "percentage": 35
+            },
+            {
+              "id": "726DFC1D-17F4-4C95-861F-990993F01D73",
+              "text": "Sustainable Energy Vectors",
+              "percentage": 10
+            },
+            {
+              "id": "46708542-5C83-487C-A8C3-DF9102E4B70F",
+              "text": "Wind Power",
+              "percentage": 40
+            },
+            {
+              "id": "7253D285-A76F-4D44-9F4E-145B36C44780",
+              "text": "Energy Efficiency",
+              "percentage": 5
+            },
+            {
+              "id": "75904339-B9F8-44F2-A4DA-8C8D1F45B66F",
+              "text": "Energy - Marine & Hydropower",
+              "percentage": 10
+            }
+          ]
+        },
+        "rcukProgrammes": {
+          "rcukProgramme": []
+        },
+        "start": null,
+        "end": null,
+        "participantValues": null
+      },
+      {
+        "links": {
+          "link": [
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/F271FC10-9C00-4683-A470-05DFC49623CB",
+              "rel": "PI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/CC884624-63C8-4C87-A9DD-E89A40041A65",
+              "rel": "COI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/27788FAC-97C4-4C94-9460-C1D5647AB1ED",
+              "rel": "COI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/08C6F432-3D77-4961-95F7-D9FCCDAEEFFB",
+              "rel": "LEAD_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/2A90C894-6864-4D42-86A3-40DD0163FCA8",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/93A1D9AD-0515-4D57-9217-2036C1653222",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/2EBCC169-13F8-4E3A-B92F-95BE8AC88DF6",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/AA74BEFD-ACAF-45CC-A5C5-18B751C8D0C5",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/052DE517-F298-4593-869D-03FE4A87442A",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/5A199D1E-A580-4E50-8F18-A1C8CF2F85D6",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            "... +91 more"
+          ]
+        },
+        "ext": null,
+        "id": "117FE54A-CEC6-421F-90F6-8934F00E7FFC",
+        "outcomeid": null,
+        "href": "http://gtr.ukri.org/gtr/api/projects/117FE54A-CEC6-421F-90F6-8934F00E7FFC",
+        "created": 1788431759000,
+        "updated": null,
+        "identifiers": {
+          "identifier": [
+            {
+              "value": "EP/W005212/1",
+              "type": "RCUK"
+            }
+          ]
+        },
+        "title": "Ocean-Fuel - Ocean Renewable Energy FuelsRE",
+        "status": "Active",
+        "grantCategory": "Research Grant",
+        "leadFunder": "EPSRC",
+        "leadOrganisationDepartment": "Naval Architecture, Ocean and Marine Eng",
+        "abstractText": "The Ocean-REFuel project brings together a multidisciplinary, world-leading team of researchers to consider at a fundamental level a whole-energy system to maximise ocean renewable energy (Offshore wind and Marine Renewable Energy) potential for conversion to zero carbon fuels. The project has transformative ambition addressing a number of big questions concerning our Energy future:\n\nHow to maximise ocean energy potential in a safe, affordable, sustainable and environmentally sensitive manner?\nHow to alleviate the intermittency of the ocean renewable energy resource?\nHow ocean renewable energy... [1072 chars]",
+        "techAbstractText": null,
+        "potentialImpact": null,
+        "healthCategories": {
+          "healthCategory": []
+        },
+        "researchActivities": {
+          "researchActivity": []
+        },
+        "researchSubjects": {
+          "researchSubject": [
+            {
+              "id": "B8818167-2E8B-4949-A5A9-5E6B1AAB0825",
+              "text": "Energy",
+              "percentage": 100
+            }
+          ]
+        },
+        "researchTopics": {
+          "researchTopic": [
+            {
+              "id": "B29164FB-8505-487A-AD77-DBB287592C6E",
+              "text": "Sustainable Energy Networks",
+              "percentage": 35
+            },
+            {
+              "id": "726DFC1D-17F4-4C95-861F-990993F01D73",
+              "text": "Sustainable Energy Vectors",
+              "percentage": 10
+            },
+            {
+              "id": "7253D285-A76F-4D44-9F4E-145B36C44780",
+              "text": "Energy Efficiency",
+              "percentage": 5
+            },
+            {
+              "id": "75904339-B9F8-44F2-A4DA-8C8D1F45B66F",
+              "text": "Energy - Marine & Hydropower",
+              "percentage": 10
+            },
+            {
+              "id": "46708542-5C83-487C-A8C3-DF9102E4B70F",
+              "text": "Wind Power",
+              "percentage": 40
+            }
+          ]
+        },
+        "rcukProgrammes": {
+          "rcukProgramme": []
+        },
+        "start": null,
+        "end": null,
+        "participantValues": null
+      },
+      {
+        "links": {
+          "link": [
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/5F0AEC59-E7A3-49F8-ABDC-3237C416333A",
+              "rel": "PI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/79055151-73A4-4921-B24F-ADB5A9FC89F4",
+              "rel": "COI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/F5FC3E1A-6320-4D64-954D-144FEE534558",
+              "rel": "COI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/B6A72C78-DBF1-4AA9-AC36-8685636DFB7A",
+              "rel": "LEAD_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/D2A6DC0B-42D3-4F5B-A311-A580056AF208",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/28DC4077-8A23-4156-A85D-D0C08444C425",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/F4E4B315-F70B-4D6A-B652-EED1BA118DEE",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/1443AECC-26B1-42F3-833D-1BF78B6765F4",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/5A199D1E-A580-4E50-8F18-A1C8CF2F85D6",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/E3369E07-AE7C-4332-9E3F-32BE1330A95B",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            "... +28 more"
+          ]
+        },
+        "ext": null,
+        "id": "EAC30E1F-0C2C-45F2-B6F9-9A7BF55BF7B6",
+        "outcomeid": null,
+        "href": "http://gtr.ukri.org/gtr/api/projects/EAC30E1F-0C2C-45F2-B6F9-9A7BF55BF7B6",
+        "created": 1788431759000,
+        "updated": null,
+        "identifiers": {
+          "identifier": [
+            {
+              "value": "EP/W005018/1",
+              "type": "RCUK"
+            }
+          ]
+        },
+        "title": "Ocean-REFuel - Ocean Renewable Energy Fuels",
+        "status": "Active",
+        "grantCategory": "Research Grant",
+        "leadFunder": "EPSRC",
+        "leadOrganisationDepartment": "School of Engineering",
+        "abstractText": "Abstracts are not currently available in GtR for all funded research. This is normally because the abstract was not required at the time of proposal submission, but may be because it included sensitive information such as personal details.",
+        "techAbstractText": null,
+        "potentialImpact": null,
+        "healthCategories": {
+          "healthCategory": []
+        },
+        "researchActivities": {
+          "researchActivity": []
+        },
+        "researchSubjects": {
+          "researchSubject": [
+            {
+              "id": "B8818167-2E8B-4949-A5A9-5E6B1AAB0825",
+              "text": "Energy",
+              "percentage": 100
+            }
+          ]
+        },
+        "researchTopics": {
+          "researchTopic": [
+            {
+              "id": "726DFC1D-17F4-4C95-861F-990993F01D73",
+              "text": "Sustainable Energy Vectors",
+              "percentage": 10
+            },
+            {
+              "id": "7253D285-A76F-4D44-9F4E-145B36C44780",
+              "text": "Energy Efficiency",
+              "percentage": 5
+            },
+            {
+              "id": "75904339-B9F8-44F2-A4DA-8C8D1F45B66F",
+              "text": "Energy - Marine & Hydropower",
+              "percentage": 10
+            },
+            {
+              "id": "B29164FB-8505-487A-AD77-DBB287592C6E",
+              "text": "Sustainable Energy Networks",
+              "percentage": 35
+            },
+            {
+              "id": "46708542-5C83-487C-A8C3-DF9102E4B70F",
+              "text": "Wind Power",
+              "percentage": 40
+            }
+          ]
+        },
+        "rcukProgrammes": {
+          "rcukProgramme": []
+        },
+        "start": null,
+        "end": null,
+        "participantValues": null
+      },
+      {
+        "links": {
+          "link": [
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/6F0382A7-626B-46F2-92B7-28A492EB436E",
+              "rel": "PI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/4B046188-D904-4358-BDAC-2A38DB6E7DB6",
+              "rel": "LEAD_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/funds/79A4C2CC-2616-43B7-90B5-02C20CBF4D31",
+              "rel": "FUND",
+              "start": 1638316800000,
+              "end": 1795996800000,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/keyfindings/8FC15110-466E-4796-8399-46FB66CB570D",
+              "rel": "KEY_FINDING",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/impactsummaries/E494AB14-7647-4077-A15C-72927296AE9C",
+              "rel": "IMPACT_SUMMARY",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/researchdatabaseandmodels/04E48DEE-6E77-44D7-AB3A-4AE2C77A7244",
+              "rel": "RESEARCH_DATABASE_AND_MODEL",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/publications/E16C9622-646B-4C6C-A927-540188EE713E",
+              "rel": "PUBLICATION",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/publications/4CAE2313-16E2-440E-AF8D-A1227BA49A65",
+              "rel": "PUBLICATION",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/publications/CB97885E-B2EA-41B5-9014-15D8FE544DC5",
+              "rel": "PUBLICATION",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            }
+          ]
+        },
+        "ext": null,
+        "id": "13E487EC-331D-42E4-86CF-9C0033AE55A3",
+        "outcomeid": null,
+        "href": "http://gtr.ukri.org/gtr/api/projects/13E487EC-331D-42E4-86CF-9C0033AE55A3",
+        "created": 1788431759000,
+        "updated": null,
+        "identifiers": {
+          "identifier": [
+            {
+              "value": "EP/W005158/1",
+              "type": "RCUK"
+            }
+          ]
+        },
+        "title": "Ocean-REFuel - Ocean Renewable Energy Fuels",
+        "status": "Active",
+        "grantCategory": "Research Grant",
+        "leadFunder": "EPSRC",
+        "leadOrganisationDepartment": "Chemical Engineering",
+        "abstractText": "Abstracts are not currently available in GtR for all funded research. This is normally because the abstract was not required at the time of proposal submission, but may be because it included sensitive information such as personal details.",
+        "techAbstractText": null,
+        "potentialImpact": null,
+        "healthCategories": {
+          "healthCategory": []
+        },
+        "researchActivities": {
+          "researchActivity": []
+        },
+        "researchSubjects": {
+          "researchSubject": [
+            {
+              "id": "B8818167-2E8B-4949-A5A9-5E6B1AAB0825",
+              "text": "Energy",
+              "percentage": 100
+            }
+          ]
+        },
+        "researchTopics": {
+          "researchTopic": [
+            {
+              "id": "46708542-5C83-487C-A8C3-DF9102E4B70F",
+              "text": "Wind Power",
+              "percentage": 40
+            },
+            {
+              "id": "726DFC1D-17F4-4C95-861F-990993F01D73",
+              "text": "Sustainable Energy Vectors",
+              "percentage": 10
+            },
+            {
+              "id": "75904339-B9F8-44F2-A4DA-8C8D1F45B66F",
+              "text": "Energy - Marine & Hydropower",
+              "percentage": 10
+            },
+            {
+              "id": "7253D285-A76F-4D44-9F4E-145B36C44780",
+              "text": "Energy Efficiency",
+              "percentage": 5
+            },
+            {
+              "id": "B29164FB-8505-487A-AD77-DBB287592C6E",
+              "text": "Sustainable Energy Networks",
+              "percentage": 35
+            }
+          ]
+        },
+        "rcukProgrammes": {
+          "rcukProgramme": []
+        },
+        "start": null,
+        "end": null,
+        "participantValues": null
+      },
+      {
+        "links": {
+          "link": [
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/132F11F8-732B-4C08-9820-ECC547EEF237",
+              "rel": "PI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/132F11F8-732B-4C08-9820-ECC547EEF237",
+              "rel": "FELLOW_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/4B046188-D904-4358-BDAC-2A38DB6E7DB6",
+              "rel": "LEAD_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/6FCBD805-5F34-4D61-AE88-B398B1BAA3EF",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/3D58ADA5-BC0A-4A12-898B-6B39CFA1A1B6",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/funds/FAA0617A-A5E1-48B3-AA2D-63D84C7F69B6",
+              "rel": "FUND",
+              "start": 1522882800000,
+              "end": 1664492400000,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/keyfindings/F63FB9D6-A37A-4E14-BA6B-4B2D9632A542",
+              "rel": "KEY_FINDING",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/collaborations/997106F8-9CF8-45C5-B80F-512B175A071C",
+              "rel": "COLLABORATION",
+              "start": 1483228800000,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/collaborations/EFCDBBE5-5737-418B-A3B8-63C228AC19AA",
+              "rel": "COLLABORATION",
+              "start": 1483228800000,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/impactsummaries/EED20866-EC54-4676-9F88-06276554A10C",
+              "rel": "IMPACT_SUMMARY",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            "... +12 more"
+          ]
+        },
+        "ext": null,
+        "id": "F3591F40-7D9E-4FAC-BE9A-8F4F9BE341FD",
+        "outcomeid": null,
+        "href": "http://gtr.ukri.org/gtr/api/projects/F3591F40-7D9E-4FAC-BE9A-8F4F9BE341FD",
+        "created": 1788431759000,
+        "updated": null,
+        "identifiers": {
+          "identifier": [
+            {
+              "value": "NE/P018319/2",
+              "type": "RCUK"
+            }
+          ]
+        },
+        "title": "Southern Ocean Pathways to Deep Ocean Ventilation",
+        "status": "Closed",
+        "grantCategory": "Fellowship",
+        "leadFunder": "NERC",
+        "leadOrganisationDepartment": "Civil and Environmental Engineering",
+        "abstractText": "Two of the main environmental challenges of the coming century will be the response of global sea levels and marine ecosystems to rapid ocean warming, particularly in the polar regions. Recently, large increases in surface temperature and ice melt have been recorded at many locations in the Arctic Ocean and Greenland, while Antarctica has seen cooling with increase in ice volume at some locations and decrease at others. \n\nUnderstanding the reasons behind this asymmetric inter-hemispheric trend lies in understanding the ocean circulation patterns.\n\nThe possibility of sudden catastrophic polar i... [2330 chars]",
+        "techAbstractText": null,
+        "potentialImpact": "NERC:\nThe fellow will engage actively throughout the course of the project with the NERC programs SoFine, DynOPO, and DIMES. The fellow will work closely with associated scientists in assimilating their inferred estimates of mixing into a smooth global map. The resulting maps will be implemented in U-of-Reading based Aquaplanet model and UKESM model (more specifically its ocean component NEMO) and then made available to the modelling efforts at UK institutions, and with a 2-year delay, to the international oceanographic community. \n\nSocietal impacts:\nThe applicant envisage setting up a webpage... [2585 chars]",
+        "healthCategories": {
+          "healthCategory": []
+        },
+        "researchActivities": {
+          "researchActivity": []
+        },
+        "researchSubjects": {
+          "researchSubject": [
+            {
+              "id": "A65FD3A1-4060-4633-B898-A9BE66B54CF2",
+              "text": "Marine environments",
+              "percentage": 75
+            },
+            {
+              "id": "3D749523-4185-40BA-B5DA-CC4B175770D7",
+              "text": "Climate & Climate Change",
+              "percentage": 25
+            }
+          ]
+        },
+        "researchTopics": {
+          "researchTopic": [
+            {
+              "id": "8443F120-DA53-4913-88FA-6D44BA2F30A8",
+              "text": "Ocean - Atmosphere Interact.",
+              "percentage": 25
+            },
+            {
+              "id": "3D749523-4185-40BA-B5DA-CC4B175770D7",
+              "text": "Climate & Climate Change",
+              "percentage": 25
+            },
+            {
+              "id": "DBF8B181-F206-43C8-95E2-43C5ED8147A4",
+              "text": "Ocean Circulation",
+              "percentage": 50
+            }
+          ]
+        },
+        "rcukProgrammes": {
+          "rcukProgramme": []
+        },
+        "start": null,
+        "end": null,
+        "participantValues": null
+      },
+      {
+        "links": {
+          "link": [
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/132F11F8-732B-4C08-9820-ECC547EEF237",
+              "rel": "PI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/132F11F8-732B-4C08-9820-ECC547EEF237",
+              "rel": "FELLOW_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/15B9E8A6-BB18-48B9-A6A6-C6A17D568414",
+              "rel": "LEAD_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/3D58ADA5-BC0A-4A12-898B-6B39CFA1A1B6",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/6FCBD805-5F34-4D61-AE88-B398B1BAA3EF",
+              "rel": "COLLAB_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/funds/B07AC0DA-01D1-462D-99FA-FD928E6E28CA",
+              "rel": "FUND",
+              "start": 1506812400000,
+              "end": 1522796400000,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/keyfindings/61A558E7-8968-41B6-A096-A5932DF2E6A1",
+              "rel": "KEY_FINDING",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/collaborations/0F395C30-2599-40A3-A62F-C34C42FB1F0B",
+              "rel": "COLLABORATION",
+              "start": 1483228800000,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/collaborations/7294B6D3-D7A8-427B-95F6-E6B425838DF7",
+              "rel": "COLLABORATION",
+              "start": 1483228800000,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/publications/2E871863-DC4E-4A89-8756-19589F58847E",
+              "rel": "PUBLICATION",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            "... +34 more"
+          ]
+        },
+        "ext": null,
+        "id": "1FAACEAA-6670-4E11-A9BC-7E7D5AF126D9",
+        "outcomeid": null,
+        "href": "http://gtr.ukri.org/gtr/api/projects/1FAACEAA-6670-4E11-A9BC-7E7D5AF126D9",
+        "created": 1788431759000,
+        "updated": null,
+        "identifiers": {
+          "identifier": [
+            {
+              "value": "NE/P018319/1",
+              "type": "RCUK"
+            }
+          ]
+        },
+        "title": "Southern Ocean Pathways to Deep Ocean Ventilation",
+        "status": "Closed",
+        "grantCategory": "Fellowship",
+        "leadFunder": "NERC",
+        "leadOrganisationDepartment": "Oxford Physics (Keble Road)",
+        "abstractText": "Two of the main environmental challenges of the coming century will be the response of global sea levels and marine ecosystems to rapid ocean warming, particularly in the polar regions. Recently, large increases in surface temperature and ice melt have been recorded at many locations in the Arctic Ocean and Greenland, while Antarctica has seen cooling with increase in ice volume at some locations and decrease at others. \n\nUnderstanding the reasons behind this asymmetric inter-hemispheric trend lies in understanding the ocean circulation patterns.\n\nThe possibility of sudden catastrophic polar i... [2330 chars]",
+        "techAbstractText": null,
+        "potentialImpact": "NERC:\nThe fellow will engage actively throughout the course of the project with the NERC programs SoFine, DynOPO, and DIMES. The fellow will work closely with associated scientists in assimilating their inferred estimates of mixing into a smooth global map. The resulting maps will be implemented in U-of-Reading based Aquaplanet model and UKESM model (more specifically its ocean component NEMO) and then made available to the modelling efforts at UK institutions, and with a 2-year delay, to the international oceanographic community. \n\nSocietal impacts:\nThe applicant envisage setting up a webpage... [2585 chars]",
+        "healthCategories": {
+          "healthCategory": []
+        },
+        "researchActivities": {
+          "researchActivity": []
+        },
+        "researchSubjects": {
+          "researchSubject": [
+            {
+              "id": "A65FD3A1-4060-4633-B898-A9BE66B54CF2",
+              "text": "Marine environments",
+              "percentage": 75
+            },
+            {
+              "id": "3D749523-4185-40BA-B5DA-CC4B175770D7",
+              "text": "Climate & Climate Change",
+              "percentage": 25
+            }
+          ]
+        },
+        "researchTopics": {
+          "researchTopic": [
+            {
+              "id": "DBF8B181-F206-43C8-95E2-43C5ED8147A4",
+              "text": "Ocean Circulation",
+              "percentage": 50
+            },
+            {
+              "id": "8443F120-DA53-4913-88FA-6D44BA2F30A8",
+              "text": "Ocean - Atmosphere Interact.",
+              "percentage": 25
+            },
+            {
+              "id": "3D749523-4185-40BA-B5DA-CC4B175770D7",
+              "text": "Climate & Climate Change",
+              "percentage": 25
+            }
+          ]
+        },
+        "rcukProgrammes": {
+          "rcukProgramme": []
+        },
+        "start": null,
+        "end": null,
+        "participantValues": null
+      },
+      {
+        "links": {
+          "link": [
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/8B51D62B-15F4-48F7-A175-088FBAB47CA8",
+              "rel": "PM_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/5E747B61-0973-43EE-A7F9-7A15967B52FA",
+              "rel": "LEAD_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/5E747B61-0973-43EE-A7F9-7A15967B52FA",
+              "rel": "PARTICIPANT_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/funds/540584E7-DA25-4677-AA17-A2E11042650C",
+              "rel": "FUND",
+              "start": 1659308400000,
+              "end": 1753916400000,
+              "otherAttributes": {}
+            }
+          ]
+        },
+        "ext": null,
+        "id": "530EE760-7EBB-4A1E-86B3-930D9E625B96",
+        "outcomeid": null,
+        "href": "http://gtr.ukri.org/gtr/api/projects/530EE760-7EBB-4A1E-86B3-930D9E625B96",
+        "created": 1788431759000,
+        "updated": null,
+        "identifiers": {
+          "identifier": [
+            {
+              "value": "10048295",
+              "type": "RCUK"
+            }
+          ]
+        },
+        "title": "SEETIP Ocean",
+        "status": "Closed",
+        "grantCategory": "EU-Funded",
+        "leadFunder": "Horizon Europe Guarantee",
+        "leadOrganisationDepartment": null,
+        "abstractText": "SEETIP Ocean’s mission is to enhance cooperation and collaboration amongst stakeholders both inside and outside of the European ocean energy sector. This mission is broken down into 6 objectives: 1. Maximise European scientific excellence in ocean energy 2. Make sustainability and the Just Transition an integral part of ocean energy’s development 3. Build a deeper understanding of how ocean energy can optimally fit into the wider energy, industrial &amp; infrastructure systems and planning systems, and help realise this integration 4. Empower the SET Plan Ocean Energy Implementation Working Gr... [2008 chars]",
+        "techAbstractText": null,
+        "potentialImpact": null,
+        "healthCategories": {
+          "healthCategory": []
+        },
+        "researchActivities": {
+          "researchActivity": []
+        },
+        "researchSubjects": {
+          "researchSubject": []
+        },
+        "researchTopics": {
+          "researchTopic": [
+            {
+              "id": "6CFA1E1F-F25C-4C23-8FE1-C47AE53E333E",
+              "text": "Unclassified",
+              "percentage": null
+            }
+          ]
+        },
+        "rcukProgrammes": {
+          "rcukProgramme": []
+        },
+        "start": null,
+        "end": null,
+        "participantValues": {
+          "participant": [
+            {
+              "organisationId": "5E747B61-0973-43EE-A7F9-7A15967B52FA",
+              "organisationName": "WAVE ENERGY SCOTLAND LIMITED",
+              "role": "LEAD_PARTICIPANT",
+              "projectCost": 94045.0,
+              "grantOffer": 94045.0
+            }
+          ]
+        }
+      },
+      {
+        "links": {
+          "link": [
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/6D4D16CE-FCBB-4FF6-81BA-7705A2463211",
+              "rel": "PI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/persons/FC2DAA0A-8C5A-4DC4-94D8-6DA55AEB782B",
+              "rel": "COI_PER",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/9CD67613-9501-482E-95B8-74B8FEBE7749",
+              "rel": "LEAD_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/organisations/42C112BF-D51F-46DC-8159-462AF572B9F4",
+              "rel": "PP_ORG",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api/funds/22FD9DAE-2479-4192-B3A4-1774D967F7E3",
+              "rel": "FUND",
+              "start": 1304290800000,
+              "end": 1406847600000,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/keyfindings/47B5C43E-5531-4908-A3DC-9CB81A81D6D7",
+              "rel": "KEY_FINDING",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/publications/EB84BBA6-B961-4E4D-953E-023DFCFC9A22",
+              "rel": "PUBLICATION",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/publications/54299C12-61A6-4D39-B50F-F9DEFDC4B5B7",
+              "rel": "PUBLICATION",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/publications/AB1B04B4-0862-4639-82A1-C0A9080DEC8D",
+              "rel": "PUBLICATION",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            {
+              "href": "http://gtr.ukri.org/gtr/api//outcomes/publications/21F22BD3-469E-4B7D-9757-B6AC20F46B99",
+              "rel": "PUBLICATION",
+              "start": null,
+              "end": null,
+              "otherAttributes": {}
+            },
+            "... +7 more"
+          ]
+        },
+        "ext": null,
+        "id": "4C420727-2840-4C0F-BCF9-72A7FB133D01",
+        "outcomeid": null,
+        "href": "http://gtr.ukri.org/gtr/api/projects/4C420727-2840-4C0F-BCF9-72A7FB133D01",
+        "created": 1788431759000,
+        "updated": null,
+        "identifiers": {
+          "identifier": [
+            {
+              "value": "NE/G018332/2",
+              "type": "RCUK"
+            }
+          ]
+        },
+        "title": "Ocean circulation, nutrient cycling and atmospheric carbon dioxide",
+        "status": "Closed",
+        "grantCategory": "Research Grant",
+        "leadFunder": "NERC",
+        "leadOrganisationDepartment": "Geography",
+        "abstractText": "The link between the physical circulation of the ocean, the cycling of nutrients in the ocean, and the storage of carbon in the deep ocean, is fundamental to the understanding of past and future changes in the greenhouse gas atmospheric carbon dioxide (CO2) and the Earth's climate. However, it is currently uncertain how sensitive ocean nutrient cycling and atmospheric CO2 are to changes in global ocean circulation patterns. Nutrients are supplied to the sunlit regions of the surface ocean by ocean circulation, living organisms then use these nutrients to grow, storing carbon within their soft ... [2835 chars]",
+        "techAbstractText": null,
+        "potentialImpact": null,
+        "healthCategories": {
+          "healthCategory": []
+        },
+        "researchActivities": {
+          "researchActivity": []
+        },
+        "researchSubjects": {
+          "researchSubject": []
+        },
+        "researchTopics": {
+          "researchTopic": [
+            {
+              "id": "6CFA1E1F-F25C-4C23-8FE1-C47AE53E333E",
+              "text": "Unclassified",
+              "percentage": null
+            }
+          ]
+        },
+        "rcukProgrammes": {
+          "rcukProgramme": []
+        },
+        "start": null,
+        "end": null,
+        "participantValues": null
+      }
+    ]
+  }
+}

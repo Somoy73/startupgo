@@ -1,0 +1,19 @@
+[project]
+name = "startup-data"
+version = "0.1.0"
+description = "Data APIs, refresh pipeline and success-prediction features for StartupGo"
+requires-python = ">=3.11"
+dependencies = [
+    "pypdf>=4",  # SH01 share-allotment PDFs (features.py); everything else is the standard library
+]
+
+[dependency-groups]
+dev = ["pytest>=8.3"]
+
+# Scripts, not an installable package: run them from this folder, e.g.
+#   uv run --package startup-data python refresh.py
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

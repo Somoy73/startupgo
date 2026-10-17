@@ -1,0 +1,286 @@
+{
+  "params": {
+    "cik": 1318605
+  },
+  "full_size_bytes": 178076,
+  "sample": {
+    "cik": "0001318605",
+    "entityType": "operating",
+    "sic": "3711",
+    "sicDescription": "Motor Vehicles & Passenger Car Bodies",
+    "ownerOrg": "04 Manufacturing",
+    "insiderTransactionForOwnerExists": 0,
+    "insiderTransactionForIssuerExists": 1,
+    "name": "Tesla, Inc.",
+    "tickers": [
+      "TSLA"
+    ],
+    "exchanges": [
+      "Nasdaq"
+    ],
+    "ein": "912197729",
+    "lei": null,
+    "description": "",
+    "website": "",
+    "investorWebsite": "",
+    "category": "Large accelerated filer",
+    "fiscalYearEnd": "1231",
+    "stateOfIncorporation": "TX",
+    "stateOfIncorporationDescription": "TX",
+    "addresses": {
+      "mailing": {
+        "street1": "1 TESLA ROAD",
+        "street2": null,
+        "city": "AUSTIN",
+        "stateOrCountry": "TX",
+        "zipCode": "78725",
+        "stateOrCountryDescription": "TX",
+        "isForeignLocation": 0,
+        "foreignStateTerritory": null,
+        "country": null,
+        "countryCode": null
+      },
+      "business": {
+        "street1": "1 TESLA ROAD",
+        "street2": null,
+        "city": "AUSTIN",
+        "stateOrCountry": "TX",
+        "zipCode": "78725",
+        "stateOrCountryDescription": "TX",
+        "isForeignLocation": null,
+        "foreignStateTerritory": null,
+        "country": null,
+        "countryCode": null
+      }
+    },
+    "phone": "512-516-8177",
+    "flags": "",
+    "formerNames": [
+      {
+        "name": "TESLA MOTORS INC",
+        "from": "2005-02-17T00:00:00.000Z",
+        "to": "2017-01-27T00:00:00.000Z"
+      }
+    ],
+    "filings": {
+      "recent": {
+        "accessionNumber": [
+          "0001628280-26-064366",
+          "0001628280-26-063820",
+          "0001104659-26-106432",
+          "0001950047-26-009212",
+          "0001628280-26-049270",
+          "0001628280-26-049213",
+          "0001628280-26-046717",
+          "0001104659-26-075213",
+          "0001104659-26-075203",
+          "0001104659-26-071970",
+          "... +990 more"
+        ],
+        "filingDate": [
+          "2026-10-02",
+          "2026-09-29",
+          "2026-09-09",
+          "2026-09-08",
+          "2026-07-23",
+          "2026-07-22",
+          "2026-07-02",
+          "2026-06-17",
+          "2026-06-17",
+          "2026-06-09",
+          "... +990 more"
+        ],
+        "reportDate": [
+          "2026-10-02",
+          "2026-09-29",
+          "2026-09-05",
+          "",
+          "2026-06-30",
+          "2026-07-22",
+          "2026-07-02",
+          "2026-06-16",
+          "",
+          "2026-06-05",
+          "... +990 more"
+        ],
+        "acceptanceDateTime": [
+          "2026-10-02T13:04:26.000Z",
+          "2026-09-29T20:38:50.000Z",
+          "2026-09-09T23:00:10.000Z",
+          "2026-09-08T20:30:16.000Z",
+          "2026-07-23T01:02:31.000Z",
+          "2026-07-22T20:35:52.000Z",
+          "2026-07-02T13:01:26.000Z",
+          "2026-06-17T21:00:37.000Z",
+          "2026-06-17T20:55:05.000Z",
+          "2026-06-09T23:00:11.000Z",
+          "... +990 more"
+        ],
+        "act": [
+          "34",
+          "34",
+          "",
+          "33",
+          "34",
+          "34",
+          "34",
+          "",
+          "34",
+          "",
+          "... +990 more"
+        ],
+        "form": [
+          "8-K",
+          "8-K",
+          "4",
+          "144",
+          "10-Q",
+          "8-K",
+          "8-K",
+          "4",
+          "SCHEDULE 13G/A",
+          "4",
+          "... +990 more"
+        ],
+        "fileNumber": [
+          "001-34756",
+          "001-34756",
+          "",
+          "001-34756",
+          "001-34756",
+          "001-34756",
+          "001-34756",
+          "",
+          "005-85943",
+          "",
+          "... +990 more"
+        ],
+        "filmNumber": [
+          "261433623",
+          "261424407",
+          "",
+          "261365452",
+          "261194921",
+          "261194091",
+          "261148032",
+          "",
+          "261099269",
+          "",
+          "... +990 more"
+        ],
+        "items": [
+          "2.02,9.01",
+          "1.01,1.02,2.03,9.01",
+          "",
+          "",
+          "",
+          "2.02,9.01",
+          "2.02,9.01",
+          "",
+          "",
+          "",
+          "... +990 more"
+        ],
+        "core_type": [
+          "XBRL",
+          "XBRL",
+          "4",
+          "144",
+          "XBRL",
+          "XBRL",
+          "XBRL",
+          "4",
+          "SCHEDULE 13G/A",
+          "4",
+          "... +990 more"
+        ],
+        "size": [
+          156965,
+          158715,
+          10270,
+          4624,
+          8824722,
+          5540214,
+          156958,
+          12276,
+          7475,
+          10263,
+          "... +990 more"
+        ],
+        "isXBRL": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          "... +990 more"
+        ],
+        "isInlineXBRL": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          "... +990 more"
+        ],
+        "isXBRLNumeric": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          "... +990 more"
+        ],
+        "primaryDocument": [
+          "tsla-20261002.htm",
+          "tsla-20260929.htm",
+          "xslF345X06/tm2625055d1_4seq1.xml",
+          "xsl144X01/primary_doc.xml",
+          "tsla-20260630.htm",
+          "tsla-20260722.htm",
+          "tsla-20260702.htm",
+          "xslF345X06/tm2618092-2_4seq1.xml",
+          "xslSCHEDULE_13G_X02/primary_doc.xml",
+          "xslF345X06/tm2617365-1_4seq1.xml",
+          "... +990 more"
+        ],
+        "primaryDocDescription": [
+          "8-K",
+          "8-K",
+          "OWNERSHIP DOCUMENT",
+          "",
+          "10-Q",
+          "8-K",
+          "8-K",
+          "OWNERSHIP DOCUMENT",
+          "",
+          "OWNERSHIP DOCUMENT",
+          "... +990 more"
+        ]
+      },
+      "files": [
+        {
+          "name": "CIK0001318605-submissions-001.json",
+          "filingCount": 752,
+          "filingFrom": "2005-02-17",
+          "filingTo": "2018-05-13"
+        }
+      ]
+    }
+  }
+}

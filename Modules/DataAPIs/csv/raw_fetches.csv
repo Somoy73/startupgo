@@ -1,0 +1,372 @@
+﻿id,source_name,startup_id,params,status,error,size_bytes,fetched_at
+1,yc_oss_companies,,"{""kind"": ""companies"", ""name"": ""all""}",ok,,9421756,2026-10-16 21:11:02
+2,gleif_lei,1,"{""filter[fulltext]"": ""Notpla"", ""page[size]"": 10}",ok,,425,2026-10-16 21:11:03
+3,wikidata_sparql,1,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Notpla\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:11:03
+4,google_patents_xhr,1,"{""q"": """", ""num"": 25, ""assignee"": ""Notpla""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:11:04
+5,serpapi_google_patents,1,"{""assignee"": ""Notpla"", ""num"": 50}",ok,,18454,2026-10-16 21:11:05
+6,openalex,1,"{""search"": ""\""Notpla\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3122,2026-10-16 21:11:06
+7,google_news_rss,1,"{""q"": ""\""Notpla\"""", ""limit"": 25}",ok,,11758,2026-10-16 21:11:07
+8,hn_algolia,1,"{""query"": ""Notpla"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,18176,2026-10-16 21:11:07
+9,github_search_repos,1,"{""q"": ""Notpla in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,55117,2026-10-16 21:11:09
+10,wayback_cdx,1,"{""url"": ""notpla.com"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,403,2026-10-16 21:11:20
+11,jina_reader,1,"{""url"": ""https://www.notpla.com""}",ok,,20457,2026-10-16 21:11:22
+12,uk_companies_house,1,"{""q"": ""Notpla"", ""items_per_page"": 5}",skipped,set env var COMPANIES_HOUSE_KEY,,2026-10-16 21:11:22
+13,people_data_labs,1,"{""website"": ""notpla.com""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:11:22
+14,opencorporates,1,"{""q"": ""Notpla""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:11:22
+15,product_hunt,1,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:11:22
+16,gleif_lei,2,"{""filter[fulltext]"": ""Sofar Ocean"", ""page[size]"": 10}",ok,,435,2026-10-16 21:11:23
+17,wikidata_sparql,2,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Sofar Ocean\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:11:23
+18,google_patents_xhr,2,"{""q"": """", ""num"": 25, ""assignee"": ""Sofar Ocean""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:11:24
+19,serpapi_google_patents,2,"{""assignee"": ""Sofar Ocean"", ""num"": 50}",ok,,19228,2026-10-16 21:11:26
+20,openalex,2,"{""search"": ""\""Sofar Ocean\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3265,2026-10-16 21:11:26
+21,google_news_rss,2,"{""q"": ""\""Sofar Ocean\"""", ""limit"": 25}",ok,,11903,2026-10-16 21:11:27
+22,hn_algolia,2,"{""query"": ""Sofar Ocean"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,59428,2026-10-16 21:11:27
+23,github_search_repos,2,"{""q"": ""Sofar Ocean in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,52237,2026-10-16 21:11:28
+24,sec_edgar_fulltext_formD,2,"{""q"": ""\""Sofar Ocean\"""", ""forms"": ""D,D/A""}",ok,,2443,2026-10-16 21:11:30
+25,wayback_cdx,2,"{""url"": ""sofarocean.com"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",error,"HTTP 503: <html><head><meta charset=""UTF-8""><title>Internet Archive: Temporarily Offline</title><style>p{font-size:24px;}img{margin-bottom:2rem;}</style></head>
+<body style=""padding:30px 0;"">
+<div style=""float:left;width:260px;text-align:center;"">
+<img xsrc=""logo_ia.jpg"" src=""data:image/jpeg;base64,iVBORw0KGg",,2026-10-16 21:11:36
+26,jina_reader,2,"{""url"": ""https://www.sofarocean.com""}",ok,,6839,2026-10-16 21:11:36
+27,people_data_labs,2,"{""website"": ""sofarocean.com""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:11:36
+28,opencorporates,2,"{""q"": ""Sofar Ocean""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:11:36
+29,product_hunt,2,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:11:36
+30,gleif_lei,3,"{""filter[fulltext]"": ""Ocean Rainforest"", ""page[size]"": 10}",ok,,2874,2026-10-16 21:11:37
+31,wikidata_sparql,3,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Ocean Rainforest\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:11:37
+32,google_patents_xhr,3,"{""q"": """", ""num"": 25, ""assignee"": ""Ocean Rainforest""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:11:37
+33,serpapi_google_patents,3,"{""assignee"": ""Ocean Rainforest"", ""num"": 50}",ok,,3983,2026-10-16 21:11:48
+34,openalex,3,"{""search"": ""\""Ocean Rainforest\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3253,2026-10-16 21:11:49
+35,google_news_rss,3,"{""q"": ""\""Ocean Rainforest\"""", ""limit"": 25}",ok,,11843,2026-10-16 21:11:49
+36,hn_algolia,3,"{""query"": ""Ocean Rainforest"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,1362,2026-10-16 21:11:50
+37,github_search_repos,3,"{""q"": ""Ocean Rainforest in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,47386,2026-10-16 21:11:51
+38,wayback_cdx,3,"{""url"": ""oceanrainforest.com"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,887,2026-10-16 21:12:14
+39,jina_reader,3,"{""url"": ""https://www.oceanrainforest.com""}",ok,,2076,2026-10-16 21:12:15
+40,people_data_labs,3,"{""website"": ""oceanrainforest.com""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:12:15
+41,opencorporates,3,"{""q"": ""Ocean Rainforest""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:12:15
+42,product_hunt,3,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:12:15
+43,gleif_lei,4,"{""filter[fulltext]"": ""Seabound"", ""page[size]"": 10}",ok,,2592,2026-10-16 21:12:15
+44,wikidata_sparql,4,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Seabound\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,829,2026-10-16 21:12:15
+45,google_patents_xhr,4,"{""q"": """", ""num"": 25, ""assignee"": ""Seabound""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:12:16
+46,serpapi_google_patents,4,"{""assignee"": ""Seabound"", ""num"": 50}",ok,,2749,2026-10-16 21:12:17
+47,openalex,4,"{""search"": ""\""Seabound\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3060,2026-10-16 21:12:18
+48,google_news_rss,4,"{""q"": ""\""Seabound\"""", ""limit"": 25}",ok,,11067,2026-10-16 21:12:19
+49,hn_algolia,4,"{""query"": ""Seabound"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,18322,2026-10-16 21:12:19
+50,github_search_repos,4,"{""q"": ""Seabound in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,53987,2026-10-16 21:12:20
+51,wayback_cdx,4,"{""url"": ""seabound.co"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,310,2026-10-16 21:12:41
+52,jina_reader,4,"{""url"": ""https://www.seabound.co""}",ok,,6440,2026-10-16 21:12:42
+53,uk_companies_house,4,"{""q"": ""Seabound"", ""items_per_page"": 5}",skipped,set env var COMPANIES_HOUSE_KEY,,2026-10-16 21:12:42
+54,people_data_labs,4,"{""website"": ""seabound.co""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:12:42
+55,opencorporates,4,"{""q"": ""Seabound""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:12:42
+56,product_hunt,4,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:12:42
+57,gleif_lei,5,"{""filter[fulltext]"": ""Oceanium"", ""page[size]"": 10}",ok,,429,2026-10-16 21:12:43
+58,wikidata_sparql,5,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Oceanium\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,591,2026-10-16 21:12:43
+59,google_patents_xhr,5,"{""q"": """", ""num"": 25, ""assignee"": ""Oceanium""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:12:43
+60,serpapi_google_patents,5,"{""assignee"": ""Oceanium"", ""num"": 50}",ok,,5303,2026-10-16 21:12:45
+61,openalex,5,"{""search"": ""\""Oceanium\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3450,2026-10-16 21:12:46
+62,google_news_rss,5,"{""q"": ""\""Oceanium\"""", ""limit"": 25}",ok,,10695,2026-10-16 21:12:46
+63,hn_algolia,5,"{""query"": ""Oceanium"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,19505,2026-10-16 21:12:47
+64,github_search_repos,5,"{""q"": ""Oceanium in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,11793,2026-10-16 21:12:47
+65,wayback_cdx,5,"{""url"": ""oceanium.world"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,309,2026-10-16 21:13:30
+66,jina_reader,5,"{""url"": ""https://www.oceanium.world""}",ok,,4113,2026-10-16 21:13:31
+67,uk_companies_house,5,"{""q"": ""Oceanium"", ""items_per_page"": 5}",skipped,set env var COMPANIES_HOUSE_KEY,,2026-10-16 21:13:31
+68,people_data_labs,5,"{""website"": ""oceanium.world""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:13:31
+69,opencorporates,5,"{""q"": ""Oceanium""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:13:31
+70,product_hunt,5,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:13:31
+71,gleif_lei,6,"{""filter[fulltext]"": ""SeaForester"", ""page[size]"": 10}",ok,,2930,2026-10-16 21:13:31
+72,wikidata_sparql,6,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""SeaForester\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:13:31
+73,google_patents_xhr,6,"{""q"": """", ""num"": 25, ""assignee"": ""SeaForester""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:13:32
+74,serpapi_google_patents,6,"{""assignee"": ""SeaForester"", ""num"": 50}",ok,,1963,2026-10-16 21:13:45
+75,openalex,6,"{""search"": ""\""SeaForester\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,2959,2026-10-16 21:13:46
+76,google_news_rss,6,"{""q"": ""\""SeaForester\"""", ""limit"": 25}",ok,,6602,2026-10-16 21:13:46
+77,hn_algolia,6,"{""query"": ""SeaForester"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,449,2026-10-16 21:13:46
+78,github_search_repos,6,"{""q"": ""SeaForester in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,5422,2026-10-16 21:13:48
+79,people_data_labs,6,"{""name"": ""SeaForester""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:13:48
+80,opencorporates,6,"{""q"": ""SeaForester""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:13:48
+81,product_hunt,6,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:13:48
+82,gleif_lei,7,"{""filter[fulltext]"": ""Kelp Blue"", ""page[size]"": 10}",ok,,431,2026-10-16 21:13:48
+83,wikidata_sparql,7,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Kelp Blue\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:13:49
+84,google_patents_xhr,7,"{""q"": """", ""num"": 25, ""assignee"": ""Kelp Blue""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:13:50
+85,serpapi_google_patents,7,"{""assignee"": ""Kelp Blue"", ""num"": 50}",ok,,2964,2026-10-16 21:13:52
+86,openalex,7,"{""search"": ""\""Kelp Blue\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3617,2026-10-16 21:13:53
+87,google_news_rss,7,"{""q"": ""\""Kelp Blue\"""", ""limit"": 25}",ok,,11401,2026-10-16 21:13:54
+88,hn_algolia,7,"{""query"": ""Kelp Blue"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,38198,2026-10-16 21:13:54
+89,github_search_repos,7,"{""q"": ""Kelp Blue in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,60998,2026-10-16 21:13:56
+90,wayback_cdx,7,"{""url"": ""kelp.blue"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,284,2026-10-16 21:14:14
+91,jina_reader,7,"{""url"": ""https://kelp.blue""}",ok,,26254,2026-10-16 21:14:15
+92,people_data_labs,7,"{""website"": ""kelp.blue""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:14:15
+93,opencorporates,7,"{""q"": ""Kelp Blue""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:14:15
+94,product_hunt,7,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:14:15
+95,gleif_lei,8,"{""filter[fulltext]"": ""Clearbot"", ""page[size]"": 10}",ok,,429,2026-10-16 21:14:15
+96,wikidata_sparql,8,"{""query"": ""SELECT ?item ?itemDescription ?inception ?website ?countryLabel ?hqLabel WHERE {\n      ?item rdfs:label \""Clearbot\""@en .\n      OPTIONAL { ?item wdt:P571 ?inception } OPTIONAL { ?item wdt:P856 ?website }\n      OPTIONAL { ?item wdt:P17 ?country } OPTIONAL { ?item wdt:P159 ?hq }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \""en\"". } } LIMIT 10""}",ok,,127,2026-10-16 21:14:16
+97,google_patents_xhr,8,"{""q"": """", ""num"": 25, ""assignee"": ""Clearbot""}",error,"HTTP 503: <html><head><meta http-equiv=""content-type"" content=""text/html; charset=utf-8""/><title>Sorry...</title><style> body { font-family: verdana, arial, sans-serif; background-color: #fff; color: #000; }</style></head><body><div><table><tr><td><b><font face=sans-serif size=10><font color=#4285f4>G</font><",,2026-10-16 21:14:16
+98,serpapi_google_patents,8,"{""assignee"": ""Clearbot"", ""num"": 50}",ok,,1065,2026-10-16 21:14:17
+99,openalex,8,"{""search"": ""\""Clearbot\"""", ""per-page"": 10, ""select"": ""id,doi,title,publication_year,cited_by_count""}",ok,,3433,2026-10-16 21:14:18
+100,google_news_rss,8,"{""q"": ""\""Clearbot\"""", ""limit"": 25}",ok,,12421,2026-10-16 21:14:19
+101,hn_algolia,8,"{""query"": ""Clearbot"", ""tags"": ""story"", ""hitsPerPage"": 20}",ok,,21590,2026-10-16 21:14:20
+102,github_search_repos,8,"{""q"": ""Clearbot in:name,description"", ""sort"": ""stars"", ""per_page"": 10}",ok,,54725,2026-10-16 21:14:21
+103,people_data_labs,8,"{""name"": ""Clearbot""}",skipped,set env var PDL_API_KEY,,2026-10-16 21:14:21
+104,opencorporates,8,"{""q"": ""Clearbot""}",skipped,set env var OPENCORPORATES_API_KEY,,2026-10-16 21:14:21
+105,product_hunt,8,{},skipped,set env var PRODUCTHUNT_TOKEN,,2026-10-16 21:14:21
+106,eu_sedia_calls,,"{""text"": ""ocean"", ""pageSize"": 50}",ok,,670506,2026-10-16 21:14:22
+107,grants_gov,,"{""keyword"": ""ocean"", ""rows"": 50, ""oppStatuses"": ""forecasted|posted""}",ok,,16692,2026-10-16 21:14:23
+108,ukri_gateway_to_research,,"{""q"": ""ocean"", ""s"": 50}",ok,,386923,2026-10-16 21:14:23
+109,ted_eu_tenders,,"{""query"": ""FT~ocean AND publication-date>=20250101"", ""limit"": 50}",ok,,469403,2026-10-16 21:14:24
+110,world_bank,,"{""iso"": ""NAM;FIN;HKG;FRO;PRT;USA;GBR"", ""code"": ""NY.GDP.MKTP.CD"", ""mrv"": 10, ""per_page"": 500}",ok,,16419,2026-10-16 21:14:25
+111,world_bank,,"{""iso"": ""NAM;FIN;HKG;FRO;PRT;USA;GBR"", ""code"": ""ER.FSH.AQUA.MT"", ""mrv"": 10, ""per_page"": 500}",ok,,17161,2026-10-16 21:14:25
+112,world_bank,,"{""iso"": ""NAM;FIN;HKG;FRO;PRT;USA;GBR"", ""code"": ""ER.FSH.CAPT.MT"", ""mrv"": 10, ""per_page"": 500}",ok,,17654,2026-10-16 21:14:26
+113,eurostat,,"{""code"": ""fish_aq2a"", ""geo"": ""FI"", ""species"": ""F00"", ""unit"": ""TLW"", ""aquaenv"": ""TOTAL"", ""aquameth"": ""TOTAL"", ""fishreg"": ""0"", ""sinceTimePeriod"": ""2015""}",ok,,1485,2026-10-16 21:14:27
+114,eurostat,,"{""code"": ""fish_aq2a"", ""geo"": ""PT"", ""species"": ""F00"", ""unit"": ""TLW"", ""aquaenv"": ""TOTAL"", ""aquameth"": ""TOTAL"", ""fishreg"": ""0"", ""sinceTimePeriod"": ""2015""}",ok,,1504,2026-10-16 21:14:28
+115,eurostat,,"{""code"": ""fish_aq2a"", ""geo"": ""NO"", ""species"": ""F00"", ""unit"": ""TLW"", ""aquaenv"": ""TOTAL"", ""aquameth"": ""TOTAL"", ""fishreg"": ""0"", ""sinceTimePeriod"": ""2015""}",ok,,1538,2026-10-16 21:14:30
+116,eurostat,,"{""code"": ""fish_aq2a"", ""geo"": ""EU27_2020"", ""species"": ""F00"", ""unit"": ""TLW"", ""aquaenv"": ""TOTAL"", ""aquameth"": ""TOTAL"", ""fishreg"": ""0"", ""sinceTimePeriod"": ""2015""}",ok,,1592,2026-10-16 21:14:31
+117,wayback_cdx,2,"{""url"": ""sofarocean.com"", ""output"": ""json"", ""collapse"": ""timestamp:4"", ""filter"": ""statuscode:200"", ""fl"": ""timestamp,original""}",ok,,435,2026-10-16 21:15:11
+118,serpapi_google,1,"{""q"": ""\""Notpla\"" Materials & packaging company"", ""num"": 10}",ok,,58751,2026-10-16 21:19:15
+119,serpapi_google_jobs,1,"{""q"": ""Notpla""}",ok,,25831,2026-10-16 21:19:16
+120,serpapi_google,2,"{""q"": ""\""Sofar Ocean\"" Ocean data company"", ""num"": 10}",ok,,58210,2026-10-16 21:19:18
+121,serpapi_google_jobs,2,"{""q"": ""Sofar Ocean""}",ok,,126753,2026-10-16 21:19:20
+122,serpapi_google,3,"{""q"": ""\""Ocean Rainforest\"" Aquaculture company"", ""num"": 10}",ok,,60222,2026-10-16 21:19:21
+123,serpapi_google_jobs,3,"{""q"": ""Ocean Rainforest""}",ok,,30741,2026-10-16 21:19:23
+124,serpapi_google,4,"{""q"": ""\""Seabound\"" Shipping decarbonisation company"", ""num"": 10}",ok,,54560,2026-10-16 21:19:52
+125,serpapi_google_jobs,4,"{""q"": ""Seabound""}",ok,,25817,2026-10-16 21:19:54
+126,serpapi_google,5,"{""q"": ""\""Oceanium\"" Aquaculture company"", ""num"": 10}",ok,,74260,2026-10-16 21:19:59
+127,serpapi_google_jobs,5,"{""q"": ""Oceanium""}",ok,,25817,2026-10-16 21:20:00
+128,serpapi_google,6,"{""q"": ""\""SeaForester\"" Habitat restoration company"", ""num"": 10}",ok,,39803,2026-10-16 21:20:02
+129,serpapi_google_jobs,6,"{""q"": ""SeaForester""}",ok,,26111,2026-10-16 21:20:09
+130,serpapi_google,7,"{""q"": ""\""Kelp Blue\"" Aquaculture company"", ""num"": 10}",ok,,65604,2026-10-16 21:20:11
+131,serpapi_google_jobs,7,"{""q"": ""Kelp Blue""}",ok,,25999,2026-10-16 21:20:16
+132,serpapi_google,8,"{""q"": ""\""Clearbot\"" Ocean cleanup company"", ""num"": 10}",ok,,61514,2026-10-16 21:20:17
+133,serpapi_google_jobs,8,"{""q"": ""Clearbot""}",ok,,25817,2026-10-16 21:20:18
+134,uk_companies_house,1,"{""q"": ""Notpla"", ""items_per_page"": 20}",ok,,2679,2026-10-16 22:05:31
+135,uk_companies_house_company,1,"{""number"": ""09147492""}",ok,,1706,2026-10-16 22:05:32
+136,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,8309,2026-10-16 22:05:32
+137,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,2955,2026-10-16 22:05:32
+138,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,33258,2026-10-16 22:05:33
+139,uk_companies_house,4,"{""q"": ""Seabound"", ""items_per_page"": 20}",ok,,2518,2026-10-16 22:05:33
+140,uk_companies_house_company,4,"{""number"": ""07149228""}",ok,,1115,2026-10-16 22:05:33
+141,uk_companies_house_company,4,"{""number"": ""07149228"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,2319,2026-10-16 22:05:34
+142,uk_companies_house_company,4,"{""number"": ""07149228"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,3581,2026-10-16 22:05:34
+143,uk_companies_house_company,4,"{""number"": ""07149228"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,647,2026-10-16 22:05:34
+144,uk_companies_house,5,"{""q"": ""Oceanium"", ""items_per_page"": 20}",ok,,720,2026-10-16 22:05:34
+145,uk_companies_house_company,5,"{""number"": ""SC600414""}",ok,,1554,2026-10-16 22:05:35
+146,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,6539,2026-10-16 22:05:35
+147,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,2113,2026-10-16 22:05:35
+148,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,11216,2026-10-16 22:05:36
+149,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""insolvency""}",ok,,606,2026-10-16 22:05:36
+150,uk_companies_house,1,"{""q"": ""Notpla"", ""items_per_page"": 20}",ok,,2679,2026-10-16 22:05:58
+151,uk_companies_house_company,1,"{""number"": ""09147492""}",ok,,1706,2026-10-16 22:05:58
+152,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,8309,2026-10-16 22:05:59
+153,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,2955,2026-10-16 22:05:59
+154,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,33258,2026-10-16 22:05:59
+155,uk_companies_house,4,"{""q"": ""Seabound"", ""items_per_page"": 20}",ok,,2518,2026-10-16 22:06:00
+156,uk_companies_house_company,4,"{""number"": ""14170323""}",ok,,1450,2026-10-16 22:06:00
+157,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,2178,2026-10-16 22:06:01
+158,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,1992,2026-10-16 22:06:01
+159,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,1719,2026-10-16 22:06:01
+160,uk_companies_house,5,"{""q"": ""Oceanium"", ""items_per_page"": 20}",ok,,720,2026-10-16 22:06:02
+161,uk_companies_house_company,5,"{""number"": ""SC600414""}",ok,,1554,2026-10-16 22:06:03
+162,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,6539,2026-10-16 22:06:03
+163,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""persons-with-significant-control"", ""items_per_page"": 100}",ok,,2113,2026-10-16 22:06:03
+164,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,11216,2026-10-16 22:06:04
+165,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""insolvency""}",ok,,606,2026-10-16 22:06:04
+166,people_data_labs,1,"{""website"": ""notpla.com"", ""min_likelihood"": 4}",ok,,1927,2026-10-16 22:44:33
+167,people_data_labs,2,"{""website"": ""sofarocean.com"", ""min_likelihood"": 4}",ok,,2063,2026-10-16 22:44:34
+168,people_data_labs,3,"{""website"": ""oceanrainforest.com"", ""min_likelihood"": 4}",ok,,2475,2026-10-16 22:44:36
+169,people_data_labs,4,"{""website"": ""seabound.co"", ""min_likelihood"": 4}",ok,,1587,2026-10-16 22:44:38
+170,people_data_labs,5,"{""website"": ""oceanium.world"", ""min_likelihood"": 4}",ok,,1674,2026-10-16 22:44:39
+171,people_data_labs,6,"{""website"": ""seaforester.org"", ""min_likelihood"": 4}",ok,,1883,2026-10-16 22:44:41
+172,people_data_labs,7,"{""website"": ""kelp.blue"", ""min_likelihood"": 4}",ok,,3227,2026-10-16 22:44:42
+173,people_data_labs,8,"{""website"": ""clearbot.org"", ""min_likelihood"": 4}",ok,,2430,2026-10-16 22:44:43
+174,people_data_labs,8,"{""website"": ""clearbot.org"", ""min_likelihood"": 4}",ok,,2430,2026-10-16 22:45:03
+175,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,8309,2026-10-17 00:01:18
+176,uk_companies_house_officer,1,"{""officer_id"": ""koQha9l4F3jOTvSbVg15Diod-98"", ""items_per_page"": 50}",ok,,1901,2026-10-17 00:01:19
+177,uk_companies_house_officer,1,"{""officer_id"": ""G-y_4p5F3_XLW4ZTvTX6Kx7RQ6k"", ""items_per_page"": 50}",ok,,1134,2026-10-17 00:01:19
+178,uk_companies_house_officer,1,"{""officer_id"": ""wYEuDIKHp8QGzBTayr1OT1JGGF4"", ""items_per_page"": 50}",ok,,1130,2026-10-17 00:01:19
+179,uk_companies_house_officer,1,"{""officer_id"": ""2T7PZ-bNaM98To9Yb1oZymmLKno"", ""items_per_page"": 50}",ok,,1746,2026-10-17 00:01:20
+180,uk_companies_house_officer,1,"{""officer_id"": ""M8EJl0s_Jz0QW_Jm71QXUd_dFrI"", ""items_per_page"": 50}",ok,,1139,2026-10-17 00:01:20
+181,uk_companies_house_officer,1,"{""officer_id"": ""WMKVZXcWbAla6-twCPkgT99HRQw"", ""items_per_page"": 50}",ok,,981,2026-10-17 00:01:21
+182,uk_companies_house_officer,1,"{""officer_id"": ""Cuw3w3okIWffcEOrkGj59mWyoJ4"", ""items_per_page"": 50}",ok,,1601,2026-10-17 00:01:21
+183,uk_companies_house_officer,1,"{""officer_id"": ""WioMWVyLQa4Ps8pBZd23KgVp1p8"", ""items_per_page"": 50}",ok,,1770,2026-10-17 00:01:21
+184,uk_companies_house_officer,1,"{""officer_id"": ""WioMWVyLQa4Ps8pBZd23KgVp1p8"", ""items_per_page"": 50}",ok,,1770,2026-10-17 00:01:22
+185,uk_companies_house_officer,1,"{""officer_id"": ""DXKxAfmYJowUNrrqLZ4wnzKoTEM"", ""items_per_page"": 50}",ok,,986,2026-10-17 00:01:22
+186,uk_companies_house_officer,1,"{""officer_id"": ""tXB08gYZ6e9IF6MEqUdfDvs-RkI"", ""items_per_page"": 50}",ok,,974,2026-10-17 00:01:23
+187,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,33258,2026-10-17 00:01:23
+188,sec_edgar_submissions,2,"{""cik"": ""1687943""}",ok,,2840,2026-10-17 00:02:00
+189,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794325000001""}",ok,,8011,2026-10-17 00:02:01
+190,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794324000002""}",ok,,7862,2026-10-17 00:02:01
+191,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794323000001""}",ok,,7978,2026-10-17 00:02:02
+192,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794322000001""}",ok,,8156,2026-10-17 00:02:02
+193,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794321000002""}",ok,,8062,2026-10-17 00:02:02
+194,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794319000004""}",ok,,7901,2026-10-17 00:02:03
+195,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794319000001""}",ok,,7701,2026-10-17 00:02:03
+196,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794316000001""}",ok,,6576,2026-10-17 00:02:04
+197,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,2178,2026-10-17 00:02:04
+198,uk_companies_house_officer,4,"{""officer_id"": ""TAmtV2qbcvBgAgYRVyZ_knbknSE"", ""items_per_page"": 50}",ok,,860,2026-10-17 00:02:04
+199,uk_companies_house_officer,4,"{""officer_id"": ""2d1uoKALVhPKSpxiVkXmvkGa2c0"", ""items_per_page"": 50}",ok,,1100,2026-10-17 00:02:05
+200,uk_companies_house_officer,4,"{""officer_id"": ""_LHgNnheSQL52HQwFzOKxxiFw5s"", ""items_per_page"": 50}",ok,,970,2026-10-17 00:02:05
+201,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,1719,2026-10-17 00:02:05
+202,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,6539,2026-10-17 00:02:10
+203,uk_companies_house_officer,5,"{""officer_id"": ""OsvASqtdUfoy9h4bNdsluPePi8k"", ""items_per_page"": 50}",ok,,31492,2026-10-17 00:02:10
+204,uk_companies_house_officer,5,"{""officer_id"": ""RvlXnoTlRZ3dPpi38VKjxyU24Mk"", ""items_per_page"": 50}",ok,,1050,2026-10-17 00:02:12
+205,uk_companies_house_officer,5,"{""officer_id"": ""5xa8Yh84DYlO4J2FYfT-BO9MagM"", ""items_per_page"": 50}",ok,,1125,2026-10-17 00:02:12
+206,uk_companies_house_officer,5,"{""officer_id"": ""hhzK62YYDhjpo30VUhZXAWXsSN4"", ""items_per_page"": 50}",ok,,1047,2026-10-17 00:02:13
+207,uk_companies_house_officer,5,"{""officer_id"": ""2QkG126EE2Rd9HM-ZcXbVZ8A9aY"", ""items_per_page"": 50}",ok,,6320,2026-10-17 00:02:13
+208,uk_companies_house_officer,5,"{""officer_id"": ""HuvRHn9soD1wg2_BTAhDySNMSAY"", ""items_per_page"": 50}",ok,,1067,2026-10-17 00:02:14
+209,uk_companies_house_officer,5,"{""officer_id"": ""tMYaOoTT4akcMQaXxBQcnOcJkvg"", ""items_per_page"": 50}",ok,,1200,2026-10-17 00:02:14
+210,uk_companies_house_officer,5,"{""officer_id"": ""wO5oIQ1WyQMQFOp4JaQlSxKTq7w"", ""items_per_page"": 50}",ok,,1912,2026-10-17 00:02:15
+211,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,11216,2026-10-17 00:02:15
+212,blueinvest_pipeline,,"{""page"": 1}",ok,,75514,2026-10-17 01:32:15
+213,blueinvest_pipeline,,"{""page"": 2}",ok,,70315,2026-10-17 01:32:19
+214,blueinvest_pipeline,,"{""page"": 3}",ok,,70356,2026-10-17 01:32:23
+215,blueinvest_pipeline,,"{""page"": 4}",ok,,68980,2026-10-17 01:32:27
+216,blueinvest_pipeline,,"{""page"": 5}",ok,,71744,2026-10-17 01:32:31
+217,blueinvest_pipeline,,"{""page"": 6}",ok,,73840,2026-10-17 01:32:35
+218,blueinvest_pipeline,,"{""page"": 7}",ok,,72969,2026-10-17 01:32:39
+219,blueinvest_pipeline,,"{""page"": 8}",ok,,74303,2026-10-17 01:32:43
+220,blueinvest_pipeline,,"{""page"": 9}",ok,,72100,2026-10-17 01:32:47
+221,blueinvest_pipeline,,"{""page"": 10}",ok,,72930,2026-10-17 01:32:50
+222,blueinvest_pipeline,,"{""page"": 11}",ok,,77694,2026-10-17 01:32:54
+223,blueinvest_pipeline,,"{""page"": 12}",ok,,69983,2026-10-17 01:32:57
+224,blueinvest_pipeline,,"{""page"": 13}",ok,,73874,2026-10-17 01:33:01
+225,blueinvest_pipeline,,"{""page"": 14}",ok,,74311,2026-10-17 01:33:04
+226,blueinvest_pipeline,,"{""page"": 15}",ok,,70371,2026-10-17 01:33:08
+227,blueinvest_pipeline,,"{""page"": 16}",ok,,68719,2026-10-17 01:33:11
+228,blueinvest_pipeline,,"{""page"": 17}",ok,,70413,2026-10-17 01:33:16
+229,blueinvest_pipeline,,"{""page"": 18}",ok,,68478,2026-10-17 01:33:19
+230,blueinvest_pipeline,,"{""page"": 19}",ok,,73777,2026-10-17 01:33:23
+231,blueinvest_pipeline,,"{""page"": 20}",ok,,71384,2026-10-17 01:33:27
+232,blueinvest_pipeline,,"{""page"": 21}",ok,,70494,2026-10-17 01:33:31
+233,blueinvest_pipeline,,"{""page"": 22}",ok,,78174,2026-10-17 01:33:35
+234,blueinvest_pipeline,,"{""page"": 23}",ok,,72084,2026-10-17 01:33:39
+235,blueinvest_pipeline,,"{""page"": 24}",ok,,71157,2026-10-17 01:33:42
+236,blueinvest_pipeline,,"{""page"": 25}",ok,,76163,2026-10-17 01:33:46
+237,blueinvest_pipeline,,"{""page"": 26}",ok,,74094,2026-10-17 01:33:50
+238,blueinvest_pipeline,,"{""page"": 27}",ok,,73098,2026-10-17 01:33:53
+239,blueinvest_pipeline,,"{""page"": 28}",ok,,72521,2026-10-17 01:33:58
+240,blueinvest_pipeline,,"{""page"": 29}",ok,,70162,2026-10-17 01:34:01
+241,blueinvest_pipeline,,"{""page"": 30}",ok,,69074,2026-10-17 01:34:04
+242,blueinvest_pipeline,,"{""page"": 31}",ok,,69218,2026-10-17 01:34:08
+243,blueinvest_pipeline,,"{""page"": 32}",ok,,78362,2026-10-17 01:34:12
+244,blueinvest_pipeline,,"{""page"": 33}",ok,,72415,2026-10-17 01:34:15
+245,blueinvest_pipeline,,"{""page"": 34}",ok,,69173,2026-10-17 01:34:18
+246,blueinvest_pipeline,,"{""page"": 35}",ok,,69206,2026-10-17 01:34:22
+247,blueinvest_pipeline,,"{""page"": 36}",ok,,68328,2026-10-17 01:34:25
+248,cordis_projects,1,"{""query"": ""contenttype='project' AND 'Notpla'"", ""num"": 50, ""p"": 1}",ok,,128821,2026-10-17 01:34:27
+249,google_patents_page,1,"{""number"": ""EP3601061B1""}",ok,,255410,2026-10-17 01:34:27
+250,google_patents_page,1,"{""number"": ""US20260110140A1""}",ok,,170814,2026-10-17 01:34:29
+251,google_patents_page,1,"{""number"": ""US20250144864A1""}",ok,,357130,2026-10-17 01:34:30
+252,google_patents_page,1,"{""number"": ""GB2612816B""}",ok,,126536,2026-10-17 01:34:31
+253,google_patents_page,1,"{""number"": ""US20250042633A1""}",ok,,297338,2026-10-17 01:34:33
+254,google_patents_page,1,"{""number"": ""AU2024215069A1""}",ok,,195269,2026-10-17 01:34:34
+255,cordis_projects,2,"{""query"": ""contenttype='project' AND 'Sofar Ocean'"", ""num"": 50, ""p"": 1}",ok,,843,2026-10-17 01:34:35
+256,google_patents_page,2,"{""number"": ""US10488554B2""}",ok,,583710,2026-10-17 01:34:36
+257,google_patents_page,2,"{""number"": ""US12078775B2""}",ok,,462722,2026-10-17 01:34:37
+258,google_patents_page,2,"{""number"": ""USD859197S1""}",ok,,76911,2026-10-17 01:34:38
+259,google_patents_page,2,"{""number"": ""WO2020123636A1""}",ok,,179682,2026-10-17 01:34:39
+260,cordis_projects,3,"{""query"": ""contenttype='project' AND 'Ocean Rainforest'"", ""num"": 50, ""p"": 1}",ok,,717808,2026-10-17 01:34:42
+261,cordis_projects,4,"{""query"": ""contenttype='project' AND 'Seabound'"", ""num"": 50, ""p"": 1}",ok,,851,2026-10-17 01:34:42
+262,google_patents_page,4,"{""number"": ""WO2025177240A1""}",ok,,257884,2026-10-17 01:34:42
+263,blueinvest_profile,4,"{""other_id"": 1730}",ok,,32729,2026-10-17 01:34:44
+264,cordis_projects,5,"{""query"": ""contenttype='project' AND 'Oceanium'"", ""num"": 50, ""p"": 1}",ok,,98747,2026-10-17 01:34:44
+265,google_patents_page,5,"{""number"": ""WO2024057012A1""}",ok,,303725,2026-10-17 01:34:45
+266,google_patents_page,5,"{""number"": ""GB202510593D0""}",ok,,32420,2026-10-17 01:34:46
+267,google_patents_page,5,"{""number"": ""GB202504692D0""}",ok,,31263,2026-10-17 01:34:47
+268,google_patents_page,5,"{""number"": ""GB202503392D0""}",ok,,47692,2026-10-17 01:34:49
+269,blueinvest_profile,5,"{""other_id"": 359}",ok,,33124,2026-10-17 01:34:50
+270,blueinvest_profile,5,"{""other_id"": 807}",ok,,33156,2026-10-17 01:34:51
+271,cordis_projects,6,"{""query"": ""contenttype='project' AND 'SeaForester'"", ""num"": 50, ""p"": 1}",ok,,857,2026-10-17 01:34:51
+272,google_patents_page,6,"{""number"": ""GB202507521D0""}",ok,,32005,2026-10-17 01:34:52
+273,blueinvest_profile,6,"{""other_id"": 1655}",ok,,32294,2026-10-17 01:34:53
+274,cordis_projects,7,"{""query"": ""contenttype='project' AND 'Kelp Blue'"", ""num"": 50, ""p"": 1}",ok,,839,2026-10-17 01:34:53
+275,google_patents_page,7,"{""number"": ""EP4561967A1""}",ok,,206141,2026-10-17 01:34:54
+276,blueinvest_profile,7,"{""other_id"": 984}",ok,,34376,2026-10-17 01:34:55
+277,cordis_projects,8,"{""query"": ""contenttype='project' AND 'Clearbot'"", ""num"": 50, ""p"": 1}",ok,,851,2026-10-17 01:34:56
+278,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,8309,2026-10-17 02:18:33
+279,uk_companies_house_officer,1,"{""officer_id"": ""koQha9l4F3jOTvSbVg15Diod-98"", ""items_per_page"": 50}",ok,,1901,2026-10-17 02:18:33
+280,uk_companies_house_officer,1,"{""officer_id"": ""G-y_4p5F3_XLW4ZTvTX6Kx7RQ6k"", ""items_per_page"": 50}",ok,,1134,2026-10-17 02:18:34
+281,uk_companies_house_officer,1,"{""officer_id"": ""wYEuDIKHp8QGzBTayr1OT1JGGF4"", ""items_per_page"": 50}",ok,,1130,2026-10-17 02:18:34
+282,uk_companies_house_officer,1,"{""officer_id"": ""2T7PZ-bNaM98To9Yb1oZymmLKno"", ""items_per_page"": 50}",ok,,1746,2026-10-17 02:18:35
+283,uk_companies_house_officer,1,"{""officer_id"": ""M8EJl0s_Jz0QW_Jm71QXUd_dFrI"", ""items_per_page"": 50}",ok,,1139,2026-10-17 02:18:35
+284,uk_companies_house_officer,1,"{""officer_id"": ""WMKVZXcWbAla6-twCPkgT99HRQw"", ""items_per_page"": 50}",ok,,981,2026-10-17 02:18:35
+285,uk_companies_house_officer,1,"{""officer_id"": ""Cuw3w3okIWffcEOrkGj59mWyoJ4"", ""items_per_page"": 50}",ok,,1601,2026-10-17 02:18:36
+286,uk_companies_house_officer,1,"{""officer_id"": ""WioMWVyLQa4Ps8pBZd23KgVp1p8"", ""items_per_page"": 50}",ok,,1770,2026-10-17 02:18:36
+287,uk_companies_house_officer,1,"{""officer_id"": ""WioMWVyLQa4Ps8pBZd23KgVp1p8"", ""items_per_page"": 50}",ok,,1770,2026-10-17 02:18:37
+288,uk_companies_house_officer,1,"{""officer_id"": ""DXKxAfmYJowUNrrqLZ4wnzKoTEM"", ""items_per_page"": 50}",ok,,986,2026-10-17 02:18:37
+289,uk_companies_house_officer,1,"{""officer_id"": ""tXB08gYZ6e9IF6MEqUdfDvs-RkI"", ""items_per_page"": 50}",ok,,974,2026-10-17 02:18:37
+290,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,33258,2026-10-17 02:18:38
+291,sec_edgar_submissions,2,"{""cik"": ""1687943""}",ok,,2840,2026-10-17 02:18:40
+292,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794325000001""}",ok,,8011,2026-10-17 02:18:40
+293,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794324000002""}",ok,,7862,2026-10-17 02:18:41
+294,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794323000001""}",ok,,7978,2026-10-17 02:18:41
+295,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794322000001""}",ok,,8156,2026-10-17 02:18:42
+296,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794321000002""}",ok,,8062,2026-10-17 02:18:42
+297,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794319000004""}",ok,,7901,2026-10-17 02:18:42
+298,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794319000001""}",ok,,7701,2026-10-17 02:18:43
+299,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794316000001""}",ok,,6576,2026-10-17 02:18:44
+300,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,2178,2026-10-17 02:18:44
+301,uk_companies_house_officer,4,"{""officer_id"": ""TAmtV2qbcvBgAgYRVyZ_knbknSE"", ""items_per_page"": 50}",ok,,860,2026-10-17 02:18:44
+302,uk_companies_house_officer,4,"{""officer_id"": ""2d1uoKALVhPKSpxiVkXmvkGa2c0"", ""items_per_page"": 50}",ok,,1100,2026-10-17 02:18:45
+303,uk_companies_house_officer,4,"{""officer_id"": ""_LHgNnheSQL52HQwFzOKxxiFw5s"", ""items_per_page"": 50}",ok,,970,2026-10-17 02:18:45
+304,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,1719,2026-10-17 02:18:46
+305,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,6539,2026-10-17 02:18:46
+306,uk_companies_house_officer,5,"{""officer_id"": ""OsvASqtdUfoy9h4bNdsluPePi8k"", ""items_per_page"": 50}",ok,,31492,2026-10-17 02:18:46
+307,uk_companies_house_officer,5,"{""officer_id"": ""RvlXnoTlRZ3dPpi38VKjxyU24Mk"", ""items_per_page"": 50}",ok,,1050,2026-10-17 02:18:47
+308,uk_companies_house_officer,5,"{""officer_id"": ""5xa8Yh84DYlO4J2FYfT-BO9MagM"", ""items_per_page"": 50}",ok,,1125,2026-10-17 02:18:47
+309,uk_companies_house_officer,5,"{""officer_id"": ""hhzK62YYDhjpo30VUhZXAWXsSN4"", ""items_per_page"": 50}",ok,,1047,2026-10-17 02:18:48
+310,uk_companies_house_officer,5,"{""officer_id"": ""2QkG126EE2Rd9HM-ZcXbVZ8A9aY"", ""items_per_page"": 50}",ok,,6320,2026-10-17 02:18:48
+311,uk_companies_house_officer,5,"{""officer_id"": ""HuvRHn9soD1wg2_BTAhDySNMSAY"", ""items_per_page"": 50}",ok,,1067,2026-10-17 02:18:48
+312,uk_companies_house_officer,5,"{""officer_id"": ""tMYaOoTT4akcMQaXxBQcnOcJkvg"", ""items_per_page"": 50}",ok,,1200,2026-10-17 02:18:49
+313,uk_companies_house_officer,5,"{""officer_id"": ""wO5oIQ1WyQMQFOp4JaQlSxKTq7w"", ""items_per_page"": 50}",ok,,1912,2026-10-17 02:18:49
+314,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,11216,2026-10-17 02:18:49
+315,job_boards,1,"{""ats"": ""personio"", ""slug"": ""notpla""}",ok,,738,2026-10-17 02:18:52
+316,pdl_person_search,2,"{""sql"": ""SELECT * FROM person WHERE (job_company_website='sofarocean.com' OR experience.company.website='sofarocean.com') AND (job_title_levels='owner' OR job_title_levels='cxo' OR job_title LIKE '%founder%' OR experience.title.levels='owner' OR experience.title.levels='cxo' OR experience.title.name LIKE '%founder%')"", ""size"": 5}",ok,,90188,2026-10-17 02:18:56
+317,job_boards,2,"{""ats"": ""ashby"", ""slug"": ""sofarocean""}",ok,,1824,2026-10-17 02:19:04
+318,pdl_person_search,3,"{""sql"": ""SELECT * FROM person WHERE (job_company_website='oceanrainforest.com' OR experience.company.website='oceanrainforest.com') AND (job_title_levels='owner' OR job_title_levels='cxo' OR job_title LIKE '%founder%' OR experience.title.levels='owner' OR experience.title.levels='cxo' OR experience.title.name LIKE '%founder%')"", ""size"": 5}",ok,,77147,2026-10-17 02:19:07
+319,pdl_person_search,6,"{""sql"": ""SELECT * FROM person WHERE (job_company_website='seaforester.org' OR experience.company.website='seaforester.org') AND (job_title_levels='owner' OR job_title_levels='cxo' OR job_title LIKE '%founder%' OR experience.title.levels='owner' OR experience.title.levels='cxo' OR experience.title.name LIKE '%founder%')"", ""size"": 5}",ok,,72353,2026-10-17 02:19:28
+320,pdl_person_search,7,"{""sql"": ""SELECT * FROM person WHERE (job_company_website='kelp.blue' OR experience.company.website='kelp.blue') AND (job_title_levels='owner' OR job_title_levels='cxo' OR job_title LIKE '%founder%' OR experience.title.levels='owner' OR experience.title.levels='cxo' OR experience.title.name LIKE '%founder%')"", ""size"": 5}",ok,,93023,2026-10-17 02:19:37
+321,pdl_person_search,8,"{""sql"": ""SELECT * FROM person WHERE (job_company_website='clearbot.org' OR experience.company.website='clearbot.org') AND (job_title_levels='owner' OR job_title_levels='cxo' OR job_title LIKE '%founder%' OR experience.title.levels='owner' OR experience.title.levels='cxo' OR experience.title.name LIKE '%founder%')"", ""size"": 5}",ok,,69664,2026-10-17 02:19:55
+322,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,8309,2026-10-17 02:20:14
+323,uk_companies_house_officer,1,"{""officer_id"": ""koQha9l4F3jOTvSbVg15Diod-98"", ""items_per_page"": 50}",ok,,1901,2026-10-17 02:20:15
+324,uk_companies_house_officer,1,"{""officer_id"": ""G-y_4p5F3_XLW4ZTvTX6Kx7RQ6k"", ""items_per_page"": 50}",ok,,1134,2026-10-17 02:20:15
+325,uk_companies_house_officer,1,"{""officer_id"": ""wYEuDIKHp8QGzBTayr1OT1JGGF4"", ""items_per_page"": 50}",ok,,1130,2026-10-17 02:20:16
+326,uk_companies_house_officer,1,"{""officer_id"": ""2T7PZ-bNaM98To9Yb1oZymmLKno"", ""items_per_page"": 50}",ok,,1746,2026-10-17 02:20:16
+327,uk_companies_house_officer,1,"{""officer_id"": ""M8EJl0s_Jz0QW_Jm71QXUd_dFrI"", ""items_per_page"": 50}",ok,,1139,2026-10-17 02:20:17
+328,uk_companies_house_officer,1,"{""officer_id"": ""WMKVZXcWbAla6-twCPkgT99HRQw"", ""items_per_page"": 50}",ok,,981,2026-10-17 02:20:17
+329,uk_companies_house_officer,1,"{""officer_id"": ""Cuw3w3okIWffcEOrkGj59mWyoJ4"", ""items_per_page"": 50}",ok,,1601,2026-10-17 02:20:18
+330,uk_companies_house_officer,1,"{""officer_id"": ""WioMWVyLQa4Ps8pBZd23KgVp1p8"", ""items_per_page"": 50}",ok,,1770,2026-10-17 02:20:18
+331,uk_companies_house_officer,1,"{""officer_id"": ""WioMWVyLQa4Ps8pBZd23KgVp1p8"", ""items_per_page"": 50}",ok,,1770,2026-10-17 02:20:18
+332,uk_companies_house_officer,1,"{""officer_id"": ""DXKxAfmYJowUNrrqLZ4wnzKoTEM"", ""items_per_page"": 50}",ok,,986,2026-10-17 02:20:19
+333,uk_companies_house_officer,1,"{""officer_id"": ""tXB08gYZ6e9IF6MEqUdfDvs-RkI"", ""items_per_page"": 50}",ok,,974,2026-10-17 02:20:19
+334,uk_companies_house_company,1,"{""number"": ""09147492"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,33258,2026-10-17 02:20:19
+335,sec_edgar_submissions,2,"{""cik"": ""1687943""}",ok,,2840,2026-10-17 02:20:20
+336,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794325000001""}",ok,,8011,2026-10-17 02:20:21
+337,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794324000002""}",ok,,7862,2026-10-17 02:20:21
+338,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794323000001""}",ok,,7978,2026-10-17 02:20:21
+339,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794322000001""}",ok,,8156,2026-10-17 02:20:22
+340,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794321000002""}",ok,,8062,2026-10-17 02:20:22
+341,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794319000004""}",ok,,7901,2026-10-17 02:20:23
+342,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794319000001""}",ok,,7701,2026-10-17 02:20:23
+343,sec_form_d_document,2,"{""cik"": ""1687943"", ""accession"": ""000168794316000001""}",ok,,6576,2026-10-17 02:20:23
+344,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,2178,2026-10-17 02:20:24
+345,uk_companies_house_officer,4,"{""officer_id"": ""TAmtV2qbcvBgAgYRVyZ_knbknSE"", ""items_per_page"": 50}",ok,,860,2026-10-17 02:20:24
+346,uk_companies_house_officer,4,"{""officer_id"": ""2d1uoKALVhPKSpxiVkXmvkGa2c0"", ""items_per_page"": 50}",ok,,1100,2026-10-17 02:20:25
+347,uk_companies_house_officer,4,"{""officer_id"": ""_LHgNnheSQL52HQwFzOKxxiFw5s"", ""items_per_page"": 50}",ok,,970,2026-10-17 02:20:25
+348,uk_companies_house_company,4,"{""number"": ""14170323"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,1719,2026-10-17 02:20:25
+349,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""officers"", ""items_per_page"": 100}",ok,,6539,2026-10-17 02:20:26
+350,uk_companies_house_officer,5,"{""officer_id"": ""OsvASqtdUfoy9h4bNdsluPePi8k"", ""items_per_page"": 50}",ok,,31492,2026-10-17 02:20:26
+351,uk_companies_house_officer,5,"{""officer_id"": ""RvlXnoTlRZ3dPpi38VKjxyU24Mk"", ""items_per_page"": 50}",ok,,1050,2026-10-17 02:20:26
+352,uk_companies_house_officer,5,"{""officer_id"": ""5xa8Yh84DYlO4J2FYfT-BO9MagM"", ""items_per_page"": 50}",ok,,1125,2026-10-17 02:20:27
+353,uk_companies_house_officer,5,"{""officer_id"": ""hhzK62YYDhjpo30VUhZXAWXsSN4"", ""items_per_page"": 50}",ok,,1047,2026-10-17 02:20:27
+354,uk_companies_house_officer,5,"{""officer_id"": ""2QkG126EE2Rd9HM-ZcXbVZ8A9aY"", ""items_per_page"": 50}",ok,,6320,2026-10-17 02:20:27
+355,uk_companies_house_officer,5,"{""officer_id"": ""HuvRHn9soD1wg2_BTAhDySNMSAY"", ""items_per_page"": 50}",ok,,1067,2026-10-17 02:20:28
+356,uk_companies_house_officer,5,"{""officer_id"": ""tMYaOoTT4akcMQaXxBQcnOcJkvg"", ""items_per_page"": 50}",ok,,1200,2026-10-17 02:20:28
+357,uk_companies_house_officer,5,"{""officer_id"": ""wO5oIQ1WyQMQFOp4JaQlSxKTq7w"", ""items_per_page"": 50}",ok,,1912,2026-10-17 02:20:28
+358,uk_companies_house_company,5,"{""number"": ""SC600414"", ""path"": ""filing-history"", ""category"": ""capital"", ""items_per_page"": 100}",ok,,11216,2026-10-17 02:20:29
+359,pdl_person_search,2,"{""sql"": ""SELECT * FROM person WHERE job_company_website='sofarocean.com' AND (job_title_levels='cxo' OR job_title_levels='owner' OR job_title LIKE '%founder%')"", ""size"": 4}",ok,,20656,2026-10-17 02:21:13
+360,pdl_person_search,2,"{""sql"": ""SELECT * FROM person WHERE experience.company.website='sofarocean.com' AND experience.title.name LIKE '%founder%'"", ""size"": 2}",ok,,42026,2026-10-17 02:21:16
+361,pdl_person_search,3,"{""sql"": ""SELECT * FROM person WHERE job_company_website='oceanrainforest.com' AND (job_title_levels='cxo' OR job_title_levels='owner' OR job_title LIKE '%founder%')"", ""size"": 4}",ok,,58009,2026-10-17 02:21:18
+362,pdl_person_search,3,"{""sql"": ""SELECT * FROM person WHERE experience.company.website='oceanrainforest.com' AND experience.title.name LIKE '%founder%'"", ""size"": 2}",ok,,40607,2026-10-17 02:21:20
+363,pdl_person_search,6,"{""sql"": ""SELECT * FROM person WHERE job_company_website='seaforester.org' AND (job_title_levels='cxo' OR job_title_levels='owner' OR job_title LIKE '%founder%')"", ""size"": 4}",ok,,9648,2026-10-17 02:21:21
+364,pdl_person_search,6,"{""sql"": ""SELECT * FROM person WHERE experience.company.website='seaforester.org' AND experience.title.name LIKE '%founder%'"", ""size"": 2}",ok,,28394,2026-10-17 02:21:23
+365,pdl_person_search,7,"{""sql"": ""SELECT * FROM person WHERE job_company_website='kelp.blue' AND (job_title_levels='cxo' OR job_title_levels='owner' OR job_title LIKE '%founder%')"", ""size"": 4}",ok,,30140,2026-10-17 02:21:25
+366,pdl_person_search,7,"{""sql"": ""SELECT * FROM person WHERE experience.company.website='kelp.blue' AND experience.title.name LIKE '%founder%'"", ""size"": 2}",ok,,30317,2026-10-17 02:21:27
+367,pdl_person_search,8,"{""sql"": ""SELECT * FROM person WHERE job_company_website='clearbot.org' AND (job_title_levels='cxo' OR job_title_levels='owner' OR job_title LIKE '%founder%')"", ""size"": 4}",ok,,44451,2026-10-17 02:21:29
+368,pdl_person_search,8,"{""sql"": ""SELECT * FROM person WHERE experience.company.website='clearbot.org' AND experience.title.name LIKE '%founder%'"", ""size"": 2}",ok,,29591,2026-10-17 02:21:31

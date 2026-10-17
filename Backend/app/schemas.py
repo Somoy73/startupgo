@@ -219,3 +219,148 @@ class ScorePreviewRequest(LevelsInput):
     ocean_kpis: list[KpiLevel] = Field(default_factory=list)
     stage: str
     last_round_on: str | None = Field(default=None, pattern=PARTIAL_DATE)
+
+
+# --- Success-prediction features (Modules/DataAPIs/features.py) ---
+
+
+class FeatureDefinition(BaseModel):
+    name: str
+    feature_group: str
+    description: str
+    unit: str | None
+    importance: Literal["high", "medium", "low"] | None
+    origin: str
+    sources: str | None
+
+
+class FeatureValue(BaseModel):
+    name: str
+    feature_group: str
+    value: float | None
+    text: str | None
+    unit: str | None
+    importance: str | None
+    evidence: dict | list | None
+
+
+class StartupFeatures(BaseModel):
+    slug: str
+    as_of: str | None
+    features: list[FeatureValue]
+    missing: list[str] = Field(description="Catalogue features with no value: unknown, not zero")
+
+
+class FundingEvent(BaseModel):
+    event_date: str
+    source_name: str
+    event_type: str
+    round_label: str | None
+    amount: float | None
+    currency: str | None
+    share_class: str | None
+    shares_allotted: int | None
+    price_per_share: float | None
+    total_shares_after: int | None
+    implied_post_money: float | None
+    investor_count: int | None
+    source_url: str | None
+    match_confidence: str
+    details: dict | None
+
+
+class Venture(BaseModel):
+    company_name: str
+    company_number: str
+    company_status: str | None
+    role: str | None
+    appointed_on: str | None
+    resigned_on: str | None
+    before_startup: bool | None
+
+
+class Person(BaseModel):
+    name: str
+    role: str
+    is_founder: bool
+    appointed_on: str | None
+    resigned_on: str | None
+    nationality: str | None
+    source_name: str
+    education: list[dict] | None = None  # degree level and school, from PDL; never scored for prestige
+    ventures: list[Venture]
+
+
+class InvestorLink(BaseModel):
+    name: str
+    kind: str | None
+    tier_score: float | None
+    role: str
+    rounds: int
+    first_seen: str | None
+
+
+class Peer(BaseModel):
+    slug: str
+    name: str
+    sector: str
+    similarity: float
+    shared_tags: list[str]
+
+
+# --- EU and ocean-specific sources (Modules/DataAPIs/ingest_eu.py) ---
+
+
+class EuGrant(BaseModel):
+    project_id: str
+    acronym: str | None
+    title: str | None
+    framework: str | None
+    role: str
+    ec_contribution: float | None
+    project_ec_max: float | None
+    sme: bool | None
+    partners: int | None
+    start_date: str | None
+    end_date: str | None
+    status: str | None
+    is_eic: bool
+    is_mission_ocean: bool
+    topic_codes: list[str]
+    categories: list[str]
+    url: str | None
+
+
+class PatentWithClasses(BaseModel):
+    publication_number: str
+    title: str
+    url: str | None
+    priority_date: str | None
+    legal_status: str | None
+    ocean_groups: list[str]
+    cpc_codes: list[str]
+
+
+class BlueInvestProfile(BaseModel):
+    other_id: int
+    name: str
+    summary: str | None
+    trl: int | None
+    sector: str | None
+    company: str | None
+    country: str | None
+    funding_sought_eur: float | None
+    website: str | None
+    matched_slug: str | None
+    url: str
+
+
+class ExternalPeer(BaseModel):
+    source: str
+    external_id: str
+    name: str
+    similarity: float
+    shared_tags: list[str]
+    trl: int | None
+    sector: str | None
+    url: str | None

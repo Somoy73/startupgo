@@ -1,0 +1,21 @@
+﻿startup_id,kpi_code,evidence_level,claim,source_url
+1,B2,2,Seaweed-based packaging replaces single-use plastic items.,https://maritime-forum.ec.europa.eu/eu4algae-highlight-stories-notpla-received-ps20-million-eu23-million-series-funding-revolutionise_en
+1,D1,1,Lower-carbon materials than fossil plastics (claimed).,
+2,E2,2,"Real-time wind, wave, temperature and current data used in marine decisions.",https://techcrunch.com/2021/11/03/sofar-nets-a-39m-round-b-to-grow-its-ocean-monitoring-autonomous-buoy-network
+2,D1,1,Weather routing can reduce ship fuel use (claimed).,
+3,A4,2,Produces offshore-farmed seaweed in the Faroe Islands.,https://www.undercurrentnews.com/2023/02/15/seaweed-farmer-ocean-rainforest-snags-6-2m-in-series-a-funding/
+3,D3,1,Seaweed cultivation as a carbon sink (claimed).,
+3,E4,1,Seaweed as a food and feed resource.,
+4,D1,2,Captures CO2 from ship exhaust onboard.,https://techcrunch.com/2022/05/20/carbon-capture-container-ships
+4,D5,1,Co-capture of sulphur emissions (claimed).,
+5,A4,1,Creates demand for farmed kelp.,
+5,B2,1,Biodegradable materials as plastic alternatives.,https://www.seafoodsource.com/news/business-finance/kelp-focused-firm-oceanium-garners-gbp-2-million-investment
+6,C5,2,Restores kelp / marine forests.,https://seedtable.com/companies/seaforester/funding-rounds/seed-2025-10
+6,A1,1,Restored forests increase marine biomass (claimed).,
+6,D3,1,Blue-carbon sequestration (claimed).,
+7,C5,2,"Cultivates giant kelp forests off Lüderitz, Namibia.",https://thefishsite.com/es/articles/kelp-blue-seeks-80-million-blue-bond
+7,D3,1,Carbon capture from kelp forests (claimed).,
+7,A1,1,Kelp forest habitat increases local biomass (claimed).,
+7,F1,1,Creates local jobs in Lüderitz (claimed).,
+8,B2,2,Each robot collects 250-300 kg of floating waste per trip.,https://hivelife.com/clearbot/
+8,F1,1,Deployments create local operator jobs (claimed).,

@@ -1,0 +1,1 @@
+pypdf>=4  # SH01 PDF text extraction in features.py (everything else is stdlib)

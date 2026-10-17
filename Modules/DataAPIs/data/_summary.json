@@ -1,0 +1,257 @@
+{
+  "yc_oss_meta": {
+    "status": "ok",
+    "info": "54,297 bytes, 0.7s",
+    "access": "free"
+  },
+  "yc_oss_companies": {
+    "status": "ok",
+    "info": "49,404 bytes, 0.4s",
+    "access": "free"
+  },
+  "people_data_labs": {
+    "status": "skipped",
+    "info": "set env var PDL_API_KEY",
+    "access": "key"
+  },
+  "wikidata_sparql": {
+    "status": "ok",
+    "info": "3,010 bytes, 1.4s",
+    "access": "free"
+  },
+  "sec_edgar_submissions": {
+    "status": "ok",
+    "info": "178,076 bytes, 0.6s",
+    "access": "free"
+  },
+  "sec_edgar_fulltext_formD": {
+    "status": "ok",
+    "info": "65,678 bytes, 1.4s",
+    "access": "free"
+  },
+  "sec_company_tickers": {
+    "status": "ok",
+    "info": "1,837 bytes, 0.8s",
+    "access": "free"
+  },
+  "crunchbase_v4": {
+    "status": "skipped",
+    "info": "set env var CRUNCHBASE_KEY",
+    "access": "paid"
+  },
+  "harmonic": {
+    "status": "skipped",
+    "info": "set env var HARMONIC_API_KEY",
+    "access": "paid"
+  },
+  "dealroom": {
+    "status": "skipped",
+    "info": "set env var DEALROOM_API_KEY",
+    "access": "paid"
+  },
+  "pitchbook": {
+    "status": "skipped",
+    "info": "set env var PITCHBOOK_API_KEY",
+    "access": "paid"
+  },
+  "tracxn": {
+    "status": "skipped",
+    "info": "set env var TRACXN_API_KEY",
+    "access": "paid"
+  },
+  "prh_ytj_finland": {
+    "status": "ok",
+    "info": "96,720 bytes, 2.1s",
+    "access": "free"
+  },
+  "gleif_lei": {
+    "status": "ok",
+    "info": "9,407 bytes, 0.5s",
+    "access": "free"
+  },
+  "opencorporates": {
+    "status": "skipped",
+    "info": "set env var OPENCORPORATES_API_KEY",
+    "access": "key"
+  },
+  "uk_companies_house": {
+    "status": "skipped",
+    "info": "set env var COMPANIES_HOUSE_KEY",
+    "access": "key"
+  },
+  "orbis_asiakastieto": {
+    "status": "skipped",
+    "info": "set env var ORBIS_API_KEY",
+    "access": "paid"
+  },
+  "eu_sedia_calls": {
+    "status": "ok",
+    "info": "50,295 bytes, 0.8s",
+    "access": "free"
+  },
+  "cordis_via_data_europa": {
+    "status": "ok",
+    "info": "1,087,988 bytes, 2.4s",
+    "access": "free"
+  },
+  "data_europa_search": {
+    "status": "ok",
+    "info": "554,355 bytes, 2.3s",
+    "access": "free"
+  },
+  "avoindata_fi_ckan": {
+    "status": "ok",
+    "info": "155,268 bytes, 1.9s",
+    "access": "free"
+  },
+  "grants_gov": {
+    "status": "ok",
+    "info": "7,080 bytes, 0.7s",
+    "access": "free"
+  },
+  "ukri_gateway_to_research": {
+    "status": "ok",
+    "info": "78,725 bytes, 1.8s",
+    "access": "free"
+  },
+  "ted_eu_tenders": {
+    "status": "ok",
+    "info": "42,463 bytes, 0.5s",
+    "access": "free"
+  },
+  "hilma_finland": {
+    "status": "skipped",
+    "info": "set env var HILMA_KEY",
+    "access": "key"
+  },
+  "epo_ops": {
+    "status": "skipped",
+    "info": "set env var EPO_KEY",
+    "access": "key"
+  },
+  "google_patents_bigquery": {
+    "status": "skipped",
+    "info": "set env var GOOGLE_APPLICATION_CREDENTIALS",
+    "access": "free"
+  },
+  "patentsview": {
+    "status": "skipped",
+    "info": "set env var PATENTSVIEW_KEY",
+    "access": "key"
+  },
+  "lens_org": {
+    "status": "skipped",
+    "info": "set env var LENS_TOKEN",
+    "access": "key"
+  },
+  "openalex": {
+    "status": "ok",
+    "info": "29,564 bytes, 0.8s",
+    "access": "free"
+  },
+  "semantic_scholar": {
+    "status": "error",
+    "info": "HTTP 429 after retries; set S2_API_KEY",
+    "access": "free"
+  },
+  "crossref": {
+    "status": "ok",
+    "info": "1,249 bytes, 0.8s",
+    "access": "free"
+  },
+  "github_search_repos": {
+    "status": "ok",
+    "info": "28,376 bytes, 0.9s",
+    "access": "key"
+  },
+  "hn_firebase": {
+    "status": "ok",
+    "info": "5,162 bytes, 3.8s",
+    "access": "free"
+  },
+  "hn_algolia": {
+    "status": "ok",
+    "info": "5,085 bytes, 0.5s",
+    "access": "free"
+  },
+  "product_hunt": {
+    "status": "skipped",
+    "info": "set env var PRODUCTHUNT_TOKEN",
+    "access": "key"
+  },
+  "gdelt_doc": {
+    "status": "ok",
+    "info": "1,174 bytes, 31.9s",
+    "access": "free"
+  },
+  "google_news_rss": {
+    "status": "ok",
+    "info": "2,361 bytes, 2.6s",
+    "access": "free"
+  },
+  "newsapi": {
+    "status": "skipped",
+    "info": "set env var NEWSAPI_KEY",
+    "access": "key"
+  },
+  "wayback_cdx": {
+    "status": "ok",
+    "info": "738 bytes, 9.1s",
+    "access": "free"
+  },
+  "common_crawl_index": {
+    "status": "ok",
+    "info": "1,002 bytes, 5.8s",
+    "access": "free"
+  },
+  "brave_search": {
+    "status": "skipped",
+    "info": "set env var BRAVE_API_KEY",
+    "access": "key"
+  },
+  "tavily": {
+    "status": "skipped",
+    "info": "set env var TAVILY_API_KEY",
+    "access": "key"
+  },
+  "exa": {
+    "status": "skipped",
+    "info": "set env var EXA_API_KEY",
+    "access": "key"
+  },
+  "jina_reader": {
+    "status": "ok",
+    "info": "17,167 bytes, 0.7s",
+    "access": "free"
+  },
+  "firecrawl": {
+    "status": "skipped",
+    "info": "set env var FIRECRAWL_API_KEY",
+    "access": "key"
+  },
+  "eurostat": {
+    "status": "ok",
+    "info": "33,580 bytes, 1.0s",
+    "access": "free"
+  },
+  "oecd_sdmx": {
+    "status": "ok",
+    "info": "93,641 bytes, 0.6s",
+    "access": "free"
+  },
+  "world_bank": {
+    "status": "ok",
+    "info": "1,244 bytes, 0.2s",
+    "access": "free"
+  },
+  "statfin_pxweb": {
+    "status": "ok",
+    "info": "9,301 bytes, 0.3s",
+    "access": "free"
+  },
+  "gbif": {
+    "status": "ok",
+    "info": "609 bytes, 0.9s",
+    "access": "free"
+  }
+}

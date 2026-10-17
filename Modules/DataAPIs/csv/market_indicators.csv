@@ -1,0 +1,250 @@
+﻿id,source_name,indicator_code,indicator_name,geo,period,value,unit,fetch_id
+1,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FIN,2025,317039368819.607,USD,110
+2,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FIN,2024,298729432711.719,USD,110
+3,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FIN,2023,295191741637.26,USD,110
+4,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FIN,2022,280253099309.34,USD,110
+5,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FIN,2021,294223210496.119,USD,110
+6,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FIN,2020,270000311606.226,USD,110
+7,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FIN,2019,267014821129.411,USD,110
+8,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FIN,2018,273869255596.078,USD,110
+9,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FIN,2017,253846138440.0,USD,110
+10,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FIN,2016,238777818792.608,USD,110
+11,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FRO,2024,4052937169.76536,USD,110
+12,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FRO,2023,3943131022.2291,USD,110
+13,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FRO,2022,3615241800.50058,USD,110
+14,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FRO,2021,3699551717.10561,USD,110
+15,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FRO,2020,3271813311.5831,USD,110
+16,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FRO,2019,3266432734.22819,USD,110
+17,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FRO,2018,3188600927.46688,USD,110
+18,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FRO,2017,2980057377.87967,USD,110
+19,world_bank,NY.GDP.MKTP.CD,GDP (current US$),FRO,2016,2813278868.78208,USD,110
+20,world_bank,NY.GDP.MKTP.CD,GDP (current US$),GBR,2025,4002587541846.01,USD,110
+21,world_bank,NY.GDP.MKTP.CD,GDP (current US$),GBR,2024,3695539513534.15,USD,110
+22,world_bank,NY.GDP.MKTP.CD,GDP (current US$),GBR,2023,3420796653789.08,USD,110
+23,world_bank,NY.GDP.MKTP.CD,GDP (current US$),GBR,2022,3181244350465.41,USD,110
+24,world_bank,NY.GDP.MKTP.CD,GDP (current US$),GBR,2021,3194559188925.93,USD,110
+25,world_bank,NY.GDP.MKTP.CD,GDP (current US$),GBR,2020,2724001478304.59,USD,110
+26,world_bank,NY.GDP.MKTP.CD,GDP (current US$),GBR,2019,2875710080015.3,USD,110
+27,world_bank,NY.GDP.MKTP.CD,GDP (current US$),GBR,2018,2897028009916.05,USD,110
+28,world_bank,NY.GDP.MKTP.CD,GDP (current US$),GBR,2017,2699118387873.1,USD,110
+29,world_bank,NY.GDP.MKTP.CD,GDP (current US$),GBR,2016,2706807606538.73,USD,110
+30,world_bank,NY.GDP.MKTP.CD,GDP (current US$),HKG,2025,427310315921.993,USD,110
+31,world_bank,NY.GDP.MKTP.CD,GDP (current US$),HKG,2024,408368682415.423,USD,110
+32,world_bank,NY.GDP.MKTP.CD,GDP (current US$),HKG,2023,380762296025.216,USD,110
+33,world_bank,NY.GDP.MKTP.CD,GDP (current US$),HKG,2022,358673532516.529,USD,110
+34,world_bank,NY.GDP.MKTP.CD,GDP (current US$),HKG,2021,368954169748.818,USD,110
+35,world_bank,NY.GDP.MKTP.CD,GDP (current US$),HKG,2020,344943149590.058,USD,110
+36,world_bank,NY.GDP.MKTP.CD,GDP (current US$),HKG,2019,363074545072.389,USD,110
+37,world_bank,NY.GDP.MKTP.CD,GDP (current US$),HKG,2018,361731070995.726,USD,110
+38,world_bank,NY.GDP.MKTP.CD,GDP (current US$),HKG,2017,341273289534.466,USD,110
+39,world_bank,NY.GDP.MKTP.CD,GDP (current US$),HKG,2016,320860317562.562,USD,110
+40,world_bank,NY.GDP.MKTP.CD,GDP (current US$),NAM,2025,15080340653.5276,USD,110
+41,world_bank,NY.GDP.MKTP.CD,GDP (current US$),NAM,2024,13641190683.4641,USD,110
+42,world_bank,NY.GDP.MKTP.CD,GDP (current US$),NAM,2023,12522012873.7957,USD,110
+43,world_bank,NY.GDP.MKTP.CD,GDP (current US$),NAM,2022,12569449123.3661,USD,110
+44,world_bank,NY.GDP.MKTP.CD,GDP (current US$),NAM,2021,12402486183.6396,USD,110
+45,world_bank,NY.GDP.MKTP.CD,GDP (current US$),NAM,2020,10583748541.5258,USD,110
+46,world_bank,NY.GDP.MKTP.CD,GDP (current US$),NAM,2019,12541928303.48,USD,110
+47,world_bank,NY.GDP.MKTP.CD,GDP (current US$),NAM,2018,13682019076.4022,USD,110
+48,world_bank,NY.GDP.MKTP.CD,GDP (current US$),NAM,2017,12895153370.9132,USD,110
+49,world_bank,NY.GDP.MKTP.CD,GDP (current US$),NAM,2016,10722018732.0936,USD,110
+50,world_bank,NY.GDP.MKTP.CD,GDP (current US$),PRT,2025,346639825141.821,USD,110
+51,world_bank,NY.GDP.MKTP.CD,GDP (current US$),PRT,2024,313656884870.859,USD,110
+52,world_bank,NY.GDP.MKTP.CD,GDP (current US$),PRT,2023,292323800948.839,USD,110
+53,world_bank,NY.GDP.MKTP.CD,GDP (current US$),PRT,2022,256898677175.024,USD,110
+54,world_bank,NY.GDP.MKTP.CD,GDP (current US$),PRT,2021,256055879091.139,USD,110
+55,world_bank,NY.GDP.MKTP.CD,GDP (current US$),PRT,2020,229618773422.577,USD,110
+56,world_bank,NY.GDP.MKTP.CD,GDP (current US$),PRT,2019,240115970063.019,USD,110
+57,world_bank,NY.GDP.MKTP.CD,GDP (current US$),PRT,2018,242092894542.888,USD,110
+58,world_bank,NY.GDP.MKTP.CD,GDP (current US$),PRT,2017,220862990767.229,USD,110
+59,world_bank,NY.GDP.MKTP.CD,GDP (current US$),PRT,2016,206305431241.638,USD,110
+60,world_bank,NY.GDP.MKTP.CD,GDP (current US$),USA,2025,30769700000000.0,USD,110
+61,world_bank,NY.GDP.MKTP.CD,GDP (current US$),USA,2024,29298013000000.0,USD,110
+62,world_bank,NY.GDP.MKTP.CD,GDP (current US$),USA,2023,27811517000000.0,USD,110
+63,world_bank,NY.GDP.MKTP.CD,GDP (current US$),USA,2022,26054614000000.0,USD,110
+64,world_bank,NY.GDP.MKTP.CD,GDP (current US$),USA,2021,23725645000000.0,USD,110
+65,world_bank,NY.GDP.MKTP.CD,GDP (current US$),USA,2020,21375281000000.0,USD,110
+66,world_bank,NY.GDP.MKTP.CD,GDP (current US$),USA,2019,21539982000000.0,USD,110
+67,world_bank,NY.GDP.MKTP.CD,GDP (current US$),USA,2018,20656516000000.0,USD,110
+68,world_bank,NY.GDP.MKTP.CD,GDP (current US$),USA,2017,19612102000000.0,USD,110
+69,world_bank,NY.GDP.MKTP.CD,GDP (current US$),USA,2016,18804913000000.0,USD,110
+70,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FIN,2024,16609.4,metric tons,111
+71,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FIN,2023,15168.6,metric tons,111
+72,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FIN,2022,16280.6,metric tons,111
+73,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FIN,2021,14399.4,metric tons,111
+74,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FIN,2020,15052.9,metric tons,111
+75,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FIN,2019,15295.8,metric tons,111
+76,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FIN,2018,14163.7,metric tons,111
+77,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FIN,2017,14586.9,metric tons,111
+78,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FIN,2016,14412.17,metric tons,111
+79,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FIN,2015,14877.0,metric tons,111
+80,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FRO,2024,109512.0,metric tons,111
+81,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FRO,2023,98365.0,metric tons,111
+82,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FRO,2022,108780.0,metric tons,111
+83,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FRO,2021,115760.0,metric tons,111
+84,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FRO,2020,89055.0,metric tons,111
+85,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FRO,2019,95085.0,metric tons,111
+86,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FRO,2018,78975.0,metric tons,111
+87,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FRO,2017,86866.0,metric tons,111
+88,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FRO,2016,83333.0,metric tons,111
+89,world_bank,ER.FSH.AQUA.MT,Aquaculture production,FRO,2015,80622.0,metric tons,111
+90,world_bank,ER.FSH.AQUA.MT,Aquaculture production,GBR,2024,226006.207,metric tons,111
+91,world_bank,ER.FSH.AQUA.MT,Aquaculture production,GBR,2023,186033.025,metric tons,111
+92,world_bank,ER.FSH.AQUA.MT,Aquaculture production,GBR,2022,201320.112,metric tons,111
+93,world_bank,ER.FSH.AQUA.MT,Aquaculture production,GBR,2021,239174.885,metric tons,111
+94,world_bank,ER.FSH.AQUA.MT,Aquaculture production,GBR,2020,219944.05,metric tons,111
+95,world_bank,ER.FSH.AQUA.MT,Aquaculture production,GBR,2019,233776.909,metric tons,111
+96,world_bank,ER.FSH.AQUA.MT,Aquaculture production,GBR,2018,189862.015,metric tons,111
+97,world_bank,ER.FSH.AQUA.MT,Aquaculture production,GBR,2017,227644.268,metric tons,111
+98,world_bank,ER.FSH.AQUA.MT,Aquaculture production,GBR,2016,194567.266,metric tons,111
+99,world_bank,ER.FSH.AQUA.MT,Aquaculture production,GBR,2015,211819.543,metric tons,111
+100,world_bank,ER.FSH.AQUA.MT,Aquaculture production,HKG,2024,2579.2,metric tons,111
+101,world_bank,ER.FSH.AQUA.MT,Aquaculture production,HKG,2023,2059.81,metric tons,111
+102,world_bank,ER.FSH.AQUA.MT,Aquaculture production,HKG,2022,3361.2,metric tons,111
+103,world_bank,ER.FSH.AQUA.MT,Aquaculture production,HKG,2021,4008.87,metric tons,111
+104,world_bank,ER.FSH.AQUA.MT,Aquaculture production,HKG,2020,3834.7,metric tons,111
+105,world_bank,ER.FSH.AQUA.MT,Aquaculture production,HKG,2019,3787.1,metric tons,111
+106,world_bank,ER.FSH.AQUA.MT,Aquaculture production,HKG,2018,4133.0,metric tons,111
+107,world_bank,ER.FSH.AQUA.MT,Aquaculture production,HKG,2017,4172.0,metric tons,111
+108,world_bank,ER.FSH.AQUA.MT,Aquaculture production,HKG,2016,4258.0,metric tons,111
+109,world_bank,ER.FSH.AQUA.MT,Aquaculture production,HKG,2015,3894.0,metric tons,111
+110,world_bank,ER.FSH.AQUA.MT,Aquaculture production,NAM,2024,340.0,metric tons,111
+111,world_bank,ER.FSH.AQUA.MT,Aquaculture production,NAM,2023,340.0,metric tons,111
+112,world_bank,ER.FSH.AQUA.MT,Aquaculture production,NAM,2022,340.0,metric tons,111
+113,world_bank,ER.FSH.AQUA.MT,Aquaculture production,NAM,2021,321.0,metric tons,111
+114,world_bank,ER.FSH.AQUA.MT,Aquaculture production,NAM,2020,320.715,metric tons,111
+115,world_bank,ER.FSH.AQUA.MT,Aquaculture production,NAM,2019,388.961,metric tons,111
+116,world_bank,ER.FSH.AQUA.MT,Aquaculture production,NAM,2018,342.48,metric tons,111
+117,world_bank,ER.FSH.AQUA.MT,Aquaculture production,NAM,2017,506.93,metric tons,111
+118,world_bank,ER.FSH.AQUA.MT,Aquaculture production,NAM,2016,525.2,metric tons,111
+119,world_bank,ER.FSH.AQUA.MT,Aquaculture production,NAM,2015,625.73,metric tons,111
+120,world_bank,ER.FSH.AQUA.MT,Aquaculture production,PRT,2024,24332.326,metric tons,111
+121,world_bank,ER.FSH.AQUA.MT,Aquaculture production,PRT,2023,22445.405,metric tons,111
+122,world_bank,ER.FSH.AQUA.MT,Aquaculture production,PRT,2022,18896.0,metric tons,111
+123,world_bank,ER.FSH.AQUA.MT,Aquaculture production,PRT,2021,19541.475,metric tons,111
+124,world_bank,ER.FSH.AQUA.MT,Aquaculture production,PRT,2020,20608.01,metric tons,111
+125,world_bank,ER.FSH.AQUA.MT,Aquaculture production,PRT,2019,13690.77,metric tons,111
+126,world_bank,ER.FSH.AQUA.MT,Aquaculture production,PRT,2018,13991.176,metric tons,111
+127,world_bank,ER.FSH.AQUA.MT,Aquaculture production,PRT,2017,12508.74,metric tons,111
+128,world_bank,ER.FSH.AQUA.MT,Aquaculture production,PRT,2016,9787.66,metric tons,111
+129,world_bank,ER.FSH.AQUA.MT,Aquaculture production,PRT,2015,9562.876,metric tons,111
+130,world_bank,ER.FSH.AQUA.MT,Aquaculture production,USA,2024,467617.1,metric tons,111
+131,world_bank,ER.FSH.AQUA.MT,Aquaculture production,USA,2023,502795.1,metric tons,111
+132,world_bank,ER.FSH.AQUA.MT,Aquaculture production,USA,2022,479089.932,metric tons,111
+133,world_bank,ER.FSH.AQUA.MT,Aquaculture production,USA,2021,461818.113,metric tons,111
+134,world_bank,ER.FSH.AQUA.MT,Aquaculture production,USA,2020,448619.606,metric tons,111
+135,world_bank,ER.FSH.AQUA.MT,Aquaculture production,USA,2019,496152.848,metric tons,111
+136,world_bank,ER.FSH.AQUA.MT,Aquaculture production,USA,2018,471429.851,metric tons,111
+137,world_bank,ER.FSH.AQUA.MT,Aquaculture production,USA,2017,439801.0,metric tons,111
+138,world_bank,ER.FSH.AQUA.MT,Aquaculture production,USA,2016,444793.0,metric tons,111
+139,world_bank,ER.FSH.AQUA.MT,Aquaculture production,USA,2015,426111.0,metric tons,111
+140,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FIN,2024,111335.0,metric tons,112
+141,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FIN,2023,128716.0,metric tons,112
+142,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FIN,2022,125969.0,metric tons,112
+143,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FIN,2021,133980.0,metric tons,112
+144,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FIN,2020,149145.0,metric tons,112
+145,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FIN,2019,164499.278,metric tons,112
+146,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FIN,2018,175623.386,metric tons,112
+147,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FIN,2017,191059.0,metric tons,112
+148,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FIN,2016,193153.0,metric tons,112
+149,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FIN,2015,183037.0,metric tons,112
+150,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FRO,2024,677690.7,metric tons,112
+151,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FRO,2023,792468.4,metric tons,112
+152,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FRO,2022,606542.1,metric tons,112
+153,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FRO,2021,542719.2,metric tons,112
+154,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FRO,2020,651423.1,metric tons,112
+155,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FRO,2019,653838.3,metric tons,112
+156,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FRO,2018,660940.0,metric tons,112
+157,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FRO,2017,703583.0,metric tons,112
+158,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FRO,2016,568735.0,metric tons,112
+159,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,FRO,2015,586067.0,metric tons,112
+160,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,GBR,2024,755323.079,metric tons,112
+161,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,GBR,2023,717353.744,metric tons,112
+162,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,GBR,2022,621770.233,metric tons,112
+163,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,GBR,2021,635592.808,metric tons,112
+164,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,GBR,2020,627493.128,metric tons,112
+165,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,GBR,2019,623104.657,metric tons,112
+166,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,GBR,2018,699792.589,metric tons,112
+167,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,GBR,2017,726521.643,metric tons,112
+168,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,GBR,2016,697239.744,metric tons,112
+169,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,GBR,2015,706172.329,metric tons,112
+170,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,HKG,2024,92253.0,metric tons,112
+171,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,HKG,2023,86578.001,metric tons,112
+172,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,HKG,2022,77199.998,metric tons,112
+173,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,HKG,2021,115178.999,metric tons,112
+174,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,HKG,2020,119428.0,metric tons,112
+175,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,HKG,2019,122929.0,metric tons,112
+176,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,HKG,2018,124299.0,metric tons,112
+177,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,HKG,2017,127554.0,metric tons,112
+178,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,HKG,2016,142775.0,metric tons,112
+179,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,HKG,2015,145193.0,metric tons,112
+180,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,NAM,2024,381230.096,metric tons,112
+181,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,NAM,2023,373140.676,metric tons,112
+182,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,NAM,2022,376109.529,metric tons,112
+183,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,NAM,2021,317853.283,metric tons,112
+184,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,NAM,2020,334135.368,metric tons,112
+185,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,NAM,2019,485136.721,metric tons,112
+186,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,NAM,2018,510863.215,metric tons,112
+187,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,NAM,2017,512606.979,metric tons,112
+188,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,NAM,2016,536901.9,metric tons,112
+189,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,NAM,2015,547082.923,metric tons,112
+190,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,PRT,2024,237008.239,metric tons,112
+191,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,PRT,2023,163772.722,metric tons,112
+192,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,PRT,2022,159890.53,metric tons,112
+193,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,PRT,2021,179526.683,metric tons,112
+194,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,PRT,2020,159947.959,metric tons,112
+195,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,PRT,2019,185050.28,metric tons,112
+196,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,PRT,2018,178270.0,metric tons,112
+197,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,PRT,2017,182615.0,metric tons,112
+198,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,PRT,2016,186545.0,metric tons,112
+199,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,PRT,2015,190100.0,metric tons,112
+200,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,USA,2024,4213780.0,metric tons,112
+201,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,USA,2023,4649807.0,metric tons,112
+202,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,USA,2022,4701380.5,metric tons,112
+203,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,USA,2021,4725316.0,metric tons,112
+204,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,USA,2020,4690973.0,metric tons,112
+205,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,USA,2019,5311534.0,metric tons,112
+206,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,USA,2018,5393878.0,metric tons,112
+207,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,USA,2017,5488206.0,metric tons,112
+208,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,USA,2016,5396365.0,metric tons,112
+209,world_bank,ER.FSH.CAPT.MT,Capture fisheries production,USA,2015,5420928.0,metric tons,112
+210,eurostat,fish_aq2a,"Aquaculture production, all species",FI,2015,14879.0,tonnes live weight,113
+211,eurostat,fish_aq2a,"Aquaculture production, all species",FI,2016,14413.0,tonnes live weight,113
+212,eurostat,fish_aq2a,"Aquaculture production, all species",FI,2017,14584.0,tonnes live weight,113
+213,eurostat,fish_aq2a,"Aquaculture production, all species",FI,2018,14323.0,tonnes live weight,113
+214,eurostat,fish_aq2a,"Aquaculture production, all species",FI,2019,15295.8,tonnes live weight,113
+215,eurostat,fish_aq2a,"Aquaculture production, all species",FI,2020,15053.0,tonnes live weight,113
+216,eurostat,fish_aq2a,"Aquaculture production, all species",FI,2021,14399.4,tonnes live weight,113
+217,eurostat,fish_aq2a,"Aquaculture production, all species",FI,2022,16280.5,tonnes live weight,113
+218,eurostat,fish_aq2a,"Aquaculture production, all species",FI,2023,15168.5,tonnes live weight,113
+219,eurostat,fish_aq2a,"Aquaculture production, all species",FI,2024,16616.3,tonnes live weight,113
+220,eurostat,fish_aq2a,"Aquaculture production, all species",PT,2015,9562.95,tonnes live weight,114
+221,eurostat,fish_aq2a,"Aquaculture production, all species",PT,2016,11262.73,tonnes live weight,114
+222,eurostat,fish_aq2a,"Aquaculture production, all species",PT,2017,12553.13,tonnes live weight,114
+223,eurostat,fish_aq2a,"Aquaculture production, all species",PT,2018,11765.9,tonnes live weight,114
+224,eurostat,fish_aq2a,"Aquaculture production, all species",PT,2019,12880.76,tonnes live weight,114
+225,eurostat,fish_aq2a,"Aquaculture production, all species",PT,2020,13647.68,tonnes live weight,114
+226,eurostat,fish_aq2a,"Aquaculture production, all species",PT,2021,17561.74,tonnes live weight,114
+227,eurostat,fish_aq2a,"Aquaculture production, all species",PT,2022,18688.19,tonnes live weight,114
+228,eurostat,fish_aq2a,"Aquaculture production, all species",PT,2023,18560.53,tonnes live weight,114
+229,eurostat,fish_aq2a,"Aquaculture production, all species",PT,2024,16865.31,tonnes live weight,114
+230,eurostat,fish_aq2a,"Aquaculture production, all species",NO,2015,1380886.645,tonnes live weight,115
+231,eurostat,fish_aq2a,"Aquaculture production, all species",NO,2016,1326190.2198,tonnes live weight,115
+232,eurostat,fish_aq2a,"Aquaculture production, all species",NO,2017,1308624.3496,tonnes live weight,115
+233,eurostat,fish_aq2a,"Aquaculture production, all species",NO,2018,1355115.0472,tonnes live weight,115
+234,eurostat,fish_aq2a,"Aquaculture production, all species",NO,2019,1453042.3826,tonnes live weight,115
+235,eurostat,fish_aq2a,"Aquaculture production, all species",NO,2020,1490412.045,tonnes live weight,115
+236,eurostat,fish_aq2a,"Aquaculture production, all species",NO,2021,1665112.059,tonnes live weight,115
+237,eurostat,fish_aq2a,"Aquaculture production, all species",NO,2022,1661740.3722,tonnes live weight,115
+238,eurostat,fish_aq2a,"Aquaculture production, all species",NO,2023,1649964.91,tonnes live weight,115
+239,eurostat,fish_aq2a,"Aquaculture production, all species",NO,2024,1667249.907,tonnes live weight,115
+240,eurostat,fish_aq2a,"Aquaculture production, all species",EU27_2020,2015,1048264.884,tonnes live weight,116
+241,eurostat,fish_aq2a,"Aquaculture production, all species",EU27_2020,2016,1092448.8313,tonnes live weight,116
+242,eurostat,fish_aq2a,"Aquaculture production, all species",EU27_2020,2017,1142374.4857,tonnes live weight,116
+243,eurostat,fish_aq2a,"Aquaculture production, all species",EU27_2020,2018,1132966.3887,tonnes live weight,116
+244,eurostat,fish_aq2a,"Aquaculture production, all species",EU27_2020,2019,1120179.8073,tonnes live weight,116
+245,eurostat,fish_aq2a,"Aquaculture production, all species",EU27_2020,2020,1070950.5757,tonnes live weight,116
+246,eurostat,fish_aq2a,"Aquaculture production, all species",EU27_2020,2021,1123891.8512,tonnes live weight,116
+247,eurostat,fish_aq2a,"Aquaculture production, all species",EU27_2020,2022,1084408.4485,tonnes live weight,116
+248,eurostat,fish_aq2a,"Aquaculture production, all species",EU27_2020,2023,1050636.9088,tonnes live weight,116
+249,eurostat,fish_aq2a,"Aquaculture production, all species",EU27_2020,2024,1007561.1095,tonnes live weight,116

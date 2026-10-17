@@ -1,0 +1,1341 @@
+{
+  "params": {
+    "dataflow": "OECD.ENV.EPI,DSD_SOE@DF_SOE,1.0",
+    "key": "all",
+    "lastNObservations": 1
+  },
+  "full_size_bytes": 93641,
+  "sample": {
+    "meta": {
+      "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/1.0/sdmx-json-data-schema.json",
+      "id": "IREF028066",
+      "prepared": "2026-10-16T19:59:20Z",
+      "test": false,
+      "contentLanguages": [
+        "en",
+        "en-US"
+      ],
+      "sender": {
+        "id": "Disseminate_Final_DMZ",
+        "name": "unknown",
+        "names": {
+          "en-US": "unknown"
+        }
+      }
+    },
+    "data": {
+      "dataSets": [
+        {
+          "action": "Information",
+          "links": [
+            {
+              "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=OECD.ENV.EPI:DSD_SOE(1.0)",
+              "rel": "DataStructure"
+            }
+          ],
+          "annotations": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "series": {
+            "0:0:0:0:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "0": [
+                  2217.96,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "1:0:0:1:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "0": [
+                  0.05,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "2:0:0:0:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "0": [
+                  1620.04,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "3:0:1:2:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "0": [
+                  1.67,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "4:0:2:2:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "0": [
+                  3.66,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "5:0:1:0:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "0": [
+                  0,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "6:0:2:0:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "0": [
+                  0,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "7:0:3:3:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "1": [
+                  0.89,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "8:0:4:4:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "2": [
+                  2,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "9:0:5:4:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "2": [
+                  2,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "0:0:6:5:0:0": {
+              "attributes": [
+                null,
+                null,
+                1
+              ],
+              "annotations": [],
+              "observations": {
+                "3": [
+                  32.33,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "10:0:7:6:0:0": {
+              "attributes": [
+                0,
+                0,
+                1
+              ],
+              "annotations": [],
+              "observations": {
+                "4": [
+                  0,
+                  0,
+                  1,
+                  null
+                ]
+              }
+            },
+            "2:0:8:7:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "5": [
+                  0.17,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "11:0:9:8:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "6": [
+                  1,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "12:0:10:8:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "6": [
+                  1,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "0:0:8:7:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "5": [
+                  0.33,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "13:0:8:8:0:0": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "5": [
+                  1,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "14:0:11:9:0:1": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "3": [
+                  0.52,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "15:0:11:9:0:2": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "3": [
+                  0.03,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            },
+            "16:0:12:10:0:1": {
+              "attributes": [
+                null,
+                null,
+                0
+              ],
+              "annotations": [],
+              "observations": {
+                "5": [
+                  50.96,
+                  0,
+                  0,
+                  null
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "structure": {
+        "name": "Sustainable Ocean Economy",
+        "names": {
+          "en": "Sustainable Ocean Economy"
+        },
+        "description": "The ocean is a shared global resource. Ocean-related industries in many countries have expanded with insufficient consideration for the environment, risking natural resources and essential marine ecosystem services that underpin economies and human well-being. </p> <p> The OECD Sustainable Ocean Economy Database synthesises ocean-related datasets, covering 20+ indicators across 6 ocean themes: <li>Natural capital of the ocean</li> <li>Environmental dimension of wellbeing and resilience in coastal communities</li> <li>Environmental and resource productivity of the ocean economy</li> <li>Economi... [1711 chars]",
+        "descriptions": {
+          "en": "The ocean is a shared global resource. Ocean-related industries in many countries have expanded with insufficient consideration for the environment, risking natural resources and essential marine ecosystem services that underpin economies and human well-being. </p> <p> The OECD Sustainable Ocean Economy Database synthesises ocean-related datasets, covering 20+ indicators across 6 ocean themes: <li>Natural capital of the ocean</li> <li>Environmental dimension of wellbeing and resilience in coastal communities</li> <li>Environmental and resource productivity of the ocean economy</li> <li>Economi... [1711 chars]"
+        },
+        "dimensions": {
+          "dataset": [],
+          "series": [
+            {
+              "id": "REF_AREA",
+              "name": "Reference area",
+              "names": {
+                "en": "Reference area"
+              },
+              "keyPosition": 0,
+              "roles": [
+                "REF_AREA"
+              ],
+              "values": [
+                {
+                  "id": "MYS",
+                  "order": 223,
+                  "name": "Malaysia",
+                  "names": {
+                    "en": "Malaysia"
+                  },
+                  "parent": "WXOECD",
+                  "annotations": [
+                    9
+                  ]
+                },
+                {
+                  "id": "TCD",
+                  "order": 152,
+                  "name": "Chad",
+                  "names": {
+                    "en": "Chad"
+                  },
+                  "parent": "WXOECD",
+                  "annotations": [
+                    10
+                  ]
+                },
+                {
+                  "id": "BEL",
+                  "order": 2,
+                  "name": "Belgium",
+                  "names": {
+                    "en": "Belgium"
+                  },
+                  "annotations": [
+                    11
+                  ]
+                },
+                {
+                  "id": "HND",
+                  "order": 198,
+                  "name": "Honduras",
+                  "names": {
+                    "en": "Honduras"
+                  },
+                  "parent": "WXOECD",
+                  "annotations": [
+                    12
+                  ]
+                },
+                {
+                  "id": "ITA",
+                  "order": 18,
+                  "name": "Italy",
+                  "names": {
+                    "en": "Italy"
+                  },
+                  "annotations": [
+                    13
+                  ]
+                },
+                {
+                  "id": "KGZ",
+                  "order": 213,
+                  "name": "Kyrgyzstan",
+                  "names": {
+                    "en": "Kyrgyzstan"
+                  },
+                  "parent": "WXOECD",
+                  "annotations": [
+                    14
+                  ]
+                },
+                {
+                  "id": "VAT",
+                  "order": 197,
+                  "name": "Holy See",
+                  "names": {
+                    "en": "Holy See"
+                  },
+                  "parent": "WXOECD",
+                  "annotations": [
+                    15
+                  ]
+                },
+                {
+                  "id": "FRA",
+                  "order": 11,
+                  "name": "France",
+                  "names": {
+                    "en": "France"
+                  },
+                  "annotations": [
+                    16
+                  ]
+                },
+                {
+                  "id": "MAR",
+                  "order": 238,
+                  "name": "Morocco",
+                  "names": {
+                    "en": "Morocco"
+                  },
+                  "parent": "WXOECD",
+                  "annotations": [
+                    17
+                  ]
+                },
+                {
+                  "id": "SVN",
+                  "order": 31,
+                  "name": "Slovenia",
+                  "names": {
+                    "en": "Slovenia"
+                  },
+                  "annotations": [
+                    18
+                  ]
+                },
+                "... +254 more"
+              ]
+            },
+            {
+              "id": "FREQ",
+              "name": "Frequency of observation",
+              "names": {
+                "en": "Frequency of observation"
+              },
+              "keyPosition": 1,
+              "roles": [
+                "FREQ"
+              ],
+              "values": [
+                {
+                  "id": "A",
+                  "order": 0,
+                  "name": "Annual",
+                  "names": {
+                    "en": "Annual"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "MEASURE",
+              "name": "Measure",
+              "names": {
+                "en": "Measure"
+              },
+              "keyPosition": 2,
+              "roles": [
+                "MEASURE"
+              ],
+              "values": [
+                {
+                  "id": "BA_BUILTA",
+                  "order": 6,
+                  "name": "Built-up area",
+                  "names": {
+                    "en": "Built-up area"
+                  },
+                  "parent": "COASTAL_LCC"
+                },
+                {
+                  "id": "COASTAL_LC_1KM",
+                  "order": 5,
+                  "name": "Built-up area within 1km of coast",
+                  "names": {
+                    "en": "Built-up area within 1km of coast"
+                  },
+                  "parent": "COASTAL_LCC"
+                },
+                {
+                  "id": "COASTAL_LC_10KM",
+                  "order": 4,
+                  "name": "Built-up area within 10km of coast",
+                  "names": {
+                    "en": "Built-up area within 10km of coast"
+                  },
+                  "parent": "COASTAL_LCC"
+                },
+                {
+                  "id": "C_IND",
+                  "order": 42,
+                  "name": "Authorisation to operate outside the EEZ",
+                  "names": {
+                    "en": "Authorisation to operate outside the EEZ"
+                  },
+                  "parent": "OCEAN_IUU_IND"
+                },
+                {
+                  "id": "PINE_OCEAN_TOT",
+                  "order": 53,
+                  "name": "Ocean-related policy instruments",
+                  "names": {
+                    "en": "Ocean-related policy instruments"
+                  },
+                  "parent": "POLICY_INSTRUMENTS"
+                },
+                {
+                  "id": "PINE_OCEAN_TAX",
+                  "order": 47,
+                  "name": "Ocean-related taxes",
+                  "names": {
+                    "en": "Ocean-related taxes"
+                  },
+                  "parent": "POLICY_INSTRUMENTS"
+                },
+                {
+                  "id": "COASTAL_100_POP",
+                  "order": 85,
+                  "name": "Population resident within 100km of coast",
+                  "names": {
+                    "en": "Population resident within 100km of coast"
+                  },
+                  "parent": "POPULATION"
+                },
+                {
+                  "id": "RD_339OCEUN",
+                  "order": 25,
+                  "name": "Unallocated ocean energy R&D",
+                  "names": {
+                    "en": "Unallocated ocean energy R&D"
+                  },
+                  "parent": "OCEAN_RND"
+                },
+                {
+                  "id": "PAT_O_OCEANH",
+                  "order": 37,
+                  "name": "Ocean-related high value ENVTECH inventions",
+                  "names": {
+                    "en": "Ocean-related high value ENVTECH inventions"
+                  },
+                  "parent": "OCEAN_PATENTS"
+                },
+                {
+                  "id": "PAT_O_CCMFISH",
+                  "order": 34,
+                  "name": "Climate change mitigation inventions in maritime fishing and aquaculture",
+                  "names": {
+                    "en": "Climate change mitigation inventions in maritime fishing and aquaculture"
+                  },
+                  "parent": "OCEAN_PATENTS"
+                },
+                "... +76 more"
+              ]
+            },
+            {
+              "id": "UNIT_MEASURE",
+              "name": "Unit of measure",
+              "names": {
+                "en": "Unit of measure"
+              },
+              "keyPosition": 3,
+              "roles": [
+                "UNIT_MEASURE"
+              ],
+              "values": [
+                {
+                  "id": "KM2",
+                  "order": 20,
+                  "name": "Square kilometres",
+                  "names": {
+                    "en": "Square kilometres"
+                  },
+                  "annotations": [
+                    284
+                  ]
+                },
+                {
+                  "id": "PT_AR",
+                  "order": 567,
+                  "name": "Percentage of area",
+                  "names": {
+                    "en": "Percentage of area"
+                  },
+                  "annotations": [
+                    285
+                  ]
+                },
+                {
+                  "id": "PT_LAR",
+                  "order": 572,
+                  "name": "Percentage of land area",
+                  "names": {
+                    "en": "Percentage of land area"
+                  },
+                  "annotations": [
+                    286
+                  ]
+                },
+                {
+                  "id": "0_TO_1",
+                  "order": 699,
+                  "name": "0-1 scale",
+                  "names": {
+                    "en": "0-1 scale"
+                  },
+                  "annotations": [
+                    287
+                  ]
+                },
+                {
+                  "id": "INST_PL",
+                  "order": 58,
+                  "name": "Policy instruments",
+                  "names": {
+                    "en": "Policy instruments"
+                  },
+                  "annotations": [
+                    288
+                  ]
+                },
+                {
+                  "id": "PS",
+                  "order": 80,
+                  "name": "Persons",
+                  "names": {
+                    "en": "Persons"
+                  },
+                  "annotations": [
+                    289
+                  ]
+                },
+                {
+                  "id": "USD_PPP",
+                  "order": 284,
+                  "name": "US dollars, PPP converted",
+                  "names": {
+                    "en": "US dollars, PPP converted"
+                  },
+                  "annotations": [
+                    290
+                  ]
+                },
+                {
+                  "id": "PT_INV_HV",
+                  "order": 690,
+                  "name": "Percentage of high-value inventions",
+                  "names": {
+                    "en": "Percentage of high-value inventions"
+                  },
+                  "annotations": [
+                    291
+                  ]
+                },
+                {
+                  "id": "INV",
+                  "order": 66,
+                  "name": "Inventions",
+                  "names": {
+                    "en": "Inventions"
+                  },
+                  "annotations": [
+                    185
+                  ]
+                },
+                {
+                  "id": "PT_POP",
+                  "order": 517,
+                  "name": "Percentage of population",
+                  "names": {
+                    "en": "Percentage of population"
+                  },
+                  "annotations": [
+                    292
+                  ]
+                },
+                "... +22 more"
+              ]
+            },
+            {
+              "id": "DESIGNATION",
+              "name": "IUCN management categories",
+              "names": {
+                "en": "IUCN management categories"
+              },
+              "keyPosition": 4,
+              "roles": [
+                "DESIGNATION"
+              ],
+              "values": [
+                {
+                  "id": "_Z",
+                  "order": 22,
+                  "name": "Not applicable",
+                  "names": {
+                    "en": "Not applicable"
+                  },
+                  "annotations": [
+                    313
+                  ]
+                },
+                {
+                  "id": "IV__VI_X",
+                  "order": 17,
+                  "name": "Habitat or species management areas, protected landscapes and seascapes, protected areas with sustainable use of natural resources and areas with no management category provided",
+                  "names": {
+                    "en": "Habitat or species management areas, protected landscapes and seascapes, protected areas with sustainable use of natural resources and areas with no management category provided"
+                  },
+                  "annotations": [
+                    314
+                  ]
+                },
+                {
+                  "id": "ALL_EXC_P",
+                  "order": 9,
+                  "name": "All, excluding data recorded as points",
+                  "names": {
+                    "en": "All, excluding data recorded as points"
+                  },
+                  "annotations": [
+                    315
+                  ]
+                },
+                {
+                  "id": "I__III",
+                  "order": 12,
+                  "name": "Strict nature reserves, wilderness areas, national parks and natural monuments",
+                  "names": {
+                    "en": "Strict nature reserves, wilderness areas, national parks and natural monuments"
+                  },
+                  "annotations": [
+                    316
+                  ]
+                },
+                {
+                  "id": "ALL_INC_P",
+                  "order": 8,
+                  "name": "All, including data recorded as points",
+                  "names": {
+                    "en": "All, including data recorded as points"
+                  },
+                  "annotations": [
+                    317
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "RET_PERIOD",
+              "name": "Return periods",
+              "names": {
+                "en": "Return periods"
+              },
+              "keyPosition": 5,
+              "roles": [
+                "RET_PERIOD"
+              ],
+              "values": [
+                {
+                  "id": "_Z",
+                  "order": 7,
+                  "name": "Not applicable",
+                  "names": {
+                    "en": "Not applicable"
+                  },
+                  "annotations": [
+                    318
+                  ]
+                },
+                {
+                  "id": "Y_25",
+                  "order": 2,
+                  "name": "25 years",
+                  "names": {
+                    "en": "25 years"
+                  },
+                  "annotations": [
+                    319
+                  ]
+                },
+                {
+                  "id": "Y_100",
+                  "order": 4,
+                  "name": "100 years",
+                  "names": {
+                    "en": "100 years"
+                  },
+                  "annotations": [
+                    320
+                  ]
+                },
+                {
+                  "id": "Y_50",
+                  "order": 3,
+                  "name": "50 years",
+                  "names": {
+                    "en": "50 years"
+                  },
+                  "annotations": [
+                    321
+                  ]
+                },
+                {
+                  "id": "Y_10",
+                  "order": 0,
+                  "name": "10 years",
+                  "names": {
+                    "en": "10 years"
+                  },
+                  "annotations": [
+                    322
+                  ]
+                }
+              ]
+            }
+          ],
+          "observation": [
+            {
+              "id": "TIME_PERIOD",
+              "name": "Time period",
+              "names": {
+                "en": "Time period"
+              },
+              "keyPosition": 6,
+              "roles": [
+                "TIME_PERIOD"
+              ],
+              "values": [
+                {
+                  "start": "2030-01-01T00:00:00",
+                  "end": "2030-12-31T23:59:59",
+                  "id": "2030",
+                  "name": "2030",
+                  "names": {
+                    "en-US": "2030"
+                  }
+                },
+                {
+                  "start": "2018-01-01T00:00:00",
+                  "end": "2018-12-31T23:59:59",
+                  "id": "2018",
+                  "name": "2018",
+                  "names": {
+                    "en-US": "2018"
+                  }
+                },
+                {
+                  "start": "2025-01-01T00:00:00",
+                  "end": "2025-12-31T23:59:59",
+                  "id": "2025",
+                  "name": "2025",
+                  "names": {
+                    "en-US": "2025"
+                  }
+                },
+                {
+                  "start": "2020-01-01T00:00:00",
+                  "end": "2020-12-31T23:59:59",
+                  "id": "2020",
+                  "name": "2020",
+                  "names": {
+                    "en-US": "2020"
+                  }
+                },
+                {
+                  "start": "2024-01-01T00:00:00",
+                  "end": "2024-12-31T23:59:59",
+                  "id": "2024",
+                  "name": "2024",
+                  "names": {
+                    "en-US": "2024"
+                  }
+                },
+                {
+                  "start": "2022-01-01T00:00:00",
+                  "end": "2022-12-31T23:59:59",
+                  "id": "2022",
+                  "name": "2022",
+                  "names": {
+                    "en-US": "2022"
+                  }
+                },
+                {
+                  "start": "2019-01-01T00:00:00",
+                  "end": "2019-12-31T23:59:59",
+                  "id": "2019",
+                  "name": "2019",
+                  "names": {
+                    "en-US": "2019"
+                  }
+                },
+                {
+                  "start": "2023-01-01T00:00:00",
+                  "end": "2023-12-31T23:59:59",
+                  "id": "2023",
+                  "name": "2023",
+                  "names": {
+                    "en-US": "2023"
+                  }
+                },
+                {
+                  "start": "2021-01-01T00:00:00",
+                  "end": "2021-12-31T23:59:59",
+                  "id": "2021",
+                  "name": "2021",
+                  "names": {
+                    "en-US": "2021"
+                  }
+                },
+                {
+                  "start": "2017-01-01T00:00:00",
+                  "end": "2017-12-31T23:59:59",
+                  "id": "2017",
+                  "name": "2017",
+                  "names": {
+                    "en-US": "2017"
+                  }
+                },
+                "... +26 more"
+              ]
+            }
+          ]
+        },
+        "attributes": {
+          "dataSet": [],
+          "series": [
+            {
+              "id": "PRICE_BASE",
+              "name": "Price base",
+              "names": {
+                "en": "Price base"
+              },
+              "roles": [
+                "PRICE_BASE"
+              ],
+              "relationship": {
+                "dimensions": [
+                  "REF_AREA",
+                  "FREQ",
+                  "MEASURE",
+                  "UNIT_MEASURE",
+                  "DESIGNATION",
+                  "RET_PERIOD"
+                ]
+              },
+              "values": [
+                {
+                  "id": "Q",
+                  "order": 5,
+                  "name": "Constant prices",
+                  "names": {
+                    "en": "Constant prices"
+                  },
+                  "annotations": [
+                    323
+                  ]
+                },
+                {
+                  "id": "V",
+                  "order": 10,
+                  "name": "Current prices",
+                  "names": {
+                    "en": "Current prices"
+                  },
+                  "annotations": [
+                    324
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "REF_YEAR_PRICE",
+              "name": "Price reference year",
+              "names": {
+                "en": "Price reference year"
+              },
+              "roles": [
+                "REF_YEAR_PRICE"
+              ],
+              "relationship": {
+                "dimensions": [
+                  "RET_PERIOD",
+                  "DESIGNATION",
+                  "UNIT_MEASURE",
+                  "MEASURE",
+                  "FREQ",
+                  "REF_AREA"
+                ]
+              },
+              "values": [
+                {
+                  "id": "2023",
+                  "name": "2023",
+                  "names": {
+                    "en-US": "2023"
+                  }
+                },
+                {
+                  "id": "2015",
+                  "name": "2015",
+                  "names": {
+                    "en-US": "2015"
+                  }
+                },
+                {
+                  "id": "2020",
+                  "name": "2020",
+                  "names": {
+                    "en-US": "2020"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "UNIT_MULT",
+              "name": "Unit multiplier",
+              "names": {
+                "en": "Unit multiplier"
+              },
+              "roles": [
+                "UNIT_MULT"
+              ],
+              "relationship": {
+                "dimensions": [
+                  "REF_AREA",
+                  "FREQ",
+                  "MEASURE",
+                  "UNIT_MEASURE",
+                  "DESIGNATION",
+                  "RET_PERIOD"
+                ]
+              },
+              "values": [
+                {
+                  "id": "0",
+                  "order": 0,
+                  "name": "Units",
+                  "names": {
+                    "en": "Units"
+                  }
+                },
+                {
+                  "id": "6",
+                  "order": 6,
+                  "name": "Millions",
+                  "names": {
+                    "en": "Millions"
+                  }
+                },
+                {
+                  "id": "3",
+                  "order": 3,
+                  "name": "Thousands",
+                  "names": {
+                    "en": "Thousands"
+                  }
+                }
+              ]
+            }
+          ],
+          "observation": [
+            {
+              "id": "DECIMALS",
+              "name": "Decimals",
+              "names": {
+                "en": "Decimals"
+              },
+              "roles": [
+                "DECIMALS"
+              ],
+              "relationship": {
+                "primaryMeasure": "OBS_VALUE"
+              },
+              "values": [
+                {
+                  "id": "2",
+                  "order": 2,
+                  "name": "Two",
+                  "names": {
+                    "en": "Two"
+                  }
+                },
+                {
+                  "id": "0",
+                  "order": 0,
+                  "name": "Zero",
+                  "names": {
+                    "en": "Zero"
+                  }
+                },
+                {
+                  "id": "1",
+                  "order": 1,
+                  "name": "One",
+                  "names": {
+                    "en": "One"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "OBS_STATUS",
+              "name": "Observation status",
+              "names": {
+                "en": "Observation status"
+              },
+              "roles": [
+                "OBS_STATUS"
+              ],
+              "relationship": {
+                "primaryMeasure": "OBS_VALUE"
+              },
+              "values": [
+                {
+                  "id": "A",
+                  "order": 0,
+                  "name": "Normal value",
+                  "names": {
+                    "en": "Normal value"
+                  }
+                },
+                {
+                  "id": "P",
+                  "order": 11,
+                  "name": "Provisional value",
+                  "names": {
+                    "en": "Provisional value"
+                  }
+                },
+                {
+                  "id": "I",
+                  "order": 6,
+                  "name": "Value imputed by a receiving agency",
+                  "names": {
+                    "en": "Value imputed by a receiving agency"
+                  }
+                },
+                {
+                  "id": "O",
+                  "order": 9,
+                  "name": "Missing value",
+                  "names": {
+                    "en": "Missing value"
+                  }
+                },
+                {
+                  "id": "E",
+                  "order": 3,
+                  "name": "Estimated value",
+                  "names": {
+                    "en": "Estimated value"
+                  }
+                },
+                {
+                  "id": "Q",
+                  "order": 15,
+                  "name": "Missing value; suppressed",
+                  "names": {
+                    "en": "Missing value; suppressed"
+                  }
+                },
+                {
+                  "id": "U",
+                  "order": 18,
+                  "name": "Low reliability",
+                  "names": {
+                    "en": "Low reliability"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "OBS_STATUS_2",
+              "name": "Observation status 2",
+              "names": {
+                "en": "Observation status 2"
+              },
+              "roles": [
+                "OBS_STATUS_2"
+              ],
+              "relationship": {
+                "primaryMeasure": "OBS_VALUE"
+              },
+              "values": [
+                {
+                  "id": "O",
+                  "order": 9,
+                  "name": "Missing value",
+                  "names": {
+                    "en": "Missing value"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "annotations": [
+          {
+            "type": "NonProductionDataflow",
+            "text": "true",
+            "texts": {
+              "en": "true"
+            }
+          },
+          {
+            "id": "@SDMX",
+            "title": "MEASURE,DESIGNATION,RET_PERIOD,UNIT_MEASURE",
+            "type": "LAYOUT_ROW"
+          },
+          {
+            "id": "@SDMX",
+            "title": "TIME_PERIOD",
+            "type": "LAYOUT_COLUMN"
+          },
+          {
+            "title": "OBS_STATUS",
+            "type": "LAYOUT_FLAG"
+          },
+          {
+            "id": "@SDMX",
+            "title": "OBS_STATUS=A,FREQ=A,UNIT_MULT=0,UNIT_MEASURE=_X,DEGISNATION=(_T+_Z),RET_PERIOD=(_T+_Z),REF_AREA=WXOECD",
+            "type": "NOT_DISPLAYED"
+          },
+          {
+            "id": "@SDMX",
+            "title": "REF_AREA=AUS,TIME_PERIOD_START=2017",
+            "type": "DEFAULT"
+          },
+          {
+            "title": "8000",
+            "type": "MAX_TABLE_DATA"
+          },
+          {
+            "title": "COMBINED_MEASURE:MEASURE,DESIGNATION,RET_PERIOD;COMBINED_UNIT_MEASURE:UNIT_MEASURE,UNIT_MULT,PRICE_BASE,REF_YEAR_PRICE",
+            "type": "COMBINED_CONCEPTS",
+            "text": "COMBINED_MEASURE:Combined measure;COMBINED_UNIT_MEASURE:Combined unit of measure",
+            "texts": {
+              "en": "COMBINED_MEASURE:Combined measure;COMBINED_UNIT_MEASURE:Combined unit of measure"
+            }
+          },
+          {
+            "title": "urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=OECD:MSD_REF_METADATA(1.0)",
+            "type": "METADATA"
+          },
+          {
+            "id": "@SDMX",
+            "type": "ORDER",
+            "text": "2240",
+            "texts": {
+              "en": "2240"
+            }
+          },
+          "... +315 more"
+        ]
+      }
+    },
+    "errors": []
+  }
+}

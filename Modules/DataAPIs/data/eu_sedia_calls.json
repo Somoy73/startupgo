@@ -1,0 +1,996 @@
+{
+  "params": {
+    "text": "ocean",
+    "pageSize": 5
+  },
+  "full_size_bytes": 50295,
+  "sample": {
+    "apiVersion": "2.157",
+    "terms": "ocean",
+    "responseTime": 67,
+    "totalResults": 121,
+    "pageNumber": 1,
+    "pageSize": 5,
+    "sort": "relevance",
+    "groupByField": "sortStatus",
+    "queryLanguage": {
+      "language": "en",
+      "probability": 0.0
+    },
+    "spellingSuggestion": "<b>open</b>",
+    "bestBets": [],
+    "results": [
+      {
+        "apiVersion": "2.157",
+        "reference": "45741635HORIZONCoordinationandSupportActions1673913600000",
+        "url": "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-MISS-2023-OCEAN-01-11.json",
+        "contentType": "text/plain",
+        "language": "en",
+        "databaseLabel": "",
+        "summary": "Ocean &amp; water and arts: the contribution of creative sectors to Mission Ocean and waters",
+        "weight": 24.4857,
+        "groupById": "1",
+        "content": "<b>Ocean</b> &amp; water and arts: the contribution of creative sectors to Mission <b>Ocean</b> and waters",
+        "accessRestriction": false,
+        "checksum": "56349E5AC8F6AE824032E15E81DBE35B27043474849C5A251AB4DBB654AD2238",
+        "metadata": {
+          "es_SortDate": [
+            "2023-01-17T00:00:00.000+0000"
+          ],
+          "keywords": [
+            "[\"Ocean literacy\",\"Cultural heritage - Culture\",\"Promotion of European artists\",\"Creative industries\",\"Social sciences and humanities\",\"New European Bauhaus\",\"Visual arts, performing arts, design\",\"Ocean sustainability and blue economy\",\"Film literacy - Media\",\"Design and applied arts - Culture\",\"Visual arts - Culture\",\"Mission ocean and waters\",\"mobilisation of citizens\",\"arts for the ocean\",\"emotional link with ocean\",\"Mission ocean\",\"Mission restore our ocean and waters by 2030\",\"creative arts\",\"visual arts\",\"emotional link with water\"]"
+          ],
+          "sortStatus": [
+            "1"
+          ],
+          "ccmTags2": [
+            "HCCM_31049416",
+            "HCCM_31101467",
+            "HCCM_43318286",
+            "HCCM_31051192",
+            "HCCM_31101525",
+            "HCCM_31101440",
+            "HCCM_31101452",
+            "HCCM_31056887",
+            "HCCM_22000188",
+            "HTAG_000013118",
+            "... +130 more"
+          ],
+          "language": [
+            "en"
+          ],
+          "type": [
+            "1"
+          ],
+          "title": [
+            "Ocean & water and arts: the contribution of creative sectors to Mission Ocean and waters"
+          ],
+          "esST_checksum": [
+            "56349E5AC8F6AE824032E15E81DBE35B27043474849C5A251AB4DBB654AD2238"
+          ],
+          "focusArea": [],
+          "cftId": [
+            "0"
+          ],
+          "typeOfMGAs": [
+            "43027846"
+          ],
+          "esST_FileName": [
+            "file.txt"
+          ],
+          "callIdentifier": [
+            "HORIZON-MISS-2023-OCEAN-01"
+          ],
+          "ccm2Id": [
+            "45741635"
+          ],
+          "callccm2Id": [
+            "45741786"
+          ],
+          "esIN_ccmTags": [
+            "HCCM_31049416",
+            "HCCM_31101467",
+            "HCCM_43318286",
+            "HCCM_31051192",
+            "HCCM_31101525",
+            "HCCM_31101440",
+            "HCCM_31101452",
+            "HCCM_31056887",
+            "HCCM_22000188",
+            "HTAG_000013118",
+            "... +130 more"
+          ],
+          "DATASOURCE": [
+            "SEDIA_PRD_CENTRICITY"
+          ],
+          "frameworkProgramme": [
+            "43108390"
+          ],
+          "identifier": [
+            "HORIZON-MISS-2023-OCEAN-01-11"
+          ],
+          "es_ContentType": [
+            "text/plain"
+          ],
+          "programmeDivision": [
+            "43118846",
+            "43121563",
+            "43120821",
+            "43108541",
+            "43120193"
+          ],
+          "crossCuttingPriorities": [
+            "SSH",
+            "NEB",
+            "OCEAN"
+          ],
+          "programmePeriod": [
+            "2021 - 2027"
+          ],
+          "deadlineDate": [
+            "2023-09-20T17:00:00.000+0000"
+          ],
+          "ccmTags": [
+            "HCCM_31049416",
+            "HCCM_31101467",
+            "HCCM_43318286",
+            "HCCM_31051192",
+            "HCCM_31101525",
+            "HCCM_31101440",
+            "HCCM_31101452",
+            "HCCM_31056887",
+            "HCCM_22000188",
+            "HTAG_000013118",
+            "... +130 more"
+          ],
+          "esDA_IngestDate": [
+            "2023-02-06T10:58:46.502+0100"
+          ],
+          "typesOfAction": [
+            "HORIZON Coordination and Support Actions"
+          ],
+          "es_Combine": [
+            "1"
+          ],
+          "corporate-search-version": [
+            "102"
+          ],
+          "url": [
+            "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-MISS-2023-OCEAN-01-11.json"
+          ],
+          "esST_URL": [
+            "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-MISS-2023-OCEAN-01-11.json"
+          ],
+          "cenTagsA": [
+            "TOPICS-041015",
+            "TOPICS-041016",
+            "TOPICS-001820",
+            "TOPICS-034810",
+            "TOPICS-001886",
+            "TOPICS-000374",
+            "TOPICS-041017",
+            "TOPICS-001881",
+            "TOPICS-041018",
+            "TOPICS-016095",
+            "... +13 more"
+          ],
+          "esDA_QueueDate": [
+            "2023-02-06T10:58:27.420+0100"
+          ],
+          "mission": [
+            "44798833"
+          ],
+          "datasource": [
+            "SEDIA_PRD_CENTRICITY"
+          ],
+          "missionGroup": [
+            "45355169"
+          ],
+          "startDate": [
+            "2023-01-17T00:00:00.000+0000"
+          ],
+          "esIN_ccmTags2": [
+            "TTG_00034152",
+            "TTG_00134496",
+            "TTG_00074466",
+            "TTG_00032924",
+            "TCM_00127876",
+            "TCM_00033673",
+            "TTG_00128169",
+            "TTG_00135928",
+            "TTG_00035153",
+            "TTG_00036326",
+            "... +8 more"
+          ],
+          "deadlineModel": [
+            "single-stage"
+          ],
+          "status": [
+            "31094502"
+          ]
+        },
+        "enrichedMetadata": {},
+        "children": [],
+        "highlightedFragments": [
+          "<b>Ocean</b> &amp; water and arts: the contribution of creative sectors to Mission <b>Ocean</b> and waters"
+        ],
+        "citation": "Ocean & water and arts: the contribution of creative sectors to Mission Ocean and waters. Available at: https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-MISS-2023-OCEAN-01-11.json"
+      },
+      {
+        "apiVersion": "2.157",
+        "reference": "45642534HORIZONResearchandInnovationActions1726531200000",
+        "url": "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL5-2024-D3-02-04.json",
+        "contentType": "text/plain",
+        "language": "en",
+        "databaseLabel": "",
+        "summary": "Critical technologies for the future ocean energy farms",
+        "weight": 22.473349,
+        "groupById": "2",
+        "content": "Critical technologies for the future <b>ocean</b> energy farms",
+        "accessRestriction": false,
+        "checksum": "9D9B9A283AF7DB08546E95600B73EED777DDB6C8F07EBAAA0E41D2DA6FD1776F",
+        "metadata": {
+          "es_SortDate": [
+            "2024-09-17T00:00:00.000+0000"
+          ],
+          "keywords": [
+            "[\"Artificial Intelligence\",\"Ocean energy\",\"Renewable energy sources - general\",\"Digital Agenda\",\"Ocean sustainability and blue economy\",\"tidal energy\",\"Ocean energy\",\"wave energy\",\"renewable electricity\",\"offshore\",\"zero emission technologies\"]"
+          ],
+          "sortStatus": [
+            "2"
+          ],
+          "ccmTags2": [
+            "HCCM_31049290",
+            "HCCM_31049296",
+            "HTAG_000021915",
+            "HCCM_31049291",
+            "HCCM_31049296",
+            "HCCM_31055452",
+            "HCCM_31104580",
+            "HCCM_31055100",
+            "HTITLE_000016256",
+            "MTAGS_000031438",
+            "... +63 more"
+          ],
+          "destination": [
+            "44799063"
+          ],
+          "language": [
+            "en"
+          ],
+          "type": [
+            "1"
+          ],
+          "title": [
+            "Critical technologies for the future ocean energy farms"
+          ],
+          "esST_checksum": [
+            "9D9B9A283AF7DB08546E95600B73EED777DDB6C8F07EBAAA0E41D2DA6FD1776F"
+          ],
+          "focusArea": [],
+          "cftId": [
+            "0"
+          ],
+          "typeOfMGAs": [
+            "43027846"
+          ],
+          "esST_FileName": [
+            "file.txt"
+          ],
+          "callIdentifier": [
+            "HORIZON-CL5-2024-D3-02"
+          ],
+          "ccm2Id": [
+            "45642534"
+          ],
+          "callccm2Id": [
+            "45706332"
+          ],
+          "destinationGroup": [
+            "45355307"
+          ],
+          "esIN_ccmTags": [
+            "HCCM_31049290",
+            "HCCM_31049296",
+            "HTAG_000021915",
+            "HCCM_31049291",
+            "HCCM_31049296",
+            "HCCM_31055452",
+            "HCCM_31104580",
+            "HCCM_31055100",
+            "HTITLE_000016256",
+            "MTAGS_000031438",
+            "... +63 more"
+          ],
+          "DATASOURCE": [
+            "SEDIA_PRD_CENTRICITY"
+          ],
+          "frameworkProgramme": [
+            "43108390"
+          ],
+          "identifier": [
+            "HORIZON-CL5-2024-D3-02-04"
+          ],
+          "es_ContentType": [
+            "text/plain"
+          ],
+          "programmeDivision": [
+            "43120835",
+            "43120821",
+            "43108541"
+          ],
+          "crossCuttingPriorities": [
+            "AI",
+            "DigitalAgenda",
+            "OCEAN"
+          ],
+          "programmePeriod": [
+            "2021 - 2027"
+          ],
+          "deadlineDate": [
+            "2025-01-21T17:00:00.000+0000"
+          ],
+          "ccmTags": [
+            "HCCM_31049290",
+            "HCCM_31049296",
+            "HTAG_000021915",
+            "HCCM_31049291",
+            "HCCM_31049296",
+            "HCCM_31055452",
+            "HCCM_31104580",
+            "HCCM_31055100",
+            "HTITLE_000016256",
+            "MTAGS_000031438",
+            "... +63 more"
+          ],
+          "esDA_IngestDate": [
+            "2023-04-03T00:54:22.095+0200"
+          ],
+          "typesOfAction": [
+            "HORIZON  Research and Innovation Actions"
+          ],
+          "es_Combine": [
+            "2"
+          ],
+          "corporate-search-version": [
+            "102"
+          ],
+          "url": [
+            "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL5-2024-D3-02-04.json"
+          ],
+          "esST_URL": [
+            "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL5-2024-D3-02-04.json"
+          ],
+          "cenTagsA": [
+            "TOPICS-044806",
+            "TOPICS-044807",
+            "TOPICS-001360",
+            "TOPICS-033769",
+            "TOPICS-001886",
+            "TOPICS-000064",
+            "TOPICS-001880",
+            "TOPICS-012085",
+            "TOPICS-007708",
+            "TOPICS-011156",
+            "... +3 more"
+          ],
+          "esDA_QueueDate": [
+            "2023-04-03T00:54:07.543+0200"
+          ],
+          "datasource": [
+            "SEDIA_PRD_CENTRICITY"
+          ],
+          "startDate": [
+            "2024-09-17T00:00:00.000+0000"
+          ],
+          "esIN_ccmTags2": [
+            "TTL_00017943",
+            "TTG_00000320",
+            "TTG_00000322",
+            "TTG_00000358",
+            "TTG_00002435",
+            "TTG_00002436",
+            "TTG_00017951",
+            "TCM_00000227",
+            "TCM_00001421",
+            "TCK_062417",
+            "... +9 more"
+          ],
+          "deadlineModel": [
+            "single-stage"
+          ],
+          "status": [
+            "31094501"
+          ]
+        },
+        "enrichedMetadata": {},
+        "children": [],
+        "highlightedFragments": [
+          "Critical technologies for the future <b>ocean</b> energy farms"
+        ],
+        "citation": "Critical technologies for the future ocean energy farms. Available at: https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL5-2024-D3-02-04.json"
+      },
+      {
+        "apiVersion": "2.157",
+        "reference": "45741198HORIZONResearchandInnovationActions1673913600000",
+        "url": "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-MISS-2023-OCEAN-01-08.json",
+        "contentType": "text/plain",
+        "language": "en",
+        "databaseLabel": "",
+        "summary": "Integration of socio-ecological models into the Digital Twin Ocean",
+        "weight": 22.114021,
+        "groupById": "1",
+        "content": "Integration of socio-ecological models into the Digital Twin <b>Ocean</b>",
+        "accessRestriction": false,
+        "checksum": "229EAE28D9AA2619BD52CB41D95F406C72C29E1073591364494671783B19E8FC",
+        "metadata": {
+          "es_SortDate": [
+            "2023-01-17T00:00:00.000+0000"
+          ],
+          "keywords": [
+            "[\"European Maritime and Fisheries Fund\",\"Marine Ecology\",\"Maritime Policy\",\"Marine and Ocean Management\",\"International Cooperation\",\"Digital Agenda\",\"Ocean Observation and Monitoring\",\"Ocean sustainability and blue economy\",\"Ocean and Climate Change\",\"Marine Environment\",\"EOSC and FAIR data\",\"Artificial Intelligence\",\"Environmental biology\",\"Marine Ecosystems\",\"Marine Knowledge and Research\",\"Digital Twin Ocean\",\"Mission ocean\",\"socio-ecological models\",\"Mission ocean and waters\",\"Mission restore our ocean and waters by 2030\"]"
+          ],
+          "sortStatus": [
+            "1"
+          ],
+          "ccmTags2": [
+            "HCCM_31104536",
+            "HCCM_31104514",
+            "HCCM_31104531",
+            "HCCM_31104523",
+            "HCCM_31104528",
+            "HCCM_31104512",
+            "HCCM_31058401",
+            "HCCM_31048677",
+            "HCCM_31104546",
+            "HCCM_31104532",
+            "... +91 more"
+          ],
+          "language": [
+            "en"
+          ],
+          "type": [
+            "1"
+          ],
+          "title": [
+            "Integration of socio-ecological models into the Digital Twin Ocean"
+          ],
+          "esST_checksum": [
+            "229EAE28D9AA2619BD52CB41D95F406C72C29E1073591364494671783B19E8FC"
+          ],
+          "focusArea": [],
+          "cftId": [
+            "0"
+          ],
+          "typeOfMGAs": [
+            "43027846"
+          ],
+          "esST_FileName": [
+            "file.txt"
+          ],
+          "callIdentifier": [
+            "HORIZON-MISS-2023-OCEAN-01"
+          ],
+          "ccm2Id": [
+            "45741198"
+          ],
+          "callccm2Id": [
+            "45741786"
+          ],
+          "esIN_ccmTags": [
+            "HCCM_31104536",
+            "HCCM_31104514",
+            "HCCM_31104531",
+            "HCCM_31104523",
+            "HCCM_31104528",
+            "HCCM_31104512",
+            "HCCM_31058401",
+            "HCCM_31048677",
+            "HCCM_31104546",
+            "HCCM_31104532",
+            "... +91 more"
+          ],
+          "DATASOURCE": [
+            "SEDIA_PRD_CENTRICITY"
+          ],
+          "frameworkProgramme": [
+            "43108390"
+          ],
+          "identifier": [
+            "HORIZON-MISS-2023-OCEAN-01-08"
+          ],
+          "es_ContentType": [
+            "text/plain"
+          ],
+          "programmeDivision": [
+            "43118846",
+            "43121563",
+            "43120821",
+            "43108541",
+            "43120193"
+          ],
+          "crossCuttingPriorities": [
+            "EC-WORLD",
+            "DigitalAgenda",
+            "OCEAN",
+            "EoscAndFairData",
+            "AI"
+          ],
+          "programmePeriod": [
+            "2021 - 2027"
+          ],
+          "deadlineDate": [
+            "2023-09-20T17:00:00.000+0000"
+          ],
+          "ccmTags": [
+            "HCCM_31104536",
+            "HCCM_31104514",
+            "HCCM_31104531",
+            "HCCM_31104523",
+            "HCCM_31104528",
+            "HCCM_31104512",
+            "HCCM_31058401",
+            "HCCM_31048677",
+            "HCCM_31104546",
+            "HCCM_31104532",
+            "... +91 more"
+          ],
+          "esDA_IngestDate": [
+            "2023-02-06T10:58:34.781+0100"
+          ],
+          "typesOfAction": [
+            "HORIZON  Research and Innovation Actions"
+          ],
+          "es_Combine": [
+            "1"
+          ],
+          "corporate-search-version": [
+            "102"
+          ],
+          "url": [
+            "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-MISS-2023-OCEAN-01-08.json"
+          ],
+          "esST_URL": [
+            "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-MISS-2023-OCEAN-01-08.json"
+          ],
+          "cenTagsA": [
+            "TOPICS-044420",
+            "TOPICS-000056",
+            "TOPICS-001886",
+            "TOPICS-012152",
+            "TOPICS-001881",
+            "TOPICS-044421",
+            "TOPICS-016095",
+            "TOPICS-016100",
+            "TOPICS-000825",
+            "TOPICS-005606",
+            "... +8 more"
+          ],
+          "esDA_QueueDate": [
+            "2023-02-06T10:58:26.638+0100"
+          ],
+          "mission": [
+            "44798833"
+          ],
+          "datasource": [
+            "SEDIA_PRD_CENTRICITY"
+          ],
+          "missionGroup": [
+            "45355169"
+          ],
+          "startDate": [
+            "2023-01-17T00:00:00.000+0000"
+          ],
+          "esIN_ccmTags2": [
+            "TTL_00043731",
+            "TTG_00043742",
+            "TTG_00043746",
+            "TCM_00019853",
+            "TCM_00035856",
+            "TCM_00034759",
+            "TCM_00026347",
+            "TCM_00019857",
+            "TCM_00019860",
+            "TCM_00033631",
+            "... +16 more"
+          ],
+          "deadlineModel": [
+            "single-stage"
+          ],
+          "status": [
+            "31094502"
+          ]
+        },
+        "enrichedMetadata": {},
+        "children": [],
+        "highlightedFragments": [
+          "Integration of socio-ecological models into the Digital Twin <b>Ocean</b>"
+        ],
+        "citation": "Integration of socio-ecological models into the Digital Twin Ocean. Available at: https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-MISS-2023-OCEAN-01-08.json"
+      },
+      {
+        "apiVersion": "2.157",
+        "reference": "45656575HORIZONResearchandInnovationActions1697500800000",
+        "url": "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL6-2024-CLIMATE-01-6.json",
+        "contentType": "text/plain",
+        "language": "en",
+        "databaseLabel": "",
+        "summary": "Ocean models for seasonal to decadal regional climate impacts and feedbacks",
+        "weight": 21.618979,
+        "groupById": "2",
+        "content": "<b>Ocean</b> models for seasonal to decadal regional climate impacts and feedbacks",
+        "accessRestriction": false,
+        "checksum": "C4827AAE0C8EB9B485D58180603BA6F7759C1A36E19DF3CBBCCC7E95AB468C04",
+        "metadata": {
+          "es_SortDate": [
+            "2023-10-17T00:00:00.000+0000"
+          ],
+          "keywords": [
+            "[\"Digital services\",\"Ocean Observation and Monitoring\",\"Mediterranean\",\"Risks assessment, modelling and impact reduction\",\"North Sea\",\"Sea-Basin Strategies\",\"Ocean sustainability and blue economy\",\"International Cooperation\",\"Ocean observing systems and operational forecastin\",\"EOSC and FAIR data\",\"Oceanography (physical, chemical, biological, geol\",\"Baltic Sea\",\"Digital Agenda\",\"Research\",\"Atlantic Ocean\",\"Ocean and Climate Change\",\"Mediterranean Sea\",\"International Ocean Governance\",\"Black Sea\",\"Adriatic and Ionian Seas\",\"Destination Earth\",\"ocean observation\",\"UN Decade of Ocean Science\",\"C... [828 chars]"
+          ],
+          "sortStatus": [
+            "2"
+          ],
+          "ccmTags2": [
+            "HCCM_31049881",
+            "HCCM_31104596",
+            "HCCM_31104593",
+            "HCCM_31048683",
+            "HCCM_31055723",
+            "HCCM_31104594",
+            "HCCM_31050000",
+            "HCCM_31104516",
+            "HCCM_31104514",
+            "HCCM_31073707",
+            "... +108 more"
+          ],
+          "destination": [
+            "44799087"
+          ],
+          "language": [
+            "en"
+          ],
+          "type": [
+            "1"
+          ],
+          "title": [
+            "Ocean models for seasonal to decadal regional climate impacts and feedbacks"
+          ],
+          "esST_checksum": [
+            "C4827AAE0C8EB9B485D58180603BA6F7759C1A36E19DF3CBBCCC7E95AB468C04"
+          ],
+          "focusArea": [],
+          "cftId": [
+            "0"
+          ],
+          "typeOfMGAs": [
+            "43027846"
+          ],
+          "esST_FileName": [
+            "file.txt"
+          ],
+          "callIdentifier": [
+            "HORIZON-CL6-2024-CLIMATE-01"
+          ],
+          "ccm2Id": [
+            "45656575"
+          ],
+          "callccm2Id": [
+            "45739814"
+          ],
+          "destinationGroup": [
+            "45355331"
+          ],
+          "esIN_ccmTags": [
+            "HCCM_31049881",
+            "HCCM_31104596",
+            "HCCM_31104593",
+            "HCCM_31048683",
+            "HCCM_31055723",
+            "HCCM_31104594",
+            "HCCM_31050000",
+            "HCCM_31104516",
+            "HCCM_31104514",
+            "HCCM_31073707",
+            "... +108 more"
+          ],
+          "DATASOURCE": [
+            "SEDIA_PRD_CENTRICITY"
+          ],
+          "frameworkProgramme": [
+            "43108390"
+          ],
+          "identifier": [
+            "HORIZON-CL6-2024-CLIMATE-01-6"
+          ],
+          "es_ContentType": [
+            "text/plain"
+          ],
+          "programmeDivision": [
+            "43121563",
+            "43108541"
+          ],
+          "crossCuttingPriorities": [
+            "MEDIT",
+            "OCEAN",
+            "EC-WORLD",
+            "EoscAndFairData",
+            "DigitalAgenda"
+          ],
+          "programmePeriod": [
+            "2021 - 2027"
+          ],
+          "deadlineDate": [
+            "2024-02-22T17:00:00.000+0000"
+          ],
+          "ccmTags": [
+            "HCCM_31049881",
+            "HCCM_31104596",
+            "HCCM_31104593",
+            "HCCM_31048683",
+            "HCCM_31055723",
+            "HCCM_31104594",
+            "HCCM_31050000",
+            "HCCM_31104516",
+            "HCCM_31104514",
+            "HCCM_31073707",
+            "... +108 more"
+          ],
+          "esDA_IngestDate": [
+            "2022-12-07T04:52:52.005+0100"
+          ],
+          "typesOfAction": [
+            "HORIZON  Research and Innovation Actions"
+          ],
+          "es_Combine": [
+            "2"
+          ],
+          "corporate-search-version": [
+            "102"
+          ],
+          "url": [
+            "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL6-2024-CLIMATE-01-6.json"
+          ],
+          "esST_URL": [
+            "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL6-2024-CLIMATE-01-6.json"
+          ],
+          "cenTagsA": [
+            "TOPICS-027548",
+            "TOPICS-027549",
+            "TOPICS-003095",
+            "TOPICS-002091",
+            "TOPICS-003060",
+            "TOPICS-027550",
+            "TOPICS-003698",
+            "TOPICS-003699",
+            "TOPICS-023779",
+            "TOPICS-027551",
+            "... +21 more"
+          ],
+          "esDA_QueueDate": [
+            "2022-12-07T04:52:29.322+0100"
+          ],
+          "datasource": [
+            "SEDIA_PRD_CENTRICITY"
+          ],
+          "startDate": [
+            "2023-10-17T00:00:00.000+0000"
+          ],
+          "esIN_ccmTags2": [
+            "TTG_00032663",
+            "TTG_00134496",
+            "TTG_00132616",
+            "TCM_00035314",
+            "TTG_00074466",
+            "TTG_00074465",
+            "TTG_00124941",
+            "TTL_00100500",
+            "TCM_00035023",
+            "TCM_00038564",
+            "... +27 more"
+          ],
+          "deadlineModel": [
+            "single-stage"
+          ],
+          "status": [
+            "31094501"
+          ]
+        },
+        "enrichedMetadata": {},
+        "children": [],
+        "highlightedFragments": [
+          "<b>Ocean</b> models for seasonal to decadal regional climate impacts and feedbacks"
+        ],
+        "citation": "Ocean models for seasonal to decadal regional climate impacts and feedbacks. Available at: https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL6-2024-CLIMATE-01-6.json"
+      },
+      {
+        "apiVersion": "2.157",
+        "reference": "45658095HORIZONCoordinationandSupportActions1684972800000",
+        "url": "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL6-2023-GOVERNANCE-02-1.json",
+        "contentType": "text/plain",
+        "language": "en",
+        "databaseLabel": "",
+        "summary": "Supporting the All-Atlantic Ocean Research and Innovation Alliance and Declaration",
+        "weight": 21.50399,
+        "groupById": "1",
+        "content": "Supporting the All-Atlantic <b>Ocean</b> Research and Innovation Alliance and Declaration",
+        "accessRestriction": false,
+        "checksum": "C4F0B20CF8CC1917C24B301E85BF0ED9BCDBC4ADF1D0EA2FAF625D9E5E71B572",
+        "metadata": {
+          "es_SortDate": [
+            "2023-05-25T00:00:00.000+0000"
+          ],
+          "keywords": [
+            "[\"Marine Knowledge and Research\",\"International Ocean Governance\",\"Atlantic Ocean\",\"Science Communication\",\"Ocean sustainability and blue economy\",\"EU research policy /Research policies in the EU\",\"Africa\",\"International Cooperation\",\"Arctic Ocean\",\"UN Decade on Ecosystem Restoration\",\"Atlantic Sea Basin\",\"Marine Biodiversity of Areas Beyond National Jurisdiction (BBNJ)\",\"Horizon Europe Partnership for a Sustainable Blue Economy\",\"Convention on Biological Diversity\",\"Atlantic-Arctic Lighthouse\",\"UN Decade of Ocean Science for Sustainable Development\",\"Galway and Belém Statements\",\"Arctic and A... [881 chars]"
+          ],
+          "sortStatus": [
+            "1"
+          ],
+          "ccmTags2": [
+            "HCCM_31055723",
+            "HCCM_31104516",
+            "HCCM_31051116",
+            "HCCM_31051055",
+            "HCCM_31104591",
+            "HCCM_31104536",
+            "HTAG_000001091",
+            "HTAG_000009635",
+            "HTAG_000020794",
+            "HTAG_000000664",
+            "... +89 more"
+          ],
+          "language": [
+            "en"
+          ],
+          "type": [
+            "1"
+          ],
+          "title": [
+            "Supporting the All-Atlantic Ocean Research and Innovation Alliance and Declaration"
+          ],
+          "esST_checksum": [
+            "C4F0B20CF8CC1917C24B301E85BF0ED9BCDBC4ADF1D0EA2FAF625D9E5E71B572"
+          ],
+          "focusArea": [],
+          "cftId": [
+            "0"
+          ],
+          "typeOfMGAs": [
+            "43027849"
+          ],
+          "esST_FileName": [
+            "file.txt"
+          ],
+          "callIdentifier": [
+            "HORIZON-CL6-2023-GOVERNANCE-02"
+          ],
+          "ccm2Id": [
+            "45658095"
+          ],
+          "callccm2Id": [
+            "45942961"
+          ],
+          "esIN_ccmTags": [
+            "HCCM_31055723",
+            "HCCM_31104516",
+            "HCCM_31051116",
+            "HCCM_31051055",
+            "HCCM_31104591",
+            "HCCM_31104536",
+            "HTAG_000001091",
+            "HTAG_000009635",
+            "HTAG_000020794",
+            "HTAG_000000664",
+            "... +89 more"
+          ],
+          "DATASOURCE": [
+            "SEDIA_PRD_CENTRICITY"
+          ],
+          "frameworkProgramme": [
+            "43108390"
+          ],
+          "identifier": [
+            "HORIZON-CL6-2023-GOVERNANCE-02-1"
+          ],
+          "es_ContentType": [
+            "text/plain"
+          ],
+          "programmeDivision": [
+            "43121563",
+            "43108541"
+          ],
+          "crossCuttingPriorities": [
+            "OCEAN",
+            "Africa",
+            "EC-WORLD"
+          ],
+          "programmePeriod": [
+            "2021 - 2027"
+          ],
+          "deadlineDate": [
+            "2023-09-21T17:00:00.000+0000"
+          ],
+          "ccmTags": [
+            "HCCM_31055723",
+            "HCCM_31104516",
+            "HCCM_31051116",
+            "HCCM_31051055",
+            "HCCM_31104591",
+            "HCCM_31104536",
+            "HTAG_000001091",
+            "HTAG_000009635",
+            "HTAG_000020794",
+            "HTAG_000000664",
+            "... +89 more"
+          ],
+          "esDA_IngestDate": [
+            "2023-05-25T11:04:06.683+0200"
+          ],
+          "typesOfAction": [
+            "HORIZON Coordination and Support Actions"
+          ],
+          "es_Combine": [
+            "1"
+          ],
+          "corporate-search-version": [
+            "102"
+          ],
+          "url": [
+            "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL6-2023-GOVERNANCE-02-1.json"
+          ],
+          "esST_URL": [
+            "https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL6-2023-GOVERNANCE-02-1.json"
+          ],
+          "cenTagsA": [
+            "TOPICS-010906",
+            "TOPICS-029188",
+            "TOPICS-029189",
+            "TOPICS-007111",
+            "TOPICS-000374",
+            "TOPICS-029190",
+            "TOPICS-029191",
+            "TOPICS-029192",
+            "TOPICS-029193",
+            "TOPICS-029194",
+            "... +16 more"
+          ],
+          "esDA_QueueDate": [
+            "2023-05-25T11:03:58.087+0200"
+          ],
+          "datasource": [
+            "SEDIA_PRD_CENTRICITY"
+          ],
+          "startDate": [
+            "2023-05-25T00:00:00.000+0000"
+          ],
+          "esIN_ccmTags2": [
+            "TTL_00026391",
+            "TCM_00026392",
+            "TCM_00026393",
+            "TCM_00026395",
+            "TCM_00026396",
+            "TTG_00026398",
+            "TTG_00026399",
+            "TTG_00026400",
+            "TTG_00026401",
+            "TTG_00026403",
+            "... +12 more"
+          ],
+          "deadlineModel": [
+            "single-stage"
+          ],
+          "status": [
+            "31094502"
+          ]
+        },
+        "enrichedMetadata": {},
+        "children": [],
+        "highlightedFragments": [
+          "Supporting the All-Atlantic <b>Ocean</b> Research and Innovation Alliance and Declaration"
+        ],
+        "citation": "Supporting the All-Atlantic Ocean Research and Innovation Alliance and Declaration. Available at: https://ec.europa.eu/info/funding-tenders/opportunities/data/topicDetails/HORIZON-CL6-2023-GOVERNANCE-02-1.json"
+      }
+    ],
+    "warnings": []
+  }
+}

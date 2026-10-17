@@ -1,0 +1,693 @@
+{
+  "params": {
+    "query": "FT~ocean",
+    "limit": 5
+  },
+  "full_size_bytes": 42463,
+  "sample": {
+    "notices": [
+      {
+        "notice-type": "can-standard",
+        "publication-number": "360128-2016",
+        "buyer-name": {
+          "hun": [
+            "Európai Bizottság, Joint Research Centre (JRC)"
+          ],
+          "lav": [
+            "Eiropas Komisija, Joint Research Centre (JRC)"
+          ],
+          "swe": [
+            "Europeiska kommissionen, Joint Research Centre (JRC)"
+          ],
+          "gle": [
+            "An Coimisiún Eorpach, an tAirmheán Comhpháirteach Taighde (JRC)"
+          ],
+          "ell": [
+            "Ευρωπαϊκή Επιτροπή, Joint Research Centre (JRC)"
+          ],
+          "spa": [
+            "Comisión Europea, Joint Research Centre (JRC)"
+          ],
+          "est": [
+            "Euroopa Komisjon, Joint Research Centre (JRC)"
+          ],
+          "nld": [
+            "Europese Commissie, Joint Research Centre (JRC)"
+          ],
+          "fin": [
+            "Euroopan komissio, Joint Research Centre (JRC)"
+          ],
+          "pol": [
+            "Komisja Europejska, Joint Research Centre (JRC)"
+          ],
+          "hrv": [
+            "Europska komisija, Joint Research Centre (JRC)"
+          ],
+          "ron": [
+            "Comisia Europeană, Joint Research Centre (JRC)"
+          ],
+          "ces": [
+            "Evropská komise, Joint Research Centre (JRC)"
+          ],
+          "dan": [
+            "Europa-Kommissionen, Joint Research Centre (JRC)"
+          ],
+          "por": [
+            "Comissão Europeia, Joint Research Centre (JRC)"
+          ],
+          "slk": [
+            "Európska komisia, Joint Research Centre (JRC)"
+          ],
+          "mlt": [
+            "Il-Kummissjoni Ewropea, Joint Research Centre (JRC)"
+          ],
+          "fra": [
+            "Commission européenne, Joint Research Centre (JRC)"
+          ],
+          "deu": [
+            "Europäische Kommission, Joint Research Centre (JRC)"
+          ],
+          "lit": [
+            "Europos Komisija, Joint Research Centre (JRC)"
+          ],
+          "ita": [
+            "Commissione europea, Joint Research Centre (JRC)"
+          ],
+          "bul": [
+            "Европейска комисия, Joint Research Centre (JRC)"
+          ],
+          "slv": [
+            "Evropska komisija, Joint Research Centre (JRC)"
+          ],
+          "eng": [
+            "European Commission, Joint Research Centre (JRC)"
+          ]
+        },
+        "publication-date": "2016-10-15+02:00",
+        "links": {
+          "xml": {
+            "MUL": "https://ted.europa.eu/en/notice/360128-2016/xml"
+          },
+          "pdf": {
+            "BUL": "https://ted.europa.eu/bg/notice/360128-2016/pdf",
+            "SPA": "https://ted.europa.eu/es/notice/360128-2016/pdf",
+            "CES": "https://ted.europa.eu/cs/notice/360128-2016/pdf",
+            "DAN": "https://ted.europa.eu/da/notice/360128-2016/pdf",
+            "DEU": "https://ted.europa.eu/de/notice/360128-2016/pdf",
+            "EST": "https://ted.europa.eu/et/notice/360128-2016/pdf",
+            "ELL": "https://ted.europa.eu/el/notice/360128-2016/pdf",
+            "ENG": "https://ted.europa.eu/en/notice/360128-2016/pdf",
+            "FRA": "https://ted.europa.eu/fr/notice/360128-2016/pdf",
+            "GLE": "https://ted.europa.eu/ga/notice/360128-2016/pdf",
+            "HRV": "https://ted.europa.eu/hr/notice/360128-2016/pdf",
+            "ITA": "https://ted.europa.eu/it/notice/360128-2016/pdf",
+            "LAV": "https://ted.europa.eu/lv/notice/360128-2016/pdf",
+            "LIT": "https://ted.europa.eu/lt/notice/360128-2016/pdf",
+            "HUN": "https://ted.europa.eu/hu/notice/360128-2016/pdf",
+            "MLT": "https://ted.europa.eu/mt/notice/360128-2016/pdf",
+            "NLD": "https://ted.europa.eu/nl/notice/360128-2016/pdf",
+            "POL": "https://ted.europa.eu/pl/notice/360128-2016/pdf",
+            "POR": "https://ted.europa.eu/pt/notice/360128-2016/pdf",
+            "RON": "https://ted.europa.eu/ro/notice/360128-2016/pdf",
+            "SLK": "https://ted.europa.eu/sk/notice/360128-2016/pdf",
+            "SLV": "https://ted.europa.eu/sl/notice/360128-2016/pdf",
+            "FIN": "https://ted.europa.eu/fi/notice/360128-2016/pdf",
+            "SWE": "https://ted.europa.eu/sv/notice/360128-2016/pdf"
+          },
+          "pdfs": {
+            "ENG": "https://ted.europa.eu/en/notice/360128-2016/pdfs"
+          },
+          "html": {
+            "BUL": "https://ted.europa.eu/bg/notice/-/detail/360128-2016",
+            "SPA": "https://ted.europa.eu/es/notice/-/detail/360128-2016",
+            "CES": "https://ted.europa.eu/cs/notice/-/detail/360128-2016",
+            "DAN": "https://ted.europa.eu/da/notice/-/detail/360128-2016",
+            "DEU": "https://ted.europa.eu/de/notice/-/detail/360128-2016",
+            "EST": "https://ted.europa.eu/et/notice/-/detail/360128-2016",
+            "ELL": "https://ted.europa.eu/el/notice/-/detail/360128-2016",
+            "ENG": "https://ted.europa.eu/en/notice/-/detail/360128-2016",
+            "FRA": "https://ted.europa.eu/fr/notice/-/detail/360128-2016",
+            "GLE": "https://ted.europa.eu/ga/notice/-/detail/360128-2016",
+            "HRV": "https://ted.europa.eu/hr/notice/-/detail/360128-2016",
+            "ITA": "https://ted.europa.eu/it/notice/-/detail/360128-2016",
+            "LAV": "https://ted.europa.eu/lv/notice/-/detail/360128-2016",
+            "LIT": "https://ted.europa.eu/lt/notice/-/detail/360128-2016",
+            "HUN": "https://ted.europa.eu/hu/notice/-/detail/360128-2016",
+            "MLT": "https://ted.europa.eu/mt/notice/-/detail/360128-2016",
+            "NLD": "https://ted.europa.eu/nl/notice/-/detail/360128-2016",
+            "POL": "https://ted.europa.eu/pl/notice/-/detail/360128-2016",
+            "POR": "https://ted.europa.eu/pt/notice/-/detail/360128-2016",
+            "RON": "https://ted.europa.eu/ro/notice/-/detail/360128-2016",
+            "SLK": "https://ted.europa.eu/sk/notice/-/detail/360128-2016",
+            "SLV": "https://ted.europa.eu/sl/notice/-/detail/360128-2016",
+            "FIN": "https://ted.europa.eu/fi/notice/-/detail/360128-2016",
+            "SWE": "https://ted.europa.eu/sv/notice/-/detail/360128-2016"
+          },
+          "htmlDirect": {
+            "BUL": "https://ted.europa.eu/bg/notice/360128-2016/html",
+            "SPA": "https://ted.europa.eu/es/notice/360128-2016/html",
+            "CES": "https://ted.europa.eu/cs/notice/360128-2016/html",
+            "DAN": "https://ted.europa.eu/da/notice/360128-2016/html",
+            "DEU": "https://ted.europa.eu/de/notice/360128-2016/html",
+            "EST": "https://ted.europa.eu/et/notice/360128-2016/html",
+            "ELL": "https://ted.europa.eu/el/notice/360128-2016/html",
+            "ENG": "https://ted.europa.eu/en/notice/360128-2016/html",
+            "FRA": "https://ted.europa.eu/fr/notice/360128-2016/html",
+            "GLE": "https://ted.europa.eu/ga/notice/360128-2016/html",
+            "HRV": "https://ted.europa.eu/hr/notice/360128-2016/html",
+            "ITA": "https://ted.europa.eu/it/notice/360128-2016/html",
+            "LAV": "https://ted.europa.eu/lv/notice/360128-2016/html",
+            "LIT": "https://ted.europa.eu/lt/notice/360128-2016/html",
+            "HUN": "https://ted.europa.eu/hu/notice/360128-2016/html",
+            "MLT": "https://ted.europa.eu/mt/notice/360128-2016/html",
+            "NLD": "https://ted.europa.eu/nl/notice/360128-2016/html",
+            "POL": "https://ted.europa.eu/pl/notice/360128-2016/html",
+            "POR": "https://ted.europa.eu/pt/notice/360128-2016/html",
+            "RON": "https://ted.europa.eu/ro/notice/360128-2016/html",
+            "SLK": "https://ted.europa.eu/sk/notice/360128-2016/html",
+            "SLV": "https://ted.europa.eu/sl/notice/360128-2016/html",
+            "FIN": "https://ted.europa.eu/fi/notice/360128-2016/html",
+            "SWE": "https://ted.europa.eu/sv/notice/360128-2016/html"
+          }
+        },
+        "notice-title": {
+          "hun": "Spanyolország-Sevilla: Egy számítógép-alapú szimulációs modell kidolgozása és kísérleti alkalmazása az Európai Unióban a szociális beruházást előmozdító, IKT által lehetővé tett társadalmi innovációs kezdeményezések (i-FRAME 2.0) hatásának értékelése céljából",
+          "lav": "Spānija-Sevilja: Datorsimulācijas modeļa izstrāde un izmēģināšana ar mērķi novērtēt tādu IKT balstītu sociālās inovācijas iniciatīvu ietekmi, kuras veicina sociālos ieguldījumus ES (i-FRAME 2.0)",
+          "swe": "Spanien-Sevilla: Utveckling och testning av en datorbaserad simuleringsmodell för att bedöma effekterna av IKT-stödda initiativ för social innovation, som främjar sociala investeringar i EU (i-FRAME 2.0)",
+          "gle": "Spáinn, an-Sevilla: Samhail ionsamhlúcháin ríomhchuidithe a fhorbairt agus a phíolótú d'fhonn tionchar tionscnamh nuála sóisialta le cuidiú TFC a mheasúnú lena gcuirtear infheistíocht shóisialta chun cinn san AE (i-FRAME 2.0)",
+          "ell": "Ισπανία-Σεβίλλη: Ανάπτυξη και πιλοτική λειτουργία μοντέλου προσομοίωσης βάσει υπολογιστή για την εκτίμηση του αντίκτυπου των πρωτοβουλιών κοινωνικής καινοτομίας με βάση τις ΤΠΕ για την προώθηση των κοινωνικών επενδύσεων στην ΕΕ (i-FRAME 2.0)",
+          "spa": "España-Sevilla: Desarrollo y experimentación de un modelo de simulación informatizado para evaluar el impacto de las iniciativas de innovación social basadas en las TIC que promueven la inversión social en la Unión Europea (i-FRAME 2.0)",
+          "nld": "Spanje-Sevilla: Ontwikkeling en sturing van een computersimulatiemodel voor de beoordeling van de impact van op ICT gebaseerde initiatieven voor sociale innovatie ter bevordering van investeringen in de EU (i-FRAME 2.0)",
+          "est": "Hispaania-Sevilla: Arvutipõhise simulatsioonimudeli arendamine ja katsetamine IKT-põhiste sotsiaalse innovatsiooni algatuste mõju hindamiseks sotsiaalinvesteeringute edendamisel ELis (i-FRAME 2.0)",
+          "fin": "Espanja-Sevilla: Tietokonepohjaisen simulointimallin kehittäminen ja kokeilu sosiaalisten investointien edistämiseksi EU:ssa tarkoitettujen, tieto- ja viestintätekniikan (TVT) mahdollistamaa sosiaalista innovointia koskevien aloitteiden vaikutuksen arviointia varten (i-FRAME 2.0)",
+          "pol": "Hiszpania-Sewilla: Opracowanie i stworzenie wersji pilotażowej modelu symulacji komputerowych w celu oceny wpływu opartych na ICT inicjatyw innowacji społecznych propagujących inwestycje społeczne w UE (i-FRAME 2.0)",
+          "hrv": "Španjolska-Sevilla: Razvijanje i pilotiranje računalnog simulacijskog modela za procjenu učinka inicijativa društvene inovacije omogućene informacijsko-komunikacijskim tehnologijama (IKT) koje promiču društveno ulaganje u EU-u (i-FRAME 2.0)",
+          "ces": "Španělsko-Sevilla: Vývoj a pilotní testování počítačového simulačního modelu pro posouzení iniciativ v oblasti sociálních inovací umožněných prostřednictvím IKT, které podporují sociální investice v EU (i-FRAME 2.0)",
+          "ron": "Spania-Sevilia: Dezvoltarea și testarea unui model de simulare pe calculator pentru evaluarea impactului inițiativelor de inovare socială bazată pe TIC care promovează investițiile sociale în UE (i-FRAME 2.0)",
+          "dan": "Spanien-Sevilla: Udvikling og styring af en computerbaseret simulationsmodel til vurdering af indvirkningen af ikt-baserede sociale innovationsinitiativer, der fremmer sociale investeringer i EU (i-FRAME 2.0)",
+          "por": "Espanha-Sevilha: Desenvolvimento e gestão de um modelo de simulação computorizada para avaliar o impacto de iniciativas de inovação social baseada nas TIC para promoção do investimento social na UE (i-FRAME 2.0)",
+          "slk": "Španielsko-Sevilla: Vývoj a testovanie počítačového simulačného modelu na posúdenie vplyvu iniciatív v oblasti sociálnych inovácií prostredníctvom IKT, ktoré podporujú sociálne investície v EÚ (i-FRAME 2.0)",
+          "mlt": "Spanja-Sivilja: Żvilupp u pilotaġġ ta' mudell ta' simulazzjoni bbażat fuq il-kompjuter biex ikun ivvalutat l-impatt ta' inizjattivi ta' innovazzjoni soċjali permezz tat-TIK li jippromwovu l-investiment soċjali fl-UE (i-FRAME 2.0)",
+          "fra": "Espagne-Séville: Mise au point et pilotage d'un modèle de simulation informatisée pour l'évaluation de l'impact des initiatives d'innovation sociale fondée sur les TIC destinées à promouvoir l'investissement social dans l'UE (i-FRAME 2.0)",
+          "deu": "Spanien-Sevilla: Entwicklung und Steuerung eines computerbasierten Simulationsmodells zur Bewertung der Auswirkungen von Initiativen für IKT-gestützte soziale Innovationen zur Förderung sozialer Investitionen in der EU (i-FRAME 2.0)",
+          "lit": "Ispanija-Sevilija: Kompiuterinis imitacinis modelis siekiant įvertinti IRT socialinių inovacijų iniciatyvų, skirtų socialinėms investicijoms skatinti ES, poveikį (i-FRAME 2.0)",
+          "ita": "Spagna-Siviglia: Sviluppo e sperimentazione di un modello di simulazione basato sull'uso di computer per valutare l'impatto delle iniziative in materia di innovazione sociale rese possibili dalle TIC che promuovono gli investimenti sociali nell'UE (i-FRAME 2.0)",
+          "bul": "Иcпaния-Севиля: Разработване и управление на модел за компютърна симулация за оценяване на въздействието на инициативите за социална иновация, базирана на ИКТ, които насърчават социалните инвестиции в ЕС (i-FRAME 2.0)",
+          "slv": "Španija-Sevilja: Razvoj in poskusno izvajanje računalniško podprtega simulacijskega modela za oceno učinka na IKT temelječih socialnih inovacijskih pobud, ki spodbujajo socialne naložbe, v EU (i-FRAME 2.0)",
+          "eng": "Spain-Seville: Development and piloting of a computer-based simulation model to assess the impact of ICT-enabled social innovation initiatives promoting social investment in the EU (i-FRAME 2.0)"
+        }
+      },
+      {
+        "notice-type": "cn-standard",
+        "publication-number": "360361-2016",
+        "buyer-name": {
+          "fra": [
+            "Syndicat cuisine Rochefort Océan"
+          ]
+        },
+        "publication-date": "2016-10-15+02:00",
+        "links": {
+          "xml": {
+            "MUL": "https://ted.europa.eu/en/notice/360361-2016/xml"
+          },
+          "pdf": {
+            "BUL": "https://ted.europa.eu/bg/notice/360361-2016/pdf",
+            "SPA": "https://ted.europa.eu/es/notice/360361-2016/pdf",
+            "CES": "https://ted.europa.eu/cs/notice/360361-2016/pdf",
+            "DAN": "https://ted.europa.eu/da/notice/360361-2016/pdf",
+            "DEU": "https://ted.europa.eu/de/notice/360361-2016/pdf",
+            "EST": "https://ted.europa.eu/et/notice/360361-2016/pdf",
+            "ELL": "https://ted.europa.eu/el/notice/360361-2016/pdf",
+            "ENG": "https://ted.europa.eu/en/notice/360361-2016/pdf",
+            "FRA": "https://ted.europa.eu/fr/notice/360361-2016/pdf",
+            "GLE": "https://ted.europa.eu/ga/notice/360361-2016/pdf",
+            "HRV": "https://ted.europa.eu/hr/notice/360361-2016/pdf",
+            "ITA": "https://ted.europa.eu/it/notice/360361-2016/pdf",
+            "LAV": "https://ted.europa.eu/lv/notice/360361-2016/pdf",
+            "LIT": "https://ted.europa.eu/lt/notice/360361-2016/pdf",
+            "HUN": "https://ted.europa.eu/hu/notice/360361-2016/pdf",
+            "MLT": "https://ted.europa.eu/mt/notice/360361-2016/pdf",
+            "NLD": "https://ted.europa.eu/nl/notice/360361-2016/pdf",
+            "POL": "https://ted.europa.eu/pl/notice/360361-2016/pdf",
+            "POR": "https://ted.europa.eu/pt/notice/360361-2016/pdf",
+            "RON": "https://ted.europa.eu/ro/notice/360361-2016/pdf",
+            "SLK": "https://ted.europa.eu/sk/notice/360361-2016/pdf",
+            "SLV": "https://ted.europa.eu/sl/notice/360361-2016/pdf",
+            "FIN": "https://ted.europa.eu/fi/notice/360361-2016/pdf",
+            "SWE": "https://ted.europa.eu/sv/notice/360361-2016/pdf"
+          },
+          "pdfs": {
+            "FRA": "https://ted.europa.eu/fr/notice/360361-2016/pdfs"
+          },
+          "html": {
+            "BUL": "https://ted.europa.eu/bg/notice/-/detail/360361-2016",
+            "SPA": "https://ted.europa.eu/es/notice/-/detail/360361-2016",
+            "CES": "https://ted.europa.eu/cs/notice/-/detail/360361-2016",
+            "DAN": "https://ted.europa.eu/da/notice/-/detail/360361-2016",
+            "DEU": "https://ted.europa.eu/de/notice/-/detail/360361-2016",
+            "EST": "https://ted.europa.eu/et/notice/-/detail/360361-2016",
+            "ELL": "https://ted.europa.eu/el/notice/-/detail/360361-2016",
+            "ENG": "https://ted.europa.eu/en/notice/-/detail/360361-2016",
+            "FRA": "https://ted.europa.eu/fr/notice/-/detail/360361-2016",
+            "GLE": "https://ted.europa.eu/ga/notice/-/detail/360361-2016",
+            "HRV": "https://ted.europa.eu/hr/notice/-/detail/360361-2016",
+            "ITA": "https://ted.europa.eu/it/notice/-/detail/360361-2016",
+            "LAV": "https://ted.europa.eu/lv/notice/-/detail/360361-2016",
+            "LIT": "https://ted.europa.eu/lt/notice/-/detail/360361-2016",
+            "HUN": "https://ted.europa.eu/hu/notice/-/detail/360361-2016",
+            "MLT": "https://ted.europa.eu/mt/notice/-/detail/360361-2016",
+            "NLD": "https://ted.europa.eu/nl/notice/-/detail/360361-2016",
+            "POL": "https://ted.europa.eu/pl/notice/-/detail/360361-2016",
+            "POR": "https://ted.europa.eu/pt/notice/-/detail/360361-2016",
+            "RON": "https://ted.europa.eu/ro/notice/-/detail/360361-2016",
+            "SLK": "https://ted.europa.eu/sk/notice/-/detail/360361-2016",
+            "SLV": "https://ted.europa.eu/sl/notice/-/detail/360361-2016",
+            "FIN": "https://ted.europa.eu/fi/notice/-/detail/360361-2016",
+            "SWE": "https://ted.europa.eu/sv/notice/-/detail/360361-2016"
+          },
+          "htmlDirect": {
+            "BUL": "https://ted.europa.eu/bg/notice/360361-2016/html",
+            "SPA": "https://ted.europa.eu/es/notice/360361-2016/html",
+            "CES": "https://ted.europa.eu/cs/notice/360361-2016/html",
+            "DAN": "https://ted.europa.eu/da/notice/360361-2016/html",
+            "DEU": "https://ted.europa.eu/de/notice/360361-2016/html",
+            "EST": "https://ted.europa.eu/et/notice/360361-2016/html",
+            "ELL": "https://ted.europa.eu/el/notice/360361-2016/html",
+            "ENG": "https://ted.europa.eu/en/notice/360361-2016/html",
+            "FRA": "https://ted.europa.eu/fr/notice/360361-2016/html",
+            "GLE": "https://ted.europa.eu/ga/notice/360361-2016/html",
+            "HRV": "https://ted.europa.eu/hr/notice/360361-2016/html",
+            "ITA": "https://ted.europa.eu/it/notice/360361-2016/html",
+            "LAV": "https://ted.europa.eu/lv/notice/360361-2016/html",
+            "LIT": "https://ted.europa.eu/lt/notice/360361-2016/html",
+            "HUN": "https://ted.europa.eu/hu/notice/360361-2016/html",
+            "MLT": "https://ted.europa.eu/mt/notice/360361-2016/html",
+            "NLD": "https://ted.europa.eu/nl/notice/360361-2016/html",
+            "POL": "https://ted.europa.eu/pl/notice/360361-2016/html",
+            "POR": "https://ted.europa.eu/pt/notice/360361-2016/html",
+            "RON": "https://ted.europa.eu/ro/notice/360361-2016/html",
+            "SLK": "https://ted.europa.eu/sk/notice/360361-2016/html",
+            "SLV": "https://ted.europa.eu/sl/notice/360361-2016/html",
+            "FIN": "https://ted.europa.eu/fi/notice/360361-2016/html",
+            "SWE": "https://ted.europa.eu/sv/notice/360361-2016/html"
+          }
+        },
+        "notice-title": {
+          "swe": "Frankrike-Rochefort: Jordbruks-, jakt-, fiske- och skogsbruksprodukter samt tillhörande produkter",
+          "hun": "Franciaország-Rochefort: Növénytermesztési, állattenyésztési, halászati, erdészeti és kapcsolódó termékek",
+          "lav": "Francija-Rochefort: Lauksaimniecības, saimniecības, zivsaimniecības, mežsaimniecības un saistītā produkcija",
+          "gle": "Fhrainc, an-Rochefort: Agricultural, farming, fishing, forestry and related products",
+          "ell": "Γαλλία-Rochefort: Προϊόντα γεωργίας, κτηνοτροφίας, αλιείας, δασοκομίας και συναφή προϊόντα",
+          "spa": "Francia-Rochefort: Productos de la agricultura, ganadería, pesca, silvicultura y productos afines",
+          "nld": "Frankrijk-Rochefort: Landbouw- en veeteelt-, kwekerij-, visserij-, bosbouw- en aanverwante producten",
+          "est": "Prantsusmaa-Rochefort: Põllumajandussaadused, loomakasvatus-, kalandus-, metsandus- ja seonduvad tooted",
+          "fin": "Ranska-Rochefort: Maa-, karja-, kala- ja metsätaloustuotteet sekä vastaavat tuotteet",
+          "pol": "Francja-Rochefort: Produkty rolnictwa, hodowli, rybołówstwa, leśnictwa i podobne",
+          "hrv": "Francuska-Rochefort: Poljoprivredni proizvodi, proizvodi stočarstva, ribarstva, šumarstva i srodni proizvodi",
+          "ces": "Francie-Rochefort: Produkty zemědělství, hospodářské produkty, produkty akvakultury, lesnictví a související produkty",
+          "ron": "Franţa-Rochefort: Produse agricole, de fermă, de pescuit, de silvicultură şi produse conexe",
+          "dan": "Frankrig-Rochefort: Produkter fra landbrug, husdyrbrug, fiskeri og skovbrug samt lignende produkter",
+          "por": "França-Rochefort: Produtos da agricultura, da pesca, da silvicultura e afins",
+          "slk": "Francúzsko-Rochefort: Poľnohospodárske, farmárske, rybárske, lesnícke a súvisiace produkty",
+          "mlt": "Franza-Rochefort: Prodotti agrikoli, tal-biedja, tas-sajd, tal-foresti u prodotti relatati",
+          "fra": "France-Rochefort: Produits agricoles, de l'élevage, de la pêche, de la sylviculture et produits connexes",
+          "deu": "Frankreich-Rochefort: Landwirtschaftliche Erzeugnisse des Pflanzenbaus und der Tierhaltung sowie Fischerei-, Forst- und zugehörige Erzeugnisse",
+          "lit": "Prancūzija-Rochefort: Žemės ūkio, ūkininkavimo, žvejybos, miškininkystės ir susiję produktai",
+          "ita": "Francia-Rochefort: Prodotti dell'agricoltura, dell'allevamento, della pesca, della silvicoltura e prodotti affini",
+          "bul": "Фpaнция-Rochefort: Продукти на земеделието, животновъдството, рибарството, лесовъдството и свързани с тях продукти",
+          "slv": "Francija-Rochefort: Kmetijski, ribiški, gozdarski in z njimi povezani proizvodi",
+          "eng": "France-Rochefort: Agricultural, farming, fishing, forestry and related products"
+        }
+      },
+      {
+        "notice-type": "corr",
+        "publication-number": "360713-2016",
+        "buyer-name": {
+          "fra": [
+            "Université de Bordeaux"
+          ]
+        },
+        "publication-date": "2016-10-15+02:00",
+        "links": {
+          "xml": {
+            "MUL": "https://ted.europa.eu/en/notice/360713-2016/xml"
+          },
+          "pdf": {
+            "BUL": "https://ted.europa.eu/bg/notice/360713-2016/pdf",
+            "SPA": "https://ted.europa.eu/es/notice/360713-2016/pdf",
+            "CES": "https://ted.europa.eu/cs/notice/360713-2016/pdf",
+            "DAN": "https://ted.europa.eu/da/notice/360713-2016/pdf",
+            "DEU": "https://ted.europa.eu/de/notice/360713-2016/pdf",
+            "EST": "https://ted.europa.eu/et/notice/360713-2016/pdf",
+            "ELL": "https://ted.europa.eu/el/notice/360713-2016/pdf",
+            "ENG": "https://ted.europa.eu/en/notice/360713-2016/pdf",
+            "FRA": "https://ted.europa.eu/fr/notice/360713-2016/pdf",
+            "GLE": "https://ted.europa.eu/ga/notice/360713-2016/pdf",
+            "HRV": "https://ted.europa.eu/hr/notice/360713-2016/pdf",
+            "ITA": "https://ted.europa.eu/it/notice/360713-2016/pdf",
+            "LAV": "https://ted.europa.eu/lv/notice/360713-2016/pdf",
+            "LIT": "https://ted.europa.eu/lt/notice/360713-2016/pdf",
+            "HUN": "https://ted.europa.eu/hu/notice/360713-2016/pdf",
+            "MLT": "https://ted.europa.eu/mt/notice/360713-2016/pdf",
+            "NLD": "https://ted.europa.eu/nl/notice/360713-2016/pdf",
+            "POL": "https://ted.europa.eu/pl/notice/360713-2016/pdf",
+            "POR": "https://ted.europa.eu/pt/notice/360713-2016/pdf",
+            "RON": "https://ted.europa.eu/ro/notice/360713-2016/pdf",
+            "SLK": "https://ted.europa.eu/sk/notice/360713-2016/pdf",
+            "SLV": "https://ted.europa.eu/sl/notice/360713-2016/pdf",
+            "FIN": "https://ted.europa.eu/fi/notice/360713-2016/pdf",
+            "SWE": "https://ted.europa.eu/sv/notice/360713-2016/pdf"
+          },
+          "pdfs": {
+            "FRA": "https://ted.europa.eu/fr/notice/360713-2016/pdfs"
+          },
+          "html": {
+            "BUL": "https://ted.europa.eu/bg/notice/-/detail/360713-2016",
+            "SPA": "https://ted.europa.eu/es/notice/-/detail/360713-2016",
+            "CES": "https://ted.europa.eu/cs/notice/-/detail/360713-2016",
+            "DAN": "https://ted.europa.eu/da/notice/-/detail/360713-2016",
+            "DEU": "https://ted.europa.eu/de/notice/-/detail/360713-2016",
+            "EST": "https://ted.europa.eu/et/notice/-/detail/360713-2016",
+            "ELL": "https://ted.europa.eu/el/notice/-/detail/360713-2016",
+            "ENG": "https://ted.europa.eu/en/notice/-/detail/360713-2016",
+            "FRA": "https://ted.europa.eu/fr/notice/-/detail/360713-2016",
+            "GLE": "https://ted.europa.eu/ga/notice/-/detail/360713-2016",
+            "HRV": "https://ted.europa.eu/hr/notice/-/detail/360713-2016",
+            "ITA": "https://ted.europa.eu/it/notice/-/detail/360713-2016",
+            "LAV": "https://ted.europa.eu/lv/notice/-/detail/360713-2016",
+            "LIT": "https://ted.europa.eu/lt/notice/-/detail/360713-2016",
+            "HUN": "https://ted.europa.eu/hu/notice/-/detail/360713-2016",
+            "MLT": "https://ted.europa.eu/mt/notice/-/detail/360713-2016",
+            "NLD": "https://ted.europa.eu/nl/notice/-/detail/360713-2016",
+            "POL": "https://ted.europa.eu/pl/notice/-/detail/360713-2016",
+            "POR": "https://ted.europa.eu/pt/notice/-/detail/360713-2016",
+            "RON": "https://ted.europa.eu/ro/notice/-/detail/360713-2016",
+            "SLK": "https://ted.europa.eu/sk/notice/-/detail/360713-2016",
+            "SLV": "https://ted.europa.eu/sl/notice/-/detail/360713-2016",
+            "FIN": "https://ted.europa.eu/fi/notice/-/detail/360713-2016",
+            "SWE": "https://ted.europa.eu/sv/notice/-/detail/360713-2016"
+          },
+          "htmlDirect": {
+            "BUL": "https://ted.europa.eu/bg/notice/360713-2016/html",
+            "SPA": "https://ted.europa.eu/es/notice/360713-2016/html",
+            "CES": "https://ted.europa.eu/cs/notice/360713-2016/html",
+            "DAN": "https://ted.europa.eu/da/notice/360713-2016/html",
+            "DEU": "https://ted.europa.eu/de/notice/360713-2016/html",
+            "EST": "https://ted.europa.eu/et/notice/360713-2016/html",
+            "ELL": "https://ted.europa.eu/el/notice/360713-2016/html",
+            "ENG": "https://ted.europa.eu/en/notice/360713-2016/html",
+            "FRA": "https://ted.europa.eu/fr/notice/360713-2016/html",
+            "GLE": "https://ted.europa.eu/ga/notice/360713-2016/html",
+            "HRV": "https://ted.europa.eu/hr/notice/360713-2016/html",
+            "ITA": "https://ted.europa.eu/it/notice/360713-2016/html",
+            "LAV": "https://ted.europa.eu/lv/notice/360713-2016/html",
+            "LIT": "https://ted.europa.eu/lt/notice/360713-2016/html",
+            "HUN": "https://ted.europa.eu/hu/notice/360713-2016/html",
+            "MLT": "https://ted.europa.eu/mt/notice/360713-2016/html",
+            "NLD": "https://ted.europa.eu/nl/notice/360713-2016/html",
+            "POL": "https://ted.europa.eu/pl/notice/360713-2016/html",
+            "POR": "https://ted.europa.eu/pt/notice/360713-2016/html",
+            "RON": "https://ted.europa.eu/ro/notice/360713-2016/html",
+            "SLK": "https://ted.europa.eu/sk/notice/360713-2016/html",
+            "SLV": "https://ted.europa.eu/sl/notice/360713-2016/html",
+            "FIN": "https://ted.europa.eu/fi/notice/360713-2016/html",
+            "SWE": "https://ted.europa.eu/sv/notice/360713-2016/html"
+          }
+        },
+        "notice-title": {
+          "lav": "Francija-Talence: Ķīmiskie analizatori",
+          "hun": "Franciaország-Talence: Kémiai analizátorok",
+          "swe": "Frankrike-Talence: Kemianalysator",
+          "gle": "Fhrainc, an-Talence: Chemistry analyser",
+          "ell": "Γαλλία-Talence: Χημικοί αναλυτές",
+          "spa": "Francia-Talence: Analizador químico",
+          "nld": "Frankrijk-Talence: Chemieanalysatoren",
+          "est": "Prantsusmaa-Talence: Keemiaanalüsaatorid",
+          "fin": "Ranska-Talence: Kemialliset analysaattorit",
+          "pol": "Francja-Talence: Analizatory chemiczne",
+          "hrv": "Francuska-Talence: Aparati za analizu u kemiji",
+          "ron": "Franţa-Talence: Analizoare chimice",
+          "ces": "Francie-Talence: Chemický analyzátor",
+          "dan": "Frankrig-Talence: Kemianalysatorer",
+          "por": "França-Talence: Analisador químico",
+          "slk": "Francúzsko-Talence: Chemické analyzátory",
+          "fra": "France-Talence: Analyseur de chimie",
+          "mlt": "Franza-Talence: Analizzaturi tal-kemistrija",
+          "deu": "Frankreich-Talence: Chemische Analysegeräte",
+          "lit": "Prancūzija-Talence: Cheminis analizatorius",
+          "ita": "Francia-Talence: Analizzatori chimici",
+          "bul": "Фpaнция-Talence: Химически анализатор",
+          "slv": "Francija-Talence: Aparati za analize v kemiji",
+          "eng": "France-Talence: Chemistry analyser"
+        }
+      },
+      {
+        "notice-type": "cn-standard",
+        "publication-number": "360861-2016",
+        "buyer-name": {
+          "fra": [
+            "Agence régionale de santé Océan Indien"
+          ]
+        },
+        "publication-date": "2016-10-15+02:00",
+        "links": {
+          "xml": {
+            "MUL": "https://ted.europa.eu/en/notice/360861-2016/xml"
+          },
+          "pdf": {
+            "BUL": "https://ted.europa.eu/bg/notice/360861-2016/pdf",
+            "SPA": "https://ted.europa.eu/es/notice/360861-2016/pdf",
+            "CES": "https://ted.europa.eu/cs/notice/360861-2016/pdf",
+            "DAN": "https://ted.europa.eu/da/notice/360861-2016/pdf",
+            "DEU": "https://ted.europa.eu/de/notice/360861-2016/pdf",
+            "EST": "https://ted.europa.eu/et/notice/360861-2016/pdf",
+            "ELL": "https://ted.europa.eu/el/notice/360861-2016/pdf",
+            "ENG": "https://ted.europa.eu/en/notice/360861-2016/pdf",
+            "FRA": "https://ted.europa.eu/fr/notice/360861-2016/pdf",
+            "GLE": "https://ted.europa.eu/ga/notice/360861-2016/pdf",
+            "HRV": "https://ted.europa.eu/hr/notice/360861-2016/pdf",
+            "ITA": "https://ted.europa.eu/it/notice/360861-2016/pdf",
+            "LAV": "https://ted.europa.eu/lv/notice/360861-2016/pdf",
+            "LIT": "https://ted.europa.eu/lt/notice/360861-2016/pdf",
+            "HUN": "https://ted.europa.eu/hu/notice/360861-2016/pdf",
+            "MLT": "https://ted.europa.eu/mt/notice/360861-2016/pdf",
+            "NLD": "https://ted.europa.eu/nl/notice/360861-2016/pdf",
+            "POL": "https://ted.europa.eu/pl/notice/360861-2016/pdf",
+            "POR": "https://ted.europa.eu/pt/notice/360861-2016/pdf",
+            "RON": "https://ted.europa.eu/ro/notice/360861-2016/pdf",
+            "SLK": "https://ted.europa.eu/sk/notice/360861-2016/pdf",
+            "SLV": "https://ted.europa.eu/sl/notice/360861-2016/pdf",
+            "FIN": "https://ted.europa.eu/fi/notice/360861-2016/pdf",
+            "SWE": "https://ted.europa.eu/sv/notice/360861-2016/pdf"
+          },
+          "pdfs": {
+            "FRA": "https://ted.europa.eu/fr/notice/360861-2016/pdfs"
+          },
+          "html": {
+            "BUL": "https://ted.europa.eu/bg/notice/-/detail/360861-2016",
+            "SPA": "https://ted.europa.eu/es/notice/-/detail/360861-2016",
+            "CES": "https://ted.europa.eu/cs/notice/-/detail/360861-2016",
+            "DAN": "https://ted.europa.eu/da/notice/-/detail/360861-2016",
+            "DEU": "https://ted.europa.eu/de/notice/-/detail/360861-2016",
+            "EST": "https://ted.europa.eu/et/notice/-/detail/360861-2016",
+            "ELL": "https://ted.europa.eu/el/notice/-/detail/360861-2016",
+            "ENG": "https://ted.europa.eu/en/notice/-/detail/360861-2016",
+            "FRA": "https://ted.europa.eu/fr/notice/-/detail/360861-2016",
+            "GLE": "https://ted.europa.eu/ga/notice/-/detail/360861-2016",
+            "HRV": "https://ted.europa.eu/hr/notice/-/detail/360861-2016",
+            "ITA": "https://ted.europa.eu/it/notice/-/detail/360861-2016",
+            "LAV": "https://ted.europa.eu/lv/notice/-/detail/360861-2016",
+            "LIT": "https://ted.europa.eu/lt/notice/-/detail/360861-2016",
+            "HUN": "https://ted.europa.eu/hu/notice/-/detail/360861-2016",
+            "MLT": "https://ted.europa.eu/mt/notice/-/detail/360861-2016",
+            "NLD": "https://ted.europa.eu/nl/notice/-/detail/360861-2016",
+            "POL": "https://ted.europa.eu/pl/notice/-/detail/360861-2016",
+            "POR": "https://ted.europa.eu/pt/notice/-/detail/360861-2016",
+            "RON": "https://ted.europa.eu/ro/notice/-/detail/360861-2016",
+            "SLK": "https://ted.europa.eu/sk/notice/-/detail/360861-2016",
+            "SLV": "https://ted.europa.eu/sl/notice/-/detail/360861-2016",
+            "FIN": "https://ted.europa.eu/fi/notice/-/detail/360861-2016",
+            "SWE": "https://ted.europa.eu/sv/notice/-/detail/360861-2016"
+          },
+          "htmlDirect": {
+            "BUL": "https://ted.europa.eu/bg/notice/360861-2016/html",
+            "SPA": "https://ted.europa.eu/es/notice/360861-2016/html",
+            "CES": "https://ted.europa.eu/cs/notice/360861-2016/html",
+            "DAN": "https://ted.europa.eu/da/notice/360861-2016/html",
+            "DEU": "https://ted.europa.eu/de/notice/360861-2016/html",
+            "EST": "https://ted.europa.eu/et/notice/360861-2016/html",
+            "ELL": "https://ted.europa.eu/el/notice/360861-2016/html",
+            "ENG": "https://ted.europa.eu/en/notice/360861-2016/html",
+            "FRA": "https://ted.europa.eu/fr/notice/360861-2016/html",
+            "GLE": "https://ted.europa.eu/ga/notice/360861-2016/html",
+            "HRV": "https://ted.europa.eu/hr/notice/360861-2016/html",
+            "ITA": "https://ted.europa.eu/it/notice/360861-2016/html",
+            "LAV": "https://ted.europa.eu/lv/notice/360861-2016/html",
+            "LIT": "https://ted.europa.eu/lt/notice/360861-2016/html",
+            "HUN": "https://ted.europa.eu/hu/notice/360861-2016/html",
+            "MLT": "https://ted.europa.eu/mt/notice/360861-2016/html",
+            "NLD": "https://ted.europa.eu/nl/notice/360861-2016/html",
+            "POL": "https://ted.europa.eu/pl/notice/360861-2016/html",
+            "POR": "https://ted.europa.eu/pt/notice/360861-2016/html",
+            "RON": "https://ted.europa.eu/ro/notice/360861-2016/html",
+            "SLK": "https://ted.europa.eu/sk/notice/360861-2016/html",
+            "SLV": "https://ted.europa.eu/sl/notice/360861-2016/html",
+            "FIN": "https://ted.europa.eu/fi/notice/360861-2016/html",
+            "SWE": "https://ted.europa.eu/sv/notice/360861-2016/html"
+          }
+        },
+        "notice-title": {
+          "swe": "Frankrike-Saint-Denis: Tekniskt bistånd",
+          "lav": "Francija-Saint-Denis: Tehniskās palīdzības pakalpojumi",
+          "hun": "Franciaország-Saint-Denis: Műszaki segítségnyújtási szolgáltatások",
+          "gle": "Fhrainc, an-Saint-Denis: Technical assistance services",
+          "ell": "Γαλλία-Saint-Denis: Υπηρεσίες τεχνικής βοήθειας",
+          "spa": "Francia-Saint-Denis: Servicios de asistencia técnica",
+          "nld": "Frankrijk-Saint-Denis: Technische bijstandsdiensten",
+          "est": "Prantsusmaa-Saint-Denis: Tehnilised abiteenused",
+          "fin": "Ranska-Saint-Denis: Tekninen apu",
+          "pol": "Francja-Saint-Denis: Usługi pomocy technicznej",
+          "hrv": "Francuska-Saint-Denis: Usluge tehničke pomoći",
+          "ces": "Francie-Saint-Denis: Technická asistence",
+          "ron": "Franţa-Saint-Denis: Servicii de asistenţă tehnică",
+          "dan": "Frankrig-Saint-Denis: Tjenesteydelser i forbindelse med teknisk støtte",
+          "por": "França-Saint-Denis: Serviços de assistência técnica",
+          "slk": "Francúzsko-Saint-Denis: Technická pomoc",
+          "mlt": "Franza-Saint-Denis: Servizzi ta' l-għajnuna teknika",
+          "fra": "France-Saint-Denis: Services d'assistance technique",
+          "deu": "Frankreich-Saint-Denis: Technische Hilfe",
+          "lit": "Prancūzija-Saint-Denis: Techninės pagalbos paslaugos",
+          "ita": "Francia-Saint-Denis: Servizi di assistenza tecnica",
+          "bul": "Фpaнция-Saint-Denis: Услуги по оказване на техническа помощ",
+          "slv": "Francija-Saint-Denis: Storitve tehnične pomoči",
+          "eng": "France-Saint-Denis: Technical assistance services"
+        }
+      },
+      {
+        "notice-type": "can-standard",
+        "publication-number": "361120-2016",
+        "buyer-name": {
+          "fra": [
+            "GIRC AGIRC-ARRCO"
+          ]
+        },
+        "publication-date": "2016-10-15+02:00",
+        "links": {
+          "xml": {
+            "MUL": "https://ted.europa.eu/en/notice/361120-2016/xml"
+          },
+          "pdf": {
+            "BUL": "https://ted.europa.eu/bg/notice/361120-2016/pdf",
+            "SPA": "https://ted.europa.eu/es/notice/361120-2016/pdf",
+            "CES": "https://ted.europa.eu/cs/notice/361120-2016/pdf",
+            "DAN": "https://ted.europa.eu/da/notice/361120-2016/pdf",
+            "DEU": "https://ted.europa.eu/de/notice/361120-2016/pdf",
+            "EST": "https://ted.europa.eu/et/notice/361120-2016/pdf",
+            "ELL": "https://ted.europa.eu/el/notice/361120-2016/pdf",
+            "ENG": "https://ted.europa.eu/en/notice/361120-2016/pdf",
+            "FRA": "https://ted.europa.eu/fr/notice/361120-2016/pdf",
+            "GLE": "https://ted.europa.eu/ga/notice/361120-2016/pdf",
+            "HRV": "https://ted.europa.eu/hr/notice/361120-2016/pdf",
+            "ITA": "https://ted.europa.eu/it/notice/361120-2016/pdf",
+            "LAV": "https://ted.europa.eu/lv/notice/361120-2016/pdf",
+            "LIT": "https://ted.europa.eu/lt/notice/361120-2016/pdf",
+            "HUN": "https://ted.europa.eu/hu/notice/361120-2016/pdf",
+            "MLT": "https://ted.europa.eu/mt/notice/361120-2016/pdf",
+            "NLD": "https://ted.europa.eu/nl/notice/361120-2016/pdf",
+            "POL": "https://ted.europa.eu/pl/notice/361120-2016/pdf",
+            "POR": "https://ted.europa.eu/pt/notice/361120-2016/pdf",
+            "RON": "https://ted.europa.eu/ro/notice/361120-2016/pdf",
+            "SLK": "https://ted.europa.eu/sk/notice/361120-2016/pdf",
+            "SLV": "https://ted.europa.eu/sl/notice/361120-2016/pdf",
+            "FIN": "https://ted.europa.eu/fi/notice/361120-2016/pdf",
+            "SWE": "https://ted.europa.eu/sv/notice/361120-2016/pdf"
+          },
+          "pdfs": {
+            "FRA": "https://ted.europa.eu/fr/notice/361120-2016/pdfs"
+          },
+          "html": {
+            "BUL": "https://ted.europa.eu/bg/notice/-/detail/361120-2016",
+            "SPA": "https://ted.europa.eu/es/notice/-/detail/361120-2016",
+            "CES": "https://ted.europa.eu/cs/notice/-/detail/361120-2016",
+            "DAN": "https://ted.europa.eu/da/notice/-/detail/361120-2016",
+            "DEU": "https://ted.europa.eu/de/notice/-/detail/361120-2016",
+            "EST": "https://ted.europa.eu/et/notice/-/detail/361120-2016",
+            "ELL": "https://ted.europa.eu/el/notice/-/detail/361120-2016",
+            "ENG": "https://ted.europa.eu/en/notice/-/detail/361120-2016",
+            "FRA": "https://ted.europa.eu/fr/notice/-/detail/361120-2016",
+            "GLE": "https://ted.europa.eu/ga/notice/-/detail/361120-2016",
+            "HRV": "https://ted.europa.eu/hr/notice/-/detail/361120-2016",
+            "ITA": "https://ted.europa.eu/it/notice/-/detail/361120-2016",
+            "LAV": "https://ted.europa.eu/lv/notice/-/detail/361120-2016",
+            "LIT": "https://ted.europa.eu/lt/notice/-/detail/361120-2016",
+            "HUN": "https://ted.europa.eu/hu/notice/-/detail/361120-2016",
+            "MLT": "https://ted.europa.eu/mt/notice/-/detail/361120-2016",
+            "NLD": "https://ted.europa.eu/nl/notice/-/detail/361120-2016",
+            "POL": "https://ted.europa.eu/pl/notice/-/detail/361120-2016",
+            "POR": "https://ted.europa.eu/pt/notice/-/detail/361120-2016",
+            "RON": "https://ted.europa.eu/ro/notice/-/detail/361120-2016",
+            "SLK": "https://ted.europa.eu/sk/notice/-/detail/361120-2016",
+            "SLV": "https://ted.europa.eu/sl/notice/-/detail/361120-2016",
+            "FIN": "https://ted.europa.eu/fi/notice/-/detail/361120-2016",
+            "SWE": "https://ted.europa.eu/sv/notice/-/detail/361120-2016"
+          },
+          "htmlDirect": {
+            "BUL": "https://ted.europa.eu/bg/notice/361120-2016/html",
+            "SPA": "https://ted.europa.eu/es/notice/361120-2016/html",
+            "CES": "https://ted.europa.eu/cs/notice/361120-2016/html",
+            "DAN": "https://ted.europa.eu/da/notice/361120-2016/html",
+            "DEU": "https://ted.europa.eu/de/notice/361120-2016/html",
+            "EST": "https://ted.europa.eu/et/notice/361120-2016/html",
+            "ELL": "https://ted.europa.eu/el/notice/361120-2016/html",
+            "ENG": "https://ted.europa.eu/en/notice/361120-2016/html",
+            "FRA": "https://ted.europa.eu/fr/notice/361120-2016/html",
+            "GLE": "https://ted.europa.eu/ga/notice/361120-2016/html",
+            "HRV": "https://ted.europa.eu/hr/notice/361120-2016/html",
+            "ITA": "https://ted.europa.eu/it/notice/361120-2016/html",
+            "LAV": "https://ted.europa.eu/lv/notice/361120-2016/html",
+            "LIT": "https://ted.europa.eu/lt/notice/361120-2016/html",
+            "HUN": "https://ted.europa.eu/hu/notice/361120-2016/html",
+            "MLT": "https://ted.europa.eu/mt/notice/361120-2016/html",
+            "NLD": "https://ted.europa.eu/nl/notice/361120-2016/html",
+            "POL": "https://ted.europa.eu/pl/notice/361120-2016/html",
+            "POR": "https://ted.europa.eu/pt/notice/361120-2016/html",
+            "RON": "https://ted.europa.eu/ro/notice/361120-2016/html",
+            "SLK": "https://ted.europa.eu/sk/notice/361120-2016/html",
+            "SLV": "https://ted.europa.eu/sl/notice/361120-2016/html",
+            "FIN": "https://ted.europa.eu/fi/notice/361120-2016/html",
+            "SWE": "https://ted.europa.eu/sv/notice/361120-2016/html"
+          }
+        },
+        "notice-title": {
+          "hun": "Franciaország-Párizs: IP-telefonnal kapcsolatos szolgáltatások",
+          "swe": "Frankrike-Paris: IP-telefoni",
+          "lav": "Francija-Parīze: IP telefonijas pakalpojumi",
+          "gle": "Fhrainc, an-Páras: IP telephone services",
+          "ell": "Γαλλία-Παρίσι: Υπηρεσίες τηλεφωνίας πρωτοκόλλου Διαδικτύου (IP)",
+          "spa": "Francia-París: Servicios telefónicos PI",
+          "nld": "Frankrijk-Parijs: IP-telefoondiensten",
+          "est": "Prantsusmaa-Pariis: IP-telefoniteenused",
+          "fin": "Ranska-Pariisi: IP-puhelinpalvelut",
+          "pol": "Francja-Paryż: Usługi telefonii internetowej (IP)",
+          "hrv": "Francuska-Pariz: Usluge IP telefonije",
+          "ron": "Franţa-Paris: Servicii de telefonie IP",
+          "ces": "Francie-Paříž: Telefonní služby prostřednictvím IP",
+          "dan": "Frankrig-Paris: IP-telefontjenester",
+          "por": "França-Paris: Serviços telefónicos IP",
+          "slk": "Francúzsko-Paríž: Telefónne služby prostredníctvom IP",
+          "fra": "France-Paris: Services de téléphonie IP",
+          "mlt": "Franza-Pariġi: Servizzi tat-telefown IP",
+          "deu": "Frankreich-Paris: Internet-Telefondienste",
+          "lit": "Prancūzija-Paryžius: IP telefonijos paslaugos",
+          "ita": "Francia-Parigi: Servizi telefonici IP",
+          "bul": "Фpaнция-Париж: IP телефонни услуги",
+          "slv": "Francija-Pariz: Storitve IP telefonije",
+          "eng": "France-Paris: IP telephone services"
+        }
+      }
+    ],
+    "totalNoticeCount": 8673,
+    "iterationNextToken": null,
+    "timedOut": false
+  }
+}

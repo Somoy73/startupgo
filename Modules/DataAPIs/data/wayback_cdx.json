@@ -1,0 +1,66 @@
+{
+  "params": {
+    "url": "saildrone.com",
+    "output": "json",
+    "limit": 5,
+    "collapse": "timestamp:6",
+    "filter": "statuscode:200"
+  },
+  "full_size_bytes": 738,
+  "sample": [
+    [
+      "urlkey",
+      "timestamp",
+      "original",
+      "mimetype",
+      "statuscode",
+      "digest",
+      "length"
+    ],
+    [
+      "com,saildrone)/",
+      "20120908002909",
+      "http://saildrone.com:80/",
+      "text/html",
+      "200",
+      "KJO6LTSXSF22JCBC6LH33ZF3JI63DY3W",
+      "2328"
+    ],
+    [
+      "com,saildrone)/",
+      "20130113004256",
+      "http://saildrone.com:80/?",
+      "text/html",
+      "200",
+      "SOM6IJIRCSHRTYSH5HXQWPPH4R3526Y7",
+      "789"
+    ],
+    [
+      "com,saildrone)/",
+      "20131101090038",
+      "http://saildrone.com:80/",
+      "text/html",
+      "200",
+      "XQHRXCGVWIJTPYN662LHAR7DFXZ7NSYA",
+      "5073"
+    ],
+    [
+      "com,saildrone)/",
+      "20131202232207",
+      "http://saildrone.com:80/",
+      "text/html",
+      "200",
+      "N3W2PIZ4AVY2TN5MOHMED4NHB6TNAVQB",
+      "5071"
+    ],
+    [
+      "com,saildrone)/",
+      "20140105133826",
+      "http://saildrone.com:80/",
+      "text/html",
+      "200",
+      "UZL3ZJTTWUL2S3DEZNKSQ3CJBMPWP2MJ",
+      "5077"
+    ]
+  ]
+}

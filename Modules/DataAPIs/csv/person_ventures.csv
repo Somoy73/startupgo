@@ -1,0 +1,97 @@
+﻿person_id,company_number,company_name,company_status,role,appointed_on,resigned_on,source_name
+1,10566685,REFORESTATION LIMITED,active,director,2020-12-18,,uk_companies_house_officer
+4,09228527,GRAVITY SKETCH LIMITED,active,director,2014-09-22,2016-04-08,uk_companies_house_officer
+7,09228527,GRAVITY SKETCH LIMITED,active,director,2014-09-22,2016-01-27,uk_companies_house_officer
+23,10704665,GREEN ANGEL VENTURES LIMITED,active,director,2017-04-03,,uk_companies_house_officer
+23,08313356,POWERVAULT LTD,administration,director,2014-10-23,,uk_companies_house_officer
+23,08018252,WESTCO MEDICAL HOLDINGS LIMITED,dissolved,director,2013-03-26,,uk_companies_house_officer
+23,07778062,TP12(I) VCT PLC,dissolved,director,2011-12-05,,uk_companies_house_officer
+23,07791461,THE ENVIRONMENT INDUSTRIES GROUP LIMITED,dissolved,director,2011-09-30,,uk_companies_house_officer
+23,07039066,TP70 2010 VCT PLC,dissolved,director,2010-01-04,,uk_companies_house_officer
+23,06713009,TP70 2009 VCT PLC,dissolved,director,2008-12-09,,uk_companies_house_officer
+23,07964746,SATELLITE APPLICATIONS CATAPULT LIMITED,active,director,2015-12-18,2024-12-18,uk_companies_house_officer
+23,06421083,TRIPLE POINT INCOME VCT PLC,dissolved,director,2009-03-12,2023-09-01,uk_companies_house_officer
+23,09243907,NATURE METRICS LTD,active,director,2016-03-23,2022-05-18,uk_companies_house_officer
+23,03166339,PLANTLIFE INTERNATIONAL - THE WILD PLANT CONSERVATION CHARITY,active,director,2010-12-14,2020-06-30,uk_companies_house_officer
+23,08924732,TIGMUS LTD,dissolved,director,2015-04-01,2017-11-15,uk_companies_house_officer
+23,00448274,CHECKIT PLC,active,director,2010-11-15,2013-10-09,uk_companies_house_officer
+23,04430287,BOND FABRICATIONS LIMITED,active,director,2007-02-12,2012-05-02,uk_companies_house_officer
+23,04723807,YOUNG ENTERPRISE LONDON LTD.,dissolved,director,2010-06-02,2011-03-01,uk_companies_house_officer
+23,06660089,PLAXICA LIMITED,dissolved,director,2009-10-07,2010-08-13,uk_companies_house_officer
+23,03262010,CELONA TECHNOLOGIES LIMITED,dissolved,director,2004-07-16,2009-12-11,uk_companies_house_officer
+23,03559880,WORKSHARE LIMITED,active,director,2002-07-26,2008-10-28,uk_companies_house_officer
+23,04101137,NEXAGENT LIMITED,dissolved,director,2005-08-02,2007-07-30,uk_companies_house_officer
+23,02323420,SPARK IMPACT LIMITED,active,director,,2007-05-29,uk_companies_house_officer
+23,02454345,SPARK VENTURE MANAGEMENT LIMITED,active,director,,2007-05-29,uk_companies_house_officer
+23,SC220736,QUESTER VENTURE GP LIMITED,dissolved,director,2001-07-11,2007-05-11,uk_companies_house_officer
+23,02944008,QUERIST LIMITED,active,director,2001-08-01,2007-05-11,uk_companies_house_officer
+23,04395109,QUESTER ACADEMIC GP LIMITED,dissolved,director,2002-06-14,2007-05-11,uk_companies_house_officer
+23,02294905,QUESTER NOMINEES LIMITED,dissolved,director,1991-09-18,2007-05-11,uk_companies_house_officer
+23,01911795,QUESTER SERVICES LIMITED,dissolved,director,1991-09-18,2007-05-11,uk_companies_house_officer
+23,01815321,QUESTER LIMITED,dissolved,director,1991-09-18,2007-05-11,uk_companies_house_officer
+23,02127064,UK BUSINESS ANGELS ASSOCIATION,active,director,2006-03-15,2007-04-25,uk_companies_house_officer
+23,03338819,SIBELIUS SOFTWARE LIMITED,dissolved,director,1999-11-11,2006-07-28,uk_companies_house_officer
+23,03467925,ELATERAL HOLDINGS LIMITED,active,director,1998-05-20,2005-10-19,uk_companies_house_officer
+23,03863686,ELATERAL TRUSTEES LIMITED,active,director,2000-01-10,2005-10-19,uk_companies_house_officer
+23,02659326,METAVANTE TECHNOLOGIES LIMITED,active,director,2000-03-14,2005-04-27,uk_companies_house_officer
+23,03313467,ATEGO SYSTEMS LIMITED,dissolved,director,1998-03-20,2005-01-25,uk_companies_house_officer
+23,01566321,SURFCONTROL LIMITED,liquidation,director,1993-05-28,2003-11-01,uk_companies_house_officer
+23,03036315,ELATERAL LIMITED,active,director,1999-08-27,2001-02-15,uk_companies_house_officer
+23,03593238,ADTRAN NETWORKS (UK) LIMITED,active,director,1998-10-26,2000-07-13,uk_companies_house_officer
+23,02683202,ROVI SOLUTIONS LIMITED,dissolved,director,1996-10-02,1999-06-18,uk_companies_house_officer
+23,02858626,BIOTRACE INTERNATIONAL LIMITED,dissolved,director,1993-11-15,1999-04-27,uk_companies_house_officer
+23,03169368,COMINO GROUP LIMITED,dissolved,director,1996-03-20,1999-01-19,uk_companies_house_officer
+23,02693122,MAVENIR SYSTEMS LIMITED,active,director,1996-03-13,1998-12-23,uk_companies_house_officer
+23,03271531,AETHOS TRUSTEES LIMITED,dissolved,director,1996-12-24,1998-12-23,uk_companies_house_officer
+23,02215690,DRAGONS HEALTH CLUBS LIMITED,dissolved,director,,1998-12-09,uk_companies_house_officer
+23,02371375,LEARNING TECHNOLOGIES GROUP (UK) LIMITED,active,director,1994-04-29,1998-11-11,uk_companies_house_officer
+23,03175632,LEARNING TECHNOLOGIES GROUP HOLDINGS (UK) LIMITED,active,director,1996-04-18,1998-11-11,uk_companies_house_officer
+23,02658043,BCS COMPUTING LIMITED,dissolved,director,1992-02-06,1996-05-21,uk_companies_house_officer
+23,02261333,BIOTRACE LIMITED,dissolved,director,,1993-11-12,uk_companies_house_officer
+27,02603245,SHOREHAM PORT DEVELOPMENTS AND INVESTMENTS LIMITED,active,director,2025-01-30,,uk_companies_house_officer
+27,12427387,SHOREHAM PORT SOLUTIONS LIMITED,active,director,2025-01-30,,uk_companies_house_officer
+27,15752488,THE CLEAR DECISIONS COMPANY LTD,active,director,2024-05-31,,uk_companies_house_officer
+27,14469456,PH3 CAPITAL VENTURES LTD,dissolved,director,2022-11-08,,uk_companies_house_officer
+27,02621885,SUSSEX PORT FORWARDING LIMITED,active,director,2022-01-20,,uk_companies_house_officer
+27,13133250,MYKOR LTD,active,director,2024-04-03,2026-04-23,uk_companies_house_officer
+30,17164217,JUNO MARA LTD,active,director,2026-04-17,,uk_companies_house_officer
+45,pdl:7x2BLyStzNjKMviB7bbI2Qc4qrDw,Knit Health,,co-founder / chief technology officer,2015-02,2018-09,people_data_labs
+45,pdl:DyRXaUFxC8pze30Kuy1yCwY7j7zk,Bad Rabbit,,co-founder,2005-06,2006-06,people_data_labs
+31,pdl:6BB09AgAxrGgNlHOjp32AQEP8CbM,Atlantic Airways,,chief executive officer,1995-06,2013-11,people_data_labs
+31,pdl:xxB8wxb8z9qnhd34OIvoZAwFU3PK,T-Mac,,chief executive officer,1990,1993,people_data_labs
+33,pdl:patagoniaseaweedsspa,Patagonia Seaweeds Spa,,founder & chief executive officer,2015-01,,people_data_labs
+33,pdl:balchile,Bal Chile,,chief executive officer,2014-04,2014-12,people_data_labs
+32,pdl:SCCJQkuqPpv7hFf7vg6smgd89fix,Flowcore,,chief executive officer and co-founder,2023-01,,people_data_labs
+32,pdl:JzXlLOJaTVseh1B0ZWERwAIVxAfB,Usable,,chief executive officer and co-founder,2023-01,,people_data_labs
+32,pdl:3rTFA1YuUz2LUhcpVBEqoQqQ115c,Globe Tracker,,chief executive officer,2021-03,2021-12,people_data_labs
+32,pdl:wvZDUCyMaCqeDnHYw2lbrQ8qxERr,Nemlia Føroyar,,chief executive officer,2020-06,2021-02,people_data_labs
+32,pdl:oJrHzBZEveSrF5GE8w5EzwD4abou,Klintra,,co-founder,2016-03,2016-03,people_data_labs
+32,pdl:QctQboBI3i3t0og7dZwyQgjLgrSm,Tokni,,founder,2000-08,2000-08,people_data_labs
+32,pdl:QctQboBI3i3t0og7dZwyQgjLgrSm,Tokni,,chief executive officer,2000-08,,people_data_labs
+36,pdl:casulo,Casulo,,founder,2016-04,,people_data_labs
+36,pdl:9hMNYCmtB9bPKTNELh3fCAwqQWUM,Seaweed Solutions,,chief executive officer & founder,2009-01,2014-12,people_data_labs
+36,pdl:seaweedsolutionsas,Seaweed Solutions As,,founder / director,2009-01,,people_data_labs
+36,pdl:cocoon,Cocoon,,chief executive officer & founder,1989-01,1996-01,people_data_labs
+34,pdl:futurumseafoodas,Futurum Seafood As,,chief executive officer,2017-04,2018-03,people_data_labs
+34,pdl:Oa4TQjZAKCxZZm22B7vIbgr3VIeg,1 Hjelpende Hånd As,,chief executive officer / founder,2010-02,2020-10,people_data_labs
+34,pdl:Cj0bM43GxmNpmvdR5I7PhQDGuT4M,Codfarmers,,chief executive officer,2008-01,2010-01,people_data_labs
+34,pdl:futurumcaptialas,Futurum Captial As,,chief executive officer,2004-01,2006-01,people_data_labs
+34,pdl:amundsenoslo,Amundsen Oslo,,chief executive officer,2003-01,2004-01,people_data_labs
+48,pdl:2c6cvkg4ovDA8WdExOdiTgIa69qN,Stimblue+,,chief executive officer,2020-01,,people_data_labs
+37,pdl:Jcqy2AQKZNDhHSkihD7dPQUTYlqU,Naturemetrics,,founder director,2020-03,,people_data_labs
+37,pdl:Jcqy2AQKZNDhHSkihD7dPQUTYlqU,Naturemetrics,,interim chief executive officer (joint) | cpo,2023-07,2023-11,people_data_labs
+37,pdl:Jcqy2AQKZNDhHSkihD7dPQUTYlqU,Naturemetrics,,managing director,2015-01,2020-03,people_data_labs
+38,pdl:k5FDqTrkO1aWj8oZ1PwAwQwdHrOB,Epic (Exponential Positive Impact Capital),,co-founder & chief executive officer,2020-01,,people_data_labs
+38,pdl:futuristcollective,Futurist Collective,,founder,2017-01,2020-01,people_data_labs
+40,pdl:fbmVUhqcNCQW3v3fi8OChwjWH0EL,Citi,,"managing director, payments head - japan, asia north & australia and global client experience transformation",2023-11,2025-06,people_data_labs
+40,pdl:fbmVUhqcNCQW3v3fi8OChwjWH0EL,Citi,,"managing director, region head - payments & receivables, tts apac",2020-10,2023-11,people_data_labs
+40,pdl:fbmVUhqcNCQW3v3fi8OChwjWH0EL,Citi,,"managing director, region head - commercial banking, digital channels & data, implementation, tts ap",2019-01,2020-10,people_data_labs
+40,pdl:fbmVUhqcNCQW3v3fi8OChwjWH0EL,Citi,,"managing director, commercial bank head & implementation head, asia pacific, tts",2015-04,2020-10,people_data_labs
+40,pdl:fbmVUhqcNCQW3v3fi8OChwjWH0EL,Citi,,"managing director, commercial bank head, asia pacific, citi transaction services",2012-10,2015-03,people_data_labs
+40,pdl:fbmVUhqcNCQW3v3fi8OChwjWH0EL,Citi,,"managing director and country head - indonesia, global transaction services",2011-08,2012-09,people_data_labs
+40,pdl:fbmVUhqcNCQW3v3fi8OChwjWH0EL,Citi,,"managing director, regional head of public sector, global transaction services, asia pacific",2009,2011-08,people_data_labs
+42,pdl:MYGfugkhqCMcfUIwKcCVAwgHggsj,Deploifai,,co-founder,2021-06,2023-12,people_data_labs
+50,pdl:yxFBa7hItp23kV6KKHuzOw7EOFnl,Open Ocean Camera,,"founder, chief executive officer",2020-01,2022-07,people_data_labs
+50,pdl:wOPrKe0Oi5GS5sf9kH4PqwnWtoyh,Osrei.Org,,founder,2017-09,2018-12,people_data_labs
+50,pdl:oVWnLnTp4C9Vf8eVVERLjwacoQNs,The Vayu Project,,founder,2015-04,2020-03,people_data_labs
+41,pdl:Lo8qLv2cbU6G7TTq8xkYVAoSNjK9,Xccelerate,,chief executive officer / founder,2017-01,2026-05,people_data_labs

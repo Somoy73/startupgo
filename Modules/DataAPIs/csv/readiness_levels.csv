@@ -1,0 +1,55 @@
+﻿dimension_code,level,summary
+CRL,1,A possible need is assumed; no clear customer hypotheses.
+CRL,2,Secondary market research; first problem/need hypothesis.
+CRL,3,Primary feedback from a few users or experts; hypothesis updated.
+CRL,4,Problem confirmed by multiple customers; segments and buyer roles identified.
+CRL,5,Customers confirm the product can solve their problem (problem-solution fit).
+CRL,6,Customer testing confirms value; structured sales activities started.
+CRL,7,Customer agreements in place; first or test sales; small active user base.
+CRL,8,Market-ready product sold near target price; initial traction; sales process staffed.
+CRL,9,"Widespread, repeatable, scalable sales; significant traction."
+TRL,1,Research results with potential applications; vague technology idea.
+TRL,2,Technology concept defined; applications speculative.
+TRL,3,Lab tests show the concept could work; active R&D started.
+TRL,4,Components integrated and working together in the lab (initial validation).
+TRL,5,Components validated in a relevant (simulated) environment.
+TRL,6,Representative prototype demonstrated in a relevant environment.
+TRL,7,Near-complete prototype works in an operational environment.
+TRL,8,Complete technology proven in actual operations by first users.
+TRL,9,Scalable technology proven in operations by several users over time.
+BRL,1,Vague business idea; little market or competition insight.
+BRL,2,Business concept and value proposition described; brief market familiarity.
+BRL,3,"Proposed business model (e.g. canvas), TAM/SAM estimates, competition defined."
+BRL,4,Simplified P&L indicates viability; initial sustainability assessment (own assumptions).
+BRL,5,Revenue and cost sides validated with external feedback; P&L updated.
+BRL,6,"Complete sustainable business model tested in realistic scenarios (pilot, pre-order)."
+BRL,7,First commercial revenue shows willingness to pay; key partner agreements in place.
+BRL,8,1-3 years of operations show the sustainable model holds; channels and supply chain live.
+BRL,9,Sustainable business model operational and proven profitable and impactful over time.
+IPRL,1,Hypothesising that results might contain some form of IP.
+IPRL,2,IP forms mapped; ownership clarified.
+IPRL,3,Key IP described in detail; initial protectability evaluation.
+IPRL,4,Protectability confirmed by professional; priorities decided.
+IPRL,5,Draft IP strategy; first formal application of key IP filed.
+IPRL,6,Complete IP strategy; positive response from authorities; freedom-to-operate assessed.
+IPRL,7,Key IP in national/regional phase in relevant markets.
+IPRL,8,IP strategy fully implemented; key IP granted in first market.
+IPRL,9,IP strategy proven to create value; key IP granted in several countries.
+TMRL,1,Individual lacking key competencies.
+TMRL,2,1-2 people with limited competencies; first idea of needs.
+TMRL,3,Some competencies present; gaps identified with a near-term plan.
+TMRL,4,Committed champion; several competencies present; roles being discussed.
+TMRL,5,Founding team with main competencies; shareholder agreement signed.
+TMRL,6,"Complementary, diverse founding team with clear CEO; advisors being recruited."
+TMRL,7,Well-functioning team with clear roles; board and advisors operational.
+TMRL,8,Experienced leadership team; competent board; HR processes in place.
+TMRL,9,High-performing organisation with continuous development.
+FRL,1,Little insight into costs or funding options.
+FRL,2,Basic plan with funding options for initial milestones.
+FRL,3,Funding secured for initial feasibility work (1-6 months).
+FRL,4,Verification plan in place and substantially funded.
+FRL,5,Investor pitch tested; 12-month budget; funding strategy decided.
+FRL,6,Improved pitch tested; 3-5 year P&L and cash flow.
+FRL,7,Discussions with investors around a defined offer; business plan in place.
+FRL,8,Term-sheet-level discussions; due-diligence materials ready.
+FRL,9,6-12+ months runway secured; full financial monitoring.
