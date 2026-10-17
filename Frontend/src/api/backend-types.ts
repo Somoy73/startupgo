@@ -23,7 +23,6 @@ export type Scores = {
   readiness: number;
   ocean_impact: number;
   momentum: number;
-  imbalance_penalty: number;
   potential: number;
   band: string;
   readiness_spread: number;
@@ -31,6 +30,10 @@ export type Scores = {
   lagging_dimensions: string[];
   ocean_evidence_label: string;
   ocean_areas_covered: string[];
+  ocean_capped_by_oir?: boolean;
+  ocean_evidence_known?: boolean;
+  momentum_recency_known?: boolean;
+  potential_coverage?: number;
 };
 
 /** One KTH IRL dimension at its current level, with what the next level requires. */

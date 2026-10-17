@@ -118,5 +118,126 @@
     "create_time": 1792251894,
     "update_time": 1792251894,
     "_id": "startup:nauticspot"
+  },
+  "startup:sammy": {
+    "entity_names": [
+      "500,000 EUR",
+      "Active Registry",
+      "Blue Invest",
+      "Coastal and Environmental Protection",
+      "Commercial Operation",
+      "Employees 1-9",
+      "Environmental Protection and Regeneration",
+      "Greece",
+      "Marinas",
+      "Multi-purpose Sensor Grid",
+      "Next Generation Marina",
+      "SaMMY",
+      "SaMMY AYT",
+      "Smart Environment",
+      "Smart Parking",
+      "Team of 8",
+      "Tourist Ports",
+      "Unified Booking and Operating Management Systems"
+    ],
+    "count": 18,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "startup:sammy"
+  },
+  "startup:aquabiotech-group": {
+    "entity_names": [
+      "AquaBioTech Limited",
+      "European Commission"
+    ],
+    "count": 2,
+    "create_time": 1792253125,
+    "update_time": 1792253125,
+    "_id": "startup:aquabiotech-group"
+  },
+  "startup:healix": {
+    "entity_names": [
+      "Blue economy sector",
+      "BlueInvest Project Pipeline",
+      "Development stage",
+      "Employees",
+      "Healix",
+      "Netherlands",
+      "Raising now",
+      "Sector",
+      "Team size",
+      "Total raised",
+      "Website"
+    ],
+    "count": 11,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "startup:healix"
+  },
+  "startup:xsun-sas": {
+    "entity_names": [
+      "AerialSurvey",
+      "BlueTech",
+      "France",
+      "SolarXOne",
+      "XSun SAS",
+      "XSun SolarXOne",
+      "Xsun",
+      "replaces"
+    ],
+    "count": 8,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "startup:xsun-sas"
+  },
+  "startup:pharem": {
+    "entity_names": [
+      "BlueInvest Project Pipeline",
+      "EIC",
+      "European Commission",
+      "Grant: H2020 DePharm",
+      "Grant: H2020 PFS",
+      "H2020 DePharm",
+      "H2020 PFS",
+      "Pharem",
+      "Zymatic"
+    ],
+    "count": 9,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "startup:pharem"
+  },
+  "startup:paras-aqua-oy": {
+    "entity_names": [
+      "1,000,000 EUR",
+      "1-9",
+      "Aquaculture",
+      "BlueInvest Project Pipeline",
+      "Finland",
+      "PaRAS",
+      "PaRAS Aqua Oy",
+      "Website",
+      "commercial operation"
+    ],
+    "count": 9,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "startup:paras-aqua-oy"
+  },
+  "startup:reeftox": {
+    "entity_names": [
+      "1-9",
+      "2,000,000 EUR",
+      "BlueInvest Project Pipeline",
+      "Coastal and environmental protection and regeneration",
+      "Environmental protection and regeneration",
+      "France",
+      "ReefTox",
+      "commercial operation"
+    ],
+    "count": 8,
+    "create_time": 1792256674,
+    "update_time": 1792256674,
+    "_id": "startup:reeftox"
   }
 }

@@ -75,7 +75,12 @@ export const COLUMNS: Column[] = [
     header: "Ocean impact",
     sortKey: "ocean",
     defaultVisible: true,
-    cell: (s) => !s.assessed ? PENDING : <Meter value={s.scores.ocean_impact} label="Ocean impact" />,
+    cell: (s) =>
+      !s.assessed ? PENDING : s.scores.ocean_evidence_known === false ? (
+        <span className="muted" title="No ocean impact evidence on record">No evidence</span>
+      ) : (
+        <Meter value={s.scores.ocean_impact} label="Ocean impact" />
+      ),
   },
   {
     id: "momentum",

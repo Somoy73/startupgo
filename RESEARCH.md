@@ -121,6 +121,30 @@ Common finding: funding history and company age carry most of the signal, and ac
 modest (~0.74 ROC-AUC in one survival study). **So Startup Go v1 uses a transparent, rules-based
 score rather than a black-box model.** An ML layer can be added once we have labelled outcomes.
 
+### 2.5 Scoring model: what is sourced and what is judgment
+
+`Backend/app/scoring.py` (readiness, ocean impact, momentum, potential) and
+`Modules/Agent/startup_agent/scoring.py` (TRL, BRL, Ocean Impact Readiness, Investment Score Matrix) are rules-based.
+Only the scales are taken from the literature; **every weight and threshold below is a provisional judgment** until it
+is calibrated against labelled outcomes (see 2.4). The UI shows `potential_coverage` so a score built on missing data
+is not read as a complete one.
+
+| Element | Where | Status |
+|---------|-------|--------|
+| Six KTH dimensions, levels 1-9 | Backend `DIMENSIONS` | Sourced (2.1) |
+| Navigator areas A-F, KPI codes, evidence levels 0-4 | Backend `ocean_impact_score` | Scale sourced (2.2); the 0-4 evidence scale is Startup Go's own |
+| Readiness weights 0.20 / 0.20 / 0.20 / 0.15 / 0.15 / 0.10 | `READINESS_WEIGHTS` | Provisional: customer, technology and business model weighted highest, IP lowest because ocean ventures often rely on know-how and permits |
+| Lagging dimension = 3+ levels below the median | `LAGGING_THRESHOLD` | KTH guide warns about gaps of 2-3 levels; 3 is the conservative end |
+| Ocean score = 60% depth (3 strongest KPIs) + 40% breadth (3 areas) | `ocean_impact_score` | Provisional; chosen so one KPI cannot score high and extra KPIs never lower the score |
+| KPI evidence capped by the Agent's OIR (1->1, 2->2, 3->2, 4->3, 5->4) | `OIR_KPI_CAP` | Derived from `navigator.py`, which assigns KPI levels from the same facts |
+| Momentum = 60% stage + 40% recency, 48-month horizon, no date = 0 | `momentum_score` | Provisional. Stage ranks are ordinal, not calibrated |
+| Potential = 0.45 readiness + 0.30 ocean + 0.25 momentum | `POTENTIAL_WEIGHTS` | Provisional. Momentum measures past fundraising, not quality; treat it as context |
+| Bands: 70 Strong, 55 Promising, 40 Watch | `band_for` | Provisional cut-offs |
+| Fact status weights: verified 1.0, claimed 0.6, inferred 0.5 | Agent `STATUS_WEIGHT` | Provisional; used only for confidence |
+| TRL, BRL and OIR ladders | Agent `score_trl` / `score_brl` / `score_oir` | Follow the extraction schema; not yet checked against the official framework text |
+| Investment Score Matrix points (10 criteria, 1-5) | Agent `_market` ... `_deal` | Provisional point rules; stated claims score as facts, confidence reports their status |
+| Currency conversion | `FX_TO_USD` | Static approximations, used only for disclosed funding totals |
+
 ---
 
 ## 3. Seed dataset

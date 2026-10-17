@@ -28,9 +28,17 @@ return (
           {value}
         </span>
       </div>
-      <span className="text-xs font-semibold tracking-wider uppercase opacity-80">
+      <span
+        className="text-xs font-semibold tracking-wider uppercase opacity-80"
+        title="Weights are provisional; see RESEARCH.md section 2.5"
+      >
         Investment potential
       </span>
+      {scores.potential_coverage !== undefined && scores.potential_coverage < 1 && (
+        <span className="text-xs opacity-70">
+          Partial data: {Math.round(scores.potential_coverage * 100)}% of inputs
+        </span>
+      )}
     </div>
   );
 }

@@ -56,10 +56,13 @@ export type StartupDetail = {
     ocean_impact: number;
     momentum: number;
     band: string;
-    imbalance_penalty: number;
     readiness_spread: number;
     lagging_dimensions: DimensionKey[];
     ocean_areas_covered: string[];
+    ocean_capped_by_oir?: boolean;
+    ocean_evidence_known?: boolean;
+    momentum_recency_known?: boolean;
+    potential_coverage?: number;
     ocean_evidence_label: string;
   };
   // The agent's Investment Score Matrix: its latest accepted assessment, else its rubric on the startup's facts.

@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { MatchRadar } from "../../components/matching/MatchRadar";
 import { TopMatchList } from "../../components/matching/TopMatchList";
 import { backend } from "../../api/backend";
-import { rankByReadiness } from "../../lib/readiness-ranking";
+import { rankByReadiness, similarStartups } from "../../lib/readiness-ranking";
 import { useAsync } from "../../lib/useAsync";
 
 export function Matching() {
@@ -10,8 +10,10 @@ export function Matching() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const toggle = (slug: string) => setSelected((cur) => (cur === slug ? null : slug));
-  const matches = useMemo(() => rankByReadiness(startups ?? []), [startups]);
-  const picked = matches.find((m) => m.startup.slug === selected) ?? null;
+  const ranked = useMemo(() => rankByReadiness(startups ?? [], Infinity), [startups]);
+  const matches = ranked.slice(0, 10);
+  const picked = ranked.find((m) => m.startup.slug === selected) ?? null;
+  const similar = picked ? similarStartups(picked, ranked) : [];
 
   return (
     <>
@@ -46,8 +48,8 @@ export function Matching() {
           )}
         </section>
         {picked && (
-          <aside className="mg-detail" aria-live="polite">
-            <div className="mg-detail-inner" key={picked.startup.slug}>
+          <aside className="mg-detail" aria-live="polite" key={picked.startup.slug}>
+            <div className="mg-detail-inner">
               <button type="button" className="mg-close" onClick={() => setSelected(null)} aria-label="Close details">×</button>
               <p className="mg-eyebrow">{picked.startup.sector} · {picked.startup.country}</p>
               <h3>{picked.startup.name}</h3>
@@ -59,6 +61,21 @@ export function Matching() {
                 <div><dt>Investment potential</dt><dd>{picked.potential}</dd></div>
               </dl>
             </div>
+            {similar.length > 0 && (
+              <section className="mg-similar" aria-label="Similar startups">
+                <h4 className="mg-eyebrow">Startups you might also be interested in</h4>
+                <div className="mg-similar-grid">
+                  {similar.map((r) => (
+                    <button type="button" key={r.startup.slug} className="mg-similar-card" onClick={() => setSelected(r.startup.slug)}>
+                      <span className="tm-badge" aria-hidden>{r.startup.name[0]}</span>
+                      <strong>{r.startup.name}</strong>
+                      <small>{r.startup.sector}</small>
+                      <span className="mg-similar-score">{r.total}<small> readiness</small></span>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            )}
           </aside>
         )}
       </div>

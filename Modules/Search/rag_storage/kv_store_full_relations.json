@@ -130,5 +130,191 @@
     "create_time": 1792251894,
     "update_time": 1792251894,
     "_id": "startup:nauticspot"
+  },
+  "startup:sammy": {
+    "relation_pairs": [],
+    "count": 0,
+    "create_time": 1792252954,
+    "update_time": 1792252954,
+    "_id": "startup:sammy"
+  },
+  "startup:aquabiotech-group": {
+    "relation_pairs": [],
+    "count": 0,
+    "create_time": 1792253125,
+    "update_time": 1792253125,
+    "_id": "startup:aquabiotech-group"
+  },
+  "startup:healix": {
+    "relation_pairs": [
+      [
+        "Blue economy sector",
+        "Healix"
+      ],
+      [
+        "BlueInvest Project Pipeline",
+        "Healix"
+      ],
+      [
+        "Development stage",
+        "Healix"
+      ],
+      [
+        "Employees",
+        "Healix"
+      ],
+      [
+        "Healix",
+        "Raising now"
+      ],
+      [
+        "Healix",
+        "Sector"
+      ],
+      [
+        "Healix",
+        "Team size"
+      ],
+      [
+        "Healix",
+        "Total raised"
+      ],
+      [
+        "Healix",
+        "Website"
+      ]
+    ],
+    "count": 9,
+    "create_time": 1792253561,
+    "update_time": 1792253561,
+    "_id": "startup:healix"
+  },
+  "startup:xsun-sas": {
+    "relation_pairs": [
+      [
+        "AerialSurvey",
+        "XSun SAS"
+      ],
+      [
+        "AerialSurvey",
+        "Xsun"
+      ],
+      [
+        "BlueTech",
+        "SolarXOne"
+      ],
+      [
+        "BlueTech",
+        "XSun SAS"
+      ],
+      [
+        "BlueTech",
+        "Xsun"
+      ],
+      [
+        "SolarXOne",
+        "XSun SAS"
+      ],
+      [
+        "SolarXOne",
+        "Xsun"
+      ],
+      [
+        "XSun SolarXOne",
+        "replaces"
+      ]
+    ],
+    "count": 8,
+    "create_time": 1792255147,
+    "update_time": 1792255147,
+    "_id": "startup:xsun-sas"
+  },
+  "startup:pharem": {
+    "relation_pairs": [
+      [
+        "BlueInvest Project Pipeline",
+        "Pharem"
+      ],
+      [
+        "BlueInvest Project Pipeline",
+        "Zymatic"
+      ],
+      [
+        "EIC",
+        "Pharem"
+      ],
+      [
+        "European Commission",
+        "Pharem"
+      ],
+      [
+        "European Commission",
+        "Zymatic"
+      ],
+      [
+        "Grant: H2020 DePharm",
+        "Pharem"
+      ],
+      [
+        "Grant: H2020 PFS",
+        "Pharem"
+      ]
+    ],
+    "count": 7,
+    "create_time": 1792255887,
+    "update_time": 1792255887,
+    "_id": "startup:pharem"
+  },
+  "startup:paras-aqua-oy": {
+    "relation_pairs": [
+      [
+        "1,000,000 EUR",
+        "PaRAS Aqua Oy"
+      ],
+      [
+        "1-9",
+        "PaRAS Aqua Oy"
+      ],
+      [
+        "Aquaculture",
+        "PaRAS Aqua Oy"
+      ],
+      [
+        "BlueInvest Project Pipeline",
+        "PaRAS Aqua Oy"
+      ],
+      [
+        "Finland",
+        "PaRAS Aqua Oy"
+      ],
+      [
+        "PaRAS Aqua Oy",
+        "Website"
+      ],
+      [
+        "PaRAS Aqua Oy",
+        "commercial operation"
+      ]
+    ],
+    "count": 7,
+    "create_time": 1792256414,
+    "update_time": 1792256414,
+    "_id": "startup:paras-aqua-oy"
+  },
+  "startup:reeftox": {
+    "relation_pairs": [
+      [
+        "BlueInvest Project Pipeline",
+        "ReefTox"
+      ],
+      [
+        "France",
+        "ReefTox"
+      ]
+    ],
+    "count": 2,
+    "create_time": 1792256674,
+    "update_time": 1792256674,
+    "_id": "startup:reeftox"
   }
 }
