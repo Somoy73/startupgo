@@ -10,10 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CompareRouteImport } from './routes/compare'
 import { Route as MatchingRouteImport } from './routes/matching'
-import { Route as MethodologyRouteImport } from './routes/methodology'
-import { Route as PipelineRouteImport } from './routes/pipeline'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as AssessIndexRouteImport } from './routes/assess.index'
 import { Route as AssessSlugRouteImport } from './routes/assess.$slug'
 import { Route as StartupsSlugRouteImport } from './routes/startups.$slug'
@@ -23,24 +21,14 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CompareRoute = CompareRouteImport.update({
-  id: '/compare',
-  path: '/compare',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const MatchingRoute = MatchingRouteImport.update({
   id: '/matching',
   path: '/matching',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MethodologyRoute = MethodologyRouteImport.update({
-  id: '/methodology',
-  path: '/methodology',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PipelineRoute = PipelineRouteImport.update({
-  id: '/pipeline',
-  path: '/pipeline',
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AssessIndexRoute = AssessIndexRouteImport.update({
@@ -61,20 +49,16 @@ const StartupsSlugRoute = StartupsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/compare': typeof CompareRoute
   '/matching': typeof MatchingRoute
-  '/methodology': typeof MethodologyRoute
-  '/pipeline': typeof PipelineRoute
+  '/search': typeof SearchRoute
   '/assess/$slug': typeof AssessSlugRoute
   '/startups/$slug': typeof StartupsSlugRoute
   '/assess/': typeof AssessIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/compare': typeof CompareRoute
   '/matching': typeof MatchingRoute
-  '/methodology': typeof MethodologyRoute
-  '/pipeline': typeof PipelineRoute
+  '/search': typeof SearchRoute
   '/assess/$slug': typeof AssessSlugRoute
   '/startups/$slug': typeof StartupsSlugRoute
   '/assess': typeof AssessIndexRoute
@@ -82,10 +66,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/compare': typeof CompareRoute
   '/matching': typeof MatchingRoute
-  '/methodology': typeof MethodologyRoute
-  '/pipeline': typeof PipelineRoute
+  '/search': typeof SearchRoute
   '/assess/$slug': typeof AssessSlugRoute
   '/startups/$slug': typeof StartupsSlugRoute
   '/assess/': typeof AssessIndexRoute
@@ -94,30 +76,24 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/compare'
     | '/matching'
-    | '/methodology'
-    | '/pipeline'
+    | '/search'
     | '/assess/$slug'
     | '/startups/$slug'
     | '/assess/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/compare'
     | '/matching'
-    | '/methodology'
-    | '/pipeline'
+    | '/search'
     | '/assess/$slug'
     | '/startups/$slug'
     | '/assess'
   id:
     | '__root__'
     | '/'
-    | '/compare'
     | '/matching'
-    | '/methodology'
-    | '/pipeline'
+    | '/search'
     | '/assess/$slug'
     | '/startups/$slug'
     | '/assess/'
@@ -125,10 +101,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CompareRoute: typeof CompareRoute
   MatchingRoute: typeof MatchingRoute
-  MethodologyRoute: typeof MethodologyRoute
-  PipelineRoute: typeof PipelineRoute
+  SearchRoute: typeof SearchRoute
   AssessSlugRoute: typeof AssessSlugRoute
   StartupsSlugRoute: typeof StartupsSlugRoute
   AssessIndexRoute: typeof AssessIndexRoute
@@ -143,13 +117,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/compare': {
-      id: '/compare'
-      path: '/compare'
-      fullPath: '/compare'
-      preLoaderRoute: typeof CompareRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/matching': {
       id: '/matching'
       path: '/matching'
@@ -157,18 +124,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MatchingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/methodology': {
-      id: '/methodology'
-      path: '/methodology'
-      fullPath: '/methodology'
-      preLoaderRoute: typeof MethodologyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pipeline': {
-      id: '/pipeline'
-      path: '/pipeline'
-      fullPath: '/pipeline'
-      preLoaderRoute: typeof PipelineRouteImport
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/assess/': {
@@ -197,10 +157,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CompareRoute: CompareRoute,
   MatchingRoute: MatchingRoute,
-  MethodologyRoute: MethodologyRoute,
-  PipelineRoute: PipelineRoute,
+  SearchRoute: SearchRoute,
   AssessSlugRoute: AssessSlugRoute,
   StartupsSlugRoute: StartupsSlugRoute,
   AssessIndexRoute: AssessIndexRoute,

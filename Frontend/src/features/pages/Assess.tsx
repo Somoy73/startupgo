@@ -1,252 +1,182 @@
-import { Button } from "../../components/ui/button";
-import { useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "../../lib/navigation";
-import { api } from "../../api/client";
-import type { Confidence, DimensionKey, StartupDetail } from "../../api/types";
-import { CompanyFields } from "../../components/assess/CompanyFields";
-import { ImpactFields } from "../../components/assess/ImpactFields";
-import { ReadinessFields } from "../../components/assess/ReadinessFields";
-import { ScorePreview } from "../../components/assess/ScorePreview";
-import { TextField } from "../../components/Controls";
-import { IconBack } from "../../components/Icons";
-import {
-  assessmentFromStartup,
-  emptyAssessment,
-  emptyCompany,
-  toAssessmentInput,
-  toPreviewInput,
-  toStartupInput,
-  validateAssessment,
-  validateCompany,
-  type AssessmentDraft,
-  type CompanyDraft,
-  type DraftErrors,
-} from "../../lib/assessment";
-import { useAsync } from "../../lib/useAsync";
-import { useScorePreview } from "../../lib/useScorePreview";
+import { Link } from "../../lib/navigation";
 import { useAppData } from "../../state/AppData";
 
-const CONFIDENCE: Confidence[] = ["low", "medium", "high"];
+const STEPS = [
+  {
+    name: "Collect evidence",
+    body: "Public sources, founder interviews and documents are gathered into one profile: technology, business model, customers, funding history, intellectual property and team.",
+  },
+  {
+    name: "Score readiness",
+    body: "Each readiness dimension is rated 1–9 on the KTH Innovation Readiness Level scale. Every level has a written summary, so the rating is always traceable to a definition.",
+  },
+  {
+    name: "Score ocean impact",
+    body: "Impact KPIs are marked with an evidence level. The score shows what a company has actually proven and what it only claims — breadth of coverage counts too.",
+  },
+  {
+    name: "Sign off",
+    body: "An assessor records the levels, a confidence level and a short rationale. Assessments are stored with their date, so you can follow how a startup develops.",
+  },
+  {
+    name: "Compare on one number",
+    body: "Readiness, ocean impact and funding momentum are combined into an investment-potential score out of 100, with a band and a breakdown of what holds it back.",
+  },
+];
 
-/** /assess → new startup; /assess/:slug → new assessment of an existing startup. */
+/** /assess — information page about the assessment method. */
 export function Assess() {
-  const { slug } = useParams();
-  const existing = useAsync(() => (slug ? api.startup(slug) : Promise.resolve(null)), [slug]);
+  const { frameworks: fw, error } = useAppData();
+  if (error) return <p className="empty error">{error}</p>;
+  if (!fw) return <p className="empty">Loading…</p>;
 
-  if (existing.error) return <p className="empty error">{existing.error}</p>;
-  if (existing.loading) return <p className="empty">Loading…</p>;
-  // key resets the form when switching between startups
-  return <AssessForm key={slug ?? "new"} startup={existing.data ?? null} />;
-}
-
-function AssessForm({ startup }: { startup: StartupDetail | null }) {
-  const { startups, frameworks, vocabulary, upsertStartup } = useAppData();
-  const navigate = useNavigate();
-  const [company, setCompany] = useState<CompanyDraft>(emptyCompany);
-  const [draft, setDraft] = useState<AssessmentDraft>(() =>
-    startup ? assessmentFromStartup(startup) : emptyAssessment(),
-  );
-  const [submitted, setSubmitted] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [saveError, setSaveError] = useState<string | null>(null);
-
-  const isNew = startup === null;
-  const previewInput = useMemo(
-    () =>
-      isNew
-        ? toPreviewInput(draft, company.stage, company.roundDate.trim() || null)
-        : toPreviewInput(draft, startup.stage, startup.last_round_on),
-    [draft, company.stage, company.roundDate, isNew, startup],
-  );
-  const preview = useScorePreview(previewInput);
-
-  const validationErrors = useMemo<DraftErrors>(
-    () => ({ ...validateAssessment(draft), ...(isNew ? validateCompany(company) : {}) }),
-    [draft, company, isNew],
-  );
-  // Errors only show after the first submit attempt, then update live as fields are fixed.
-  const errors = submitted ? validationErrors : {};
-  const errorCount = Object.keys(errors).length;
-
-  const update = (patch: Partial<AssessmentDraft>) => setDraft((d) => ({ ...d, ...patch }));
-
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    if (Object.keys(validationErrors).length) return;
-
-    setSaving(true);
-    setSaveError(null);
-    try {
-      const saved = isNew
-        ? await api.createStartup(toStartupInput(company, draft))
-        : await api.addAssessment(startup.slug, toAssessmentInput(draft));
-      upsertStartup(saved);
-      navigate(`/startups/${saved.slug}`);
-    } catch (err) {
-      setSaveError((err as Error).message);
-      setSaving(false);
-    }
-  };
-
-  if (!frameworks) return <p className="empty">Loading frameworks…</p>;
+  const w = fw.potential_weights;
+  const pct = (n: number) => `${Math.round(n * 100)}%`;
+  const kpiCount = fw.ocean_impact_areas.reduce((sum, a) => sum + a.kpis.length, 0);
 
   return (
     <>
-      {startup && (
-        <Link to={`/startups/${startup.slug}`} className="back">
-          <IconBack /> {startup.name}
-        </Link>
-      )}
       <div className="page-head">
         <div>
-          <h1>{isNew ? "Assess a new startup" : `Assess ${startup.name}`}</h1>
+          <h1>How we assess startups</h1>
           <p>
-            {isNew
-              ? "Add a company and score its readiness and ocean impact. It joins your deal flow as Sourced."
-              : `Pre-filled from the current assessment (${startup.readiness.assessor}, ${startup.readiness.assessed_on}). Saving adds a new dated snapshot.`}
+            Assess is our method, not a form. Every startup is judged the same way — readiness,
+            ocean-impact evidence and funding momentum — so a score means the same thing whether it
+            comes from a kelp farm or a sensor company.
           </p>
         </div>
-        <StartupSwitcher
-          current={startup?.slug ?? ""}
-          options={startups.map((s) => ({ slug: s.slug, name: s.name }))}
-        />
       </div>
 
-      <form className="assess-layout" onSubmit={submit} noValidate>
-        <div className="stack">
-          {isNew && (
-            <section className="card card-pad">
-              <div className="card-head">
-                <h2>1 · Company</h2>
-              </div>
-              <CompanyFields
-                company={company}
-                errors={errors}
-                vocabulary={vocabulary}
-                onChange={(patch) => setCompany((c) => ({ ...c, ...patch }))}
-              />
-            </section>
-          )}
+      <div className="grid grid-4" style={{ marginBottom: 20 }}>
+        <div className="card stat">
+          <span className="label">Readiness dimensions</span>
+          <span className="value">{fw.readiness_dimensions.length}</span>
+          <span className="sub">each scored 1–9</span>
+        </div>
+        <div className="card stat">
+          <span className="label">Ocean impact KPIs</span>
+          <span className="value">{kpiCount}</span>
+          <span className="sub">across {fw.ocean_impact_areas.length} areas</span>
+        </div>
+        <div className="card stat">
+          <span className="label">Evidence levels</span>
+          <span className="value">{fw.evidence_scale.length}</span>
+          <span className="sub">recorded per KPI</span>
+        </div>
+        <div className="card stat">
+          <span className="label">Score inputs</span>
+          <span className="value">3</span>
+          <span className="sub">readiness · impact · momentum</span>
+        </div>
+      </div>
 
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>{isNew ? "2" : "1"} · Readiness</h2>
-              <span className="small muted">KTH Innovation Readiness Level, 1–9</span>
-            </div>
-            <ReadinessFields
-              levels={draft.levels}
-              dimensions={frameworks.readiness_dimensions}
-              onChange={(key: DimensionKey, level) =>
-                update({ levels: { ...draft.levels, [key]: level } })
-              }
-            />
-          </section>
-
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>{isNew ? "3" : "2"} · Ocean impact evidence</h2>
-              <span className="small muted">Ocean Impact Navigator</span>
-            </div>
-            <ImpactFields
-              kpis={draft.kpis}
-              framework={frameworks}
-              errors={errors}
-              onChange={(code, kpi) => update({ kpis: { ...draft.kpis, [code]: kpi } })}
-            />
-          </section>
-
-          <section className="card card-pad">
-            <div className="card-head">
-              <h2>{isNew ? "4" : "3"} · Sign-off</h2>
-            </div>
-            <div className="form-grid">
-              <TextField
-                label="Assessor"
-                value={draft.assessor}
-                onChange={(assessor) => update({ assessor })}
-                error={errors["assessor"]}
-                placeholder="Your name"
-                required
-              />
-              <fieldset className="toggle-group">
-                <legend>Confidence</legend>
-                <div>
-                  {CONFIDENCE.map((c) => (
-                    <Button
-                      key={c}
-                      type="button"
-                      className="toggle"
-                      aria-pressed={draft.confidence === c}
-                      onClick={() => update({ confidence: c })}
-                    >
-                      {c}
-                    </Button>
-                  ))}
+      <div className="stack">
+        <section className="card card-pad">
+          <div className="card-head">
+            <h2>The method, step by step</h2>
+          </div>
+          <div className="rank-list">
+            {STEPS.map((step, i) => (
+              <div className="rank-row" key={step.name}>
+                <span className="rank-badge">{i + 1}</span>
+                <div className="grow">
+                  <span className="name">{step.name}</span>
+                  <p className="small secondary" style={{ marginTop: 4 }}>
+                    {step.body}
+                  </p>
                 </div>
-              </fieldset>
-              <div className="span-2">
-                <TextField
-                  label="Rationale"
-                  value={draft.rationale}
-                  onChange={(rationale) => update({ rationale })}
-                  placeholder="What evidence supports these levels? What would move them up?"
-                  multiline
-                />
               </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="grid grid-2" style={{ alignItems: "start" }}>
+          <section className="card card-pad">
+            <div className="card-head">
+              <h2>Readiness</h2>
+              <span className="small muted">{pct(w.readiness)} of the score</span>
             </div>
+            <p className="small secondary" style={{ marginBottom: 8 }}>
+              KTH Innovation Readiness Level. Six dimensions, weighted below, rescaled so that L1 = 0
+              and L9 = 100.
+            </p>
+            <div className="rank-list">
+              {fw.readiness_dimensions.map((d) => (
+                <div className="rank-row" key={d.code}>
+                  <div className="grow">
+                    <span className="name">
+                      {d.code} · {d.name}
+                    </span>
+                    <span className="meta">{d.description}</span>
+                  </div>
+                  <span className="chip">{pct(d.weight)}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="card card-pad">
+            <div className="card-head">
+              <h2>Ocean impact</h2>
+              <span className="small muted">{pct(w.ocean_impact)} of the score</span>
+            </div>
+            <p className="small secondary" style={{ marginBottom: 8 }}>
+              Ocean Impact Navigator. {kpiCount} KPIs in {fw.ocean_impact_areas.length} areas, each
+              marked with an evidence level.
+            </p>
+            <div className="rank-list">
+              {fw.ocean_impact_areas.map((a) => (
+                <div className="rank-row" key={a.code}>
+                  <div className="grow">
+                    <span className="name">
+                      {a.code} · {a.name}
+                    </span>
+                    <span className="meta">{a.orientation}</span>
+                  </div>
+                  <span className="chip">{a.kpis.length} KPIs</span>
+                </div>
+              ))}
+            </div>
+            <p className="small muted" style={{ marginTop: 12 }}>
+              Evidence: {fw.evidence_scale.map((e) => `${e.level} ${e.label}`).join(" · ")}
+            </p>
           </section>
         </div>
 
-        <div className="assess-side">
-          <ScorePreview
-            preview={preview.scores}
-            current={startup?.scores ?? null}
-            error={preview.error}
-          />
-          {errorCount > 0 && (
-            <p className="small error" role="alert">
-              Fix {errorCount} field{errorCount > 1 ? "s" : ""} before saving.
-            </p>
-          )}
-          {saveError && (
-            <p className="small error" role="alert">
-              Couldn't save: {saveError}
-            </p>
-          )}
-          <Button className="btn btn-primary btn-block" disabled={saving}>
-            {saving ? "Saving…" : isNew ? "Add startup" : "Save assessment"}
-          </Button>
-        </div>
-      </form>
-    </>
-  );
-}
+        <section className="card card-pad">
+          <div className="card-head">
+            <h2>Funding momentum</h2>
+            <span className="small muted">{pct(w.momentum)} of the score</span>
+          </div>
+          <p className="small secondary">
+            Where a company is in its funding history and how recently it last raised. A round
+            closed this quarter counts for more than one from four years ago, so momentum is a
+            signal of traction rather than of size.
+          </p>
+        </section>
 
-function StartupSwitcher({
-  current,
-  options,
-}: {
-  current: string;
-  options: { slug: string; name: string }[];
-}) {
-  const navigate = useNavigate();
-  return (
-    <div className="field">
-      <label htmlFor="assess-target">Startup</label>
-      <select
-        id="assess-target"
-        className="select"
-        value={current}
-        onChange={(e) => navigate(e.target.value ? `/assess/${e.target.value}` : "/assess")}
-      >
-        <option value="">+ New startup</option>
-        {options.map((o) => (
-          <option key={o.slug} value={o.slug}>
-            {o.name}
-          </option>
-        ))}
-      </select>
-    </div>
+        <section className="card card-pad">
+          <div className="card-head">
+            <h2>What the score tells you</h2>
+          </div>
+          <p className="small secondary" style={{ marginBottom: 10 }}>
+            Investment potential is a weighted blend of readiness ({pct(w.readiness)}), ocean impact
+            ({pct(w.ocean_impact)}) and funding momentum ({pct(w.momentum)}), with a penalty when the
+            readiness dimensions are far apart — a company that is strong on technology but
+            undeveloped everywhere else is riskier than the average suggests.
+          </p>
+          <div className="row-gap" style={{ flexWrap: "wrap" }}>
+            <span className="chip">Strong ≥ 70</span>
+            <span className="chip">Promising ≥ 55</span>
+            <span className="chip">Watch ≥ 40</span>
+            <span className="chip">Early &lt; 40</span>
+          </div>
+          <p className="small secondary" style={{ marginTop: 14 }}>
+            The exact formula, weights and imbalance penalty are all shown on this page. You can
+            also see the method applied side by side in <Link to="/matching">Matching</Link>.
+          </p>
+        </section>
+      </div>
+    </>
   );
 }

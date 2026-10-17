@@ -15,12 +15,10 @@ describe("App routing", () => {
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
   it.each([
+    "/search",
     "/matching",
     "/assess",
     "/assess/origin-by-ocean",
-    "/pipeline",
-    "/compare",
-    "/methodology",
     "/startups/origin-by-ocean",
   ])("matches the supplied page at %s", (path) => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });

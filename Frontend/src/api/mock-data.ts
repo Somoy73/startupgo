@@ -138,8 +138,11 @@ const rows = [
     4000000,
   ],
 ] as const;
+// Mock fields used by the landing dashboards (newest / trending).
+const FOUND_DATES = ["2026-10-14", "2026-10-09", "2026-09-30", "2026-09-22", "2026-09-15", "2026-08-28"];
+const GROWTH_SPEED = [12, 38, 21, 9, 47, 15];
 export const seed: StartupDetail[] = rows.map(
-  ([name, tagline, sector, country, region, trl, brl, impact, potential, pipeline, usd]) => {
+  ([name, tagline, sector, country, region, trl, brl, impact, potential, pipeline, usd], i) => {
     const levels = { trl, brl, crl: Math.max(1, brl - 1), frl: brl, ipr: trl, team: brl };
     return {
       slug: name.toLowerCase().replaceAll(" ", "-"),
@@ -151,6 +154,8 @@ export const seed: StartupDetail[] = rows.map(
       city: "",
       founded_year: null,
       website: "",
+      created_at: FOUND_DATES[i] ?? null,
+      growth_speed: GROWTH_SPEED[i] ?? null,
       description: tagline + ". This profile uses illustrative preview data.",
       stage: "seed",
       last_round_on: null,
