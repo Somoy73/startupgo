@@ -7,7 +7,7 @@
  */
 import type { StartupSummary } from "../api/types";
 import { stageLabel } from "./format";
-import { regionLabel, regionOf, type Region } from "./regions";
+import { inRegion, regionLabel, regionOf, type Region } from "./regions";
 
 export interface Thesis {
   id: string;
@@ -70,7 +70,18 @@ export function evaluateCriteria(s: StartupSummary, t: Thesis): CriterionResult[
 
   if (t.stages.length) results.push(oneOf("stage", t.stages, s.stage, stageLabel));
   if (t.sectors.length) results.push(oneOf("sector", t.sectors, s.sector, (v) => v));
-  if (t.regions.length) results.push(oneOf("region", t.regions, regionOf(s.country), (v) => regionLabel(v as Region)));
+  if (t.regions.length) {
+    const matched = t.regions.find((r) => inRegion(s.country, r));
+    const continent = regionOf(s.country);
+    results.push({
+      key: "region",
+      met: matched !== undefined,
+      fit: matched !== undefined ? 1 : 0,
+      label: matched
+        ? regionLabel(matched)
+        : `${continent ? regionLabel(continent) : "Unknown"} (thesis: ${t.regions.map(regionLabel).join(", ")})`,
+    });
+  }
 
   if (t.impactAreas.length) {
     const covered = t.impactAreas.filter((a) => s.scores.ocean_areas_covered.includes(a));

@@ -5,6 +5,8 @@ import type {
   PipelineStage,
   Scores,
   ScorePreviewInput,
+  SearchRequest,
+  SearchResponse,
   StartupDetail,
   StartupInput,
   StartupSummary,
@@ -42,6 +44,7 @@ export const api = {
   previewScores: (input: ScorePreviewInput) => post<Scores>("/scoring/preview", input),
   compare: (slugs: string[]) => request<StartupDetail[]>(`/compare?${new URLSearchParams({ slugs: slugs.join(",") })}`),
   frameworks: () => request<Frameworks>("/frameworks"),
+  search: (body: SearchRequest) => post<SearchResponse>("/search", body),
   setPipeline: (slug: string, pipeline_stage: PipelineStage) =>
     request<StartupSummary>(`${slugPath(slug)}/pipeline`, {
       method: "PATCH",

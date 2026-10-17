@@ -2,12 +2,14 @@
 
 import sqlite3
 from contextlib import asynccontextmanager
+from pathlib import Path
 
+from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from . import repository
+from . import repository, search
 from .db import get_conn, init_db
 from .schemas import (
     AssessmentCreate,
@@ -17,10 +19,15 @@ from .schemas import (
     PipelineUpdate,
     ScorePreviewRequest,
     Scores,
+    SearchRequest,
+    SearchResponse,
     StartupCreate,
     StartupDetail,
     StartupSummary,
 )
+
+# Backend/.env (see .env.example). Variables already set in the environment win.
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 
 @asynccontextmanager
@@ -136,3 +143,13 @@ def filters(conn: sqlite3.Connection = Conn):
 @app.get("/api/frameworks")
 def frameworks(conn: sqlite3.Connection = Conn) -> dict:
     return repository.frameworks(conn)
+
+
+@app.post("/api/search", response_model=SearchResponse)
+def search_startups(body: SearchRequest, wrapper: search.SearchWrapper = Depends(search.get_search_wrapper)):
+    """Natural-language `query` or explicit `filters`, answered by the search wrapper (RAG / vector search)."""
+    try:
+        result = wrapper.search(query=body.query, filters=body.filters)
+    except NotImplementedError as exc:
+        raise HTTPException(501, f"Search isn't available yet: {exc}") from exc
+    return SearchResponse(query=body.query, filters=result.filters, notice=result.notice, startups=result.startups)

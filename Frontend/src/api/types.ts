@@ -139,6 +139,35 @@ export interface Frameworks {
   penalty_per_extra_level: number;
 }
 
+// ---------- Search ----------
+
+/** Wire format of the search filters (SearchFilters in schemas.py). */
+export interface ApiSearchFilters {
+  stages: string[];
+  sectors: string[];
+  countries: string[];
+  regions: string[];
+  impact_areas: string[];
+  pipeline: string[];
+  /** 0 means no minimum. */
+  min_levels: Record<DimensionKey, number>;
+  /** All must appear. */
+  keywords: string[];
+  /** At least one must appear. */
+  any_keywords: string[];
+}
+
+/** POST /api/search: a natural-language `query` or explicit `filters` (edited chips and dropdowns). */
+export type SearchRequest = { query: string } | { filters: ApiSearchFilters };
+
+export interface SearchResponse {
+  query: string | null;
+  /** Filters the search applied (shown as chips), or null if it produced none. */
+  filters: ApiSearchFilters | null;
+  notice: string | null;
+  startups: StartupSummary[];
+}
+
 // ---------- Write models ----------
 
 export type Levels = Record<DimensionKey, number>;

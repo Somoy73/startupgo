@@ -1,17 +1,27 @@
 /**
- * Smart search: turns a free-form query such as
- *   "seed kelp startups in europe with trl >= 6"
- * into structured filters, and back into a canonical query string.
+ * Search filters on the client: chips, and the URL encoding of edited filters.
  *
- * The query string is the single source of truth (it lives in the URL);
- * filters are always derived from it with `parseSearch`.
+ * Interpretation and filtering happen on the backend (POST /api/search). The URL holds
+ * either `q` (what the user typed) or, once they edit a chip or a
+ * dropdown, `f`: the filters as a canonical string such as
+ *   stage:seed region:nordics trl>=6 any:kelp
+ * written by `formatSearch` and read back by `parseSearch`.
  */
-import { DIMENSIONS, type DimensionKey, type PipelineStage, type StartupSummary } from "../api/types";
+import {
+  DIMENSIONS,
+  type ApiSearchFilters,
+  type DimensionKey,
+  type PipelineStage,
+  type StartupSummary,
+} from "../api/types";
 import { PIPELINE_LABELS, stageLabel } from "./format";
-import { REGIONS, regionLabel, regionOf, type Region } from "./regions";
+import { REGIONS, regionLabel, type Region } from "./regions";
 
 export interface SearchFilters {
+  /** Every term must appear. */
   text: string[];
+  /** At least one term must appear (synonyms from smart search, written `any:term`). */
+  anyText: string[];
   stages: string[];
   sectors: string[];
   countries: string[];
@@ -29,6 +39,7 @@ export interface Vocabulary {
 
 export const emptyFilters = (): SearchFilters => ({
   text: [],
+  anyText: [],
   stages: [],
   sectors: [],
   countries: [],
@@ -64,6 +75,8 @@ const REGION_PHRASES: [Region, RegExp][] = [
   ["asia", /\basia(n)?\b/],
   ["africa", /\bafrica(n)?\b/],
   ["oceania", /\boceania\b/],
+  ["nordics", /\b(nordics?|scandinavia(n)?)\b/],
+  ["baltics", /\bbaltics?\b/],
 ];
 
 const COUNTRY_ALIASES: [string, RegExp][] = [
@@ -90,7 +103,7 @@ const PIPELINE_PHRASES: [PipelineStage, RegExp][] = [
 ];
 
 const LEVEL_PATTERN = /\b(crl|trl|brl|iprl|tmrl|frl)\s*(>=|≥|>|=|:)?\s*([1-9])\+?(?!\d)/g;
-const KEY_VALUE_PATTERN = /\b(stage|sector|country|region|area|pipeline):(?:"([^"]+)"|(\S+))/g;
+const KEY_VALUE_PATTERN = /\b(stage|sector|country|region|area|pipeline|any):(?:"([^"]+)"|(\S+))/g;
 
 const STOP_WORDS = new Set(
   "a an and are at based companies company find for in is me of on or show stage startup startups that the with".split(
@@ -146,6 +159,9 @@ export function parseSearch(input: string, vocab: Vocabulary): SearchFilters {
         if (stage) f.pipeline = addUnique(f.pipeline, stage);
         break;
       }
+      case "any":
+        f.anyText = addUnique(f.anyText, value);
+        break;
     }
   });
 
@@ -190,30 +206,14 @@ export function formatSearch(f: SearchFilters): string {
     ...f.impactAreas.map((v) => `area:${v}`),
     ...f.pipeline.map((v) => `pipeline:${v}`),
     ...DIMENSIONS.filter((d) => f.minLevels[d.key]).map((d) => `${d.key}>=${f.minLevels[d.key]}`),
+    ...f.anyText.map((v) => `any:${quote(v)}`),
     ...f.text,
   ].join(" ");
 }
 
 // ---------------------------------------------------------------------------
-// Apply
+// State
 // ---------------------------------------------------------------------------
-
-export function matchesFilters(s: StartupSummary, f: SearchFilters): boolean {
-  const anyOf = <T>(wanted: T[], actual: T | null) =>
-    wanted.length === 0 || (actual !== null && wanted.includes(actual));
-  const haystack = [s.name, s.tagline, s.description, s.sector, s.country, s.city ?? ""].join(" ").toLowerCase();
-
-  return (
-    f.text.every((t) => haystack.includes(t)) &&
-    anyOf(f.stages, s.stage) &&
-    anyOf(f.sectors, s.sector) &&
-    anyOf(f.countries, s.country) &&
-    anyOf(f.regions, regionOf(s.country)) &&
-    anyOf(f.pipeline, s.pipeline_stage) &&
-    (f.impactAreas.length === 0 || f.impactAreas.some((a) => s.scores.ocean_areas_covered.includes(a))) &&
-    DIMENSIONS.every((d) => s.readiness[d.key] >= (f.minLevels[d.key] ?? 0))
-  );
-}
 
 export const isEmpty = (f: SearchFilters) => formatSearch(f) === "";
 
@@ -253,6 +253,53 @@ export function filterChips(f: SearchFilters): FilterChip[] {
     ...listChips("impactAreas", "Impact area ", (v) => v),
     ...listChips("pipeline", "Pipeline: ", (v) => PIPELINE_LABELS[v]),
     ...levelChips,
+    ...listChips("anyText", "Any: ", (v) => `“${v}”`),
     ...listChips("text", "", (v) => `“${v}”`),
   ];
+}
+
+// ---------------------------------------------------------------------------
+// Wire format (POST /api/search)
+// ---------------------------------------------------------------------------
+
+const REGION_IDS = new Set<string>(REGIONS.map((r) => r.id));
+const PIPELINE_IDS = new Set<string>(PIPELINE_PHRASES.map(([id]) => id));
+
+export function toApiFilters(f: SearchFilters): ApiSearchFilters {
+  const min_levels = Object.fromEntries(DIMENSIONS.map(({ key }) => [key, f.minLevels[key] ?? 0])) as Record<
+    DimensionKey,
+    number
+  >;
+  return {
+    stages: f.stages,
+    sectors: f.sectors,
+    countries: f.countries,
+    regions: f.regions,
+    impact_areas: f.impactAreas,
+    pipeline: f.pipeline,
+    min_levels,
+    keywords: f.text,
+    any_keywords: f.anyText,
+  };
+}
+
+/** The backend's filters as UI filters, dropping anything the UI doesn't know. */
+export function fromApiFilters(api: ApiSearchFilters): SearchFilters {
+  const unique = <T>(values: T[]) => [...new Set(values)];
+  const minLevels: SearchFilters["minLevels"] = {};
+  for (const { key } of DIMENSIONS) {
+    const level = Math.round(api.min_levels[key] ?? 0);
+    if (level >= 1 && level <= 9) minLevels[key] = level;
+  }
+  return {
+    text: unique(api.keywords.map((t) => t.toLowerCase().trim()).filter(Boolean)),
+    anyText: unique(api.any_keywords.map((t) => t.toLowerCase().trim()).filter(Boolean)),
+    stages: unique(api.stages),
+    sectors: unique(api.sectors),
+    countries: unique(api.countries),
+    regions: unique(api.regions.filter((r): r is Region => REGION_IDS.has(r))),
+    impactAreas: unique(api.impact_areas.map((a) => a.toUpperCase()).filter((a) => /^[A-F]$/.test(a))),
+    pipeline: unique(api.pipeline.filter((p): p is PipelineStage => PIPELINE_IDS.has(p))),
+    minLevels,
+  };
 }

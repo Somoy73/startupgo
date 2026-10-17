@@ -1,43 +1,80 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import type { StartupSummary } from "../api/types";
+import { api } from "../api/client";
+import type { SearchRequest, SearchResponse, StartupSummary } from "../api/types";
 import { FilterSelect } from "../components/Controls";
 import { BandBadge, LevelPill, Meter } from "../components/Scores";
 import { SearchBar } from "../components/SearchBar";
 import { compactMoney, PIPELINE_LABELS, score } from "../lib/format";
 import { REGIONS } from "../lib/regions";
-import { formatSearch, isEmpty, matchesFilters, parseSearch, type SearchFilters } from "../lib/search";
-import { isSortKey, SORTS, sortStartups, type SortKey } from "../lib/sort";
+import {
+  emptyFilters,
+  formatSearch,
+  fromApiFilters,
+  isEmpty,
+  parseSearch,
+  toApiFilters,
+  type SearchFilters,
+  type Vocabulary,
+} from "../lib/search";
+import { effectiveSort, SORTS, sortStartups } from "../lib/sort";
+import { useAsync } from "../lib/useAsync";
 import { useAppData } from "../state/AppData";
 
 const MAX_COMPARE = 3;
 
+// The `f` parameter is written by formatSearch in key:value form, so it decodes without the data vocabulary.
+const NO_VOCABULARY: Vocabulary = { sectors: [], countries: [] };
+
 export function DealFlow() {
-  const { startups, vocabulary, frameworks, loading, error } = useAppData();
+  const { vocabulary, frameworks } = useAppData();
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string[]>([]);
 
+  // URL: `q` = what the user typed; `f` = filters after the user edited chips or dropdowns.
+  // Both go to POST /api/search; with neither, the page lists everything via GET /api/startups.
   const query = params.get("q") ?? "";
-  const sortParam = params.get("sort");
-  const sort: SortKey = isSortKey(sortParam) ? sortParam : "potential";
-  const filters = useMemo(() => parseSearch(query, vocabulary), [query, vocabulary]);
-  const results = useMemo(
+  const editedFilters = params.get("f");
+
+  const sentFilters = useMemo(
+    () => (editedFilters !== null ? parseSearch(editedFilters, NO_VOCABULARY) : null),
+    [editedFilters],
+  );
+  const request: SearchRequest | null = useMemo(() => {
+    if (sentFilters) return { filters: toApiFilters(sentFilters) };
+    if (query) return { query };
+    return null;
+  }, [query, sentFilters]);
+  const search = useAsync<SearchResponse>(
     () =>
-      sortStartups(
-        startups.filter((s) => matchesFilters(s, filters)),
-        sort,
-      ),
-    [startups, filters, sort],
+      request
+        ? api.search(request)
+        : api.startups().then((startups) => ({ query: null, filters: null, notice: null, startups })),
+    [request],
   );
 
-  const setParam = (key: string, value: string) => {
+  const response = search.data;
+  // Sorted here so changing the order never re-runs the search.
+  const sort = effectiveSort(params.get("sort"), request !== null);
+  const results = useMemo(() => sortStartups(response?.startups ?? [], sort), [response, sort]);
+  // Chips: what the search says it applied, else what we sent.
+  const filters = response?.filters ? fromApiFilters(response.filters) : sentFilters;
+  const loading = search.loading && !response;
+
+  const updateParams = (changes: Record<string, string | null>) => {
     const next = new URLSearchParams(params);
-    if (value) next.set(key, value);
-    else next.delete(key);
+    for (const [key, value] of Object.entries(changes)) {
+      if (value) next.set(key, value);
+      else next.delete(key);
+    }
     setParams(next, { replace: true });
   };
-  const setFilters = (f: SearchFilters) => setParam("q", formatSearch(f));
+  const setParam = (key: string, value: string) => updateParams({ [key]: value });
+  // Edited filters keep `q` for context but take precedence over it.
+  const setFilters = (f: SearchFilters) =>
+    isEmpty(f) ? updateParams({ q: null, f: null }) : updateParams({ f: formatSearch(f) });
+  const current = filters ?? emptyFilters();
 
   const toggleCompare = (slug: string) =>
     setSelected((s) => (s.includes(slug) ? s.filter((x) => x !== slug) : s.length < MAX_COMPARE ? [...s, slug] : s));
@@ -54,51 +91,66 @@ export function DealFlow() {
         </Link>
       </div>
 
-      <Stats startups={results} filtered={!isEmpty(filters)} />
+      <Stats startups={results} filtered={!isEmpty(current)} />
 
-      <SearchBar query={query} filters={filters} onQueryChange={(q) => setParam("q", q)} />
+      <SearchBar
+        query={query}
+        filters={filters}
+        interpreted={editedFilters === null && Boolean(response?.filters)}
+        interpreting={search.loading && request !== null && "query" in request}
+        notice={editedFilters === null ? (response?.notice ?? null) : null}
+        onSearch={(q) => updateParams({ q, f: null })}
+        onFiltersChange={setFilters}
+        onClear={() => updateParams({ q: null, f: null })}
+      />
 
       <div className="filters">
         <FilterSelect
           label="Sector"
-          value={filters.sectors[0] ?? ""}
+          value={current.sectors[0] ?? ""}
           options={vocabulary.sectors.map((v) => ({ value: v, label: v }))}
-          onChange={(v) => setFilters({ ...filters, sectors: v ? [v] : [] })}
+          onChange={(v) => setFilters({ ...current, sectors: v ? [v] : [] })}
         />
         <FilterSelect
           label="Region"
-          value={filters.regions[0] ?? ""}
+          value={current.regions[0] ?? ""}
           options={REGIONS.map((r) => ({ value: r.id, label: r.label }))}
-          onChange={(v) => setFilters({ ...filters, regions: v ? [v as SearchFilters["regions"][number]] : [] })}
+          onChange={(v) => setFilters({ ...current, regions: v ? [v as SearchFilters["regions"][number]] : [] })}
         />
         <FilterSelect
           label="Impact area"
-          value={filters.impactAreas[0] ?? ""}
+          value={current.impactAreas[0] ?? ""}
           options={(frameworks?.ocean_impact_areas ?? []).map((a) => ({
             value: a.code,
             label: `${a.code} · ${a.name}`,
           }))}
-          onChange={(v) => setFilters({ ...filters, impactAreas: v ? [v] : [] })}
+          onChange={(v) => setFilters({ ...current, impactAreas: v ? [v] : [] })}
         />
         <label className="visually-hidden" htmlFor="sort">
           Sort by
         </label>
         <select id="sort" className="select" value={sort} onChange={(e) => setParam("sort", e.target.value)}>
-          {Object.entries(SORTS).map(([key, { label }]) => (
-            <option key={key} value={key}>
-              Sort: {label}
-            </option>
-          ))}
+          {Object.entries(SORTS)
+            .filter(([key]) => key !== "relevance" || request !== null)
+            .map(([key, { label }]) => (
+              <option key={key} value={key}>
+                Sort: {label}
+              </option>
+            ))}
         </select>
       </div>
 
       <div className="card">
-        {error && <p className="empty error">Couldn't load startups: {error}. Is the backend running on :8000?</p>}
-        {!error && loading && <p className="empty">Loading…</p>}
-        {!error && !loading && results.length === 0 && (
+        {search.error && (
+          <p className="empty error">
+            {request ? "Search failed" : "Couldn't load startups"}: {search.error}
+          </p>
+        )}
+        {!search.error && loading && <p className="empty">Loading…</p>}
+        {!search.error && response && results.length === 0 && (
           <div className="empty">
             <p>No startups match this search.</p>
-            <button className="btn" style={{ marginTop: 12 }} onClick={() => setParam("q", "")}>
+            <button className="btn" style={{ marginTop: 12 }} onClick={() => updateParams({ q: null, f: null })}>
               Clear search
             </button>
           </div>

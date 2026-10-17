@@ -75,8 +75,26 @@ cd Frontend && npm run format                 # prettier
 | GET | `/api/compare?slugs=a,b,c` | Up to 3 profiles |
 | GET | `/api/filters` | Filter options |
 | GET | `/api/frameworks` | KTH IRL levels, Navigator KPIs, scoring weights |
+| POST | `/api/search` | `{ "query": "..." }` or `{ "filters": {...} }` → applied filters + matching startups (sorted in the UI). 501 until the search wrapper is connected (see below) |
 
 Interactive docs: http://localhost:8000/docs
+
+## Search
+
+The deal-flow search bar sends what the user types to `POST /api/search` as `{ "query": ... }`.
+Removing a filter chip or changing a dropdown sends `{ "filters": ... }` instead, and the edited
+filters are kept in the URL (`f=`). The response carries the startups, the filters the search
+applied (shown as chips, or `null`) and an optional `notice`.
+
+The endpoint delegates to a `SearchWrapper` (`Backend/app/search.py`), the seam for the RAG /
+vector search. Until one is connected, `/api/search` returns **501** and the Deal flow page shows
+the error for searches. Browsing with no search still uses `GET /api/startups`. To connect a real
+search, implement `SearchWrapper.search(query=..., filters=...)` and return it from
+`get_search_wrapper()`.
+
+Backend settings go in `Backend/.env` (template: `Backend/.env.example`). Variables already set in
+the shell take precedence. Restart the backend after editing `.env`, since `--reload` only watches
+Python files.
 
 ## Data caveat
 

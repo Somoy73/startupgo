@@ -5,11 +5,15 @@ export const REGIONS = [
   { id: "asia", label: "Asia" },
   { id: "africa", label: "Africa" },
   { id: "oceania", label: "Oceania" },
+  { id: "nordics", label: "Nordics" },
+  { id: "baltics", label: "Baltics" },
 ] as const;
 
 export type Region = (typeof REGIONS)[number]["id"];
 
-const COUNTRIES_BY_REGION: Record<Region, string[]> = {
+type Continent = Exclude<Region, "nordics" | "baltics">;
+
+const COUNTRIES_BY_REGION: Record<Continent, string[]> = {
   europe: [
     "Austria",
     "Belgium",
@@ -23,6 +27,8 @@ const COUNTRIES_BY_REGION: Record<Region, string[]> = {
     "Iceland",
     "Ireland",
     "Italy",
+    "Latvia",
+    "Lithuania",
     "Netherlands",
     "Norway",
     "Poland",
@@ -54,14 +60,27 @@ const COUNTRIES_BY_REGION: Record<Region, string[]> = {
   oceania: ["Australia", "Fiji", "New Zealand"],
 };
 
+/** Sub-regions overlap a continent: a Finnish startup is in both Europe and the Nordics. */
+const SUBREGIONS: Record<Exclude<Region, Continent>, string[]> = {
+  nordics: ["Denmark", "Faroe Islands", "Finland", "Iceland", "Norway", "Sweden"],
+  baltics: ["Estonia", "Latvia", "Lithuania"],
+};
+
 const REGION_BY_COUNTRY = new Map(
   Object.entries(COUNTRIES_BY_REGION).flatMap(([region, countries]) =>
-    countries.map((c) => [c.toLowerCase(), region as Region] as const),
+    countries.map((c) => [c.toLowerCase(), region as Continent] as const),
   ),
 );
 
-export function regionOf(country: string): Region | null {
+/** The continent a country belongs to. */
+export function regionOf(country: string): Continent | null {
   return REGION_BY_COUNTRY.get(country.toLowerCase()) ?? null;
+}
+
+export function inRegion(country: string, region: Region): boolean {
+  const key = country.toLowerCase();
+  if (region in SUBREGIONS) return SUBREGIONS[region as keyof typeof SUBREGIONS].some((c) => c.toLowerCase() === key);
+  return REGION_BY_COUNTRY.get(key) === region;
 }
 
 export function regionLabel(id: Region): string {
