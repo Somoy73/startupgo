@@ -1,7 +1,6 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { Button } from "../components/ui/button";
 import { Search } from "../features/pages/Search";
-import { startupListOptions } from "../lib/discover-search";
 export const Route = createFileRoute("/search")({
   validateSearch: (search: Record<string, unknown>) => ({
     q: typeof search["q"] === "string" ? search["q"] : "",
@@ -9,7 +8,6 @@ export const Route = createFileRoute("/search")({
     filters: typeof search["filters"] === "string" ? search["filters"] : "",
     sort: typeof search["sort"] === "string" ? search["sort"] : "",
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(startupListOptions),
   errorComponent: SearchError,
   notFoundComponent: () => <div className="empty">Search is unavailable.</div>,
   head: () => ({

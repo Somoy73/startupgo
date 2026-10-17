@@ -76,28 +76,6 @@ export type StartupDetail = {
   sources: { url: string; title: string }[];
 };
 export type StartupSummary = StartupDetail;
-export type SearchMatch = StartupSummary & {
-  relevance: number;
-  matched: string[];
-  entry: string | null;
-};
-export type AgentEntryMatch = {
-  entry: string;
-  name: string;
-  website: string | null;
-  relevance: number;
-  matched: string[];
-  trl: number | null;
-  brl: number | null;
-  ocean_impact_readiness: number | null;
-  investment_score: number | null;
-  overall_confidence: number | null;
-};
-export type NaturalLanguageSearchResponse = {
-  query: string;
-  results: SearchMatch[];
-  entries: AgentEntryMatch[];
-};
 export type Framework = {
   potential_weights: { readiness: number; ocean_impact: number; momentum: number };
   penalty_per_extra_level: number;

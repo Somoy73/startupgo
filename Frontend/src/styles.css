@@ -101,7 +101,7 @@
 .app-nav a:hover, .app-nav a.active { background: var(--ocean); color: var(--navy-foreground); }
 .header-cta { background: var(--ocean); border-radius: 24px; font-weight: 700; }
 .menu-toggle { display: none; background: var(--glass-nav); color: var(--navy-foreground); }
-.app-main { max-width: 1280px; margin: auto; padding: 0 24px 64px; }
+.app-main { width: 100%; max-width: 1280px; margin: auto; padding: 0 24px 64px; }
 .page-head { position: relative; isolation: isolate; display: flex; justify-content: space-between; align-items: center; gap: 28px; color: var(--navy-foreground); padding: 48px 0 42px; margin-bottom: 30px; }
 .page-head::before { content: none; }
 @media(min-width:1280px) { .page-head::before { left: calc((1280px - 100vw) / 2 - 24px); right: calc((1280px - 100vw) / 2 - 24px); } }

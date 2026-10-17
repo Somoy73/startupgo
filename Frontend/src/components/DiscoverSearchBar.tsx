@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
-import { DIMENSIONS } from "../api/types";
+import { KTH_DIMENSIONS } from "../api/backend-types";
 import type { SearchFilters } from "../lib/discover-search";
 import { Button } from "./ui/button";
 import { SearchFilterPanel } from "./SearchFilterPanel";
@@ -16,11 +16,11 @@ export function DiscoverSearchBar({ query, filters, type, busy, onSearch, onFilt
   const [showFilters, setShowFilters] = useState(false);
   useEffect(() => setDraft(query), [query]);
   const euProjects = type === "eu-projects";
-  const chips = (["stages", "regions", "sectors", "impactAreas", "pipeline"] as const).flatMap((key) => filters[key].map((value) => ({
+  const chips = (["stages", "countries", "sectors", "impactAreas", "pipeline"] as const).flatMap((key) => filters[key].map((value) => ({
     id: `${key}:${value}`, label: key === "pipeline" ? PIPELINE_LABELS[value as keyof typeof PIPELINE_LABELS] ?? value : value,
     remove: () => onFiltersChange({ ...filters, [key]: filters[key].filter((v) => v !== value) }),
   })));
-  for (const d of DIMENSIONS) {
+  for (const d of KTH_DIMENSIONS) {
     const level = filters.minLevels[d.key];
     if (level !== undefined) chips.push({ id: `level:${d.key}`, label: `${d.code} ≥ ${level}`, remove: () => {
       const minLevels = { ...filters.minLevels }; delete minLevels[d.key]; onFiltersChange({ ...filters, minLevels });

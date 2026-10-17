@@ -1,4 +1,9 @@
-import type { StartupDetail } from "./backend-types";
+import type {
+  Frameworks,
+  NaturalLanguageSearchResponse,
+  StartupDetail,
+  StartupSummary,
+} from "./backend-types";
 
 // Client for the FastAPI backend. In development Vite proxies /api to it (vite.config.ts).
 const BASE = "/api";
@@ -41,5 +46,13 @@ function errorMessage(detail: unknown): string | null {
 const startupPath = (slug: string) => `/startups/${encodeURIComponent(slug)}`;
 
 export const backend = {
+  startups: () => request<StartupSummary[]>("/startups"),
   startup: (slug: string) => request<StartupDetail>(startupPath(slug)),
+  /** Natural-language search (LightRAG). 503 when search isn't configured, 502 when it failed. */
+  search: (query: string) =>
+    request<NaturalLanguageSearchResponse>("/startups/search", {
+      method: "POST",
+      body: JSON.stringify({ query }),
+    }),
+  frameworks: () => request<Frameworks>("/frameworks"),
 };

@@ -94,3 +94,59 @@ export type StartupDetail = StartupSummary & {
   sources: Source[];
   notes: Note[];
 };
+
+/** The six KTH IRL dimensions, keyed as in Readiness. */
+export const KTH_DIMENSIONS = [
+  { key: "trl", code: "TRL", name: "Technology" },
+  { key: "brl", code: "BRL", name: "Business" },
+  { key: "crl", code: "CRL", name: "Customer" },
+  { key: "frl", code: "FRL", name: "Funding" },
+  { key: "iprl", code: "IPRL", name: "Intellectual property" },
+  { key: "tmrl", code: "TMRL", name: "Team" },
+] as const;
+export type KthKey = (typeof KTH_DIMENSIONS)[number]["key"];
+
+export const BACKEND_PIPELINE_STAGES: readonly BackendPipelineStage[] = [
+  "sourced",
+  "screening",
+  "diligence",
+  "term-sheet",
+  "portfolio",
+  "passed",
+];
+
+/** A database startup the natural-language search found. */
+export type SearchMatch = StartupSummary & {
+  /** 0-1, relative to the best match. */
+  relevance: number;
+  /** Knowledge-graph entities that led to it. */
+  matched: string[];
+  /** The agent's entry about it, if any. */
+  entry: string | null;
+};
+
+/** A startup found only in the agent's entries (not in the database yet), with the agent's scores. */
+export type AgentEntryMatch = {
+  entry: string;
+  name: string;
+  website: string | null;
+  relevance: number;
+  matched: string[];
+  trl: number | null;
+  brl: number | null;
+  ocean_impact_readiness: number | null;
+  investment_score: number | null;
+  overall_confidence: number | null;
+};
+
+export type NaturalLanguageSearchResponse = {
+  query: string;
+  /** Most relevant first. */
+  results: SearchMatch[];
+  entries: AgentEntryMatch[];
+};
+
+export type OceanImpactArea = { code: string; name: string };
+
+/** GET /api/frameworks, the parts the frontend reads. */
+export type Frameworks = { ocean_impact_areas: OceanImpactArea[] };

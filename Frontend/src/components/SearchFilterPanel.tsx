@@ -1,8 +1,10 @@
-import { DIMENSIONS, PIPELINE_STAGES, type PipelineStage } from "../api/types";
+import { useQuery } from "@tanstack/react-query";
+import { BACKEND_PIPELINE_STAGES, KTH_DIMENSIONS, type BackendPipelineStage } from "../api/backend-types";
 import { PIPELINE_LABELS, stageLabel } from "../lib/format";
-import type { SearchFilters } from "../lib/discover-search";
-import { useAppData } from "../state/AppData";
+import { frameworksOptions, startupListOptions, type SearchFilters } from "../lib/discover-search";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
+
+const uniqueSorted = (values: string[]) => [...new Set(values)].sort();
 
 type Props = {
   filters: SearchFilters;
@@ -11,46 +13,47 @@ type Props = {
 
 /** Every structured filter, edited directly. Free-text terms stay as chips. */
 export function SearchFilterPanel({ filters, onChange }: Props) {
-  const { startups, vocabulary, frameworks } = useAppData();
+  // Both are cached: the Search page loads them too.
+  const startups = useQuery(startupListOptions).data ?? [];
+  const impactAreas = useQuery(frameworksOptions).data?.ocean_impact_areas ?? [];
   const set = (patch: Partial<SearchFilters>) => onChange({ ...filters, ...patch });
-  const stages = [...new Set(startups.map((s) => s.stage))].sort();
 
   return (
     <div className="mt-4 grid gap-5 border-t border-border pt-4 md:grid-cols-2">
       <Facet
         label="Stage"
-        options={stages.map((s) => ({ value: s, label: stageLabel(s) }))}
+        options={uniqueSorted(startups.map((s) => s.stage)).map((s) => ({ value: s, label: stageLabel(s) }))}
         selected={filters.stages}
         onChange={(stages) => set({ stages })}
       />
       <Facet
-        label="Region"
-        options={[...new Set(startups.map((s) => s.region))].sort().map((r) => ({ value: r, label: r }))}
-        selected={filters.regions}
-        onChange={(regions) => set({ regions })}
+        label="Country"
+        options={uniqueSorted(startups.map((s) => s.country)).map((c) => ({ value: c, label: c }))}
+        selected={filters.countries}
+        onChange={(countries) => set({ countries })}
       />
       <Facet
         label="Sector"
-        options={vocabulary.sectors.map((s) => ({ value: s, label: s }))}
+        options={uniqueSorted(startups.map((s) => s.sector)).map((s) => ({ value: s, label: s }))}
         selected={filters.sectors}
         onChange={(sectors) => set({ sectors })}
       />
       <Facet
         label="Ocean impact area"
-        options={frameworks.ocean_impact_areas.map((a) => ({ value: a.code, label: `${a.code} · ${a.name}` }))}
+        options={impactAreas.map((a) => ({ value: a.code, label: `${a.code} · ${a.name}` }))}
         selected={filters.impactAreas}
         onChange={(impactAreas) => set({ impactAreas })}
       />
       <Facet
         label="Pipeline"
-        options={PIPELINE_STAGES.map((p) => ({ value: p, label: PIPELINE_LABELS[p] }))}
+        options={BACKEND_PIPELINE_STAGES.map((p) => ({ value: p, label: PIPELINE_LABELS[p] }))}
         selected={filters.pipeline}
-        onChange={(pipeline) => set({ pipeline: pipeline as PipelineStage[] })}
+        onChange={(pipeline) => set({ pipeline: pipeline as BackendPipelineStage[] })}
       />
       <fieldset className="min-w-0">
         <legend className="mb-2 text-xs font-bold text-muted-foreground">Minimum readiness (KTH IRL)</legend>
         <div className="grid grid-cols-3 gap-2">
-          {DIMENSIONS.map((d) => (
+          {KTH_DIMENSIONS.map((d) => (
             <label key={d.key} className="field">
               {d.code}
               <select

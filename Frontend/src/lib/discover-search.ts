@@ -1,26 +1,33 @@
 import { queryOptions } from "@tanstack/react-query";
-import { api } from "../api/client";
-import { DIMENSIONS, PIPELINE_STAGES, type DimensionKey, type PipelineStage, type SearchMatch, type StartupSummary } from "../api/types";
+import { backend } from "../api/backend";
+import {
+  BACKEND_PIPELINE_STAGES,
+  KTH_DIMENSIONS,
+  type BackendPipelineStage,
+  type KthKey,
+  type SearchMatch,
+  type StartupSummary,
+} from "../api/backend-types";
 
 export type SearchFilters = {
   stages: string[];
-  regions: string[];
+  countries: string[];
   sectors: string[];
   impactAreas: string[];
-  pipeline: PipelineStage[];
-  minLevels: Partial<Record<DimensionKey, number>>;
+  pipeline: BackendPipelineStage[];
+  minLevels: Partial<Record<KthKey, number>>;
 };
-export const emptyFilters = (): SearchFilters => ({ stages: [], regions: [], sectors: [], impactAreas: [], pipeline: [], minLevels: {} });
+export const emptyFilters = (): SearchFilters => ({ stages: [], countries: [], sectors: [], impactAreas: [], pipeline: [], minLevels: {} });
 export function parseFilters(value: unknown): SearchFilters {
   const empty = emptyFilters();
   try {
     const parsed = typeof value === "string" ? JSON.parse(value) : value;
     if (!parsed || typeof parsed !== "object") return empty;
-    for (const key of ["stages", "regions", "sectors", "impactAreas"] as const) {
+    for (const key of ["stages", "countries", "sectors", "impactAreas"] as const) {
       empty[key] = Array.isArray(parsed[key]) ? parsed[key].filter((item: unknown) => typeof item === "string") : [];
     }
-    empty.pipeline = Array.isArray(parsed.pipeline) ? parsed.pipeline.filter((item: unknown): item is PipelineStage => PIPELINE_STAGES.some((stage) => stage === item)) : [];
-    for (const d of DIMENSIONS) {
+    empty.pipeline = Array.isArray(parsed.pipeline) ? parsed.pipeline.filter((item: unknown): item is BackendPipelineStage => BACKEND_PIPELINE_STAGES.some((stage) => stage === item)) : [];
+    for (const d of KTH_DIMENSIONS) {
       const level = parsed.minLevels?.[d.key];
       if (Number.isInteger(level) && level >= 1 && level <= 9) empty.minLevels[d.key] = level;
     }
@@ -30,17 +37,17 @@ export function parseFilters(value: unknown): SearchFilters {
 export function filterStartups<T extends StartupSummary>(items: T[], filters: SearchFilters): T[] {
   return items.filter((s) =>
     (!filters.stages.length || filters.stages.includes(s.stage)) &&
-    (!filters.regions.length || filters.regions.includes(s.region)) &&
+    (!filters.countries.length || filters.countries.includes(s.country)) &&
     (!filters.sectors.length || filters.sectors.includes(s.sector)) &&
     (!filters.pipeline.length || filters.pipeline.includes(s.pipeline_stage)) &&
     (!filters.impactAreas.length || filters.impactAreas.some((area) => s.scores.ocean_areas_covered.includes(area))) &&
-    DIMENSIONS.every((d) => s.readiness[d.key] >= (filters.minLevels[d.key] ?? 0)),
+    KTH_DIMENSIONS.every((d) => s.readiness[d.key] >= (filters.minLevels[d.key] ?? 0)),
   );
 }
-export type SearchSortKey = "relevance" | "name" | "stage" | DimensionKey | "readiness" | "ocean" | "momentum" | "potential" | "funding" | "lastRound" | "pipeline";
+export type SearchSortKey = "relevance" | "name" | "stage" | KthKey | "readiness" | "ocean" | "momentum" | "potential" | "funding" | "lastRound" | "pipeline";
 export type SearchSort = { key: SearchSortKey; direction: "asc" | "desc" };
 export function parseSearchSort(value: unknown, query: string): SearchSort {
-  const keys: SearchSortKey[] = ["relevance", "name", "stage", "readiness", "ocean", "momentum", "potential", "funding", "lastRound", "pipeline", ...DIMENSIONS.map((d) => d.key)];
+  const keys: SearchSortKey[] = ["relevance", "name", "stage", "readiness", "ocean", "momentum", "potential", "funding", "lastRound", "pipeline", ...KTH_DIMENSIONS.map((d) => d.key)];
   const [key, direction] = typeof value === "string" ? value.split(":") : [];
   const known = keys.find((candidate) => candidate === key);
   return { key: known ?? (query ? "relevance" : "potential"), direction: direction === "asc" ? "asc" : "desc" };
@@ -50,7 +57,7 @@ export function sortSearchResults<T extends StartupSummary>(items: T[], sort: Se
     if (sort.key === "relevance") return (s as T & Partial<SearchMatch>).relevance ?? 0;
     if (sort.key === "name" || sort.key === "stage") return s[sort.key];
     if (sort.key === "pipeline") return s.pipeline_stage;
-    if (sort.key === "funding") return s.total_disclosed_usd;
+    if (sort.key === "funding") return s.total_disclosed_usd ?? 0;
     if (sort.key === "lastRound") return s.last_round_on ?? "";
     if (sort.key === "ocean") return s.scores.ocean_impact;
     if (sort.key === "potential" || sort.key === "readiness" || sort.key === "momentum") return s.scores[sort.key];
@@ -62,4 +69,5 @@ export function sortSearchResults<T extends StartupSummary>(items: T[], sort: Se
     return (sort.direction === "asc" ? comparison : -comparison) || a.name.localeCompare(b.name);
   });
 }
-export const startupListOptions = queryOptions({ queryKey: ["discover", "startups"], queryFn: () => api.listStartups() });
+export const startupListOptions = queryOptions({ queryKey: ["discover", "startups"], queryFn: () => backend.startups() });
+export const frameworksOptions = queryOptions({ queryKey: ["discover", "frameworks"], queryFn: () => backend.frameworks(), staleTime: Infinity });
