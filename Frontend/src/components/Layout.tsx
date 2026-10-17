@@ -10,10 +10,13 @@ export function Layout() {
         <span className="sea-bg-veil" />
         <span className="sea-bg-tint" />
       </div>
-      <AppHeader />
-      <main className="app-main">
-        <Outlet />
-      </main>
+      <div className="app-shell">
+        <AppHeader />
+        <main className="app-main">
+          <Outlet />
+        </main>
+        <footer className="app-footer">© MeatProxies 2026</footer>
+      </div>
     </>
   );
 }

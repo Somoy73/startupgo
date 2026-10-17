@@ -66,9 +66,7 @@ export function Matching() {
       <div className="page-head">
         <div>
           <h1>Matching</h1>
-          <p>
-            Describe your investment thesis; startups are ranked by fit and investment potential.
-          </p>
+          <p>Not implemented !</p>
         </div>
       </div>
 

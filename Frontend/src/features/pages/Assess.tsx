@@ -38,11 +38,10 @@ export function Assess() {
     <>
       <div className="page-head">
         <div>
-          <h1>How we assess startups</h1>
+          <h1>Information about our assess methods</h1>
           <p>
-            Assess is our method, not a form. Every startup is judged the same way — readiness,
-            ocean-impact evidence and funding momentum — so a score means the same thing whether it
-            comes from a kelp farm or a sensor company.
+            Placeholder: How our judge agent assess startups. Choose a startup from landing page or
+            search page to see its assessment
           </p>
         </div>
       </div>

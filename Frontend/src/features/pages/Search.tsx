@@ -13,9 +13,10 @@ export function Search() {
   const navigate = useNavigate();
   const query = params.q;
   const type = params.type;
+  const euProjects = type === "eu-projects";
   const filters = parseFilters(params.filters);
   const { data: allStartups } = useSuspenseQuery(startupListOptions);
-  const response = useQuery({ queryKey: ["discover", "search", query], queryFn: () => api.searchStartups(query), enabled: !!query && type === "startups" });
+  const response = useQuery({ queryKey: ["discover", "search", query], queryFn: () => api.searchStartups(query), enabled: !!query && !euProjects });
   const sort = parseSearchSort(params.sort, query);
   const [columns, setColumns] = useState(DEFAULT_COLUMNS);
   const [storageReady, setStorageReady] = useState(false);
@@ -39,18 +40,18 @@ export function Search() {
   const setFilters = (next: SearchFilters) => { void update({ filters: JSON.stringify(next) }); };
   const items = query ? response.data?.results ?? [] : allStartups;
   const results = sortSearchResults(filterStartups(items, filters), sort);
-  const busy = !!query && type === "startups" && response.isPending;
+  const busy = !!query && !euProjects && response.isPending;
   const onSort = (key: SearchSortKey) => { const direction = sort.key === key ? sort.direction === "asc" ? "desc" : "asc" : key === "name" || key === "stage" || key === "pipeline" ? "asc" : "desc"; void update({ sort: `${key}:${direction}` }); };
   return <>
     <div className="page-head"><div><h1>Search</h1><p>Discover startups and EU projects in the blue economy.</p></div></div>
-    <DiscoverSearchBar query={query} filters={filters} type={type} busy={busy} onSearch={(q) => { void update({ q, sort: "" }); }} onFiltersChange={setFilters} onTypeChange={(type) => { void update({ type }); }} onClear={clear} />
-    <div className="card discover-results" aria-live="polite">
-      {type === "eu-projects" ? <p className="empty">EU project data is not connected yet.</p> : busy ? <p className="empty">Searching…</p> : query && response.error ? <div className="empty"><p className="error">Search failed: {response.error.message}</p><Button className="mt-3" variant="outline" onClick={() => { void response.refetch(); }}>Try again</Button></div> : <>
+    <DiscoverSearchBar query={query} filters={filters} type={type} busy={busy} onSearch={(q) => { void update({ q, sort: "" }); }} onFiltersChange={setFilters} onTypeChange={(next) => { void update({ type: next }); }} onClear={clear} />
+    {euProjects ? <div className="card discover-results" aria-live="polite"><p className="empty">List of EU projects. Not implemented</p></div> : <div className="card discover-results" aria-live="polite">
+      {busy ? <p className="empty">Searching…</p> : query && response.error ? <div className="empty"><p className="error">Search failed: {response.error.message}</p><Button className="mt-3" variant="outline" onClick={() => { void response.refetch(); }}>Try again</Button></div> : <>
         <div className="discover-results-head"><span className="small muted tabular">{results.length} startup{results.length === 1 ? "" : "s"}{query && sort.key === "relevance" ? " · Most relevant first" : ""}</span><ColumnPicker columns={columns} onChange={setColumns} /></div>
         {results.length ? <StartupTable startups={results} columns={columns} sort={sort} onSort={onSort} onOpen={(slug) => { void navigate({ to: "/startups/$slug", params: { slug } }); }} /> : <div className="empty"><p>No startups match this search.</p><Button variant="outline" className="mt-3" onClick={clear}>Clear search</Button></div>}
         {response.data && response.data.entries.length > 0 && <p className="notice">{response.data.entries.length} agent discoveries are not yet available as startup profiles.</p>}
       </>}
-    </div>
-    {type === "startups" && <p className="discover-footnote small">Sample data · Readiness levels are low-confidence public-source estimates.</p>}
+    </div>}
+    {!euProjects && <p className="discover-footnote small">Sample data · Readiness levels are low-confidence public-source estimates.</p>}
   </>;
 }

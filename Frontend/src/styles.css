@@ -66,7 +66,7 @@
   --ring: oklch(0.6 0.17 248);
   --gradient-hero: linear-gradient(135deg, oklch(0.22 0.07 258) 0%, oklch(0.36 0.13 252) 60%, oklch(0.55 0.17 245) 100%);
   --shadow-card: 0 1px 2px oklch(0.24 0.07 255 / 0.05), 0 8px 24px -12px oklch(0.24 0.07 255 / 0.15);
-  --sea-veil: linear-gradient(180deg, oklch(0.36 0.08 256 / 0.6) 0%, oklch(0.46 0.11 250 / 0.44) 28%, oklch(0.56 0.13 248 / 0.3) 52%, oklch(0.99 0.004 240 / 0.8) 82%, var(--background) 100%);
+  --sea-veil: linear-gradient(180deg, oklch(0.36 0.08 256 / 0.6) 0%, oklch(0.46 0.11 250 / 0.44) 28%, oklch(0.56 0.13 248 / 0.3) 52%, oklch(0.42 0.1 252 / 0.42) 82%, oklch(0.32 0.09 256 / 0.6) 100%);
   --sea-tint: linear-gradient(180deg, oklch(0.28 0.08 256 / 0.46) 0%, oklch(0.36 0.1 252 / 0.34) 28%, oklch(0.46 0.11 248 / 0.22) 54%, oklch(0.58 0.09 244 / 0.09) 78%, transparent 92%);
   --glass-surface: color-mix(in oklch, var(--card) 88%, transparent);
   --glass-nav: color-mix(in oklch, var(--navy) 45%, transparent);
@@ -271,7 +271,10 @@ section.card { color: var(--foreground); --muted-foreground: var(--content-muted
 /* Discover tools keep the shared sea visible around the search and result surfaces. */
 .discover-controls { margin-bottom: 24px; }
 .discover-input { margin-bottom: 12px; }
-.discover-input > .select { flex-shrink: 0; }
+/* The submit button is a pure white disc with a navy glass. */
+.discover-input > button[type="submit"] { background: white; border: 1px solid white; color: var(--navy); box-shadow: 0 2px 12px -3px oklch(0.2 0.06 258 / 0.4); }
+.discover-input > button[type="submit"]:hover { background: color-mix(in oklch, white 86%, var(--primary)); border-color: color-mix(in oklch, white 86%, var(--primary)); color: var(--navy); }
+.discover-input > button[type="submit"] svg { color: var(--navy); }
 .discover-chips { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--navy-foreground); }
 .discover-chips > button { color: var(--foreground); }
 .discover-filter-panel { margin-top: 16px; padding: 20px; border-radius: 8px; background: var(--glass-surface); color: var(--foreground); backdrop-filter: blur(10px); }
@@ -280,5 +283,15 @@ section.card { color: var(--foreground); --muted-foreground: var(--content-muted
 .discover-results .data th button { padding: 0; font-size: 11px; height: 28px; }
 .discover-results .data th button svg { width: 13px; }
 .discover-footnote { color: var(--navy-foreground); margin-top: 12px; text-shadow: var(--sea-text-shadow); }
-@media(max-width:600px) { .discover-input { display: grid; grid-template-columns: 20px minmax(0,1fr) 36px; border-radius: 8px; padding: 14px; gap: 10px; }.discover-input > input { grid-column: 2; grid-row: 1; }.discover-input > button[type=button] { grid-column: 3; grid-row: 1; }.discover-input > select { grid-column: 1 / 3; grid-row: 2; width: 100%; }.discover-input > button[type=submit] { grid-column: 3; grid-row: 2; }.discover-results-head { padding: 12px; }.discover-filter-panel { padding: 16px; } }
+/* The EU Projects switch sits above the search field, on the right: outlined when off, solid when on. */
+.discover-mode { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+.discover-mode .discover-mode-toggle { background: color-mix(in oklch, var(--navy-foreground) 14%, transparent); border: 1px solid color-mix(in oklch, var(--navy-foreground) 46%, transparent); color: var(--navy-foreground); font-weight: 700; }
+.discover-mode .discover-mode-toggle:hover { background: color-mix(in oklch, var(--navy-foreground) 26%, transparent); border-color: var(--navy-foreground); color: var(--navy-foreground); }
+.discover-mode .discover-mode-toggle[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
+.discover-mode .discover-mode-toggle[aria-pressed="true"]:hover { background: color-mix(in oklch, var(--primary) 86%, var(--navy)); border-color: color-mix(in oklch, var(--primary) 86%, var(--navy)); color: var(--primary-foreground); }
+@media(max-width:600px) { .discover-input { padding: 12px 14px; gap: 8px; }.discover-results-head { padding: 12px; }.discover-filter-panel { padding: 16px; } }
+/* One column per screen, so the footer line always ends the page. */
+.app-shell { display: flex; flex-direction: column; min-height: 100vh; }
+.app-main { flex: 1 0 auto; margin: 0 auto; }
+.app-footer { flex-shrink: 0; padding: 26px 24px 30px; text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; color: color-mix(in oklch, var(--navy-foreground) 76%, transparent); text-shadow: var(--sea-text-shadow); }
 
