@@ -1,8 +1,11 @@
 import { seed, frameworks } from "./mock-data";
-import type { PipelineStage, StartupDetail } from "./types";
+import type { NaturalLanguageSearchResponse, PipelineStage, StartupDetail } from "./types";
 import { previewScores, type AssessmentDraft, type CompanyDraft } from "../lib/assessment";
 // Mock transport retains the original API method boundaries. Replace these handlers with your real client.
 let startups: StartupDetail[] = structuredClone(seed);
+const SEARCH_STOP_WORDS = new Set(
+  "and are for from that the with startups startup companies company show find".split(" "),
+);
 export const api = {
   async listStartups() {
     return structuredClone(startups);
@@ -14,6 +17,38 @@ export const api = {
     const s = startups.find((s) => s.slug === slug);
     if (!s) throw new Error("Startup not found");
     return structuredClone(s);
+  },
+  /**
+   * Mock of POST /api/startups/search (LightRAG on the backend): ranks startups by how many
+   * query terms their text contains. Same response shape as the real endpoint.
+   */
+  async searchStartups(query: string): Promise<NaturalLanguageSearchResponse> {
+    const terms = [
+      ...new Set(
+        query
+          .toLowerCase()
+          .split(/[^\p{L}\p{N}]+/u)
+          .filter((t) => t.length > 2 && !SEARCH_STOP_WORDS.has(t)),
+      ),
+    ];
+    const scored = startups
+      .map((s) => {
+        const text = `${s.name} ${s.tagline} ${s.description} ${s.sector} ${s.country} ${s.region}`.toLowerCase();
+        return { s, matched: terms.filter((t) => text.includes(t)) };
+      })
+      .filter((m) => m.matched.length > 0)
+      .sort((a, b) => b.matched.length - a.matched.length);
+    const top = scored[0]?.matched.length ?? 1;
+    return {
+      query,
+      results: scored.map(({ s, matched }) => ({
+        ...structuredClone(s),
+        relevance: matched.length / top,
+        matched,
+        entry: null,
+      })),
+      entries: [],
+    };
   },
   async compare(slugs: string[]) {
     return Promise.all([...new Set(slugs)].slice(0, 3).map((slug) => api.startup(slug)));

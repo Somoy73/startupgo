@@ -53,7 +53,7 @@ export function StartupPage() {
   return (
     <>
       <Link to="/" className="back">
-        <IconBack /> Deal flow
+        <IconBack /> Discover
       </Link>
       <div className="page-head">
         <div>

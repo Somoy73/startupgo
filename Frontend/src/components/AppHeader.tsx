@@ -4,7 +4,7 @@ import { Menu, Waves, X } from "lucide-react";
 import { Button } from "./ui/button";
 
 const nav = [
-  { name: "Deal flow", to: "/" },
+  { name: "Discover", to: "/" },
   { name: "Matching", to: "/matching" },
   { name: "Assess", to: "/assess" },
   { name: "Pipeline", to: "/pipeline" },
@@ -30,13 +30,7 @@ export function AppHeader() {
               to={item.to}
               onClick={() => setOpen(false)}
               className={
-                (
-                  item.to === "/"
-                    ? location.pathname === "/"
-                    : location.pathname.startsWith(item.to)
-                )
-                  ? "active"
-                  : ""
+                (item.to === "/" ? location.pathname === "/" : location.pathname.startsWith(item.to)) ? "active" : ""
               }
             >
               {item.name}
