@@ -92,7 +92,7 @@ def _unassessed_summary(conn: sqlite3.Connection, row: sqlite3.Row) -> StartupSu
             assessed_on="", assessor="none", confidence="low", crl=0, trl=0, brl=0, iprl=0, tmrl=0, frl=0
         ),
         scores=Scores(
-            readiness=0, ocean_impact=0, momentum=0, imbalance_penalty=0, potential=0, band="Not assessed",
+            readiness=0, ocean_impact=0, momentum=0, potential=0, band="Not assessed",
             readiness_spread=0, lagging_dimensions=[], ocean_evidence_label="No evidence", ocean_areas_covered=[],
         ),
         investment=InvestmentScores(**scores_of(conn, row["id"], scoring.investment_weights())),
@@ -113,11 +113,13 @@ def _summary(conn: sqlite3.Connection, row: sqlite3.Row) -> StartupSummary:
     last_round_on = max(dated) if dated else None
     disclosed = [r.amount_usd for r in rounds if r.amount_usd is not None]
 
+    investment = scores_of(conn, row["id"], scoring.investment_weights())
     breakdown = scoring.score_startup(
         levels,
         _kpi_pairs(conn, row["id"]),
         row["stage"],
         scoring.parse_partial_date(last_round_on),
+        oir_level=investment["ocean_impact_readiness"],
     )
     return StartupSummary(
         slug=row["slug"],
@@ -131,7 +133,7 @@ def _summary(conn: sqlite3.Connection, row: sqlite3.Row) -> StartupSummary:
         pipeline_stage=row["pipeline_stage"],
         readiness=readiness,
         scores=Scores(**asdict(breakdown)),
-        investment=InvestmentScores(**scores_of(conn, row["id"], scoring.investment_weights())),
+        investment=InvestmentScores(**investment),
         total_disclosed_usd=sum(disclosed) if disclosed else None,
         last_round_on=last_round_on,
     )

@@ -27,7 +27,7 @@ export function ScorePreview({
               <Meter value={preview[k]} label={k} />
             </div>
           ))}
-          <p className="small muted">Illustrative preview scores</p>
+          <p className="small muted">Illustrative preview. Weights are provisional.</p>
         </>
       ) : (
         <p className="muted">Calculating…</p>

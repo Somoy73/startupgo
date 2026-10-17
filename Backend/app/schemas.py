@@ -20,6 +20,13 @@ class Scores(BaseModel):
     lagging_dimensions: list[str]
     ocean_evidence_label: str
     ocean_areas_covered: list[str]
+    ocean_capped_by_oir: bool = False  # KPI evidence was lowered to what the agent's OIR supports
+    ocean_evidence_known: bool = False  # False: no KPI evidence on record (ocean_impact 0 is "unknown")
+    momentum_recency_known: bool = False  # False: no round date (recency counted 0)
+    potential_coverage: float = 0.0  # share of the potential weights backed by data, 0-1
+    ocean_evidence_known: bool = False  # False: no KPI evidence on record (ocean_impact 0 is "unknown")
+    momentum_recency_known: bool = False  # False: no round date (recency counted 0)
+    potential_coverage: float = 0.0  # share of the potential weights backed by data, 0-1
 
 
 class Readiness(BaseModel):

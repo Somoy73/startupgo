@@ -49,6 +49,7 @@ def test_momentum_decays_with_age():
     stale = scoring.momentum_score("seed", date(2021, 1, 1), today)
     assert fresh > stale
     assert stale == round(100 * 0.6 * 2 / 5, 1)
+    assert scoring.momentum_score("seed", None, today) == stale  # unknown date earns no recency
 
 
 def test_parse_partial_date():
@@ -93,3 +94,69 @@ def test_backend_rehydrates_serialized_agent_entry():
     }
     entry = {"sections": {"D": {"facts": {"customer_validation": fact_data}}}}
     assert scoring.score_entry(entry).brl.level == 8
+
+
+def test_readiness_index_rejects_out_of_range_levels():
+    import pytest
+
+    with pytest.raises(ValueError):
+        scoring.readiness_index({**ALL_FIVES, "trl": 0})
+    with pytest.raises(ValueError):
+        scoring.readiness_index({**ALL_FIVES, "frl": 10})
+
+
+def test_ocean_impact_rejects_out_of_range_evidence():
+    import pytest
+
+    with pytest.raises(ValueError):
+        scoring.ocean_impact_score([("B2", 5)])
+
+
+def test_stage_rank_accepts_agent_spelling_and_case():
+    assert scoring.stage_rank("pre_seed") == scoring.stage_rank("pre-seed") == 1
+    assert scoring.stage_rank("Series_A") == 3
+    assert scoring.stage_rank("nonsense") == scoring.DEFAULT_STAGE_RANK
+
+
+def test_oir_caps_kpi_evidence():
+    kpis = [("B2", 4), ("D1", 3)]
+    unknown = scoring.score_startup(ALL_FIVES, kpis, "seed", None)
+    claimed = scoring.score_startup(ALL_FIVES, kpis, "seed", None, oir_level=1)
+    verified = scoring.score_startup(ALL_FIVES, kpis, "seed", None, oir_level=5)
+    assert not unknown.ocean_capped_by_oir and not verified.ocean_capped_by_oir
+    assert claimed.ocean_capped_by_oir and claimed.ocean_evidence_label == "Claimed"
+    assert claimed.ocean_impact < unknown.ocean_impact == verified.ocean_impact
+
+
+def test_oir_cap_levels_match_navigator_derivation():
+    # navigator.py: claim/pathway/metrics -> at most 2, measured -> 3, verified measurement -> 4
+    assert [scoring.OIR_KPI_CAP[o] for o in range(1, 6)] == [1, 2, 2, 3, 4]
+    import pytest
+
+    with pytest.raises(ValueError):
+        scoring.cap_kpis([("B2", 1)], 6)
+
+
+def test_ocean_score_is_monotonic_and_one_kpi_is_not_enough():
+    one, _, _ = scoring.ocean_impact_score([("B2", 4)])
+    assert one < 50
+    assert scoring.ocean_impact_score([("B2", 4), ("D1", 1)])[0] >= one  # a weak extra KPI never lowers the score
+    full = scoring.ocean_impact_score([("B2", 4), ("D1", 4), ("F1", 4)])[0]
+    assert full == 100
+
+
+def test_unknown_data_is_flagged_not_hidden():
+    empty = scoring.score_startup(ALL_FIVES, [], "seed", None)
+    assert not empty.ocean_evidence_known and not empty.momentum_recency_known
+    assert empty.potential_coverage == round(0.45 + 0.25 * 0.6, 2)
+    full = scoring.score_startup(ALL_FIVES, [("B2", 2)], "seed", date(2026, 9, 1), date(2026, 10, 1))
+    assert full.ocean_evidence_known and full.momentum_recency_known and full.potential_coverage == 1.0
+
+
+def test_api_scores_carry_the_unknown_flags():
+    from dataclasses import asdict
+
+    from app.schemas import Scores
+
+    api = Scores(**asdict(scoring.score_startup(ALL_FIVES, [], "seed", None)))
+    assert api.ocean_evidence_known is False and api.potential_coverage == 0.6
