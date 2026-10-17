@@ -17,7 +17,10 @@ export function Matching() {
       <div className="page-head">
         <div>
           <h1>Matching</h1>
-          <p>The best matches based our agent judge scoring. A'Pelago is in the center and the graph represents the closest startup matches.</p>
+          <p>
+            The best matches based our agent judge scoring. A'Pelago is in the center and the graph
+            represents the closest startup matches.
+          </p>
         </div>
       </div>
 

@@ -1,0 +1,134 @@
+{
+  "startup:seabound": {
+    "relation_pairs": [
+      [
+        "Business model (BRL)",
+        "IP (IPRL)"
+      ],
+      [
+        "CO2",
+        "Seabound"
+      ],
+      [
+        "Carbon capture",
+        "Seabound"
+      ],
+      [
+        "Eastern Pacific Shipping",
+        "Seabound"
+      ],
+      [
+        "Emles",
+        "Seabound"
+      ],
+      [
+        "Funding (FRL)",
+        "Team (TMRL)"
+      ],
+      [
+        "Hawktail",
+        "Seabound"
+      ],
+      [
+        "Lowercarbon Capital",
+        "Seabound"
+      ],
+      [
+        "Rebel Fund",
+        "Seabound"
+      ],
+      [
+        "Seabound",
+        "Soma Capital"
+      ],
+      [
+        "Seabound",
+        "UK Clean Maritime Demonstration Competition"
+      ],
+      [
+        "Seabound",
+        "Y Combinator"
+      ],
+      [
+        "Seabound",
+        "shipping and ports"
+      ],
+      [
+        "System and method for capturing and storing co2",
+        "WO2025177240A1"
+      ],
+      [
+        "UK Clean Maritime Demonstration Competition",
+        "UK DfT"
+      ]
+    ],
+    "count": 15,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "startup:seabound"
+  },
+  "startup:kelp-blue": {
+    "relation_pairs": [],
+    "count": 0,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "startup:kelp-blue"
+  },
+  "startup:clearbot": {
+    "relation_pairs": [],
+    "count": 0,
+    "create_time": 1792249598,
+    "update_time": 1792249598,
+    "_id": "startup:clearbot"
+  },
+  "startup:hivelife": {
+    "relation_pairs": [
+      [
+        "5G Catalyst Technologies",
+        "Shannon Kalayanamitr"
+      ],
+      [
+        "Engine Biosciences",
+        "Hive Life Magazine"
+      ],
+      [
+        "Hive Life Magazine",
+        "Vietnam's Beer Market"
+      ],
+      [
+        "HiveLife",
+        "KTH Innovation"
+      ]
+    ],
+    "count": 4,
+    "create_time": 1792249983,
+    "update_time": 1792249983,
+    "_id": "startup:hivelife"
+  },
+  "startup:swedish-algae-factory-ab": {
+    "relation_pairs": [],
+    "count": 0,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "startup:swedish-algae-factory-ab"
+  },
+  "startup:sundew": {
+    "relation_pairs": [
+      [
+        "BlueInvest Project Pipeline",
+        "Sundew"
+      ]
+    ],
+    "count": 1,
+    "create_time": 1792251033,
+    "update_time": 1792251033,
+    "_id": "startup:sundew"
+  },
+  "startup:nauticspot": {
+    "relation_pairs": [],
+    "count": 0,
+    "create_time": 1792251894,
+    "update_time": 1792251894,
+    "_id": "startup:nauticspot"
+  }
+}

@@ -1,0 +1,569 @@
+{
+  "Seabound": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Seabound"
+  },
+  "WEN, Roujia": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "WEN, Roujia"
+  },
+  "FREDRIKSSON, Alisha": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "FREDRIKSSON, Alisha"
+  },
+  "KTH Innovation": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000",
+      "startup:hivelife-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1792249983,
+    "_id": "KTH Innovation"
+  },
+  "Lowercarbon Capital": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Lowercarbon Capital"
+  },
+  "Eastern Pacific Shipping": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Eastern Pacific Shipping"
+  },
+  "Emles": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Emles"
+  },
+  "Hawktail": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Hawktail"
+  },
+  "Rebel Fund": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Rebel Fund"
+  },
+  "Soma Capital": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Soma Capital"
+  },
+  "Y Combinator": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Y Combinator"
+  },
+  "UK Clean Maritime Demonstration Competition": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "UK Clean Maritime Demonstration Competition"
+  },
+  "WO2025177240A1": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "WO2025177240A1"
+  },
+  "shipping and ports": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "shipping and ports"
+  },
+  "Carbon capture": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Carbon capture"
+  },
+  "CO2": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "CO2"
+  },
+  "SOx emissions": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "SOx emissions"
+  },
+  "1.5C": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "1.5C"
+  },
+  "Technology (TRL)": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Technology (TRL)"
+  },
+  "Customer (CRL)": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Customer (CRL)"
+  },
+  "Business model (BRL)": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Business model (BRL)"
+  },
+  "IP (IPRL)": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "IP (IPRL)"
+  },
+  "Team (TMRL)": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Team (TMRL)"
+  },
+  "Funding (FRL)": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Funding (FRL)"
+  },
+  "SOx emissions mitigated": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "SOx emissions mitigated"
+  },
+  "GHG emissions reduced or avoided": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "GHG emissions reduced or avoided"
+  },
+  "seed round": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "seed round"
+  },
+  "Series A": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "Series A"
+  },
+  "UK DfT": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "UK DfT"
+  },
+  "System and method for capturing and storing co2": {
+    "chunk_ids": [
+      "startup:seabound-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792245596,
+    "update_time": 1792245596,
+    "_id": "System and method for capturing and storing co2"
+  },
+  "Kelp Blue": {
+    "chunk_ids": [
+      "startup:kelp-blue-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "Kelp Blue"
+  },
+  "Lüderitz": {
+    "chunk_ids": [
+      "startup:kelp-blue-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "Lüderitz"
+  },
+  "Namibia": {
+    "chunk_ids": [
+      "startup:kelp-blue-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "Namibia"
+  },
+  "Carbon": {
+    "chunk_ids": [
+      "startup:kelp-blue-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "Carbon"
+  },
+  "Daniel Hooft": {
+    "chunk_ids": [
+      "startup:kelp-blue-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "Daniel Hooft"
+  },
+  "Kat Bruce": {
+    "chunk_ids": [
+      "startup:kelp-blue-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "Kat Bruce"
+  },
+  "50-249": {
+    "chunk_ids": [
+      "startup:kelp-blue-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "50-249"
+  },
+  "7,000,000 EUR": {
+    "chunk_ids": [
+      "startup:kelp-blue-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "7,000,000 EUR"
+  },
+  "COP28": {
+    "chunk_ids": [
+      "startup:kelp-blue-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792247970,
+    "update_time": 1792247970,
+    "_id": "COP28"
+  },
+  "HiveLife": {
+    "chunk_ids": [
+      "startup:hivelife-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792249983,
+    "update_time": 1792249983,
+    "_id": "HiveLife"
+  },
+  "Engine Biosciences": {
+    "chunk_ids": [
+      "startup:hivelife-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792249983,
+    "update_time": 1792249983,
+    "_id": "Engine Biosciences"
+  },
+  "Vietnam's Beer Market": {
+    "chunk_ids": [
+      "startup:hivelife-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792249983,
+    "update_time": 1792249983,
+    "_id": "Vietnam's Beer Market"
+  },
+  "Shannon Kalayanamitr": {
+    "chunk_ids": [
+      "startup:hivelife-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792249983,
+    "update_time": 1792249983,
+    "_id": "Shannon Kalayanamitr"
+  },
+  "5G Catalyst Technologies": {
+    "chunk_ids": [
+      "startup:hivelife-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792249983,
+    "update_time": 1792249983,
+    "_id": "5G Catalyst Technologies"
+  },
+  "Readiness Level": {
+    "chunk_ids": [
+      "startup:hivelife-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792249983,
+    "update_time": 1792249983,
+    "_id": "Readiness Level"
+  },
+  "Precision Oncology Medicine": {
+    "chunk_ids": [
+      "startup:hivelife-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792249983,
+    "update_time": 1792249983,
+    "_id": "Precision Oncology Medicine"
+  },
+  "Hive Life Magazine": {
+    "chunk_ids": [
+      "startup:hivelife-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792249983,
+    "update_time": 1792249983,
+    "_id": "Hive Life Magazine"
+  },
+  "Swedish Algae Factory AB": {
+    "chunk_ids": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "Swedish Algae Factory AB"
+  },
+  "Blue Biotechnology": {
+    "chunk_ids": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "Blue Biotechnology"
+  },
+  "HORIZON MULTIPLY": {
+    "chunk_ids": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "HORIZON MULTIPLY"
+  },
+  "HORIZON GREENS": {
+    "chunk_ids": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "HORIZON GREENS"
+  },
+  "HORIZON DIASHUTTLE": {
+    "chunk_ids": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "HORIZON DIASHUTTLE"
+  },
+  "Blue Economy Sector": {
+    "chunk_ids": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "Blue Economy Sector"
+  },
+  "European Commission": {
+    "chunk_ids": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "European Commission"
+  },
+  "Horizon Multiply": {
+    "chunk_ids": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "Horizon Multiply"
+  },
+  "Horizon Greens": {
+    "chunk_ids": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "Horizon Greens"
+  },
+  "Horizon Diashuttle": {
+    "chunk_ids": [
+      "startup:swedish-algae-factory-ab-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792250370,
+    "update_time": 1792250370,
+    "_id": "Horizon Diashuttle"
+  },
+  "Sundew": {
+    "chunk_ids": [
+      "startup:sundew-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792251033,
+    "update_time": 1792251033,
+    "_id": "Sundew"
+  },
+  "BlueInvest Project Pipeline": {
+    "chunk_ids": [
+      "startup:sundew-chunk-000",
+      "startup:nauticspot-chunk-000"
+    ],
+    "count": 2,
+    "update_time": 1792251894,
+    "_id": "BlueInvest Project Pipeline"
+  },
+  "Nauticspot": {
+    "chunk_ids": [
+      "startup:nauticspot-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792251894,
+    "update_time": 1792251894,
+    "_id": "Nauticspot"
+  },
+  "Shipping & ports": {
+    "chunk_ids": [
+      "startup:nauticspot-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792251894,
+    "update_time": 1792251894,
+    "_id": "Shipping & ports"
+  },
+  "France": {
+    "chunk_ids": [
+      "startup:nauticspot-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792251894,
+    "update_time": 1792251894,
+    "_id": "France"
+  },
+  "NAUTICSPOT": {
+    "chunk_ids": [
+      "startup:nauticspot-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1792251894,
+    "update_time": 1792251894,
+    "_id": "NAUTICSPOT"
+  }
+}

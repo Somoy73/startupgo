@@ -1,6 +1,12 @@
 import type { InvestorMatch } from "../../lib/investor";
 
-type Props = { matches: InvestorMatch[]; hovered: string | null; selected: string | null; onHover: (slug: string | null) => void; onSelect: (slug: string) => void };
+type Props = {
+  matches: InvestorMatch[];
+  hovered: string | null;
+  selected: string | null;
+  onHover: (slug: string | null) => void;
+  onSelect: (slug: string) => void
+};
 
 export function TopMatchList({ matches, hovered, selected, onHover, onSelect }: Props) {
   return (
@@ -17,10 +23,14 @@ export function TopMatchList({ matches, hovered, selected, onHover, onSelect }: 
             onFocus={() => onHover(m.startup.slug)}
             onBlur={() => onHover(null)}
           >
-            <span className="tm-badge" aria-hidden>{m.startup.name[0]}</span>
+            <span className="tm-badge" aria-hidden>
+              {m.startup.name[0]}
+            </span>
             <span className="tm-text">
               <strong>{m.startup.name}</strong>
-              <small>Fit {m.thesis} · Readiness {m.readiness} · Impact {m.impact}</small>
+              <small>
+                Fit {m.thesis} · Readiness {m.readiness} · Impact {m.impact}
+              </small>
             </span>
             <span className="tm-score">{m.total}</span>
           </button>

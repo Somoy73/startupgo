@@ -11,10 +11,8 @@ export function AppHeader() {
   const heroButtons = location.pathname === "/";
 
   return (
-    <header
-      className={`app-header${heroButtons ? " is-home" : ""}`}
-    >
-      <div className="header-inner">
+    <header className={`app-header${heroButtons ? " is-home" : ""}`}>
+      <div className="header-inner px-[18px] min-[801px]:px-10 min-[1100px]:px-14 py-3">
         <Link to="/" className="brand">
           <span>
             <Waves size={18} />

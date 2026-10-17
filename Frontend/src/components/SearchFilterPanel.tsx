@@ -27,10 +27,12 @@ export function SearchFilterPanel({ filters, onChange }: Props) {
         onChange={(stages) => set({ stages })}
       />
       <Facet
-        label="Country"
-        options={uniqueSorted(startups.map((s) => s.country)).map((c) => ({ value: c, label: c }))}
-        selected={filters.countries}
-        onChange={(countries) => set({ countries })}
+        label="Region"
+        options={[...new Set(startups.map((s) => s.region))]
+          .sort()
+          .map((r) => ({ value: r, label: r }))}
+        selected={filters.regions}
+        onChange={(regions) => set({ regions })}
       />
       <Facet
         label="Sector"
@@ -51,7 +53,9 @@ export function SearchFilterPanel({ filters, onChange }: Props) {
         onChange={(pipeline) => set({ pipeline: pipeline as BackendPipelineStage[] })}
       />
       <fieldset className="min-w-0">
-        <legend className="mb-2 text-xs font-bold text-muted-foreground">Minimum readiness (KTH IRL)</legend>
+        <legend className="mb-2 text-xs font-bold text-muted-foreground">
+          Minimum readiness (KTH IRL)
+        </legend>
         <div className="grid grid-cols-3 gap-2">
           {KTH_DIMENSIONS.map((d) => (
             <label key={d.key} className="field">
