@@ -12,6 +12,7 @@ same quote-verified extraction as everything else.
 from __future__ import annotations
 
 import json
+from datetime import date
 from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from typing import Protocol
@@ -22,6 +23,7 @@ from urllib.request import Request, urlopen
 from .cache import JsonCache
 from .errors import AgentError
 from .llm import GeminiSession, UsageStats
+from .retrievals import Retrieval, RetrievalLog
 
 
 @dataclass(frozen=True, slots=True)
@@ -101,11 +103,12 @@ class BraveSearch:
 class CachedSearch:
     """Caches hits per (provider, query, limit) so reruns repeat no searches."""
 
-    def __init__(self, inner: WebSearch, cache: JsonCache, *, stats: UsageStats | None = None):
+    def __init__(self, inner: WebSearch, cache: JsonCache, *, stats: UsageStats | None = None, log: RetrievalLog | None = None):
         self.inner = inner
         self.name = inner.name
         self.cache = cache
         self.stats = stats
+        self.log = log
 
     @property
     def available(self) -> bool:
@@ -116,10 +119,22 @@ class CachedSearch:
         if (cached := self.cache.get("search", key)) is not None:
             if self.stats:
                 self.stats.search_cached += 1
-            return [SearchHit(**hit) for hit in cached]
-        hits = self.inner.search(query, limit=limit)
+            hits = [SearchHit(**hit) for hit in cached]
+            self._record(query, "cached", hits)
+            return hits
+        try:
+            hits = self.inner.search(query, limit=limit)
+        except AgentError as exc:
+            self._record(query, "error", detail=str(exc))
+            raise
         self.cache.put("search", key, [asdict(hit) for hit in hits])
+        self._record(query, "ok", hits)
         return hits
+
+    def _record(self, query: str, status: str, hits: list[SearchHit] = (), detail: str | None = None) -> None:
+        if self.log is not None:
+            self.log.add(Retrieval("search", status, query=query, provider=self.name, retrieved_at=date.today().isoformat(),
+                                   detail=detail or json.dumps([asdict(hit) for hit in hits])))
 
 
 def resolve_redirect(url: str, *, user_agent: str, timeout: float = 15) -> str | None:

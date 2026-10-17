@@ -29,6 +29,7 @@ from .judge import ResearchFeedback
 from .llm import UsageStats
 from .record import StartupRecord, slugify
 from .registry import PRHRegistry
+from .retrievals import RetrievalLog
 from .search import WebSearch
 from .spec import FIELDS_BY_NAME, SECTIONS
 
@@ -78,6 +79,7 @@ class StartupAgent:
         self.section_groups = [list(g) for g in section_groups] if section_groups else [[s] for s in SECTIONS]
         self.usage = usage or UsageStats()  # LLM/search requests, cache hits, waiting, tokens
         self.today = today or date.today().isoformat()
+        self.log = RetrievalLog()  # the pipeline swaps in the log its loader and searcher share (factory.py)
 
     # --- discovery ------------------------------------------------------------------
 

@@ -12,6 +12,7 @@ run both). The Backend's research jobs call ``research`` for one candidate.
 from __future__ import annotations
 
 from collections.abc import Callable, Iterable
+from datetime import datetime, timezone
 from typing import Any
 
 from scraper.fetchers import PublicPageFetcher
@@ -82,7 +83,28 @@ class ResearchPipeline:
         return found[:limit], problems
 
     def research(self, candidate: Candidate) -> dict[str, Any]:
-        """Research, judge and store one startup; returns its summary (database.entry_summary) and run errors."""
+        """Research, judge and store one startup; returns its summary (database.entry_summary) and run errors.
+
+        The pages and searches of the run are logged to the database, whether or not it succeeds.
+        """
+        started_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+        self.agent.log.drain()  # a fresh log for this candidate
+        try:
+            summary = self._research(candidate)
+        except Exception as exc:
+            self._log_run(candidate, started_at, error=str(exc) or type(exc).__name__)
+            raise
+        self._log_run(candidate, started_at, entry_id=summary["entry"], slug=summary["slug"])
+        return summary
+
+    def _log_run(self, candidate: Candidate, started_at: str, *, entry_id: str | None = None, slug: str | None = None,
+                 error: str | None = None) -> None:
+        retrievals = self.agent.log.drain()
+        if self.database:
+            self.database.save_run(name=candidate.name, website=candidate.website, retrievals=retrievals, started_at=started_at,
+                                   entry_id=entry_id, slug=slug or candidate.slug, error=error)
+
+    def _research(self, candidate: Candidate) -> dict[str, Any]:
         if self._workflow is None:
             self._workflow = build_agent_graph(self.agent, judge=build_judge(self.settings, self.agent), weights=self.settings.weights)
         result = self._workflow.invoke({

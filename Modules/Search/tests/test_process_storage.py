@@ -23,10 +23,40 @@ def test_new_documents_are_inserted_with_their_id_as_file_path(tmp_path):
     rag = FakeRag()
     report = process(tmp_path, rag, [doc("startup:notpla", "a", startup="notpla", info={"sector": "Packaging"}), doc("entry:kelpco", "b", entry="kelpco")])
     assert report.added == ["startup:notpla", "entry:kelpco"]
-    assert rag.inserted == [["startup:notpla", "entry:kelpco"]] and rag.file_paths == rag.inserted
+    assert rag.inserted == [["startup:notpla"], ["entry:kelpco"]] and rag.file_paths == rag.inserted  # one at a time, in order
     saved = manifest(tmp_path)
     assert saved["startup:notpla"]["startup"] == "notpla" and saved["startup:notpla"]["info"] == {"sector": "Packaging"}
-    assert saved["entry:kelpco"]["entry"] == "kelpco"
+    assert (saved["startup:notpla"]["key"], saved["startup:notpla"]["kind"]) == ("startup:notpla", "startup")
+    assert (saved["entry:kelpco"]["entry"], saved["entry:kelpco"]["key"], saved["entry:kelpco"]["kind"]) == ("kelpco", "entry:kelpco", "entry")
+
+
+def test_a_limit_processes_the_first_documents_and_leaves_the_rest_waiting(tmp_path):
+    rag = FakeRag()
+    documents = [doc(f"startup:s{i}", f"text {i}") for i in range(5)]
+    report = process(tmp_path, rag, documents, limit=2)
+    assert report.added == ["startup:s0", "startup:s1"] and report.waiting == ["startup:s2", "startup:s3", "startup:s4"]
+    assert set(manifest(tmp_path)) == {"startup:s0", "startup:s1"}
+
+    report = process(tmp_path, rag, documents, limit=2)  # the next run goes on where the last stopped
+    assert (report.unchanged, report.added, report.waiting) == (["startup:s0", "startup:s1"], ["startup:s2", "startup:s3"], ["startup:s4"])
+
+
+def test_each_document_is_saved_as_soon_as_it_is_processed(tmp_path):
+    rag, seen = FakeRag(), []
+    report = process(tmp_path, rag, [doc("startup:a", "one"), doc("startup:b", "two")], progress=lambda doc_id, outcome: seen.append((doc_id, outcome, set(manifest(tmp_path)))))
+    assert seen == [("startup:a", "added", {"startup:a"}), ("startup:b", "added", {"startup:a", "startup:b"})]
+    assert report.summary() == "2 added"
+
+
+def test_documents_are_paused_apart(tmp_path, monkeypatch):
+    slept = []
+
+    async def sleep(seconds):
+        slept.append(seconds)
+
+    monkeypatch.setattr("startup_search.process_storage.asyncio.sleep", sleep)
+    process(tmp_path, FakeRag(), [doc("startup:a", "one"), doc("startup:b", "two"), doc("startup:c", "three")], pause=5)
+    assert slept == [5, 5]  # between documents, not before the first
 
 
 def test_only_changed_documents_are_processed_again(tmp_path):

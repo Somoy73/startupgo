@@ -11,6 +11,7 @@ from scraper.errors import ScraperError
 
 from .cache import JsonCache
 from .documents import RobotsPolicy, SourceDocument, host, html_to_document, rank_links
+from .retrievals import Retrieval, RetrievalLog, Status
 from .vocab import SourceType
 
 
@@ -44,25 +45,36 @@ class PageLoader:
         robots: RobotsPolicy | None,
         today: str,
         page_chars: int,
+        log: RetrievalLog | None = None,
     ):
         self._fetch_text = fetch_text
         self._cache = cache
         self._robots = robots
         self._today = today
         self._page_chars = page_chars
+        self.log = log
 
     def load(self, url: str, *, source_type: SourceType, is_homepage: bool = False) -> tuple[SourceDocument, list[str]]:
         cached = self._cache.get("pages", url)
-        if cached:
-            html, retrieved_at = cached["html"], cached["retrieved_at"]
-        else:
-            if self._robots and not self._robots.allowed(url):
-                raise PageSkipped(f"{url} is disallowed by robots.txt")
-            html, retrieved_at = self._fetch_text(url), self._today
-            self._cache.put("pages", url, {"url": url, "retrieved_at": retrieved_at, "html": html})
+        try:
+            if cached:
+                html, retrieved_at = cached["html"], cached["retrieved_at"]
+            else:
+                if self._robots and not self._robots.allowed(url):
+                    raise PageSkipped(f"{url} is disallowed by robots.txt")
+                html, retrieved_at = self._fetch_text(url), self._today
+                self._cache.put("pages", url, {"url": url, "retrieved_at": retrieved_at, "html": html})
+        except Exception as exc:  # recorded, then raised to the caller as before
+            self._record(url, source_type, "skipped" if isinstance(exc, PageSkipped) else "error", str(exc))
+            raise
+        self._record(url, source_type, "cached" if cached else "ok")
         return html_to_document(
             url, html, source_type=source_type, retrieved_at=retrieved_at, max_chars=self._page_chars, is_homepage=is_homepage
         )
+
+    def _record(self, url: str, source_type: str, status: Status, detail: str | None = None) -> None:
+        if self.log is not None:
+            self.log.add(Retrieval("page", status, url=url, source_type=source_type, detail=detail, retrieved_at=self._today))
 
 
 def crawl_site(loader: PageLoader, website: str, *, max_pages: int, errors: list[dict[str, str]]) -> list[SourceDocument]:

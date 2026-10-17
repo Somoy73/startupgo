@@ -11,7 +11,7 @@
 endpoint = "https://integrate.api.nvidia.com/v1"
 reasoning = false              # Nemotron "thinking": ~27 s per call in our test, not needed here
 max_tokens = 4096              # extraction answers are long
-timeout = 120                  # seconds per call
+timeout = 300                  # seconds per call; the free tier takes ~90 s for one extraction (LightRAG allows 2x per chunk)
 max_async = 2                  # parallel calls; the free tier is rate limited
 
 # Embedding model: chunks, entities and relations (process-storage) and each query (search).
@@ -44,8 +44,9 @@ chunk_top_k = 20               # text chunks retrieved
 min_similarity = 0.2           # vector matches below this cosine similarity are ignored (LightRAG's default)
 max_results = 20               # startups returned
 
-# What process-storage processes: the StartupGo database (STARTUPGO_DB overrides it, as in the
-# Backend) and the agent's entries.
+# What process-storage processes: the StartupGo database (the 3-table model: entities, facts,
+# assessments; STARTUPGO_DB overrides it, as in the Backend) and the agent's entries.
 [sources]
 database = "../../DB/startupgo_unified.db"
 entries = "../Agent/output/startups"
+kinds = ["startup"]            # entity kinds indexed; add "candidate" for the BlueInvest leads (~700 more documents)

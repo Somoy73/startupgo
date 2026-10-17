@@ -18,6 +18,9 @@ An evaluated, judge-reviewed entry becomes:
                  facts came from (reference). A round already stored from another source is kept, not current
 
 A new startup whose entry the judge didn't accept isn't stored. Saving the same entry again changes nothing.
+
+scores_of gives any startup's Investment Score Matrix by the agent's rubric (scoring.py), for the Backend: the agent's
+latest accepted assessment, else the rubric applied to the startup's facts (facts_of), read the way the agent reads them.
 """
 
 from __future__ import annotations
@@ -31,13 +34,16 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
-from .derive import Facts, value
+from .agent import merge_facts
+from .derive import Facts, derive_all, value
 from .errors import AgentError
-from .facts import INFERRED_CONFIDENCE
+from .facts import INFERRED_CONFIDENCE, Fact, InvalidValue, coerce
 from .kth import score_kth
 from .navigator import ocean_kpis
 from .record import StartupRecord, slugify
-from .scoring import confidence_label
+from .retrievals import Retrieval
+from .scoring import confidence_label, investment_percent, score_all
+from .spec import FIELDS_BY_NAME
 
 ENGINE = "agent"  # assessments.engine and facts.source_name of everything the agent writes
 ASSESSOR = "StartupGo agent"
@@ -106,6 +112,51 @@ def researched_within(conn: sqlite3.Connection, entity_id: int, days: int) -> st
     """When the agent last researched the startup, if that was in the last ``days``."""
     ran = researched_at(conn, entity_id)
     return ran if ran and ran >= (datetime.now(timezone.utc) - timedelta(days=days)).strftime(TIMESTAMP) else None
+
+
+def facts_of(conn: sqlite3.Connection, entity_id: int, *, today: str | None = None) -> Facts:
+    """The startup's current facts as the agent scores them: fields of its schema with valid values, list fields merged,
+    the strongest fact for the others, and derived fields (stage, total_raised, ...) computed from them, not read."""
+    facts: Facts = {}
+    rows = conn.execute("SELECT * FROM facts WHERE entity_id = ? AND is_current = 1 ORDER BY id", (entity_id,)).fetchall()
+    for r in rows:
+        spec = FIELDS_BY_NAME.get(r["field"])
+        if spec is None or spec.origin == "derived":
+            continue
+        try:
+            found = coerce(spec, json.loads(r["value"]) if r["value"] else None)
+        except (InvalidValue, ValueError):
+            continue  # a value outside the agent's vocabulary: the rubric can't read it
+        if found is None:
+            continue
+        fact = Fact(r["field"], found, r["evidence"] or "", r["source_url"] or "", r["source_type"], r["retrieved_at"] or "", r["status"],
+                    r["confidence"])
+        facts[r["field"]] = merge_facts(facts.get(r["field"]), [fact] if spec.is_list else fact)
+    website = conn.execute("SELECT website FROM entities WHERE id = ?", (entity_id,)).fetchone()
+    today = today or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    derived = derive_all(facts, website_domain=domain(website[0] if website else None), today=today)
+    return {k: v for k, v in {**facts, **derived}.items() if v is not None}
+
+
+def scores_of(conn: sqlite3.Connection, entity_id: int, weights: dict[str, float] | None = None) -> dict[str, Any]:
+    """The startup's Investment Score Matrix by the agent's rubric: its latest accepted assessment ("agent"), else the
+    rubric with ``weights`` (the agent's [weights]) applied to facts_of ("facts")."""
+    row = conn.execute(
+        "SELECT * FROM assessments WHERE entity_id = ? AND engine = ? AND trl IS NOT NULL ORDER BY assessed_at DESC, id DESC LIMIT 1",
+        (entity_id, ENGINE),
+    ).fetchone()
+    if row:
+        basis = json.loads(row["levels_basis"]) if row["levels_basis"] else {}
+        level = lambda name: (basis.get(name) or {}).get("level")  # noqa: E731
+        return {"source": "agent", "assessed_at": row["assessed_at"], "trl": level("trl"), "brl": level("brl"),
+                "ocean_impact_readiness": level("oir"), "criteria": json.loads(row["criteria"]) if row["criteria"] else [],
+                "investment_score": row["investment_score"], "investment_percent": investment_percent(row["investment_score"]),
+                "overall_confidence": row["overall_confidence"]}
+    scores = score_all(facts_of(conn, entity_id), weights)
+    return {"source": "facts", "assessed_at": None, "trl": scores.trl.level, "brl": scores.brl.level,
+            "ocean_impact_readiness": scores.ocean_impact_readiness.level, "criteria": [asdict(c) for c in scores.criteria],
+            "investment_score": scores.investment_score, "investment_percent": scores.investment_percent,
+            "overall_confidence": scores.overall_confidence}
 
 
 class StartupDatabase:
@@ -190,6 +241,36 @@ class StartupDatabase:
                 kpis = self._kpis(conn, entity_id, record.facts, assessed_at)
                 self._sources(conn, entity_id, entry.get("sources", []))
                 return Stored(slug, created, assessment_id, kpis=kpis)
+        finally:
+            conn.close()
+
+    def save_run(self, *, name: str, website: str, retrievals: list[Retrieval], started_at: str, entry_id: str | None = None,
+                 slug: str | None = None, error: str | None = None) -> int | None:
+        """Log one research run and what it retrieved (agent_runs, agent_retrievals); None when the database has no such tables.
+
+        ``slug`` is the startup the run was about; retrievals whose URL a stored fact cites are marked used.
+        """
+        conn = self.connect()
+        try:
+            if not {"agent_runs", "agent_retrievals"} <= {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}:
+                return None
+            with conn:
+                row = conn.execute("SELECT id FROM entities WHERE kind = 'startup' AND slug = ?", (slug,)).fetchone() if slug else None
+                run_id = conn.execute(
+                    "INSERT INTO agent_runs (entity_id, name, website, status, started_at, finished_at, entry_id, error)"
+                    " VALUES (?, ?, ?, ?, ?, datetime('now'), ?, ?)",
+                    (row["id"] if row else None, name, website, "error" if error else "ok", started_at, entry_id, error)).lastrowid
+                conn.executemany(
+                    "INSERT INTO agent_retrievals (run_id, seq, kind, url, query, provider, source_type, status, detail, retrieved_at)"
+                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    [(run_id, i, r.kind, r.url, r.query, r.provider, r.source_type, r.status, r.detail, r.retrieved_at)
+                     for i, r in enumerate(retrievals, 1)])
+                if row:
+                    conn.execute(
+                        "UPDATE agent_retrievals SET used = 1 WHERE run_id = ? AND url IN"
+                        " (SELECT source_url FROM facts WHERE entity_id = ? AND is_current = 1 AND source_url IS NOT NULL)",
+                        (run_id, row["id"]))
+            return run_id
         finally:
             conn.close()
 

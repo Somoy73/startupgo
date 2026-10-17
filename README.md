@@ -121,7 +121,7 @@ cd Modules/Search && uv run pytest            # search: documents, process-stora
 
 | Method | Path | Purpose |
 |--------|------|---------|
-| GET | `/api/startups` | List with scores. Filters: `q`, `sector`, `country`, `stage`, `pipeline_stage`, `impact_area` (A–F), `min_trl`, `min_brl`, `min_potential`. Sort: `potential`, `readiness`, `ocean`, `momentum`, `trl`, `brl`, `name` |
+| GET | `/api/startups` | List with scores: `scores` (investment potential, 0–100) and `investment`, the agent's Investment Score Matrix (10 criteria, 1–5): the agent's latest accepted assessment, else the agent's rubric and weights on the startup's facts, so it matches the agent's entries. Filters: `q`, `sector`, `country`, `stage`, `pipeline_stage`, `impact_area` (A–F), `min_trl`, `min_brl`, `min_potential`. Sort: `potential`, `investment`, `readiness`, `ocean`, `momentum`, `trl`, `brl`, `name` |
 | POST | `/api/startups/search` | Natural-language search, e.g. `{"query": "seaweed packaging replacing plastic", "filters": {"min_trl": 5, "impact_area": "B"}}`: database startups (`results`, with `relevance` and the `matched` graph entities) and agent-only entries (`entries`). `filters` (optional) takes the `GET /api/startups` filters. 503 until `process-storage` has run |
 | GET | `/api/startups/{slug}/graph` | Matching: the knowledge graph within `hops` (0–3, default 2) of the startup (`nodes`, `edges`) and the startups it reaches, most shared entities first |
 | POST | `/api/match/graph` | Matching from a thesis: `{"thesis": "kelp carbon removal", "hops": 1, "filters": {...}}` seeds the graph with the entities the thesis retrieves |

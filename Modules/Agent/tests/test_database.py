@@ -6,11 +6,12 @@ from pathlib import Path
 
 import pytest
 
-from startup_agent.database import StartupDatabase, domain, missing_levels, needs_score, researched_within
+from startup_agent.database import StartupDatabase, domain, facts_of, missing_levels, needs_score, researched_within, scores_of
 from startup_agent.errors import AgentError
 from startup_agent.graph import build_agent_graph
 from startup_agent.kth import score_crl, score_frl, score_iprl, score_tmrl
 from startup_agent.navigator import kpi_codes, ocean_kpis
+from startup_agent.scoring import score_all
 
 from .helpers import fact
 
@@ -275,3 +276,48 @@ def test_older_databases_are_reported(tmp_path):
     with pytest.raises(AgentError, match="assessments, entities, facts"):
         StartupDatabase(tmp_path / "old.db").pending(limit=1, max_age_days=1)
     assert domain("HTTPS://www.Acme.fi:8080/x") == "acme.fi"
+
+
+# --- the agent's rubric on database facts (scores_of, for the Backend) ----------------------------
+
+
+def matrix(scores: dict) -> tuple:
+    """What the Backend shows of a score: levels, criterion scores, investment score, confidence."""
+    return (scores["trl"]["level"] if isinstance(scores["trl"], dict) else scores["trl"],
+            scores["brl"]["level"] if isinstance(scores["brl"], dict) else scores["brl"],
+            [(c["name"], c["score"], c["confidence"]) for c in scores["criteria"]],
+            scores["investment_score"], scores["overall_confidence"])
+
+
+def test_the_stored_facts_score_like_the_agents_entry(tmp_path, entry):
+    db = make_db(tmp_path / "db.sqlite")
+    stored = db.save(entry, slug="sammy")
+    conn = db.connect()
+    rescored = score_all(facts_of(conn, 4, today=entry["generated_at"][:10])).to_dict()
+    assert matrix(rescored) == matrix(entry["scores"])  # same facts, same rubric, same scores
+    agent = scores_of(conn, 4)
+    conn.close()
+    assert agent["source"] == "agent" and stored.assessment_id
+    assert (agent["trl"], agent["brl"], agent["investment_score"], agent["overall_confidence"]) == matrix(entry["scores"])[:2] + matrix(entry["scores"])[3:]
+    assert [c["score"] for c in agent["criteria"]] == [c["score"] for c in entry["scores"]["criteria"]]
+    assert agent["investment_percent"] == entry["scores"]["investment_percent"]
+
+
+def test_startups_the_agent_has_not_scored_get_the_rubric_on_their_facts(tmp_path):
+    db = make_db(tmp_path / "db.sqlite")
+    conn = db.connect()
+    with conn:
+        conn.executemany(
+            "INSERT INTO facts (entity_id, section, field, value, evidence, source_type, source_name, status, confidence) VALUES (3, ?, ?, ?, 'q', ?, 'x', ?, 0.9)",
+            [("C", "dev_stage", '"prototype_relevant_env"', "website", "claimed"),
+             ("G", "equity_rounds", '{"stage": "seed", "date": "2025-05", "amount": 1500000, "currency": "EUR", "investors": ["Blue Fund"], "round_type": "seed"}',
+              "news", "verified"),
+             ("G", "stage", '"series_b_plus"', "manual", "claimed"),  # derived by the agent from the rounds, not read
+             ("D", "revenue_trend", '"skyrocketing"', "website", "claimed")])  # outside the agent's vocabulary: left out
+    facts = facts_of(conn, 3)
+    assert facts["stage"].value == "seed" and "revenue_trend" not in facts and facts["equity_rounds"][0].value["amount"] == 1500000
+    scores = scores_of(conn, 3, {"Tech": 2.0})
+    conn.close()
+    expected = score_all(facts, {"Tech": 2.0})
+    assert scores["source"] == "facts" and scores["trl"] == expected.trl.level is not None
+    assert (scores["investment_score"], scores["criteria"][7]["score"]) == (expected.investment_score, expected.criteria[7].score)

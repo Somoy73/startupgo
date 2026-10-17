@@ -22,13 +22,18 @@ await search.close()                                    # on shutdown
 
 | Field | |
 |---|---|
-| `slug` | StartupGo database slug (`None` if only an agent entry knows the startup) |
+| `key` | the database entity it is (`startup:notpla`, `blueinvest:84`), or `entry:<id>` if only an agent entry knows the startup |
+| `kind` | the entity's kind: `startup`, `candidate` (when `[sources] kinds` indexes them), ...; `entry` for an agent-only startup |
+| `slug` | StartupGo startup slug (kind `startup`; else `None`) |
 | `entry` | agent entry id, if there is one |
 | `name`, `website` | |
-| `info` | startup info saved by ProcessStorage: tagline, sector, country, city, stage (database); TRL, BRL, ocean impact readiness, investment score, confidence (agent entry) |
+| `info` | info saved by ProcessStorage: tagline, sector, country, city, stage (database entity); TRL, BRL, ocean impact readiness, investment score, confidence (agent entry) |
 | `relevance` | 0–1, relative to the best match |
 | `matched` | knowledge-graph entities that led to it, e.g. `("Seaweed", "Packaging")` |
 | `documents` | the matched documents, e.g. `("startup:notpla", "entry:notpla-com")` |
+
+The Backend joins `slug` with its `startups` view, which only lists startups with all six readiness
+levels; `key` is there for entities that view doesn't show (yet).
 
 For matching, two N-hop subgraphs of the knowledge graph (`startup_search/graph.py`):
 
@@ -59,19 +64,34 @@ database rows / agent entries -> one text document per startup        (documents
   -> embeddings of chunks, entities and relations              -> VectorDB
 ```
 
-- **Documents.** For a database startup: its profile (`startups`), the latest readiness assessment
-  with what each KTH level means (`readiness_assessments`, `readiness_levels`), ocean-impact evidence
-  (`startup_ocean_kpis` with KPI and area names), funding rounds and source titles. Analyst notes and
-  pipeline stage are left out: they change often and are internal workflow state. For an agent entry:
-  every extracted fact and the agent's scores. Preview them without model calls:
-  `uv run startup-search documents`.
-- An agent entry whose website matches a database startup is found as that startup.
-- Only new and changed documents are processed, since each costs a few chat-model calls. Startups that
-  left the database are removed (`--keep-removed` keeps them). Run it again after the database or
-  the agent's entries change.
+- **Documents.** The database is the 3-table model (`DB/unified.sql`): `entities`, `facts`,
+  `assessments`. One document per entity of the kinds in `[sources] kinds` (default `startup`; add
+  `candidate` for the ~700 BlueInvest leads): the entity's row (tagline, description, sector, location,
+  stage), its current facts of the fields that describe it (solution, development stage, team, registry
+  status, funding rounds, grants, investors, patents, ocean-impact KPIs, source titles), and the latest
+  assessment with readiness levels and what each KTH level means. For a one-value field the strongest
+  fact counts (verified, then confidence, then newest). Left out: facts found by name only (news,
+  research papers), page dumps (website text, web history), job ads, code repositories, beneficial
+  owners, analyst notes and pipeline stage. For an agent entry: every extracted fact and the agent's
+  scores. Preview them without model calls: `uv run startup-search documents`.
+- **One chunk each.** A document is kept under 3,600 characters (~900 tokens; the biggest today is
+  ~880), below LightRAG's 1,200-token chunk, so each entity is one chunk and one extraction call, and
+  nothing is chunked when the search runs.
+- **Best first.** Documents are ranked: assessed entities first, then the ones with the most evidence;
+  agent entries last. `startup-search documents` prints them in that order.
+- An agent entry whose website matches a database entity is found as that entity.
+- Only new and changed documents are processed, since each costs a few chat-model calls. They go one at a
+  time, best first, and each is saved as soon as it is done, so an interrupted run keeps its work.
+  `--limit N` processes the top N still to do and leaves the rest for the next run; `--pause S` waits
+  between documents for the rate-limited free tier. Entities that left the database are removed
+  (`--keep-removed` keeps them). Run it again after the database or the agent's entries change.
 
-Document ids are also LightRAG's `file_path`s (`startup:<slug>`, `entry:<agent id>`), so every
-retrieved entity and chunk leads back to its startup.
+```bash
+uv run process-storage --limit 20 --pause 5   # the top 20 still to process; run again for the next 20
+```
+
+Document ids are also LightRAG's `file_path`s: the entity's `key` (`startup:<slug>`, `blueinvest:<id>`)
+or `entry:<agent id>`, so every retrieved entity and chunk leads back to its entity.
 
 ## Search
 
@@ -93,7 +113,7 @@ LightRAG's four storages are local files in `rag_storage/` for now; no database 
 | doc_status | `JsonDocStatusStorage` | processing state of each document |
 
 `rag_storage/startupgo_documents.json` records what ProcessStorage processed: each document's text
-digest and its startup info. A graph or vector database can replace these later: change the class
+digest, the entity it is about (`key`, `kind`) and its info. A graph or vector database can replace these later: change the class
 names in `[storage]` and run `process-storage` again. Searches never write to the storage, so the
 Backend can search while `process-storage` runs.
 

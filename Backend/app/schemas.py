@@ -36,6 +36,31 @@ class Readiness(BaseModel):
     rationale: str | None = None
 
 
+class InvestmentCriterion(BaseModel):
+    name: str
+    score: int | None  # 1-5; None without facts
+    confidence: float
+    confidence_label: str
+    fields_found: int
+    fields_total: int
+    reasons: list[str]
+
+
+class InvestmentScores(BaseModel):
+    """The agent's Investment Score Matrix (Modules/Agent/startup_agent/scoring.py): the agent's latest accepted assessment
+    (source "agent"), else the same rubric and weights applied to the startup's facts in the database (source "facts")."""
+
+    source: Literal["agent", "facts"]
+    assessed_at: str | None  # the agent's assessment (UTC); None when scored from the facts
+    trl: int | None
+    brl: int | None
+    ocean_impact_readiness: int | None  # 1-5
+    investment_score: float | None  # weighted 1-5 over the criteria with facts
+    investment_percent: float | None  # the same on 0-100
+    overall_confidence: float
+    criteria: list[InvestmentCriterion]
+
+
 class StartupSummary(BaseModel):
     slug: str
     name: str
@@ -48,6 +73,7 @@ class StartupSummary(BaseModel):
     pipeline_stage: PipelineStage
     readiness: Readiness
     scores: Scores
+    investment: InvestmentScores  # the agent's rubric: same numbers as the agent's entries
     total_disclosed_usd: float | None
     last_round_on: str | None
 

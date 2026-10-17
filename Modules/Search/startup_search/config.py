@@ -88,9 +88,12 @@ class SearchSettings:
     query: QuerySettings
     database: Path
     entries: Path
+    kinds: tuple[str, ...] = ("startup",)  # database entity kinds to index
 
     @classmethod
-    def load(cls, path: Path | None = None, *, env: Mapping[str, str] | None = None) -> SearchSettings:
+    def load(
+        cls, path: Path | None = None, *, env: Mapping[str, str] | None = None
+    ) -> SearchSettings:
         """Read ``path`` (default: $STARTUPGO_SEARCH_CONFIG, else config.toml next to the package) and
         ``env`` (default: .env next to it, overridden by the environment)."""
         path = path or Path(os.environ.get("STARTUPGO_SEARCH_CONFIG") or DEFAULT_CONFIG)
@@ -107,9 +110,11 @@ class SearchSettings:
         storage: dict[str, Any] = data.get("storage", {})
         query: dict[str, Any] = data.get("query", {})
         sources: dict[str, Any] = data.get("sources", {})
-        mode = str(query.get("mode", "mix"))
+        mode = str(query.get("mode", "naive"))
         if mode not in QUERY_MODES:
-            raise SearchError(f"[query] mode must be one of {', '.join(QUERY_MODES)}, got {mode!r}")
+            raise SearchError(
+                f"[query] mode must be one of {', '.join(QUERY_MODES)}, got {mode!r}"
+            )
         dim = _value(env, "EMBEDDING_DIM") or str(DEFAULT_EMBEDDING_DIM)
         if not dim.isdigit():
             raise SearchError(f"EMBEDDING_DIM must be a whole number, got {dim!r}")
@@ -148,8 +153,12 @@ class SearchSettings:
                 max_results=int(query.get("max_results", 20)),
             ),
             # The Backend's STARTUPGO_DB override applies here too, so both read the same database.
-            database=Path(_value(env, "STARTUPGO_DB") or root / sources.get("database", "../../DB/startupgo_unified.db")),
+            database=Path(
+                _value(env, "STARTUPGO_DB")
+                or root / sources.get("database", "../../DB/startupgo_unified.db")
+            ),
             entries=root / sources.get("entries", "../Agent/output/startups"),
+            kinds=tuple(str(kind) for kind in sources.get("kinds", ["startup"])),
         )
 
 
@@ -159,7 +168,9 @@ def _value(env: Mapping[str, str], name: str) -> str:
 
 def _require(key: str, env_name: str, model: str) -> str:
     if not key:
-        raise SearchUnavailable(f"missing API key for {model}: set {env_name} in Search/.env")
+        raise SearchUnavailable(
+            f"missing API key for {model}: set {env_name} in Search/.env"
+        )
     return key
 
 

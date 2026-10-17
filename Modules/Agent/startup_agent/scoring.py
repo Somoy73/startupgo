@@ -404,6 +404,11 @@ def _field_weight(facts: Facts, scores: dict[str, LevelScore], name: str) -> flo
     return max((STATUS_WEIGHT[f.status] for f in found), default=0.0)
 
 
+def investment_percent(investment: float | None) -> float | None:
+    """The 1-5 investment score on 0-100."""
+    return round((investment - 1) / 4 * 100, 1) if investment is not None else None
+
+
 def confidence_label(confidence: float) -> str:
     return "high" if confidence >= 0.75 else "medium" if confidence >= 0.4 else "low"
 
@@ -423,6 +428,6 @@ def score_all(facts: Facts, weights: dict[str, float] | None = None) -> Scores:
         criteria=criteria,
         weights=weights,
         investment_score=investment,
-        investment_percent=round((investment - 1) / 4 * 100, 1) if investment is not None else None,
+        investment_percent=investment_percent(investment),
         overall_confidence=round(sum(weights[c.name] * c.confidence for c in criteria) / total_weight, 2),
     )

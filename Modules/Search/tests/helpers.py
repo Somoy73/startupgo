@@ -26,7 +26,8 @@ def settings(tmp_path: Path, extra: str = "", env: dict[str, str] | None = None)
 
 
 def doc(doc_id: str, text: str, *, name: str | None = None, startup: str | None = None, entry: str | None = None, **kw: Any) -> Document:
-    return Document(doc_id, text, name or doc_id.split(":", 1)[1].title(), kw.get("website"), startup, entry, kw.get("info", {}))
+    key, kind = (f"startup:{startup}", "startup") if startup else (None, "entry")
+    return Document(doc_id, text, name or doc_id.split(":", 1)[1].title(), kw.get("website"), startup, entry, kw.get("info", {}), key, kind)
 
 
 class FakeRag:
