@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { KTH_DIMENSIONS, type StartupSummary } from "../../api/backend-types";
-import { compactMoney, partialDate, PIPELINE_LABELS, stageLabel } from "../../lib/format";
+import { compactMoney, partialDate, PIPELINE_LABELS, stageLabel, toEur } from "../../lib/format";
 import { Link } from "@tanstack/react-router";
 import type { SearchSortKey } from "../../lib/discover-search";
 import { BandBadge, LevelPill, Meter } from "../Scores";
@@ -93,7 +93,7 @@ export const COLUMNS: Column[] = [
     sortKey: "funding",
     numeric: true,
     defaultVisible: false,
-    cell: (s) => compactMoney(s.total_disclosed_usd || null),
+    cell: (s) => compactMoney(toEur(s.total_disclosed_usd || null, "USD")),
   },
   {
     id: "lastRound",

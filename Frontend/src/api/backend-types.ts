@@ -149,4 +149,29 @@ export type NaturalLanguageSearchResponse = {
 export type OceanImpactArea = { code: string; name: string };
 
 /** GET /api/frameworks, the parts the frontend reads. */
-export type Frameworks = { ocean_impact_areas: OceanImpactArea[] };
+export type Frameworks = {
+  ocean_impact_areas: OceanImpactArea[];
+  /** Share of each score in the investment potential (sums to 1). */
+  potential_weights: { readiness: number; ocean_impact: number; momentum: number };
+};
+
+/** A round, grant or raised total from one source. The same round can appear once per source. */
+export type FundingEvent = {
+  event_date: string | null;
+  source_name: string;
+  /** announced_round, priced_round (UK SH01), form_d, eu_grant, grant, aggregate */
+  event_type: string;
+  round_label: string | null;
+  amount: number | null;
+  currency: string | null;
+  price_per_share: number | null;
+  investor_count: number | null;
+  source_url: string | null;
+  /** verified, claimed, inferred */
+  status: string;
+  confidence: number;
+  details: Record<string, unknown> | null;
+};
+
+/** A similar startup (weighted tag overlap); slug is null when it isn't in the database. */
+export type Peer = { slug: string | null; name: string; sector: string | null; similarity: number };

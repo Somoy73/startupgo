@@ -1,6 +1,8 @@
 import type {
   Frameworks,
+  FundingEvent,
   NaturalLanguageSearchResponse,
+  Peer,
   StartupDetail,
   StartupSummary,
 } from "./backend-types";
@@ -55,4 +57,7 @@ export const backend = {
       body: JSON.stringify({ query }),
     }),
   frameworks: () => request<Frameworks>("/frameworks"),
+  /** Every funding event from every source, oldest first. */
+  rounds: (slug: string) => request<FundingEvent[]>(`${startupPath(slug)}/rounds`),
+  peers: (slug: string) => request<Peer[]>(`${startupPath(slug)}/peers`),
 };
