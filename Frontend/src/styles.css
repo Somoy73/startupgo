@@ -91,7 +91,7 @@
 /* Shared presentation for the supplied pages. */
 /* Shared clear header over the sea photo on every screen. */
 .app-header { position: sticky; top: 0; z-index: 30; background: transparent; color: var(--foreground); transition: background 0.2s ease, box-shadow 0.2s ease; }
-.header-inner { max-width: 1280px; margin: auto; display: flex; align-items: center; gap: 28px; min-height: 72px; padding: 12px 24px; }
+.header-inner { max-width: 1280px; margin: auto; display: flex; align-items: center; gap: 28px; min-height: 72px; padding: 12px var(--page-gutter); }
 /* The wordmark sits in a navy speech bubble with a tail at its bottom-left. */
 .brand { position: relative; display: inline-flex; align-items: center; gap: 10px; font: 700 18px var(--font-display); white-space: nowrap; background: var(--navy); color: var(--navy-foreground); padding: 8px 18px; border-radius: 2px; }
 .brand::after { content: ""; position: absolute; left: 0; bottom: -11px; width: 15px; height: 11px; background: var(--navy); clip-path: polygon(0 0, 0 100%, 100% 0); }
@@ -101,11 +101,14 @@
 .app-nav a:hover, .app-nav a.active { background: var(--ocean); color: var(--navy-foreground); }
 .header-cta { background: var(--ocean); border-radius: 24px; font-weight: 700; }
 .menu-toggle { display: none; background: var(--glass-nav); color: var(--navy-foreground); }
-.app-main { max-width: 1280px; margin: auto; padding: 0 24px 64px; }
+:root { --page-gutter: 24px; }
+@media(min-width:801px) { :root { --page-gutter: 40px; } }
+@media(min-width:1100px) { :root { --page-gutter: 56px; } }
+.app-main { max-width: 1280px; margin: auto; padding: 0 var(--page-gutter) 64px; }
 .page-head { position: relative; isolation: isolate; display: flex; justify-content: space-between; align-items: center; gap: 28px; color: var(--navy-foreground); padding: 48px 0 42px; margin-bottom: 30px; }
 .page-head::before { content: none; }
-@media(min-width:1280px) { .page-head::before { left: calc((1280px - 100vw) / 2 - 24px); right: calc((1280px - 100vw) / 2 - 24px); } }
-@media(max-width:1279px) { .page-head::before { left: -24px; right: -24px; } }
+@media(min-width:1280px) { .page-head::before { left: calc((1280px - 100vw) / 2 - var(--page-gutter)); right: calc((1280px - 100vw) / 2 - var(--page-gutter)); } }
+@media(max-width:1279px) { .page-head::before { left: calc(-1 * var(--page-gutter)); right: calc(-1 * var(--page-gutter)); } }
 .page-head h1 { font-size: 40px; line-height: 1.2; font-weight: 700; }
 .page-head p { max-width: 720px; margin-top: 14px; color: color-mix(in oklch, var(--navy-foreground) 82%, transparent); line-height: 1.65; }
 .page-head .field { min-width: 190px; font-size: 13px; }
@@ -351,3 +354,25 @@ section.mg-card { padding: 28px; overflow: visible; }
   .mg-graph { padding: 24px 16px; }
   .mg-list { padding: 0; }
 }
+
+/* CORDIS widget (EU projects page): the loader ships no list styling, so lay the rows out here. */
+.cordis-table .SearchResultHeader { margin-bottom: 12px; }
+.cordis-table .SearchResultHeader img { height: 40px; width: auto; }
+.cordis-table .SearchResultMatchList { display: flex; flex-direction: column; gap: 10px; }
+.cordis-table .SearchResultMatch { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 16px; align-items: start; padding: 16px; border-radius: 12px; border: 1px solid var(--border); }
+.cordis-table .SearchResultMatch:nth-child(odd) { background: var(--wash); }
+.cordis-table .SearchResultMatch:nth-child(even) { background: var(--card); }
+.cordis-table .SearchResultColLeft img { width: 72px; height: 72px; object-fit: contain; border-radius: 10px; background: #fff; display: block; }
+.cordis-table .SearchResultColRight { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cordis-table .SearchResultItemTitle { font-weight: 700; line-height: 1.35; overflow-wrap: anywhere; }
+.cordis-table .SearchResultItemTitle a { color: var(--primary); }
+.cordis-table .SearchResultItemTeaser { font-size: 14px; line-height: 1.5; color: var(--muted-foreground); }
+.cordis-table .SearchResultItemLastUpdateDate { font-size: 12px; color: var(--muted-foreground); }
+.cordis-table .SearchResultAppliDomIconList:empty { display: none; }
+.cordis-table .SearchResultPagination { display: flex; justify-content: center; margin-top: 20px; }
+.cordis-table .SearchResultPagination ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.cordis-table .SearchResultPagination li a, .cordis-table .SearchResultPagination li span { display: grid; place-items: center; min-width: 34px; height: 34px; padding: 0 10px; border-radius: 6px; border: 1px solid var(--border); font-size: 13px; font-weight: 700; color: var(--primary); cursor: pointer; }
+.cordis-table .SearchResultPagination li .current { background: var(--primary); border-color: var(--primary); color: #fff; cursor: default; }
+.cordis-table .SearchResultPagination li .disabled, .cordis-table .SearchResultPagination li .ellipse { opacity: 0.5; cursor: default; }
+.cordis-table .SearchResultFooter { margin-top: 16px; font-size: 12px; color: var(--muted-foreground); text-align: center; }
+@media(max-width:600px) { .cordis-table .SearchResultMatch { grid-template-columns: 48px minmax(0, 1fr); } .cordis-table .SearchResultColLeft img { width: 48px; height: 48px; } }

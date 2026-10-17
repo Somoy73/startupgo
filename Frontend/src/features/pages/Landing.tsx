@@ -2,6 +2,7 @@ import { ArrowRight, CalendarDays, TrendingUp } from "lucide-react";
 import type { ReactNode } from "react";
 import { api } from "../../api/client";
 import type { StartupDetail } from "../../api/types";
+import { CordisWidget } from "../../components/CordisWidget";
 import { Meter } from "../../components/Scores";
 import { partialDate, score } from "../../lib/format";
 import { Link } from "../../lib/navigation";
@@ -16,9 +17,7 @@ export function Landing() {
       <div className="page-head">
         <div>
           <h1>Startups in Finnish Blue Economy</h1>
-          <p>
-            Discover the newest startups found and assessed by our agentic approach.
-          </p>
+          <p>Discover the newest startups found and assessed by our agentic approach.</p>
           <nav className="hero-nav" aria-label="Main navigation">
             {navItems.map((item) => (
               <Link key={item.to} to={item.to}>
@@ -29,14 +28,12 @@ export function Landing() {
         </div>
       </div>
 
-
-
       {loading && <p className="empty">Loading dashboards…</p>}
       {error && <p className="empty error">Couldn't load dashboards: {error}</p>}
 
       {data && (
         <div className="dash-grid">
-          <section className="dash-card span-full" aria-labelledby="newest-heading">
+          <section className="dash-card" aria-labelledby="newest-heading">
             <div className="dash-card-head">
               <h2 id="newest-heading">Newest startups</h2>
               <Link to="/search" className="dash-more">
@@ -52,6 +49,16 @@ export function Landing() {
                 </RankRow>
               ))}
             </div>
+          </section>
+
+          <section className="dash-card" aria-labelledby="cordis-heading">
+            <div className="dash-card-head">
+              <h2 id="cordis-heading">EU ocean projects</h2>
+              <Link to="/eu-projects" className="dash-more">
+                More <ArrowRight />
+              </Link>
+            </div>
+            <CordisWidget output="map" />
           </section>
 
           <section className="dash-card" aria-labelledby="trending-heading">
@@ -88,7 +95,6 @@ export function Landing() {
     </div>
   );
 }
-
 
 function RankRow({
   rank,
