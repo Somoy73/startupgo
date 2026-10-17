@@ -1,6 +1,7 @@
 import type {
   Frameworks,
   NaturalLanguageSearchResponse,
+  ResearchJob,
   StartupDetail,
   StartupSummary,
 } from "./backend-types";
@@ -54,5 +55,9 @@ export const backend = {
       method: "POST",
       body: JSON.stringify({ query }),
     }),
+  /** Queue the research agent on a startup that has no score yet. 409 when it was researched recently or already scored. */
+  startResearch: (slug: string) =>
+    request<ResearchJob>("/research", { method: "POST", body: JSON.stringify({ slug }) }),
+  researchJob: (id: number) => request<ResearchJob>(`/research/${id}`),
   frameworks: () => request<Frameworks>("/frameworks"),
 };

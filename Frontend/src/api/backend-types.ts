@@ -79,6 +79,8 @@ export type StartupSummary = {
   city: string | null;
   stage: string;
   pipeline_stage: BackendPipelineStage;
+  /** False for a sourced startup the research agent hasn't scored yet: its levels and scores are zero. */
+  assessed: boolean;
   readiness: Readiness;
   scores: Scores;
   total_disclosed_usd: number | null;
@@ -150,3 +152,11 @@ export type OceanImpactArea = { code: string; name: string };
 
 /** GET /api/frameworks, the parts the frontend reads. */
 export type Frameworks = { ocean_impact_areas: OceanImpactArea[] };
+
+export type ResearchJob = {
+  id: number;
+  status: "queued" | "running" | "done" | "error";
+  slug: string | null;
+  error: string | null;
+  result: Record<string, unknown> | null;
+};

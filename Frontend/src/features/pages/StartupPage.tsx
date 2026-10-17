@@ -1,8 +1,10 @@
+import { useCallback, useState } from "react";
 import { Link, useParams } from "../../lib/navigation";
 import { ApiError, backend } from "../../api/backend";
 import { IconAlert, IconBack, IconExternal } from "../../components/Icons";
 import { OceanImpact } from "../../components/OceanImpact";
 import { ReadinessSection } from "../../components/ReadinessSection";
+import { ResearchPanel } from "../../components/ResearchPanel";
 import { ScoreRadar } from "../../components/ScoreRadar";
 import { PotentialMark } from "../../components/PotentialMark";
 import { BandBadge } from "../../components/Scores";
@@ -21,12 +23,14 @@ const loadStartup = (slug: string) =>
 
 export function StartupPage() {
   const { slug = "" } = useParams();
-  const { data: s, error, loading } = useAsync(() => loadStartup(slug), [slug]);
+  const [reloads, setReloads] = useState(0);
+  const reload = useCallback(() => setReloads((n) => n + 1), []);
+  const { data: s, error, loading } = useAsync(() => loadStartup(slug), [slug, reloads]);
 
   if (error) return <p className="empty error">{error}</p>;
   if (loading || !s) return <p className="empty">Loading…</p>;
 
-  const { scores, readiness } = s;
+  const { scores, readiness, assessed } = s;
 
   return (
     <>
@@ -37,7 +41,7 @@ export function StartupPage() {
         <div>
           <div className="row-gap" style={{ marginBottom: 6 }}>
             <h1>{s.name}</h1>
-            <BandBadge band={scores.band} />
+            {assessed && <BandBadge band={scores.band} />}
           </div>
           <p>{s.tagline}</p>
           <p className="small muted" style={{ marginTop: 6 }}>
@@ -54,10 +58,12 @@ export function StartupPage() {
             )}
           </p>
         </div>
-        <PotentialMark scores={scores} />
+        {assessed && <PotentialMark scores={scores} />}
       </div>
 
-      {readiness.confidence === "low" && (
+      {!assessed && <ResearchPanel slug={s.slug} onDone={reload} />}
+
+      {assessed && readiness.confidence === "low" && (
         <div className="notice">
           <IconAlert />
           <span>
@@ -75,12 +81,12 @@ export function StartupPage() {
           </div>
           <p className="secondary">{s.description}</p>
         </section>
-        <ScoreRadar scores={scores} lastRound={partialDate(s.last_round_on)} />
+        {assessed && <ScoreRadar scores={scores} lastRound={partialDate(s.last_round_on)} />}
       </div>
 
       <div className="grid grid-2" style={{ alignItems: "start" }}>
         <div className="stack">
-          <ReadinessSection levels={s.levels} readiness={readiness} scores={scores} />
+          {assessed && <ReadinessSection levels={s.levels} readiness={readiness} scores={scores} />}
 
           <section className="card card-pad">
             <div className="card-head">

@@ -115,6 +115,12 @@ CREATE INDEX IF NOT EXISTS idx_agent_runs_entity ON agent_runs(entity_id, starte
 CREATE INDEX IF NOT EXISTS idx_agent_retr_run    ON agent_retrievals(run_id, seq);
 CREATE INDEX IF NOT EXISTS idx_agent_retr_url    ON agent_retrievals(url);
 
+-- Every startup entity, scored or not: the Backend lists these; `startups` below keeps only fully assessed ones.
+DROP VIEW IF EXISTS all_startups;
+CREATE VIEW all_startups AS SELECT e.id, e.slug, e.name, e.tagline, e.description, e.sector, e.country, e.city, e.founded_year, e.website,
+                           e.stage, e.pipeline_stage, e.created_at, e.updated_at
+                    FROM entities e WHERE e.kind='startup';
+
 DROP VIEW IF EXISTS startups;
 CREATE VIEW startups AS SELECT e.id, e.slug, e.name, e.tagline, e.description, e.sector, e.country, e.city, e.founded_year, e.website,
                            e.stage, e.pipeline_stage, e.created_at, e.updated_at
