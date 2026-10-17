@@ -1,186 +1,96 @@
-// Mirrors Backend/app/schemas.py
-
-export type PipelineStage = "sourced" | "screening" | "diligence" | "term-sheet" | "portfolio" | "passed";
-
-export const PIPELINE_STAGES: PipelineStage[] = [
+export const PIPELINE_STAGES = [
   "sourced",
   "screening",
   "diligence",
   "term-sheet",
-  "portfolio",
+  "invested",
   "passed",
-];
-
-export type FundingStage = "pre-seed" | "seed" | "series-a" | "series-b" | "series-c+" | "growth" | "project-finance";
-
-export const FUNDING_STAGES: FundingStage[] = [
-  "pre-seed",
-  "seed",
-  "series-a",
-  "series-b",
-  "series-c+",
-  "growth",
-  "project-finance",
-];
-
+] as const;
+export type PipelineStage = (typeof PIPELINE_STAGES)[number];
 export type Confidence = "low" | "medium" | "high";
-
-export type DimensionKey = "crl" | "trl" | "brl" | "iprl" | "tmrl" | "frl";
-
-export const DIMENSIONS: { key: DimensionKey; code: string; name: string }[] = [
-  { key: "crl", code: "CRL", name: "Customer" },
+export const DIMENSIONS = [
   { key: "trl", code: "TRL", name: "Technology" },
-  { key: "brl", code: "BRL", name: "Business model" },
-  { key: "iprl", code: "IPRL", name: "IP" },
-  { key: "tmrl", code: "TMRL", name: "Team" },
+  { key: "brl", code: "BRL", name: "Business" },
+  { key: "crl", code: "CRL", name: "Customer" },
   { key: "frl", code: "FRL", name: "Funding" },
-];
-
-export interface Scores {
-  readiness: number;
-  ocean_impact: number;
-  momentum: number;
-  imbalance_penalty: number;
-  potential: number;
-  band: "Strong" | "Promising" | "Watch" | "Early";
-  readiness_spread: number;
-  lagging_dimensions: string[];
-  ocean_evidence_label: string;
-  ocean_areas_covered: string[];
-}
-
-export interface Readiness extends Record<DimensionKey, number> {
-  assessed_on: string;
-  assessor: string;
-  confidence: Confidence;
-  rationale: string | null;
-}
-
-export interface StartupSummary {
+  { key: "ipr", code: "IPRL", name: "Intellectual property" },
+  { key: "team", code: "TMRL", name: "Team" },
+] as const;
+export type DimensionKey = (typeof DIMENSIONS)[number]["key"];
+export type Levels = Record<DimensionKey, number>;
+export type KPI = {
+  code: string;
+  name: string;
+  level: number;
+  value?: string;
+  unit?: string;
+  source?: string;
+};
+export type StartupDetail = {
   slug: string;
   name: string;
   tagline: string;
-  description: string;
   sector: string;
   country: string;
-  city: string | null;
-  stage: string;
-  pipeline_stage: PipelineStage;
-  readiness: Readiness;
-  scores: Scores;
-  total_disclosed_usd: number | null;
-  last_round_on: string | null;
-}
-
-export interface FundingRound {
-  round_type: string;
-  amount: number | null;
-  currency: string | null;
-  amount_usd: number | null;
-  announced_on: string | null;
-  lead_investors: string | null;
-  notes: string | null;
-  source_url: string | null;
-}
-
-export interface OceanKpiEvidence {
-  kpi_code: string;
-  kpi_name: string;
-  area_code: string;
-  area_name: string;
-  evidence_level: number;
-  evidence_label: string;
-  claim: string;
-  source_url: string | null;
-}
-
-export interface LevelDetail {
-  dimension: string;
-  name: string;
-  level: number;
-  summary: string;
-  next_summary: string | null;
-}
-
-export interface Note {
-  id: number;
-  author: string;
-  body: string;
-  created_at: string;
-}
-
-export interface StartupDetail extends StartupSummary {
+  region: string;
+  city: string;
   founded_year: number | null;
-  website: string | null;
-  levels: LevelDetail[];
-  ocean_kpis: OceanKpiEvidence[];
-  funding_rounds: FundingRound[];
-  sources: { title: string; url: string }[];
-  notes: Note[];
-}
-
-export interface Frameworks {
+  website: string;
+  description: string;
+  stage: string;
+  last_round_on: string | null;
+  pipeline_stage: PipelineStage;
+  total_disclosed_usd: number;
+  readiness: Levels & {
+    assessor: string;
+    assessed_on: string;
+    confidence: Confidence;
+    rationale: string;
+  };
+  levels: Levels;
+  scores: {
+    potential: number;
+    readiness: number;
+    ocean_impact: number;
+    momentum: number;
+    band: string;
+    imbalance_penalty: number;
+    readiness_spread: number;
+    lagging_dimensions: DimensionKey[];
+    ocean_areas_covered: string[];
+    ocean_evidence_label: string;
+  };
+  funding_rounds: {
+    round_type: string;
+    announced_on: string;
+    amount: number | null;
+    currency: string | null;
+    lead_investors: string;
+    notes: string;
+    source_url: string;
+  }[];
+  ocean_kpis: KPI[];
+  notes: { id: string; body: string; author: string; created_at: string }[];
+  sources: { url: string; title: string }[];
+};
+export type StartupSummary = StartupDetail;
+export type Framework = {
+  potential_weights: { readiness: number; ocean_impact: number; momentum: number };
+  penalty_per_extra_level: number;
+  max_healthy_spread: number;
   readiness_dimensions: {
+    key: DimensionKey;
     code: string;
     name: string;
-    description: string;
     weight: number;
+    description: string;
     levels: { level: number; summary: string }[];
   }[];
+  evidence_scale: { level: number; label: string }[];
   ocean_impact_areas: {
     code: string;
     name: string;
     orientation: string;
-    kpis: { code: string; name: string; qualitative_only: number }[];
+    kpis: { code: string; name: string; qualitative_only: boolean }[];
   }[];
-  evidence_scale: { level: number; label: string }[];
-  potential_weights: { readiness: number; ocean_impact: number; momentum: number };
-  max_healthy_spread: number;
-  penalty_per_extra_level: number;
-}
-
-// ---------- Write models ----------
-
-export type Levels = Record<DimensionKey, number>;
-
-export interface KpiEvidenceInput {
-  kpi_code: string;
-  evidence_level: number;
-  claim: string;
-  source_url: string | null;
-}
-
-export interface AssessmentInput extends Levels {
-  assessor: string;
-  confidence: Confidence;
-  rationale: string | null;
-  ocean_kpis: KpiEvidenceInput[];
-}
-
-export interface FundingRoundInput {
-  round_type: string;
-  amount: number | null;
-  currency: string | null;
-  announced_on: string | null;
-  lead_investors: string | null;
-}
-
-export interface StartupInput {
-  name: string;
-  tagline: string;
-  description: string;
-  sector: string;
-  country: string;
-  city: string | null;
-  founded_year: number | null;
-  website: string | null;
-  stage: FundingStage;
-  funding_round: FundingRoundInput | null;
-  assessment: AssessmentInput;
-}
-
-export interface ScorePreviewInput extends Levels {
-  ocean_kpis: { kpi_code: string; evidence_level: number }[];
-  stage: string;
-  last_round_on: string | null;
-}
+};

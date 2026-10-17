@@ -1,180 +1,100 @@
-/**
- * Assessment form model: editable drafts, conversion to API inputs, and validation.
- * Kept free of React so it can be unit tested.
- */
 import {
   DIMENSIONS,
-  type AssessmentInput,
-  type Confidence,
-  type FundingStage,
   type Levels,
-  type ScorePreviewInput,
+  type Confidence,
   type StartupDetail,
-  type StartupInput,
+  type KPI,
 } from "../api/types";
-
-export interface KpiDraft {
-  level: number;
-  claim: string;
-  sourceUrl: string;
-}
-
-export interface AssessmentDraft {
+export type CompanyDraft = {
+  name: string;
+  tagline: string;
+  sector: string;
+  country: string;
+  stage: string;
+  roundDate: string;
+  website: string;
+  description: string;
+};
+export type AssessmentDraft = {
   levels: Levels;
-  kpis: Record<string, KpiDraft>;
+  kpis: Record<string, KPI>;
   assessor: string;
   confidence: Confidence;
   rationale: string;
-}
-
-export interface CompanyDraft {
-  name: string;
-  tagline: string;
-  description: string;
-  sector: string;
-  country: string;
-  city: string;
-  foundedYear: string;
-  website: string;
-  stage: FundingStage;
-  roundAmount: string;
-  roundCurrency: string;
-  roundDate: string;
-  roundLead: string;
-}
-
-/** Field path → message, e.g. "company.name" or "kpi.B2". */
+};
 export type DraftErrors = Record<string, string>;
-
-const DEFAULT_LEVEL = 1;
-const PARTIAL_DATE = /^\d{4}(-\d{2}(-\d{2})?)?$/;
-const URL_PATTERN = /^https?:\/\/\S+$/i;
-
-export const EMPTY_KPI: KpiDraft = { level: 0, claim: "", sourceUrl: "" };
-
-export function emptyAssessment(): AssessmentDraft {
+export const emptyCompany: CompanyDraft = {
+  name: "",
+  tagline: "",
+  sector: "",
+  country: "",
+  stage: "seed",
+  roundDate: "",
+  website: "",
+  description: "",
+};
+export const emptyAssessment = (): AssessmentDraft => ({
+  levels: { trl: 1, brl: 1, crl: 1, frl: 1, ipr: 1, team: 1 },
+  kpis: {},
+  assessor: "",
+  confidence: "low",
+  rationale: "",
+});
+export const assessmentFromStartup = (s: StartupDetail): AssessmentDraft => ({
+  levels: { ...s.levels },
+  kpis: Object.fromEntries(s.ocean_kpis.map((k) => [k.code, k])),
+  assessor: s.readiness.assessor,
+  confidence: s.readiness.confidence,
+  rationale: s.readiness.rationale,
+});
+export const validateCompany = (c: CompanyDraft): DraftErrors =>
+  Object.fromEntries(
+    ["name", "sector", "country"]
+      .filter((k) => !c[k as keyof CompanyDraft].trim())
+      .map((k) => [k, "Required"]),
+  );
+export const validateAssessment = (d: AssessmentDraft): DraftErrors =>
+  d.assessor.trim() ? {} : { assessor: "Required" };
+export const toAssessmentInput = (d: AssessmentDraft) => d;
+export const toStartupInput = (company: CompanyDraft, draft: AssessmentDraft) => ({
+  company,
+  draft,
+});
+export const toPreviewInput = (
+  draft: AssessmentDraft,
+  stage: string,
+  roundDate: string | null,
+) => ({ draft, stage, roundDate });
+export function previewScores(draft: AssessmentDraft) {
+  const values = DIMENSIONS.map((d) => draft.levels[d.key]);
+  const readiness = ((values.reduce((a, b) => a + b, 0) / 6 - 1) / 8) * 100;
+  const spread = Math.max(...values) - Math.min(...values);
+  const kpis = Object.values(draft.kpis).filter((k) => k.level > 0);
+  const ocean = kpis.length ? Math.max(...kpis.map((k) => k.level)) * 25 : 0;
+  const penalty = 3 * Math.max(0, spread - 3);
+  const potential = Math.max(0, Math.round(0.45 * readiness + 0.35 * ocean + 0.2 * 50 - penalty));
   return {
-    levels: Object.fromEntries(DIMENSIONS.map((d) => [d.key, DEFAULT_LEVEL])) as Levels,
-    kpis: {},
-    assessor: "",
-    confidence: "medium",
-    rationale: "",
-  };
-}
-
-export function emptyCompany(): CompanyDraft {
-  return {
-    name: "",
-    tagline: "",
-    description: "",
-    sector: "",
-    country: "",
-    city: "",
-    foundedYear: "",
-    website: "",
-    stage: "seed",
-    roundAmount: "",
-    roundCurrency: "EUR",
-    roundDate: "",
-    roundLead: "",
-  };
-}
-
-/** Pre-fill a new assessment from the startup's current one. */
-export function assessmentFromStartup(s: StartupDetail): AssessmentDraft {
-  return {
-    levels: Object.fromEntries(DIMENSIONS.map((d) => [d.key, s.readiness[d.key]])) as Levels,
-    kpis: Object.fromEntries(
-      s.ocean_kpis.map((k) => [k.kpi_code, { level: k.evidence_level, claim: k.claim, sourceUrl: k.source_url ?? "" }]),
+    potential,
+    readiness: Math.round(readiness),
+    ocean_impact: ocean,
+    momentum: 50,
+    band:
+      potential >= 70
+        ? "Strong"
+        : potential >= 55
+          ? "Promising"
+          : potential >= 40
+            ? "Watch"
+            : "Early",
+    imbalance_penalty: penalty,
+    readiness_spread: spread,
+    lagging_dimensions: DIMENSIONS.filter((d) => draft.levels[d.key] === Math.min(...values)).map(
+      (d) => d.key,
     ),
-    assessor: "",
-    confidence: "medium",
-    rationale: "",
+    ocean_areas_covered: [...new Set(kpis.map((k) => k.code.replace(/\d/g, "")))],
+    ocean_evidence_label:
+      ["None", "Intent", "Modelled", "Measured", "Verified"][
+        kpis.length ? Math.max(...kpis.map((k) => k.level)) : 0
+      ] ?? "None",
   };
-}
-
-const activeKpis = (draft: AssessmentDraft) => Object.entries(draft.kpis).filter(([, k]) => k.level > 0);
-const orNull = (v: string) => v.trim() || null;
-
-export function toAssessmentInput(draft: AssessmentDraft): AssessmentInput {
-  return {
-    ...draft.levels,
-    assessor: draft.assessor.trim(),
-    confidence: draft.confidence,
-    rationale: orNull(draft.rationale),
-    ocean_kpis: activeKpis(draft).map(([code, k]) => ({
-      kpi_code: code,
-      evidence_level: k.level,
-      claim: k.claim.trim(),
-      source_url: orNull(k.sourceUrl),
-    })),
-  };
-}
-
-export function toStartupInput(company: CompanyDraft, draft: AssessmentDraft): StartupInput {
-  const hasRound = Boolean(company.roundAmount.trim() || company.roundDate.trim() || company.roundLead.trim());
-  return {
-    name: company.name.trim(),
-    tagline: company.tagline.trim(),
-    description: company.description.trim(),
-    sector: company.sector.trim(),
-    country: company.country.trim(),
-    city: orNull(company.city),
-    founded_year: company.foundedYear.trim() ? Number(company.foundedYear) : null,
-    website: orNull(company.website),
-    stage: company.stage,
-    funding_round: hasRound
-      ? {
-          round_type: company.stage,
-          amount: company.roundAmount.trim() ? Number(company.roundAmount) : null,
-          currency: company.roundAmount.trim() ? company.roundCurrency.trim().toUpperCase() : null,
-          announced_on: orNull(company.roundDate),
-          lead_investors: orNull(company.roundLead),
-        }
-      : null,
-    assessment: toAssessmentInput(draft),
-  };
-}
-
-export function toPreviewInput(draft: AssessmentDraft, stage: string, lastRoundOn: string | null): ScorePreviewInput {
-  return {
-    ...draft.levels,
-    ocean_kpis: activeKpis(draft).map(([code, k]) => ({ kpi_code: code, evidence_level: k.level })),
-    stage,
-    last_round_on: lastRoundOn && PARTIAL_DATE.test(lastRoundOn) ? lastRoundOn : null,
-  };
-}
-
-export function validateAssessment(draft: AssessmentDraft): DraftErrors {
-  const errors: DraftErrors = {};
-  if (!draft.assessor.trim()) errors.assessor = "Who is making this assessment?";
-  for (const [code, k] of activeKpis(draft)) {
-    if (!k.claim.trim()) errors[`kpi.${code}`] = "Describe the claim behind this evidence level.";
-    else if (k.sourceUrl.trim() && !URL_PATTERN.test(k.sourceUrl.trim()))
-      errors[`kpi.${code}`] = "Source must be an http(s) link.";
-  }
-  return errors;
-}
-
-export function validateCompany(c: CompanyDraft): DraftErrors {
-  const errors: DraftErrors = {};
-  const required: [keyof CompanyDraft, string][] = [
-    ["name", "Name"],
-    ["tagline", "Tagline"],
-    ["description", "Description"],
-    ["sector", "Sector"],
-    ["country", "Country"],
-  ];
-  for (const [key, label] of required) if (!c[key].trim()) errors[`company.${key}`] = `${label} is required.`;
-
-  const year = c.foundedYear.trim();
-  if (year && !(/^\d{4}$/.test(year) && Number(year) >= 1900 && Number(year) <= 2100))
-    errors["company.foundedYear"] = "Use a four-digit year.";
-  if (c.website.trim() && !URL_PATTERN.test(c.website.trim())) errors["company.website"] = "Use a full http(s) link.";
-  if (c.roundAmount.trim() && !(Number(c.roundAmount) >= 0)) errors["company.roundAmount"] = "Amount must be a number.";
-  if (c.roundAmount.trim() && !/^[A-Za-z]{3}$/.test(c.roundCurrency.trim()))
-    errors["company.roundCurrency"] = "Use a 3-letter currency code.";
-  if (c.roundDate.trim() && !PARTIAL_DATE.test(c.roundDate.trim()))
-    errors["company.roundDate"] = "Use YYYY, YYYY-MM or YYYY-MM-DD.";
-  return errors;
 }

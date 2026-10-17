@@ -1,39 +1,25 @@
-import { useCallback, useEffect, useState } from "react";
-
-interface AsyncState<T> {
-  data: T | null;
-  error: string | null;
-  loading: boolean;
-  reload: () => void;
-  setData: (data: T) => void;
-}
-
-/** Runs `fn` whenever `deps` change; exposes loading/error and a manual reload. */
-export function useAsync<T>(fn: () => Promise<T>, deps: unknown[]): AsyncState<T> {
+import { useEffect, useState } from "react";
+export function useAsync<T>(fn: () => Promise<T>, deps: unknown[]) {
   const [data, setData] = useState<T | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [tick, setTick] = useState(0);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const run = useCallback(fn, deps);
-
+  const [error, setError] = useState<string | null>(null);
   useEffect(() => {
-    let cancelled = false;
+    let active = true;
     setLoading(true);
-    run()
+    setError(null);
+    fn()
       .then((d) => {
-        if (!cancelled) {
-          setData(d);
-          setError(null);
-        }
+        if (active) setData(d);
       })
-      .catch((e: Error) => !cancelled && setError(e.message))
-      .finally(() => !cancelled && setLoading(false));
+      .catch((e) => {
+        if (active) setError(e instanceof Error ? e.message : "Couldn't load");
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
     return () => {
-      cancelled = true;
+      active = false;
     };
-  }, [run, tick]);
-
-  return { data, error, loading, reload: () => setTick((t) => t + 1), setData };
+  }, deps);
+  return { data, setData, loading, error };
 }

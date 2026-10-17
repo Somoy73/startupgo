@@ -1,62 +1,58 @@
-import { useId } from "react";
-import { FUNDING_STAGES, type FundingStage } from "../../api/types";
-import type { CompanyDraft, DraftErrors } from "../../lib/assessment";
-import { stageLabel } from "../../lib/format";
-import type { Vocabulary } from "../../lib/search";
 import { TextField } from "../Controls";
-
-interface Props {
+import type { CompanyDraft, DraftErrors } from "../../lib/assessment";
+export function CompanyFields({
+  company,
+  errors,
+  vocabulary,
+  onChange,
+}: {
   company: CompanyDraft;
   errors: DraftErrors;
-  vocabulary: Vocabulary;
-  onChange: (patch: Partial<CompanyDraft>) => void;
-}
-
-export function CompanyFields({ company, errors, vocabulary, onChange }: Props) {
-  const stageId = useId();
-  const field = (key: keyof CompanyDraft, label: string, extra: Partial<Parameters<typeof TextField>[0]> = {}) => (
-    <TextField
-      label={label}
-      value={company[key]}
-      error={errors[`company.${key}`]}
-      onChange={(v) => onChange({ [key]: v })}
-      {...extra}
-    />
-  );
-
+  vocabulary: unknown;
+  onChange: (p: Partial<CompanyDraft>) => void;
+}) {
   return (
     <div className="form-grid">
-      {field("name", "Company name", { required: true })}
-      {field("tagline", "One-line tagline", { required: true })}
-      <div className="span-2">{field("description", "What they do", { required: true, multiline: true })}</div>
-      {field("sector", "Sector", { required: true, suggestions: vocabulary.sectors })}
-      <div className="field">
-        <label htmlFor={stageId}>Funding stage</label>
+      {(["name", "tagline", "sector", "country", "website", "description"] as const).map((k) => (
+        <TextField
+          key={k}
+          label={
+            {
+              name: "Company name",
+              tagline: "Tagline",
+              sector: "Sector",
+              country: "Country",
+              website: "Website",
+              description: "Description",
+            }[k]
+          }
+          value={company[k]}
+          error={errors[k]}
+          required={["name", "sector", "country"].includes(k)}
+          onChange={(v) => onChange({ [k]: v })}
+        />
+      ))}
+      <label className="field">
+        Funding stage
         <select
-          id={stageId}
           className="select"
           value={company.stage}
-          onChange={(e) => onChange({ stage: e.target.value as FundingStage })}
+          onChange={(e) => onChange({ stage: e.target.value })}
         >
-          {FUNDING_STAGES.map((s) => (
-            <option key={s} value={s}>
-              {stageLabel(s)}
-            </option>
+          {["pre-seed", "seed", "series-a", "series-b", "growth"].map((s) => (
+            <option key={s}>{s}</option>
           ))}
         </select>
-      </div>
-      {field("country", "Country", { required: true, suggestions: vocabulary.countries })}
-      {field("city", "City")}
-      {field("foundedYear", "Founded (year)", { placeholder: "e.g. 2024" })}
-      {field("website", "Website", { placeholder: "https://" })}
-
-      <h3 className="span-2" style={{ marginTop: 8 }}>
-        Latest funding round <span className="muted small">(optional)</span>
-      </h3>
-      {field("roundAmount", "Amount", { placeholder: "e.g. 500000" })}
-      {field("roundCurrency", "Currency", { placeholder: "e.g. EUR" })}
-      {field("roundDate", "Announced", { placeholder: "YYYY-MM" })}
-      {field("roundLead", "Lead investor(s)")}
+      </label>
+      <label className="field">
+        Last round date
+        <input
+          type="date"
+          className="input"
+          value={company.roundDate}
+          onChange={(e) => onChange({ roundDate: e.target.value })}
+        />
+      </label>
     </div>
   );
 }

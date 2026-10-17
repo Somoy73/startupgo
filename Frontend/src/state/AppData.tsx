@@ -1,65 +1,52 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { api } from "../api/client";
-import type { Frameworks, StartupSummary } from "../api/types";
-import { vocabularyOf, type Vocabulary } from "../lib/search";
-
-/**
- * App-wide data: the startup list (small enough to search and match client-side)
- * and the static framework definitions. Loaded once, shared by every page.
- */
-interface AppData {
-  startups: StartupSummary[];
-  vocabulary: Vocabulary;
-  frameworks: Frameworks | null;
+import { frameworks } from "../api/mock-data";
+import type { StartupDetail } from "../api/types";
+type Data = {
+  startups: StartupDetail[];
+  frameworks: typeof frameworks;
+  vocabulary: { sectors: string[]; countries: string[] };
   loading: boolean;
   error: string | null;
-  refresh: () => Promise<void>;
-  upsertStartup: (startup: StartupSummary) => void;
-}
-
-const AppDataContext = createContext<AppData | null>(null);
-
+  upsertStartup: (s: StartupDetail) => void;
+};
+const Context = createContext<Data | null>(null);
 export function AppDataProvider({ children }: { children: ReactNode }) {
-  const [startups, setStartups] = useState<StartupSummary[]>([]);
-  const [frameworks, setFrameworks] = useState<Frameworks | null>(null);
+  const [startups, setStartups] = useState<StartupDetail[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  const refresh = useCallback(async () => {
-    try {
-      const [list, fw] = await Promise.all([api.startups(), api.frameworks()]);
-      setStartups(list);
-      setFrameworks(fw);
-      setError(null);
-    } catch (e) {
-      setError((e as Error).message);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
-    refresh();
-  }, [refresh]);
-
-  const upsertStartup = useCallback((startup: StartupSummary) => {
-    setStartups((list) =>
-      list.some((s) => s.slug === startup.slug)
-        ? list.map((s) => (s.slug === startup.slug ? startup : s))
-        : [...list, startup],
-    );
+    api
+      .listStartups()
+      .then(setStartups)
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
   }, []);
-
-  const value = useMemo(
-    () => ({ startups, vocabulary: vocabularyOf(startups), frameworks, loading, error, refresh, upsertStartup }),
-    [startups, frameworks, loading, error, refresh, upsertStartup],
+  return (
+    <Context.Provider
+      value={{
+        startups,
+        frameworks,
+        vocabulary: {
+          sectors: [...new Set(startups.map((s) => s.sector))],
+          countries: [...new Set(startups.map((s) => s.country))],
+        },
+        loading,
+        error,
+        upsertStartup: (s) =>
+          setStartups((items) =>
+            items.some((o) => o.slug === s.slug)
+              ? items.map((o) => (o.slug === s.slug ? s : o))
+              : [...items, s],
+          ),
+      }}
+    >
+      {children}
+    </Context.Provider>
   );
-
-  return <AppDataContext.Provider value={value}>{children}</AppDataContext.Provider>;
 }
-
-export function useAppData(): AppData {
-  const ctx = useContext(AppDataContext);
-  if (!ctx) throw new Error("useAppData must be used inside <AppDataProvider>");
-  return ctx;
+export function useAppData() {
+  const data = useContext(Context);
+  if (!data) throw new Error("AppDataProvider missing");
+  return data;
 }
