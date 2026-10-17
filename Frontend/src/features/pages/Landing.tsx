@@ -1,16 +1,31 @@
 import { ArrowRight, CalendarDays, TrendingUp } from "lucide-react";
 import type { ReactNode } from "react";
-import { api } from "../../api/client";
-import type { StartupDetail } from "../../api/types";
+import { backend } from "../../api/backend";
+import type { StartupSummary } from "../../api/backend-types";
 import { CordisWidget } from "../../components/CordisWidget";
 import { Meter } from "../../components/Scores";
-import { partialDate, score } from "../../lib/format";
+import { score } from "../../lib/format";
 import { Link } from "../../lib/navigation";
 import { navItems } from "../../lib/nav-items";
 import { useAsync } from "../../lib/useAsync";
 
+/** The dashboards, from the startups in the database (GET /api/startups). */
+const dashboards = (startups: StartupSummary[]) => {
+  const assessed = startups.filter((s) => s.assessed);
+  return {
+    // Most recently found first; startups found in the same batch, youngest company first.
+    newest: [...startups]
+      .sort((a, b) => (b.created_at ?? "").localeCompare(a.created_at ?? "") || (b.founded_year ?? 0) - (a.founded_year ?? 0))
+      .slice(0, 5),
+    trending: [...assessed].sort((a, b) => b.scores.momentum - a.scores.momentum).slice(0, 5),
+    topImpact: [...assessed].sort((a, b) => b.scores.ocean_impact - a.scores.ocean_impact).slice(0, 3),
+  };
+};
+
+const foundOn = (createdAt: string | null | undefined) => (createdAt ? createdAt.slice(0, 10) : "—");
+
 export function Landing() {
-  const { data, loading, error } = useAsync(() => api.landingDashboard(), []);
+  const { data, loading, error } = useAsync(() => backend.startups().then(dashboards), []);
 
   return (
     <div className="landing">
@@ -44,7 +59,7 @@ export function Landing() {
               {data.newest.map((s, i) => (
                 <RankRow key={s.slug} rank={i + 1} startup={s}>
                   <span className="meta">
-                    <CalendarDays /> Found {partialDate(s.created_at)}
+                    <CalendarDays /> Found {foundOn(s.created_at)}
                   </span>
                 </RankRow>
               ))}
@@ -64,13 +79,13 @@ export function Landing() {
           <section className="dash-card" aria-labelledby="trending-heading">
             <div className="dash-card-head">
               <h2 id="trending-heading">Trending</h2>
-              <span className="small muted">By growth speed</span>
+              <span className="small muted">By funding momentum</span>
             </div>
             <div className="rank-list">
               {data.trending.map((s, i) => (
                 <RankRow key={s.slug} rank={i + 1} startup={s}>
                   <span className="growth-pill">
-                    <TrendingUp /> +{s.growth_speed ?? 0}%/mo
+                    <TrendingUp /> Momentum {score(s.scores.momentum)}
                   </span>
                 </RankRow>
               ))}
@@ -102,7 +117,7 @@ function RankRow({
   children,
 }: {
   rank: number;
-  startup: StartupDetail;
+  startup: StartupSummary;
   children?: ReactNode;
 }) {
   return (
@@ -111,7 +126,8 @@ function RankRow({
       <Link to={`/startups/${startup.slug}`} className="grow rank-link">
         <span className="name">{startup.name}</span>
         <span className="meta">
-          {startup.sector} · {startup.country} · Potential {score(startup.scores.potential)}
+          {startup.sector} · {startup.country} ·{" "}
+          {startup.assessed ? `Potential ${score(startup.scores.potential)}` : "Not assessed yet"}
         </span>
       </Link>
       {children}

@@ -77,6 +77,8 @@ class StartupSummary(BaseModel):
     investment: InvestmentScores  # the agent's rubric: same numbers as the agent's entries
     total_disclosed_usd: float | None
     last_round_on: str | None
+    founded_year: int | None = None
+    created_at: str | None = None  # when StartupGo first found the startup (UTC)
 
 
 class SearchFilters(BaseModel):
@@ -174,7 +176,6 @@ class Note(BaseModel):
 
 
 class StartupDetail(StartupSummary):
-    founded_year: int | None
     website: str | None
     levels: list[LevelDetail]
     ocean_kpis: list[OceanKpiEvidence]
@@ -493,3 +494,45 @@ class ThesisGraphRequest(BaseModel):
     max_nodes: int = Field(default=150, ge=1, le=500)
     seeds: int = Field(default=10, ge=1, le=40)
     filters: SearchFilters = Field(default_factory=SearchFilters)
+
+
+# ---------------------------------------------------------------------------
+# Investment memo: one document per startup, assembled from the database (app/memo.py)
+# ---------------------------------------------------------------------------
+
+
+class MemoRecommendation(BaseModel):
+    verdict: str  # Advance to due diligence | Take a first call | Monitor | Pass for now | Research first
+    tone: Literal["positive", "neutral", "caution"]
+    rationale: str
+
+
+class MemoNextStep(BaseModel):
+    action: str
+    reason: str
+    resource: str | None
+
+
+class MemoAssessment(BaseModel):
+    engine: str  # seed-estimate | analyst | startupgo-pipeline | agent
+    assessed_on: str
+    confidence: Confidence
+    rationale: str | None
+    judge_status: str | None
+
+
+class InvestmentMemo(BaseModel):
+    generated_at: str  # UTC
+    startup: StartupDetail
+    assessment: MemoAssessment | None  # None until the startup is assessed
+    recommendation: MemoRecommendation
+    highlights: list[str]
+    risks: list[str]
+    questions: list[str]  # due-diligence questions for the first call (the agent's data gaps)
+    next_steps: list[MemoNextStep]
+    founders: list[Person]
+    investors: list[InvestorLink]
+    funding: list[FundingEvent]
+    grants: list[EuGrant]
+    patents: list[Patent]
+    peers: list[Peer]

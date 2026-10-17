@@ -1,5 +1,6 @@
 import type {
   Frameworks,
+  InvestmentMemo,
   NaturalLanguageSearchResponse,
   ResearchJob,
   StartupDetail,
@@ -49,6 +50,7 @@ const startupPath = (slug: string) => `/startups/${encodeURIComponent(slug)}`;
 export const backend = {
   startups: () => request<StartupSummary[]>("/startups"),
   startup: (slug: string) => request<StartupDetail>(startupPath(slug)),
+  memo: (slug: string) => request<InvestmentMemo>(`${startupPath(slug)}/memo`),
   /** Natural-language search (LightRAG). 503 when search isn't configured, 502 when it failed. */
   search: (query: string) =>
     request<NaturalLanguageSearchResponse>("/startups/search", {

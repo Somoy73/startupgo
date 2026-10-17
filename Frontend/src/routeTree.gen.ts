@@ -15,6 +15,7 @@ import { Route as MatchingRouteImport } from './routes/matching'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as AssessIndexRouteImport } from './routes/assess.index'
 import { Route as AssessSlugRouteImport } from './routes/assess.$slug'
+import { Route as MemoSlugRouteImport } from './routes/memo.$slug'
 import { Route as StartupsSlugRouteImport } from './routes/startups.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const AssessSlugRoute = AssessSlugRouteImport.update({
   path: '/assess/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MemoSlugRoute = MemoSlugRouteImport.update({
+  id: '/memo/$slug',
+  path: '/memo/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StartupsSlugRoute = StartupsSlugRouteImport.update({
   id: '/startups/$slug',
   path: '/startups/$slug',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/matching': typeof MatchingRoute
   '/search': typeof SearchRoute
   '/assess/$slug': typeof AssessSlugRoute
+  '/memo/$slug': typeof MemoSlugRoute
   '/startups/$slug': typeof StartupsSlugRoute
   '/assess/': typeof AssessIndexRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/matching': typeof MatchingRoute
   '/search': typeof SearchRoute
   '/assess/$slug': typeof AssessSlugRoute
+  '/memo/$slug': typeof MemoSlugRoute
   '/startups/$slug': typeof StartupsSlugRoute
   '/assess': typeof AssessIndexRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/matching': typeof MatchingRoute
   '/search': typeof SearchRoute
   '/assess/$slug': typeof AssessSlugRoute
+  '/memo/$slug': typeof MemoSlugRoute
   '/startups/$slug': typeof StartupsSlugRoute
   '/assess/': typeof AssessIndexRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/matching'
     | '/search'
     | '/assess/$slug'
+    | '/memo/$slug'
     | '/startups/$slug'
     | '/assess/'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/matching'
     | '/search'
     | '/assess/$slug'
+    | '/memo/$slug'
     | '/startups/$slug'
     | '/assess'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/matching'
     | '/search'
     | '/assess/$slug'
+    | '/memo/$slug'
     | '/startups/$slug'
     | '/assess/'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   MatchingRoute: typeof MatchingRoute
   SearchRoute: typeof SearchRoute
   AssessSlugRoute: typeof AssessSlugRoute
+  MemoSlugRoute: typeof MemoSlugRoute
   StartupsSlugRoute: typeof StartupsSlugRoute
   AssessIndexRoute: typeof AssessIndexRoute
 }
@@ -165,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AssessSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/memo/$slug': {
+      id: '/memo/$slug'
+      path: '/memo/$slug'
+      fullPath: '/memo/$slug'
+      preLoaderRoute: typeof MemoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/startups/$slug': {
       id: '/startups/$slug'
       path: '/startups/$slug'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   MatchingRoute: MatchingRoute,
   SearchRoute: SearchRoute,
   AssessSlugRoute: AssessSlugRoute,
+  MemoSlugRoute: MemoSlugRoute,
   StartupsSlugRoute: StartupsSlugRoute,
   AssessIndexRoute: AssessIndexRoute,
 }

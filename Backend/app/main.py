@@ -12,7 +12,7 @@ from startup_agent import Candidate
 from startup_agent.database import ENGINE, domain, has_score, researched_at
 from startup_search import SearchError, SearchUnavailable, StartupMatch, StartupSearch, Subgraph
 
-from . import features_repo, repository, research
+from . import features_repo, memo, repository, research
 from .db import get_conn, init_db
 from .schemas import (
     AgentAssessment,
@@ -27,6 +27,7 @@ from .schemas import (
     GraphEdgeOut,
     GraphNodeOut,
     GraphResponse,
+    InvestmentMemo,
     InvestorLink,
     NaturalLanguageSearchRequest,
     NaturalLanguageSearchResponse,
@@ -255,6 +256,12 @@ def get_startup(slug: str, conn: sqlite3.Connection = Conn):
     if startup is None:
         raise HTTPException(404, f"Startup '{slug}' not found")
     return startup
+
+
+@app.get("/api/startups/{slug}/memo", response_model=InvestmentMemo)
+def investment_memo(slug: str, conn: sqlite3.Connection = Conn):
+    """One-click investment memo: scores, evidence, highlights, risks, due-diligence questions and next steps."""
+    return _found(memo.build_memo(conn, slug), slug)
 
 
 @app.patch("/api/startups/{slug}/pipeline", response_model=StartupSummary)

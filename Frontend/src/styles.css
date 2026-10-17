@@ -388,3 +388,115 @@ section.mg-card { padding: 28px; overflow: visible; }
   .mg-graph { padding: 24px 16px; }
   .mg-list { padding: 0; }
 }
+
+/* ---------- Investment memo (features/pages/MemoPage.tsx): an A4 document on screen, a clean PDF in print ---------- */
+.memo-toolbar { max-width: 900px; margin: 0 auto 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.memo-toolbar .back { margin: 0; }
+.memo-doc { --memo-ink: oklch(0.22 0.05 255); --memo-muted: oklch(0.48 0.03 250); --memo-rule: oklch(0.9 0.015 245); --memo-wash: oklch(0.97 0.01 245);
+  max-width: 900px; margin: 0 auto; background: #fff; color: var(--memo-ink); border-radius: 6px; box-shadow: 0 24px 60px oklch(0 0 0 / 0.28); padding: 0 56px 44px; font-size: 13.5px; line-height: 1.6; overflow: hidden; }
+.memo-doc a { color: var(--primary); text-decoration: none; }
+.memo-doc a:hover { text-decoration: underline; }
+.memo-muted { color: var(--memo-muted); font-size: 12px; }
+.memo-eyebrow { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--memo-muted); }
+
+.memo-cover { margin: 0 -56px; padding: 30px 56px 28px; background: var(--navy); color: var(--navy-foreground); }
+.memo-brandline { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.75; margin-bottom: 26px; }
+.memo-cover h1 { font: 700 34px/1.15 var(--font-display); margin: 0; }
+.memo-tagline { margin: 8px 0 22px; font-size: 15px; opacity: 0.85; max-width: 640px; }
+.memo-facts { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; margin: 0; padding-top: 18px; border-top: 1px solid oklch(1 0 0 / 0.18); }
+.memo-facts dt { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.65; }
+.memo-facts dd { margin: 3px 0 0; font-weight: 700; font-size: 13px; overflow-wrap: anywhere; }
+.memo-facts a { color: inherit; text-decoration: underline; text-decoration-color: oklch(1 0 0 / 0.4); }
+
+.memo-verdict { display: grid; grid-template-columns: 220px 1fr; gap: 22px; align-items: center; margin: 28px 0 18px; padding: 18px 22px; border-radius: 10px; border-left: 5px solid; background: var(--memo-wash); }
+.memo-verdict p { margin: 0; }
+.memo-verdict-title { display: block; font: 700 21px/1.2 var(--font-display); margin-top: 4px; }
+.memo-verdict.is-positive { border-color: var(--success); background: oklch(0.96 0.04 155); }
+.memo-verdict.is-positive .memo-verdict-title { color: oklch(0.45 0.13 155); }
+.memo-verdict.is-neutral { border-color: var(--primary); }
+.memo-verdict.is-neutral .memo-verdict-title { color: var(--primary); }
+.memo-verdict.is-caution { border-color: oklch(0.72 0.15 65); background: oklch(0.97 0.04 75); }
+.memo-verdict.is-caution .memo-verdict-title { color: oklch(0.5 0.13 55); }
+
+.memo-metrics { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--memo-rule); border-radius: 10px; margin-bottom: 10px; }
+.memo-metric { padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.memo-metric + .memo-metric { border-left: 1px solid var(--memo-rule); }
+.memo-metric strong { font: 700 26px/1.1 var(--font-display); color: var(--primary); }
+.memo-metric strong small { font-size: 12px; color: var(--memo-muted); margin-left: 2px; }
+
+.memo-section { padding-top: 26px; margin-top: 22px; border-top: 1px solid var(--memo-rule); }
+.memo-section h2 { display: flex; align-items: baseline; gap: 12px; font: 700 18px/1.3 var(--font-display); margin: 0 0 14px; }
+.memo-num { font-size: 12px; color: var(--primary); letter-spacing: 0.08em; }
+.memo-lead { font-size: 15px; line-height: 1.65; margin: 0 0 10px; }
+.memo-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.memo-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 10px; color: var(--memo-ink); }
+.memo-subhead.is-positive { color: oklch(0.45 0.13 155); }
+.memo-subhead.is-caution { color: oklch(0.5 0.15 40); }
+.memo-bullets { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.memo-bullets li { position: relative; padding-left: 16px; }
+.memo-bullets li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 6px; height: 6px; border-radius: 2px; background: currentColor; opacity: 0.35; }
+.memo-list { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.memo-people { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+
+.memo-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.memo-table th { text-align: left; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--memo-muted); font-weight: 700; padding: 0 10px 8px 0; border-bottom: 2px solid var(--memo-ink); }
+.memo-table td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--memo-rule); vertical-align: top; }
+.memo-table .num { text-align: right; padding-right: 18px; white-space: nowrap; }
+.memo-table th:last-child, .memo-table td:last-child { padding-right: 0; }
+.memo-table tr.is-lagging td:first-child { box-shadow: inset 3px 0 0 oklch(0.72 0.15 65); padding-left: 10px; }
+
+.memo-level { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.memo-level-num { font: 700 16px var(--font-display); color: var(--primary); width: 14px; }
+.memo-level-bar { display: inline-flex; gap: 2px; }
+.memo-level-bar i, .memo-dots i { display: inline-block; width: 7px; height: 12px; border-radius: 2px; background: var(--memo-rule); }
+.memo-level-bar i.is-on, .memo-dots i.is-on { background: var(--primary); }
+.memo-dots { display: inline-flex; align-items: center; gap: 2px; white-space: nowrap; }
+.memo-dots i { width: 9px; height: 9px; border-radius: 999px; }
+.memo-dots b { margin-left: 6px; font-size: 12px; }
+.memo-chip { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--memo-wash); color: var(--memo-muted); margin-left: 4px; white-space: nowrap; }
+.memo-chip.evidence-2 { background: oklch(0.95 0.04 252); color: var(--primary); }
+.memo-chip.evidence-3, .memo-chip.evidence-4 { background: oklch(0.94 0.06 155); color: oklch(0.42 0.12 155); }
+.memo-src svg { display: inline; width: 12px; height: 12px; vertical-align: -1px; }
+
+.memo-footer { margin-top: 30px; padding-top: 18px; border-top: 2px solid var(--memo-ink); font-size: 11px; color: var(--memo-muted); }
+.memo-footer p { margin: 12px 0 0; }
+.memo-sources { margin: 0; padding-left: 18px; columns: 2; column-gap: 28px; }
+
+.startup-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+.startup-actions .btn { white-space: nowrap; }
+
+@media (max-width: 800px) {
+  .memo-doc { padding: 0 18px 28px; font-size: 13px; }
+  .memo-cover { margin: 0 -18px; padding: 24px 18px; }
+  .memo-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .memo-verdict, .memo-columns { grid-template-columns: 1fr; gap: 12px; }
+  .memo-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .memo-metric + .memo-metric { border-left: 0; }
+  .memo-table { display: block; overflow-x: auto; }
+  .memo-sources { columns: 1; }
+  .startup-actions { align-items: flex-start; }
+}
+
+@page { size: A4; margin: 14mm 12mm; }
+@media print {
+  .sea-bg, .app-header, .app-footer, .memo-toolbar { display: none !important; }
+  html, body, .app-shell, .app-main { background: #fff !important; padding: 0 !important; margin: 0 !important; max-width: none !important; }
+  .memo-doc { max-width: none; box-shadow: none; border-radius: 0; padding: 0 0 0; font-size: 11.5px; }
+  .memo-cover { margin: 0 0 0; border-radius: 6px; padding: 22px 24px; }
+  .memo-doc * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .memo-section { break-inside: auto; }
+  .memo-section h2, .memo-subhead { break-after: avoid; }
+  .memo-table tr, .memo-verdict, .memo-metrics, .memo-people li, .memo-bullets li { break-inside: avoid; }
+  .memo-doc a { color: inherit; }
+  /* A4 is narrower than the phone breakpoint: keep the desktop layout on paper. */
+  .memo-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .memo-verdict { grid-template-columns: 180px 1fr; gap: 18px; }
+  .memo-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+  .memo-metrics { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .memo-metric { padding: 10px 12px; }
+  .memo-metric + .memo-metric { border-left: 1px solid var(--memo-rule); }
+  .memo-metric strong { font-size: 21px; }
+  .memo-table { display: table; }
+  .memo-sources { columns: 2; }
+}
+.memo-note { margin: 10px 0 0; }

@@ -98,6 +98,8 @@ def _unassessed_summary(conn: sqlite3.Connection, row: sqlite3.Row) -> StartupSu
         investment=InvestmentScores(**scores_of(conn, row["id"], scoring.investment_weights())),
         total_disclosed_usd=sum(disclosed) if disclosed else None,
         last_round_on=max(dated) if dated else None,
+        founded_year=row["founded_year"],
+        created_at=row["created_at"],
     )
 
 
@@ -134,6 +136,8 @@ def _summary(conn: sqlite3.Connection, row: sqlite3.Row) -> StartupSummary:
         investment=InvestmentScores(**scores_of(conn, row["id"], scoring.investment_weights())),
         total_disclosed_usd=sum(disclosed) if disclosed else None,
         last_round_on=last_round_on,
+        founded_year=row["founded_year"],
+        created_at=row["created_at"],
     )
 
 
@@ -276,7 +280,6 @@ def get_startup(conn: sqlite3.Connection, slug: str) -> StartupDetail | None:
 
     return StartupDetail(
         **summary.model_dump(),
-        founded_year=row["founded_year"],
         website=row["website"],
         levels=levels,
         ocean_kpis=ocean_kpis,

@@ -57,7 +57,12 @@ export function StartupPage() {
             )}
           </p>
         </div>
-        {assessed && <PotentialMark scores={scores} />}
+        <div className="startup-actions">
+          {assessed && <PotentialMark scores={scores} />}
+          <Link to={`/memo/${s.slug}`} className="btn btn-primary">
+            Investment memo
+          </Link>
+        </div>
       </div>
 
       {!assessed && <ResearchPanel slug={s.slug} onDone={reload} />}
