@@ -14,7 +14,7 @@ Background research, the DeepTree feature notes and paper references are in [RES
 Frontend/   React + TypeScript (Vite): search, assess, matching, pipeline, compare, methodology
 Backend/    Python (FastAPI): REST API + scoring model (app/scoring.py)
 DB/         SQL: schema.sql + seed.sql (SQLite in dev, written to port to PostgreSQL)
-Modules/
+Modules/    uv workspace (one uv.lock, one .venv) for the Python modules below
   Scraper/  Python: public page fetching (HTTP or stealth Chrome) and startup discovery (Wellfound, OSM, generic)
   Agent/    Python: builds evidence-backed startup entries per the Ocean Opportunity Radar extraction
             schema (facts → TRL/BRL/OIR, investment criteria, next steps). See Modules/Agent/README.md
@@ -51,6 +51,15 @@ npm install
 npm run dev        # http://localhost:5173
 ```
 
+Agent and Scraper (Python 3.11, [uv](https://docs.astral.sh/uv/)). One shared environment for both:
+
+```bash
+cd Modules
+uv sync --all-packages
+cp Agent/.env.example Agent/.env     # add GEMINI_API_KEY
+uv run --package startup-agent startup-agent graph --name "Origin by Ocean" --website https://www.originbyocean.com
+```
+
 To reset the database after editing `DB/*.sql`, delete `DB/startupgo.db` and restart the backend.
 
 ## Tests
@@ -59,6 +68,8 @@ To reset the database after editing `DB/*.sql`, delete `DB/startupgo.db` and res
 cd Backend && uv run pytest                   # scoring + API
 cd Frontend && npm run check                  # typecheck + lint + unit tests
 cd Frontend && npm run format                 # prettier
+cd Modules/Agent && uv run pytest             # agent: extraction, scoring, judge, workflow
+cd Modules/Scraper && uv run python -m unittest discover -s tests -t .   # scraper
 ```
 
 ## API

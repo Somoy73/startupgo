@@ -27,6 +27,9 @@ class RecordStore:
     def load(self, path: Path) -> StartupRecord:
         return StartupRecord.from_dict(json.loads(path.read_text(encoding="utf-8")))
 
+    def entry_paths(self) -> list[Path]:
+        return sorted(self.entries.glob("*.json"))
+
     def _update_index(self, data: dict[str, Any], path: Path) -> None:
         try:
             index = json.loads(self.index_path.read_text(encoding="utf-8"))

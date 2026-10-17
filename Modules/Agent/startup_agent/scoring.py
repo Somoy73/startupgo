@@ -345,19 +345,35 @@ def _deal(f: Facts) -> tuple[int, list[str]]:
 Rule = Callable[[Facts], tuple[int, list[str]]]
 
 
+# Fields each investment criterion is scored from ("TRL"/"OIR" are level scores, not fields).
+CRITERIA_FIELDS: dict[str, tuple[str, ...]] = {
+    "Market": ("market_size_claim", "target_geographies", "paying_customers"),
+    "Product": ("value_proposition", "customer_validation", "pilots"),
+    "Team": ("founders", "team_size", "key_roles_missing", "advisors_board"),
+    "Business model": ("business_model", "pricing", "customer_type"),
+    "Competition": ("competitors", "differentiation"),
+    "Marketing and distribution": ("sales_channels", "distribution_partners"),
+    "Financials": ("revenue_last_fy", "profit_last_fy", "equity_last_fy", "revenue_trend"),
+    "Tech": ("TRL", "patents", "tech_description"),
+    "Deal dynamics": ("stage", "current_raise", "equity_rounds", "total_raised"),
+    "Impact": ("OIR",),
+}
+
+
 def score_criteria(facts: Facts, trl: LevelScore, oir: LevelScore) -> list[CriterionScore]:
-    criteria: list[tuple[str, tuple[str, ...], Rule]] = [
-        ("Market", ("market_size_claim", "target_geographies", "paying_customers"), _market),
-        ("Product", ("value_proposition", "customer_validation", "pilots"), _product),
-        ("Team", ("founders", "team_size", "key_roles_missing", "advisors_board"), _team),
-        ("Business model", ("business_model", "pricing", "customer_type"), _business_model),
-        ("Competition", ("competitors", "differentiation"), _competition),
-        ("Marketing and distribution", ("sales_channels", "distribution_partners"), _distribution),
-        ("Financials", ("revenue_last_fy", "profit_last_fy", "equity_last_fy", "revenue_trend"), _financials),
-        ("Tech", ("TRL", "patents", "tech_description"), lambda f: _tech(f, trl)),
-        ("Deal dynamics", ("stage", "current_raise", "equity_rounds", "total_raised"), _deal),
-        ("Impact", ("OIR",), lambda f: (oir.level or 1, [f"Ocean Impact Readiness {oir.level}"])),
-    ]
+    rules: dict[str, Rule] = {
+        "Market": _market,
+        "Product": _product,
+        "Team": _team,
+        "Business model": _business_model,
+        "Competition": _competition,
+        "Marketing and distribution": _distribution,
+        "Financials": _financials,
+        "Tech": lambda f: _tech(f, trl),
+        "Deal dynamics": _deal,
+        "Impact": lambda f: (oir.level or 1, [f"Ocean Impact Readiness {oir.level}"]),
+    }
+    criteria = [(name, fields, rules[name]) for name, fields in CRITERIA_FIELDS.items()]
     scores = {"TRL": trl, "OIR": oir}
     out = []
     for name, fields, rule in criteria:

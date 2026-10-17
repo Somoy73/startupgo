@@ -8,6 +8,12 @@ resolution-markers = [
     "python_full_version < '3.11.5'",
 ]
 
+[manifest]
+members = [
+    "scraper",
+    "startup-agent",
+]
+
 [[package]]
 name = "annotated-types"
 version = "0.8.0"
@@ -1234,7 +1240,7 @@ wheels = [
 [[package]]
 name = "scraper"
 version = "0.1.0"
-source = { editable = "../Scraper" }
+source = { editable = "Scraper" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "selenium" },
@@ -1354,7 +1360,7 @@ wheels = [
 [[package]]
 name = "startup-agent"
 version = "0.1.0"
-source = { editable = "." }
+source = { editable = "Agent" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "google-genai" },
@@ -1372,7 +1378,7 @@ requires-dist = [
     { name = "beautifulsoup4", specifier = ">=4.15.0" },
     { name = "google-genai", specifier = ">=2.31.0" },
     { name = "langgraph", specifier = ">=0.6.0" },
-    { name = "scraper", editable = "../Scraper" },
+    { name = "scraper", editable = "Scraper" },
 ]
 
 [package.metadata.requires-dev]

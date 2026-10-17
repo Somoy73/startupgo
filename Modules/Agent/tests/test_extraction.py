@@ -72,3 +72,18 @@ def test_response_schema_is_strict():
     assert {"type": "null"} in dev["anyOf"]
     pilots = schema["properties"]["pilots"]["items"]
     assert pilots["required"] == ["item", "evidence", "source_url"]
+
+
+def test_gemini_retry_policy():
+    from types import SimpleNamespace
+
+    from startup_agent.llm import _retry_delay
+
+    def error(code, details=None):
+        return SimpleNamespace(code=code, details={"error": {"details": details or []}})
+
+    assert _retry_delay(error(503), 0) == 5  # transient server error: back off
+    assert _retry_delay(error(429, [{"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "17s"}]), 0) == 17
+    assert _retry_delay(error(429), 0) is None  # exhausted quota: fail fast
+    assert _retry_delay(error(400), 0) is None
+    assert _retry_delay(error(503), 3) is None  # out of attempts

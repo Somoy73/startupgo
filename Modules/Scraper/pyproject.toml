@@ -13,7 +13,7 @@ dependencies = [
     "xvfbwrapper>=0.2.35",
 ]
 
-# Installable so other modules (e.g. Modules/Agent) can depend on it by path.
+# Installable so other workspace members (e.g. Agent) can depend on it.
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
