@@ -43,11 +43,6 @@ export function Matching() {
   // Similar startups come from every ranked startup, not only the top 10.
   const similar = picked ? similarStartups(picked, ranked) : [];
 
-  const similar = useMemo(() => {
-      if (!picked || !startups) return [];
-      return similarStartups(picked, allMatches);
-    }, [picked, allMatches, startups]);
-
   return (
     <>
       <div className="page-head">
