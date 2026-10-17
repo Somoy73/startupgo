@@ -62,7 +62,9 @@ export function Matching() {
             Readiness ranking
           </header>
           {error && <p className="small error card-pad">{error}</p>}
-          {!loading && allMatches.length === 0 && <p className="empty">No assessed startups yet.</p>}
+          {!loading && allMatches.length === 0 && (
+            <p className="empty">No assessed startups yet.</p>
+          )}
           {allMatches.length > 0 && (
             <div className="mg-body">
               {/* Radar always displays ALL dots */}
@@ -77,13 +79,18 @@ export function Matching() {
               </div>
 
               {/* List displays only the 5 for the current page */}
-<<<<<<< HEAD
               <div className="mg-list">
-=======
-              <div className="mg-list max-w-[400px]">
->>>>>>> 5ac2aba5f16ae40cd56bb7fa28996eeafe8a4cde
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-                  <h2 className="mg-eyebrow" style={{ margin: 0 }}>Top matches</h2>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: 8,
+                  }}
+                >
+                  <h2 className="mg-eyebrow" style={{ margin: 0 }}>
+                    Top matches
+                  </h2>
                   <span className="small muted" style={{ fontWeight: 600 }}>
                     {page === 1 ? "Closest 1-5" : "Closest 6-10"}
                   </span>
@@ -181,9 +188,7 @@ export function Matching() {
                 {picked.startup.sector} · {picked.startup.country}
               </p>
               <h3>
-                <Link to={`/startups/${picked.startup.slug}`}>
-                  {picked.startup.name}
-                </Link>
+                <Link to={`/startups/${picked.startup.slug}`}>{picked.startup.name}</Link>
               </h3>
               <p className="mg-detail-score">
                 {picked.total}
@@ -210,11 +215,21 @@ export function Matching() {
                 <h4 className="mg-eyebrow">Startups you might also be interested in</h4>
                 <div className="mg-similar-grid">
                   {similar.map((r) => (
-                    <button type="button" key={r.startup.slug} className="mg-similar-card" onClick={() => setSelected(r.startup.slug)}>
-                      <span className="tm-badge" aria-hidden>{r.startup.name[0]}</span>
+                    <button
+                      type="button"
+                      key={r.startup.slug}
+                      className="mg-similar-card"
+                      onClick={() => setSelected(r.startup.slug)}
+                    >
+                      <span className="tm-badge" aria-hidden>
+                        {r.startup.name[0]}
+                      </span>
                       <strong>{r.startup.name}</strong>
                       <small>{r.startup.sector}</small>
-                      <span className="mg-similar-score">{r.total}<small> readiness</small></span>
+                      <span className="mg-similar-score">
+                        {r.total}
+                        <small> readiness</small>
+                      </span>
                     </button>
                   ))}
                 </div>
