@@ -1,0 +1,21 @@
+# Kept out of the image (Dockerfile). Secrets come from Heroku config vars, not .env files.
+**/.env
+**/.env.*
+!**/.env.example
+
+# Installed or built inside the image.
+**/.venv
+**/node_modules
+**/__pycache__
+**/.pytest_cache
+Frontend/.output
+Frontend/dist
+Frontend/.nitro
+Frontend/.tanstack
+
+# Not needed to run.
+.git
+.devcontainer
+DB/runtime
+**/tests
+Modules/Agent/output
