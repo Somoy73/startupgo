@@ -519,9 +519,30 @@ def ingest_serpapi(conn, st):
 # ---------------------------------------------------------------------------
 # Funding opportunities and market indicators
 # ---------------------------------------------------------------------------
+def mark_fetch_error(conn, source: str, fetch_id: int | None, message: str) -> None:
+    """A call that returned HTTP 200 but no usable data: record it as an error so the run log and data_sources show it."""
+    if fetch_id:
+        conn.execute("UPDATE raw_fetches SET status='error', error=? WHERE id=?", (message[:500], fetch_id))
+    conn.execute("UPDATE data_sources SET last_status='error', last_info=?, last_run_at=? WHERE name=?", (message[:300], now(), source))
+
+
 def ingest_funding(conn):
+    """Four independent sources: one failing (bad payload, parse error) is recorded and the others still load."""
+    for source, load in (("eu_sedia_calls", _load_sedia), ("grants_gov", _load_grants_gov),
+                         ("ukri_gateway_to_research", _load_ukri), ("ted_eu_tenders", _load_ted)):
+        try:
+            load(conn)
+            conn.commit()
+        except Exception as exc:  # noqa: BLE001
+            conn.rollback()
+            mark_fetch_error(conn, source, None, f"{type(exc).__name__}: {exc}")
+            conn.commit()
+            print(f"   {source}: {type(exc).__name__}: {exc}"[:200])
+
+
+def _load_sedia(conn):
     d, f = fetch(conn, "eu_sedia_calls", None, text="ocean", pageSize=50)
-    for r in (d or {}).get("results", []):
+    for r in (d or {}).get("results", []) if isinstance(d, dict) else []:
         m = r.get("metadata", {})
         first = lambda k: (m.get(k) or [None])[0]  # noqa: E731
         ident = first("identifier") or r.get("reference")
@@ -532,31 +553,47 @@ def ingest_funding(conn):
                       (first("startDate") or "")[:10] or None, (first("deadlineDate") or "")[:10] or None, first("frameworkProgramme"),
                       f"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/{ident}", f))
 
+
+def _load_grants_gov(conn):
     d, f = fetch(conn, "grants_gov", None, keyword="ocean", rows=50, oppStatuses="forecasted|posted")
-    for o in ((d or {}).get("data") or {}).get("oppHits", []):
+    data = d.get("data") if isinstance(d, dict) else None
+    if d is not None and not isinstance(data, dict):
+        # Grants.gov sometimes answers "Webservice Succeeds" with an upstream error string in "data" (e.g. "read ECONNRESET")
+        mark_fetch_error(conn, "grants_gov", f, f"no results in payload: {str(data)[:120]}")
+        return
+    for o in (data or {}).get("oppHits", []):
         conn.execute("""INSERT OR REPLACE INTO funding_opportunities
                         (source_name, external_ref, kind, title, status, opens_on, deadline, organisation, url, fetch_id) VALUES (?,?,?,?,?,?,?,?,?,?)""",
                      ("grants_gov", o["number"], "grant_call", o["title"], o.get("oppStatus"), o.get("openDate"), o.get("closeDate") or None,
                       o.get("agency"), f"https://www.grants.gov/search-results-detail/{o['id']}", f))
 
+
+def _load_ukri(conn):
     d, f = fetch(conn, "ukri_gateway_to_research", None, q="ocean", s=50)
-    for p in (d or {}).get("project", []):
+    for p in (d or {}).get("project", []) if isinstance(d, dict) else []:
         conn.execute("""INSERT OR REPLACE INTO funding_opportunities
                         (source_name, external_ref, kind, title, status, organisation, url, fetch_id) VALUES (?,?,?,?,?,?,?,?)""",
                      ("ukri_gateway_to_research", p["id"], "project", p["title"], p.get("status"), p.get("leadFunder"),
                       f"https://gtr.ukri.org/projects?ref={p.get('grantReference', p['id'])}", f))
 
+
+def _load_ted(conn):
     d, f = fetch(conn, "ted_eu_tenders", None, query="FT~ocean AND publication-date>=20250101", limit=50)
-    for t in (d or {}).get("notices", []):
-        buyer = t.get("buyer-name") or {}
-        buyer = (buyer.get("eng") or next(iter(buyer.values()), [None]))[0] if isinstance(buyer, dict) else buyer
-        title = t.get("notice-title") or {}
-        title = title.get("eng") or next(iter(title.values()), "") if isinstance(title, dict) else title
+    for t in (d or {}).get("notices", []) if isinstance(d, dict) else []:
+        buyer, title = _ted_text(t.get("buyer-name")), _ted_text(t.get("notice-title"))
         conn.execute("""INSERT OR REPLACE INTO funding_opportunities
                         (source_name, external_ref, kind, title, status, opens_on, organisation, url, fetch_id) VALUES (?,?,?,?,?,?,?,?,?)""",
                      ("ted_eu_tenders", t["publication-number"], "tender", title or t["publication-number"], t.get("notice-type"),
                       (t.get("publication-date") or "")[:10], buyer, f"https://ted.europa.eu/en/notice/-/detail/{t['publication-number']}", f))
-    conn.commit()
+
+
+def _ted_text(v):
+    """TED fields come as text, a list, or {language: text | [text]}; prefer English, else the first value."""
+    if isinstance(v, dict):
+        v = v.get("eng") or next(iter(v.values()), None)
+    if isinstance(v, list):
+        v = v[0] if v else None
+    return v
 
 
 WB_COUNTRIES = {"United Kingdom": "GBR", "United States": "USA", "Faroe Islands": "FRO", "Portugal": "PRT",
