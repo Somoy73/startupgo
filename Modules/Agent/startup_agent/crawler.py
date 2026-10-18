@@ -10,7 +10,7 @@ from urllib.request import Request, urlopen
 from scraper.errors import ScraperError
 
 from .cache import JsonCache
-from .documents import RobotsPolicy, SourceDocument, host, html_to_document, rank_links
+from .documents import Link, RobotsPolicy, SourceDocument, host, html_to_document, rank_links
 from .retrievals import Retrieval, RetrievalLog, Status
 from .vocab import SourceType
 
@@ -56,7 +56,7 @@ class PageLoader:
 
     def load(
         self, url: str, *, source_type: SourceType, is_homepage: bool = False, readable: bool = False
-    ) -> tuple[SourceDocument, list[str]]:
+    ) -> tuple[SourceDocument, list[Link]]:
         cached = self._cache.get("pages", url)
         try:
             if cached:

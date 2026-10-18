@@ -41,6 +41,25 @@ class SourceDocument:
     is_homepage: bool = False
 
 
+class Link(str):
+    """A page's link: the absolute URL, with what the link shows (its text, else its title, aria-label or image alt) as ``text``."""
+
+    text: str
+
+    def __new__(cls, url: str, text: str = "") -> Link:
+        link = super().__new__(cls, url)
+        link.text = text
+        return link
+
+
+def _link_text(a: Tag) -> str:
+    img = a.find("img")
+    shown = a.get_text(" ", strip=True) or a.get("title") or a.get("aria-label") or (img.get("alt") if isinstance(img, Tag) else "") or ""
+    if not shown:  # an empty link laid over a card: the card's first line, usually its name
+        shown = next((first for parent in list(a.parents)[:3] if (first := next(parent.stripped_strings, ""))), "")
+    return " ".join(str(shown).split())
+
+
 def host(url: str) -> str:
     return (urlsplit(url).hostname or "").removeprefix("www.")
 
@@ -67,8 +86,8 @@ def html_to_document(
     max_chars: int,
     is_homepage: bool = False,
     readable: bool = False,
-) -> tuple[SourceDocument, list[str]]:
-    """Readable text plus the outgoing links of a page.
+) -> tuple[SourceDocument, list[Link]]:
+    """Readable text plus the outgoing links of a page (each with the text it shows).
 
     ``readable`` keeps only the page's main content when it has one, else everything except cookie-consent
     dialogs: those come first in the markup and can fill ``max_chars`` before the content starts. Off by
@@ -76,9 +95,9 @@ def html_to_document(
     """
     soup = BeautifulSoup(html, "html.parser")
     title = " ".join(soup.title.get_text(" ", strip=True).split()) if soup.title else ""
-    links = [urldefrag(urljoin(url, a["href"]))[0] for a in soup.select("a[href]")]
     for tag in soup(_STRIP_TAGS):
         tag.decompose()
+    links = [Link(urldefrag(urljoin(url, a["href"]))[0], _link_text(a)) for a in soup.select("a[href]")]
     root = (_main_content(soup) or _without_consent(soup)) if readable else soup
     text = " ".join(root.get_text(" ", strip=True).split())[:max_chars]
     return SourceDocument(url, title, text, source_type, retrieved_at, is_homepage), links

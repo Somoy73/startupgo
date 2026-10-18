@@ -11,6 +11,10 @@ files ([llm] multimodal, or Gemini). The LLM then turns the text into records, f
 and the source's focus prompt (prompts/scrape/<mode>.md). Code checks each record's verbatim quote against the text
 it came from (found in the source, in a transcript, or not at all), marks what a company says on its own site as
 self-reported, and links records that several sources describe (``also_in``).
+
+Page text carries no link targets, so a startup or company read without a website is looked up in the links of the
+page it came from: a link named after it that leaves the site is its website; one that stays on the site is its
+profile page, which is opened (up to MAX_PROFILES per source) and read for the website and the fields the listing lacks.
 """
 
 from __future__ import annotations
@@ -30,7 +34,7 @@ from scraper.errors import ScraperError
 from .agent import SEARCH_SKIP_DOMAINS
 from .config import AgentSettings
 from .crawler import PageSkipped
-from .documents import SourceDocument, classify_source, host, locate_quote, same_site
+from .documents import Link, SourceDocument, classify_source, host, locate_quote, same_site
 from .errors import AgentError
 from .factory import build_agent
 from .llm import AnswerCutOff, LLMTimeout, QuotaExhausted
@@ -43,6 +47,8 @@ KINDS = ("startup", "company", "funding_call", "project", "funding_round", "inve
 MIN_TEXT_CHARS = 40  # a page or file with less readable text than this is reported as empty
 MAX_SOURCES = 8
 MAX_SPLITS = 3  # an answer cut off at max_tokens, or too slow, is asked again for half the documents, up to this many times
+MAX_PROFILES = 20  # profile pages opened per source to find websites the listing page doesn't link
+PROFILE_KINDS = ("startup", "company", "investor")  # records whose own website is looked up on their profile page
 RECORD_FIELDS = {"kind", "title", "details", "website", "source_url", "quote"}  # not repeated as attributes
 
 SCHEMA: dict[str, Any] = {
@@ -98,7 +104,7 @@ class ScrapeTask:
     goal: str
     urls: tuple[str, ...] = ()
     follow_links: bool = False  # also read the links on those pages that match the goal (including PDFs)
-    max_pages: int = 8  # pages read for this source, searched and followed ones included
+    max_pages: int = 8  # pages read for this source, searched and followed ones included (profile pages are extra)
     mode: str = "general"  # focus prompt, one of MODES
     label: str = ""  # the source's name in a merged result, e.g. "CORDIS ocean projects"
 
@@ -222,6 +228,75 @@ def goal_links(links: list[str], goal: str, origin: str) -> list[str]:
     return sorted(scored, key=lambda link: (-scored[link], len(link)))
 
 
+def _social(link: str) -> bool:
+    h = host(link)
+    return any(h == d or h.endswith("." + d) for d in SEARCH_SKIP_DOMAINS)
+
+
+def _site_link(link: str) -> bool:
+    """A web page link that isn't a file or a social or directory profile (which isn't anyone's own website)."""
+    return urlsplit(link).scheme in ("http", "https") and file_type(link) is None and not _social(link)
+
+
+_TAGLINE = re.compile(r"\s*[–—|:]\s*|\s+-\s*|-\s+")  # "Coral Rescue - Coral Restoration ...", "OW-Ferment- From waste to food"
+
+
+def _names(link: str, name: str) -> bool:
+    """Whether a link is named after the record: its text (or the text before a tagline) is the name, or its last path
+    segment is the name as a slug."""
+    key = _name_key(name)
+    text = getattr(link, "text", "")
+    slug = urlsplit(link).path.rstrip("/").rsplit("/", 1)[-1]
+    return key != "" and key in (_name_key(text), _name_key(_TAGLINE.split(text, 1)[0]), _name_key(slug))
+
+
+def social_link(name: str, links: Sequence[str]) -> str:
+    """The record's social profile (LinkedIn, Instagram, ...) among a page's links, named after it; "" when none."""
+    return next((str(link) for link in links if _social(link) and _names(link, name)), "")
+
+
+def website_link(name: str, links: Sequence[str], page: str) -> str:
+    """The record's own website among a page's links: a link off the page's site whose text is the record's name, or
+    whose domain is the name (acmeocean.fi or acme-ocean.com for "Acme Ocean"); "" when none."""
+    compact = _name_key(name).replace(" ", "")
+    for link in links:
+        if not _site_link(link) or same_site(link, host(page)):
+            continue
+        labels = {label.replace("-", "") for label in host(link).split(".")[:-1]}
+        if _names(link, name) or (len(compact) >= 4 and compact in labels):
+            parts = urlsplit(link)
+            return f"{parts.scheme}://{parts.netloc}{parts.path or '/'}"
+    return ""
+
+
+def profile_link(name: str, links: Sequence[str], page: str) -> str:
+    """The record's profile page among a page's links: a link on the page's own site named after the record; "" when none."""
+    return next((clean_url(link) for link in links if _site_link(link) and same_site(link, host(page)) and clean_url(link) != page
+                 and _names(link, name)), "")
+
+
+def with_links(doc: SourceDocument, links: Sequence[str], skip: set[str]) -> SourceDocument:
+    """The document with its off-site links (except those in ``skip``) written after its text, so the model sees
+    where a "Website" or "Visit site" link leads."""
+    shown = {str(link): getattr(link, "text", "") for link in links
+             if _site_link(link) and not same_site(link, host(doc.url)) and link not in skip}
+    if not shown:
+        return doc
+    return replace(doc, text=f"{doc.text}\n\nLinks on this page: " + "; ".join(f"{text or 'link'} <{url}>" for url, text in list(shown.items())[:30]))
+
+
+def _fill(record: dict[str, Any], found: dict[str, Any], profile: str) -> None:
+    """Complete a listing's record with what its profile page says: the website and the fields it lacked, and the
+    company's name when the profile names the company behind a project-titled listing."""
+    if not record["website"] and found["website"] and _site_link(found["website"]) and not same_site(found["website"], host(profile)):
+        record["website"] = found["website"]
+    names = {a["name"] for a in record["attributes"]}
+    if "company" not in names and _name_key(record["title"]) not in _name_key(found["title"]):
+        record["attributes"].append({"name": "company", "value": found["title"]})
+        names.add("company")
+    record["attributes"] += [a for a in found["attributes"] if a["name"] not in names]
+
+
 def batches(documents: list[SourceDocument], budget: int) -> list[list[SourceDocument]]:
     """Documents grouped so that each group's text fits one LLM call; a longer document is cut to the budget."""
     groups: list[list[SourceDocument]] = []
@@ -254,6 +329,7 @@ class _Run:
         self.sources: list[dict[str, str]] = []
         self.notices: list[str] = []
         self.seen: set[str] = set()
+        self.links: dict[str, list[Link]] = {}  # each read page's links
 
     # --- reading ------------------------------------------------------------------------
 
@@ -268,6 +344,7 @@ class _Run:
         for url in dict.fromkeys(follow):  # read() stops at max_pages
             self._read(url)
         result = self._extract()
+        result["gaps"] += self._find_websites(result["records"])
         gaps = result["gaps"] + [f"Nothing from {s['url']}: {s['detail']}" for s in self.sources if s["status"] != "read"]
         return {**result, "gaps": list(dict.fromkeys(gaps)), "sources": self.sources, "notices": self.notices}
 
@@ -288,9 +365,9 @@ class _Run:
             raise AgentError("web search found no readable pages for that goal: give URLs, or word the goal differently")
         return urls
 
-    def _read(self, url: str) -> list[str]:
+    def _read(self, url: str, *, budgeted: bool = True) -> list[Link]:
         """Load one page, PDF or image into the documents; returns the page's links."""
-        if url in self.seen or self._budget_left() <= 0:
+        if url in self.seen or (budgeted and self._budget_left() <= 0):
             return []
         self.seen.add(url)
         mime = file_type(url)
@@ -311,6 +388,7 @@ class _Run:
                          "no readable text (a login wall, or a page that only shows content to a signed-in user?)", mime)
             return []
         self.documents.append(doc)
+        self.links[url] = links
         self._source(url, "read", doc.title, mime)
         return links
 
@@ -341,6 +419,72 @@ class _Run:
                 self.notices.append(note)
             raise NeedsMultimodal(note)
         return self.agent.extractor.llm.transcribe(TRANSCRIBE.format(goal=self.task.goal), data=data, mime=mime)
+
+    # --- websites -----------------------------------------------------------------------
+
+    def _find_websites(self, records: list[dict[str, Any]]) -> list[str]:
+        """Fill in the websites of startups and companies the page text didn't give: a link named after the record that
+        leaves its page's site is the website; one that stays is the record's profile page, opened and read for it.
+        Returns the gaps left."""
+        missing = [r for r in records if not r["website"] and r["kind"] in PROFILE_KINDS]
+        profiles: dict[str, dict[str, Any]] = {}
+        for record in missing:
+            page = record["source_url"] if record["source_url"] in self.links else ""
+            pages = [page] if page else list(self.links)
+            for url in pages:
+                if website := website_link(record["title"], self.links[url], url):
+                    record["website"] = website
+                    break
+                profile = profile_link(record["title"], self.links[url], url)
+                if profile and profile not in profiles and len(profiles) < MAX_PROFILES:
+                    profiles[profile] = record
+                    break
+        if profiles:
+            self._read_profiles(profiles)
+        for record in missing:
+            # Only a LinkedIn or Instagram page: shown so the website can be looked up, but never the website itself
+            # (startups are told apart by their website's domain).
+            pages = [record["source_url"]] if record["source_url"] in self.links else list(self.links)
+            social = next((s for url in pages if (s := social_link(record["title"], self.links[url]))), "")
+            if not record["website"] and social and all(a["name"] != "social_profile" for a in record["attributes"]):
+                record["attributes"].append({"name": "social_profile", "value": social})
+        unfound = [r["title"] for r in missing if not r["website"]]
+        if not unfound:
+            return []
+        names = ", ".join(unfound[:10]) + (f" and {len(unfound) - 10} more" if len(unfound) > 10 else "")
+        return [f"No website found for {len(unfound)} of {len(missing)} startups/companies without one on the page ({names}): check their profile pages or a company registry."]
+
+    def _read_profiles(self, profiles: dict[str, dict[str, Any]]) -> None:
+        """Open the profile pages and take each record's website and missing fields from them."""
+        self.progress(f"Opening {len(profiles)} profile page(s) to find websites the listing doesn't link")
+        listing = {str(link) for page_links in self.links.values() for link in page_links}  # navigation and footer links
+        new: list[SourceDocument] = []
+        for url, record in profiles.items():
+            fresh = url not in self.seen
+            self._read(url, budgeted=False)
+            if url not in self.links:
+                continue
+            record["attributes"].append({"name": "profile_page", "value": url})
+            if website := website_link(record["title"], self.links[url], url):
+                record["website"] = website
+            if fresh:
+                doc = next(d for d in self.documents if d.url == url)
+                new.append(with_links(doc, self.links[url], listing))
+        if not new:
+            return
+        found: dict[str, list[dict[str, Any]]] = {}
+        system = system_prompt(self.task.mode)
+        for group in batches(new, self.settings.crawl.section_chars):
+            self.progress(f"Extracting from {len(group)} profile page(s)")
+            for part, out in self._ask(system, group, []):  # a profile the model fails on just keeps the listing's record
+                for raw in out.get("records", []):
+                    record = self._check(raw, part)
+                    if record["source_url"] in profiles and record["kind"] in PROFILE_KINDS:
+                        found.setdefault(record["source_url"], []).append(record)
+        for url, candidates in found.items():
+            # A profile page can list related companies too: the one named like the listing's record, else the first.
+            record = profiles[url]
+            _fill(record, next((c for c in candidates if _name_key(c["title"]) == _name_key(record["title"])), candidates[0]), url)
 
     # --- extraction ---------------------------------------------------------------------
 

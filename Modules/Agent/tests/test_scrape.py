@@ -11,7 +11,7 @@ from startup_agent.crawler import PageLoader
 from startup_agent.documents import SourceDocument
 from startup_agent.errors import AgentError
 from startup_agent.llm import QuotaExhausted, UsageStats
-from startup_agent.scrape import ScrapeAgent, ScrapeTask, _Run, batches, file_type, goal_links, pdf_text
+from startup_agent.scrape import ScrapeAgent, ScrapeTask, _Run, batches, file_type, goal_links, pdf_text, website_link
 from startup_agent.search import SearchHit
 
 PAGES = {
@@ -20,6 +20,12 @@ PAGES = {
     "https://funds.example/calls/blue-call-2026": "<title>Blue Call</title><p>Applicants must be SMEs registered in the EU or Norway.</p>",
     "https://funds.example/about": "<title>About</title><p>The fund was founded in 2019 by the ministry.</p>",
     "https://walled.example/": "<title>Sign in</title><p>Sign in</p>",
+    "https://hub.example/startups": "<title>Startups</title><p>Acme Ocean cleans harbours with drones. Kelp Labs farms kelp offshore. "
+                                    "Wave Co builds wave power buoys.</p><a href='https://acmeocean.fi/?utm_source=hub'>Acme Ocean</a>"
+                                    "<a href='/startups/kelp-labs'>Kelp Labs</a><a href='https://twitter.com/hub'>Follow us</a>",
+    "https://hub.example/startups/kelp-labs": "<title>Kelp Labs</title><p>Kelp Labs Oy farms kelp offshore in Finland and raised a "
+                                              "EUR 1 million seed round.</p><a href='https://kelplabs.io/en'>Visit website</a>"
+                                              "<a href='https://twitter.com/hub'>Follow us</a><a href='/startups'>All startups</a>",
 }
 EXTRACTION = {
     "summary": "One open call.",
@@ -385,3 +391,77 @@ def test_a_part_the_model_keeps_failing_on_is_a_gap_and_the_rest_is_kept(tmp_pat
     assert any(g.startswith("Not extracted, the model failed on part of the text: https://funds.example/about") for g in result["gaps"])
     assert any(s.startswith("The answer was too slow") for s in steps)
     assert any("Blue Call" in call and "founded" not in call for call in llm.calls)  # the calls page alone, after the split
+
+
+def test_websites_come_from_named_links_and_from_profile_pages_the_listing_links(tmp_path):
+    def startup(title, quote, url="https://hub.example/startups", **extra):
+        return {"kind": "startup", "title": title, "details": "", "website": "", "attributes": [], "source_url": url, "quote": quote, **extra}
+
+    class Directory(FakeLLM):
+        def complete_json(self, *, system, user, schema):
+            self.calls.append(user)
+            if "### https://hub.example/startups/kelp-labs" in user:
+                return {"summary": "", "gaps": [], "records": [startup(
+                    "Kelp Labs", "Kelp Labs Oy farms kelp offshore", "https://hub.example/startups/kelp-labs", website="https://kelplabs.io/en",
+                    attributes=[{"name": "funding_raised", "value": "EUR 1 million"}, {"name": "country", "value": "Finland"}])]}
+            return {"summary": "Three startups.", "gaps": [], "records": [
+                startup("Acme Ocean", "Acme Ocean cleans harbours with drones."), startup("Kelp Labs", "Kelp Labs farms kelp offshore."),
+                startup("Wave Co", "Wave Co builds wave power buoys.", attributes=[{"name": "country", "value": "Norway"}])]}
+
+    llm, steps = Directory(), []
+    result = make_run(tmp_path, ScrapeTask("ocean startups", ("https://hub.example/startups",), mode="startups"), llm=llm,
+                      progress=steps.append).execute()
+
+    acme, kelp, wave = result["records"]
+    assert acme["website"] == "https://acmeocean.fi/"  # the listing's link named after it, tracking query dropped
+    assert kelp["website"] == "https://kelplabs.io/en"  # read on its profile page
+    assert kelp["attributes"] == [{"name": "profile_page", "value": "https://hub.example/startups/kelp-labs"},
+                                  {"name": "funding_raised", "value": "EUR 1 million"}, {"name": "country", "value": "Finland"}]
+    assert kelp["quote"] == "Kelp Labs farms kelp offshore." and kelp["source_url"] == "https://hub.example/startups"  # the listing's record
+    assert wave["website"] == "" and any(g.startswith("No website found for 1 of 3 startups/companies") and "Wave Co" in g for g in result["gaps"])
+    assert [s["url"] for s in result["sources"]] == ["https://hub.example/startups", "https://hub.example/startups/kelp-labs"]
+    assert "Opening 1 profile page(s) to find websites the listing doesn't link" in steps
+    profile_call = llm.calls[-1]
+    assert "Visit website <https://kelplabs.io/en>" in profile_call and "twitter.com" not in profile_call  # the link the text hides
+
+
+def test_website_and_profile_links_need_the_records_name():
+    from startup_agent.documents import Link
+    from startup_agent.scrape import profile_link, website_link
+
+    page = "https://hub.example/startups"
+    links = [Link("https://hub.example/about", "About"), Link("https://partner.example/", "Kelp Labs partner"),
+             Link("https://acme-ocean.com/en?ref=hub", ""), Link("https://www.linkedin.com/company/kelp-labs", "Kelp Labs"),
+             Link("https://hub.example/p/kelp-labs", "Read more")]
+    assert website_link("Acme Ocean Oy", links, page) == "https://acme-ocean.com/en"  # the domain is the name
+    assert website_link("Kelp Labs", links, page) == ""  # LinkedIn isn't its website; "Kelp Labs partner" isn't its name
+    assert profile_link("Kelp Labs", links, page) == "https://hub.example/p/kelp-labs"  # the slug is the name
+    assert profile_link("About Us", links, page) == "" and website_link("AI", [Link("https://ai.example/", "")], page) == ""
+
+
+def test_card_links_without_text_are_named_by_the_card_and_social_profiles_are_kept_apart(tmp_path):
+    from startup_agent.documents import html_to_document
+
+    def card(name, href):
+        return f"<article><img src='logo.png'><div><p>{name}</p><p>Builds things for the ocean.</p></div><a href='{href}' class='overlay'></a></article>"
+
+    html = card("Coral Rescue - Coral Restoration with Geospatial Technology", "https://www.instagram.com/coralrescue/") \
+        + card("eMathStudio by FourFerries - For those about to Learn", "https://fourferries.com") + card("OW-Ferment- From waste to food", "https://ow-f.fi")
+    _, links = html_to_document("https://hub.example/2025/", html, source_type="news", retrieved_at="d", max_chars=1000)
+    assert [link.text for link in links][1] == "eMathStudio by FourFerries - For those about to Learn"
+    assert website_link("eMathStudio by FourFerries", links, "https://hub.example/2025/") == "https://fourferries.com/"
+    assert website_link("OW-Ferment", links, "https://hub.example/2025/") == "https://ow-f.fi/"
+    assert website_link("Coral Rescue", links, "https://hub.example/2025/") == ""
+
+    class Cards(FakeLLM):
+        def complete_json(self, *, system, user, schema):
+            return {"summary": "", "gaps": [], "records": [{"kind": "startup", "title": "Coral Rescue", "details": "", "website": "",
+                                                            "attributes": [], "source_url": "https://hub.example/2025/", "quote": "Coral Rescue"}]}
+
+    PAGES["https://hub.example/2025/"] = html
+    try:
+        result = make_run(tmp_path, ScrapeTask("startups", ("https://hub.example/2025/",)), llm=Cards()).execute()
+    finally:
+        del PAGES["https://hub.example/2025/"]
+    coral = result["records"][0]
+    assert coral["website"] == "" and coral["attributes"] == [{"name": "social_profile", "value": "https://www.instagram.com/coralrescue/"}]
