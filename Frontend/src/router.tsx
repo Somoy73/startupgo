@@ -9,6 +9,8 @@ export const getRouter = () => {
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
+    // The browser cross-fades between pages where it supports View Transitions (styles.css, Motion).
+    defaultViewTransition: true,
     defaultPreloadStaleTime: 0,
   });
 

@@ -1,7 +1,7 @@
 import type { Scores } from "../api/backend-types";
 import { score } from "../lib/format";
 import { cn } from "../lib/utils";
-import { useCountUp } from "../lib/useCountUp";
+import { CountUp } from "./CountUp";
 
 function getScoreStyle(val: number) {
   if (val < 30) return "bg-red-500/20 text-red-400 border-red-500/50";
@@ -15,7 +15,6 @@ function getScoreStyle(val: number) {
 /** Investment potential (0–100) badge with color-coded score */
 export function PotentialMark({ scores }: { scores: Scores }) {
   const value = score(scores.potential);
-  const shown = Math.round(useCountUp(value));
 
 return (
     <div className="flex flex-col items-center gap-2 text-center">
@@ -26,11 +25,8 @@ return (
           getScoreStyle(value),
         )}
       >
-        <span
-          className="font-display text-5xl font-bold leading-none tabular-nums select-none"
-          aria-label={`${value}`}
-        >
-          {shown}
+        <span className="font-display text-5xl font-bold leading-none tabular-nums select-none">
+          <CountUp value={value} durationMs={900} />
         </span>
       </div>
       <span

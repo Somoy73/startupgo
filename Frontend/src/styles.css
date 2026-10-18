@@ -1225,6 +1225,13 @@ section.card {
     animation-iteration-count: 1 !important;
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
 /* Discover tools keep the shared sea visible around the search and result surfaces. */
 .discover-controls {
   margin-bottom: 24px;
@@ -1428,17 +1435,19 @@ section.mg-card {
   align-items: start;
   margin-top: 20px;
 }
+/* The detail column opens from 0px to 340-460px. Both widths are lengths so the browser can animate
+   between them (a 0fr ↔ 340px change can't be interpolated and would snap), at the page's motion pace. */
 .mg-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0fr);
+  grid-template-columns: minmax(0, 1fr) 0px;
   gap: 0;
   align-items: stretch;
   transition:
-    grid-template-columns 0.55s cubic-bezier(0.2, 0.8, 0.2, 1),
-    gap 0.55s;
+    grid-template-columns var(--motion-duration) var(--motion-ease),
+    gap var(--motion-duration) var(--motion-ease);
 }
 .mg-layout.is-open {
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 460px);
+  grid-template-columns: minmax(0, 1fr) clamp(340px, 32vw, 460px);
   gap: 24px;
 }
 .mg-body .mg-graph {
@@ -1459,7 +1468,7 @@ section.mg-card {
   border: 1px solid var(--border);
   border-radius: 14px;
   background: var(--glass-surface);
-  animation: mg-detail-in 0.45s 0.2s ease-out both;
+  animation: mg-detail-in var(--motion-duration) var(--motion-ease) 0.15s both;
 }
 .mg-detail-inner h3 {
   margin: 0 0 6px;
@@ -2408,8 +2417,20 @@ section.mg-card {
 }
 
 /* ---------------------------------------------------------------------------------------------
-   Motion: short, ease-out, opacity and transform only (plus the dropdown height). Everything here
-   runs once when an element appears; "reduce motion" skips it (see the rule near .app-nav). */
+   Motion. Tune the feel here: every animation below reads these. Opacity, transform and blur only
+   (plus the dropdown height). "Reduce motion" skips all of it (see the rule near .app-nav). */
+:root {
+  --motion-distance: 22px; /* how far things rise as they appear */
+  --motion-blur: 6px; /* how blurred they start */
+  --motion-duration: 0.55s; /* cards, sections */
+  --motion-duration-page: 0.45s; /* a new page */
+  --motion-duration-fast: 0.3s; /* rows, chips */
+  --motion-stagger: 100ms; /* between cards appearing together */
+  --motion-ease: cubic-bezier(0.16, 1, 0.3, 1); /* fast start, long settle */
+  --motion-ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot */
+  --motion-pop-from: 0.7; /* the size chips and the grade start at */
+  --motion-lift: 4px; /* hover lift on clickable cards */
+}
 
 /* Progress bars (components/Scores.tsx, Bar): the fill grows in from the left. */
 .bar {
@@ -2434,7 +2455,7 @@ section.mg-card {
   border-radius: inherit;
   background: var(--ocean);
   transform-origin: left center;
-  animation: grow-x 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: grow-x 0.9s var(--motion-ease) 0.15s both;
 }
 
 /* Dropdowns (components/Collapse.tsx): slide to their height instead of jumping. */
@@ -2451,96 +2472,118 @@ section.mg-card {
   overflow: hidden;
 }
 
-/* A new page (components/Layout.tsx) fades in and rises. */
+/* A new page (components/Layout.tsx) rises and sharpens into view. Where the browser cross-fades
+   pages itself (View Transitions, router.tsx), that replaces this. */
 .page-enter {
-  animation: rise-in 0.22s ease-out both;
+  animation: rise-in var(--motion-duration-page) var(--motion-ease) both;
 }
 
-/* Cards in a .stagger container appear one after another, 60 ms apart (the first 12). */
-.stagger > * {
-  animation: rise-in 0.3s ease-out both;
+/* Cards in a .stagger container rise in as they scroll into view (lib/useReveal.ts marks them
+   data-reveal="in"); cards that appear together come in one after another (--reveal-order).
+   Hidden only once that script runs (<main data-reveal-ready>), so the page never stays blank without it. */
+[data-reveal-ready] .stagger > :not([data-reveal="in"]) {
+  opacity: 0;
 }
-.stagger > :nth-child(2) { animation-delay: 60ms; }
-.stagger > :nth-child(3) { animation-delay: 120ms; }
-.stagger > :nth-child(4) { animation-delay: 180ms; }
-.stagger > :nth-child(5) { animation-delay: 240ms; }
-.stagger > :nth-child(6) { animation-delay: 300ms; }
-.stagger > :nth-child(7) { animation-delay: 360ms; }
-.stagger > :nth-child(8) { animation-delay: 420ms; }
-.stagger > :nth-child(9) { animation-delay: 480ms; }
-.stagger > :nth-child(10) { animation-delay: 540ms; }
-.stagger > :nth-child(11) { animation-delay: 600ms; }
-.stagger > :nth-child(n + 12) { animation-delay: 660ms; }
+.stagger > [data-reveal="in"] {
+  animation: rise-in var(--motion-duration) var(--motion-ease) both;
+  animation-delay: calc(var(--reveal-order, 0) * var(--motion-stagger));
+}
 
-/* Search results (StartupTable): new rows fade in, the first 10 staggered. Re-sorting moves rows
+/* Search results (StartupTable): new rows slide in, the first 10 staggered. Re-sorting moves rows
    without re-mounting them, so it doesn't replay. */
 .data tr.row-enter {
-  animation: fade-in 0.25s ease-out both;
+  animation: slide-in var(--motion-duration-fast) var(--motion-ease) both;
 }
-.data tr.row-enter:nth-child(2) { animation-delay: 30ms; }
-.data tr.row-enter:nth-child(3) { animation-delay: 60ms; }
-.data tr.row-enter:nth-child(4) { animation-delay: 90ms; }
-.data tr.row-enter:nth-child(5) { animation-delay: 120ms; }
-.data tr.row-enter:nth-child(6) { animation-delay: 150ms; }
-.data tr.row-enter:nth-child(7) { animation-delay: 180ms; }
-.data tr.row-enter:nth-child(8) { animation-delay: 210ms; }
-.data tr.row-enter:nth-child(9) { animation-delay: 240ms; }
-.data tr.row-enter:nth-child(n + 10) { animation-delay: 270ms; }
+.data tr.row-enter:nth-child(2) { animation-delay: 40ms; }
+.data tr.row-enter:nth-child(3) { animation-delay: 80ms; }
+.data tr.row-enter:nth-child(4) { animation-delay: 120ms; }
+.data tr.row-enter:nth-child(5) { animation-delay: 160ms; }
+.data tr.row-enter:nth-child(6) { animation-delay: 200ms; }
+.data tr.row-enter:nth-child(7) { animation-delay: 240ms; }
+.data tr.row-enter:nth-child(8) { animation-delay: 280ms; }
+.data tr.row-enter:nth-child(9) { animation-delay: 320ms; }
+.data tr.row-enter:nth-child(n + 10) { animation-delay: 360ms; }
 
 /* The investment potential grade (PotentialMark) pops in while its number counts up. */
 .mark-in {
-  animation: pop-in 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  animation: pop-in 0.7s var(--motion-ease-pop) both;
 }
 
 /* Chips pop in. */
 .chip {
-  animation: pop-in 0.18s ease-out both;
+  animation: pop-in var(--motion-duration-fast) var(--motion-ease-pop) both;
 }
 
-/* Hover: clickable cards lift a little, content cards get a stronger edge, rows ease their highlight. */
-.dash-card,
+/* Hover: similar-startup cards lift, content cards get a stronger edge, rows ease their highlight.
+   The landing dashboard's cards stay still. */
 .mg-similar-card {
   transition:
-    transform 0.18s ease-out,
-    box-shadow 0.18s ease-out;
+    transform 0.25s var(--motion-ease),
+    box-shadow 0.25s var(--motion-ease);
 }
-.dash-card:hover,
 .mg-similar-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px -12px oklch(0.2 0.06 258 / 0.35);
+  transform: translateY(calc(var(--motion-lift) * -1)) scale(1.01);
+  box-shadow: 0 16px 36px -14px oklch(0.2 0.06 258 / 0.4);
 }
 section.card {
   transition:
-    border-color 0.18s ease-out,
-    box-shadow 0.18s ease-out;
+    border-color 0.25s var(--motion-ease),
+    box-shadow 0.25s var(--motion-ease);
 }
 section.card:hover {
-  border-color: color-mix(in oklch, var(--ocean) 35%, var(--border));
-  box-shadow: 0 8px 24px -16px oklch(0.2 0.06 258 / 0.3);
+  border-color: color-mix(in oklch, var(--ocean) 45%, var(--border));
+  box-shadow: 0 12px 30px -18px oklch(0.2 0.06 258 / 0.4);
 }
 .data tr.clickable {
   transition: background-color 0.15s ease-out;
 }
 
+/* Page cross-fade (View Transitions, router.tsx): the old page fades and lifts away, the new one
+   rises in. A startup's name morphs from its search row into the profile heading (view-transition-name). */
+@supports (view-transition-name: none) {
+  .page-enter {
+    animation: none;
+  }
+}
+::view-transition-old(root) {
+  animation: page-out 0.25s ease-in both;
+}
+::view-transition-new(root) {
+  animation: rise-in var(--motion-duration-page) var(--motion-ease) both;
+}
+::view-transition-group(*) {
+  animation-duration: var(--motion-duration-page);
+  animation-timing-function: var(--motion-ease);
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(var(--motion-distance));
+    filter: blur(var(--motion-blur));
   }
 }
-@keyframes fade-in {
+@keyframes slide-in {
   from {
     opacity: 0;
+    transform: translateX(-12px);
   }
 }
 @keyframes pop-in {
   from {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(var(--motion-pop-from));
   }
 }
 @keyframes grow-x {
   from {
     transform: scaleX(0);
+  }
+}
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(calc(var(--motion-distance) * -0.5));
+    filter: blur(var(--motion-blur));
   }
 }

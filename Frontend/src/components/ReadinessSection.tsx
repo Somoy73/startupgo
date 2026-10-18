@@ -2,6 +2,7 @@ import { useId, useState } from "react";
 import type { LevelDetail, Readiness, Scores } from "../api/backend-types";
 import { rationalePoints, score } from "../lib/format";
 import { Collapse } from "./Collapse";
+import { CountUp } from "./CountUp";
 import { DetailsToggle } from "./DetailsToggle";
 import { ReadinessProfile } from "./ReadinessProfile";
 import { ReadinessRadar } from "./ReadinessRadar";
@@ -26,7 +27,9 @@ export function ReadinessSection({ levels, readiness, scores }: Props) {
       </div>
       <div className="stat" style={{ padding: 0, marginBottom: 16 }}>
         <span className="label">Readiness index (KTH IRL)</span>
-        <span className="value">{score(scores.readiness)}</span>
+        <span className="value">
+          <CountUp value={score(scores.readiness)} />
+        </span>
         <Meter value={scores.readiness} label="Readiness index" showValue={false} />
         <span className="sub">
           TRL {readiness.trl} · BRL {readiness.brl} · spread {scores.readiness_spread}

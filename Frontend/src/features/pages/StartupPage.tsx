@@ -48,7 +48,7 @@ export function StartupPage() {
       <div className="page-head">
         <div>
           <div className="row-gap" style={{ marginBottom: 6 }}>
-            <h1>{s.name}</h1>
+            <h1 style={{ viewTransitionName: `startup-${s.slug}` }}>{s.name}</h1>
             {assessed && <BandBadge band={scores.band} />}
           </div>
           <p>{s.tagline}</p>

@@ -42,7 +42,7 @@ export const COLUMNS: Column[] = [
     cell: (s) => (
       <>
         <Link to="/startups/$slug" params={{ slug: s.slug }} onClick={(e) => e.stopPropagation()}>
-          <strong>{s.name}</strong>
+          <strong style={{ viewTransitionName: `startup-${s.slug}` }}>{s.name}</strong>
         </Link>
         <span>{s.tagline}</span>
       </>
