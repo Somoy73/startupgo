@@ -46,7 +46,7 @@ export function Landing() {
     <div className="landing">
       <div className="page-head">
         <div>
-          <h1>Startups in Finnish Blue Economy</h1>
+          <h1>Startups in Blue Economy</h1>
           <p>Discover the newest startups found and assessed by our agentic approach.</p>
           <nav className="hero-nav" aria-label="Main navigation">
             {navItems.map((item) => (
