@@ -203,6 +203,9 @@
   color: var(--navy-foreground);
 }
 .app-main {
+  /* Full width: .app-shell is a flex column and margin: auto would otherwise shrink <main> to its
+     content, so pages would start narrow and widen as their data loads. */
+  width: 100%;
   max-width: 1280px;
   margin: auto;
 }
