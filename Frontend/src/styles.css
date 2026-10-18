@@ -609,6 +609,23 @@ input[type="range"] {
   font-size: 13px;
   font-weight: 700;
 }
+/* Startup page: the heading lines up with other pages' headings. "Back" sits in the header's top
+   padding instead of above it, and the header is top-aligned so the tall grade circle on the right
+   doesn't push the name down. */
+.startup-head {
+  align-items: flex-start;
+}
+.startup-head > .back {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  padding-top: 0;
+}
+@media (max-width: 800px) {
+  .startup-head > .back {
+    top: 6px;
+  }
+}
 .back svg,
 .page-head p svg {
   display: inline;
@@ -2538,17 +2555,24 @@ section.card:hover {
   transition: background-color 0.15s ease-out;
 }
 
-/* Page cross-fade (View Transitions, router.tsx): the old page fades and lifts away, the new one
-   rises in. A startup's name morphs from its search row into the profile heading (view-transition-name). */
+/* Page cross-fade (View Transitions, router.tsx): the old page's content fades and lifts away, the new
+   one rises in. Only the content moves: it gets its own "page" layer, while the rest of the document
+   (root: header, background) keeps the browser's plain cross-fade, which looks still since both pages
+   share it. The name is set only during a transition: a permanent view-transition-name would make the
+   wrapper a backdrop root and break the cards' frosted glass. A startup's name morphs from its search
+   row into the profile heading (view-transition-name on both). */
 @supports (view-transition-name: none) {
   .page-enter {
     animation: none;
   }
 }
-::view-transition-old(root) {
+html:active-view-transition .page-enter {
+  view-transition-name: page;
+}
+::view-transition-old(page) {
   animation: page-out 0.25s ease-in both;
 }
-::view-transition-new(root) {
+::view-transition-new(page) {
   animation: rise-in var(--motion-duration-page) var(--motion-ease) both;
 }
 ::view-transition-group(*) {
