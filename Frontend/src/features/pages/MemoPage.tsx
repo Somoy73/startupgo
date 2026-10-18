@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { ApiError, backend } from "../../api/backend";
 import type { InvestmentMemo } from "../../api/backend-types";
 import { IconBack, IconExternal } from "../../components/Icons";
-import { compactMoney, PIPELINE_LABELS, stageLabel } from "../../lib/format";
+import { compactMoney, fundingStage, PIPELINE_LABELS, stageLabel } from "../../lib/format";
 import { Link, useParams } from "../../lib/navigation";
 import { useAsync } from "../../lib/useAsync";
 
@@ -388,7 +388,7 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
   );
 
   return (
-    <article className="memo-doc">
+    <article className="memo-doc stagger">
       <header className="memo-cover">
         <div className="memo-brandline">
           <span>Startup Go · Investment memo</span>
@@ -399,7 +399,7 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
         <dl className="memo-facts">
           <Fact label="Sector" value={s.sector} />
           <Fact label="Location" value={location || "—"} />
-          <Fact label="Stage" value={stageLabel(s.stage)} />
+          <Fact label="Stage" value={fundingStage(s.stage) ?? "Not known"} />
           <Fact label="Founded" value={s.founded_year ? String(s.founded_year) : "—"} />
           <Fact
             label="Pipeline"

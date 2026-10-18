@@ -23,8 +23,9 @@ export function toEur(amount: number | null, currency: string | null): number | 
   return amount == null || rate === undefined ? null : (amount * rate) / FX_TO_USD["EUR"]!;
 }
 export const partialDate = (d: string | null) => d || "Undisclosed";
+/** "series-a" → "Series A", "project-finance" → "Project finance". */
 export const stageLabel = (s: string) =>
-  s.charAt(0).toUpperCase() + s.slice(1).replaceAll("-", " ");
+  (s.charAt(0).toUpperCase() + s.slice(1).replaceAll("-", " ")).replace(/\b[a-z]\b/g, (c) => c.toUpperCase());
 
 /**
  * An assessor's rationale as tidy points: split on semicolons, snake_case words spaced out
@@ -38,3 +39,10 @@ export function rationalePoints(text: string | null): string[] {
     .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
     .map((p) => (/[.!?]$/.test(p) ? p : `${p}.`));
 }
+
+/**
+ * A startup's funding stage for display, or null when it isn't known. Startups added from the
+ * BlueInvest pipeline (Modules/DataAPIs/discover.py) get the placeholder "unknown" until researched.
+ */
+export const fundingStage = (stage: string | null | undefined): string | null =>
+  stage && stage.toLowerCase() !== "unknown" ? stageLabel(stage) : null;

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { KTH_DIMENSIONS, type StartupSummary } from "../../api/backend-types";
-import { compactMoney, partialDate, PIPELINE_LABELS, stageLabel, toEur } from "../../lib/format";
+import { compactMoney, fundingStage, partialDate, PIPELINE_LABELS, toEur } from "../../lib/format";
 import { Link } from "@tanstack/react-router";
 import type { SearchSortKey } from "../../lib/discover-search";
 import { BandBadge, LevelPill, Meter } from "../Scores";
@@ -42,7 +42,7 @@ export const COLUMNS: Column[] = [
     cell: (s) => (
       <>
         <Link to="/startups/$slug" params={{ slug: s.slug }} onClick={(e) => e.stopPropagation()}>
-          <strong>{s.name}</strong>
+          <strong style={{ viewTransitionName: `startup-${s.slug}` }}>{s.name}</strong>
         </Link>
         <span>{s.tagline}</span>
       </>
@@ -60,7 +60,7 @@ export const COLUMNS: Column[] = [
     header: "Stage",
     sortKey: "stage",
     defaultVisible: false,
-    cell: (s) => stageLabel(s.stage),
+    cell: (s) => fundingStage(s.stage) ?? <span className="muted">—</span>,
   },
   ...levelColumns,
   {

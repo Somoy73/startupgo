@@ -1,5 +1,6 @@
 import type { Frameworks, Scores } from "../api/backend-types";
 import { score } from "../lib/format";
+import { CountUp } from "./CountUp";
 
 type Weights = Frameworks["potential_weights"];
 
@@ -23,7 +24,9 @@ export function PotentialBreakdown({ scores, weights }: { scores: Scores; weight
     <section className="card card-pad">
       <div className="card-head">
         <h2>How the potential is built</h2>
-        <span className="small muted tabular">= {score(scores.potential)} / 100</span>
+        <span className="small muted tabular">
+          = <CountUp value={score(scores.potential)} /> / 100
+        </span>
       </div>
 
       <div
@@ -45,7 +48,9 @@ export function PotentialBreakdown({ scores, weights }: { scores: Scores; weight
             <dt className="flex-1">{p.label}</dt>
             <dd className="small muted tabular">
               {score(p.value)} × {p.weight.toFixed(2)} ={" "}
-              <strong className="text-foreground">{points(p.points)}</strong>
+              <strong className="text-foreground">
+                <CountUp value={p.points} decimals={1} />
+              </strong>
             </dd>
           </div>
         ))}

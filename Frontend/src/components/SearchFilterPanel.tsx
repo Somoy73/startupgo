@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { BACKEND_PIPELINE_STAGES, KTH_DIMENSIONS, type BackendPipelineStage } from "../api/backend-types";
-import { PIPELINE_LABELS, stageLabel } from "../lib/format";
+import { fundingStage, PIPELINE_LABELS } from "../lib/format";
 import { frameworksOptions, startupListOptions, type SearchFilters } from "../lib/discover-search";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
@@ -22,7 +22,7 @@ export function SearchFilterPanel({ filters, onChange }: Props) {
     <div className="grid gap-5 md:grid-cols-2">
       <Facet
         label="Stage"
-        options={uniqueSorted(startups.map((s) => s.stage)).map((s) => ({ value: s, label: stageLabel(s) }))}
+        options={uniqueSorted(startups.map((s) => s.stage)).map((s) => ({ value: s, label: fundingStage(s) ?? "Stage unknown" }))}
         selected={filters.stages}
         onChange={(stages) => set({ stages })}
       />

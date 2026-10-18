@@ -1,6 +1,7 @@
 import type { Scores } from "../api/backend-types";
 import { score } from "../lib/format";
 import { cn } from "../lib/utils";
+import { CountUp } from "./CountUp";
 
 function getScoreStyle(val: number) {
   if (val < 30) return "bg-red-500/20 text-red-400 border-red-500/50";
@@ -20,12 +21,12 @@ return (
       <div
         className={cn(
           // grid place-items-center + leading-none gives true vertical & horizontal centering
-          "grid size-32 place-items-center rounded-full border-2 text-center shadow-lg backdrop-blur-sm",
+          "mark-in grid size-32 place-items-center rounded-full border-2 text-center shadow-lg backdrop-blur-sm",
           getScoreStyle(value),
         )}
       >
         <span className="font-display text-5xl font-bold leading-none tabular-nums select-none">
-          {value}
+          <CountUp value={value} durationMs={900} />
         </span>
       </div>
       <span

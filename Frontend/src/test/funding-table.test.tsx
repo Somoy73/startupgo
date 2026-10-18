@@ -25,7 +25,7 @@ describe("FundingTable", () => {
     const rows = screen.getAllByRole("row").slice(1);
     expect(rows).toHaveLength(events.length - 1);
     expect(screen.queryByText("Total raised")).not.toBeInTheDocument();
-    expect(within(rows[0]!).getByText("Series a")).toBeInTheDocument();
+    expect(within(rows[0]!).getByText("Series A")).toBeInTheDocument();
     expect(within(rows[0]!).getByText("Verified")).toHaveClass("tone-success");
     expect(within(rows[0]!).getByRole("link")).toHaveTextContent("Announced");
     expect(within(rows[1]!).getByText("UK Companies House (SH01)")).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe("FundingTable", () => {
 
   it("keeps the curated round's lead investor and notes, and shows amounts in euros", () => {
     render(<FundingTable events={events} />);
-    const series = screen.getByText("Series a").closest("tr")!;
+    const series = screen.getByText("Series A").closest("tr")!;
     expect(within(series).getByText("Lead: UB Forest Industry Green Growth Fund")).toBeInTheDocument();
     expect(within(series).getByText("Series A+ (~EUR 23M).")).toBeInTheDocument();
     expect(within(series).getByText("€24M")).toBeInTheDocument();

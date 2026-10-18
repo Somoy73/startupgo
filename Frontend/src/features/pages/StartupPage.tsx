@@ -11,7 +11,7 @@ import { PeerScatter } from "../../components/PeerScatter";
 import { PotentialBreakdown } from "../../components/PotentialBreakdown";
 import { PotentialMark } from "../../components/PotentialMark";
 import { BandBadge } from "../../components/Scores";
-import { partialDate, stageLabel } from "../../lib/format";
+import { fundingStage, partialDate } from "../../lib/format";
 import { useAsync } from "../../lib/useAsync";
 
 /** Loads the profile from the backend; a 404 means the slug isn't in the database. */
@@ -42,20 +42,21 @@ export function StartupPage() {
 
   return (
     <>
-      <Link to="/" className="back">
-        <IconBack /> Back
-      </Link>
-      <div className="page-head">
+      <div className="page-head startup-head">
+        <Link to="/" className="back">
+          <IconBack /> Back
+        </Link>
         <div>
           <div className="row-gap" style={{ marginBottom: 6 }}>
-            <h1>{s.name}</h1>
+            <h1 style={{ viewTransitionName: `startup-${s.slug}` }}>{s.name}</h1>
             {assessed && <BandBadge band={scores.band} />}
           </div>
           <p>{s.tagline}</p>
           <p className="small muted" style={{ marginTop: 6 }}>
             {s.sector} ·{" "}
             {[s.city, s.country].filter((x, i, a) => x && a.indexOf(x) === i).join(", ")}
-            {s.founded_year && ` · Founded ${s.founded_year}`} · {stageLabel(s.stage)}
+            {s.founded_year && ` · Founded ${s.founded_year}`}
+            {fundingStage(s.stage) && ` · ${fundingStage(s.stage)}`}
             {s.website && (
               <>
                 {" · "}
@@ -115,7 +116,7 @@ export function StartupPage() {
         </section>
 
         {/* Left Column Stack: the scores, once the startup is assessed */}
-        <div className="stack">
+        <div className="stack stagger">
           {assessed && (
             <>
               <ReadinessSection levels={s.levels} readiness={readiness} scores={scores} />
@@ -128,7 +129,7 @@ export function StartupPage() {
         </div>
 
         {/* Right Column Stack: the evidence, once the startup is assessed */}
-        <div className="stack">
+        <div className="stack stagger">
           {assessed && (
             <>
               <OceanImpactSection
