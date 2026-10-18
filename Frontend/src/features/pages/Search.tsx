@@ -5,6 +5,7 @@ import { backend } from "../../api/backend";
 import { DiscoverSearchBar } from "../../components/DiscoverSearchBar";
 import type { StartupSummary } from "../../api/backend-types";
 import { FilterToggle } from "../../components/FilterToggle";
+import { Collapse } from "../../components/Collapse";
 import { SearchFilterPanel } from "../../components/SearchFilterPanel";
 import { SearchProgress } from "../../components/SearchProgress";
 import {
@@ -201,17 +202,14 @@ export function Search() {
               </div>
             </div>
 
-            {showFilters && (
-              <div
-                id="discover-filters"
-                className="border-b border-border px-5 py-4"
-              >
+            <Collapse open={showFilters} id="discover-filters">
+              <div className="border-b border-border px-5 py-4">
                 <SearchFilterPanel
                   filters={filters}
                   onChange={setFilters}
                 />
               </div>
-            )}
+            </Collapse>
 
             {results.length ? (
               <StartupTable

@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import type { LevelDetail, Readiness, Scores } from "../api/backend-types";
 import { rationalePoints, score } from "../lib/format";
+import { Collapse } from "./Collapse";
 import { DetailsToggle } from "./DetailsToggle";
 import { ReadinessProfile } from "./ReadinessProfile";
 import { ReadinessRadar } from "./ReadinessRadar";
@@ -33,7 +34,7 @@ export function ReadinessSection({ levels, readiness, scores }: Props) {
       </div>
       <ReadinessRadar levels={levels} lagging={scores.lagging_dimensions} />
 
-      <div id={detailsId} hidden={!open} style={{ marginTop: 16 }}>
+      <Collapse open={open} id={detailsId} className="pt-4">
         <p className="small muted" style={{ marginBottom: 12 }}>
           KTH Innovation Readiness Level, 1–9
         </p>
@@ -55,7 +56,7 @@ export function ReadinessSection({ levels, readiness, scores }: Props) {
             )}
           </div>
         )}
-      </div>
+      </Collapse>
     </section>
   );
 }

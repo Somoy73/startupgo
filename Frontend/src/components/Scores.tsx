@@ -20,8 +20,28 @@ export function Meter({
 }) {
   return (
     <div className="meter">
-      <progress max={100} value={value} aria-label={label} />
+      <Bar value={value} label={label} />
       {showValue && <strong>{Math.round(value)}</strong>}
+    </div>
+  );
+}
+
+/**
+ * A progress bar whose fill grows in when it appears (styles.css, .bar-fill). Used in place of
+ * <progress>, whose fill can't be animated; role="progressbar" keeps it readable to screen readers.
+ */
+export function Bar({ value, max = 100, label }: { value: number; max?: number; label: string }) {
+  const percent = Math.max(0, Math.min(100, (value / max) * 100));
+  return (
+    <div
+      className="bar"
+      role="progressbar"
+      aria-label={label}
+      aria-valuemin={0}
+      aria-valuemax={max}
+      aria-valuenow={value}
+    >
+      <span className="bar-fill" style={{ width: `${percent}%` }} />
     </div>
   );
 }

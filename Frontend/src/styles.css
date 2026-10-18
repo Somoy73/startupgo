@@ -1216,6 +1216,10 @@ section.card {
   *::after {
     transition: none !important;
     scroll-behavior: auto !important;
+    /* Animations jump to their end state, so nothing is left hidden or half-drawn. */
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
   }
 }
 /* Discover tools keep the shared sea visible around the search and result surfaces. */
@@ -2398,4 +2402,142 @@ section.mg-card {
 .memo-doc .memo-peer-link:hover {
   color: var(--primary);
   text-decoration-color: currentColor;
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Motion: short, ease-out, opacity and transform only (plus the dropdown height). Everything here
+   runs once when an element appears; "reduce motion" skips it (see the rule near .app-nav). */
+
+/* Progress bars (components/Scores.tsx, Bar): the fill grows in from the left. */
+.bar {
+  width: 100%;
+  min-width: 50px;
+  height: 7px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--accent);
+}
+.meter .bar {
+  width: 88px;
+  flex: none;
+}
+.score-preview .meter .bar,
+.match-card .meter .bar {
+  width: 100%;
+}
+.bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ocean);
+  transform-origin: left center;
+  animation: grow-x 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Dropdowns (components/Collapse.tsx): slide to their height instead of jumping. */
+.slide-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease-out;
+}
+.slide-collapse[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.slide-collapse-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* A new page (components/Layout.tsx) fades in and rises. */
+.page-enter {
+  animation: rise-in 0.22s ease-out both;
+}
+
+/* Cards in a .stagger container appear one after another, 60 ms apart (the first 12). */
+.stagger > * {
+  animation: rise-in 0.3s ease-out both;
+}
+.stagger > :nth-child(2) { animation-delay: 60ms; }
+.stagger > :nth-child(3) { animation-delay: 120ms; }
+.stagger > :nth-child(4) { animation-delay: 180ms; }
+.stagger > :nth-child(5) { animation-delay: 240ms; }
+.stagger > :nth-child(6) { animation-delay: 300ms; }
+.stagger > :nth-child(7) { animation-delay: 360ms; }
+.stagger > :nth-child(8) { animation-delay: 420ms; }
+.stagger > :nth-child(9) { animation-delay: 480ms; }
+.stagger > :nth-child(10) { animation-delay: 540ms; }
+.stagger > :nth-child(11) { animation-delay: 600ms; }
+.stagger > :nth-child(n + 12) { animation-delay: 660ms; }
+
+/* Search results (StartupTable): new rows fade in, the first 10 staggered. Re-sorting moves rows
+   without re-mounting them, so it doesn't replay. */
+.data tr.row-enter {
+  animation: fade-in 0.25s ease-out both;
+}
+.data tr.row-enter:nth-child(2) { animation-delay: 30ms; }
+.data tr.row-enter:nth-child(3) { animation-delay: 60ms; }
+.data tr.row-enter:nth-child(4) { animation-delay: 90ms; }
+.data tr.row-enter:nth-child(5) { animation-delay: 120ms; }
+.data tr.row-enter:nth-child(6) { animation-delay: 150ms; }
+.data tr.row-enter:nth-child(7) { animation-delay: 180ms; }
+.data tr.row-enter:nth-child(8) { animation-delay: 210ms; }
+.data tr.row-enter:nth-child(9) { animation-delay: 240ms; }
+.data tr.row-enter:nth-child(n + 10) { animation-delay: 270ms; }
+
+/* The investment potential grade (PotentialMark) pops in while its number counts up. */
+.mark-in {
+  animation: pop-in 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+/* Chips pop in. */
+.chip {
+  animation: pop-in 0.18s ease-out both;
+}
+
+/* Hover: clickable cards lift a little, content cards get a stronger edge, rows ease their highlight. */
+.dash-card,
+.mg-similar-card {
+  transition:
+    transform 0.18s ease-out,
+    box-shadow 0.18s ease-out;
+}
+.dash-card:hover,
+.mg-similar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -12px oklch(0.2 0.06 258 / 0.35);
+}
+section.card {
+  transition:
+    border-color 0.18s ease-out,
+    box-shadow 0.18s ease-out;
+}
+section.card:hover {
+  border-color: color-mix(in oklch, var(--ocean) 35%, var(--border));
+  box-shadow: 0 8px 24px -16px oklch(0.2 0.06 258 / 0.3);
+}
+.data tr.clickable {
+  transition: background-color 0.15s ease-out;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
 }

@@ -115,7 +115,7 @@ export function StartupPage() {
         </section>
 
         {/* Left Column Stack: the scores, once the startup is assessed */}
-        <div className="stack">
+        <div className="stack stagger">
           {assessed && (
             <>
               <ReadinessSection levels={s.levels} readiness={readiness} scores={scores} />
@@ -128,7 +128,7 @@ export function StartupPage() {
         </div>
 
         {/* Right Column Stack: the evidence, once the startup is assessed */}
-        <div className="stack">
+        <div className="stack stagger">
           {assessed && (
             <>
               <OceanImpactSection

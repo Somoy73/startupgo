@@ -388,7 +388,7 @@ function MemoDocument({ memo }: { memo: InvestmentMemo }) {
   );
 
   return (
-    <article className="memo-doc">
+    <article className="memo-doc stagger">
       <header className="memo-cover">
         <div className="memo-brandline">
           <span>Startup Go · Investment memo</span>

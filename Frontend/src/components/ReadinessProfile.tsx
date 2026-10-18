@@ -1,5 +1,6 @@
 import { CircleHelp } from "lucide-react";
 import type { LevelDetail } from "../api/backend-types";
+import { Bar } from "./Scores";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 /**
@@ -22,7 +23,7 @@ export function ReadinessProfile({
             <LevelHint level={l} />
             {lagging.includes(l.dimension) && <span className="small error"> · lagging</span>}
           </span>
-          <progress aria-label={`${l.name} readiness`} max={9} value={l.level} />
+          <Bar value={l.level} max={9} label={`${l.name} readiness`} />
           <strong>{l.level}/9</strong>
         </div>
       ))}

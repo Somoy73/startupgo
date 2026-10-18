@@ -57,7 +57,7 @@ export function StartupTable({
         </thead>
         <tbody>
           {startups.map((s) => (
-            <tr key={s.slug} className="clickable" onClick={() => onOpen(s.slug)}>
+            <tr key={s.slug} className="clickable row-enter" onClick={() => onOpen(s.slug)}>
               {visible.map((c) => (
                 <td key={c.id} className={`${c.cellClassName ?? ""} ${c.numeric ? "num" : ""}`}>
                   {c.cell(s)}

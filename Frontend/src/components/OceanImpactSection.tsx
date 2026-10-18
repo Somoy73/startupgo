@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import type { OceanImpactArea, OceanKpiEvidence } from "../api/backend-types";
+import { Collapse } from "./Collapse";
 import { DetailsToggle } from "./DetailsToggle";
 import { OceanAreaChart } from "./OceanAreaChart";
 import { OceanImpact } from "./OceanImpact";
@@ -34,12 +35,12 @@ export function OceanImpactSection({ kpis, areas }: Props) {
       {evidenced === 0 ? (
         <p className="muted">No impact evidence recorded.</p>
       ) : (
-        <div id={detailsId} hidden={!open} style={{ marginTop: 16 }}>
+        <Collapse open={open} id={detailsId} className="pt-4">
           <p className="small muted" style={{ marginBottom: 12 }}>
             {evidenced} KPI{evidenced === 1 ? "" : "s"} with evidence
           </p>
           <OceanImpact kpis={kpis} />
-        </div>
+        </Collapse>
       )}
     </section>
   );

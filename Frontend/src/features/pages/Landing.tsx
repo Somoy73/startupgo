@@ -62,7 +62,7 @@ export function Landing() {
       {error && <p className="empty error">Couldn't load dashboards: {error}</p>}
 
       {data && (
-        <div className="dash-grid">
+        <div className="dash-grid stagger">
           <section className="dash-card" aria-labelledby="newest-heading">
             <div className="dash-card-head">
               <h2 id="newest-heading">Newest Startups</h2>
